@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+
+@theme inline {
+  /* Brand */
+  --color-accent:        #0b7983;
+  --color-accent-hover:  #097380;
+  --color-accent-light:  #e6f5f6;
+  --color-accent-muted:  #b2dfe3;
+  --color-danger:        #0b7983;
+  --color-danger-light:  #e6f5f6;
+
+  /* Lightdash-inspired cool gray scale */
+  --color-background:   #ffffff;
+  --color-surface:      #f8fafb;
+  --color-surface-2:    #f6f8fa;
+  --color-surface-3:    #eceff3;
+  --color-border:       #dfe1e7;
+  --color-border-light: #e5e7eb;
+
+  /* Text scale */
+  --color-foreground:         #0d0d12;
+  --color-foreground-2:       #1a1b25;
+  --color-foreground-3:       #36394a;
+  --color-muted-foreground:   #666d80;
+  --color-subtle:             #818898;
+  --color-faint:              #a4acb9;
+
+  /* Radius — tight like Lightdash */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+
+  --font-sans: var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(11, 121, 131, 0.12);
+  color: #0d0d12;
+}
+
+/* Dot grid — Lightdash style (cooler tone) */
+.dot-grid {
+  background-image: radial-gradient(circle, #c1c7d0 0.7px, transparent 0.7px);
+  background-size: 28px 28px;
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(11, 121, 131, 0.4); }
+  70%  { box-shadow: 0 0 0 8px rgba(11, 121, 131, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(11, 121, 131, 0); }
+}
+
+/* ── Micro-transitions ──────────────────────────────── */
+a { transition: color 0.15s ease, opacity 0.15s ease; }
+button { transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease; }
+button:active { transform: scale(0.97); }
+
+:focus-visible {
+  outline: 2px solid #0b7983;
+  outline-offset: 3px;
+  border-radius: 4px;
+}

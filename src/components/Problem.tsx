@@ -1,0 +1,139 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
+const cards = [
+  {
+    num: '01',
+    statement: 'Ranking w Google nie oznacza widoczności w AI',
+    body: 'ChatGPT, Perplexity i Google AI Overview dobierają treści według własnych kryteriów — niezależnie od pozycji w SERP, PageRank czy liczby linków.',
+  },
+  {
+    num: '02',
+    statement: 'Twoje narzędzia SEO są ślepe na AI Search',
+    body: 'Modele językowe analizują BLUF, gęstość informacji, EAV i pokrycie sub-zapytań. Żaden klasyczny crawler ani audytor SEO tych wskaźników nie mierzy.',
+  },
+  {
+    num: '03',
+    statement: 'Rzetelna analiza ręczna kosztuje godziny',
+    body: '9 wymiarów jakości, benchmark 10 konkurentów SERP, analiza AI Overview — zebranie tego wszystkiego manualnie to pełny dzień eksperckiej pracy.',
+  },
+];
+
+const closing = {
+  statement: 'Bez danych nie wiesz od czego zacząć',
+  body: 'Optymalizacja bez diagnozy to strzelanie na ślepo. Nie wiesz, który wymiar obniża Twój CQS i jaką zmianę wprowadzić w pierwszej kolejności.',
+};
+
+export default function Problem() {
+  return (
+    <section style={{ background: '#f8fafb', padding: '58px 0' }}>
+      <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.55 }}
+          style={{ marginBottom: 56, textAlign: 'center' }}
+        >
+          <h2 style={{
+            fontSize: 'clamp(1.6rem, 3.5vw, 2.25rem)',
+            fontWeight: 600,
+            color: '#0d0d12',
+            letterSpacing: '-0.025em',
+            lineHeight: 1.25,
+            maxWidth: 560,
+            margin: '0 auto',
+          }}>
+            Wysoka pozycja w Google nie oznacza cytowania przez AI
+          </h2>
+          <p style={{ fontSize: 16, color: '#818898', lineHeight: 1.65, marginTop: 14, maxWidth: 480, margin: '14px auto 0' }}>
+            Epoka AI Search zmienia zasady gry. Sam PageRank już nie wystarczy — oto cztery powody, dla których Twoja treść znika w AI.
+          </p>
+        </motion.div>
+
+        {/* 3-column cards */}
+        <div className="problem-grid">
+          {cards.map((p, i) => (
+            <motion.div
+              key={p.num}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: i * 0.09 }}
+              style={{
+                background: '#ffffff',
+                border: '1px solid #dfe1e7',
+                borderRadius: 10,
+                padding: '32px 28px',
+              }}
+            >
+              <span style={{
+                display: 'block',
+                fontSize: 13,
+                fontWeight: 700,
+                color: '#0b7983',
+                letterSpacing: '0.04em',
+                marginBottom: 16,
+                fontVariantNumeric: 'tabular-nums',
+              }}>
+                {p.num}
+              </span>
+              <h3 style={{
+                fontSize: 17,
+                fontWeight: 600,
+                color: '#0d0d12',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.35,
+                marginBottom: 12,
+              }}>
+                {p.statement}
+              </h3>
+              <p style={{ fontSize: 14, color: '#666d80', lineHeight: 1.7, margin: 0 }}>
+                {p.body}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Closing — zamknięcie sekcji */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.5, delay: 0.27 }}
+          style={{ marginTop: 56, textAlign: 'center' }}
+        >
+          <h3 style={{
+            fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)',
+            fontWeight: 600,
+            color: '#0d0d12',
+            letterSpacing: '-0.025em',
+            lineHeight: 1.25,
+            maxWidth: 560,
+            margin: '0 auto 14px',
+          }}>
+            {closing.statement}
+          </h3>
+          <p style={{ fontSize: 16, color: '#818898', lineHeight: 1.65, maxWidth: 480, margin: '0 auto' }}>
+            {closing.body}
+          </p>
+        </motion.div>
+
+      </div>
+
+      <style>{`
+        .problem-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
+        @media (max-width: 768px) {
+          .problem-grid { grid-template-columns: 1fr; }
+        }
+      `}</style>
+    </section>
+  );
+}
