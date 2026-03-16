@@ -56,7 +56,7 @@ export default function Hero() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </motion.a>
-              <motion.a
+              {/* <motion.a
                 href="#przyklad-raportu"
                 className="inline-flex items-center justify-center"
                 whileHover={{ scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
@@ -68,7 +68,7 @@ export default function Hero() {
                 }}
               >
                 Zobacz przykładowy raport
-              </motion.a>
+              </motion.a> */}
             </div>
           </motion.div>
 
