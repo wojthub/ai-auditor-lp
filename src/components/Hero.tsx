@@ -24,15 +24,19 @@ export default function Hero() {
             <h1 style={{
               fontSize: 'clamp(2.4rem, 4.56vw, 3.6rem)', fontWeight: 700,
               lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: 20,
-              display: 'inline-block',
-              background: 'linear-gradient(135deg, #0b7983 0%, #0b9aa6 45%, #0d0d12 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
             }}>
-              Audytuj treść<br />
-              pod kątem<br />
-              AI Search
+              <span style={{ color: '#0b7983' }}>
+                Audytuj treść<br />
+                pod kątem
+              </span>
+              <br />
+              <span style={{
+                display: 'inline',
+                background: 'linear-gradient(135deg, #0d0d12 0%, #0b7983 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>AI Search</span>
             </h1>
 
             <p style={{ fontSize: 17, color: '#36394a', fontWeight: 400, lineHeight: 1.6, margin: '0 0 36px' }}>

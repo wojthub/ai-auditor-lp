@@ -29,7 +29,7 @@ const DIMS = [
   { name: 'BLUF', score: 9.0, desc: 'Najważniejsza odpowiedź na początku' },
   { name: 'EAV', score: 6.8, desc: 'Encje, atrybuty i wartości' },
   { name: 'Chunk Optim.', score: 7.9, desc: 'Jakość podziału na fragmenty' },
-  { name: 'Cost of Retrieval', score: 5.5, desc: 'Koszt pobrania informacji przez AI' },
+  { name: 'Cost of Retrieval', score: 3.8, desc: 'Koszt pobrania informacji przez AI' },
   { name: 'TF-IDF', score: 7.2, desc: 'Słowa kluczowe i kontekst semantyczny' },
   { name: 'Fan-Out / AIO', score: 8.3, desc: 'Pokrycie sub-zapytań i AI Overview' },
   { name: 'E-E-A-T', score: 6.5, desc: 'Doświadczenie, ekspertyza, autorytet' },
@@ -40,7 +40,7 @@ function DimensionsVisual() {
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
       {DIMS.map((d) => {
         const pct = (d.score / 10) * 100;
-        const color = d.score >= 8 ? '#0b7983' : d.score >= 6.5 ? '#0891b2' : '#64748b';
+        const color = d.score >= 7 ? '#16A34A' : d.score >= 5 ? '#CA8A04' : '#DC2626';
         return (
           <motion.div key={d.name} {...fadeUp(0.05)}
             style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 8, padding: '14px 14px 12px' }}
@@ -328,7 +328,7 @@ export default function Features() {
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 52 }}>
             <SectionLabel>9 wymiarów analizy</SectionLabel>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
-              Każdy wymiar AI Search mierzony osobno
+              Wymiary AI Search mierzone osobno
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 520, margin: '0 auto', lineHeight: 1.65 }}>
               9 kryteriów cytowania przez modele językowe - z konkretnym wynikiem 0–10, wzorcem punktacji i rankingiem ważności.
