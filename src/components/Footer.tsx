@@ -17,10 +17,8 @@ export default function Footer() {
 
           <div className="flex items-center gap-1">
             {[
-              { href: '#jak-dziala', label: 'Jak działa' },
+              { href: '#jak-dziala', label: 'Jak działa?' },
               { href: '#features', label: 'Funkcje' },
-              { href: '#cennik', label: 'Cennik' },
-              { href: '#faq', label: 'FAQ' },
             ].map((l) => (
               <a key={l.href} href={l.href} style={{ fontSize: 13.5, color: '#818898', textDecoration: 'none', padding: '4px 10px', borderRadius: 5 }}>
                 {l.label}

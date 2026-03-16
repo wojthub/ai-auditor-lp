@@ -115,6 +115,30 @@ i odpowiadające tagi JSX w `<main>`.
 | `--color-subtle` | `#818898` | Trzeciorzędny tekst |
 | `--color-faint` | `#a4acb9` | Najsłabszy tekst, labele |
 
+### Kolory statusów
+
+| Status | Label | Hex | Użycie |
+|--------|-------|-----|--------|
+| OK (8-10) | `OK` | `#16A34A` (zielony) | Score >= 8, badge sukcesu |
+| UWAGA (5-7) | `UWAGA` | `#CA8A04` (żółty) | Score 5-7, badge ostrzeżenia |
+| KRYTYCZNY (0-4) | `KRYTYCZNY` | `#DC2626` (czerwony) | Score < 5, badge krytyczny |
+
+### Kolory pokrycia
+
+| Badge | Hex | Użycie |
+|-------|-----|--------|
+| pokryte | `#16A34A` (zielony) | Pokryte sub-zapytania, encje obecne |
+| luka | `#DC2626` (czerwony) | Brakujące sub-zapytania, luki treściowe |
+| unikalne | `#0b7983` (accent teal) | Wyróżniające elementy |
+
+### URR (klasyfikacja atrybutów)
+
+| Klasa | Label PL | Hex | Tło |
+|-------|----------|-----|-----|
+| UNIQUE | Wyróżnik | `#0b7983` (accent teal) | `rgba(11,121,131,0.08)` |
+| ROOT | Podstawa | `#0891b2` (cyan) | `rgba(8,145,178,0.08)` |
+| RARE | Rzadki | `#CA8A04` (żółty) | `rgba(202,138,4,0.08)` |
+
 ### Logo
 
 Prosty teal kwadrat z białym "AI":

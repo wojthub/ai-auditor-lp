@@ -185,25 +185,22 @@ function AIOverviewVisual() {
           <div key={sq.q} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 18px' }}>
             <div style={{
               width: 18, height: 18, borderRadius: '50%', flexShrink: 0,
-              background: sq.covered ? 'rgba(11,121,131,0.1)' : '#f6f8fa',
-              border: `1px solid ${sq.covered ? 'rgba(11,121,131,0.25)' : '#dfe1e7'}`,
+              background: sq.covered ? 'rgba(22,163,74,0.1)' : 'rgba(220,38,38,0.07)',
+              border: `1px solid ${sq.covered ? 'rgba(22,163,74,0.25)' : 'rgba(220,38,38,0.2)'}`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               {sq.covered
-                ? <path d="M4 8l3 3 5-5" stroke={ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                : null}
-              {sq.covered
-                ? <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-5" stroke={ACCENT} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                : <svg width="8" height="8" viewBox="0 0 14 14" fill="none"><path d="M4 4l6 6M10 4l-6 6" stroke="#c1c7d0" strokeWidth="1.8" strokeLinecap="round"/></svg>
+                ? <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-5" stroke="#16A34A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                : <svg width="8" height="8" viewBox="0 0 14 14" fill="none"><path d="M4 4l6 6M10 4l-6 6" stroke="#DC2626" strokeWidth="1.8" strokeLinecap="round"/></svg>
               }
             </div>
             <span style={{ fontSize: 12, color: sq.covered ? '#36394a' : '#a4acb9', lineHeight: 1.4 }}>{sq.q}</span>
             <span style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 600,
-              color: sq.covered ? ACCENT : '#c1c7d0',
-              background: sq.covered ? 'rgba(11,121,131,0.07)' : '#f6f8fa',
+              color: sq.covered ? '#16A34A' : '#DC2626',
+              background: sq.covered ? 'rgba(22,163,74,0.07)' : 'rgba(220,38,38,0.07)',
               borderRadius: 4, padding: '2px 7px', flexShrink: 0,
             }}>
-              {sq.covered ? 'pokryte' : 'brak'}
+              {sq.covered ? 'pokryte' : 'luka'}
             </span>
           </div>
         ))}
@@ -220,18 +217,18 @@ function AIOverviewVisual() {
 
 /* ─── 5. Graf wiedzy ──────────────────────────────── */
 const ENTITIES = [
-  { entity: 'AI Search', attr: 'algorytm', value: 'modele językowe', type: 'ROOT' },
-  { entity: 'BLUF', attr: 'definicja', value: 'Bottom Line Up Front', type: 'UNIQUE' },
-  { entity: 'ChatGPT', attr: 'typ', value: 'model językowy', type: 'ROOT' },
-  { entity: 'CQS', attr: 'zakres', value: '0–100', type: 'UNIQUE' },
-  { entity: 'Google AIO', attr: 'źródło', value: 'grounding w SERP', type: 'RARE' },
-  { entity: 'Content audit', attr: 'narzędzie', value: 'Smart Content Audit', type: 'UNIQUE' },
+  { entity: 'AI Search', attr: 'algorytm', value: 'modele językowe', type: 'Podstawa' },
+  { entity: 'BLUF', attr: 'definicja', value: 'Bottom Line Up Front', type: 'Wyróżnik' },
+  { entity: 'ChatGPT', attr: 'typ', value: 'model językowy', type: 'Podstawa' },
+  { entity: 'CQS', attr: 'zakres', value: '0–100', type: 'Wyróżnik' },
+  { entity: 'Google AIO', attr: 'źródło', value: 'grounding w SERP', type: 'Rzadki' },
+  { entity: 'Content audit', attr: 'narzędzie', value: 'Smart Content Audit', type: 'Wyróżnik' },
 ];
 
 const TYPE_STYLE: Record<string, { color: string; bg: string }> = {
-  UNIQUE: { color: ACCENT, bg: 'rgba(11,121,131,0.08)' },
-  ROOT: { color: '#0891b2', bg: 'rgba(8,145,178,0.08)' },
-  RARE: { color: '#ca8a04', bg: 'rgba(202,138,4,0.08)' },
+  'Wyróżnik': { color: ACCENT, bg: 'rgba(11,121,131,0.08)' },
+  'Podstawa': { color: '#0891b2', bg: 'rgba(8,145,178,0.08)' },
+  'Rzadki': { color: '#ca8a04', bg: 'rgba(202,138,4,0.08)' },
 };
 
 function KnowledgeGraphVisual() {
@@ -424,7 +421,7 @@ export default function Features() {
               AI widzi encje - nie tylko słowa kluczowe
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, lineHeight: 1.65 }}>
-              Modele językowe budują reprezentację wiedzy na podstawie encji i ich atrybutów. Raport mapuje te relacje i klasyfikuje je jako UNIQUE, ROOT lub RARE - wskazując, które budują autorytet tematyczny.
+              Modele językowe budują reprezentację wiedzy na podstawie encji i ich atrybutów. Raport mapuje te relacje i klasyfikuje je jako Wyróżnik, Podstawa lub Rzadki - wskazując, które budują autorytet tematyczny.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>

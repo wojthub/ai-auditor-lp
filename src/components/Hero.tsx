@@ -8,10 +8,10 @@ const APP_URL = 'https://app.smartcontentaudit.com';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden" style={{ background: '#ffffff' }}>
-      <div className="absolute inset-0 dot-grid" style={{ opacity: 0.18 }} />
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 70% 60% at 50% -10%, rgba(11,121,131,0.045) 0%, transparent 100%)' }}
-      />
+      <div className="absolute inset-0 dot-grid" style={{ opacity: 0.14 }} />
+      <div className="hero-blob hero-blob-1" />
+      <div className="hero-blob hero-blob-2" />
+      <div className="hero-blob hero-blob-3" />
 
       <div className="relative" style={{ maxWidth: 1024, margin: '0 auto', padding: '72px 24px 88px' }}>
         <div className="hero-grid">
@@ -82,7 +82,7 @@ export default function Hero() {
               style={{
                 background: '#ffffff', border: '1px solid #dfe1e7',
                 borderRadius: 10, padding: '24px 24px 20px',
-                width: '100%', maxWidth: 380,
+                width: '100%', maxWidth: 420,
                 boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
               }}
             >
