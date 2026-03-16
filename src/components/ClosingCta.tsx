@@ -35,7 +35,7 @@ export default function ClosingCta() {
             maxWidth: 440,
             margin: '0 auto 36px',
           }}>
-            Wklej URL artykułu i słowo kluczowe. Gotowy raport z rekomendacjami Before/After w mniej niż 15 minut.
+            Wklej URL artykułu i słowo kluczowe. Gotowy raport z rekomendacjami Before/After w mniej niż 3 minuty.
           </p>
 
           <motion.a
