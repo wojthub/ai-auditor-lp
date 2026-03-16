@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Smart Content Audit — Audyt treści pod kątem AI Search',
+  title: 'Smart Content Audit - Audyt treści pod kątem AI Search',
   description:
     'Sprawdź, czy Twój content jest cytowalny przez ChatGPT, Perplexity i Google AI Overview. 9 wymiarów analizy, rekomendacje Before/After, benchmark SERP.',
   openGraph: {

@@ -228,7 +228,7 @@ export default function Pricing() {
           transition={{ duration: 0.6, delay: 0.3 }}
           style={{ textAlign: 'center', marginTop: 36, fontSize: 14, color: '#818898' }}
         >
-          Potrzebujesz większego wolumenu? Napisz do nas — przygotujemy ofertę indywidualną.
+          Potrzebujesz większego wolumenu? Napisz do nas - przygotujemy ofertę indywidualną.
         </motion.p>
       </div>
 

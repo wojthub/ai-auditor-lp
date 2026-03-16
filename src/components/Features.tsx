@@ -79,7 +79,7 @@ function BenchmarkVisual() {
   return (
     <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '24px 24px 20px' }}>
       <p style={{ fontSize: 11, fontWeight: 600, color: '#a4acb9', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 18 }}>
-        Content Quality Score — porównanie SERP
+        Content Quality Score - porównanie SERP
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {SERP_DATA.map((row, i) => (
@@ -107,7 +107,7 @@ function BenchmarkVisual() {
       </div>
       <div style={{ marginTop: 18, padding: '10px 14px', background: 'rgba(11,121,131,0.06)', borderRadius: 6, border: '1px solid rgba(11,121,131,0.15)' }}>
         <p style={{ fontSize: 12, color: ACCENT, margin: 0, fontWeight: 500 }}>
-          ↑ 16 pkt do pozycji lidera — raport wskazuje dokładnie co zmienić
+          ↑ 16 pkt do pozycji lidera - raport wskazuje dokładnie co zmienić
         </p>
       </div>
     </div>
@@ -135,7 +135,7 @@ function BeforeAfterVisual() {
             <span style={{ fontSize: 10, fontWeight: 700, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Po</span>
           </div>
           <p style={{ fontSize: 12.5, color: '#36394a', lineHeight: 1.6, margin: 0 }}>
-            <strong style={{ color: ACCENT }}>Audyt AI Search</strong> mierzy 9 wymiarów cytowania przez modele językowe — każdy z szacowanym wpływem na CQS i konkretną poprawką.
+            <strong style={{ color: ACCENT }}>Audyt AI Search</strong> mierzy 9 wymiarów cytowania przez modele językowe - każdy z szacowanym wpływem na CQS i konkretną poprawką.
           </p>
         </div>
       </div>
@@ -150,7 +150,7 @@ function BeforeAfterVisual() {
             {p.label}
           </span>
         ))}
-        <span style={{ fontSize: 11.5, color: '#a4acb9', alignSelf: 'center' }}>— każda rekomendacja ma priorytet i estymowany wpływ na CQS</span>
+        <span style={{ fontSize: 11.5, color: '#a4acb9', alignSelf: 'center' }}>- każda rekomendacja ma priorytet i estymowany wpływ na CQS</span>
       </div>
     </div>
   );
@@ -173,7 +173,7 @@ function AIOverviewVisual() {
         <div style={{ width: 20, height: 20, borderRadius: 4, background: 'linear-gradient(135deg, #4285f4, #34a853)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <span style={{ fontSize: 10, color: '#fff', fontWeight: 700 }}>G</span>
         </div>
-        <span style={{ fontSize: 11, fontWeight: 600, color: '#0d0d12' }}>AI Overview — dekompozycja syntezy</span>
+        <span style={{ fontSize: 11, fontWeight: 600, color: '#0d0d12' }}>AI Overview - dekompozycja syntezy</span>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 5 }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: ACCENT, background: 'rgba(11,121,131,0.08)', border: '1px solid rgba(11,121,131,0.2)', borderRadius: 4, padding: '2px 7px' }}>3/5</span>
           <span style={{ fontSize: 10, color: '#a4acb9' }}>pokrytych</span>
@@ -277,7 +277,7 @@ const REPORT_ITEMS = [
   'Content Quality Score (0–100) z rozbiciem na wymiary',
   'AI Citability Score (0–10)',
   'Wykres radarowy 9 wymiarów',
-  'Benchmark top 10 SERP — tabela porównawcza',
+  'Benchmark top 10 SERP - tabela porównawcza',
   'Rekomendacje Before/After z priorytetami',
   'Graf wiedzy i tabela encji EAV',
   'AI Overview Coverage i analiza sub-zapytań',
@@ -325,7 +325,7 @@ export default function Features() {
   return (
     <div id="features">
 
-      {/* 1 — 9 wymiarów */}
+      {/* 1 - 9 wymiarów */}
       <section style={{ background: '#f8fafb', padding: '58px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 52 }}>
@@ -334,7 +334,7 @@ export default function Features() {
               Każdy wymiar AI Search mierzony osobno
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 520, margin: '0 auto', lineHeight: 1.65 }}>
-              9 kryteriów cytowania przez modele językowe — z konkretnym wynikiem 0–10, wzorcem punktacji i rankingiem ważności.
+              9 kryteriów cytowania przez modele językowe - z konkretnym wynikiem 0–10, wzorcem punktacji i rankingiem ważności.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>
@@ -343,7 +343,7 @@ export default function Features() {
         </div>
       </section>
 
-      {/* 2 — Benchmark SERP */}
+      {/* 2 - Benchmark SERP */}
       <section style={{ background: '#ffffff', padding: '58px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <div className="feat-grid">
@@ -353,10 +353,10 @@ export default function Features() {
                 Wiesz dokładnie, gdzie odstajesz od konkurencji
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 24 }}>
-                Narzędzie automatycznie pobiera i analizuje 10 najwyżej rankujących artykułów dla danego słowa kluczowego. Wynik Twojego contentu trafia na tle realnej konkurencji — widać lukę i punkt wyjścia do optymalizacji.
+                Narzędzie automatycznie pobiera i analizuje 10 najwyżej rankujących artykułów dla danego słowa kluczowego. Wynik Twojego contentu trafia na tle realnej konkurencji - widać lukę i punkt wyjścia do optymalizacji.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {['CQS per artykuł — porównanie tabelaryczne', 'Identyfikacja liderów i słabych punktów SERP', 'Format, długość i struktura konkurentów'].map(item => (
+                {['CQS per artykuł - porównanie tabelaryczne', 'Identyfikacja liderów i słabych punktów SERP', 'Format, długość i struktura konkurentów'].map(item => (
                   <li key={item} style={{ display: 'flex', gap: 10, fontSize: 14, color: '#36394a' }}>
                     <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>→</span>{item}
                   </li>
@@ -370,16 +370,16 @@ export default function Features() {
         </div>
       </section>
 
-      {/* 3 — Before/After */}
+      {/* 3 - Before/After */}
       <section style={{ background: '#f8fafb', padding: '58px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ marginBottom: 44 }}>
             <SectionLabel>Rekomendacje</SectionLabel>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
-              Nie "co poprawić" — tylko "jak poprawić"
+              Nie "co poprawić" - tylko "jak poprawić"
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, lineHeight: 1.65 }}>
-              Każda rekomendacja zawiera fragment z oryginalnego artykułu, gotową poprawkę i szacowany przyrost CQS. Zero interpretacji — wiesz co wkleić.
+              Każda rekomendacja zawiera fragment z oryginalnego artykułu, gotową poprawkę i szacowany przyrost CQS. Zero interpretacji - wiesz co wkleić.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>
@@ -388,7 +388,7 @@ export default function Features() {
         </div>
       </section>
 
-      {/* 4 — AI Overview */}
+      {/* 4 - AI Overview */}
       <section style={{ background: '#ffffff', padding: '58px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <div className="feat-grid feat-grid-reverse">
@@ -401,10 +401,10 @@ export default function Features() {
                 Czy Twoja treść pokrywa syntezę AI Overview?
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 24 }}>
-                AI Overview to synteza odpowiedzi na kilkanaście sub-zapytań powiązanych z frazą. Narzędzie dekompozytuje tę syntezę i sprawdza, które sub-zapytania Twoja treść pokrywa — a gdzie są luki, przez które AI pomija Twoją stronę przy generowaniu odpowiedzi.
+                AI Overview to synteza odpowiedzi na kilkanaście sub-zapytań powiązanych z frazą. Narzędzie dekompozytuje tę syntezę i sprawdza, które sub-zapytania Twoja treść pokrywa - a gdzie są luki, przez które AI pomija Twoją stronę przy generowaniu odpowiedzi.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {['Dekompozycja AI Overview na sub-zapytania składowe', 'Mapa pokrycia — które sub-zapytania obsługuje Twoja treść', 'Wskazanie luk z rekomendacją uzupełnienia treści'].map(item => (
+                {['Dekompozycja AI Overview na sub-zapytania składowe', 'Mapa pokrycia - które sub-zapytania obsługuje Twoja treść', 'Wskazanie luk z rekomendacją uzupełnienia treści'].map(item => (
                   <li key={item} style={{ display: 'flex', gap: 10, fontSize: 14, color: '#36394a' }}>
                     <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>→</span>{item}
                   </li>
@@ -415,16 +415,16 @@ export default function Features() {
         </div>
       </section>
 
-      {/* 5 — Graf wiedzy */}
+      {/* 5 - Graf wiedzy */}
       <section style={{ background: '#f8fafb', padding: '58px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ marginBottom: 44 }}>
             <SectionLabel>Graf wiedzy</SectionLabel>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
-              AI widzi encje — nie tylko słowa kluczowe
+              AI widzi encje - nie tylko słowa kluczowe
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, lineHeight: 1.65 }}>
-              Modele językowe budują reprezentację wiedzy na podstawie encji i ich atrybutów. Raport mapuje te relacje i klasyfikuje je jako UNIQUE, ROOT lub RARE — wskazując, które budują autorytet tematyczny.
+              Modele językowe budują reprezentację wiedzy na podstawie encji i ich atrybutów. Raport mapuje te relacje i klasyfikuje je jako UNIQUE, ROOT lub RARE - wskazując, które budują autorytet tematyczny.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>
@@ -433,7 +433,7 @@ export default function Features() {
         </div>
       </section>
 
-      {/* 6 — Eksport */}
+      {/* 6 - Eksport */}
       <section style={{ background: '#ffffff', padding: '58px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <div className="feat-grid">
@@ -443,7 +443,7 @@ export default function Features() {
                 Raport gotowy do wysłania klientowi
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 24 }}>
-                PDF zaprojektowany z myślą o prezentacji klientowi — bez dodatkowej edycji. Format Markdown przydatny do dokumentacji projektowej lub dalszego przetwarzania.
+                PDF zaprojektowany z myślą o prezentacji klientowi - bez dodatkowej edycji. Format Markdown przydatny do dokumentacji projektowej lub dalszego przetwarzania.
               </p>
               <div style={{ display: 'flex', gap: 12 }}>
                 {[

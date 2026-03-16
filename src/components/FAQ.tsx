@@ -7,17 +7,17 @@ const faqs = [
   {
     question: 'Czym różni się audyt AI Search od klasycznego audytu SEO?',
     answer:
-      'Klasyczny audyt SEO sprawdza techniczne aspekty strony, linki i słowa kluczowe. Audyt AI Search analizuje, czy treść jest cytowalny przez modele językowe (ChatGPT, Perplexity, Google AI Overview) — to zupełnie inne kryteria: gęstość informacji, struktura odpowiedzi, graf wiedzy, BLUF. Nasze narzędzie specjalizuje się właśnie w tym wymiarze.',
+      'Klasyczny audyt SEO sprawdza techniczne aspekty strony, linki i słowa kluczowe. Audyt AI Search analizuje, czy treść jest cytowalny przez modele językowe (ChatGPT, Perplexity, Google AI Overview) - to zupełnie inne kryteria: gęstość informacji, struktura odpowiedzi, graf wiedzy, BLUF. Nasze narzędzie specjalizuje się właśnie w tym wymiarze.',
   },
   {
     question: 'Ile trwa jeden audyt?',
     answer:
-      'Cały proces — od wklejenia URL do gotowego raportu — zajmuje zazwyczaj 10–15 minut. Narzędzie samo pobiera treść strony, dane SERP i analizuje AI Overview. Nie musisz nic robić w tym czasie.',
+      'Cały proces - od wklejenia URL do gotowego raportu - zajmuje zazwyczaj 10–15 minut. Narzędzie samo pobiera treść strony, dane SERP i analizuje AI Overview. Nie musisz nic robić w tym czasie.',
   },
   {
     question: 'Czy raport nadaje się do bezpośredniego wysłania klientowi?',
     answer:
-      'Tak. Raport PDF jest zaprojektowany tak, żeby można go wysłać klientowi bez edycji. Zawiera Content Quality Score, wykres radarowy 9 wymiarów, tabelę priorytetów z rekomendacjami Before/After i benchmark SERP — wszystko w czytelnym, profesjonalnym formacie.',
+      'Tak. Raport PDF jest zaprojektowany tak, żeby można go wysłać klientowi bez edycji. Zawiera Content Quality Score, wykres radarowy 9 wymiarów, tabelę priorytetów z rekomendacjami Before/After i benchmark SERP - wszystko w czytelnym, profesjonalnym formacie.',
   },
   {
     question: 'Co to jest Content Quality Score i jak jest liczony?',
@@ -27,7 +27,7 @@ const faqs = [
   {
     question: 'Czy narzędzie działa z każdym rodzajem treści?',
     answer:
-      'Narzędzie analizuje każdą publicznie dostępną stronę — artykuły blogowe, poradniki, strony eksperckie, landing page z treścią. Wymaga tylko publicznego URL i słowa kluczowego, pod kątem którego ma być oceniany content.',
+      'Narzędzie analizuje każdą publicznie dostępną stronę - artykuły blogowe, poradniki, strony eksperckie, landing page z treścią. Wymaga tylko publicznego URL i słowa kluczowego, pod kątem którego ma być oceniany content.',
   },
 ];
 

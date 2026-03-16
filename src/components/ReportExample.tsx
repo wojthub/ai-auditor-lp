@@ -45,7 +45,7 @@ export default function ReportExample() {
             margin: '0 auto 40px',
             lineHeight: 1.7,
           }}>
-            W mniej niż 3 minuty otrzymujesz gotowy raport. Dokument nie wymaga edycji — możesz go wysłać do klienta lub od razu rozpocząć prace optymalizacyjne.
+            W mniej niż 3 minuty otrzymujesz gotowy raport. Dokument nie wymaga edycji - możesz go wysłać do klienta lub od razu rozpocząć prace optymalizacyjne.
           </p>
 
           <motion.a

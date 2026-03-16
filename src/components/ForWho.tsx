@@ -8,7 +8,7 @@ const audiences = [
   {
     title: 'Właściciel agencji SEO',
     description:
-      'Nowa usługa, którą możesz oferować klientom — zanim zrobi to konkurencja. Raport wychodzi z narzędzia gotowy, bez angażowania teamu przy każdym zleceniu.',
+      'Nowa usługa, którą możesz oferować klientom - zanim zrobi to konkurencja. Raport wychodzi z narzędzia gotowy, bez angażowania teamu przy każdym zleceniu.',
     highlights: ['Nowa usługa bez dodatkowego etatu', 'Raport gotowy do wysłania bez edycji', 'Pakiet bez subskrypcji, na fakturę'],
     icon: (
       // briefcase
@@ -22,7 +22,7 @@ const audiences = [
   {
     title: 'Specjalista / ekspert SEO',
     description:
-      'Ręczna analiza 9 wymiarów i benchmark 10 konkurentów SERP to godziny pracy. Narzędzie dostarcza liczby i rekomendacje — ty interpretujesz i budujesz strategię.',
+      'Ręczna analiza 9 wymiarów i benchmark 10 konkurentów SERP to godziny pracy. Narzędzie dostarcza liczby i rekomendacje - ty interpretujesz i budujesz strategię.',
     highlights: ['CQS i AI Citability Score per wymiar', 'Benchmark top 10 SERP automatycznie', 'SERP + AI Overview w jednym raporcie'],
     icon: (
       // magnifying glass with lines
@@ -36,7 +36,7 @@ const audiences = [
   {
     title: 'Freelancer SEO',
     description:
-      'Każda godzina się liczy. Audyt jako osobna usługa — bez subskrypcji, na fakturę. Obsługujesz więcej klientów bez zwiększania nakładu pracy.',
+      'Każda godzina się liczy. Audyt jako osobna usługa - bez subskrypcji, na fakturę. Obsługujesz więcej klientów bez zwiększania nakładu pracy.',
     highlights: ['Skalujesz się bez zatrudniania', 'Sprzedajesz audyty jako usługę', 'Pakiet bez limitu czasowego'],
     icon: (
       // laptop

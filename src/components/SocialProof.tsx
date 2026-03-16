@@ -15,19 +15,19 @@ const STATS = [
 /* ─── Testimonials ───────────────────────────────────── */
 const TESTIMONIALS = [
   {
-    quote: 'Dodaliśmy audyty AI Search do oferty bez zatrudniania nowego analityka. Raport wychodzi gotowy — wysyłamy klientowi bez edycji. Czas realizacji zlecenia z 6 godzin do 20 minut.',
+    quote: 'Dodaliśmy audyty AI Search do oferty bez zatrudniania nowego analityka. Raport wychodzi gotowy - wysyłamy klientowi bez edycji. Czas realizacji zlecenia z 6 godzin do 20 minut.',
     name: 'Marcin K.',
     role: 'Właściciel agencji SEO · Warszawa',
     initials: 'MK',
   },
   {
-    quote: 'Dostawałam to samo co robiłam ręcznie przez kilka godzin — w 15 minut. CQS, benchmark, rekomendacje Before/After. Teraz skupiam się na strategii, nie na zbieraniu liczb.',
+    quote: 'Dostawałam to samo co robiłam ręcznie przez kilka godzin - w 15 minut. CQS, benchmark, rekomendacje Before/After. Teraz skupiam się na strategii, nie na zbieraniu liczb.',
     name: 'Anna W.',
     role: 'Senior SEO Specialist · agencja e-commerce',
     initials: 'AW',
   },
   {
-    quote: 'Sprzedaję audyty AI Search jako osobną usługę — to konkretna pozycja na fakturze, którą klienci rozumieją i chcą kupować. Bez subskrypcji, pakiet rozliczyłem w 3 tygodnie.',
+    quote: 'Sprzedaję audyty AI Search jako osobną usługę - to konkretna pozycja na fakturze, którą klienci rozumieją i chcą kupować. Bez subskrypcji, pakiet rozliczyłem w 3 tygodnie.',
     name: 'Tomasz R.',
     role: 'Freelancer SEO · 12 lat w branży',
     initials: 'TR',

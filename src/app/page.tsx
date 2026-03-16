@@ -4,9 +4,9 @@ import Problem from '@/components/Problem';
 import Solution from '@/components/Solution';
 import HowItWorks from '@/components/HowItWorks';
 import Features from '@/components/Features';
-// import SocialProof from '@/components/SocialProof';   // UKRYTA — liczby + testimoniale
-// import Pricing from '@/components/Pricing';           // UKRYTA — cennik
-// import FAQ from '@/components/FAQ';                   // UKRYTA — FAQ
+// import SocialProof from '@/components/SocialProof';   // UKRYTA - liczby + testimoniale
+// import Pricing from '@/components/Pricing';           // UKRYTA - cennik
+// import FAQ from '@/components/FAQ';                   // UKRYTA - FAQ
 import ReportExample from '@/components/ReportExample';
 import ForWho from '@/components/ForWho';
 import ClosingCta from '@/components/ClosingCta';

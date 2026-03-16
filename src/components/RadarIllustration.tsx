@@ -13,39 +13,39 @@ const SCORE_SETS = [
 const LABELS = [
   {
     short: 'CSI',
-    def: 'CSI Alignment — zgodność treści z centralnym zapytaniem wyszukiwania. Ocenia, czy artykuł odpowiada dokładnie na to, czego szuka użytkownik.',
+    def: 'CSI Alignment - zgodność treści z centralnym zapytaniem wyszukiwania. Ocenia, czy artykuł odpowiada dokładnie na to, czego szuka użytkownik.',
   },
   {
     short: 'Gęstość',
-    def: 'Gęstość informacji — stosunek konkretnych faktów i liczb do "puchu". Im więcej weryfikowalnych twierdzeń, tym wyższy wynik.',
+    def: 'Gęstość informacji - stosunek konkretnych faktów i liczb do "puchu". Im więcej weryfikowalnych twierdzeń, tym wyższy wynik.',
   },
   {
     short: 'Graf',
-    def: 'Graf wiedzy — kompletność struktury encja–atrybut–wartość (EAV). Mierzy, jak dokładnie artykuł opisuje kluczowe obiekty i ich cechy.',
+    def: 'Graf wiedzy - kompletność struktury encja–atrybut–wartość (EAV). Mierzy, jak dokładnie artykuł opisuje kluczowe obiekty i ich cechy.',
   },
   {
     short: 'BLUF',
-    def: 'Bottom Line Up Front — czy odpowiedź pojawia się w pierwszych zdaniach każdej sekcji. Systemy RAG preferują treści z odpowiedzią na początku.',
+    def: 'Bottom Line Up Front - czy odpowiedź pojawia się w pierwszych zdaniach każdej sekcji. Systemy RAG preferują treści z odpowiedzią na początku.',
   },
   {
     short: 'Chunk',
-    def: 'Chunk Optimization — autonomiczność sekcji. Każdy rozdział powinien być zrozumiały bez kontekstu reszty artykułu (optimum: 200–500 słów).',
+    def: 'Chunk Optimization - autonomiczność sekcji. Każdy rozdział powinien być zrozumiały bez kontekstu reszty artykułu (optimum: 200–500 słów).',
   },
   {
     short: 'CoR',
-    def: 'Cost of Retrieval — łatwość ekstrakcji informacji. Ocenia strukturę nagłówków, tabele, listy i pogrubienia ułatwiające AI pobieranie faktów.',
+    def: 'Cost of Retrieval - łatwość ekstrakcji informacji. Ocenia strukturę nagłówków, tabele, listy i pogrubienia ułatwiające AI pobieranie faktów.',
   },
   {
     short: 'TF-IDF',
-    def: 'TF-IDF — nasycenie terminologią branżową. Porównuje słownictwo artykułu z top 10 SERP — im więcej specjalistycznych fraz, tym wyższy wynik.',
+    def: 'TF-IDF - nasycenie terminologią branżową. Porównuje słownictwo artykułu z top 10 SERP - im więcej specjalistycznych fraz, tym wyższy wynik.',
   },
   {
     short: 'SRL',
-    def: 'Semantic Role Labels — perspektywa narracyjna. Mierzy, czy centralna encja (produkt/usługa) pełni rolę aktywnego podmiotu w zdaniach.',
+    def: 'Semantic Role Labels - perspektywa narracyjna. Mierzy, czy centralna encja (produkt/usługa) pełni rolę aktywnego podmiotu w zdaniach.',
   },
   {
     short: 'Fan-Out',
-    def: 'Fan-Out i AI Overview — pokrycie sub-zapytań. Sprawdza, czy artykuł odpowiada na wszystkie pytania poboczne generowane przez AI wokół głównego tematu.',
+    def: 'Fan-Out i AI Overview - pokrycie sub-zapytań. Sprawdza, czy artykuł odpowiada na wszystkie pytania poboczne generowane przez AI wokół głównego tematu.',
   },
 ];
 
@@ -109,7 +109,7 @@ export default function RadarIllustration({ maxWidth = 220 }: { maxWidth?: numbe
             transition={{ duration: 0.9, ease: 'easeInOut' }}
           />
         ))}
-        {/* Labels — styled like 78/100: dark, bold Inter */}
+        {/* Labels - styled like 78/100: dark, bold Inter */}
         {LABELS.map((label, i) => {
           const p = getPoint(i, 13);
           const isHovered = hoveredIdx === i;

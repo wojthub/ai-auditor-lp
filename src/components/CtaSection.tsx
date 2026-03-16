@@ -85,7 +85,7 @@ export default function CtaSection() {
                   lineHeight: 1.6,
                 }}
               >
-                Wklejasz URL, dostajesz raport — co zmienić w treści, żeby cytowały Cię
+                Wklejasz URL, dostajesz raport - co zmienić w treści, żeby cytowały Cię
                 Google AI Overview, ChatGPT i Perplexity.
               </p>
               <div className="flex flex-col sm:flex-row gap-3" style={{ justifyContent: 'center' }}>

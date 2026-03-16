@@ -31,7 +31,8 @@ export default function Hero() {
               backgroundClip: 'text',
             }}>
               Audytuj treść<br />
-              pod kątem AI Search
+              pod kątem<br />
+              AI Search
             </h1>
 
             <p style={{ fontSize: 17, color: '#36394a', fontWeight: 400, lineHeight: 1.6, margin: '0 0 36px' }}>
@@ -71,7 +72,7 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* RIGHT — floating report card */}
+          {/* RIGHT - floating report card */}
           <motion.div
             initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
