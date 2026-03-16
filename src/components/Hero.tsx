@@ -85,25 +85,31 @@ export default function Hero() {
                 boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
               }}
             >
-              <div style={{ marginBottom: 2, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 2 }}>
                 {/* Left: CQS */}
-                <div>
-                  <p style={{ fontSize: 11, fontWeight: 600, color: '#a4acb9', textTransform: 'uppercase', letterSpacing: '0.09em', marginBottom: 6 }}>
-                    CQS
-                  </p>
+                <div style={{ background: 'rgba(202,138,4,0.06)', borderLeft: '3px solid #CA8A04', borderRadius: 8, padding: '12px 14px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                    <p style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>
+                      CQS
+                    </p>
+                    <span style={{ fontSize: 9, fontWeight: 700, color: '#CA8A04', background: 'rgba(202,138,4,0.12)', border: '1px solid rgba(202,138,4,0.25)', borderRadius: 4, padding: '2px 7px', letterSpacing: '0.06em' }}>UWAGA</span>
+                  </div>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-                    <span style={{ fontSize: 40, fontWeight: 700, color: '#0d0d12', lineHeight: 1, letterSpacing: '-0.04em' }}>78</span>
-                    <span style={{ fontSize: 15, color: '#dfe1e7', fontWeight: 500 }}>/100</span>
+                    <span style={{ fontSize: 36, fontWeight: 700, color: '#CA8A04', lineHeight: 1, letterSpacing: '-0.04em' }}>78</span>
+                    <span style={{ fontSize: 14, color: '#a4acb9', fontWeight: 500 }}>/ 100</span>
                   </div>
                 </div>
                 {/* Right: Citability */}
-                <div style={{ borderLeft: '1px solid #eceff3', paddingLeft: 20 }}>
-                  <p style={{ fontSize: 11, fontWeight: 600, color: '#a4acb9', textTransform: 'uppercase', letterSpacing: '0.09em', marginBottom: 6 }}>
-                    Citability AI
-                  </p>
+                <div style={{ background: 'rgba(220,38,38,0.06)', borderLeft: '3px solid #DC2626', borderRadius: 8, padding: '12px 14px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                    <p style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>
+                      Citability
+                    </p>
+                    <span style={{ fontSize: 9, fontWeight: 700, color: '#DC2626', background: 'rgba(220,38,38,0.12)', border: '1px solid rgba(220,38,38,0.25)', borderRadius: 4, padding: '2px 7px', letterSpacing: '0.06em' }}>KRYTYCZNY</span>
+                  </div>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-                    <span style={{ fontSize: 40, fontWeight: 700, color: '#0d0d12', lineHeight: 1, letterSpacing: '-0.04em' }}>7.2</span>
-                    <span style={{ fontSize: 15, color: '#dfe1e7', fontWeight: 500 }}>/10</span>
+                    <span style={{ fontSize: 36, fontWeight: 700, color: '#DC2626', lineHeight: 1, letterSpacing: '-0.04em' }}>4.9</span>
+                    <span style={{ fontSize: 14, color: '#a4acb9', fontWeight: 500 }}>/ 10</span>
                   </div>
                 </div>
               </div>

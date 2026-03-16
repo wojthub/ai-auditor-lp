@@ -142,9 +142,9 @@ function BeforeAfterVisual() {
       {/* Priority badges */}
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
         {[
-          { label: 'KRYTYCZNE', bg: 'rgba(11,121,131,0.1)', color: '#097380' },
-          { label: 'WYSOKIE', bg: '#f0f9fa', color: ACCENT },
-          { label: 'ŚREDNIE', bg: '#f8fafb', color: '#818898' },
+          { label: 'OK', bg: 'rgba(22,163,74,0.1)', color: '#16A34A' },
+          { label: 'UWAGA', bg: 'rgba(202,138,4,0.1)', color: '#CA8A04' },
+          { label: 'KRYTYCZNY', bg: 'rgba(220,38,38,0.1)', color: '#DC2626' },
         ].map(p => (
           <span key={p.label} style={{ fontSize: 10, fontWeight: 700, color: p.color, background: p.bg, border: `1px solid ${p.color}30`, borderRadius: 4, padding: '4px 10px', letterSpacing: '0.06em' }}>
             {p.label}

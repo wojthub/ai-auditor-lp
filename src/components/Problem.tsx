@@ -6,17 +6,17 @@ const cards = [
   {
     num: '01',
     statement: 'Ranking w Google nie oznacza widoczności w AI',
-    body: 'ChatGPT, Perplexity i Google AI Overview dobierają treści według własnych kryteriów — niezależnie od pozycji w SERP, PageRank czy liczby linków.',
+    body: 'ChatGPT, Perplexity i Google AI Overview dobierają treści według własnych kryteriów - niezależnie od pozycji w SERP, PageRank czy liczby linków.',
   },
   {
     num: '02',
-    statement: 'Twoje narzędzia SEO są ślepe na AI Search',
-    body: 'Modele językowe analizują BLUF, gęstość informacji, EAV i pokrycie sub-zapytań. Żaden klasyczny crawler ani audytor SEO tych wskaźników nie mierzy.',
+    statement: 'Nie wiesz, co AI ocenia w Twojej treści',
+    body: 'Modele językowe cytują artykuły według własnych kryteriów - struktura odpowiedzi, kompletność informacji, jakość danych. Klasyczne narzędzia SEO tego nie pokażą.',
   },
   {
     num: '03',
     statement: 'Rzetelna analiza ręczna kosztuje godziny',
-    body: '9 wymiarów jakości, benchmark 10 konkurentów SERP, analiza AI Overview — zebranie tego wszystkiego manualnie to pełny dzień eksperckiej pracy.',
+    body: '9 wymiarów jakości, benchmark 10 konkurentów SERP, analiza AI Overview - zebranie tego wszystkiego manualnie to pełny dzień eksperckiej pracy.',
   },
 ];
 
@@ -49,9 +49,6 @@ export default function Problem() {
           }}>
             Wysoka pozycja w Google nie oznacza cytowania przez AI
           </h2>
-          <p style={{ fontSize: 16, color: '#818898', lineHeight: 1.65, marginTop: 14, maxWidth: 480, margin: '14px auto 0' }}>
-            Epoka AI Search zmienia zasady gry. Sam PageRank już nie wystarczy — oto cztery powody, dla których Twoja treść znika w AI.
-          </p>
         </motion.div>
 
         {/* 3-column cards */}
@@ -98,7 +95,7 @@ export default function Problem() {
           ))}
         </div>
 
-        {/* Closing — zamknięcie sekcji */}
+        {/* Closing - zamknięcie sekcji */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
