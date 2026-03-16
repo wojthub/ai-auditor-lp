@@ -22,7 +22,7 @@ const cards = [
 
 const closing = {
   statement: 'Bez danych nie wiesz od czego zacząć',
-  body: 'Optymalizacja bez diagnozy to strzelanie na ślepo. Nie wiesz, który wymiar obniża Twój CQS i jaką zmianę wprowadzić w pierwszej kolejności.',
+  body: 'Optymalizacja bez diagnozy to strzelanie na ślepo. Nie wiesz, który wymiar obniża Twój Content Quality Score (CQS) i jaką zmianę wprowadzić w pierwszej kolejności.',
 };
 
 export default function Problem() {

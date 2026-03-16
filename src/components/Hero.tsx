@@ -92,7 +92,7 @@ export default function Hero() {
             >
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 2 }}>
                 {/* Left: CQS */}
-                <div style={{ background: 'rgba(202,138,4,0.06)', borderLeft: '3px solid #CA8A04', borderRadius: 8, padding: '12px 14px' }}>
+                <div className="score-box" style={{ background: 'rgba(202,138,4,0.06)', borderLeft: '3px solid #CA8A04', borderRadius: 8, padding: '12px 14px', position: 'relative', cursor: 'default' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                     <p style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>
                       CQS
@@ -103,9 +103,12 @@ export default function Hero() {
                     <span style={{ fontSize: 36, fontWeight: 700, color: '#CA8A04', lineHeight: 1, letterSpacing: '-0.04em' }}>78</span>
                     <span style={{ fontSize: 14, color: '#a4acb9', fontWeight: 500 }}>/ 100</span>
                   </div>
+                  <div className="score-tooltip">
+                    <strong>Content Quality Score</strong> - zagregowana ocena jakości treści (0-100) obliczana z 9 wymiarów AI Search. Im wyższy wynik, tym większa szansa na cytowanie przez modele językowe.
+                  </div>
                 </div>
                 {/* Right: Citability */}
-                <div style={{ background: 'rgba(220,38,38,0.06)', borderLeft: '3px solid #DC2626', borderRadius: 8, padding: '12px 14px' }}>
+                <div className="score-box" style={{ background: 'rgba(220,38,38,0.06)', borderLeft: '3px solid #DC2626', borderRadius: 8, padding: '12px 14px', position: 'relative', cursor: 'default' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                     <p style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>
                       Citability
@@ -115,6 +118,9 @@ export default function Hero() {
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
                     <span style={{ fontSize: 36, fontWeight: 700, color: '#DC2626', lineHeight: 1, letterSpacing: '-0.04em' }}>4.9</span>
                     <span style={{ fontSize: 14, color: '#a4acb9', fontWeight: 500 }}>/ 10</span>
+                  </div>
+                  <div className="score-tooltip">
+                    <strong>AI Citability Score</strong> - prawdopodobieństwo, że ChatGPT, Perplexity lub Google AI Overview zacytuje Twoją treść (0-10). Uwzględnia strukturę BLUF, gęstość informacji i pokrycie sub-zapytań.
                   </div>
                 </div>
               </div>
@@ -139,6 +145,23 @@ export default function Hero() {
         @media (max-width: 768px) {
           .hero-grid { grid-template-columns: 1fr; gap: 40px; }
         }
+        .score-tooltip {
+          display: none;
+          position: absolute;
+          left: 0; right: 0; top: 100%;
+          margin-top: 6px;
+          background: #0d0d12;
+          color: #e5e7eb;
+          font-size: 12px;
+          line-height: 1.55;
+          padding: 10px 12px;
+          border-radius: 6px;
+          z-index: 10;
+          pointer-events: none;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+        }
+        .score-tooltip strong { color: #ffffff; }
+        .score-box:hover .score-tooltip { display: block; }
       `}</style>
     </section>
   );
