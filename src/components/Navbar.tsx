@@ -33,7 +33,7 @@ export default function Navbar() {
           <a href="#jak-dziala" className="nav-link">Jak to działa?</a>
           <a href="#dla-kogo" className="nav-link">Dla kogo?</a>
 
-          <a href={`${APP_URL}/register`} className="nav-cta">Rozpocznij</a>
+          <a href={`${APP_URL}/login`} className="nav-cta">Rozpocznij</a>
         </div>
       </div>
 

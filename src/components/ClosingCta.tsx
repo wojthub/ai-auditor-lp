@@ -39,7 +39,7 @@ export default function ClosingCta() {
           </p>
 
           <motion.a
-            href={`${APP_URL}/register`}
+            href={`${APP_URL}/login`}
             whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
             whileTap={{ scale: 0.97 }}
             style={{

@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import TechLogos from '@/components/TechLogos';
 import Problem from '@/components/Problem';
 import Solution from '@/components/Solution';
 import HowItWorks from '@/components/HowItWorks';
@@ -17,6 +18,7 @@ export default function LandingPage() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
+      <TechLogos />
       <Problem />
       <Solution />
       <HowItWorks />
