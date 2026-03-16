@@ -6,7 +6,7 @@ const APP_URL = 'https://app.smartcontentaudit.com';
 
 export default function ClosingCta() {
   return (
-    <section style={{ background: '#0d0d12', padding: '58px 0' }}>
+    <section style={{ background: '#0b7983', padding: '58px 0' }}>
       <div style={{ maxWidth: 640, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>
 
         <motion.div
@@ -24,12 +24,12 @@ export default function ClosingCta() {
             marginBottom: 20,
           }}>
             Sprawdź, czy Twoja treść<br />
-            <span style={{ color: '#0b7983' }}>jest gotowa na AI Search.</span>
+            jest gotowa na AI Search.
           </h2>
 
           <p style={{
             fontSize: 17,
-            color: 'rgba(255,255,255,0.58)',
+            color: 'rgba(255,255,255,0.72)',
             lineHeight: 1.68,
             marginBottom: 36,
             maxWidth: 440,
@@ -48,8 +48,8 @@ export default function ClosingCta() {
               gap: 8,
               padding: '14px 32px',
               borderRadius: 8,
-              background: '#0b7983',
-              color: '#ffffff',
+              background: '#ffffff',
+              color: '#0b7983',
               fontWeight: 700,
               fontSize: 15,
               textDecoration: 'none',

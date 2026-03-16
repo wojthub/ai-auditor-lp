@@ -7,7 +7,7 @@ import Features from '@/components/Features';
 // import SocialProof from '@/components/SocialProof';   // UKRYTA - liczby + testimoniale
 // import Pricing from '@/components/Pricing';           // UKRYTA - cennik
 // import FAQ from '@/components/FAQ';                   // UKRYTA - FAQ
-import ReportExample from '@/components/ReportExample';
+// import ReportExample from '@/components/ReportExample'; // UKRYTA - przykład raportu
 import ForWho from '@/components/ForWho';
 import ClosingCta from '@/components/ClosingCta';
 import Footer from '@/components/Footer';
@@ -22,7 +22,7 @@ export default function LandingPage() {
       <HowItWorks />
       <Features />
       {/* <SocialProof /> */}
-      <ReportExample />
+      {/* <ReportExample /> */}
       <ForWho />
       {/* <Pricing /> */}
       {/* <FAQ /> */}
