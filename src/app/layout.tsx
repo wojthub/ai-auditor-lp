@@ -11,20 +11,20 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Smart Content Audit - Audyt treści pod kątem AI Search',
+  title: 'CitabilityScore - Audyt treści pod kątem AI Search',
   description:
     'Sprawdź, czy Twój content jest cytowalny przez ChatGPT, Perplexity i Google AI Overview. 9 wymiarów analizy, rekomendacje Before/After, benchmark SERP.',
   openGraph: {
-    title: 'Smart Content Audit',
+    title: 'CitabilityScore',
     description: 'Audytuj treść pod kątem AI Search. 9 wymiarów analizy, konkretne rekomendacje.',
-    url: 'https://www.smartcontentaudit.com',
-    siteName: 'Smart Content Audit',
+    url: 'https://citabilityscore.com',
+    siteName: 'CitabilityScore',
     locale: 'pl_PL',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Smart Content Audit',
+    title: 'CitabilityScore',
     description: 'Audytuj treść pod kątem AI Search. 9 wymiarów analizy, konkretne rekomendacje.',
   },
 };

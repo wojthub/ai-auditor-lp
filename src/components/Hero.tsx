@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import RadarIllustration from './RadarIllustration';
 
-const APP_URL = 'https://app.smartcontentaudit.com';
+const APP_URL = 'https://app.citabilityscore.com';
 
 export default function Hero() {
   return (

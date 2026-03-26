@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-const APP_URL = 'https://app.smartcontentaudit.com';
+const APP_URL = 'https://app.citabilityscore.com';
 
 export default function ClosingCta() {
   return (

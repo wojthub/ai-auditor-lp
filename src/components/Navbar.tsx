@@ -1,4 +1,4 @@
-const APP_URL = 'https://app.smartcontentaudit.com';
+const APP_URL = 'https://app.citabilityscore.com';
 
 export default function Navbar() {
   return (
@@ -18,14 +18,9 @@ export default function Navbar() {
         style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, height: 64 }}
       >
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2.5" style={{ textDecoration: 'none' }}>
-          <svg width="28" height="28" viewBox="0 0 32 32">
-            <rect width="32" height="32" rx="8" fill="#0b7983"/>
-            <text x="16" y="23" textAnchor="middle" fontFamily="system-ui,sans-serif" fontWeight="700" fontSize="15" fill="#FFFFFF">AI</text>
-          </svg>
-          <span style={{ fontSize: 14, fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.02em' }}>
-            Smart Content Audit
-          </span>
+        <a href="/" className="flex items-center" style={{ textDecoration: 'none' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="CitabilityScore" style={{ height: 28 }} />
         </a>
 
         {/* Nav links */}

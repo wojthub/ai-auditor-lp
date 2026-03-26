@@ -1,14 +1,14 @@
-# CLAUDE.md — Smart Content Audit LP
+# CLAUDE.md — CitabilityScore LP
 
 ## Opis projektu
 
-Landing page dla narzędzia **Smart Content Audit** — webapp do audytu contentu pod kątem AI Search (ChatGPT, Perplexity, Google AI Overview, Bing Copilot).
+Landing page dla narzędzia **CitabilityScore** (`citabilityscore.com`) — webapp do audytu contentu pod kątem AI Search (ChatGPT, Perplexity, Google AI Overview, Bing Copilot).
 
 **Cel LP:** konwersja na rejestrację konta (`/register`) lub zakup pakietu audytów.
 
 **Język:** polski (PL). Wszystkie teksty i komunikacja z użytkownikiem w języku polskim.
 
-**Powiązane repo:** aplikacja główna znajduje się w `../` — specyfikacja w `spec/` (patrz `spec/CLAUDE.md`).
+**Powiązane repo:** aplikacja główna znajduje się w `../ai-auditor/` — specyfikacja w `spec/` (patrz `ai-auditor/CLAUDE.md`).
 
 ---
 
@@ -67,7 +67,7 @@ Navbar → Hero → Problem → Solution → HowItWorks → Features → ReportE
 **Logika kolejności (AIDA + marketing psychology):**
 1. **Hero** — hak, CTA, uwaga
 2. **Problem** — agitacja bólu (3 kafle + zamknięcie jako akapit)
-3. **Solution** — Smart Content Audit jako odpowiedź na problem
+3. **Solution** — CitabilityScore jako odpowiedź na problem
 4. **HowItWorks** — redukcja lęku przed złożonością ("to tylko 3 kroki") + CTA
 5. **Features** — budowanie pożądania (deep-dive dla zdecydowanych)
 6. **ReportExample** — namacalny output ("oto co dokładnie dostaniesz")
@@ -141,14 +141,8 @@ i odpowiadające tagi JSX w `<main>`.
 
 ### Logo
 
-Prosty teal kwadrat z białym "AI":
-```svg
-<svg viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="8" fill="#0b7983"/>
-  <text x="16" y="22" textAnchor="middle" fontWeight="700" fontSize="13"
-        fill="#ffffff" fontFamily="Inter,system-ui,sans-serif">AI</text>
-</svg>
-```
+- **Logotyp PNG:** `public/logo.png` — pełny logotyp CitabilityScore (speedometer + tekst), używany w Navbar (height 28px) i Footer (height 22px)
+- **Favicon SVG:** `src/app/icon.svg` — teal speedometer z cudzysłowem (identyczny jak w ai-auditor)
 
 ### Typografia
 
@@ -188,8 +182,9 @@ Hero floating card: `animate={{ y: [0, -8, 0] }}`, `duration: 4, repeat: Infinit
 
 - Server Component (brak `'use client'`)
 - Sticky, `backdrop-filter: blur(16px)`, border-bottom, height `64px`, maxWidth `1024`
+- Logo: `<img src="/logo.png" height={28} />` (logotyp CitabilityScore)
 - Linki: Jak działa (`#jak-dziala`), Dla kogo (`#dla-kogo`)
-- Jeden CTA: "Rozpocznij" → `APP_URL/register` (teal `#0b7983`, hover `#097380`)
+- Jeden CTA: "Rozpocznij" → `APP_URL/login` (teal `#0b7983`, hover `#097380`)
 
 ### Hero
 
@@ -219,7 +214,7 @@ Hero floating card: `animate={{ y: [0, -8, 0] }}`, `duration: 4, repeat: Infinit
 ### Solution
 
 - Tło: `#ffffff`
-- Mały label: "Smart Content Audit" (uppercase, `#818898`)
+- Mały label: "CitabilityScore" (uppercase, `#818898`)
 - H2: "Narzędzie, które mierzy to, " + teal span "co AI naprawdę ocenia"
 - Akapit: jedno zdanie opisujące produkt
 - CTA: "Rozpocznij →" → `APP_URL/register`
@@ -289,7 +284,7 @@ Hero floating card: `animate={{ y: [0, -8, 0] }}`, `duration: 4, repeat: Infinit
 
 ### Footer
 
-- Server Component, logo + linki nawigacyjne
+- Server Component, logotyp CitabilityScore (`<img src="/logo.png" height={22} />`) + linki nawigacyjne
 
 ---
 
@@ -310,7 +305,7 @@ Hero floating card: `animate={{ y: [0, -8, 0] }}`, `duration: 4, repeat: Infinit
 ## APP_URL
 
 ```ts
-const APP_URL = 'https://app.smartcontentaudit.com';
+const APP_URL = 'https://app.citabilityscore.com';
 ```
 
 Zdefiniowany lokalnie w każdym komponencie który linkuje do aplikacji. Linki:
