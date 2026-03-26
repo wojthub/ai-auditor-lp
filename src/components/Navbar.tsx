@@ -20,7 +20,7 @@ export default function Navbar() {
         {/* Logo */}
         <a href="/" className="flex items-center" style={{ textDecoration: 'none' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="CitabilityScore" style={{ height: 28 }} />
+          <img src="/logo.png" alt="CitabilityScore" style={{ height: 36 }} />
         </a>
 
         {/* Nav links */}
