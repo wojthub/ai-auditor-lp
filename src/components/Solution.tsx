@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import RadarIllustration from './RadarIllustration';
 
 const ACCENT = '#0b7983';
-const APP_URL = 'https://app.citabilityscore.com';
+const APP_URL = 'https://app.citationone.com';
 
 export default function Solution() {
   return (
@@ -28,7 +28,7 @@ export default function Solution() {
               letterSpacing: '0.08em',
               marginBottom: 14,
             }}>
-              CitabilityScore
+              CitationOne
             </p>
             <h2 style={{
               fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)',
@@ -47,7 +47,7 @@ export default function Solution() {
               lineHeight: 1.7,
               maxWidth: 420,
             }}>
-              CitabilityScore analizuje 9 wymiarów jakości treści i porównuje
+              CitationOne analizuje 9 wymiarów jakości treści i porównuje
               Twój artykuł z top&nbsp;10 SERP. Otrzymujesz spriorytetyzowane rekomendacje
               Before/After – całość jest gotowa w mniej niż 3 minuty.
             </p>

@@ -1,4 +1,4 @@
-const APP_URL = 'https://app.citabilityscore.com';
+const APP_URL = 'https://app.citationone.com';
 
 export default function Footer() {
   return (
@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://app.citabilityscore.com/logo.png" alt="CitabilityScore" style={{ height: 28 }} />
+            <img src="https://app.citationone.com/logo.png" alt="CitationOne" style={{ height: 28 }} />
           </div>
 
           <div className="flex items-center gap-1">
@@ -25,7 +25,7 @@ export default function Footer() {
           </div>
 
           <span style={{ fontSize: 12.5, color: '#a4acb9' }}>
-            &copy; {new Date().getFullYear()} CitabilityScore
+            &copy; {new Date().getFullYear()} CitationOne
           </span>
         </div>
       </div>

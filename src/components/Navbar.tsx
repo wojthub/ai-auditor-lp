@@ -1,4 +1,4 @@
-const APP_URL = 'https://app.citabilityscore.com';
+const APP_URL = 'https://app.citationone.com';
 
 export default function Navbar() {
   return (
@@ -20,7 +20,7 @@ export default function Navbar() {
         {/* Logo */}
         <a href="/" className="flex items-center" style={{ textDecoration: 'none' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="https://app.citabilityscore.com/logo.png" alt="CitabilityScore" style={{ height: 36 }} />
+          <img src="https://app.citationone.com/logo.png" alt="CitationOne" style={{ height: 36 }} />
         </a>
 
         {/* Nav links */}

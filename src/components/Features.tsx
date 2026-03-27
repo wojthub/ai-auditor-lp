@@ -222,7 +222,7 @@ const ENTITIES = [
   { entity: 'ChatGPT', attr: 'typ', value: 'model językowy', type: 'Podstawa' },
   { entity: 'CQS', attr: 'zakres', value: '0–100', type: 'Wyróżnik' },
   { entity: 'Google AIO', attr: 'źródło', value: 'grounding w SERP', type: 'Rzadki' },
-  { entity: 'Content audit', attr: 'narzędzie', value: 'CitabilityScore', type: 'Wyróżnik' },
+  { entity: 'Content audit', attr: 'narzędzie', value: 'CitationOne', type: 'Wyróżnik' },
 ];
 
 const TYPE_STYLE: Record<string, { color: string; bg: string }> = {

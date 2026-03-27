@@ -11,20 +11,20 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'CitabilityScore - Audyt treści pod kątem AI Search',
+  title: 'CitationOne - Audyt treści pod kątem AI Search',
   description:
     'Sprawdź, czy Twój content jest cytowalny przez ChatGPT, Perplexity i Google AI Overview. 9 wymiarów analizy, rekomendacje Before/After, benchmark SERP.',
   openGraph: {
-    title: 'CitabilityScore',
+    title: 'CitationOne',
     description: 'Audytuj treść pod kątem AI Search. 9 wymiarów analizy, konkretne rekomendacje.',
-    url: 'https://citabilityscore.com',
-    siteName: 'CitabilityScore',
+    url: 'https://citationone.com',
+    siteName: 'CitationOne',
     locale: 'pl_PL',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CitabilityScore',
+    title: 'CitationOne',
     description: 'Audytuj treść pod kątem AI Search. 9 wymiarów analizy, konkretne rekomendacje.',
   },
 };
