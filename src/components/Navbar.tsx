@@ -31,22 +31,19 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden sm:flex items-center">
-          <a href="/jak-to-dziala" className="nav-link">Jak to dziala?</a>
+          <a href="/jak-to-dziala" className="nav-link">Jak to działa?</a>
           <a href="#dla-kogo" className="nav-link">Dla kogo?</a>
-          <a href={`${APP_URL}/login`} className="nav-cta">Zrob audyt</a>
+          <a href={`${APP_URL}/login`} className="nav-cta">Zrób audyt</a>
         </div>
 
         {/* Mobile hamburger */}
         <button
-          className="sm:hidden"
+          className="sm:hidden flex items-center justify-center"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? 'Zamknij menu' : 'Otworz menu'}
+          aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
           style={{
             width: 44,
             height: 44,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
             background: 'none',
             border: 'none',
             cursor: 'pointer',
@@ -81,7 +78,7 @@ export default function Navbar() {
             onClick={() => setMobileOpen(false)}
             className="nav-mobile-link"
           >
-            Jak to dziala?
+            Jak to działa?
           </a>
           <a
             href="#dla-kogo"
@@ -95,7 +92,7 @@ export default function Navbar() {
             onClick={() => setMobileOpen(false)}
             className="nav-mobile-cta"
           >
-            Zrob audyt
+            Zrób audyt
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
