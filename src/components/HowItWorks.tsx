@@ -1,5 +1,6 @@
 'use client';
 
+import { Fragment } from 'react';
 import { motion } from 'framer-motion';
 
 const APP_URL = 'https://app.citationone.com';
@@ -12,9 +13,9 @@ const steps = [
       'Podajesz adres strony i słowo kluczowe. Narzędzie samo pobiera treść i dane SERP - żadnych ręcznych copy-paste.',
     accent: '#0b7983',
     icon: (
-      // globe-alt - URL / web address
-      <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+      // link bar - URL / address bar
+      <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
       </svg>
     ),
   },
@@ -22,11 +23,11 @@ const steps = [
     number: '2',
     title: 'AI analizuje treść',
     description:
-      '10 równoległych wywołań AI: 9 wymiarów jakości, benchmark top 10 SERP, pokrycie AI Overview i analiza grafu wiedzy.',
+      '10 równoległych wywołań AI: zgodność z intencją, gęstość informacji, graf wiedzy, BLUF, chunki, koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AI Overview, wysiłek redakcyjny + E-E-A-T. W trybie Full: benchmark top 10 SERP.',
     accent: '#0b7983',
     icon: (
       // sparkles - AI magic
-      <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+      <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423L16.5 15.75l.394 1.183a2.25 2.25 0 001.423 1.423L19.5 18.75l-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
       </svg>
     ),
@@ -35,11 +36,11 @@ const steps = [
     number: '3',
     title: 'Odbierasz gotowy raport',
     description:
-      'Content Quality Score, wykres radarowy, priorytetyzowane rekomendacje BEFORE/AFTER, benchmark SERP. Eksport PDF i Markdown.',
+      'Raport z rekomendacjami Before/After - dosłowny cytat z artykułu i gotowa poprawka z szacowanym wpływem na wynik. Eksport PDF lub Markdown jednym kliknięciem.',
     accent: '#0b7983',
     icon: (
       // document-check - gotowy raport
-      <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+      <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12" />
       </svg>
     ),
@@ -59,8 +60,30 @@ function StepConnector() {
 
 export default function HowItWorks() {
   return (
-    <section id="jak-dziala" style={{ background: '#f8fafb', padding: '58px 0' }}>
-      <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+    <section id="jak-dziala" style={{
+      background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
+      padding: '90px 0',
+      clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0 100%)',
+      margin: '-28px 0',
+      position: 'relative',
+      overflow: 'hidden',
+      zIndex: 1,
+    }}>
+      {/* Dekoracyjne cudzysłowy */}
+      <span aria-hidden style={{
+        position: 'absolute', top: 36, left: 52,
+        fontSize: 200, lineHeight: 1, fontWeight: 400,
+        color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif',
+        userSelect: 'none', pointerEvents: 'none',
+      }}>{'\u201C'}</span>
+      <span aria-hidden style={{
+        position: 'absolute', bottom: 36, right: 52,
+        fontSize: 200, lineHeight: 1, fontWeight: 400,
+        color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif',
+        userSelect: 'none', pointerEvents: 'none',
+      }}>{'\u201D'}</span>
+
+      <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 2 }}>
 
         {/* Header */}
         <motion.div
@@ -74,7 +97,7 @@ export default function HowItWorks() {
             style={{
               fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
               fontWeight: 600,
-              color: '#0d0d12',
+              color: '#ffffff',
               letterSpacing: '-0.025em',
             }}
           >
@@ -85,9 +108,8 @@ export default function HowItWorks() {
         {/* Steps */}
         <div className="howitworks-grid">
           {steps.map((step, i) => (
-            <>
+            <Fragment key={step.number}>
               <motion.div
-                key={step.number}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ y: -4, boxShadow: '0 8px 24px rgba(11,121,131,0.1)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
@@ -105,17 +127,17 @@ export default function HowItWorks() {
               >
                 {/* Icon */}
                 <motion.div
-                  whileHover={{ scale: 1.12, rotate: 5, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
+                  whileHover={{ scale: 1.08, rotate: 4, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
                   style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: 6,
+                    width: 88,
+                    height: 88,
+                    borderRadius: 16,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: step.accent,
-                    background: 'rgba(11,121,131,0.06)',
-                    border: '1px solid rgba(11,121,131,0.18)',
+                    color: '#ffffff',
+                    background: '#0b7983',
+                    border: '1px solid rgba(255,255,255,0.2)',
                     marginBottom: 24,
                     marginTop: 4,
                   }}
@@ -154,7 +176,7 @@ export default function HowItWorks() {
                   <StepConnector />
                 </motion.div>
               )}
-            </>
+            </Fragment>
           ))}
         </div>
 
@@ -174,17 +196,18 @@ export default function HowItWorks() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 8,
-              padding: '12px 28px',
+              padding: '14px 28px',
               borderRadius: 8,
-              background: '#0b7983',
-              color: '#ffffff',
+              background: '#ffffff',
+              color: '#0b7983',
+              border: '1px solid rgba(255,255,255,0.5)',
               fontWeight: 600,
-              fontSize: 14,
+              fontSize: 15,
               textDecoration: 'none',
               letterSpacing: '-0.01em',
             }}
           >
-            Rozpocznij
+            Zrób audyt
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>

@@ -16,7 +16,7 @@ const cards = [
   {
     num: '03',
     statement: 'Rzetelna analiza ręczna kosztuje godziny',
-    body: '9 wymiarów jakości, benchmark 10 konkurentów SERP, analiza AI Overview - zebranie tego wszystkiego manualnie to pełny dzień eksperckiej pracy.',
+    body: '10 wymiarów jakości, benchmark 10 konkurentów SERP, analiza AI Overview - zebranie tego wszystkiego manualnie to pełny dzień eksperckiej pracy.',
   },
 ];
 
@@ -27,8 +27,30 @@ const closing = {
 
 export default function Problem() {
   return (
-    <section style={{ background: '#f8fafb', padding: '58px 0' }}>
-      <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+    <section style={{
+      background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
+      padding: '90px 0',
+      clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0 100%)',
+      margin: '-28px 0',
+      position: 'relative',
+      overflow: 'hidden',
+      zIndex: 1,
+    }}>
+      {/* Dekoracyjne cudzysłowy - jedna para */}
+      <span aria-hidden style={{
+        position: 'absolute', top: 36, left: 52,
+        fontSize: 200, lineHeight: 1, fontWeight: 400,
+        color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif',
+        userSelect: 'none', pointerEvents: 'none',
+      }}>{'\u201C'}</span>
+      <span aria-hidden style={{
+        position: 'absolute', bottom: 36, right: 52,
+        fontSize: 200, lineHeight: 1, fontWeight: 400,
+        color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif',
+        userSelect: 'none', pointerEvents: 'none',
+      }}>{'\u201D'}</span>
+
+      <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 2 }}>
 
         {/* Header */}
         <motion.div
@@ -41,7 +63,7 @@ export default function Problem() {
           <h2 style={{
             fontSize: 'clamp(1.6rem, 3.5vw, 2.25rem)',
             fontWeight: 600,
-            color: '#0d0d12',
+            color: '#ffffff',
             letterSpacing: '-0.025em',
             lineHeight: 1.25,
             maxWidth: 560,
@@ -69,11 +91,12 @@ export default function Problem() {
             >
               <span style={{
                 display: 'block',
-                fontSize: 13,
+                fontSize: 48,
                 fontWeight: 700,
                 color: '#0b7983',
-                letterSpacing: '0.04em',
-                marginBottom: 16,
+                letterSpacing: '-0.03em',
+                marginBottom: 12,
+                lineHeight: 1,
                 fontVariantNumeric: 'tabular-nums',
               }}>
                 {p.num}
@@ -106,7 +129,7 @@ export default function Problem() {
           <h3 style={{
             fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)',
             fontWeight: 600,
-            color: '#0d0d12',
+            color: '#ffffff',
             letterSpacing: '-0.025em',
             lineHeight: 1.25,
             maxWidth: 560,
@@ -114,7 +137,7 @@ export default function Problem() {
           }}>
             {closing.statement}
           </h3>
-          <p style={{ fontSize: 16, color: '#818898', lineHeight: 1.65, maxWidth: 480, margin: '0 auto' }}>
+          <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, maxWidth: 480, margin: '0 auto' }}>
             {closing.body}
           </p>
         </motion.div>

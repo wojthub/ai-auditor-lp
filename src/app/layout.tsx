@@ -13,10 +13,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'CitationOne - Audyt treści pod kątem AI Search',
   description:
-    'Sprawdź, czy Twój content jest cytowalny przez ChatGPT, Perplexity i Google AI Overview. 9 wymiarów analizy, rekomendacje Before/After, benchmark SERP.',
+    'Sprawdź, czy Twój content jest cytowalny przez ChatGPT, Perplexity i Google AI Overview. 10 wymiarów analizy, rekomendacje Before/After, benchmark SERP.',
   openGraph: {
     title: 'CitationOne',
-    description: 'Audytuj treść pod kątem AI Search. 9 wymiarów analizy, konkretne rekomendacje.',
+    description: 'Audytuj treść pod kątem AI Search. 10 wymiarów analizy, konkretne rekomendacje.',
     url: 'https://citationone.com',
     siteName: 'CitationOne',
     locale: 'pl_PL',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'CitationOne',
-    description: 'Audytuj treść pod kątem AI Search. 9 wymiarów analizy, konkretne rekomendacje.',
+    description: 'Audytuj treść pod kątem AI Search. 10 wymiarów analizy, konkretne rekomendacje.',
   },
 };
 

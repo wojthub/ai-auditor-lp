@@ -4,16 +4,16 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const SCORE_SETS = [
-  [8, 7, 9, 6, 8, 7, 5, 8, 7],
-  [5, 9, 6, 9, 5, 8, 8, 6, 9],
-  [9, 6, 8, 5, 9, 6, 7, 9, 6],
-  [7, 8, 5, 8, 7, 9, 9, 7, 8],
+  [8, 7, 9, 6, 8, 7, 5, 8, 7, 6],
+  [5, 9, 6, 9, 5, 8, 8, 6, 9, 8],
+  [9, 6, 8, 5, 9, 6, 7, 9, 6, 7],
+  [7, 8, 5, 8, 7, 9, 9, 7, 8, 5],
 ];
 
 const LABELS = [
   {
-    short: 'CSI',
-    def: 'CSI Alignment - zgodność treści z centralnym zapytaniem wyszukiwania. Ocenia, czy artykuł odpowiada dokładnie na to, czego szuka użytkownik.',
+    short: 'Intencja',
+    def: 'Zgodność z intencją - czy treść odpowiada dokładnie na to, czego szuka użytkownik. Ocenia dopasowanie do centralnego zapytania wyszukiwania.',
   },
   {
     short: 'Gęstość',
@@ -21,36 +21,40 @@ const LABELS = [
   },
   {
     short: 'Graf',
-    def: 'Graf wiedzy - kompletność struktury encja–atrybut–wartość (EAV). Mierzy, jak dokładnie artykuł opisuje kluczowe obiekty i ich cechy.',
+    def: 'Graf wiedzy - kompletność struktury encja-atrybut-wartość (EAV). Mierzy, jak dokładnie artykuł opisuje kluczowe obiekty i ich cechy.',
   },
   {
     short: 'BLUF',
-    def: 'Bottom Line Up Front - czy odpowiedź pojawia się w pierwszych zdaniach każdej sekcji. Systemy RAG preferują treści z odpowiedzią na początku.',
+    def: 'Odpowiedź na początku - czy kluczowa informacja pojawia się w pierwszych zdaniach każdej sekcji. Systemy RAG preferują treści z odpowiedzią na starcie.',
   },
   {
-    short: 'Chunk',
-    def: 'Chunk Optimization - autonomiczność sekcji. Każdy rozdział powinien być zrozumiały bez kontekstu reszty artykułu (optimum: 200–500 słów).',
+    short: 'Chunki',
+    def: 'Autonomiczność sekcji - każdy rozdział powinien być zrozumiały bez kontekstu reszty artykułu (optimum: 200-500 słów).',
   },
   {
-    short: 'CoR',
-    def: 'Cost of Retrieval - łatwość ekstrakcji informacji. Ocenia strukturę nagłówków, tabele, listy i pogrubienia ułatwiające AI pobieranie faktów.',
+    short: 'Ekstrakcja',
+    def: 'Koszt ekstrakcji - łatwość pobrania informacji przez AI. Ocenia strukturę nagłówków, tabele, listy i pogrubienia ułatwiające AI pobieranie faktów.',
   },
   {
     short: 'TF-IDF',
     def: 'TF-IDF - nasycenie terminologią branżową. Porównuje słownictwo artykułu z top 10 SERP - im więcej specjalistycznych fraz, tym wyższy wynik.',
   },
   {
-    short: 'SRL',
-    def: 'Semantic Role Labels - perspektywa narracyjna. Mierzy, czy centralna encja (produkt/usługa) pełni rolę aktywnego podmiotu w zdaniach.',
+    short: 'Role',
+    def: 'Role semantyczne - perspektywa narracyjna. Mierzy, czy centralna encja (produkt/usługa) pełni rolę aktywnego podmiotu w zdaniach.',
   },
   {
-    short: 'Fan-Out',
-    def: 'Fan-Out i AI Overview - pokrycie sub-zapytań. Sprawdza, czy artykuł odpowiada na wszystkie pytania poboczne generowane przez AI wokół głównego tematu.',
+    short: 'AIO',
+    def: 'Pokrycie AI Overview - sprawdza, czy artykuł odpowiada na wszystkie pod-pytania generowane przez AI wokół głównego tematu.',
+  },
+  {
+    short: 'Wysiłek',
+    def: 'Wysiłek redakcyjny - ocena struktury i formatowania treści: długość, obrazki, wideo, listy, tabele, hierarchia nagłówków, wyróżnienia. Porównuje z konkurencją w SERP.',
   },
 ];
 
 export default function RadarIllustration({ maxWidth = 220 }: { maxWidth?: number }) {
-  const cx = 150, cy = 150, r = 96, axes = 9;
+  const cx = 150, cy = 150, r = 96, axes = 10;
   const [scoreIdx, setScoreIdx] = useState(0);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
@@ -109,26 +113,55 @@ export default function RadarIllustration({ maxWidth = 220 }: { maxWidth?: numbe
             transition={{ duration: 0.9, ease: 'easeInOut' }}
           />
         ))}
-        {/* Labels - styled like 78/100: dark, bold Inter */}
+        {/* Labels with info icon */}
         {LABELS.map((label, i) => {
           const p = getPoint(i, 13);
           const isHovered = hoveredIdx === i;
+          // offset info icon to the right of label text
+          const textWidth = label.short.length * 4.5;
           return (
-            <text
+            <g
               key={i}
-              x={p.x} y={p.y}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              fill={isHovered ? '#0b7983' : '#0d0d12'}
-              fontSize="9.5"
-              fontWeight="700"
-              fontFamily="Inter,system-ui,sans-serif"
-              style={{ cursor: 'default', transition: 'fill 0.15s' }}
+              style={{ cursor: 'default' }}
               onMouseEnter={() => setHoveredIdx(i)}
               onMouseLeave={() => setHoveredIdx(null)}
             >
-              {label.short}
-            </text>
+              <text
+                x={p.x - 4} y={p.y}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fill={isHovered ? '#0b7983' : '#0d0d12'}
+                fontSize="9.5"
+                fontWeight="700"
+                fontFamily="Inter,system-ui,sans-serif"
+                style={{ transition: 'fill 0.15s' }}
+              >
+                {label.short}
+              </text>
+              {/* info circle icon */}
+              <circle
+                cx={p.x + textWidth + 1}
+                cy={p.y}
+                r="5"
+                fill={isHovered ? 'rgba(11,121,131,0.15)' : 'rgba(164,172,185,0.15)'}
+                stroke={isHovered ? '#0b7983' : '#a4acb9'}
+                strokeWidth="0.8"
+                style={{ transition: 'fill 0.15s, stroke 0.15s' }}
+              />
+              <text
+                x={p.x + textWidth + 1}
+                y={p.y + 0.5}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fill={isHovered ? '#0b7983' : '#a4acb9'}
+                fontSize="6.5"
+                fontWeight="600"
+                fontFamily="Inter,system-ui,sans-serif"
+                style={{ transition: 'fill 0.15s' }}
+              >
+                i
+              </text>
+            </g>
           );
         })}
       </svg>

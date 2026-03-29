@@ -1,6 +1,12 @@
+'use client';
+
+import { useState } from 'react';
+
 const APP_URL = 'https://app.citationone.com';
 
 export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <nav
       style={{
@@ -23,22 +29,87 @@ export default function Navbar() {
           <img src="https://app.citationone.com/logo.png" alt="CitationOne" style={{ height: 36 }} />
         </a>
 
-        {/* Nav links */}
+        {/* Desktop nav */}
         <div className="hidden sm:flex items-center">
-          <a href="#jak-dziala" className="nav-link">Jak to działa?</a>
+          <a href="/jak-to-dziala" className="nav-link">Jak to dziala?</a>
           <a href="#dla-kogo" className="nav-link">Dla kogo?</a>
-
-          <a href={`${APP_URL}/login`} className="nav-cta">Rozpocznij</a>
+          <a href={`${APP_URL}/login`} className="nav-cta">Zrob audyt</a>
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          className="sm:hidden"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? 'Zamknij menu' : 'Otworz menu'}
+          style={{
+            width: 44,
+            height: 44,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            borderRadius: 6,
+            padding: 0,
+          }}
+        >
+          {mobileOpen ? (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d0d12" strokeWidth={2} strokeLinecap="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d0d12" strokeWidth={2} strokeLinecap="round">
+              <path d="M3 12h18M3 6h18M3 18h18" />
+            </svg>
+          )}
+        </button>
       </div>
+
+      {/* Mobile menu panel */}
+      {mobileOpen && (
+        <div
+          className="sm:hidden"
+          style={{
+            borderTop: '1px solid #eceff3',
+            background: '#ffffff',
+            padding: '12px 24px 20px',
+          }}
+        >
+          <a
+            href="/jak-to-dziala"
+            onClick={() => setMobileOpen(false)}
+            className="nav-mobile-link"
+          >
+            Jak to dziala?
+          </a>
+          <a
+            href="#dla-kogo"
+            onClick={() => setMobileOpen(false)}
+            className="nav-mobile-link"
+          >
+            Dla kogo?
+          </a>
+          <a
+            href={`${APP_URL}/login`}
+            onClick={() => setMobileOpen(false)}
+            className="nav-mobile-cta"
+          >
+            Zrob audyt
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+      )}
 
       <style>{`
         .nav-link {
-          font-size: 13.5px;
+          font-size: 15px;
           font-weight: 500;
           color: #666d80;
           text-decoration: none;
-          padding: 5px 11px;
+          padding: 6px 14px;
           border-radius: 6px;
           transition: color 0.14s ease, background 0.14s ease;
           letter-spacing: -0.01em;
@@ -51,20 +122,46 @@ export default function Navbar() {
         .nav-cta {
           display: inline-flex;
           align-items: center;
-          padding: 7px 16px;
+          padding: 10px 20px;
           border-radius: 6px;
           background: #0b7983;
           color: #ffffff;
-          font-size: 13.5px;
+          font-size: 15px;
           font-weight: 600;
           text-decoration: none;
-          margin-left: 4px;
+          margin-left: 6px;
           letter-spacing: -0.01em;
           transition: background 0.14s ease;
         }
         .nav-cta:hover {
           background: #097380;
           opacity: 1;
+        }
+        .nav-mobile-link {
+          display: block;
+          font-size: 16px;
+          font-weight: 500;
+          color: #36394a;
+          text-decoration: none;
+          padding: 14px 0;
+          border-bottom: 1px solid #eceff3;
+          letter-spacing: -0.01em;
+        }
+        .nav-mobile-cta {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          width: 100%;
+          margin-top: 12px;
+          padding: 14px 20px;
+          border-radius: 8px;
+          background: #0b7983;
+          color: #ffffff;
+          font-size: 16px;
+          font-weight: 600;
+          text-decoration: none;
+          letter-spacing: -0.01em;
         }
       `}</style>
     </nav>

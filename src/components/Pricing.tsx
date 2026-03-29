@@ -8,7 +8,7 @@ const included = [
   'Pełny audyt AI Search',
   'Content Quality Score (CQS 0–100)',
   'AI Citability Score (0–10)',
-  'Analiza 9 wymiarów jakości',
+  'Analiza 10 wymiarów jakości',
   'Benchmark top 10 SERP',
   'Rekomendacje Before/After z priorytetami',
   'AI Overview Coverage',

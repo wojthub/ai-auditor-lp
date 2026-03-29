@@ -1,10 +1,12 @@
 # Wymiary audytu
 
-> Czesc specyfikacji Smart Content Audit. Indeks: [CLAUDE.md](../CLAUDE.md)
+> Czesc specyfikacji CitationOne. Indeks: [CLAUDE.md](../CLAUDE.md)
 
 ## Wymiary audytu
 
 Kazdy wymiar to osobne wywolanie Gemini API z dedykowanym promptem. Prompty w `lib/ai/prompts/`.
+
+**DimensionProblem extended schema:** kazdy prompt wymiaru generuje `problems[]` z 4 opcjonalnymi polami per problem: `title` (tytul rekomendacji), `section` (nazwa H2 lub "Lead"/"Meta"), `actionType` ("zamień"/"dodaj"/"usuń"/"przenieś"/"rozszerz"), `clientWhy` (uzasadnienie w jezyku klienta). Te pola sa uzywane przez `recommendation-builder.ts` do algorytmicznego budowania rekomendacji (0 Gemini calls).
 
 | # | Wymiar | DimensionId | Prompt plik | Co ocenia |
 |---|--------|-------------|-------------|-----------|
@@ -150,7 +152,7 @@ Podczas ekstrakcji EAV z konkurentow (etap 5 benchmark), Gemini API dodatkowo wy
 |--------|-------------|----------|
 | `tables` | Tabele porownawcze, tabele z danymi | Tabela oprocentowania kredytow wg bankow |
 | `lists` | Listy punktowane/numerowane (>3 elementy) | Lista objawow, kroki postepowania |
-| `infographics` | Odwolania do grafik/diagramow/schematow | "Jak pokazuje wykres ponizej..." |
+| `infographics` | Obrazy, grafiki, diagramy, schematy (UI label: "Obrazy") | "Jak pokazuje wykres ponizej...", imageCount >=4 z htmlMetrics |
 | `bibliography` | Cytowania naukowe, lista zrodel, PubMed | "(Smith et al., 2024)", "[1]" |
 | `videos` | Osadzone video, odwolania do YouTube | Embed YouTube, "obejrzyj film" |
 | `faq` | Sekcja FAQ / pytania i odpowiedzi | "Najczesciej zadawane pytania" |

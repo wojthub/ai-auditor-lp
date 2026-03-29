@@ -6,7 +6,7 @@ const ACCENT = '#0b7983';
 
 /* ─── Stats ─────────────────────────────────────────── */
 const STATS = [
-  { value: '9', label: 'wymiarów AI Search\nw jednym raporcie' },
+  { value: '10', label: 'wymiarów AI Search\nw jednym raporcie' },
   { value: '< 15', label: 'minut od URL\ndo gotowego raportu' },
   { value: '10', label: 'artykułów SERP\nw benchmarku' },
   { value: '2', label: 'formaty eksportu\nPDF i Markdown' },

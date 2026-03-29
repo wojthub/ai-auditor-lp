@@ -12,15 +12,15 @@ export default function Footer() {
 
           <div className="flex items-center gap-1">
             {[
-              { href: '#jak-dziala', label: 'Jak działa?' },
-              { href: '#features', label: 'Funkcje' },
+              { href: '/jak-to-dziala', label: 'Jak to działa?' },
+              { href: '/#dla-kogo', label: 'Dla kogo?' },
             ].map((l) => (
-              <a key={l.href} href={l.href} style={{ fontSize: 13.5, color: '#818898', textDecoration: 'none', padding: '4px 10px', borderRadius: 5 }}>
+              <a key={l.href} href={l.href} style={{ fontSize: 14, color: '#818898', textDecoration: 'none', padding: '12px 14px', borderRadius: 5 }}>
                 {l.label}
               </a>
             ))}
-            <a href={APP_URL} style={{ fontSize: 13.5, color: '#0b7983', fontWeight: 600, textDecoration: 'none', padding: '4px 10px' }}>
-              Aplikacja →
+            <a href={`${APP_URL}/login`} style={{ fontSize: 14, color: '#0b7983', fontWeight: 600, textDecoration: 'none', padding: '12px 14px' }}>
+              Zrób audyt →
             </a>
           </div>
 

@@ -1,6 +1,6 @@
 # Modele danych
 
-> Czesc specyfikacji Smart Content Audit. Indeks: [CLAUDE.md](../CLAUDE.md)
+> Czesc specyfikacji CitationOne. Indeks: [CLAUDE.md](../CLAUDE.md)
 
 ## Typy TypeScript (`src/types/index.ts`)
 
@@ -101,6 +101,7 @@ interface Audit {
   sourceContent: string;
   sourceWordCount: number;
   keyword: string | null;        // Slowo kluczowe (tryb Full: do SERP)
+  sourceLanguage: string | null; // ISO 639-1 (np. 'pl', 'en') — NULL = stary audyt (domyslnie pl)
   // CSI
   centralEntity: string;
   sourceContext: string;
@@ -118,6 +119,9 @@ interface Audit {
   eavTriples: EAVTriple[];
   reportExtras: ReportExtras | null;
   serpConsensus: SerpConsensus | null;
+  contentTypeProfile: string | null;  // ID profilu z content-type-profiles.ts (np. 'article', 'listing', 'faq')
+  project: string | null;             // tag projektu/klienta (max 50 zn.)
+  shareToken: string | null;          // token publicznego linku (nanoid 24 zn.)
 }
 
 // --- Report extras (generated in report phase) ---
@@ -265,15 +269,21 @@ interface EEATDimension {
 
 // --- Rekomendacje ---
 
+type RecommendationAction = 'zamień' | 'dodaj' | 'usuń' | 'przenieś' | 'rozszerz';
+
 interface Recommendation {
   id: string;                    // generowane przez nanoid() przy zapisie do DB (nie AI-generated)
   priority: Priority;
   title: string;
-  dimension: DimensionId | 'eeat';
+  dimension: DimensionId | 'eeat' | 'aiOverview';
   before: string;
   after: string;
   impact: string;
   estimatedCqsDelta: number;
+  beforeVerified?: boolean;      // grounding verification
+  section?: string;              // nazwa sekcji H2 (lub "Lead", "Meta description", "Nowa sekcja")
+  actionType?: RecommendationAction;  // typ akcji: zamień, dodaj, usuń, przenieś, rozszerz
+  clientWhy?: string;            // uzasadnienie w języku klienta (bez żargonu SEO/AI)
 }
 
 // --- Struktura artykulu ---
@@ -286,6 +296,7 @@ interface StructureProposal {
 interface ProposedSection {
   level: 'h1' | 'h2' | 'h3';
   title: string;
+  originalTitle?: string;          // oryginalny tytul sekcji z tresci (tylko dla action='change')
   action: 'ok' | 'change' | 'new';
   reason: string | null;
   children: ProposedSection[];
@@ -310,6 +321,7 @@ interface WizardState {
     predicate: PredicateCategory;
   } | null;
   csiConfirmed: boolean;
+  sourceLanguage: string;          // ISO 639-1 (default 'pl'), auto-detected by Gemini
   auditId: string | null;
   dimensionProgress: Record<DimensionId | 'eeat', DimensionStatus>;
   benchmarkProgress: DimensionStatus; // tryb Full: status benchmarku
@@ -324,6 +336,7 @@ interface WizardState {
 interface WizardPrefill {
   sourceUrl: string | null;
   keyword: string | null;
+  sourceLanguage?: string;
   mode: AuditMode;
   csi: CSI;  // CE, SC, CSI, Predicate z poprzedniego audytu
 }
@@ -335,8 +348,11 @@ interface WizardPrefill {
 Tabele:
 - audits            -- id, status, mode ('content-only' | 'full'), source_url, source_title,
                        source_description, source_content, source_word_count, keyword,
+                       source_language (TEXT nullable, ISO 639-1, NULL=pl),
                        central_entity, source_context, central_search_intent, predicate,
                        cqs, ai_citability, report_extras (JSON), serp_consensus (JSON),
+                       content_type_profile (TEXT nullable), error_message (TEXT nullable),
+                       project (TEXT nullable), share_token (TEXT nullable),
                        created_at, updated_at
 - dimension_results -- id, audit_id (FK), dimension_id, score, summary, strengths (JSON),
                        problems (JSON), raw_response
@@ -344,7 +360,8 @@ Tabele:
                        experience_missing (JSON), experience_suggestion, [analogicznie dla
                        expertise, authority, trust], average
 - recommendations   -- id, audit_id (FK), priority, title, dimension, before_text, after_text,
-                       impact, estimated_cqs_delta
+                       impact, estimated_cqs_delta, before_verified (BOOL nullable),
+                       section (TEXT nullable), action_type (TEXT nullable), client_why (TEXT nullable)
 - eav_triples       -- id, audit_id (FK), entity, attribute, value, eav_type, urr_class, covered
 - benchmark_data    -- id, audit_id (FK), keyword, paa (JSON), related (JSON),
                        competitors (JSON), eav_matrix (JSON), gaps (JSON),

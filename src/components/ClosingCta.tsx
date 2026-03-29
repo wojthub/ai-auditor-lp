@@ -6,7 +6,7 @@ const APP_URL = 'https://app.citationone.com';
 
 export default function ClosingCta() {
   return (
-    <section style={{ background: '#0b7983', padding: '58px 0' }}>
+    <section style={{ background: '#ffffff', padding: '58px 0', borderTop: '1px solid #eceff3' }}>
       <div style={{ maxWidth: 640, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>
 
         <motion.div
@@ -18,7 +18,7 @@ export default function ClosingCta() {
           <h2 style={{
             fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
             fontWeight: 700,
-            color: '#ffffff',
+            color: '#0d0d12',
             letterSpacing: '-0.03em',
             lineHeight: 1.15,
             marginBottom: 20,
@@ -29,7 +29,7 @@ export default function ClosingCta() {
 
           <p style={{
             fontSize: 17,
-            color: 'rgba(255,255,255,0.72)',
+            color: '#666d80',
             lineHeight: 1.68,
             marginBottom: 36,
             maxWidth: 440,
@@ -48,15 +48,15 @@ export default function ClosingCta() {
               gap: 8,
               padding: '14px 32px',
               borderRadius: 8,
-              background: '#ffffff',
-              color: '#0b7983',
+              background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
+              color: '#ffffff',
               fontWeight: 700,
               fontSize: 15,
               textDecoration: 'none',
               letterSpacing: '-0.01em',
             }}
           >
-            Rozpocznij
+            Zrób audyt
             <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>

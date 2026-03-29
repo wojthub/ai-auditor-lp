@@ -1,6 +1,6 @@
 # Pipeline audytu
 
-> Czesc specyfikacji Smart Content Audit. Indeks: [CLAUDE.md](../CLAUDE.md)
+> Czesc specyfikacji CitationOne. Indeks: [CLAUDE.md](../CLAUDE.md)
 
 ## Architektura
 
@@ -37,13 +37,22 @@ Dwa tryby: **Content-only** i **Full** (domyslny, z benchmarkiem SERP).
     ├── POST /api/extract (Bright Data Web Unlocker) x top 10 URLs -> Markdown konkurentow
     │   └── cache: shared/crawl/{urlHash}.json x10 + audits/{id}/04_competitors.json
     ├── Filtrowanie: tylko konkurenci z wordCount >= MIN_COMPETITOR_WORDS (domyslnie 100, konfigurowalny w /ustawienia) trafiaja do EAV extraction i scoring
-    ├── Gemini API -> EAV extraction z konkurentow -> gaps P1-P4 + Content Format Intelligence + algorytmiczna klasyfikacja URR
+    ├── Gemini API -> EAV extraction z konkurentow -> gaps P1-P4 + Content Format Intelligence + algorytmiczna klasyfikacja (wewnetrznie URR: UNIQUE/ROOT/RARE, UI label: "Klasyfikacja")
     └── Gemini API -> Competitor scoring (1 call per competitor) -> estimatedCQS + estimatedCitability + summary
         └── cache: audits/{id}/05_benchmark.json (competitors[] zawiera pola scoring)
     |
     v
+[Resolve Content Type Profile]
+    └── resolveProfile(serpConsensus.contentType.primary) -> ContentTypeProfile
+        ├── Fuzzy matching free-form stringa na 8 profili (article/listing/product/comparison/faq/landing/encyclopedia/tool)
+        ├── Profil ID zapisywany w DB (audits.content_type_profile)
+        ├── Wagi CQS/Citability i instrukcje per wymiar przekazywane do pipeline'u
+        └── Fallback: 'article' (brak serpConsensus lub nierozpoznany typ)
+    |
+    v
 [Krok 3: Audyt]
     └── POST /api/audit (równoległe wywolania Gemini API via Promise.all)
+        ├── Prompty adaptowane do profilu: instrukcja kontekstowa + relabel "Artykul" -> "Treść (Typ)"
         ├── CSI-A: CSI Alignment -> cache: 06_dimensions/csiAlignment.json -> zapis do DB
         ├── D1: Information Density -> cache: 06_dimensions/density.json -> zapis do DB
         ├── D2: EAV Structure -> cache: 06_dimensions/eav.json -> zapis do DB
@@ -57,21 +66,33 @@ Dwa tryby: **Content-only** i **Full** (domyslny, z benchmarkiem SERP).
     |
     v
 [Scoring]
-    └── lib/scoring.ts -> CQS (0-100), AI Citability (0-10)
+    └── lib/scoring.ts -> CQS (0-100), AI Citability (0-10) z wagami z profilu typu tresci
         └── cache: audits/{id}/07_scoring.json
     |
     v
-[Generowanie raportu]
-    └── POST /api/audit/[id]/report (Gemini API)
-        -> rekomendacje BEFORE/AFTER, struktura H1/H2/H3, BLUF per H2
+[Budowanie rekomendacji]
+    └── lib/ai/recommendation-builder.ts (algorytmiczny, 0 Gemini calls)
+        -> buildRecommendationsFromDimensions(dimensions, eeat, cqsWeights)
+        -> DimensionProblem[] → Recommendation[] (priorytet z impact + waga CQS)
+        -> fuzzy dedup (token overlap >=80%), cap 20, EEAT bonus recs
+        -> saveRecommendations() — zapis do DB PRZED raportem (odporne na blad raportu)
+    |
+    v
+[Generowanie raportu (extras)]
+    └── POST /api/audit/[id]/report (Gemini API, retry 2 proby)
+        -> struktura H1/H2/H3, BLUF per H2
         -> analiza Title & Meta Description (current vs recommended, SEO best practices)
         -> tryb Full: + gaps P1-P4, benchmark vs SERP, Content Format Intelligence
+        -> proponowana struktura zasilana: chunk optimization + gaps + sub-zapytania Fan-Out (POKRYTE/NIEPOKRYTE) + twierdzenia AI Overview (jesli obecne)
+        -> NIE generuje rekomendacji (przeniesione do recommendation-builder)
+        -> 7 zadan (bylo 8 — usuniety task 1 "rekomendacje")
         └── cache: audits/{id}/08_report.json
     |
     v
 [Dashboard raportu]
     └── /audyt/[id] -> pelny raport z wykresami
-        ├── Tab Podsumowanie: CQS, Citability, Radar, CSI, Walidacja SERP (z DB — tabela 7 wierszy: CE/SC/CSI/Predicate/Typ/Format/Perspektywa + kluczowe dane), Title & Description (current vs recommended), Top 10 SERP (3 metryki benchmarkowe: Śr. CQS/Citability/długość + tabela ranked competitors)
+        ├── Tab Podsumowanie: CQS, Citability, Radar, CSI, Walidacja SERP (z DB — tabela 7 wierszy: CE/SC/CSI/Predicate/Typ/Format/Perspektywa + kluczowe dane), Title & Description (current vs recommended), Top 10 SERP (4 metryki benchmarkowe: Śr. CQS/Citability/długość/Wpływ jakości + tabela ranked competitors)
+        ├── Tab Rekomendacje: priorytetyzowane (z recommendation-builder, generowane przed raportem)
         └── Tab Eksport: Markdown (.md) + PDF (.pdf, client-side html2pdf.js + marked)
     |
     v
@@ -105,9 +126,17 @@ Orkiestrator (`lib/ai/orchestrator.ts`) uruchamia wymiary **równolegle** via `P
   - Polling w UI pokazuje biezacy postep (tylko jeden wymiar jako "running")
   - **Error handling per wymiar:** try/catch -- blad jednego wymiaru nie przerywa calego audytu (fallback: score=0, puste pola)
   - **Warning detection:** jesli AI zwroci score=0 i brak summary -> status `'warning'` w `_meta.json`
-- **Batch 2 (po batch 1):** Generowanie raportu z rekomendacjami
-  - `saveRecommendations` i `saveReportExtras` maja niezalezne try/catch -- blad jednego nie blokuje drugiego
+- **Batch 2a (po batch 1):** Budowanie rekomendacji algorytmicznie z wymiarow
+  - `buildRecommendationsFromDimensions()` w `recommendation-builder.ts` — 0 Gemini calls
+  - Konwersja DimensionProblem[] → Recommendation[] z priorytetem, dedup, cap 20
+  - `saveRecommendations()` — zapis do DB PRZED raportem (odporne na blad raportu)
   - Recommendation IDs generowane przez `nanoid()` (nie AI-generated `rec_N`)
+- **Batch 2b (po batch 2a):** Generowanie raportu (tylko extras)
+  - Report prompt: 7 zadan (bylo 8 — usuniety task 1 "rekomendacje")
+  - Generuje: struktura H1/H2/H3, BLUF per H2, SRL transforms, EEAT blocks, TF-IDF mapping, Title & Meta Description, AIO coverage
+  - Report retry (2 proby) — blad raportu nie traci rekomendacji (juz zapisane)
+  - `saveReportExtras` z niezaleznym try/catch
+  - `parseReportResponse()` nie zwraca juz rekomendacji
 
 **Cancellation:** Orchestrator sprawdza `getAuditStatus(auditId)` przed i po batchu równoległych wymiarów (nie między poszczególnymi — max ~15s opóźnienia detekcji). Jesli `'cancelled'` -- rzuca `AuditCancelledError` i konczy prace bez nadpisywania statusu w DB.
 
@@ -163,7 +192,7 @@ Ekstrakcja tresci z URL realizowana przez **Bright Data Web Unlocker** -- HTTP A
 **TypeScript wrapper** (`lib/services/crawler.ts`):
 - Wywoluje `POST https://api.brightdata.com/request` z Bearer token + zone + url
 - Auth: `Authorization: Bearer ${BRIGHTDATA_API_TOKEN}`, zone: `BRIGHTDATA_UNLOCKER_ZONE`
-- Retry z exponential backoff (3 proby, brak retry na 4xx)
+- Retry z exponential backoff + jitter (3 proby, brak retry na 4xx). Logowanie kazdej nieudanej proby.
 - Timeout: 60s per URL
 - Min content: 500 znakow (krotsze = odrzucone)
 - Concurrent: 5 rownolegych (batch crawl w orchestratorze)
@@ -178,14 +207,17 @@ Dane SERP pobierane z **Bright Data SERP API** -- ten sam vendor co Web Unlocker
 
 **Auth:** Bearer token (`BRIGHTDATA_API_TOKEN`) + zone (`BRIGHTDATA_SERP_ZONE`)
 
-**TypeScript wrapper** (`lib/services/dataforseo.ts` -- nazwa pliku legacy):
+**TypeScript wrapper** (`lib/services/dataforseo.ts` -- nazwa pliku legacy).
+Auto-retry: 2 ponowienia z 3s delay (max 3 proby). Retry na 5xx i timeout, bez retry na 4xx. `parseBrightDataResponse()` wyekstrahowana do osobnej funkcji.
 
 ```typescript
 async function searchSerp(keyword: string, locationCode = 2616, languageCode = 'pl') {
   const apiToken = await resolveCredential('BRIGHTDATA_API_TOKEN');
   const zone = await resolveCredential('BRIGHTDATA_SERP_ZONE');
 
-  const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(keyword)}&hl=${languageCode}&gl=${languageCode}&num=10&brd_json=1`;
+  // gl = country (LANG_TO_COUNTRY mapping: en→us, pl→pl, de→de), hl = language
+  const gl = LANG_TO_COUNTRY[languageCode] || 'us';
+  const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(keyword)}&hl=${languageCode}&gl=${gl}&num=10&brd_json=1`;
 
   const response = await fetch('https://api.brightdata.com/request', {
     method: 'POST',
@@ -195,6 +227,7 @@ async function searchSerp(keyword: string, locationCode = 2616, languageCode = '
     },
     body: JSON.stringify({ zone, url: googleUrl, format: 'raw' }),
     signal: AbortSignal.timeout(30_000),
+    cache: 'no-store', // zapobiega cache'owaniu przez Next.js na Vercel
   });
 
   const data = await response.json();

@@ -22,22 +22,23 @@ function fadeUp(delay = 0) {
   };
 }
 
-/* ─── 1. 9 wymiarów ───────────────────────────────── */
+/* ─── 1. 10 wymiarów ───────────────────────────────── */
 const DIMS = [
-  { name: 'CSI Alignment', score: 8.1, desc: 'Dopasowanie do intencji wyszukiwania' },
-  { name: 'Info Density', score: 7.4, desc: 'Gęstość i kompletność informacji' },
+  { name: 'Zgodność z intencją', score: 8.1, desc: 'Dopasowanie do intencji wyszukiwania' },
+  { name: 'Gęstość informacji', score: 7.4, desc: 'Gęstość i kompletność informacji' },
   { name: 'BLUF', score: 9.0, desc: 'Najważniejsza odpowiedź na początku' },
-  { name: 'EAV', score: 6.8, desc: 'Encje, atrybuty i wartości' },
-  { name: 'Chunk Optim.', score: 7.9, desc: 'Jakość podziału na fragmenty' },
-  { name: 'Cost of Retrieval', score: 3.8, desc: 'Koszt pobrania informacji przez AI' },
+  { name: 'Graf wiedzy', score: 6.8, desc: 'Encje, atrybuty i wartości' },
+  { name: 'Chunki', score: 7.9, desc: 'Jakość podziału na fragmenty' },
+  { name: 'Koszt ekstrakcji', score: 3.8, desc: 'Koszt pobrania informacji przez AI' },
   { name: 'TF-IDF', score: 7.2, desc: 'Słowa kluczowe i kontekst semantyczny' },
-  { name: 'Fan-Out / AIO', score: 8.3, desc: 'Pokrycie sub-zapytań i AI Overview' },
+  { name: 'Pokrycie AIO', score: 8.3, desc: 'Pokrycie sub-zapytań i AI Overview' },
+  { name: 'Wysiłek red.', score: 5.1, desc: 'Wysiłek redakcyjny: długość, obrazki, wideo, schema' },
   { name: 'E-E-A-T', score: 6.5, desc: 'Doświadczenie, ekspertyza, autorytet' },
 ];
 
 function DimensionsVisual() {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
+    <div className="dims-grid">
       {DIMS.map((d) => {
         const pct = (d.score / 10) * 100;
         const color = d.score >= 7 ? '#16A34A' : d.score >= 5 ? '#CA8A04' : '#DC2626';
@@ -119,7 +120,7 @@ function BeforeAfterVisual() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       {/* Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+      <div className="ba-grid">
         {/* Before */}
         <div style={{ background: '#fafafa', border: '1px solid #e5e7eb', borderRadius: 8, padding: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
@@ -135,7 +136,7 @@ function BeforeAfterVisual() {
             <span style={{ fontSize: 10, fontWeight: 700, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Po</span>
           </div>
           <p style={{ fontSize: 12.5, color: '#36394a', lineHeight: 1.6, margin: 0 }}>
-            <strong style={{ color: ACCENT }}>Audyt AI Search</strong> mierzy 9 wymiarów cytowania przez modele językowe - każdy z szacowanym wpływem na CQS i konkretną poprawką.
+            <strong style={{ color: ACCENT }}>Audyt AI Search</strong> mierzy 10 wymiarów cytowania przez modele językowe - każdy z szacowanym wpływem na CQS i konkretną poprawką.
           </p>
         </div>
       </div>
@@ -273,7 +274,7 @@ function KnowledgeGraphVisual() {
 const REPORT_ITEMS = [
   'Content Quality Score (0–100) z rozbiciem na wymiary',
   'AI Citability Score (0–10)',
-  'Wykres radarowy 9 wymiarów',
+  'Wykres radarowy 10 wymiarów',
   'Benchmark top 10 SERP - tabela porównawcza',
   'Rekomendacje Before/After z priorytetami',
   'Graf wiedzy i tabela encji EAV',
@@ -326,12 +327,12 @@ export default function Features() {
       <section style={{ background: '#f8fafb', padding: '58px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 52 }}>
-            <SectionLabel>9 wymiarów analizy</SectionLabel>
+            <SectionLabel>10 wymiarów analizy</SectionLabel>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
-              Wymiary AI Search mierzone osobno
+              10 wymiarów - każdy mierzony osobno
             </h2>
-            <p style={{ fontSize: 16, color: '#666d80', maxWidth: 520, margin: '0 auto', lineHeight: 1.65 }}>
-              9 kryteriów cytowania przez modele językowe - z konkretnym wynikiem 0–10, wzorcem punktacji i rankingiem ważności.
+            <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, margin: '0 auto', lineHeight: 1.65 }}>
+              10 kryteriów cytowania przez modele językowe - każde z osobnym wynikiem 0-10. Dopiero ich kombinacja daje pełny obraz: które treści AI chętnie cytuje, a które ignoruje i dlaczego.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>
@@ -385,52 +386,7 @@ export default function Features() {
         </div>
       </section>
 
-      {/* 4 - AI Overview */}
-      <section style={{ background: '#ffffff', padding: '58px 0' }}>
-        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-          <div className="feat-grid feat-grid-reverse">
-            <motion.div {...fadeUp(0.1)}>
-              <AIOverviewVisual />
-            </motion.div>
-            <motion.div {...fadeUp()}>
-              <SectionLabel>AI Overview Coverage</SectionLabel>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
-                Czy Twoja treść pokrywa syntezę AI Overview?
-              </h2>
-              <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 24 }}>
-                AI Overview to synteza odpowiedzi na kilkanaście sub-zapytań powiązanych z frazą. Narzędzie dekompozytuje tę syntezę i sprawdza, które sub-zapytania Twoja treść pokrywa - a gdzie są luki, przez które AI pomija Twoją stronę przy generowaniu odpowiedzi.
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {['Dekompozycja AI Overview na sub-zapytania składowe', 'Mapa pokrycia - które sub-zapytania obsługuje Twoja treść', 'Wskazanie luk z rekomendacją uzupełnienia treści'].map(item => (
-                  <li key={item} style={{ display: 'flex', gap: 10, fontSize: 14, color: '#36394a' }}>
-                    <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>→</span>{item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5 - Graf wiedzy */}
-      <section style={{ background: '#f8fafb', padding: '58px 0' }}>
-        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-          <motion.div {...fadeUp()} style={{ marginBottom: 44 }}>
-            <SectionLabel>Graf wiedzy</SectionLabel>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
-              AI widzi encje - nie tylko słowa kluczowe
-            </h2>
-            <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, lineHeight: 1.65 }}>
-              Modele językowe budują reprezentację wiedzy na podstawie encji i ich atrybutów. Raport mapuje te relacje i klasyfikuje je jako Wyróżnik, Podstawa lub Rzadki - wskazując, które budują autorytet tematyczny.
-            </p>
-          </motion.div>
-          <motion.div {...fadeUp(0.1)}>
-            <KnowledgeGraphVisual />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 6 - Eksport */}
+      {/* 4 - Eksport */}
       <section style={{ background: '#ffffff', padding: '58px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <div className="feat-grid">
@@ -477,6 +433,16 @@ export default function Features() {
       </section>
 
       <style>{`
+        .dims-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;
+        }
+        .ba-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
         .feat-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -486,8 +452,13 @@ export default function Features() {
         .feat-grid-reverse > *:first-child { order: 1; }
         .feat-grid-reverse > *:last-child  { order: 0; }
         @media (max-width: 768px) {
+          .dims-grid { grid-template-columns: repeat(2, 1fr); }
+          .ba-grid { grid-template-columns: 1fr; }
           .feat-grid { grid-template-columns: 1fr; gap: 36px; }
           .feat-grid-reverse > * { order: unset !important; }
+        }
+        @media (max-width: 420px) {
+          .dims-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </div>

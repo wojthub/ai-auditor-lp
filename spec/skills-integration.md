@@ -1,6 +1,6 @@
 # Integracja ze skillami
 
-> Czesc specyfikacji Smart Content Audit. Indeks: [CLAUDE.md](../CLAUDE.md)
+> Czesc specyfikacji CitationOne. Indeks: [CLAUDE.md](../CLAUDE.md)
 
 Skille (`SKILL.md`) to szablony promptow -- NIE runtime libraries. Webapp implementuje logike opisana w skillach jako:
 

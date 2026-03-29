@@ -43,19 +43,19 @@ export default function Hero() {
               Sprawdź, czy Twój content jest cytowalny przez ChatGPT, Perplexity i Google AI Overview.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-2.5">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2.5">
               <motion.a
                 href={`${APP_URL}/login`}
                 className="inline-flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
                 whileTap={{ scale: 0.97 }}
                 style={{
-                  padding: '11px 22px', borderRadius: 8, background: '#0b7983',
-                  color: '#ffffff', fontWeight: 600, fontSize: 14,
+                  padding: '14px 28px', borderRadius: 8, background: '#0b7983',
+                  color: '#ffffff', fontWeight: 600, fontSize: 15,
                   textDecoration: 'none', letterSpacing: '-0.01em', border: '1px solid #097380',
                 }}
               >
-                Rozpocznij
+                Zrób audyt
                 <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
@@ -104,7 +104,7 @@ export default function Hero() {
                     <span style={{ fontSize: 14, color: '#a4acb9', fontWeight: 500 }}>/ 100</span>
                   </div>
                   <div className="score-tooltip">
-                    <strong>Content Quality Score</strong> - zagregowana ocena jakości treści (0-100) obliczana z 9 wymiarów AI Search. Im wyższy wynik, tym większa szansa na cytowanie przez modele językowe.
+                    <strong>Content Quality Score</strong> - zagregowana ocena jakości treści (0-100) obliczana z 10 wymiarów AI Search. Im wyższy wynik, tym większa szansa na cytowanie przez modele językowe.
                   </div>
                 </div>
                 {/* Right: Citability */}

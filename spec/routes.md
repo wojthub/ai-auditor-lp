@@ -1,6 +1,6 @@
 # Strony i API Routes
 
-> Czesc specyfikacji Smart Content Audit. Indeks: [CLAUDE.md](../CLAUDE.md)
+> Czesc specyfikacji CitationOne. Indeks: [CLAUDE.md](../CLAUDE.md)
 
 ## Strony / Routes
 
@@ -12,7 +12,11 @@
 
 ### Dashboard (`/`)
 
-Lista audytow z kolumnami: tytul, data, **dwa SVG circular progress rings** (CQS 0-100 + AI Citability 0-10 -- kolory wg progów: zielony/zolty/czerwony), status, przycisk usun. Przycisk "Nowy audyt". Siatka 10 wymiarow z popupem wyjasniajacym (DimensionInfoGrid).
+Lista audytow z kolumnami: tytul, data, **dwa SVG circular progress rings** (CQS 0-100 + AI Citability 0-10 -- kolory wg progów: zielony/zolty/czerwony), status, badge projektu, przycisk usun. Przycisk "Nowy audyt". Siatka 10 wymiarow z popupem wyjasniajacym (DimensionInfoGrid). **AuditList** Client Component z wyszukiwarka (tytul/keyword/projekt) + pill-buttony filtr per projekt.
+
+### Publiczny raport (`/share/[token]`)
+
+Read-only widok raportu bez logowania. Token nanoid(24) generowany przez `createShareLinkAction`. Minimalny header (logo + "Udostepniony raport" + link "Zaloguj sie"). Middleware: `/share` w PUBLIC_PATHS. Tylko completed audyty.
 
 - Kazdy audyt ma przycisk usuwania (ikona kosza) z potwierdzeniem (Usun/Nie)
 - Jesli audyt jest w toku -- automatycznie anuluje przed usunieciem
@@ -26,7 +30,7 @@ Server Component (`page.tsx`) laduje audyty i opakowuje w `SidebarWrapper`. Obsl
 **Krok 1 -- Zrodlo tresci:**
 - Przelacznik: URL / Wklej tekst
 - Pole URL + przycisk "Pobierz" (POST /api/extract)
-  - Gdy URL wklejony ale nie pobrany: hint "Kliknij Pobierz" + animacja glow na przycisku (custom keyframe `glow-accent`)
+  - Gdy URL wklejony ale nie pobrany: hint "Kliknij Pobierz" + animacja glow na przycisku (custom keyframe `glow-success`, zielony przycisk `variant="success"`)
 - Textarea do wklejenia tekstu Markdown
 - Pole "Slowo kluczowe" (opcjonalne, wymagane w trybie Full)
 - Checkbox: "Tryb Full (analiza konkurencji z SERP)" -- domyslnie zaznaczony
@@ -34,15 +38,18 @@ Server Component (`page.tsx`) laduje audyty i opakowuje w `SidebarWrapper`. Obsl
 - Walidacja: content > 100 slow
 
 **Krok 2 -- Definicja CSI:**
-- Auto-inferowanie CSI (POST /api/csi) z full-screen loaderem (lista pol: CE, SC, CSI, Predicate z mini-spinnerami)
+- Auto-inferowanie CSI (POST /api/csi) z kompaktowym loaderem (pasek ze spinnerem + tekst)
 - 4 edytowalne pola: CE, SC, CSI, Predicate (etykiety po polsku)
 - **Walidacja SERP Consensus** (tryb Full + keyword): po inferowaniu CSI automatyczny fetch `POST /api/serp-consensus` z tytulem + snippetem tresci:
   - Tabela porownawcza 7 wierszy (CE, SC, CSI, Predicate, Typ, Format, Perspektywa) z alignment dots (zielony/zolty/czerwony) — kolumny: Źródło | Konsensus SERP
   - Panel "Walidacja SERP": badge zgodnosci (Wysoka/Czesciowa/Niska — obliczana server-side ze sredniej 7 pol), explanation, tematy SERP (tagi), sygnaly PAA, kluczowe dane
   - Przycisk "Zwaliduj ponownie" po edycji pol CSI
-  - Loading skeleton podczas fetch, error z przyciskiem "Ponow"
-  - Nie blokuje uzytkownika -- moze potwierdzic CSI zanim consensus sie zaladuje
+  - Loading skeleton podczas fetch, error z przyciskiem "Ponów"
+  - **Blokada przycisku "Potwierdź" przy bledzie SERP** (np. "Brak wyników organicznych") — user musi kliknac "Ponów"
+  - Nie blokuje uzytkownika -- moze potwierdzic CSI zanim consensus sie zaladuje (ale blokuje gdy blad)
   - W trybie content-only lub bez keyword: panel nie jest renderowany
+  - **Auto-collapse:** po zaladowaniu konsensusu SERP pola CSI i panel Walidacji SERP automatycznie zwijane (klikalne naglowki z chevronem do rozwijania)
+- **Credit enforcement:** przycisk "Potwierdź i rozpocznij audyt" wyszarzony + komunikat "Brak kredytów" gdy user ma 0 kredytow (prop `hasCredits` z `page.tsx` -> `WizardContent` -> `Step2CSI`, admin = unlimited)
 - Uzytkownik potwierdza lub edytuje
 
 **Krok 3 -- Audyt w toku:**
@@ -51,7 +58,8 @@ Server Component (`page.tsx`) laduje audyty i opakowuje w `SidebarWrapper`. Obsl
 - Wszystkie nieukończone wymiary oznaczone jako "running" podczas fazy analyzing
 - Pasek postepu per kazdy etap (pending=0%, running=animacja, completed=100%, error=czerwony)
 - **Popup cache JSON:** klikniecie na ukonczony etap otwiera modal z surowym cache (GET /api/audit/[id]/cache/[stage])
-- Etap "Generowanie raportu" widoczny po zakonczeniu wszystkich wymiarow
+- **Auto-collapse wymiarów:** gdy wszystkie wymiary gotowe i raport sie generuje — lista auto-zwija sie (naglowek "Analiza wymiarów (10/10) ✓" z chevronem, klik rozwija/zwija)
+- Etap "Generowanie raportu" widoczny po zakonczeniu wszystkich wymiarow (pod zwinieta lista)
 - Przycisk **"Przerwij"** -- anuluje audyt na dowolnym etapie (POST /api/audit/[id]/cancel)
 - Polling GET /api/audit/[id] co 3s
 - Automatyczne przejscie do Kroku 4 po zakonczeniu
@@ -242,3 +250,14 @@ const result = await callClaudeJSON<T>(prompt, 8192, geminiKey);
 ```
 
 Brak globalnego `setGeminiApiKey()` — eliminuje race conditions w concurrent batches.
+
+## Strony publiczne (bez logowania)
+
+### Login (`/login`)
+Formularz email + checkbox zgody na Politykę Prywatności. Przycisk "Wyślij kod" zablokowany dopóki checkbox niezaznaczony. Link do polityki otwiera nową kartę.
+
+### Weryfikacja kodu (`/login/verify`)
+Formularz 6-cyfrowego kodu OTP.
+
+### Polityka Prywatności (`/polityka-prywatnosci`)
+Server Component, 10 sekcji: administrator (Seowp Wojciech Władziński, Gdańsk, NIP), zbierane dane (tylko email), cele przetwarzania, podstawa prawna (RODO art. 6.1.a), cookies + GTM + GA4, usługi zewnętrzne (Resend, Neon, Vercel, Gemini API, Bright Data), okres przechowywania, prawa użytkownika, bezpieczeństwo, kontakt. Middleware: dodana do PUBLIC_PATHS.

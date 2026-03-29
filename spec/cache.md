@@ -1,6 +1,6 @@
 # Pipeline Cache
 
-> Czesc specyfikacji Smart Content Audit. Indeks: [CLAUDE.md](../CLAUDE.md)
+> Czesc specyfikacji CitationOne. Indeks: [CLAUDE.md](../CLAUDE.md)
 
 Kazdy etap pipeline'u zapisuje swoj output jako JSON na filesystem. Cel: **debug i inspekcja** surowych wynikow (jakosc promptow, analiza bledow, porownanie miedzy audytami).
 

@@ -17,12 +17,12 @@ const faqs = [
   {
     question: 'Czy raport nadaje się do bezpośredniego wysłania klientowi?',
     answer:
-      'Tak. Raport PDF jest zaprojektowany tak, żeby można go wysłać klientowi bez edycji. Zawiera Content Quality Score, wykres radarowy 9 wymiarów, tabelę priorytetów z rekomendacjami Before/After i benchmark SERP - wszystko w czytelnym, profesjonalnym formacie.',
+      'Tak. Raport PDF jest zaprojektowany tak, żeby można go wysłać klientowi bez edycji. Zawiera Content Quality Score, wykres radarowy 10 wymiarów, tabelę priorytetów z rekomendacjami Before/After i benchmark SERP - wszystko w czytelnym, profesjonalnym formacie.',
   },
   {
     question: 'Co to jest Content Quality Score i jak jest liczony?',
     answer:
-      'Content Quality Score (CQS) to wynik 0–100 obliczany jako ważona suma 9 wymiarów: CSI Alignment (15%), Information Density (15%), EAV (15%), BLUF (14%), Chunk Optimization (10%), Cost of Retrieval (8%), TF-IDF (7%), Fan-Out i AIO (7%), E-E-A-T (5%) i SRL (4%). Dodatkowo narzędzie wylicza AI Citability Score (0–10), który koncentruje się wyłącznie na czynnikach cytowania przez modele językowe.',
+      'Content Quality Score (CQS) to wynik 0-100 obliczany jako ważona suma 10 wymiarów: zgodność z intencją (13%), pokrycie AI Overview (13%), graf wiedzy (13%), gęstość informacji (11%), BLUF (11%), role semantyczne (9%), autonomiczność sekcji (7%), koszt ekstrakcji (6%), TF-IDF (6%), wysiłek redakcyjny (6%) oraz E-E-A-T (5%). Dodatkowo narzędzie wylicza AI Citability Score (0-10), który koncentruje się wyłącznie na czynnikach cytowania przez modele językowe.',
   },
   {
     question: 'Czy narzędzie działa z każdym rodzajem treści?',
