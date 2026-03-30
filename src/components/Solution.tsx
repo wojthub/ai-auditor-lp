@@ -82,25 +82,19 @@ export default function Solution() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          style={{ width: '80%', margin: '0 auto' }}
+          className="sol-card-wrapper"
         >
-          <div style={{
-            background: '#ffffff',
-            border: '1px solid #dfe1e7',
-            borderRadius: 12,
-            padding: '28px 28px 24px',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-          }}>
+          <div className="sol-card">
             {/* Score boxes */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 2 }}>
               {/* CQS */}
-              <div className="sol-score-box" style={{ background: 'rgba(202,138,4,0.06)', borderLeft: '3px solid #CA8A04', borderRadius: 8, padding: '12px 16px', position: 'relative', cursor: 'default' }}>
+              <div className="sol-score-box" style={{ background: 'rgba(202,138,4,0.06)', borderLeft: '3px solid #CA8A04', borderRadius: 8, padding: '12px 14px', position: 'relative', cursor: 'default', overflow: 'hidden' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                  <p style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>CQS</p>
-                  <span style={{ fontSize: 9, fontWeight: 700, color: '#CA8A04', background: 'rgba(202,138,4,0.12)', border: '1px solid rgba(202,138,4,0.25)', borderRadius: 4, padding: '2px 7px', letterSpacing: '0.06em' }}>UWAGA</span>
+                  <p className="sol-score-label" style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>CQS</p>
+                  <span className="sol-score-badge" style={{ fontSize: 9, fontWeight: 700, color: '#CA8A04', background: 'rgba(202,138,4,0.12)', border: '1px solid rgba(202,138,4,0.25)', borderRadius: 4, padding: '2px 7px', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>UWAGA</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-                  <span style={{ fontSize: 40, fontWeight: 700, color: '#CA8A04', lineHeight: 1, letterSpacing: '-0.04em' }}>78</span>
+                  <span className="sol-score-num" style={{ fontSize: 40, fontWeight: 700, color: '#CA8A04', lineHeight: 1, letterSpacing: '-0.04em' }}>78</span>
                   <span style={{ fontSize: 14, color: '#a4acb9', fontWeight: 500 }}>/ 100</span>
                 </div>
                 <div className="sol-score-tooltip">
@@ -108,13 +102,13 @@ export default function Solution() {
                 </div>
               </div>
               {/* Citability */}
-              <div className="sol-score-box" style={{ background: 'rgba(220,38,38,0.06)', borderLeft: '3px solid #DC2626', borderRadius: 8, padding: '12px 16px', position: 'relative', cursor: 'default' }}>
+              <div className="sol-score-box" style={{ background: 'rgba(220,38,38,0.06)', borderLeft: '3px solid #DC2626', borderRadius: 8, padding: '12px 14px', position: 'relative', cursor: 'default', overflow: 'hidden' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                  <p style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>Citability</p>
-                  <span style={{ fontSize: 9, fontWeight: 700, color: '#DC2626', background: 'rgba(220,38,38,0.12)', border: '1px solid rgba(220,38,38,0.25)', borderRadius: 4, padding: '2px 7px', letterSpacing: '0.06em' }}>KRYTYCZNY</span>
+                  <p className="sol-score-label" style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>Citability</p>
+                  <span className="sol-score-badge" style={{ fontSize: 9, fontWeight: 700, color: '#DC2626', background: 'rgba(220,38,38,0.12)', border: '1px solid rgba(220,38,38,0.25)', borderRadius: 4, padding: '2px 7px', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>KRYTYCZNY</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-                  <span style={{ fontSize: 40, fontWeight: 700, color: '#DC2626', lineHeight: 1, letterSpacing: '-0.04em' }}>4.9</span>
+                  <span className="sol-score-num" style={{ fontSize: 40, fontWeight: 700, color: '#DC2626', lineHeight: 1, letterSpacing: '-0.04em' }}>4.9</span>
                   <span style={{ fontSize: 14, color: '#a4acb9', fontWeight: 500 }}>/ 10</span>
                 </div>
                 <div className="sol-score-tooltip">
@@ -134,6 +128,23 @@ export default function Solution() {
       </div>
 
       <style>{`
+        .sol-card-wrapper { width: 80%; margin: 0 auto; }
+        .sol-card {
+          background: #ffffff;
+          border: 1px solid #dfe1e7;
+          border-radius: 12px;
+          padding: 28px 28px 24px;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+          overflow: hidden;
+        }
+        @media (max-width: 768px) {
+          .sol-card-wrapper { width: 100%; }
+          .sol-card { padding: 18px 14px 16px; }
+          .sol-score-box { padding: 10px 10px !important; }
+          .sol-score-box .sol-score-num { font-size: 32px !important; }
+          .sol-score-box .sol-score-badge { font-size: 8px !important; padding: 2px 5px !important; }
+          .sol-score-box .sol-score-label { font-size: 10px !important; }
+        }
         .sol-score-box { transition: box-shadow 0.15s ease; }
         .sol-score-tooltip {
           display: none;
