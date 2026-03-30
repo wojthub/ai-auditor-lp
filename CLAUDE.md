@@ -85,6 +85,13 @@ Navbar → Hero → TechLogos → Problem → Solution → HowItWorks → Featur
 
 Osobna podstrona z pełnym opisem narzędzia: 3 kroki, CQS + Citability, 10 wymiarów (karty z medium + expert opisem), Benchmark SERP, Before/After, AI Overview Coverage, Graf wiedzy, Eksport, CTA.
 
+### SEO metadata
+
+- **Layout** (`layout.tsx`): `title.template: '%s - CitationOne'` — podstrony dziedziczą suffix
+- **HP** (`/`): title `Audyt treści pod AI Search - CitationOne`
+- **Jak to działa** (`/jak-to-dziala`): title `Jak działa CitationOne? - CitationOne`, własne `description` i `openGraph`
+- OG: `locale: pl_PL`, `type: website`, `siteName: CitationOne`
+
 ---
 
 ## Sekcje ukryte (ławka rezerwowa)
