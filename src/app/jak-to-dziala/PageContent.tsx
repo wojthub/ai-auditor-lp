@@ -640,7 +640,7 @@ export default function PageContent() {
               Pierwszy audyt zajmuje ~3 minuty. Raport gotowy do wysłania klientowi od razu po zakończeniu.
             </p>
             <motion.a
-              href={`${APP_URL}/register`}
+              href={`${APP_URL}/login?lang=pl`}
               whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
               whileTap={{ scale: 0.97 }}
               style={{ display: 'inline-flex', alignItems: 'center', padding: '16px 33px', borderRadius: 8, background: '#ffffff', color: '#0b7983', fontWeight: 700, fontSize: 16, textDecoration: 'none', letterSpacing: '-0.01em' }}

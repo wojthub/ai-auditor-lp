@@ -189,7 +189,7 @@ export default function HowItWorks() {
           style={{ textAlign: 'center', marginTop: 48 }}
         >
           <motion.a
-            href={`${APP_URL}/login`}
+            href={`${APP_URL}/login?lang=pl`}
             whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
             whileTap={{ scale: 0.97 }}
             style={{

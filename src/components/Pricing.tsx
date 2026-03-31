@@ -177,7 +177,7 @@ export default function Pricing() {
 
               {/* CTA */}
               <a
-                href={`${APP_URL}/login`}
+                href={`${APP_URL}/login?lang=pl`}
                 style={{
                   display: 'flex',
                   alignItems: 'center',

@@ -33,7 +33,7 @@ export default function Navbar() {
         <div className="hidden sm:flex items-center">
           <a href="/jak-to-dziala" className="nav-link">Jak to działa?</a>
           <a href="#dla-kogo" className="nav-link">Dla kogo?</a>
-          <a href={`${APP_URL}/login`} className="nav-cta">Zrób audyt</a>
+          <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zrób audyt</a>
           <a href="/en" className="nav-lang" title="English version">EN</a>
         </div>
 
@@ -92,7 +92,7 @@ export default function Navbar() {
             EN - English version
           </a>
           <a
-            href={`${APP_URL}/login`}
+            href={`${APP_URL}/login?lang=pl`}
             onClick={() => setMobileOpen(false)}
             className="nav-mobile-cta"
           >

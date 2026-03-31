@@ -45,7 +45,7 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-2.5">
               <motion.a
-                href={`${APP_URL}/login`}
+                href={`${APP_URL}/login?lang=pl`}
                 className="inline-flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
                 whileTap={{ scale: 0.97 }}

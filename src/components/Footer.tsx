@@ -19,7 +19,7 @@ export default function Footer() {
                 {l.label}
               </a>
             ))}
-            <a href={`${APP_URL}/login`} style={{ fontSize: 14, color: '#0b7983', fontWeight: 600, textDecoration: 'none', padding: '12px 14px' }}>
+            <a href={`${APP_URL}/login?lang=pl`} style={{ fontSize: 14, color: '#0b7983', fontWeight: 600, textDecoration: 'none', padding: '12px 14px' }}>
               Zrób audyt →
             </a>
           </div>
