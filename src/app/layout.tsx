@@ -30,6 +30,12 @@ export const metadata: Metadata = {
     title: 'CitationOne - Audyt treści pod AI Search',
     description: 'Sprawdź, czy AI zacytuje Twoją treść. 10 wymiarów, benchmark SERP, rekomendacje Before/After. Raport w 3 minuty.',
   },
+  alternates: {
+    languages: {
+      'pl': 'https://citationone.com',
+      'en': 'https://citationone.com/en',
+    },
+  },
 };
 
 export default function RootLayout({

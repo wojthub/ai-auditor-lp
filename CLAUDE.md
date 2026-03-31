@@ -38,11 +38,17 @@ ai-auditor-lp-clone/
 │   │   ├── layout.tsx           # Root layout, metadata, Inter font
 │   │   ├── page.tsx             # Główna strona — składa sekcje w kolejności
 │   │   ├── globals.css          # Tailwind + tokeny kolorów + animacje
-│   │   └── jak-to-dziala/       # Podstrona "Jak to działa?"
-│   │       ├── page.tsx         # Server Component wrapper
-│   │       └── PageContent.tsx  # Client Component — pełna treść strony
+│   │   ├── jak-to-dziala/       # Podstrona "Jak to działa?"
+│   │   │   ├── page.tsx         # Server Component wrapper
+│   │   │   └── PageContent.tsx  # Client Component — pełna treść strony
+│   │   └── en/                  # English version
+│   │       ├── layout.tsx       # EN layout (lang="en", metadata EN, hreflang)
+│   │       ├── page.tsx         # EN homepage
+│   │       └── how-it-works/    # EN "How it works"
+│   │           ├── page.tsx
+│   │           └── PageContentEN.tsx
 │   └── components/
-│       ├── Navbar.tsx           # Client Component — hamburger mobile
+│       ├── Navbar.tsx           # Client Component — hamburger mobile, switcher EN
 │       ├── Hero.tsx
 │       ├── TechLogos.tsx        # Loga technologii (Gemini, Bright Data, Next.js)
 │       ├── Problem.tsx
@@ -51,13 +57,25 @@ ai-auditor-lp-clone/
 │       ├── Features.tsx         # 4 sekcje: Wymiary, Benchmark, Before/After, Eksport
 │       ├── ForWho.tsx           # 3 grupy docelowe
 │       ├── ClosingCta.tsx
-│       ├── RadarIllustration.tsx # Shared — używany w Hero i Solution
+│       ├── RadarIllustration.tsx # Shared PL — używany w Hero i Solution
 │       ├── Footer.tsx
 │       ├── CtaSection.tsx       # Reusable CTA section
 │       ├── SocialProof.tsx      # UKRYTA (ławka rezerwowa)
 │       ├── Pricing.tsx          # UKRYTA (ławka rezerwowa)
 │       ├── ReportExample.tsx    # UKRYTA (ławka rezerwowa)
-│       └── FAQ.tsx              # UKRYTA (ławka rezerwowa)
+│       ├── FAQ.tsx              # UKRYTA (ławka rezerwowa)
+│       └── en/                  # Angielskie wersje komponentów
+│           ├── NavbarEN.tsx     # Nawigacja EN + switcher PL
+│           ├── HeroEN.tsx
+│           ├── TechLogosEN.tsx
+│           ├── ProblemEN.tsx
+│           ├── SolutionEN.tsx
+│           ├── HowItWorksEN.tsx
+│           ├── FeaturesEN.tsx
+│           ├── ForWhoEN.tsx
+│           ├── ClosingCtaEN.tsx
+│           ├── RadarIllustrationEN.tsx  # Etykiety EN + tooltips EN
+│           └── FooterEN.tsx     # Privacy Policy + Terms links
 ```
 
 ---
@@ -85,12 +103,24 @@ Navbar → Hero → TechLogos → Problem → Solution → HowItWorks → Featur
 
 Osobna podstrona z pełnym opisem narzędzia: 3 kroki, CQS + Citability, 10 wymiarów (karty z medium + expert opisem), Benchmark SERP, Before/After, AI Overview Coverage, Graf wiedzy, Eksport, CTA.
 
+### EN Homepage (`/en`)
+
+Angielska wersja HP - identyczna struktura jak PL: NavbarEN → HeroEN → TechLogosEN → ProblemEN → SolutionEN → HowItWorksEN → FeaturesEN → ForWhoEN → ClosingCtaEN → FooterEN. Osobne komponenty w `src/components/en/`.
+
+### EN How it works (`/en/how-it-works`)
+
+Angielska wersja `/jak-to-dziala` - `PageContentEN.tsx` z pełnym tłumaczeniem: 3 steps, CQS + Citability, 10 dimensions, Benchmark, Before/After, AI Overview, Knowledge Graph, Export, CTA.
+
 ### SEO metadata
 
-- **Layout** (`layout.tsx`): `title.template: '%s - CitationOne'` — podstrony dziedziczą suffix
-- **HP** (`/`): title `Audyt treści pod AI Search - CitationOne`
-- **Jak to działa** (`/jak-to-dziala`): title `Jak działa CitationOne? - CitationOne`, własne `description` i `openGraph`
-- OG: `locale: pl_PL`, `type: website`, `siteName: CitationOne`
+- **Root layout** (`layout.tsx`): `title.template: '%s - CitationOne'` — podstrony PL dziedziczą suffix
+- **PL HP** (`/`): title `Audyt treści pod AI Search - CitationOne`
+- **PL Jak to działa** (`/jak-to-dziala`): title `Jak działa CitationOne? - CitationOne`
+- **EN layout** (`en/layout.tsx`): `title.template: '%s - CitationOne'`, `default: 'AI Search Content Audit'`
+- **EN HP** (`/en`): title `AI Search Content Audit - CitationOne`
+- **EN How it works** (`/en/how-it-works`): title `How does CitationOne work? - CitationOne`
+- PL OG: `locale: pl_PL` | EN OG: `locale: en_US`
+- **hreflang** PL↔EN w obu layoutach (`alternates.languages`)
 
 ---
 
@@ -287,15 +317,25 @@ function fadeUp(delay = 0) {
 
 ---
 
-## APP_URL
+## APP_URL i linki
 
 ```ts
 const APP_URL = 'https://app.citationone.com';
 ```
 
-Zdefiniowany lokalnie w każdym komponencie który linkuje do aplikacji. Linki:
-- Logowanie / CTA: `APP_URL/login`
-- Rejestracja: `APP_URL/register`
+Zdefiniowany lokalnie w każdym komponencie który linkuje do aplikacji.
+
+| Kontekst | PL | EN |
+|----------|----|----|
+| CTA / Login | `APP_URL/login` | `APP_URL/login?lang=en` |
+| Privacy Policy | - | `APP_URL/privacy-policy` |
+| Terms of Service | - | `APP_URL/terms` |
+
+### Language switcher
+
+- PL Navbar: badge `EN` → `/en` (desktop) + "EN - English version" (mobile)
+- EN Navbar: badge `PL` → `/` (desktop) + "PL - Wersja polska" (mobile)
+- CSS class `.nav-lang`: border badge, 13px, `#a4acb9`
 
 ---
 
@@ -307,7 +347,17 @@ Zdefiniowany lokalnie w każdym komponencie który linkuje do aplikacji. Linki:
 - Ikony: JSX SVG inline, `fill="none"`, `viewBox="0 0 24 24"`, `strokeWidth={1.0}` (ikony w sekcjach turkusowych), `strokeWidth={1.8}` (inne karty) lub `{2.5}` (przyciski)
 - `'use client'` — wszystkie komponenty z animacjami Framer Motion, `useState` lub event handlers
 - Brak emoji w UI
-- `RadarIllustration` — shared component, 10 osi, etykiety PL z ikonami info (i). Hover tooltip z definicją wskaźnika (teal `#0b7983`). Używany w Hero (`maxWidth={320}`) i Solution (`maxWidth={460}`).
+- `RadarIllustration` (PL) — 10 osi, etykiety PL z ikonami info (i). Używany w Hero (`maxWidth={320}`) i Solution (`maxWidth={460}`).
+- `RadarIllustrationEN` — identyczny komponent z etykietami EN (Intent, Density, KGraph, BLUF, Chunks, CoR, TF-IDF, Roles, AIO, Effort). Używany w HeroEN i SolutionEN.
+
+## Wersja EN
+
+- **Podejście:** osobne komponenty w `src/components/en/` (nie i18n library) - każdy komponent EN to kopia PL z przetłumaczonym copy
+- **Routing:** `/en` (HP), `/en/how-it-works` (podstrona). EN layout w `src/app/en/layout.tsx` z `<div lang="en">` wrapper
+- **Wymiary EN:** Intent Alignment, Info Density, Knowledge Graph, BLUF, Chunks, Cost of Retrieval, TF-IDF, Semantic Roles, AIO Coverage, Editorial Effort, E-E-A-T
+- **Statusy EN:** OK, WARNING, CRITICAL (zamiast PL: OK, UWAGA, KRYTYCZNY)
+- **URR EN:** Unique, Root, Rare (zamiast PL: Wyróżnik, Podstawa, Rzadki)
+- **Footer EN:** dodatkowe linki Privacy Policy (`APP_URL/privacy-policy`) i Terms (`APP_URL/terms`)
 
 ## RWD / Mobile
 

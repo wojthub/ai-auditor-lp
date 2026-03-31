@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 const APP_URL = 'https://app.citationone.com';
 
-export default function Navbar() {
+export default function NavbarEN() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -24,24 +24,24 @@ export default function Navbar() {
         style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, height: 64 }}
       >
         {/* Logo */}
-        <a href="/" className="flex items-center" style={{ textDecoration: 'none' }}>
+        <a href="/en" className="flex items-center" style={{ textDecoration: 'none' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="https://app.citationone.com/logo.png" alt="CitationOne" style={{ height: 36 }} />
         </a>
 
         {/* Desktop nav */}
         <div className="hidden sm:flex items-center">
-          <a href="/jak-to-dziala" className="nav-link">Jak to działa?</a>
-          <a href="#dla-kogo" className="nav-link">Dla kogo?</a>
-          <a href={`${APP_URL}/login`} className="nav-cta">Zrób audyt</a>
-          <a href="/en" className="nav-lang" title="English version">EN</a>
+          <a href="/en/how-it-works" className="nav-link">How it works</a>
+          <a href="#who-is-it-for" className="nav-link">Who is it for?</a>
+          <a href={`${APP_URL}/login?lang=en`} className="nav-cta">Run audit</a>
+          <a href="/" className="nav-lang" title="Wersja polska">PL</a>
         </div>
 
         {/* Mobile hamburger */}
         <button
           className="sm:hidden flex items-center justify-center"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           style={{
             width: 44,
             height: 44,
@@ -74,29 +74,17 @@ export default function Navbar() {
             padding: '12px 24px 20px',
           }}
         >
-          <a
-            href="/jak-to-dziala"
-            onClick={() => setMobileOpen(false)}
-            className="nav-mobile-link"
-          >
-            Jak to działa?
+          <a href="/en/how-it-works" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+            How it works
           </a>
-          <a
-            href="#dla-kogo"
-            onClick={() => setMobileOpen(false)}
-            className="nav-mobile-link"
-          >
-            Dla kogo?
+          <a href="#who-is-it-for" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+            Who is it for?
           </a>
-          <a href="/en" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
-            EN - English version
+          <a href="/" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+            PL - Wersja polska
           </a>
-          <a
-            href={`${APP_URL}/login`}
-            onClick={() => setMobileOpen(false)}
-            className="nav-mobile-cta"
-          >
-            Zrób audyt
+          <a href={`${APP_URL}/login?lang=en`} onClick={() => setMobileOpen(false)} className="nav-mobile-cta">
+            Run audit
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
