@@ -1,35 +1,27 @@
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import TechLogos from '@/components/TechLogos';
-import Problem from '@/components/Problem';
-import Solution from '@/components/Solution';
-import HowItWorks from '@/components/HowItWorks';
-import Features from '@/components/Features';
-// import SocialProof from '@/components/SocialProof';   // UKRYTA - liczby + testimoniale
-// import Pricing from '@/components/Pricing';           // UKRYTA - cennik
-// import FAQ from '@/components/FAQ';                   // UKRYTA - FAQ
-// import ReportExample from '@/components/ReportExample'; // UKRYTA - przykład raportu
-import ForWho from '@/components/ForWho';
-import ClosingCta from '@/components/ClosingCta';
-import Footer from '@/components/Footer';
+import NavbarEN from '@/components/en/NavbarEN';
+import HeroEN from '@/components/en/HeroEN';
+import TechLogosEN from '@/components/en/TechLogosEN';
+import ProblemEN from '@/components/en/ProblemEN';
+import SolutionEN from '@/components/en/SolutionEN';
+import HowItWorksEN from '@/components/en/HowItWorksEN';
+import FeaturesEN from '@/components/en/FeaturesEN';
+import ForWhoEN from '@/components/en/ForWhoEN';
+import ClosingCtaEN from '@/components/en/ClosingCtaEN';
+import FooterEN from '@/components/en/FooterEN';
 
 export default function LandingPage() {
   return (
     <main className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <TechLogos />
-      <Problem />
-      <Solution />
-      <HowItWorks />
-      <Features />
-      {/* <SocialProof /> */}
-      {/* <ReportExample /> */}
-      <ForWho />
-      {/* <Pricing /> */}
-      {/* <FAQ /> */}
-      <ClosingCta />
-      <Footer />
+      <NavbarEN />
+      <HeroEN />
+      <TechLogosEN />
+      <ProblemEN />
+      <SolutionEN />
+      <HowItWorksEN />
+      <FeaturesEN />
+      <ForWhoEN />
+      <ClosingCtaEN />
+      <FooterEN />
     </main>
   );
 }

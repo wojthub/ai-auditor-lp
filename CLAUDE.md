@@ -4,17 +4,17 @@
 
 Landing page dla narzędzia **CitationOne** (`citationone.com`) — webapp do audytu contentu pod kątem AI Search (ChatGPT, Perplexity, Google AI Overview, Bing Copilot).
 
-**Cel LP:** konwersja na rejestrację konta (`/register`) lub zakup pakietu audytów.
+**Cel LP:** konwersja na logowanie/rejestrację (`/login`) lub zakup pakietu audytów.
 
-**Język:** polski (PL). Wszystkie teksty i komunikacja z użytkownikiem w języku polskim. Nazwy wymiarów w UI po polsku (patrz sekcja "Wymiary").
+**Języki:** EN (domyślny, root `/`) + PL (`/pl`). Osobne komponenty per język w `src/components/` (PL) i `src/components/en/` (EN).
 
-**Powiązane repo:** aplikacja główna znajduje się w `../ai-auditor/` — specyfikacja w `spec/` (patrz `ai-auditor/CLAUDE.md`).
+**Powiązane repo:** aplikacja główna w `../ai-auditor/` — specyfikacja w `spec/` (patrz `ai-auditor/CLAUDE.md`).
 
 ---
 
 ## Stack technologiczny
 
-- **Framework:** Next.js 15 (App Router, SSR)
+- **Framework:** Next.js 15 (App Router, static export `output: 'export'`)
 - **Runtime:** React 19, TypeScript strict
 - **Styling:** Tailwind CSS 4 — CSS-first config przez `@theme inline` w `src/app/globals.css`. **Brak pliku `tailwind.config.js`.**
 - **Animacje:** Framer Motion (`motion`, `AnimatePresence`)
@@ -28,44 +28,46 @@ Landing page dla narzędzia **CitationOne** (`citationone.com`) — webapp do au
 
 ```
 ai-auditor-lp-clone/
-├── CLAUDE.md                    # Ten plik
+├── CLAUDE.md
 ├── package.json
 ├── tsconfig.json
-├── next.config.ts
-├── spec/                        # Specyfikacja aplikacji głównej (read-only dla LP)
+├── next.config.ts               # output: 'export' (static)
+├── public/
+│   └── _redirects               # 301 redirecty (Vercel/Netlify)
+├── spec/                        # Specyfikacja aplikacji głównej (read-only)
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx           # Root layout, metadata, Inter font
-│   │   ├── page.tsx             # Główna strona — składa sekcje w kolejności
+│   │   ├── layout.tsx           # Root layout (lang="en"), metadata EN, hreflang
+│   │   ├── page.tsx             # EN homepage (root /)
 │   │   ├── globals.css          # Tailwind + tokeny kolorów + animacje
-│   │   ├── jak-to-dziala/       # Podstrona "Jak to działa?"
-│   │   │   ├── page.tsx         # Server Component wrapper
-│   │   │   └── PageContent.tsx  # Client Component — pełna treść strony
-│   │   └── en/                  # English version
-│   │       ├── layout.tsx       # EN layout (lang="en", metadata EN, hreflang)
-│   │       ├── page.tsx         # EN homepage
-│   │       └── how-it-works/    # EN "How it works"
+│   │   ├── how-it-works/        # EN "How it works" (/how-it-works)
+│   │   │   ├── page.tsx
+│   │   │   └── PageContentEN.tsx
+│   │   └── pl/                  # Wersja PL
+│   │       ├── layout.tsx       # PL layout (lang="pl", metadata PL, hreflang)
+│   │       ├── page.tsx         # PL homepage (/pl)
+│   │       └── jak-to-dziala/   # PL "Jak to działa?" (/pl/jak-to-dziala)
 │   │           ├── page.tsx
-│   │           └── PageContentEN.tsx
+│   │           └── PageContent.tsx
 │   └── components/
-│       ├── Navbar.tsx           # Client Component — hamburger mobile, switcher EN
+│       ├── Navbar.tsx           # PL Navbar — switcher EN → /
 │       ├── Hero.tsx
-│       ├── TechLogos.tsx        # Loga technologii (Gemini, Bright Data, Next.js)
+│       ├── TechLogos.tsx
 │       ├── Problem.tsx
-│       ├── Solution.tsx         # Bridge problem→produkt, RadarIllustration
+│       ├── Solution.tsx
 │       ├── HowItWorks.tsx
-│       ├── Features.tsx         # 4 sekcje: Wymiary, Benchmark, Before/After, Eksport
-│       ├── ForWho.tsx           # 3 grupy docelowe
+│       ├── Features.tsx         # 4 sekcje PL
+│       ├── ForWho.tsx
 │       ├── ClosingCta.tsx
-│       ├── RadarIllustration.tsx # Shared PL — używany w Hero i Solution
-│       ├── Footer.tsx
-│       ├── CtaSection.tsx       # Reusable CTA section
-│       ├── SocialProof.tsx      # UKRYTA (ławka rezerwowa)
-│       ├── Pricing.tsx          # UKRYTA (ławka rezerwowa)
-│       ├── ReportExample.tsx    # UKRYTA (ławka rezerwowa)
-│       ├── FAQ.tsx              # UKRYTA (ławka rezerwowa)
-│       └── en/                  # Angielskie wersje komponentów
-│           ├── NavbarEN.tsx     # Nawigacja EN + switcher PL
+│       ├── RadarIllustration.tsx # PL etykiety
+│       ├── Footer.tsx           # PL Footer — linki /pl/*
+│       ├── CtaSection.tsx
+│       ├── SocialProof.tsx      # UKRYTA
+│       ├── Pricing.tsx          # UKRYTA
+│       ├── ReportExample.tsx    # UKRYTA
+│       ├── FAQ.tsx              # UKRYTA
+│       └── en/                  # EN komponenty
+│           ├── NavbarEN.tsx     # EN Navbar — switcher PL → /pl
 │           ├── HeroEN.tsx
 │           ├── TechLogosEN.tsx
 │           ├── ProblemEN.tsx
@@ -74,88 +76,121 @@ ai-auditor-lp-clone/
 │           ├── FeaturesEN.tsx
 │           ├── ForWhoEN.tsx
 │           ├── ClosingCtaEN.tsx
-│           ├── RadarIllustrationEN.tsx  # Etykiety EN + tooltips EN
-│           └── FooterEN.tsx     # Privacy Policy + Terms links
+│           ├── RadarIllustrationEN.tsx
+│           └── FooterEN.tsx     # + Privacy Policy + Terms links
 ```
 
 ---
 
-## Strony
+## Strony i routing
 
-### HP (`page.tsx`)
+### EN (domyślny, root)
+
+| URL | Komponent | Title |
+|-----|-----------|-------|
+| `/` | EN HP (komponenty EN) | AI Search Content Audit - CitationOne |
+| `/how-it-works` | PageContentEN | How does CitationOne work? - CitationOne |
+
+### PL (katalog /pl)
+
+| URL | Komponent | Title |
+|-----|-----------|-------|
+| `/pl` | PL HP (komponenty PL) | Audyt treści pod AI Search - CitationOne |
+| `/pl/jak-to-dziala` | PageContent PL | Jak działa CitationOne? - CitationOne |
+
+### 301 Redirecty (`public/_redirects`)
+
+| Stary URL | Nowy URL | Powód |
+|-----------|----------|-------|
+| `/en` | `/` | EN przeniesione na root |
+| `/en/how-it-works` | `/how-it-works` | EN przeniesione na root |
+| `/jak-to-dziala` | `/pl/jak-to-dziala` | PL przeniesione do /pl |
+
+### SEO metadata
+
+- **Root layout** (`layout.tsx`): `<html lang="en">`, `title.template: '%s - CitationOne'`
+- **PL layout** (`pl/layout.tsx`): `<div lang="pl">`, własne `title.template`, OG `locale: pl_PL`
+- **hreflang** w obu layoutach: `en` → `citationone.com`, `pl` → `citationone.com/pl`
+
+### Kolejność sekcji (identyczna EN i PL)
 
 ```
 Navbar → Hero → TechLogos → Problem → Solution → HowItWorks → Features → ForWho → ClosingCta → Footer
 ```
 
-**Logika kolejności (AIDA + marketing psychology):**
-1. **Hero** — hak, CTA, uwaga
-2. **TechLogos** — wiarygodność technologiczna
-3. **Problem** — agitacja bólu (3 kafle + zamknięcie jako akapit)
-4. **Solution** — CitationOne jako odpowiedź na problem
-5. **HowItWorks** — redukcja lęku przed złożonością ("to tylko 3 kroki") + CTA
-6. **Features** — budowanie pożądania (deep-dive: wymiary, benchmark, before/after, eksport)
-7. **ForWho** — self-identyfikacja ("to jest właśnie dla mnie")
-8. **ClosingCta** — ostatni impuls dla tych co przewinęli do końca
-9. **Footer**
+---
 
-### Jak to działa (`/jak-to-dziala`)
+## Sekcje ukryte (ławka rezerwowa, tylko PL)
 
-Osobna podstrona z pełnym opisem narzędzia: 3 kroki, CQS + Citability, 10 wymiarów (karty z medium + expert opisem), Benchmark SERP, Before/After, AI Overview Coverage, Graf wiedzy, Eksport, CTA.
-
-### EN Homepage (`/en`)
-
-Angielska wersja HP - identyczna struktura jak PL: NavbarEN → HeroEN → TechLogosEN → ProblemEN → SolutionEN → HowItWorksEN → FeaturesEN → ForWhoEN → ClosingCtaEN → FooterEN. Osobne komponenty w `src/components/en/`.
-
-### EN How it works (`/en/how-it-works`)
-
-Angielska wersja `/jak-to-dziala` - `PageContentEN.tsx` z pełnym tłumaczeniem: 3 steps, CQS + Citability, 10 dimensions, Benchmark, Before/After, AI Overview, Knowledge Graph, Export, CTA.
-
-### SEO metadata
-
-- **Root layout** (`layout.tsx`): `title.template: '%s - CitationOne'` — podstrony PL dziedziczą suffix
-- **PL HP** (`/`): title `Audyt treści pod AI Search - CitationOne`
-- **PL Jak to działa** (`/jak-to-dziala`): title `Jak działa CitationOne? - CitationOne`
-- **EN layout** (`en/layout.tsx`): `title.template: '%s - CitationOne'`, `default: 'AI Search Content Audit'`
-- **EN HP** (`/en`): title `AI Search Content Audit - CitationOne`
-- **EN How it works** (`/en/how-it-works`): title `How does CitationOne work? - CitationOne`
-- PL OG: `locale: pl_PL` | EN OG: `locale: en_US`
-- **hreflang** PL↔EN w obu layoutach (`alternates.languages`)
+| Komponent | Zawartość | Gdzie wstawić |
+|-----------|-----------|---------------|
+| `SocialProof` | Stats bar + testimoniale | Po Features, przed ForWho |
+| `ReportExample` | Przykład raportu | Po Features, przed ForWho |
+| `Pricing` | 3 pakiety cenowe | Po ForWho, przed ClosingCta |
+| `FAQ` | Akordeon 5 pytań | Po Pricing, przed ClosingCta |
 
 ---
 
-## Sekcje ukryte (ławka rezerwowa)
+## Wymiary
 
-Gotowe komponenty, **wykluczone z `page.tsx`** na start serwisu. Aby włączyć — odkomentować import i JSX w `page.tsx`.
+### PL (komponenty w `src/components/`)
 
-| Komponent | Plik | Zawartość | Gdzie wstawić |
-|-----------|------|-----------|---------------|
-| `SocialProof` | `src/components/SocialProof.tsx` | Stats bar (4 liczby) + 3 testimoniale | Po `Features`, przed `ForWho` |
-| `ReportExample` | `src/components/ReportExample.tsx` | Przykład raportu | Po `Features`, przed `ForWho` |
-| `Pricing` | `src/components/Pricing.tsx` | 3 pakiety cenowe (490 / 890 / 1590 zł) | Po `ForWho`, przed `ClosingCta` |
-| `FAQ` | `src/components/FAQ.tsx` | Akordeon z 5 pytaniami | Po `Pricing`, przed `ClosingCta` |
+| ID | Label PL | Radar PL |
+|----|----------|----------|
+| CSI-A | Zgodność z intencją | Intencja |
+| D1 | Gęstość informacji | Gęstość |
+| D2 | Graf wiedzy | Graf |
+| D3 | BLUF | BLUF |
+| D4 | Autonomiczność sekcji | Chunki |
+| D5 | Koszt ekstrakcji | Ekstrakcja |
+| D6 | TF-IDF | TF-IDF |
+| D7 | Role semantyczne | Role |
+| D8 | Pokrycie AI Overview | AIO |
+| D9 | Wysiłek redakcyjny | Wysiłek |
+| EEAT | E-E-A-T | - |
+
+### EN (komponenty w `src/components/en/`)
+
+| ID | Label EN | Radar EN |
+|----|----------|----------|
+| CSI-A | Intent Alignment | Intent |
+| D1 | Info Density | Density |
+| D2 | Knowledge Graph | KGraph |
+| D3 | BLUF | BLUF |
+| D4 | Chunks | Chunks |
+| D5 | Cost of Retrieval | CoR |
+| D6 | TF-IDF | TF-IDF |
+| D7 | Semantic Roles | Roles |
+| D8 | AIO Coverage | AIO |
+| D9 | Editorial Effort | Effort |
+| EEAT | E-E-A-T | - |
+
+### Statusy / URR
+
+| | PL | EN |
+|-|----|----|
+| Statusy | OK / UWAGA / KRYTYCZNY | OK / WARNING / CRITICAL |
+| URR | Wyróżnik / Podstawa / Rzadki | Unique / Root / Rare |
 
 ---
 
-## Wymiary — nazwy PL
+## APP_URL i linki
 
-Wszystkie nazwy wymiarów w UI, RadarIllustration, Features, FAQ i stronie /jak-to-dziala po polsku:
+```ts
+const APP_URL = 'https://app.citationone.com';
+```
 
-| ID | Label PL (UI) | Opis |
-|----|---------------|------|
-| CSI-A | Zgodność z intencją | Dopasowanie do intencji wyszukiwania |
-| D1 | Gęstość informacji | Stosunek faktów do "puchu" |
-| D2 | Graf wiedzy | Struktura encja-atrybut-wartość (EAV) |
-| D3 | BLUF | Odpowiedź na początku sekcji |
-| D4 | Autonomiczność sekcji / Chunki | Jakość podziału na fragmenty RAG |
-| D5 | Koszt ekstrakcji | Łatwość pobrania informacji przez AI |
-| D6 | TF-IDF | Nasycenie terminologią branżową |
-| D7 | Role semantyczne | Perspektywa narracyjna (CE jako podmiot) |
-| D8 | Pokrycie AI Overview | Pokrycie sub-zapytań i AI Overview |
-| D9 | Wysiłek redakcyjny | Struktura, formatowanie, multimedia |
-| EEAT | E-E-A-T | Doświadczenie, ekspertyza, autorytet |
+| Kontekst | PL | EN |
+|----------|----|----|
+| CTA / Login | `APP_URL/login?lang=pl` | `APP_URL/login?lang=en` |
+| Privacy Policy | - | `APP_URL/privacy-policy` (FooterEN) |
+| Terms of Service | - | `APP_URL/terms` (FooterEN) |
 
-**RadarIllustration** używa skróconych etykiet: Intencja, Gęstość, Graf, BLUF, Chunki, Ekstrakcja, TF-IDF, Role, AIO, Wysiłek.
+### Language switcher
+
+- **PL Navbar:** logo → `/pl`, badge `EN` → `/` (root = EN)
+- **EN Navbar:** logo → `/`, badge `PL` → `/pl`
+- CSS class `.nav-lang`: border badge, 13px, `#a4acb9`
 
 ---
 
@@ -167,202 +202,41 @@ Wszystkie nazwy wymiarów w UI, RadarIllustration, Features, FAQ i stronie /jak-
 |-------|---------|--------|
 | `--color-accent` | `#0b7983` | Teal — primary, CTA, akcenty |
 | `--color-accent-hover` | `#097380` | Hover przycisku |
-| `--color-accent-light` | `#e6f5f6` | Jasne tło teal |
-| `--color-accent-muted` | `#b2dfe3` | Miękkie obramowania teal |
 | `--color-background` | `#ffffff` | Tło strony |
-| `--color-surface` | `#f8fafb` | Tło sekcji (chłodna szarość) |
+| `--color-surface` | `#f8fafb` | Tło sekcji |
 | `--color-border` | `#dfe1e7` | Obramowania |
 | `--color-foreground` | `#0d0d12` | Główny kolor tekstu |
 | `--color-muted-foreground` | `#666d80` | Sekundarny tekst |
 | `--color-subtle` | `#818898` | Trzeciorzędny tekst |
-| `--color-faint` | `#a4acb9` | Najsłabszy tekst, labele |
-
-### Kolory statusów
-
-| Status | Label | Hex | Użycie |
-|--------|-------|-----|--------|
-| OK (8-10) | `OK` | `#16A34A` (zielony) | Score >= 8, badge sukcesu |
-| UWAGA (5-7) | `UWAGA` | `#CA8A04` (żółty) | Score 5-7, badge ostrzeżenia |
-| KRYTYCZNY (0-4) | `KRYTYCZNY` | `#DC2626` (czerwony) | Score < 5, badge krytyczny |
-
-### Kolory pokrycia
-
-| Badge | Hex | Użycie |
-|-------|-----|--------|
-| pokryte | `#16A34A` (zielony) | Pokryte sub-zapytania, encje obecne |
-| luka | `#DC2626` (czerwony) | Brakujące sub-zapytania, luki treściowe |
-| unikalne | `#0b7983` (accent teal) | Wyróżniające elementy |
-
-### URR (klasyfikacja atrybutów)
-
-| Klasa | Label PL | Hex | Tło |
-|-------|----------|-----|-----|
-| UNIQUE | Wyróżnik | `#0b7983` (accent teal) | `rgba(11,121,131,0.08)` |
-| ROOT | Podstawa | `#0891b2` (cyan) | `rgba(8,145,178,0.08)` |
-| RARE | Rzadki | `#CA8A04` (żółty) | `rgba(202,138,4,0.08)` |
+| `--color-faint` | `#a4acb9` | Najsłabszy tekst |
 
 ### Logo
 
-- **Logotyp PNG:** zaciągany z `https://app.citationone.com/logo.png` — używany w Navbar (height 36px) i Footer (height 28px)
-- **Favicon SVG:** `src/app/icon.svg` — teal speedometer z cudzysłowem
+- **Logotyp PNG:** `https://app.citationone.com/logo.png` — Navbar (36px), Footer (28px)
+- **Favicon SVG:** `src/app/icon.svg`
 
 ### Typografia
 
-- Nagłówki sekcji: `clamp(1.6rem, 3.5vw, 2.2rem)`, `fontWeight: 600`, `letterSpacing: -0.025em`
-- H1 Hero: `clamp(2.4rem, 4.56vw, 3.6rem)`, `fontWeight: 700`, `letterSpacing: -0.03em`
-- Etykiety sekcji (`SectionLabel`): `fontSize: 11`, `fontWeight: 600`, `textTransform: uppercase`, `letterSpacing: 0.08em`, kolor `#818898`
-- Body: 14-17px, `color: #36394a` lub `#666d80`, `lineHeight: 1.65-1.7`
-- Navbar linki: `fontSize: 15px`, `fontWeight: 500`
-- Navbar CTA: `fontSize: 15px`, `fontWeight: 600`, `padding: 10px 20px`
-
-### Spacing sekcji
-
-- Standardowy padding: `padding: '58px 0'`
-- Max-width kontenera: `1024px`
-- Tła sekcji alternują: `#f8fafb` / `#ffffff`
-
-### Animacje (Framer Motion)
-
-Helper `fadeUp(delay?)` używany w Features:
-```tsx
-function fadeUp(delay = 0) {
-  return {
-    initial: { opacity: 0, y: 24 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: '-60px' },
-    transition: { duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] },
-  };
-}
-```
-
----
-
-## Komponenty — szczegóły
-
-### Navbar
-
-- **Client Component** (`'use client'`, `useState` dla mobile menu)
-- Sticky, `backdrop-filter: blur(16px)`, border-bottom, height `64px`, maxWidth `1024`
-- Logo: `<img src="https://app.citationone.com/logo.png" height={36} />`
-- Desktop (`sm:flex`): linki "Jak to działa?" (`/jak-to-dziala`), "Dla kogo?" (`#dla-kogo`) + CTA "Zrób audyt" → `APP_URL/login`
-- **Mobile (`<sm`):** hamburger 44x44px, panel z linkami + full-width CTA. Auto-close po kliknięciu linku.
-- Touch targets: CTA desktop `padding: 10px 20px` (~44px), mobile linki `padding: 14px 0` (~48px), mobile CTA `padding: 14px 20px`
-
-### Hero
-
-- `'use client'` — animacje, `RadarIllustration` (shared)
-- 2-column grid (`.hero-grid`, gap 72px): lewa — copy, prawa — karta z radarem
-- H1: teal + gradient tekst, `clamp(2.4rem, 4.56vw, 3.6rem)`
-- CTA: "Zrób audyt →" (primary teal, `padding: 14px 28px`, fontSize 15)
-- Karta prawa: CQS 78/100 + Citability 4.9/10 z tooltipami, `RadarIllustration` (maxWidth 320)
-- Responsive: 1 kolumna na <=768px
-
-### Problem
-
-- Sekcja turkusowa (gradient teal), `clipPath` skos, cudzysłowy dekoracyjne
-- 3 kafle + zamknięcie, responsive 1 kolumna na <=768px
-
-### Solution
-
-- Centered layout: copy + CTA + karta z CQS/Citability + `RadarIllustration` (maxWidth 460)
-- H2: "Narzędzie, które mierzy to, co AI naprawdę ocenia"
-- CTA: "Zrób audyt →", `padding: 14px 28px`
-- RadarIllustration z ikonami info (i) przy etykietach wskaźników — podpowiadają tooltip na hover
-
-### HowItWorks
-
-- Sekcja turkusowa, `clipPath`, 3 kroki z connectorami
-- Krok 1: Wklej URL, Krok 2: AI analizuje (wymiary PL), Krok 3: Odbierasz raport (focus na Before/After + eksport)
-- CTA: "Zrób audyt →" odwrócone kolory (biały na teal), `padding: 14px 28px`
-
-### Features
-
-- **4 sekcje** (usunięte AI Overview Coverage i Graf wiedzy z HP):
-  1. **10 wymiarów** (`#f8fafb`) — nazwy PL, responsive grid (3col → 2col → 1col)
-  2. **Benchmark SERP** (`#ffffff`) — `.feat-grid`
-  3. **Before/After** (`#f8fafb`) — responsive grid (2col → 1col na mobile)
-  4. **Eksport PDF** (`#ffffff`) — PDF + Markdown
-
-### ForWho
-
-- Sekcja turkusowa, 3 karty:
-  - **Specjalista SEO** — 10 wymiarów, benchmark, Before/After z wpływem na CQS
-  - **Marketer / Content Manager** — zrozumiałe wyniki bez wiedzy technicznej, gotowe rekomendacje, PDF do zespołu
-  - **Agencja / Freelancer** — nowa usługa, raport gotowy do wysłania, pakiet na fakturę
-- H2: "Nie musisz być ekspertem, żeby audytować jak ekspert"
-
-### ClosingCta
-
-- Tło: `#ffffff`, border-top
-- H2 + gradient CTA "Zrób audyt →" → `APP_URL/login`
-
-### Footer
-
-- Server Component, logo CitationOne + linki: "Jak to działa?" (`/jak-to-dziala`), "Dla kogo?" (`/#dla-kogo`), "Zrób audyt →" (`APP_URL/login`)
-- Touch targets: `padding: 12px 14px` (~44px)
-
----
-
-## USP i messaging
-
-**3 kluczowe USP:**
-1. Raport z rekomendacjami Before/After — dosłowny cytat + gotowa poprawka z szacowanym wpływem na wynik
-2. 10 wymiarów AI Search po polsku + E-E-A-T, benchmark top 10 SERP
-3. Rzetelna analiza ręczna = godziny eksperckiej pracy → w narzędziu <3 minuty
-
-**Grupy docelowe:**
-- Specjaliści SEO
-- Marketerzy / Content Managerowie (nie muszą być ekspertami)
-- Agencje i freelancerzy SEO
-
----
-
-## APP_URL i linki
-
-```ts
-const APP_URL = 'https://app.citationone.com';
-```
-
-Zdefiniowany lokalnie w każdym komponencie który linkuje do aplikacji.
-
-| Kontekst | PL | EN |
-|----------|----|----|
-| CTA / Login | `APP_URL/login` | `APP_URL/login?lang=en` |
-| Privacy Policy | - | `APP_URL/privacy-policy` |
-| Terms of Service | - | `APP_URL/terms` |
-
-### Language switcher
-
-- PL Navbar: badge `EN` → `/en` (desktop) + "EN - English version" (mobile)
-- EN Navbar: badge `PL` → `/` (desktop) + "PL - Wersja polska" (mobile)
-- CSS class `.nav-lang`: border badge, 13px, `#a4acb9`
+- H1 Hero: `clamp(2.4rem, 4.56vw, 3.6rem)`, fontWeight 700
+- H2 sekcji: `clamp(1.6rem, 3.5vw, 2.2rem)`, fontWeight 600
+- SectionLabel: fontSize 11, uppercase, `#818898`
+- Body: 14-17px, lineHeight 1.65-1.7
+- Navbar: 15px/500 (linki), 15px/600 (CTA)
 
 ---
 
 ## Konwencje kodowania
 
-- Wszystkie style inline (`style={{ }}`) — brak CSS modules, brak zewnętrznych klas Tailwind poza układem
-- Tailwind używany tylko do klas układu: `flex`, `items-center`, `gap-*`, `hidden sm:flex`, `w-full`, `relative`, `overflow-hidden`, itp.
-- Responsywność przez `<style>` tag z `@media` w komponentach używających custom grid
-- Ikony: JSX SVG inline, `fill="none"`, `viewBox="0 0 24 24"`, `strokeWidth={1.0}` (ikony w sekcjach turkusowych), `strokeWidth={1.8}` (inne karty) lub `{2.5}` (przyciski)
-- `'use client'` — wszystkie komponenty z animacjami Framer Motion, `useState` lub event handlers
+- Style inline (`style={{ }}`) — Tailwind tylko do layout (`flex`, `items-center`, `hidden sm:flex`)
+- Responsywność przez `<style>` tag z `@media` w komponentach
+- Ikony: JSX SVG inline
+- `'use client'` — komponenty z animacjami/state
 - Brak emoji w UI
-- `RadarIllustration` (PL) — 10 osi, etykiety PL z ikonami info (i). Używany w Hero (`maxWidth={320}`) i Solution (`maxWidth={460}`).
-- `RadarIllustrationEN` — identyczny komponent z etykietami EN (Intent, Density, KGraph, BLUF, Chunks, CoR, TF-IDF, Roles, AIO, Effort). Używany w HeroEN i SolutionEN.
-
-## Wersja EN
-
-- **Podejście:** osobne komponenty w `src/components/en/` (nie i18n library) - każdy komponent EN to kopia PL z przetłumaczonym copy
-- **Routing:** `/en` (HP), `/en/how-it-works` (podstrona). EN layout w `src/app/en/layout.tsx` z `<div lang="en">` wrapper
-- **Wymiary EN:** Intent Alignment, Info Density, Knowledge Graph, BLUF, Chunks, Cost of Retrieval, TF-IDF, Semantic Roles, AIO Coverage, Editorial Effort, E-E-A-T
-- **Statusy EN:** OK, WARNING, CRITICAL (zamiast PL: OK, UWAGA, KRYTYCZNY)
-- **URR EN:** Unique, Root, Rare (zamiast PL: Wyróżnik, Podstawa, Rzadki)
-- **Footer EN:** dodatkowe linki Privacy Policy (`APP_URL/privacy-policy`) i Terms (`APP_URL/terms`)
+- `output: 'export'` — static export, brak middleware/server-side redirects. Redirecty przez `public/_redirects`
 
 ## RWD / Mobile
 
-- **Breakpoint:** `sm:` (640px) dla Navbar, `768px` (`@media`) dla gridów
-- **Navbar mobile:** hamburger + panel, auto-close, full-width CTA
-- **Touch targets:** min 44px na wszystkich CTA i linkach nawigacyjnych
-- **Gridy:** `.dims-grid` (3→2→1col), `.ba-grid` (2→1col), `.feat-grid` (2→1col), `.problem-grid` / `.forwho-grid` / `.howitworks-grid` (3→1col)
-- **Hero CTA:** `padding: 14px 28px` (~48px height)
+- **Breakpoint:** `sm:` (640px) Navbar, `768px` gridy
+- **Navbar:** hamburger + panel, auto-close, full-width CTA, touch targets 44px+
+- **Gridy responsive:** dims 3→2→1, ba 2→1, feat 2→1, problem/forwho/howitworks 3→1
+- **Solution card:** 80%→100% na mobile, score font 40→32px

@@ -24,17 +24,17 @@ export default function Navbar() {
         style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, height: 64 }}
       >
         {/* Logo */}
-        <a href="/" className="flex items-center" style={{ textDecoration: 'none' }}>
+        <a href="/pl" className="flex items-center" style={{ textDecoration: 'none' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="https://app.citationone.com/logo.png" alt="CitationOne" style={{ height: 36 }} />
         </a>
 
         {/* Desktop nav */}
         <div className="hidden sm:flex items-center">
-          <a href="/jak-to-dziala" className="nav-link">Jak to działa?</a>
+          <a href="/pl/jak-to-dziala" className="nav-link">Jak to działa?</a>
           <a href="#dla-kogo" className="nav-link">Dla kogo?</a>
           <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zrób audyt</a>
-          <a href="/en" className="nav-lang" title="English version">EN</a>
+          <a href="/" className="nav-lang" title="English version">EN</a>
         </div>
 
         {/* Mobile hamburger */}
@@ -75,7 +75,7 @@ export default function Navbar() {
           }}
         >
           <a
-            href="/jak-to-dziala"
+            href="/pl/jak-to-dziala"
             onClick={() => setMobileOpen(false)}
             className="nav-mobile-link"
           >
@@ -88,7 +88,7 @@ export default function Navbar() {
           >
             Dla kogo?
           </a>
-          <a href="/en" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+          <a href="/" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             EN - English version
           </a>
           <a

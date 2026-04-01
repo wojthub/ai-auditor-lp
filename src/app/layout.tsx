@@ -12,28 +12,28 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Audyt treści pod AI Search - CitationOne',
+    default: 'AI Search Content Audit - CitationOne',
     template: '%s - CitationOne',
   },
   description:
-    'Sprawdź, czy ChatGPT, Perplexity i Google AI Overview zacytują Twoją treść. 10 wymiarów analizy, benchmark top 10 SERP, rekomendacje Before/After z gotowymi poprawkami. Raport w 3 minuty.',
+    'Check if ChatGPT, Perplexity and Google AI Overview will cite your content. 10 analysis dimensions, top 10 SERP benchmark, Before/After recommendations. Report in 3 minutes.',
   openGraph: {
-    title: 'CitationOne - Audyt treści pod AI Search',
-    description: 'Sprawdź, czy AI zacytuje Twoją treść. 10 wymiarów, benchmark SERP, rekomendacje Before/After. Raport w 3 minuty.',
+    title: 'CitationOne - AI Search Content Audit',
+    description: 'Check if AI will cite your content. 10 dimensions, SERP benchmark, Before/After recommendations. Report in 3 minutes.',
     url: 'https://citationone.com',
     siteName: 'CitationOne',
-    locale: 'pl_PL',
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CitationOne - Audyt treści pod AI Search',
-    description: 'Sprawdź, czy AI zacytuje Twoją treść. 10 wymiarów, benchmark SERP, rekomendacje Before/After. Raport w 3 minuty.',
+    title: 'CitationOne - AI Search Content Audit',
+    description: 'Check if AI will cite your content. 10 dimensions, SERP benchmark, Before/After recommendations. Report in 3 minutes.',
   },
   alternates: {
     languages: {
-      'pl': 'https://citationone.com',
-      'en': 'https://citationone.com/en',
+      'en': 'https://citationone.com',
+      'pl': 'https://citationone.com/pl',
     },
   },
 };
@@ -44,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pl" className={inter.variable}>
+    <html lang="en" className={inter.variable}>
       <head>
         <Script
           id="consentguards"
