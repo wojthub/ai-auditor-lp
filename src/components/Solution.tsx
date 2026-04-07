@@ -117,10 +117,10 @@ export default function Solution() {
               </div>
             </div>
 
-            <div style={{ borderTop: '1px solid #eceff3', margin: '18px 0' }} />
-
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <RadarIllustration maxWidth={460} />
+            <div className="sol-radar-wrap" style={{ borderTop: '1px solid #eceff3', margin: '18px 0 0' }}>
+              <div style={{ paddingTop: 18, display: 'flex', justifyContent: 'center' }}>
+                <RadarIllustration maxWidth={460} />
+              </div>
             </div>
           </div>
         </motion.div>
@@ -144,6 +144,7 @@ export default function Solution() {
           .sol-score-box .sol-score-num { font-size: 32px !important; }
           .sol-score-box .sol-score-badge { font-size: 8px !important; padding: 2px 5px !important; }
           .sol-score-box .sol-score-label { font-size: 10px !important; }
+          .sol-radar-wrap { display: none; }
         }
         .sol-score-box { transition: box-shadow 0.15s ease; }
         .sol-score-tooltip {

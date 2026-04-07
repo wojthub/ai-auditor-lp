@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 const logos = [
   { src: '/logos/Gemini_language_model_logo.png', alt: 'Google Gemini', height: 24 },
   { src: '/logos/Bright_Data.svg.png', alt: 'Bright Data', height: 38 },
+  { src: '/logos/jina.png', alt: 'Jina AI', height: 22 },
   { src: '/logos/Nextjs-logo.svg.png', alt: 'Next.js', height: 18 },
 ];
 
