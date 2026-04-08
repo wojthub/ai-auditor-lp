@@ -74,6 +74,15 @@ export default function Hero() {
                 Zobacz przykładowy raport
               </motion.a> */}
             </div>
+            <p style={{ fontSize: 13, color: '#818898', margin: '12px 0 0', lineHeight: 1.5 }}>
+              1,50 EUR / audyt
+            </p>
+            <p style={{ fontSize: 13, color: '#818898', margin: '6px 0 0', lineHeight: 1.5, display: 'flex', alignItems: 'center', gap: 5 }}>
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0b7983" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z" />
+              </svg>
+              Każde nowe konto otrzymuje 3 darmowe audyty.
+            </p>
           </motion.div>
 
           {/* RIGHT - floating report card */}

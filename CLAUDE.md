@@ -186,6 +186,12 @@ const APP_URL = 'https://app.citationone.com';
 | Privacy Policy | - | `APP_URL/privacy-policy` (FooterEN) |
 | Terms of Service | - | `APP_URL/terms` (FooterEN) |
 
+### Pricing info (Hero + ClosingCta, PL + EN)
+
+- Linia 1: "1,50 EUR / audyt" (PL) / "EUR 1.50 / audit" (EN) — `fontSize: 13`, `color: #818898`
+- Linia 2: ikona prezentu (teal SVG gift box) + "Każde nowe konto otrzymuje 3 darmowe audyty." (PL) / "Every new account receives 3 free audits." (EN)
+- Umieszczone pod CTA button, poza flex-row
+
 ### Language switcher
 
 - **PL Navbar:** logo → `/pl`, badge `EN` → `/` (root = EN)
