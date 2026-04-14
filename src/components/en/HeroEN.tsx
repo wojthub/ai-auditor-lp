@@ -26,8 +26,11 @@ export default function HeroEN() {
               lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: 20,
             }}>
               <span style={{ color: '#0b7983' }}>
-                Audit your content<br />
-                for
+                Audit your{' '}
+              </span>
+              <br />
+              <span style={{ color: '#0b7983' }}>
+                content for
               </span>
               <br />
               <span style={{
