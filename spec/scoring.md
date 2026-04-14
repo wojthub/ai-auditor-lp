@@ -73,6 +73,7 @@ Uwzglednia: BLUF w H1/H2, gestosc informacji, autonomicznosc chunkow, koszt ekst
 - Algorytmiczne metryki z `analyzeContentStructure()` wstrzyknięte do prompta (liczba słów, zdań, nagłówków, ściany tekstu, FAQ itp.)
 - htmlMetrics z crawlera (imageCount, videoCount, hasFaqSchema, hasTableOfContents)
 - Profil typu treści z SERP consensus (non-article: dostosowane kryteria)
+- **Rozszerzona baza algorytmiczna (65% algo + 35% Gemini):** `computeAlgorithmicCompetitorScore()` w `content-structure.ts` — max 33.5 pkt (bylo 24.5): CoR 7 + Chunk 5 + Effort 6 + BLUF 4 + Density 3 + **SRL proxy 2** + **EEAT signals 3** + **TF-IDF proxy 2** + **Fan-Out proxy 2**. Nowy opcjonalny param `extras?: { content?, centralEntity?, tfidfCoveredRatio?, serpQuestions? }`. `scoreCompetitors()` przyjmuje `serpData?: { paa: string[]; related: string[] }`. Citability deterministyczna porcja: ~4.3/10 (bylo ~2.9/10). Blending: `finalCQS = round(0.65 * algoCQS + 0.35 * geminiCQS)`
 
 **Znane ograniczenia vs source scoring:**
 - Source: 10 osobnych call Gemini (głęboka analiza per wymiar) vs competitor: 1 call (rubric w jednym prompcie)

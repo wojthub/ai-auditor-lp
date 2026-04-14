@@ -56,7 +56,8 @@ ai-auditor-lp-clone/
 │       ├── Problem.tsx
 │       ├── Solution.tsx
 │       ├── HowItWorks.tsx
-│       ├── Features.tsx         # 4 sekcje PL
+│       ├── Features.tsx         # 5 sekcji PL (wymiary, benchmark, before/after, eksport, quick wins)
+│       ├── BrandMorph.tsx      # Shared — animowane logo CitatioNone→CitationOne (typing effect)
 │       ├── ForWho.tsx
 │       ├── ClosingCta.tsx
 │       ├── RadarIllustration.tsx # PL etykiety
@@ -112,11 +113,21 @@ ai-auditor-lp-clone/
 - **PL layout** (`pl/layout.tsx`): `<div lang="pl">`, własne `title.template`, OG `locale: pl_PL`
 - **hreflang** w obu layoutach: `en` → `citationone.com`, `pl` → `citationone.com/pl`
 
-### Kolejność sekcji (identyczna EN i PL)
+### Kolejność sekcji HP (identyczna EN i PL)
 
 ```
-Navbar → Hero → TechLogos → Problem → Solution → HowItWorks → Features → ForWho → ClosingCta → Footer
+Navbar → Hero → TechLogos → Problem → Solution → HowItWorks → Features (5 sekcji) → ForWho → ClosingCta → Footer
 ```
+
+Features HP: Wymiary, Benchmark SERP, Before/After, Eksport, Quick Wins
+
+### Kolejność sekcji /how-it-works i /pl/jak-to-dziala
+
+```
+Navbar → 3 kroki → CQS/Citability → 10 wymiarów → Benchmark → Before/After → AI Overview → Graf wiedzy → Eksport → Quick Wins → Schema.org Audit → Information Gain → CTA → Footer
+```
+
+Schema.org Audit i Information Gain tylko na podstronach (nie na HP).
 
 ---
 

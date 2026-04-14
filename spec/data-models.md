@@ -130,8 +130,56 @@ interface ReportExtras {
   structure: StructureProposal;
   srlTransforms: SRLTransform[];
   eeatBlocks: EEATBlocks;
-  tfidfMapping: TFIDFMapping[];
+  tfidfMapping: TFIDFMapping[];  // puste [] w nowych audytach (TF-IDF mapping usuniety z report prompt). Konsumenci uzywaja rawResponse.missingTerms jako PRIMARY source, tfidfMapping jako fallback dla starych audytow
   titleDescription?: TitleDescriptionAnalysis;  // opcjonalne -- backward compat
+  schemaAudit?: SchemaRecommendation[];         // opcjonalne -- audyt schema.org JSON-LD (algorytmiczny, backward compat)
+}
+
+// --- Schema Auditor (algorytmiczny, 0 Gemini calls) ---
+
+interface ExtractedSchema {
+  type: string;               // np. "Article", "FAQPage", "BreadcrumbList"
+  properties: string[];       // wykryte wlasciwosci w JSON-LD (np. ["name", "author", "datePublished"])
+  raw?: unknown;              // surowy obiekt JSON-LD (opcjonalny, do debugowania)
+}
+
+interface SchemaRecommendation {
+  type: string;               // typ schema.org (np. "Article", "FAQPage")
+  label: { pl: string; en: string };  // czytelna nazwa PL/EN
+  status: 'present' | 'incomplete' | 'missing';
+  priority: 'required' | 'recommended';
+  presentProperties: string[];      // wlasciwosci juz obecne w JSON-LD
+  missingRequired: string[];        // brakujace wymagane pola
+  missingRecommended: string[];     // brakujace rekomendowane pola
+  googleRichResult: boolean;        // czy typ kwalifikuje sie do Google Rich Results
+}
+
+// HtmlMetrics rozszerzony o schemas:
+// interface HtmlMetrics {
+//   ...istniejace pola...
+//   schemas?: ExtractedSchema[];    // JSON-LD bloki wyekstrahowane z HTML (obsluguje @graph z WordPress Yoast/RankMath)
+// }
+
+// ReportBlockType rozszerzony o 'schemaAudit':
+// type ReportBlockType = ... | 'schemaAudit';
+
+// --- Quick Wins (algorytmiczne, 0 Gemini calls) ---
+
+interface QuickWin {
+  id: string;
+  title: string;
+  description: string;
+  source: string;           // badge zrodla: 'effort' | 'title' | 'eeat' | 'tfidf' | 'fanout' | 'bluf' | 'chunk'
+  targetDimId: string;      // DimensionId do nawigacji
+}
+
+// --- EEAT Pre-detection (algorytmiczne, 0 Gemini calls) ---
+
+interface PreDetectedSignals {
+  experience: string[];     // wykryte sygnaly Experience
+  expertise: string[];      // wykryte sygnaly Expertise
+  authority: string[];      // wykryte sygnaly Authority
+  trust: string[];          // wykryte sygnaly Trust
 }
 
 interface TitleDescriptionAnalysis {
@@ -168,6 +216,10 @@ interface CompetitorData {
   qualitySummary?: string;
   topStrengths?: string[];
   topWeaknesses?: string[];
+  // Domain-level backlinks (DataForSEO Backlinks Summary, opcjonalne)
+  domainBacklinks?: number;
+  domainReferringDomains?: number;
+  domainRank?: number;              // 0-1000
 }
 
 interface BenchmarkEAV {
@@ -199,12 +251,12 @@ interface ContentFormatIntelligence {
 // --- Query Fan-Out ---
 
 type FanoutDecompositionType = 'semantic' | 'intent' | 'verification';
-type FanoutGroundingTag = 'CONFIRMED' | 'PREDICTED' | 'SERP-ONLY';
+type FanoutGroundingTag = 'CONFIRMED' | 'OVERVIEW' | 'PREDICTED' | 'SERP-ONLY';
 
 interface FanoutSubQuery {
   subQuery: string;
   type: FanoutDecompositionType;
-  grounding: FanoutGroundingTag | null;   // null w content-only
+  grounding: FanoutGroundingTag | null;   // algorytmiczny (postProcessRawResponse), null w content-only
   mappedSection: string | null;           // tytul H2 lub null jesli uncovered
   covered: boolean;
 }
@@ -340,6 +392,146 @@ interface WizardPrefill {
   mode: AuditMode;
   csi: CSI;  // CE, SC, CSI, Predicate z poprzedniego audytu
 }
+
+// --- Klasteryzacja slow kluczowych ---
+
+type ClusteringJobStatus = 'pending' | 'running' | 'completed' | 'error';
+
+interface ClusteringConfig {
+  clusterThreshold: number;   // 0.5-1.0, default 0.95 — cosine similarity threshold
+  minClusterSize: number;     // 1-20, default 1 — minimalny rozmiar klastra
+  maxKeywords: number;        // default 500 — cap keywords per job
+  serpResults: number;        // 1-10, default 5 — top N organic results per keyword
+}
+
+const DEFAULT_CLUSTERING_CONFIG: ClusteringConfig = {
+  clusterThreshold: 0.95,
+  minClusterSize: 1,
+  maxKeywords: 500,
+  serpResults: 5,
+};
+
+interface ClusteredKeyword {
+  keyword: string;
+  volume?: number | null;
+  clusterId: number;
+}
+
+interface ClusterResult {
+  clusterId: number;
+  label: string;              // Gemini-generated label
+  intent: string;             // informational | transactional | navigational | commercial
+  pillarSuggestion: string;   // suggested pillar page topic
+  keywords: ClusteredKeyword[];
+  totalVolume: number;
+}
+
+interface ClusteringJob {
+  id: string;
+  userId: string;
+  name: string;
+  status: ClusteringJobStatus;
+  config: ClusteringConfig;
+  keywords: string[];
+  keywordCount: number;
+  clusters: ClusterResult[] | null;
+  clusterCount: number | null;
+  errorMessage: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// --- Content Pruning & Cannibalization ---
+
+type PruningJobStatus = 'pending' | 'running' | 'completed' | 'error';
+
+interface PruningConfig {
+  pruningPercentile: number;        // 50-99, default 90 — percentile for pruning candidates
+  cannibalizationThreshold: number; // 0.7-1.0, default 0.9 — cosine similarity threshold
+}
+
+const DEFAULT_PRUNING_CONFIG: PruningConfig = {
+  pruningPercentile: 90,
+  cannibalizationThreshold: 0.9,
+};
+
+interface PruningCandidate {
+  url: string;
+  title: string;
+  deviationScore: number;     // cosine distance from main cluster centroid
+  clusterLabel: string;
+}
+
+interface CannibalizationGroup {
+  urls: string[];
+  titles: string[];
+  similarity: number;         // pairwise cosine similarity
+}
+
+interface PruningResults {
+  topics: { topic: string; pageCount: number; keywords: string[] }[];
+  pruningCandidates: PruningCandidate[];
+  cannibalizationGroups: CannibalizationGroup[];
+  geminiAnalysis?: {
+    pruningRecommendations: { url: string; recommendation: string; contentType?: string }[];
+    cannibalizationRecommendations: { urls: string[]; recommendation: string; intent?: string }[];
+  };
+}
+
+interface PruningJob {
+  id: string;
+  userId: string;
+  name: string;
+  status: PruningJobStatus;
+  progress: number;           // 0-100%
+  config: PruningConfig;
+  sitemapUrl: string;
+  pageCount: number | null;
+  results: PruningResults | null;
+  errorMessage: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// --- Schema Gaps (standalone narzedzie) ---
+
+type SchemaJobStatus = 'pending' | 'running' | 'completed' | 'error';
+
+interface SchemaPageResult {
+  url: string;
+  profile: string;                     // detected page profile (article/listing/product/faq/etc.)
+  schemas: ExtractedSchema[];          // JSON-LD schemas found on page
+  recommendations: SchemaRecommendation[]; // reuse from schema-catalog.ts
+  hasIssues: boolean;                  // true jesli missing/incomplete schemas
+}
+
+interface SchemaSiteSummary {
+  totalPages: number;
+  successfulPages: number;             // pages fetched successfully
+  successRate: number;                 // 0-100%
+  totalIssues: number;                 // pages with missing/incomplete schemas
+  missingSchemas: { type: string; count: number }[];  // most common missing schemas ranked
+  profileDistribution: { profile: string; count: number }[]; // how many pages per profile
+}
+
+interface SchemaJobResults {
+  summary: SchemaSiteSummary;
+  pages: SchemaPageResult[];
+}
+
+interface SchemaJob {
+  id: string;
+  userId: string;
+  name: string;
+  status: SchemaJobStatus;
+  progress: number;           // 0-100%
+  sitemapUrl: string;
+  pageCount: number | null;
+  results: SchemaJobResults | null;
+  errorMessage: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
 ```
 
 ## Schema bazy danych (Drizzle ORM)
@@ -352,7 +544,7 @@ Tabele:
                        central_entity, source_context, central_search_intent, predicate,
                        cqs, ai_citability, report_extras (JSON), serp_consensus (JSON),
                        content_type_profile (TEXT nullable), error_message (TEXT nullable),
-                       project (TEXT nullable), share_token (TEXT nullable),
+                       project (TEXT nullable), share_token (TEXT nullable), search_volume (INT nullable),
                        created_at, updated_at
 - dimension_results -- id, audit_id (FK), dimension_id, score, summary, strengths (JSON),
                        problems (JSON), raw_response
@@ -368,7 +560,23 @@ Tabele:
                        content_formats (JSON), term_stats (JSON)
 - settings          -- key (PK), value, updated_at  (key-value store dla kredencjalow i konfiguracji)
 - users             -- id (PK), email (UNIQUE), role ('admin' | 'user'), audit_credits (INT),
-                       gemini_api_key (nullable -- per-user Gemini key), created_at
+                       gemini_api_key (nullable -- per-user Gemini key),
+                       marketing_consent (BOOLEAN default false), marketing_consent_at (TIMESTAMP nullable),
+                       company_name (TEXT nullable), company_logo_url (TEXT nullable), created_at
 - verification_codes -- id (PK), email, code (6 cyfr), expires_at (ISO +10 min),
                        used (BOOLEAN default false), created_at
+- feedback          -- id, user_id (FK→cascade), type, message, page, created_at
+- payments          -- id, user_id, email, ls_order_id (UNIQUE), ls_customer_id, variant_id,
+                       credits_added, amount_cents, currency, status, created_at
+- report_templates  -- id, user_id (FK→cascade), name, blocks (JSON), is_default (BOOL),
+                       created_at, updated_at; index user_id
+- clustering_jobs   -- id, user_id (FK→cascade), name, status, config (JSON), keywords (JSON),
+                       keyword_count, clusters (JSON), cluster_count, error_message,
+                       created_at, updated_at; index user_id + status
+- pruning_jobs      -- id, user_id (FK→cascade), name, status, progress (INT default 0),
+                       config (JSON), sitemap_url, page_count, results (JSON), error_message,
+                       created_at, updated_at; index user_id + status
+- schema_jobs       -- id, user_id (FK→cascade), name, status, progress (INT default 0),
+                       sitemap_url, page_count, results (JSON), error_message,
+                       created_at, updated_at; index user_id + status
 ```

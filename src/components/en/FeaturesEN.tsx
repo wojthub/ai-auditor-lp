@@ -224,6 +224,46 @@ export default function FeaturesEN() {
         </div>
       </section>
 
+      {/* 5 - Quick Wins */}
+      <section style={{ background: '#f8fafb', padding: '58px 0' }}>
+        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+          <div className="feat-grid">
+            <motion.div {...fadeUp()}>
+              <SectionLabel>Quick Wins</SectionLabel>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>Instant fixes right after the audit</h2>
+              <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 24 }}>Up to 7 ready-made fixes generated algorithmically - no extra AI calls. Each with a source badge and a link to the relevant dimension. You know what to fix before reading the full report.</p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {['Missing tables, lists or images', 'Title/Meta too long or missing', 'Missing E-E-A-T signals', 'Uncovered AI Overview sub-queries', 'BLUF - no answer in the lead'].map(item => (
+                  <li key={item} style={{ display: 'flex', gap: 10, fontSize: 14, color: '#36394a' }}><span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>→</span>{item}</li>
+                ))}
+              </ul>
+            </motion.div>
+            <motion.div {...fadeUp(0.12)}>
+              <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, overflow: 'hidden' }}>
+                <div style={{ padding: '14px 18px', borderBottom: '1px solid #dfe1e7' }}>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#0d0d12' }}>Quick Wins</span>
+                  <span style={{ fontSize: 10, color: '#a4acb9', marginLeft: 8 }}>5 fixes</span>
+                </div>
+                <div style={{ padding: '8px 0' }}>
+                  {[
+                    { badge: 'Effort', badgeColor: '#CA8A04', text: 'Add a comparison table - competitors use it in 7/10 articles' },
+                    { badge: 'Title', badgeColor: '#0891b2', text: 'Shorten title to 60 characters (currently 78)' },
+                    { badge: 'EEAT', badgeColor: '#7c3aed', text: 'Add last updated date and author bio' },
+                    { badge: 'Fan-Out', badgeColor: ACCENT, text: 'Cover sub-query "how to measure results"' },
+                    { badge: 'Schema', badgeColor: '#DC2626', text: 'Add FAQPage schema - you have a FAQ section' },
+                  ].map((qw) => (
+                    <div key={qw.text} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '9px 18px' }}>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: qw.badgeColor, background: `${qw.badgeColor}15`, border: `1px solid ${qw.badgeColor}30`, borderRadius: 4, padding: '2px 7px', flexShrink: 0, whiteSpace: 'nowrap' }}>{qw.badge}</span>
+                      <span style={{ fontSize: 12.5, color: '#36394a', lineHeight: 1.5 }}>{qw.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       <style>{`
         .dims-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
         .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }

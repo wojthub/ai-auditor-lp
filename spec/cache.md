@@ -220,7 +220,7 @@ async function runAudit(auditId: string, input: AuditInput): Promise<void> {
     const report = await generateReport(...);
     // Osobne try/catch -- blad jednego nie blokuje drugiego
     try { await saveRecommendations(auditId, report.recommendations); } catch { ... }
-    try { await saveReportExtras(auditId, { structure, srlTransforms, eeatBlocks, tfidfMapping }); } catch { ... }
+    try { await saveReportExtras(auditId, { structure, srlTransforms, eeatBlocks, tfidfMapping: [] }); } catch { ... }  // tfidfMapping puste — TF-IDF mapping usuniety z report prompt
     writeStageCache(auditId, '08_report', report).catch(console.warn);
     stageLog.push({ stage: '08_report', status: 'completed', ... });
   } catch (err) {

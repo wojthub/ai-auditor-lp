@@ -629,6 +629,126 @@ export default function PageContent() {
         </div>
       </section>
 
+      {/* QUICK WINS */}
+      <section style={{ background: '#f8fafb', padding: '80px 0' }}>
+        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+          <motion.div {...fadeUp()} style={{ marginBottom: 36 }}>
+            <SectionLabel>Quick Wins</SectionLabel>
+            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
+              Szybkie poprawki - od razu po audycie
+            </h2>
+            <p style={{ fontSize: 16, color: '#666d80', maxWidth: 640, lineHeight: 1.65 }}>
+              Do 7 gotowych poprawek wygenerowanych algorytmicznie (bez dodatkowego wywołania AI). Każda z badge'em źródła i linkiem do wymiaru, który ją wykrył. Wiesz co poprawić zanim przeczytasz cały raport.
+            </p>
+          </motion.div>
+          <motion.div {...fadeUp(0.1)} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
+            {[
+              { badge: 'Effort', color: '#CA8A04', text: 'Dodaj tabelę porównawczą - konkurencja używa w 7/10 artykułach' },
+              { badge: 'Title', color: '#0891b2', text: 'Skróć title do 60 znaków (obecnie 78)' },
+              { badge: 'EEAT', color: '#7c3aed', text: 'Dodaj datę aktualizacji i bio autora' },
+              { badge: 'Fan-Out', color: ACCENT, text: 'Pokryj sub-zapytanie "jak mierzyć efekty"' },
+              { badge: 'Schema', color: '#DC2626', text: 'Dodaj schema FAQPage - masz sekcję FAQ' },
+              { badge: 'TF-IDF', color: '#CA8A04', text: 'Dodaj brakujące terminy: "konwersja", "retencja"' },
+            ].map((qw) => (
+              <div key={qw.text} style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 8, padding: '14px 16px', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                <span style={{ fontSize: 9, fontWeight: 700, color: qw.color, background: `${qw.color}15`, border: `1px solid ${qw.color}30`, borderRadius: 4, padding: '3px 8px', flexShrink: 0, whiteSpace: 'nowrap' }}>{qw.badge}</span>
+                <span style={{ fontSize: 13, color: '#36394a', lineHeight: 1.5 }}>{qw.text}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* SCHEMA.ORG AUDIT */}
+      <section style={{ background: '#ffffff', padding: '80px 0' }}>
+        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+          <div className="feat-grid">
+            <motion.div {...fadeUp()}>
+              <SectionLabel>Schema.org</SectionLabel>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
+                Audyt danych strukturalnych
+              </h2>
+              <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 16 }}>
+                Algorytmiczna analiza schema.org JSON-LD (0 wywołań AI). Wykrywa ~14 typów schematów, sprawdza kompletność pól i wskazuje brakujące wymagane schematy z priorytetem.
+              </p>
+              <p style={{ fontSize: 14, color: '#666d80', lineHeight: 1.65 }}>
+                Article, FAQPage, Product, HowTo, Review, BreadcrumbList, WebPage, Organization, Person, AggregateRating - każdy z listą wymaganych i rekomendowanych pól. Status: obecny / niekompletny / brakujący. Kwalifikacja do Google Rich Result.
+              </p>
+            </motion.div>
+            <motion.div {...fadeUp(0.12)}>
+              <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, overflow: 'hidden' }}>
+                <div style={{ padding: '14px 18px', borderBottom: '1px solid #dfe1e7', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke={ACCENT} strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#0d0d12' }}>Schema.org Audit</span>
+                </div>
+                {[
+                  { type: 'Article', status: 'incomplete', missing: 'dateModified, author.url' },
+                  { type: 'FAQPage', status: 'missing', missing: 'cały schemat' },
+                  { type: 'BreadcrumbList', status: 'present', missing: '' },
+                  { type: 'WebPage', status: 'missing', missing: 'cały schemat' },
+                  { type: 'Organization', status: 'present', missing: '' },
+                ].map((s) => {
+                  const c = s.status === 'present' ? '#16A34A' : s.status === 'incomplete' ? '#CA8A04' : '#DC2626';
+                  const l = s.status === 'present' ? 'OK' : s.status === 'incomplete' ? 'Niekompletny' : 'Brak';
+                  return (
+                    <div key={s.type} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 18px', borderBottom: '1px solid #f0f0f3' }}>
+                      <span style={{ fontSize: 12, fontWeight: 600, color: '#0d0d12', width: 120, flexShrink: 0 }}>{s.type}</span>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: c, background: `${c}12`, border: `1px solid ${c}25`, borderRadius: 4, padding: '2px 7px' }}>{l}</span>
+                      {s.missing && s.status !== 'present' && <span style={{ fontSize: 11, color: '#a4acb9', marginLeft: 'auto' }}>{s.missing}</span>}
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* INFORMATION GAIN */}
+      <section style={{ background: '#f8fafb', padding: '80px 0' }}>
+        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+          <div className="feat-grid feat-grid-reverse">
+            <motion.div {...fadeUp(0.12)}>
+              <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '20px 18px', overflow: 'hidden' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 16 }}>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em' }}>IG Score</span>
+                  <span style={{ fontSize: 28, fontWeight: 700, color: ACCENT, lineHeight: 1 }}>68</span>
+                  <span style={{ fontSize: 13, color: '#a4acb9' }}>/ 100</span>
+                </div>
+                {[
+                  { label: 'Unikatowe twierdzenia', pct: 72, color: ACCENT },
+                  { label: 'Unikatowe EAV', pct: 61, color: '#0891b2' },
+                  { label: 'Unikatowe terminy TF-IDF', pct: 55, color: '#CA8A04' },
+                  { label: 'Przewaga formatów', pct: 80, color: '#16A34A' },
+                ].map((bar) => (
+                  <div key={bar.label} style={{ marginBottom: 10 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                      <span style={{ fontSize: 11, color: '#818898' }}>{bar.label}</span>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: bar.color }}>{bar.pct}%</span>
+                    </div>
+                    <div style={{ height: 4, background: '#eceff3', borderRadius: 2, overflow: 'hidden' }}>
+                      <motion.div initial={{ width: 0 }} whileInView={{ width: `${bar.pct}%` }} viewport={{ once: true }} transition={{ duration: 0.8, ease: 'easeOut' }} style={{ height: '100%', background: bar.color, borderRadius: 2 }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+            <motion.div {...fadeUp()}>
+              <SectionLabel>Information Gain</SectionLabel>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
+                Ile unikatowej wartości wnosi Twoja treść?
+              </h2>
+              <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 16 }}>
+                Information Gain mierzy unikatowość treści vs konkurencja SERP. Nie wpływa na CQS - to czysto informacyjna metryka. Ekstrahuje 10-20 twierdzeń faktowych i porównuje z treściami konkurentów (token overlap).
+              </p>
+              <p style={{ fontSize: 14, color: '#666d80', lineHeight: 1.65 }}>
+                IG Score (0-100) składa się z 4 składowych: unikatowość twierdzeń (40%), unikatowe trójki EAV (30%), unikatowe terminy TF-IDF (20%) i przewaga formatów (10%). Każde twierdzenie oznaczone badge'em unique lub common.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section style={{ background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)', padding: '96px 0' }}>
         <div style={{ maxWidth: 640, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>

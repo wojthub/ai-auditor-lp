@@ -46,12 +46,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        <Script
-          id="consentguards"
-          src="https://consentguards.com/consent.min.js"
-          data-key="d0d6f44f70371e68e6f1635e8888dececb9038fb4e24b2f05b41ffca0be453aa"
-          strategy="afterInteractive"
-        />
+        {process.env.NODE_ENV === 'production' && (
+          <Script
+            id="consentguards"
+            src="https://consentguards.com/consent.min.js"
+            data-key="d0d6f44f70371e68e6f1635e8888dececb9038fb4e24b2f05b41ffca0be453aa"
+            strategy="afterInteractive"
+          />
+        )}
         <Script
           id="gtm-script"
           strategy="afterInteractive"

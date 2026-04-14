@@ -99,7 +99,7 @@ Kazdy wymiar to osobne wywolanie Gemini API z dedykowanym promptem. Prompty w `l
 - 1-2: <30% pokrytych, tresc odpowiada tylko na glowne pytanie
 - Malus -1 za niepokryte SERP-ONLY sub-queries (potwierdzone luki z SERP)
 - Typy dekompozycji: semantic (atrybuty/relacje encji), intent (realne potrzeby uzytkownika), verification (weryfikacja faktow)
-- Tryb Full: grounding wobec PAA/Related (CONFIRMED/PREDICTED/SERP-ONLY)
+- Tryb Full: grounding obliczany algorytmicznie w `postProcessRawResponse()` (nie przez Gemini) — CONFIRMED = sub-zapytanie pasuje do PAA/Related (substring lub token overlap >= 50%), OVERVIEW = pasuje do AI Overview (>= 50% tokenow), PREDICTED = dane SERP dostepne ale brak dopasowania. `hasSerpData` uwzglednia tez `serpOrganicCount > 0` i `!!aioText` — sub-zapytania dostaja PREDICTED zamiast null nawet gdy PAA/Related puste
 - Content-only: grounding = null (brak danych SERP)
 
 ## Formuly scoringu per wymiar
@@ -211,6 +211,8 @@ Zrodlo: `docs/bluf-generator/references/transformations.md`
 - [ ] Brak SEO fluff i pustych przymiotnikow
 
 ## E-E-A-T -- sygnaly i wagi
+
+**EEAT pre-detekcja (`lib/ai/eeat-detection.ts`):** `detectEeatSignals(content, htmlMetrics?)` — regex/keyword detekcja ~15 sygnalow EEAT przed wywolaniem Gemini. Zwraca `PreDetectedSignals` z 4 sub-wymiarami. `formatPreDetectedSignals()` tworzy blok wstrzykiwany do prompta EEAT PRZED trescia — Gemini weryfikuje pre-detekcje + ocenia sile sygnalow + generuje sugestie (jakosc bez zmian, oszczednosc ~700-1000 tokenow/audyt). `buildPrompt()` w `eeat-evaluation.ts` przyjmuje nowy opcjonalny param `preDetectedBlock?: string`.
 
 **Experience (0-10):** Personal story (+3), Case study (+3), Zdjecia/screenshoty (+2), Firsthand testing (+2)
 

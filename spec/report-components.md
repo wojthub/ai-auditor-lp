@@ -35,6 +35,9 @@ Profil audytu: **[Listing / Katalog]** - wagi i kryteria dostosowane do typu tre
 CQS = (CSI-A x 0.13 + Fan-Out x 0.13 + EAV x 0.13 + Density x 0.11 + BLUF x 0.11 + SRL x 0.09 + Chunk x 0.07 + CoR x 0.06 + TF-IDF x 0.06 + Effort x 0.06 + EEAT x 0.05) x 10
 CSI = (CSI Alignment + BLUF + Chunk + URR + Query Fan-Out) / 5
 
+### Quick Wins  ← sekcja po Executive Summary, jesli sa quick wins
+- [source badge] tytul — opis  ← max 7 algorytmicznych quick wins z buildQuickWins(audit)
+
 ## 2. Diagnoza
 
 ### 2.1 CSI & Pokrycie tematyczne
@@ -55,7 +58,7 @@ CSI = (CSI Alignment + BLUF + Chunk + URR + Query Fan-Out) / 5
 - Docelowa struktura H1/H2/H3 — PELNA (WSZYSTKIE istniejace naglowki + nowe). [OK] sekcje bez zmian, [ZMIEN] z originalTitle + nowy title, [NOWA] do dodania. Generowana na podstawie: chunk optimization + gaps z benchmarku + sub-zapytania Fan-Out (POKRYTE/NIEPOKRYTE → niepokryte = [NOWA] sekcja) + twierdzenia AI Overview (niepokryte → [NOWA] lub [ZMIEN])
 - BLUF per H2 z BEFORE/AFTER (currentBluf + suggestedBluf per kazda sekcja H2 — wymuszane w prompcie)
 - Rekomendacje (z recommendation-builder, nie z report prompt): KRYTYCZNE / WYSOKIE / SREDNIE z BEFORE/AFTER + clientWhy (💡) + impact (oba widoczne)
-- Luki terminologiczne TF-IDF z docelowymi sekcjami H2 (dane z termStats.missingFromSource — spojne z wymiarem TF-IDF; fallback na tfidfMapping dla starych audytow)
+- Pokrycie encji z CSI Alignment benchmark (luki sortowane P1→P4 najpierw, potem pokryte encje; dane z bm.gaps i bm.eavMatrix)
 - Transformacje SRL (CE Patient -> Agent)
 - EEAT bloki do wdrozenia
 - Tryb Full: gaps P1-P4 z danymi SERP, Content Format recommendations
@@ -66,11 +69,21 @@ CSI = (CSI Alignment + BLUF + Chunk + URR + Query Fan-Out) / 5
 - Rekomendowany title (z dlugoscia)
 - Obecna meta description (lub "(brak)") + analiza SEO
 - Rekomendowana meta description (z dlugoscia)
+
+## 15. Schema.org (opcjonalne — jesli reportExtras.schemaAudit istnieje)
+- Lista rekomendacji schema.org per typ:
+  - Typ + label PL/EN
+  - Status: present / incomplete / missing
+  - Priorytet: required / recommended
+  - Wykryte pola (jesli present/incomplete)
+  - Brakujace wymagane pola
+  - Brakujace rekomendowane pola
+  - Google Rich Result eligibility
 ```
 
 ### SerpConsensusPanel (w AuditReport — tab Podsumowanie)
 
-Panel "Walidacja SERP" renderowany jesli `audit.serpConsensus` istnieje:
+Panel "Walidacja SERP" renderowany jesli `audit.serpConsensus` istnieje. Przyjmuje opcjonalny prop `benchmark?: { paa: string[]; related: string[] }` do wyswietlania Related Searches z Bright Data SERP:
 
 - **Badge zgodnosci:** "Wysoka zgodność" (zielony) / "Częściowa zgodność" (żółty) / "Niska zgodność" (czerwony) — obliczana server-side ze średniej 7 pól fieldAlignment
 - **Explanation:** 2-3 zdania wyjaśniające zgodność
@@ -78,9 +91,9 @@ Panel "Walidacja SERP" renderowany jesli `audit.serpConsensus` istnieje:
 
 | Pole | Źródło (treść) | Konsensus SERP |
 |------|-------------------|----------------|
-| [dot] Główna encja (CE) | audit.centralEntity | consensus.centralEntity |
-| [dot] Kontekst (SC) | audit.sourceContext | consensus.sourceContext |
-| [dot] Intencja (CSI) | audit.centralSearchIntent | consensus.centralSearchIntent |
+| [dot] Główna encja (PL: "Encja Centralna", EN: "Central Entity (CE)") | audit.centralEntity | consensus.centralEntity |
+| [dot] Kontekst (PL: "Kontekst Zrodla", EN: "Source Context (SC)") | audit.sourceContext | consensus.sourceContext |
+| [dot] Intencja (PL: "Centralny Zamiar Wyszukiwania", EN: "Central Search Intent (CSI)") | audit.centralSearchIntent | consensus.centralSearchIntent |
 | [dot] Predykat | audit.predicate | consensus.predicate |
 | [dot] Typ | consensus.sourceContentType | consensus.contentType.primary |
 | [dot] Format | consensus.sourceContentFormat[] | consensus.contentFormat.dominant[] |
@@ -90,6 +103,8 @@ Panel "Walidacja SERP" renderowany jesli `audit.serpConsensus` istnieje:
 - **Kluczowe dane** (poza tabelą): lista `contentData.essentialDataPoints` + tagi formatów
 - **Tematy SERP:** tagi z `serpThemes`
 - **Sygnały PAA:** lista z `topPaaSignals`
+- **Related Searches:** badge z `benchmark.related` (dane Bright Data SERP) — wyswietlane pod sekcja tematow/PAA, oddzielone `border-t`. PAA NIE duplikowana — "Sygnaly PAA" z SERP consensus jest wystarczajace. Widoczne gdy `benchmark` prop przekazany i `benchmark.related` niepuste
+- **Prop `benchmark`:** opcjonalny `{ paa: string[]; related: string[] }` — przekazywany z `AuditReport` do `SerpConsensusPanel`. i18n klucze: `serp.paa`, `serp.related`
 - Backward compat: stare audyty bez contentType/Format/Angle — te wiersze nie renderowane
 
 ## Komponenty -- szczegoly
@@ -100,6 +115,7 @@ Połączony box pod ScoreCards, widoczny gdy są rekomendacje LUB profil non-art
 - Liczba problemów critical+high (polska odmiana: 1 "problem", 2-4 "problemy", 5+ "problemów")
 - Najważniejsza zmiana (pierwszy critical, fallback na pierwszy rec)
 - Badge profilu typu treści (tylko non-article): "Profil audytu: **Listing / Katalog** - wagi i kryteria dostosowane do typu treści"
+- **Quick Wins** (zwijanra sekcja, domyslnie rozwiniety jesli sa quick wins): max 7 algorytmicznych quick wins z `buildQuickWins(audit)` w `lib/ai/quick-wins.ts`. Zrodla: Effort checks, Title/Meta, EEAT brakujace sygnaly, TF-IDF brakujace terminy, Fan-Out niepokryte CONFIRMED, BLUF, Chunk. Kazdy quick win: tytul + opis + source badge (kolorowy tag np. "Effort", "EEAT") + klikalny link nawigujacy do odpowiedniego wymiaru (`targetDimId`). 0 Gemini calls — czysto algorytmiczne
 
 ### Wpływ jakości na pozycję (w Top 10 SERP)
 
@@ -111,6 +127,19 @@ Połączony box pod ScoreCards, widoczny gdy są rekomendacje LUB profil non-art
 - Min 3 scored competitors wymagane, inaczej "-"
 - Kolorowanie: zielony ≥50% (silny wpływ), żółty ≥30% (umiarkowany), szary <30% (słaby)
 - InfoHint z glossary key `cqsImpact`
+
+### Keyword Profile / Profil frazy (w TopBar + naglowku Top 10 SERP)
+
+Algorytmiczny wskaznik obliczany z istniejacych Spearman correlations (0 Gemini calls):
+- Formula: `contentRatio = qualityImpact / (qualityImpact + linkImpact)`
+- >60% = Contentowa (zielony badge), <40% = Linkowa (accent/niebieski badge), 40-60% = Mieszana (zolty badge)
+- Wyswietlany w: TopBar subtitle (obok KD) i naglowek Top 10 SERP (obok KD)
+- NIE w siatce 5 metryk benchmarkowych (kolumny bez zmian)
+- Min wymaganie: oba impacty >= 5%, min 3 konkurentow ze score + DR — inaczej ukryty
+- `cursor-help` + tooltip per typ (contentDrivenTooltip/linkDrivenTooltip/mixedTooltip)
+- i18n: `benchmark.keywordProfile`, `benchmark.contentDriven`/`linkDriven`/`mixed` + tooltips PL/EN
+- Glossary: `keywordProfile` entry
+- `serpBenchmark` glossary entry zaktualizowany — wspomina DR, RD, link impact, keyword profile, KD, mocne/slabe strony konkurentow
 
 ### ScoreCard
 
@@ -136,8 +165,9 @@ Rozwiniety widok wymiaru. Zawiera:
   - CSI-A: Pokrycie encji (tabela pokrytych + luk P1-P4 sortowanych wg priorytetu + coverageCount desc) + Macierz EAV (tagi) — sorting w orchestratorze + UI-side sort dla starych audytow (tryb Full)
   - Graf wiedzy (EAV): KnowledgeGraph (interaktywny graf) + EAVTable (trójki z badge: pokryte/unikalne/luka) + Macierz EAV (tagi pokrycia) + Formaty treści
   - Chunk: ChunkMap z dlugosciami sekcji
+  - TF-IDF: Tabela "Pokrycie terminow konkurencji" (luki NAJPIERW, potem pokryte; tylko bigramy+; tryb Full)
   - SRL: Tabela instancji SRL z BEFORE/AFTER transformacjami
-  - Fan-Out i AIO: Tabela sub-zapytan z typem (semantic/intent/verification), grounding tag (CONFIRMED/OVERVIEW/PREDICTED/SERP-ONLY), mapowana sekcja H2, status pokrycia. InfoHint na wszystkich kolumnach naglowkowych (Sub-zapytanie, Typ, Sekcja, Status, Grounding). Coverage stats (tagi z liczbami). Lista niepokrytych sub-zapytan (czerwony callout). AiOverviewCoverageCard (karta pokrycia AI Overview — przeniesiona z Summary tab). Ta sama tabela z InfoHint wyswietlana w 3 miejscach: SummaryTab (karta Pokrycie Fan-Out), RecommendationsTab, DimensionDetail (queryFanout).
+  - Fan-Out i AIO: Tabela sub-zapytan z typem (semantic/intent/verification), grounding tag (CONFIRMED/OVERVIEW/PREDICTED/SERP-ONLY — obliczany algorytmicznie w postProcessRawResponse, nie przez Gemini), mapowana sekcja H2, status pokrycia. InfoHint na wszystkich kolumnach naglowkowych (Sub-zapytanie, Typ, Sekcja, Status, Grounding). Coverage stats (tagi z liczbami). Lista niepokrytych sub-zapytan (czerwony callout). AiOverviewCoverageCard (karta pokrycia AI Overview — przeniesiona z Summary tab). Ta sama tabela z InfoHint wyswietlana w 3 miejscach: SummaryTab (karta Pokrycie Fan-Out), RecommendationsTab, DimensionDetail (queryFanout).
 
 ### ChunkMap
 
@@ -188,6 +218,30 @@ Zakladka "Eksport" w raporcie audytu. Dwa stany:
 - Docelowa struktura z emoji (✅/✏️/➕)
 - Przeznaczenie: wyslanie do klienta/copywritera jako brief do wdrozenia
 - Generowane client-side bez API call (dane z `audit.recommendations` + `audit.reportExtras`)
+
+**Wspolne cechy MD + PDF eksportow:**
+- **Grounding labels przetlumaczone:** CONFIRMED → "Potwierdzone", OVERVIEW → "AIO", PREDICTED → "Przewidywane", SERP-ONLY → "Tylko SERP" (zamiast surowych angielskich tagow)
+- **Keyword Profile:** KD badge + Contentowa/Linkowa/Mieszana — MD: w naglowku benchmarku, PDF: badge w headerze
+- **Quick Wins:** MD: sekcja po Executive Summary, PDF: w bloku executiveSummary. Oba importuja `buildQuickWins` z `lib/ai/quick-wins.ts`
+- **Schema.org:** MD: sekcja 15 (tabela rekomendacji z typem, statusem, priorytetem, brakujacymi polami). PDF: blok schema z badge status/priority per rekomendacja. Widoczne tylko jesli `reportExtras.schemaAudit` istnieje i niepuste
+
+### SchemaAuditBlock (w AuditReport — Summary tab + Report Builder)
+
+Karta audytu schema.org JSON-LD renderowana jesli `reportExtras.schemaAudit` istnieje i zawiera rekomendacje:
+
+- **Issues first:** rekomendacje z `status: 'missing'` (czerwony badge) i `status: 'incomplete'` (zolty badge) wyswietlane na gorze
+- **Detected schemas:** rekomendacje z `status: 'present'` (zielony badge) ponizej
+- **Per rekomendacja:**
+  - Typ schema.org + label (locale-aware PL/EN)
+  - Status badge: missing (danger), incomplete (warning), present (success)
+  - Priority badge: required (accent) / recommended (muted)
+  - Present properties (jesli sa): lista wykrytych pol
+  - Missing required (jesli sa): lista brakujacych wymaganych pol (czerwona)
+  - Missing recommended (jesli sa): lista brakujacych rekomendowanych pol (zolta)
+  - Google Rich Result info: badge "Rich Result" jesli typ kwalifikuje sie
+- **Backward compat:** stare audyty bez `schemaAudit` w `reportExtras` — sekcja calkowicie ukryta
+- **0 Gemini calls** — detekcja czysto algorytmiczna (katalog typow + regex + profil)
+- **Blok w Report Builder:** `schemaAudit` — dostepny do drag & drop, domyslnie widoczny, warunkowy (ukryty gdy brak danych)
 
 ### Pola rekomendacji (brief do klienta)
 

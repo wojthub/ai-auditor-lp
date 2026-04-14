@@ -337,6 +337,110 @@ export default function PageContentEN() {
       {/* EXPORT */}
       <section style={{ background: '#ffffff', padding: '80px 0' }}><div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}><div className="feat-grid feat-grid-reverse"><motion.div {...fadeUp(0.1)}><ExportVisual /></motion.div><motion.div {...fadeUp()}><SectionLabel>Report export</SectionLabel><h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>Report ready to send to your client</h2><p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>PDF designed for presentation - all report sections in readable format without additional editing. Markdown for project documentation or automated processing.</p><div style={{ display: 'flex', gap: 12 }}>{[{ fmt: 'PDF', desc: 'Ready to send', icon: <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke={ACCENT} strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg> }, { fmt: 'Markdown', desc: 'For documentation', icon: <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke={ACCENT} strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg> }].map(f => (<div key={f.fmt} style={{ flex: 1, background: '#f8fafb', border: '1px solid #dfe1e7', borderRadius: 8, padding: '16px', textAlign: 'center' }}><div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>{f.icon}</div><p style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', margin: '0 0 2px' }}>{f.fmt}</p><p style={{ fontSize: 11.5, color: '#818898', margin: 0 }}>{f.desc}</p></div>))}</div></motion.div></div></div></section>
 
+      {/* QUICK WINS */}
+      <section style={{ background: '#f8fafb', padding: '80px 0' }}>
+        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+          <motion.div {...fadeUp()} style={{ marginBottom: 36 }}>
+            <SectionLabel>Quick Wins</SectionLabel>
+            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>Instant fixes - right after the audit</h2>
+            <p style={{ fontSize: 16, color: '#666d80', maxWidth: 640, lineHeight: 1.65 }}>Up to 7 ready-made fixes generated algorithmically (no extra AI calls). Each with a source badge and a link to the dimension that detected it. You know what to fix before reading the full report.</p>
+          </motion.div>
+          <motion.div {...fadeUp(0.1)} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
+            {[
+              { badge: 'Effort', color: '#CA8A04', text: 'Add a comparison table - competitors use it in 7/10 articles' },
+              { badge: 'Title', color: '#0891b2', text: 'Shorten title to 60 characters (currently 78)' },
+              { badge: 'EEAT', color: '#7c3aed', text: 'Add last updated date and author bio' },
+              { badge: 'Fan-Out', color: ACCENT, text: 'Cover sub-query "how to measure results"' },
+              { badge: 'Schema', color: '#DC2626', text: 'Add FAQPage schema - you have a FAQ section' },
+              { badge: 'TF-IDF', color: '#CA8A04', text: 'Add missing terms: "conversion", "retention"' },
+            ].map((qw) => (
+              <div key={qw.text} style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 8, padding: '14px 16px', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                <span style={{ fontSize: 9, fontWeight: 700, color: qw.color, background: `${qw.color}15`, border: `1px solid ${qw.color}30`, borderRadius: 4, padding: '3px 8px', flexShrink: 0, whiteSpace: 'nowrap' }}>{qw.badge}</span>
+                <span style={{ fontSize: 13, color: '#36394a', lineHeight: 1.5 }}>{qw.text}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* SCHEMA.ORG AUDIT */}
+      <section style={{ background: '#ffffff', padding: '80px 0' }}>
+        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+          <div className="feat-grid">
+            <motion.div {...fadeUp()}>
+              <SectionLabel>Schema.org</SectionLabel>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>Structured data audit</h2>
+              <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 16 }}>Algorithmic analysis of schema.org JSON-LD (0 AI calls). Detects ~14 schema types, checks field completeness and flags missing required schemas with priority.</p>
+              <p style={{ fontSize: 14, color: '#666d80', lineHeight: 1.65 }}>Article, FAQPage, Product, HowTo, Review, BreadcrumbList, WebPage, Organization, Person, AggregateRating - each with required and recommended fields. Status: present / incomplete / missing. Google Rich Result eligibility.</p>
+            </motion.div>
+            <motion.div {...fadeUp(0.12)}>
+              <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, overflow: 'hidden' }}>
+                <div style={{ padding: '14px 18px', borderBottom: '1px solid #dfe1e7', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke={ACCENT} strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#0d0d12' }}>Schema.org Audit</span>
+                </div>
+                {[
+                  { type: 'Article', status: 'incomplete', missing: 'dateModified, author.url' },
+                  { type: 'FAQPage', status: 'missing', missing: 'entire schema' },
+                  { type: 'BreadcrumbList', status: 'present', missing: '' },
+                  { type: 'WebPage', status: 'missing', missing: 'entire schema' },
+                  { type: 'Organization', status: 'present', missing: '' },
+                ].map((s) => {
+                  const c = s.status === 'present' ? '#16A34A' : s.status === 'incomplete' ? '#CA8A04' : '#DC2626';
+                  const l = s.status === 'present' ? 'OK' : s.status === 'incomplete' ? 'Incomplete' : 'Missing';
+                  return (
+                    <div key={s.type} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 18px', borderBottom: '1px solid #f0f0f3' }}>
+                      <span style={{ fontSize: 12, fontWeight: 600, color: '#0d0d12', width: 120, flexShrink: 0 }}>{s.type}</span>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: c, background: `${c}12`, border: `1px solid ${c}25`, borderRadius: 4, padding: '2px 7px' }}>{l}</span>
+                      {s.missing && s.status !== 'present' && <span style={{ fontSize: 11, color: '#a4acb9', marginLeft: 'auto' }}>{s.missing}</span>}
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* INFORMATION GAIN */}
+      <section style={{ background: '#f8fafb', padding: '80px 0' }}>
+        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+          <div className="feat-grid feat-grid-reverse">
+            <motion.div {...fadeUp(0.12)}>
+              <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '20px 18px', overflow: 'hidden' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 16 }}>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em' }}>IG Score</span>
+                  <span style={{ fontSize: 28, fontWeight: 700, color: ACCENT, lineHeight: 1 }}>68</span>
+                  <span style={{ fontSize: 13, color: '#a4acb9' }}>/ 100</span>
+                </div>
+                {[
+                  { label: 'Unique claims', pct: 72, color: ACCENT },
+                  { label: 'Unique EAV', pct: 61, color: '#0891b2' },
+                  { label: 'Unique TF-IDF terms', pct: 55, color: '#CA8A04' },
+                  { label: 'Format advantage', pct: 80, color: '#16A34A' },
+                ].map((bar) => (
+                  <div key={bar.label} style={{ marginBottom: 10 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                      <span style={{ fontSize: 11, color: '#818898' }}>{bar.label}</span>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: bar.color }}>{bar.pct}%</span>
+                    </div>
+                    <div style={{ height: 4, background: '#eceff3', borderRadius: 2, overflow: 'hidden' }}>
+                      <motion.div initial={{ width: 0 }} whileInView={{ width: `${bar.pct}%` }} viewport={{ once: true }} transition={{ duration: 0.8, ease: 'easeOut' }} style={{ height: '100%', background: bar.color, borderRadius: 2 }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+            <motion.div {...fadeUp()}>
+              <SectionLabel>Information Gain</SectionLabel>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>How much unique value does your content bring?</h2>
+              <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 16 }}>Information Gain measures content uniqueness vs SERP competition. Does not affect CQS - purely informational metric. Extracts 10-20 factual claims and compares with competitor content (token overlap).</p>
+              <p style={{ fontSize: 14, color: '#666d80', lineHeight: 1.65 }}>IG Score (0-100) consists of 4 components: claim uniqueness (40%), unique EAV triples (30%), unique TF-IDF terms (20%) and format advantage (10%). Each claim marked with a unique or common badge.</p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section style={{ background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)', padding: '96px 0' }}>
         <div style={{ maxWidth: 640, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import BrandMorph from './BrandMorph';
 
 const APP_URL = 'https://app.citationone.com';
 
@@ -24,9 +25,8 @@ export default function Navbar() {
         style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, height: 64 }}
       >
         {/* Logo */}
-        <a href="/pl" className="flex items-center" style={{ textDecoration: 'none' }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="https://app.citationone.com/logo.png" alt="CitationOne" style={{ height: 36 }} />
+        <a href="/pl" className="flex items-center" style={{ textDecoration: 'none', fontSize: 22 }}>
+          <BrandMorph />
         </a>
 
         {/* Desktop nav */}

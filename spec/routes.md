@@ -50,6 +50,7 @@ Server Component (`page.tsx`) laduje audyty i opakowuje w `SidebarWrapper`. Obsl
   - W trybie content-only lub bez keyword: panel nie jest renderowany
   - **Auto-collapse:** po zaladowaniu konsensusu SERP pola CSI i panel Walidacji SERP automatycznie zwijane (klikalne naglowki z chevronem do rozwijania)
 - **Credit enforcement:** przycisk "Potwierdź i rozpocznij audyt" wyszarzony + komunikat "Brak kredytów" gdy user ma 0 kredytow (prop `hasCredits` z `page.tsx` -> `WizardContent` -> `Step2CSI`, admin = unlimited)
+- **Layout przycisku:** przycisk "Potwierdź" wyrownany do prawej (flex-col items-end), "Koszt: 1 kredyt" pod nim
 - Uzytkownik potwierdza lub edytuje
 
 **Krok 3 -- Audyt w toku:**
@@ -73,7 +74,7 @@ Server Component (`page.tsx`) laduje audyty i opakowuje w `SidebarWrapper`. Obsl
 
 ### Raport audytu (`/audyt/[id]`)
 
-Layout: sidebar + content, 4 zakladki (Tabs). Przycisk **"↻ Odśwież audyt"** w TopBar (widoczny tylko dla zakonczonych audytow) -- nawiguje do `/nowy-audyt?from=AUDIT_ID` z pre-wypelnionymi danymi (URL, keyword, tryb, CSI). Tresc i consensus NIE sa przenoszone -- musza byc re-crawlowane/re-walidowane.
+Layout: sidebar + content, 5 zakladek (Tabs): Podsumowanie | Wymiary | Rekomendacje | Raport builder | Eksport. TopBar z tytulem audytu + opcjonalny `subtitle` (ReactNode) z metadanymi keyword (badge jezyka, keyword, volume, KD) — budowany w `audyt/[id]/page.tsx` (Server Component). Przycisk **"↻ Odśwież audyt"** w TopBar (widoczny tylko dla zakonczonych audytow) -- nawiguje do `/nowy-audyt?from=AUDIT_ID` z pre-wypelnionymi danymi (URL, keyword, tryb, CSI). Tresc i consensus NIE sa przenoszone -- musza byc re-crawlowane/re-walidowane.
 
 **Tab 1 -- Podsumowanie:**
 - ScoreCard CQS (0-100) + ScoreCard AI Citability (0-10)
@@ -90,7 +91,7 @@ Layout: sidebar + content, 4 zakladki (Tabs). Przycisk **"↻ Odśwież audyt"**
 - CSI-A: Pokrycie encji (tabela pokrytych + luk P1-P4) + Macierz EAV (tagi) (tryb Full)
 - Graf wiedzy (EAV): KnowledgeGraph (graf) + EAVTable (trójki z badge pokryte/unikalne/luka) + Macierz EAV (tagi pokrycia) + Formaty treści
 - D4 (Chunk): ChunkMap z dlugosciami sekcji
-- D8 (Fan-Out i AIO): tabela sub-zapytan z grounding tags (CONFIRMED/OVERVIEW/PREDICTED/SERP-ONLY), coverage stats (badge pokryte/brak), lista niepokrytych sub-queries + AiOverviewCoverageCard (karta pokrycia AI Overview — przeniesiona z Summary tab)
+- D8 (Fan-Out i AIO): tabela sub-zapytan z grounding tags (CONFIRMED/OVERVIEW/PREDICTED/SERP-ONLY; w eksportach MD/PDF przetlumaczone: Potwierdzone/AIO/Przewidywane/Tylko SERP), coverage stats (badge pokryte/brak), lista niepokrytych sub-queries + AiOverviewCoverageCard (karta pokrycia AI Overview — przeniesiona z Summary tab)
 - EEATCard z 4 wymiarami E-E-A-T
 
 **Tab 3 -- Rekomendacje:**
@@ -98,7 +99,7 @@ Layout: sidebar + content, 4 zakladki (Tabs). Przycisk **"↻ Odśwież audyt"**
 - Kazda rekomendacja: tytul, wymiar, BeforeAfter, wplyw, szacowany +CQS
 - Proponowana struktura H1/H2/H3 (ChunkMap z [OK]/[ZMIEN]/[NOWA])
 - BLUF per H2
-- Brakujace terminy TF-IDF z mapowaniem do sekcji
+- Pokrycie encji z CSI Alignment benchmark (luki P1→P4 najpierw, potem pokryte)
 - Transformacje SRL (CE Patient -> Agent)
 - EEAT bloki do wdrozenia
 
@@ -120,12 +121,21 @@ Ekstrakcja tresci z URL via Bright Data Web Unlocker (HTTP API, serverless-compa
 
 ### POST /api/serp
 
-Pobranie wynikow SERP z Bright Data SERP API. Uzywane w trybie Full do budowy benchmarku.
+Pobranie wynikow SERP z Bright Data SERP API (fallback: DataForSEO Live Advanced). Uzywane w trybie Full do budowy benchmarku.
 
 - **Request:** `{ keyword: string, locationCode?: number, languageCode?: string }`
 - **Response:** `{ organic: OrganicResult[], paa: string[], related: string[] }`
-- **Logika:** Sprawdz shared SERP cache (`readSharedCache('serp', keyword)`). Jesli cache hit i TTL < 1h -> zwroc z cache. Jesli miss -> `POST https://api.brightdata.com/request` (SERP zone, Bearer token, URL = Google Search z `brd_json=1`), zapisz do shared cache (`writeSharedCache('serp', keyword, result)`). Parsowanie odpowiedzi: `organic[]` (rank/title/link/description), `people_also_ask[]` (question), `related[]` (text — dwa formaty: carousel items + proste). Defaults: `languageCode='pl'`, `gl=pl` w URL Google.
-- **Wykorzystanie:** Tryb Full -> top 10 URLs z organic -> Bright Data Web Unlocker -> EAV extraction -> benchmark
+- **Logika:** Sprawdz shared SERP cache (skip jesli 0 organic). Bright Data -> jesli 0 organic lub throw -> DataForSEO fallback (merge: DFS organic + BD extras PAA/related/AIO). Puste wyniki nie cache'owane. Parsowanie BD: `organic[]` (rank/title/link/description), `people_also_ask[]` (question), `related[]` (text — dwa formaty: carousel items + proste). Defaults: `languageCode='pl'`, `gl=pl` w URL Google.
+- **Wykorzystanie:** Tryb Full -> top 10 URLs z organic -> Bright Data Web Unlocker (fallback: Jina Reader) -> EAV extraction -> benchmark
+
+### POST /api/keyword-volume
+
+Pobranie monthly search volume z DataForSEO Keywords Data API.
+
+- **Request:** `{ keyword: string, language?: string }`
+- **Response:** `{ volume: number | null }`
+- **Logika:** `fetchKeywordVolume()` w `dataforseo.ts`. Basic Auth (DATAFORSEO_LOGIN/PASSWORD). Nigdy nie throwuje — zwraca null przy bledzie. Rate limit 20/min.
+- **Wykorzystanie:** Step1Input po kliknieciu "Pobierz" (fire-and-forget) -> badge obok keyword -> zapisywane w DB (`search_volume` kolumna)
 
 ### POST /api/csi
 
@@ -146,7 +156,7 @@ Walidacja CSI artykulu wobec konsensusu SERP (top 10 Google) + analiza typu/form
   2. Top 10 organic (title + snippet) + PAA + related + kontekst artykulu (tytul + snippet tresci) -> `buildSerpConsensusPrompt(serpInput, csi, articleContext)` (`lib/ai/prompts/serp-consensus.ts`)
   3. `callClaudeJSON<SerpConsensus>(prompt)` -- Gemini analizuje SERP, buduje consensus, okresla typ/format/perspektywe SERP i artykulu, porownuje z CSI artykulu
   4. Walidacja alignment levels, predicatow, content analysis fields, sanitization
-  5. **Server-side `computeOverallAlignment()`** -- oblicza ogolna zgodnosc ze sredniej WSZYSTKICH fieldAlignment (4 wymagane + do 3 opcjonalnych). Scoring: high=2, partial=1, low=0. Progi: avg>=1.5 -> high, avg>=0.75 -> partial, else -> low. Nadpisuje wartosc z Gemini.
+  5. **Server-side `computeOverallAlignment()`** -- oblicza ogolna zgodnosc z **wazonej sredniej z hard cap**. CE i Predicate maja wage 2x, reszta (SC, CSI, Type, Format, Angle) wage 1x. **Hard cap:** jesli CE=low LUB Predicate=low → overall = low natychmiast. Scoring: high=2, partial=1, low=0. Progi: avg>=1.5 -> high, avg>=0.75 -> partial, else -> low. Nadpisuje wartosc z Gemini.
   6. Zwrot `SerpConsensus`
 - **Koszt:** 1 wywolanie Gemini (~800 tokenow output), 0 dodatkowych wywolan Bright Data (SERP cache hit)
 - **Dane persisted:** zapisywane w DB (kolumna `serp_consensus` TEXT/JSON w tabeli `audits`) przy tworzeniu audytu. Wyswietlane w raporcie (tab Podsumowanie, panel "Walidacja SERP" z tabela porownawcza 7 wierszy). Opcjonalnie przekazywane do orchestratora (wymiar CSI Alignment)
@@ -208,6 +218,110 @@ Eksport raportu jako Markdown.
 
 - **Response:** Plik `.md` z pelnym raportem w formacie z `audit-report-generator/SKILL.md`.
 
+### POST /api/clustering
+
+Tworzenie joba klasteryzacji slow kluczowych.
+
+- **Request:** `{ name: string, keywords: string[], config: ClusteringConfig }`
+- **Response:** `{ jobId: string }`
+- **Auth:** wymagany login, 1 kredyt (admin bypass)
+- **maxDuration:** 600s
+- **Logika:** Tworzy rekord `clustering_jobs` w DB (status `pending`), pobiera kredyt, uruchamia `runClustering()` w `after()`. Pipeline: SERP fetch per keyword (Bright Data, 8 concurrent, reuse `searchSerp()`) → macierz keyword x URL (binarna) → cosine similarity → Union-Find clustering (threshold) → Gemini analiza per klaster (label, intent, pillar) rownolegle z DataForSEO batch volume fetch → sort po totalVolume desc → zapis do DB.
+- **Graceful degradation:** Gemini fail → placeholder labels. Volume fail → brak wolumenow. SERP fail per keyword → klaster "No SERP data".
+
+### GET /api/clustering/[id]
+
+Polling statusu joba klasteryzacji.
+
+- **Response:** `{ job: ClusteringJob }`
+- **Auth:** ownership check (userId === session.userId || admin)
+- **Logika:** Pobiera job z DB, sprawdza stuck detection (running >15 min → error). Zwraca aktualny stan z clusters (jesli completed).
+
+### POST /api/clustering/[id]/expand
+
+Rozszerzenie klastra o powiazane frazy kluczowe wygenerowane przez Gemini.
+
+- **Request:** `{ clusterId: number }`
+- **Response:** `{ suggestions: ExpandedKeyword[] }` — kazda fraza: keyword, type (longtail/question/variant/subtopic), suggestedTitle (50-65 zn.), volume (number | null), similarity (number | null)
+- **Auth:** wymagany login, ownership check (userId === session.userId || admin)
+- **maxDuration:** 60s
+- **Logika:**
+  1. Pobiera job z DB, sprawdza ownership i status (musi byc completed)
+  2. Pobiera klaster po clusterId z clusters JSON
+  3. `sanitize()` na cluster label/keywords — stripuje markdown/instrukcje z user-influenced danych
+  4. Gemini (temp 0.5) generuje 10-15 powiazanych fraz z ramka semantyczna (Agent/Cause/Result/Manner/Time/Quantity/Comparison) + terminologia (synonimy/hiponimy/meronimy)
+  5. Walidacja typow fraz (odrzuca nieprawidlowe typy)
+  6. Dedup: odrzucenie sugestii duplikujacych istniejace keywords klastra
+  7. Gemini embeddings: sugestie + keywords klastra → centroid klastra → cosine similarity
+  8. DataForSEO batch volume fetch
+  9. Merge wynikow + aktualizacja clusters JSON w DB (pole `suggestions` w klastrze)
+- **Graceful degradation:** embeddings fail → similarity=null, volume fail → volume=null
+- **Limit:** 3 ekspansje per job (client-side enforcement)
+- **Error messages:** sanitized (nie eksponuja wewnetrznych komunikatow)
+
+### POST /api/pruning
+
+Tworzenie joba content pruning & cannibalization.
+
+- **Request:** `{ name: string, sitemapUrl: string, config: PruningConfig }`
+- **Response:** `{ jobId: string }`
+- **Auth:** wymagany login, 1 kredyt (admin bypass)
+- **maxDuration:** 600s
+- **Logika:** Tworzy rekord `pruning_jobs` w DB (status `pending`), pobiera kredyt, uruchamia `runPruningAnalysis()` w `after()`. Pipeline z progress tracking (0-100%):
+  1. Parse sitemap → lista URL-i (rekursywne, nested sitemaps, filtr mediow, cap 2000, SSRF walidacja) [0-5%]
+  2. Lightweight scrape title/H1/meta per URL (direct fetch, 8 concurrent, SSRF check, 5MB limit) [5-40%]
+  3. Gemini embeddings batch (100 per call, model configurable via `EMBEDDING_MODEL_NAME`) [40-55%]
+  4. KMeans clustering (KMeans++ init, Lloyd's algorithm, merge similar centroids >=0.95 BFS) → TF-IDF top keywords per cluster → main topic + side topics [55-65%]
+  5. Content Pruning: cosine distance od centroidu glownego klastra → percentyl → kandydaci [65-70%]
+  6. Kanibalizacja: pairwise cosine similarity (cap 1000 stron) → BFS connected components → grupy [70-80%]
+  7. Gemini expert analysis: pruning recs + cannibalization groups z content type/intent/recommendation [80-95%]
+  8. Zapis do DB [95-100%]
+- **Graceful degradation:** Gemini analysis fail → puste rekomendacje AI (wyniki algorytmiczne dostepne). Empty embeddings → zero vector fallback. Scrape fail per URL → pominiete.
+
+### GET /api/pruning/[id]
+
+Polling statusu joba pruning.
+
+- **Response:** `{ job: PruningJob }`
+- **Auth:** ownership check (userId === session.userId || admin)
+- **Logika:** Pobiera job z DB, zwraca aktualny stan z progress % i results (jesli completed).
+
+### Klasteryzacja slow kluczowych (`/klasteryzacja`)
+
+Lista jobow klasteryzacji + formularz nowego joba. Server Component (auth, SidebarWrapper, dane z DB). Client Component `ClusteringContent.tsx` (formularz: textarea/CSV upload keywords + konfiguracja: threshold slider 0.5-1.0, min cluster size 1-20, SERP results 1-10). Polling co 3s aktywnych jobow, auto-expand przy ukonczeniu. Wyniki: karty klastrow z expand/collapse (label + intent badge + totalVolume → pillar suggestion + tabela keywords z volume). Eksport CSV (BOM UTF-8). 1 kredyt per klasteryzacja. Link w Sidebar sekcja "Inne narzedzia".
+
+### Content Pruning & Cannibalization (`/pruning`)
+
+Lista jobow pruning + formularz nowego joba. Server Component (auth, SidebarWrapper, dane z DB). Client Component `PruningContent.tsx` (formularz: URL sitemapy + slidery config: pruningPercentile 50-99, cannibalizationThreshold 0.7-1.0). Polling co 3s z progress bar 0-100%, auto-expand przy ukonczeniu. Wyniki w 3 zakladkach: (1) Content Pruning tabela kandydatow z deviation score, (2) Kanibalizacja grupy expand/collapse z similarity score, (3) Analiza AI rekomendacje + tabele. Podsumowanie tematow TF-IDF. Eksport CSV. 1 kredyt per analiza. Link w Sidebar sekcja "Inne narzedzia".
+
+### Schema Gaps (`/schema`)
+
+Lista jobow schema gaps + formularz nowego joba. Server Component (auth, SidebarWrapper, dane z DB). Client Component `SchemaContent.tsx` (formularz: URL sitemapy). Polling co 3s z progress bar 0-100%, auto-expand przy ukonczeniu. Wyniki w 2 zakladkach: (1) Summary — sitewide stats (total pages, issues, success rate), najczestsze brakujace schemas (ranking), rozklad profili stron, (2) Pages — tabela URL-i z: badge profilu (article/product/faq/etc.), detected schemas, missing/incomplete schemas, filtr (all/issues/ok). Eksport CSV. Warning banner gdy success rate <50%. 1 kredyt per analiza. Link w Sidebar sekcja "Inne narzedzia" obok Klasteryzacji i Pruningu. i18n: klucze `schemaGaps.*` (osobne od `schema.*` uzywanych w SchemaAuditBlock raportu audytu).
+
+### POST /api/schema
+
+Tworzenie joba schema gaps.
+
+- **Request:** `{ name: string, sitemapUrl: string }`
+- **Response:** `{ jobId: string }`
+- **Auth:** wymagany login, 1 kredyt (admin bypass)
+- **maxDuration:** 600s
+- **Logika:** Tworzy rekord `schema_jobs` w DB (status `pending`), pobiera kredyt, uruchamia `runSchemaGapsAnalysis()` w `after()`. Pipeline:
+  1. Parse sitemap → lista URL-i (reuse `parseSitemap()`, cap 500, SSRF walidacja) [0-5%]
+  2. Direct HTTP fetch per URL (5 concurrent, 15s timeout, `redirect: 'error'`, `validateUrl()`) + cheerio JSON-LD extraction (obsluga `@graph` + bare JSON arrays) [5-85%]
+  3. `detectPageProfile()` per URL (heurystyka: existing schemas → URL patterns → content body patterns) + `detectRecommendedSchemas()` (reuse z `schema-catalog.ts`) [85-95%]
+  4. Agregacja site-wide summary + zapis do DB [95-100%]
+- **Koszt:** 0 Gemini calls, 0 Bright Data — direct HTTP fetch
+- **Error handling:** try-catch na sitemap parse, per-URL fetch, DB save. Success rate tracking + warning <50%
+
+### GET /api/schema/[id]
+
+Polling statusu joba schema gaps.
+
+- **Response:** `{ job: SchemaJob }`
+- **Auth:** ownership check (userId === session.userId || admin)
+- **Logika:** Pobiera job z DB, zwraca aktualny stan z progress % i results (jesli completed).
+
 ## Wzorce auth w Server Actions i API Routes
 
 ### Server Actions — `getCurrentUser()` poza try-catch
@@ -254,10 +368,13 @@ Brak globalnego `setGeminiApiKey()` — eliminuje race conditions w concurrent b
 ## Strony publiczne (bez logowania)
 
 ### Login (`/login`)
-Formularz email + checkbox zgody na Politykę Prywatności. Przycisk "Wyślij kod" zablokowany dopóki checkbox niezaznaczony. Link do polityki otwiera nową kartę.
+Formularz email + checkbox zgody na Regulamin i Politykę Prywatności + opcjonalny checkbox zgody marketingowej ("Chcę otrzymywać informacje o aktualizacjach narzędzia - bez spamu" — nie blokuje logowania). Przycisk "Wyślij kod" zablokowany dopóki checkbox RODO niezaznaczony. Linki do `/regulamin` i `/polityka-prywatnosci` otwieraja nowe karty. Zgoda marketingowa: OTP flow → hidden field → query param `mc` → verify page → `createUser(mc)`. Google OAuth → query param `mc` → `oauth_mc` cookie → callback → `createUser(mc)`. Istniejący user + zaznaczony checkbox → zgoda aktualizowana (nigdy auto-wycofywana).
 
 ### Weryfikacja kodu (`/login/verify`)
 Formularz 6-cyfrowego kodu OTP.
 
 ### Polityka Prywatności (`/polityka-prywatnosci`)
-Server Component, 10 sekcji: administrator (Seowp Wojciech Władziński, Gdańsk, NIP), zbierane dane (tylko email), cele przetwarzania, podstawa prawna (RODO art. 6.1.a), cookies + GTM + GA4, usługi zewnętrzne (Resend, Neon, Vercel, Gemini API, Bright Data), okres przechowywania, prawa użytkownika, bezpieczeństwo, kontakt. Middleware: dodana do PUBLIC_PATHS.
+Server Component, 10 sekcji: administrator (Seowp Wojciech Władziński, Gdańsk, NIP), zbierane dane (tylko email), cele przetwarzania, podstawa prawna (RODO art. 6.1.a + osobna zgoda art. 6.1.a dla komunikacji marketingowej), cookies + GTM + GA4, usługi zewnętrzne (Resend, Neon, Vercel, Gemini API, Bright Data), okres przechowywania, prawa użytkownika, bezpieczeństwo, kontakt. Middleware: dodana do PUBLIC_PATHS. Wersja PL + EN (warunkowy render) + standalone EN (`/privacy-policy`).
+
+### Regulamin (`/regulamin`)
+Server Component, 11 sekcji: postanowienia ogolne, definicje, rejestracja, zakres uslugi, platnosci (Lemon Squeezy jako Merchant of Record), odpowiedzialnosc, prawa wlasnosci intelektualnej, ograniczenia, usuwanie konta, zmiany regulaminu, kontakt. Middleware: dodana do PUBLIC_PATHS. Administrator: Seowp Wojciech Władziński, Gdańsk.
