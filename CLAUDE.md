@@ -257,4 +257,4 @@ const APP_URL = 'https://app.citationone.com';
 - **Navbar:** hamburger + panel, auto-close, full-width CTA, touch targets 44px+
 - **Gridy responsive:** dims 3→2→1, ba 2→1, feat 2→1, problem/forwho/howitworks 3→1
 - **Solution card:** 80%→100% na mobile, score font 40→32px, **radar ukryty na mobile** (`.sol-radar-wrap { display: none }` na <=768px — widoczny w Hero, nie powtarza się)
-- **TechLogos:** Gemini, Bright Data, Jina AI, Next.js
+- **TechLogos:** Gemini, Bright Data, Jina AI, DataForSEO
