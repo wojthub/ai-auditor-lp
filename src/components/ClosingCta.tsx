@@ -63,7 +63,7 @@ export default function ClosingCta() {
           </motion.a>
 
           <p style={{ fontSize: 13, color: '#a4acb9', marginTop: 16 }}>
-            1,50 EUR / audyt
+            2 EUR / audyt
           </p>
           <p style={{ fontSize: 13, color: '#a4acb9', marginTop: 6, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0b7983" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
