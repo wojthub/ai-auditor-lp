@@ -36,8 +36,7 @@ export default function ForWhoEN() {
   return (
     <section id="who-is-it-for" style={{
       background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
-      padding: '90px 0', clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0 100%)',
-      margin: '-28px 0', position: 'relative', overflow: 'hidden', zIndex: 1,
+      padding: '90px 0', position: 'relative', overflow: 'hidden', zIndex: 1,
     }}>
       <span aria-hidden style={{ position: 'absolute', top: 36, left: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201C'}</span>
       <span aria-hidden style={{ position: 'absolute', bottom: 36, right: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201D'}</span>

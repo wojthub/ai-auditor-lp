@@ -4,25 +4,39 @@ import { motion } from 'framer-motion';
 
 const cards = [
   {
-    num: '01',
-    statement: 'Ranking in Google does not mean visibility in AI',
-    body: 'ChatGPT, Perplexity and Google AI Overview select content based on their own criteria - independent of SERP position, PageRank or backlink count.',
+    icon: (
+      <svg width="42" height="42" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0} strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <path d="M21 21l-4.35-4.35" />
+      </svg>
+    ),
+    statement: 'Ranking in Google is only half the battle today',
+    body: 'ChatGPT, Perplexity and Google AI Overview select sources by their own criteria - often completely independent of your SERP position or how many backlinks your page has.',
   },
   {
-    num: '02',
-    statement: "You don't know what AI evaluates in your content",
-    body: 'Language models cite articles based on their own criteria - answer structure, information completeness, data quality. Traditional SEO tools cannot show this.',
+    icon: (
+      <svg width="42" height="42" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
+    statement: "Traditional SEO tools can't see what AI evaluates",
+    body: "Traditional SEO tools won't tell you whether your page is readable for language models. AI evaluates answer structure, information density and concrete data - not just keyword saturation. If you're not measuring these parameters, you're flying blind.",
   },
   {
-    num: '03',
-    statement: 'Manual analysis takes hours of expert work',
-    body: '10 quality dimensions, benchmark of 10 SERP competitors, AI Overview analysis - gathering all this manually is a full day of expert work.',
+    icon: (
+      <svg width="42" height="42" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0} strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+    statement: 'Manual analysis takes a full day of tedious work',
+    body: 'Manually benchmarking your page against the TOP 10 competitors takes an expert a full working day. CitationOne automates the process, delivering a precise benchmark and ready-made recommendations while you make coffee.',
   },
 ];
 
 const closing = {
-  statement: "Without data you don't know where to start",
-  body: "Optimization without diagnosis is shooting in the dark. You don't know which dimension is lowering your Content Quality Score (CQS) or what change to make first.",
+  statement: 'Acting without diagnosis is burning your budget',
+  body: 'CitationOne precisely identifies which dimension is lowering your Content Quality Score (CQS). Find out exactly what changes to make on your page to become visible to AI Search algorithms.',
 };
 
 export default function ProblemEN() {
@@ -30,8 +44,6 @@ export default function ProblemEN() {
     <section style={{
       background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
       padding: '90px 0',
-      clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0 100%)',
-      margin: '-28px 0',
       position: 'relative',
       overflow: 'hidden',
       zIndex: 1,
@@ -67,9 +79,14 @@ export default function ProblemEN() {
               transition={{ duration: 0.5, delay: i * 0.09 }}
               style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '32px 28px' }}
             >
-              <span style={{ display: 'block', fontSize: 48, fontWeight: 700, color: '#0b7983', letterSpacing: '-0.03em', marginBottom: 12, lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>
-                {p.num}
-              </span>
+              <div style={{
+                width: 88, height: 88, borderRadius: 16,
+                background: '#0b7983', border: '1px solid rgba(255,255,255,0.2)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                marginBottom: 24, color: '#ffffff',
+              }}>
+                {p.icon}
+              </div>
               <h3 style={{ fontSize: 17, fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.02em', lineHeight: 1.35, marginBottom: 12 }}>
                 {p.statement}
               </h3>

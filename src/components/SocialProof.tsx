@@ -21,7 +21,7 @@ const TESTIMONIALS = [
     initials: 'MK',
   },
   {
-    quote: 'Dostawałam to samo co robiłam ręcznie przez kilka godzin - w 15 minut. CQS, benchmark, rekomendacje Before/After. Teraz skupiam się na strategii, nie na zbieraniu liczb.',
+    quote: 'Dostawałam to samo co robiłam ręcznie przez kilka godzin - w 15 minut. CQS, benchmark, rekomendacje Przed i Po. Teraz skupiam się na strategii, nie na zbieraniu liczb.',
     name: 'Anna W.',
     role: 'Senior SEO Specialist · agencja e-commerce',
     initials: 'AW',

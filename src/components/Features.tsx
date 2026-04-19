@@ -24,16 +24,16 @@ function fadeUp(delay = 0) {
 
 /* ─── 1. 10 wymiarów ───────────────────────────────── */
 const DIMS = [
-  { name: 'Zgodność z intencją', score: 8.1, desc: 'Dopasowanie do intencji wyszukiwania' },
-  { name: 'Gęstość informacji', score: 7.4, desc: 'Gęstość i kompletność informacji' },
-  { name: 'BLUF', score: 9.0, desc: 'Najważniejsza odpowiedź na początku' },
-  { name: 'Graf wiedzy', score: 6.8, desc: 'Encje, atrybuty i wartości' },
-  { name: 'Chunki', score: 7.9, desc: 'Jakość podziału na fragmenty' },
-  { name: 'Koszt ekstrakcji', score: 3.8, desc: 'Koszt pobrania informacji przez AI' },
-  { name: 'TF-IDF', score: 7.2, desc: 'Słowa kluczowe i kontekst semantyczny' },
-  { name: 'Pokrycie AIO', score: 8.3, desc: 'Pokrycie sub-zapytań i AI Overview' },
-  { name: 'Wysiłek red.', score: 5.1, desc: 'Wysiłek redakcyjny: długość, obrazki, wideo, schema' },
-  { name: 'E-E-A-T', score: 6.5, desc: 'Doświadczenie, ekspertyza, autorytet' },
+  { name: 'Zgodność z intencją', score: 8.1, desc: 'Czy treść odpowiada dokładnie na to, czego szuka użytkownik. Ocenia dopasowanie do centralnego zapytania wyszukiwania.' },
+  { name: 'Gęstość informacji', score: 7.4, desc: 'Stosunek konkretnych faktów i liczb do „puchu". Im więcej weryfikowalnych twierdzeń, tym wyższy wynik.' },
+  { name: 'BLUF', score: 9.0, desc: 'Odpowiedź na początku - czy kluczowa informacja pojawia się w pierwszych zdaniach każdej sekcji. Systemy RAG preferują treści z odpowiedzią na starcie.' },
+  { name: 'Graf wiedzy', score: 6.8, desc: 'Kompletność struktury encja-atrybut-wartość (EAV). Mierzy, jak dokładnie artykuł opisuje kluczowe obiekty i ich cechy.' },
+  { name: 'Chunki', score: 7.9, desc: 'Autonomiczność sekcji - każdy rozdział powinien być zrozumiały bez kontekstu reszty artykułu (optimum: 200–500 słów).' },
+  { name: 'Koszt ekstrakcji', score: 3.8, desc: 'Łatwość pobrania informacji przez AI. Ocenia strukturę nagłówków, tabele, listy i pogrubienia ułatwiające AI pobieranie faktów.' },
+  { name: 'TF-IDF', score: 7.2, desc: 'Nasycenie terminologią branżową. Porównuje słownictwo artykułu z top 10 SERP - im więcej specjalistycznych fraz, tym wyższy wynik.' },
+  { name: 'Pokrycie AIO', score: 8.3, desc: 'Sprawdza, czy artykuł odpowiada na wszystkie pod-pytania generowane przez AI wokół głównego tematu.' },
+  { name: 'Wysiłek red.', score: 5.1, desc: 'Ocena struktury i formatowania treści: długość, obrazki, wideo, listy, tabele, hierarchia nagłówków, wyróżnienia. Porównuje z konkurencją w SERP.' },
+  { name: 'E-E-A-T', score: 6.5, desc: 'Role semantyczne - perspektywa narracyjna. Mierzy, czy centralna encja (produkt/usługa) pełni rolę aktywnego podmiotu w zdaniach.' },
 ];
 
 function DimensionsVisual() {
@@ -276,7 +276,7 @@ const REPORT_ITEMS = [
   'AI Citability Score (0–10)',
   'Wykres radarowy 10 wymiarów',
   'Benchmark top 10 SERP - tabela porównawcza',
-  'Rekomendacje Before/After z priorytetami',
+  'Rekomendacje Przed i Po z priorytetami',
   'Graf wiedzy i tabela encji EAV',
   'AI Overview Coverage i analiza sub-zapytań',
   'Podsumowanie wykonawcze gotowe do wysyłki',
@@ -327,12 +327,12 @@ export default function Features() {
       <section style={{ background: '#f8fafb', padding: '58px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 52 }}>
-            <SectionLabel>10 wymiarów analizy</SectionLabel>
+            <SectionLabel>Narzędzie, które mierzy to, co AI naprawdę ocenia</SectionLabel>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
-              10 wymiarów - każdy mierzony osobno
+              Uruchom audyt 10 wymiarów AI
             </h2>
-            <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, margin: '0 auto', lineHeight: 1.65 }}>
-              10 kryteriów cytowania przez modele językowe - każde z osobnym wynikiem 0-10. Dopiero ich kombinacja daje pełny obraz: które treści AI chętnie cytuje, a które ignoruje i dlaczego.
+            <p style={{ fontSize: 16, color: '#666d80', maxWidth: 640, margin: '0 auto', lineHeight: 1.65 }}>
+              CitationOne ocenia jakość treści pod kątem AI Search, wykonując 10 równoległych analiz: od intencji i gęstości informacji, przez graf wiedzy, BLUF i chunki, aż po koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AIO oraz wysiłek redakcyjny. Dzięki temu wiesz dokładnie, który element wymaga poprawy, by zwiększyć AI Citability Score swojej podstrony.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>
@@ -348,13 +348,13 @@ export default function Features() {
             <motion.div {...fadeUp()}>
               <SectionLabel>Benchmark SERP</SectionLabel>
               <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
-                Wiesz dokładnie, gdzie odstajesz od konkurencji
+                Zobacz, czy i dlaczego odstajesz od liderów
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 24 }}>
-                Narzędzie automatycznie pobiera i analizuje 10 najwyżej rankujących artykułów dla danego słowa kluczowego. Wynik Twojego contentu trafia na tle realnej konkurencji - widać lukę i punkt wyjścia do optymalizacji.
+                CitationOne automatycznie pobiera i analizuje 10 najlepiej rankujących podstron dla wybranego słowa kluczowego. Zestawiamy Twoją treść z realną konkurencją, aby precyzyjnie wskazać lukę optymalizacyjną.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {['CQS per artykuł - porównanie tabelaryczne', 'Identyfikacja liderów i słabych punktów SERP', 'Format, długość i struktura konkurentów'].map(item => (
+                {['Porównanie tabelaryczne CQS dla każdej analizowanej podstrony.', 'Identyfikacja liderów oraz słabych punktów w aktualnym SERP', 'Analiza struktury i formatu najlepiej ocenianych treści.'].map(item => (
                   <li key={item} style={{ display: 'flex', gap: 10, fontSize: 14, color: '#36394a' }}>
                     <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>→</span>{item}
                   </li>
@@ -368,16 +368,16 @@ export default function Features() {
         </div>
       </section>
 
-      {/* 3 - Before/After */}
+      {/* 3 - Przed i Po */}
       <section style={{ background: '#f8fafb', padding: '58px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ marginBottom: 44 }}>
             <SectionLabel>Rekomendacje</SectionLabel>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
-              Nie "co poprawić" - tylko "jak poprawić"
+              Konkretne rekomendacje z mierzalnym wpływem na CQS
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, lineHeight: 1.65 }}>
-              Każda rekomendacja zawiera fragment z oryginalnego artykułu, gotową poprawkę i szacowany przyrost CQS. Zero interpretacji - wiesz co wkleić.
+              Zapomnij o ogólnych wskazówkach. CitationOne wskazuje precyzyjne fragmenty treści wymagające optymalizacji i dostarcza gotowe wersje „Przed i Po". Widzisz szacowany wzrost wyniku dla każdej zmiany, dzięki czemu wdrażasz tylko te poprawki, które najskuteczniej budują Twój autorytet w AI Search.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>
@@ -396,7 +396,7 @@ export default function Features() {
                 Raport gotowy do wysłania klientowi
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 24 }}>
-                PDF zaprojektowany z myślą o prezentacji klientowi - bez dodatkowej edycji. Format Markdown przydatny do dokumentacji projektowej lub dalszego przetwarzania.
+                CitationOne dostarcza dane w formie gotowej do natychmiastowego wykorzystania. Pobierz PDF, aby dostarczyć zespołowi lub klientowi profesjonalną analizę jakości podstrony. Wybierz Markdown, by wygodnie zarządzać optymalizacją treści wewnątrz zespołu.
               </p>
               <div style={{ display: 'flex', gap: 12 }}>
                 {[

@@ -37,8 +37,8 @@ export default function Solution() {
             lineHeight: 1.25,
             marginBottom: 20,
           }}>
-            Narzędzie, które mierzy to,{' '}
-            <span style={{ color: ACCENT }}>co AI naprawdę ocenia</span>
+            Sprawdź, dlaczego{' '}
+            <span style={{ color: ACCENT }}>AI Cię pomija</span>
           </h2>
           <p style={{
             fontSize: 16,
@@ -46,9 +46,7 @@ export default function Solution() {
             lineHeight: 1.7,
             marginBottom: 32,
           }}>
-            CitationOne analizuje 10 wymiarów jakości treści i porównuje
-            Twój artykuł z top&nbsp;10 SERP. Otrzymujesz spriorytetyzowane rekomendacje
-            Before/After – całość jest gotowa w mniej niż 3 minuty.
+            CitationOne zestawia Twoją podstronę z najlepiej rankującymi treściami w 10 kluczowych wymiarach AI Citability – tych, których tradycyjne narzędzia SEO nie dostrzegają. Dowiedz się dokładnie, gdzie wygrywa konkurencja i odbierz gotowy plan naprawczy „Przed i Po", który zapewni Twoim treściom priorytet w odpowiedziach AI.
           </p>
 
           <motion.a
@@ -69,7 +67,7 @@ export default function Solution() {
               letterSpacing: '-0.01em',
             }}
           >
-            Zrób audyt
+            Wygeneruj raport w 3 minuty
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>

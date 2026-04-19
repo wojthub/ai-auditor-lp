@@ -109,7 +109,7 @@ function BenchmarkVisual() {
   );
 }
 
-/* ── Visual: Before/After ─────────────────────────────────────────────── */
+/* ── Visual: Przed i Po ─────────────────────────────────────────────── */
 function BeforeAfterVisual() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -240,7 +240,7 @@ const REPORT_ITEMS = [
   'AI Citability Score (0–10)',
   'Wykres radarowy 10 wymiarów',
   'Benchmark top 10 SERP - tabela porównawcza',
-  'Rekomendacje Before/After z priorytetami',
+  'Rekomendacje Przed i Po z priorytetami',
   'Graf wiedzy i tabela encji EAV',
   'AI Overview Coverage i analiza sub-zapytań',
   'Podsumowanie wykonawcze gotowe do wysyłki',
@@ -371,7 +371,7 @@ export default function PageContent() {
                 { text: 'Pełny raport w ~3 minuty' },
                 { text: '10 wymiarów + E-E-A-T' },
                 { text: 'Benchmark top 10 SERP' },
-                { text: 'Before/After z gotowymi poprawkami' },
+                { text: 'Przed i Po z gotowymi poprawkami' },
               ].map((item) => (
                 <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', background: '#f8fafb', border: '1px solid #dfe1e7', borderRadius: 8, fontSize: 13, color: '#36394a' }}>
                   <div style={{ width: 6, height: 6, borderRadius: '50%', background: ACCENT, flexShrink: 0 }} />
@@ -387,8 +387,6 @@ export default function PageContent() {
       <section style={{
         background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
         padding: '120px 0',
-        clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0 100%)',
-        margin: '-28px 0',
         position: 'relative',
         overflow: 'hidden',
         zIndex: 1,
@@ -415,7 +413,7 @@ export default function PageContent() {
               },
               {
                 n: '3', title: 'Odbierasz gotowy raport',
-                body: 'Raport zawiera priorytetyzowane rekomendacje Before/After - dosłowny cytat z artykułu i gotową wersję po poprawce z szacowanym wpływem na wynik. Całość eksportujesz jednym kliknięciem: PDF do wysłania klientowi, Markdown do dalszej pracy.',
+                body: 'Raport zawiera priorytetyzowane rekomendacje Przed i Po - dosłowny cytat z artykułu i gotową wersję po poprawce z szacowanym wpływem na wynik. Całość eksportujesz jednym kliknięciem: PDF do wysłania klientowi, Markdown do dalszej pracy.',
                 icon: <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0}><path strokeLinecap="round" strokeLinejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12" /></svg>,
               },
             ].map((step, i) => (
@@ -466,8 +464,6 @@ export default function PageContent() {
       <section style={{
         background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
         padding: '120px 0',
-        clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0 100%)',
-        margin: '-28px 0',
         position: 'relative',
         overflow: 'hidden',
         zIndex: 1,
@@ -515,13 +511,13 @@ export default function PageContent() {
             <motion.div {...fadeUp()}>
               <SectionLabel>Benchmark SERP</SectionLabel>
               <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
-                Widzisz gdzie dokładnie odstajesz od konkurencji
+                Zobacz, czy i dlaczego odstajesz od liderów
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>
-                Narzędzie automatycznie pobiera i ocenia 10 artykułów, które teraz rankują na Twoje słowo kluczowe. Widzisz CQS każdego konkurenta i dokładną lukę do zamknięcia - bez ręcznego zbierania danych.
+                CitationOne automatycznie pobiera i analizuje 10 najlepiej rankujących podstron dla wybranego słowa kluczowego. Zestawiamy Twoją treść z realną konkurencją, aby precyzyjnie wskazać lukę optymalizacyjną.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {['CQS per artykuł - porównanie tabelaryczne', 'Identyfikacja liderów i słabych punktów SERP', 'Formaty treści konkurencji: tabele, FAQ, listy'].map(item => (
+                {['Porównanie tabelaryczne CQS dla każdej analizowanej podstrony.', 'Identyfikacja liderów oraz słabych punktów w aktualnym SERP', 'Analiza struktury i formatu najlepiej ocenianych treści.'].map(item => (
                   <li key={item} style={{ display: 'flex', gap: 10, fontSize: 14, color: '#36394a' }}>
                     <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>-</span>{item}
                   </li>
@@ -537,12 +533,12 @@ export default function PageContent() {
       <section style={{ background: '#f8fafb', padding: '80px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ marginBottom: 40 }}>
-            <SectionLabel>Rekomendacje Before/After</SectionLabel>
+            <SectionLabel>Rekomendacje Przed i Po</SectionLabel>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
-              Nie &ldquo;co poprawić&rdquo; - tylko &ldquo;jak poprawić&rdquo;
+              Konkretne rekomendacje z mierzalnym wpływem na CQS
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 600, lineHeight: 1.65, margin: '0 0 4px' }}>
-              Każda rekomendacja zawiera dosłowny cytat z artykułu i gotową wersję po poprawce. Zero interpretacji: wklejasz, nie piszesz od nowa. Każda z priorytetem i szacowanym wpływem na CQS.
+              Zapomnij o ogólnych wskazówkach. CitationOne wskazuje precyzyjne fragmenty treści wymagające optymalizacji i dostarcza gotowe wersje „Przed i Po". Widzisz szacowany wzrost wyniku dla każdej zmiany, dzięki czemu wdrażasz tylko te poprawki, które najskuteczniej budują Twój autorytet w AI Search.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}><BeforeAfterVisual /></motion.div>
@@ -610,7 +606,7 @@ export default function PageContent() {
                 Raport gotowy do wysłania klientowi
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>
-                PDF zaprojektowany do prezentacji - wszystkie sekcje raportu w czytelnym formacie bez dodatkowej edycji. Markdown do dokumentacji projektowej lub automatycznego przetwarzania.
+                CitationOne dostarcza dane w formie gotowej do natychmiastowego wykorzystania. Pobierz PDF, aby dostarczyć zespołowi lub klientowi profesjonalną analizę jakości podstrony. Wybierz Markdown, by wygodnie zarządzać optymalizacją treści wewnątrz zespołu.
               </p>
               <div style={{ display: 'flex', gap: 12 }}>
                 {[

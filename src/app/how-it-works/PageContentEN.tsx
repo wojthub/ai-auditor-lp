@@ -252,7 +252,7 @@ export default function PageContentEN() {
       </section>
 
       {/* 3 STEPS */}
-      <section style={{ background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)', padding: '120px 0', clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0 100%)', margin: '-28px 0', position: 'relative', overflow: 'hidden', zIndex: 1 }}>
+      <section style={{ background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)', padding: '120px 0', position: 'relative', overflow: 'hidden', zIndex: 1 }}>
         <span aria-hidden style={{ position: 'absolute', top: 36, left: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201C'}</span>
         <span aria-hidden style={{ position: 'absolute', bottom: 36, right: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201D'}</span>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 2 }}>
@@ -296,7 +296,7 @@ export default function PageContentEN() {
       </section>
 
       {/* 10 DIMENSIONS */}
-      <section style={{ background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)', padding: '120px 0', clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0 100%)', margin: '-28px 0', position: 'relative', overflow: 'hidden', zIndex: 1 }}>
+      <section style={{ background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)', padding: '120px 0', position: 'relative', overflow: 'hidden', zIndex: 1 }}>
         <span aria-hidden style={{ position: 'absolute', top: 36, left: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201C'}</span>
         <span aria-hidden style={{ position: 'absolute', bottom: 36, right: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201D'}</span>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 2 }}>

@@ -10,7 +10,7 @@ const included = [
   'AI Citability Score (0–10)',
   'Analiza 10 wymiarów jakości',
   'Benchmark top 10 SERP',
-  'Rekomendacje Before/After z priorytetami',
+  'Rekomendacje Przed i Po z priorytetami',
   'AI Overview Coverage',
   'Graf wiedzy i encje (EAV)',
   'Eksport PDF i Markdown',

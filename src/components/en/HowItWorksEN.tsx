@@ -19,7 +19,7 @@ const steps = [
   {
     number: '2',
     title: 'AI analyzes content',
-    description: '10 parallel AI calls: intent alignment, info density, knowledge graph, BLUF, chunks, cost of retrieval, TF-IDF, semantic roles, AI Overview coverage, editorial effort + E-E-A-T. Full mode: top 10 SERP benchmark.',
+    description: 'CitationOne runs 10 parallel analyses and benchmarks your results against the TOP 10 SERP competitors. It identifies gaps that traditional SEO tools cannot see.',
     icon: (
       <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423L16.5 15.75l.394 1.183a2.25 2.25 0 001.423 1.423L19.5 18.75l-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
@@ -29,7 +29,7 @@ const steps = [
   {
     number: '3',
     title: 'Get your report',
-    description: 'Report with Before/After recommendations - exact quote from your article and a ready-made fix with estimated impact on score. Export to PDF or Markdown in one click.',
+    description: 'You get a report with precise recommendations you can immediately implement on your page. Download a PDF or Markdown file in one click.',
     icon: (
       <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12" />
@@ -53,8 +53,7 @@ export default function HowItWorksEN() {
   return (
     <section id="how-it-works" style={{
       background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
-      padding: '90px 0', clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0 100%)',
-      margin: '-28px 0', position: 'relative', overflow: 'hidden', zIndex: 1,
+      padding: '90px 0', position: 'relative', overflow: 'hidden', zIndex: 1,
     }}>
       <span aria-hidden style={{ position: 'absolute', top: 36, left: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201C'}</span>
       <span aria-hidden style={{ position: 'absolute', bottom: 36, right: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201D'}</span>

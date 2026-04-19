@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 const audiences = [
   {
     title: 'Specjalista SEO',
-    highlights: ['10 wymiarów cytowania z osobnym wynikiem 0-10', 'Benchmark top 10 SERP - widzisz lukę do lidera', 'Before/After z szacowanym wpływem na CQS'],
+    highlights: ['10 wymiarów cytowania z osobnym wynikiem 0-10', 'Benchmark top 10 SERP - widzisz lukę do lidera', 'Przed i Po z szacowanym wpływem na CQS'],
     icon: (
       // magnifying glass with lines
       <svg width="42" height="42" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0} strokeLinecap="round" strokeLinejoin="round">
@@ -47,8 +47,6 @@ export default function ForWho() {
     <section id="dla-kogo" style={{
       background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
       padding: '90px 0',
-      clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0 100%)',
-      margin: '-28px 0',
       position: 'relative',
       overflow: 'hidden',
       zIndex: 1,

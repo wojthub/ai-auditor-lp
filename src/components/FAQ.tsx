@@ -17,7 +17,7 @@ const faqs = [
   {
     question: 'Czy raport nadaje się do bezpośredniego wysłania klientowi?',
     answer:
-      'Tak. Raport PDF jest zaprojektowany tak, żeby można go wysłać klientowi bez edycji. Zawiera Content Quality Score, wykres radarowy 10 wymiarów, tabelę priorytetów z rekomendacjami Before/After i benchmark SERP - wszystko w czytelnym, profesjonalnym formacie.',
+      'Tak. Raport PDF jest zaprojektowany tak, żeby można go wysłać klientowi bez edycji. Zawiera Content Quality Score, wykres radarowy 10 wymiarów, tabelę priorytetów z rekomendacjami Przed i Po i benchmark SERP - wszystko w czytelnym, profesjonalnym formacie.',
   },
   {
     question: 'Co to jest Content Quality Score i jak jest liczony?',

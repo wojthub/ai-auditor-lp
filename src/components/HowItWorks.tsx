@@ -23,7 +23,7 @@ const steps = [
     number: '2',
     title: 'AI analizuje treść',
     description:
-      '10 równoległych wywołań AI: zgodność z intencją, gęstość informacji, graf wiedzy, BLUF, chunki, koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AI Overview, wysiłek redakcyjny + E-E-A-T. W trybie Full: benchmark top 10 SERP.',
+      'CitationOne przeprowadza 10 równoległych analiz i zestawia Twoje wyniki z benchmarkiem TOP 10 konkurentów z SERP. Wskazuje luki, których nie widzą klasyczne narzędzia SEO.',
     accent: '#0b7983',
     icon: (
       // sparkles - AI magic
@@ -36,7 +36,7 @@ const steps = [
     number: '3',
     title: 'Odbierasz gotowy raport',
     description:
-      'Raport z rekomendacjami Before/After - dosłowny cytat z artykułu i gotowa poprawka z szacowanym wpływem na wynik. Eksport PDF lub Markdown jednym kliknięciem.',
+      'Otrzymasz raport z precyzyjnymi rekomendacjami, które możesz od razu wdrożyć na podstronie. Pobierasz jednym kliknięciem plik PDF lub format markdown.',
     accent: '#0b7983',
     icon: (
       // document-check - gotowy raport
@@ -63,8 +63,6 @@ export default function HowItWorks() {
     <section id="jak-dziala" style={{
       background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
       padding: '90px 0',
-      clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0 100%)',
-      margin: '-28px 0',
       position: 'relative',
       overflow: 'hidden',
       zIndex: 1,
