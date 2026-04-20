@@ -72,7 +72,7 @@ export default function ProblemEN() {
         <div className="problem-grid">
           {cards.map((p, i) => (
             <motion.div
-              key={p.num}
+              key={p.statement}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
