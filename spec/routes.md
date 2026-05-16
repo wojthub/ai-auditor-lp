@@ -6,9 +6,9 @@
 
 ### Error Pages
 
-- **`error.tsx`** — Route-level error boundary (Client Component). Łapie błędy renderowania w stronach (nie w layoutach). Wyświetla komunikat "Coś poszło nie tak" z przyciskiem "Spróbuj ponownie" (`reset()`). Używa Tailwind classes (CSS dostępne).
-- **`global-error.tsx`** — Root layout error handler (Client Component). Fallback gdy `layout.tsx` lub `error.tsx` rzuci błąd. Wymaga własnych `<html>/<body>` tagów i **inline styles** (brak dostępu do CSS/Tailwind). Kolory hardcoded (#F8F9FA bg, #4F46E5 accent).
-- **`not-found.tsx`** — Custom 404 page. Logo AI + "Strona nie została znaleziona" + link `<Link href="/">` (next/link). Używa Tailwind classes.
+- **`error.tsx`** - Route-level error boundary (Client Component). Łapie błędy renderowania w stronach (nie w layoutach). Wyświetla komunikat "Coś poszło nie tak" z przyciskiem "Spróbuj ponownie" (`reset()`). Używa Tailwind classes (CSS dostępne).
+- **`global-error.tsx`** - Root layout error handler (Client Component). Fallback gdy `layout.tsx` lub `error.tsx` rzuci błąd. Wymaga własnych `<html>/<body>` tagów i **inline styles** (brak dostępu do CSS/Tailwind). Kolory hardcoded (#F8F9FA bg, #4F46E5 accent).
+- **`not-found.tsx`** - Custom 404 page. Logo AI + "Strona nie została znaleziona" + link `<Link href="/">` (next/link). Używa Tailwind classes.
 
 ### Dashboard (`/`)
 
@@ -41,11 +41,11 @@ Server Component (`page.tsx`) laduje audyty i opakowuje w `SidebarWrapper`. Obsl
 - Auto-inferowanie CSI (POST /api/csi) z kompaktowym loaderem (pasek ze spinnerem + tekst)
 - 4 edytowalne pola: CE, SC, CSI, Predicate (etykiety po polsku)
 - **Walidacja SERP Consensus** (tryb Full + keyword): po inferowaniu CSI automatyczny fetch `POST /api/serp-consensus` z tytulem + snippetem tresci:
-  - Tabela porownawcza 7 wierszy (CE, SC, CSI, Predicate, Typ, Format, Perspektywa) z alignment dots (zielony/zolty/czerwony) — kolumny: Źródło | Konsensus SERP
-  - Panel "Walidacja SERP": badge zgodnosci (Wysoka/Czesciowa/Niska — obliczana server-side ze sredniej 7 pol), explanation, tematy SERP (tagi), sygnaly PAA, kluczowe dane
+  - Tabela porownawcza 7 wierszy (CE, SC, CSI, Predicate, Typ, Format, Perspektywa) z alignment dots (zielony/zolty/czerwony) - kolumny: Źródło | Konsensus SERP
+  - Panel "Walidacja SERP": badge zgodnosci (Wysoka/Czesciowa/Niska - obliczana server-side ze sredniej 7 pol), explanation, tematy SERP (tagi), sygnaly PAA, kluczowe dane
   - Przycisk "Zwaliduj ponownie" po edycji pol CSI
   - Loading skeleton podczas fetch, error z przyciskiem "Ponów"
-  - **Blokada przycisku "Potwierdź" przy bledzie SERP** (np. "Brak wyników organicznych") — user musi kliknac "Ponów"
+  - **Blokada przycisku "Potwierdź" przy bledzie SERP** (np. "Brak wyników organicznych") - user musi kliknac "Ponów"
   - Nie blokuje uzytkownika -- moze potwierdzic CSI zanim consensus sie zaladuje (ale blokuje gdy blad)
   - W trybie content-only lub bez keyword: panel nie jest renderowany
   - **Auto-collapse:** po zaladowaniu konsensusu SERP pola CSI i panel Walidacji SERP automatycznie zwijane (klikalne naglowki z chevronem do rozwijania)
@@ -59,7 +59,7 @@ Server Component (`page.tsx`) laduje audyty i opakowuje w `SidebarWrapper`. Obsl
 - Wszystkie nieukończone wymiary oznaczone jako "running" podczas fazy analyzing
 - Pasek postepu per kazdy etap (pending=0%, running=animacja, completed=100%, error=czerwony)
 - **Popup cache JSON:** klikniecie na ukonczony etap otwiera modal z surowym cache (GET /api/audit/[id]/cache/[stage])
-- **Auto-collapse wymiarów:** gdy wszystkie wymiary gotowe i raport sie generuje — lista auto-zwija sie (naglowek "Analiza wymiarów (10/10) ✓" z chevronem, klik rozwija/zwija)
+- **Auto-collapse wymiarów:** gdy wszystkie wymiary gotowe i raport sie generuje - lista auto-zwija sie (naglowek "Analiza wymiarów (10/10) ✓" z chevronem, klik rozwija/zwija)
 - Etap "Generowanie raportu" widoczny po zakonczeniu wszystkich wymiarow (pod zwinieta lista)
 - Przycisk **"Przerwij"** -- anuluje audyt na dowolnym etapie (POST /api/audit/[id]/cancel)
 - Polling GET /api/audit/[id] co 3s
@@ -74,16 +74,16 @@ Server Component (`page.tsx`) laduje audyty i opakowuje w `SidebarWrapper`. Obsl
 
 ### Raport audytu (`/audyt/[id]`)
 
-Layout: sidebar + content, 5 zakladek (Tabs): Podsumowanie | Wymiary | Rekomendacje | Raport builder | Eksport. TopBar z tytulem audytu + opcjonalny `subtitle` (ReactNode) z metadanymi keyword (badge jezyka, keyword, volume, KD) — budowany w `audyt/[id]/page.tsx` (Server Component). Przycisk **"↻ Odśwież audyt"** w TopBar (widoczny tylko dla zakonczonych audytow) -- nawiguje do `/nowy-audyt?from=AUDIT_ID` z pre-wypelnionymi danymi (URL, keyword, tryb, CSI). Tresc i consensus NIE sa przenoszone -- musza byc re-crawlowane/re-walidowane.
+Layout: sidebar + content, 5 zakladek (Tabs): Podsumowanie | Wymiary | Rekomendacje | Raport builder | Eksport. TopBar z tytulem audytu + opcjonalny `subtitle` (ReactNode) z metadanymi keyword (badge jezyka, keyword, volume, KD) - budowany w `audyt/[id]/page.tsx` (Server Component). Przycisk **"↻ Odśwież audyt"** w TopBar (widoczny tylko dla zakonczonych audytow) -- nawiguje do `/nowy-audyt?from=AUDIT_ID` z pre-wypelnionymi danymi (URL, keyword, tryb, CSI). Tresc i consensus NIE sa przenoszone -- musza byc re-crawlowane/re-walidowane.
 
 **Tab 1 -- Podsumowanie:**
 - ScoreCard CQS (0-100) + ScoreCard AI Citability (0-10)
 - RadarChart (9 osi: CSI + D1-D8)
 - Kontekst CSI (CE, SC, CSI)
-- **Panel Walidacja SERP** (jesli `serpConsensus` zapisany w DB): tabela porownawcza 7 wierszy (CE, SC, CSI, Predicate, Typ, Format, Perspektywa) — kolumny Źródło vs Konsensus SERP z alignment dots per pole, badge zgodnosci (obliczana ze sredniej 7 pol), explanation, tematy SERP (tagi), sygnaly PAA, kluczowe dane. Backward compat: stare audyty bez serpConsensus — panel nie renderowany.
-- **Karta Title & Description** (jesli `reportExtras.titleDescription`): current title/desc z badge dlugosci (zielony/zolty/czerwony wg SEO best practices) + analiza AI + recommended title/desc na zielonym tle. Backward compat: stare audyty — karta nie renderowana.
+- **Panel Walidacja SERP** (jesli `serpConsensus` zapisany w DB): tabela porownawcza 7 wierszy (CE, SC, CSI, Predicate, Typ, Format, Perspektywa) - kolumny Źródło vs Konsensus SERP z alignment dots per pole, badge zgodnosci (obliczana ze sredniej 7 pol), explanation, tematy SERP (tagi), sygnaly PAA, kluczowe dane. Backward compat: stare audyty bez serpConsensus - panel nie renderowany.
+- **Karta Title & Description** (jesli `reportExtras.titleDescription`): current title/desc z badge dlugosci (zielony/zolty/czerwony wg SEO best practices) + analiza AI + recommended title/desc na zielonym tle. Backward compat: stare audyty - karta nie renderowana.
 - Tabela wymiarow (nazwa, score, status badge, top problem)
-- **Top 10 SERP** (tryb Full): polaczona karta z 3 metrykami benchmarkowymi (Śr. CQS SERP, Śr. Citability, Śr. długość treści w słowach) + tabela top 10 posortowana wg pozycji SERP, scored competitors z CQS/Citability (klikalne wiersze z rozwinieciem strengths/weaknesses), wykluczona konkurencja wyszarzona na swoim miejscu z informacja "wykluczone — za malo tresci (X slow)"
+- **Top 10 SERP** (tryb Full): polaczona karta z 3 metrykami benchmarkowymi (Śr. CQS SERP, Śr. Citability, Śr. długość treści w słowach) + tabela top 10 posortowana wg pozycji SERP, scored competitors z CQS/Citability (klikalne wiersze z rozwinieciem strengths/weaknesses), wykluczona konkurencja wyszarzona na swoim miejscu z informacja "wykluczone - za malo tresci (X slow)"
 
 **Tab 2 -- Wymiary:**
 - 9 kart DimensionCard (CSI-A + D1-D8: score, summary, klikalne)
@@ -91,7 +91,7 @@ Layout: sidebar + content, 5 zakladek (Tabs): Podsumowanie | Wymiary | Rekomenda
 - CSI-A: Pokrycie encji (tabela pokrytych + luk P1-P4) + Macierz EAV (tagi) (tryb Full)
 - Graf wiedzy (EAV): KnowledgeGraph (graf) + EAVTable (trójki z badge pokryte/unikalne/luka) + Macierz EAV (tagi pokrycia) + Formaty treści
 - D4 (Chunk): ChunkMap z dlugosciami sekcji
-- D8 (Fan-Out i AIO): tabela sub-zapytan z grounding tags (CONFIRMED/OVERVIEW/PREDICTED/SERP-ONLY; w eksportach MD/PDF przetlumaczone: Potwierdzone/AIO/Przewidywane/Tylko SERP), coverage stats (badge pokryte/brak), lista niepokrytych sub-queries + AiOverviewCoverageCard (karta pokrycia AI Overview — przeniesiona z Summary tab)
+- D8 (Fan-Out i AIO): tabela sub-zapytan z grounding tags (CONFIRMED/OVERVIEW/PREDICTED/SERP-ONLY; w eksportach MD/PDF przetlumaczone: Potwierdzone/AIO/Przewidywane/Tylko SERP), coverage stats (badge pokryte/brak), lista niepokrytych sub-queries + AiOverviewCoverageCard (karta pokrycia AI Overview - przeniesiona z Summary tab)
 - EEATCard z 4 wymiarami E-E-A-T
 
 **Tab 3 -- Rekomendacje:**
@@ -117,7 +117,7 @@ Ekstrakcja tresci z URL via Bright Data Web Unlocker (HTTP API, serverless-compa
 - **Request:** `{ url: string, keyword?: string }`
 - **Response:** `{ title: string, description: string, content: string, wordCount: number }`
 - **Logika:** Sprawdz shared crawl cache (`readSharedCache('crawl', url)`). Jesli cache hit i TTL < 24h -> zwroc z cache. Jesli miss -> `POST https://api.brightdata.com/request` (Web Unlocker zone, Bearer token), zapisz do shared cache (`writeSharedCache('crawl', url, result)`). Bright Data zwraca raw HTML, konwersja do markdown przez `node-html-markdown`, nastepnie `cleanContent()` -- 14-krokowy pipeline w 4 fazach: (1) Pre-clean: HTML tag stripping, tooltip cleanup, empty link stripping. (2) Pre-split: heading boundaries, horizontal rule boundaries, navigation transition boundaries. (3) Block filtering: deduplication, blacklista ~25 fraz, category listing filter, concatenated nav filter, link density filter (>50%). (4) Post-clean: image link removal, markdown link stripping, whitespace collapse. `extractTitle(html)` i `extractDescription(html)` wyciagaja metadane z HTML (regex). Walidacja URL (SSRF protection). Min content: 500 znakow.
-- **Uwaga:** Parametr `keyword` w `crawlUrl()` jest ignorowany — Bright Data zwraca pelny HTML, content cleaning pipeline usuwa szum. BM25 nie jest uzywany.
+- **Uwaga:** Parametr `keyword` w `crawlUrl()` jest ignorowany - Bright Data zwraca pelny HTML, content cleaning pipeline usuwa szum. BM25 nie jest uzywany.
 
 ### POST /api/serp
 
@@ -125,7 +125,7 @@ Pobranie wynikow SERP z Bright Data SERP API (fallback: DataForSEO Live Advanced
 
 - **Request:** `{ keyword: string, locationCode?: number, languageCode?: string }`
 - **Response:** `{ organic: OrganicResult[], paa: string[], related: string[] }`
-- **Logika:** Sprawdz shared SERP cache (skip jesli 0 organic). Bright Data -> jesli 0 organic lub throw -> DataForSEO fallback (merge: DFS organic + BD extras PAA/related/AIO). Puste wyniki nie cache'owane. Parsowanie BD: `organic[]` (rank/title/link/description), `people_also_ask[]` (question), `related[]` (text — dwa formaty: carousel items + proste). Defaults: `languageCode='pl'`, `gl=pl` w URL Google.
+- **Logika:** Sprawdz shared SERP cache (skip jesli 0 organic). Bright Data -> jesli 0 organic lub throw -> DataForSEO fallback (merge: DFS organic + BD extras PAA/related/AIO). Puste wyniki nie cache'owane. Parsowanie BD: `organic[]` (rank/title/link/description), `people_also_ask[]` (question), `related[]` (text - dwa formaty: carousel items + proste). Defaults: `languageCode='pl'`, `gl=pl` w URL Google.
 - **Wykorzystanie:** Tryb Full -> top 10 URLs z organic -> Bright Data Web Unlocker (fallback: Jina Reader) -> EAV extraction -> benchmark
 
 ### POST /api/keyword-volume
@@ -134,7 +134,7 @@ Pobranie monthly search volume z DataForSEO Keywords Data API.
 
 - **Request:** `{ keyword: string, language?: string }`
 - **Response:** `{ volume: number | null }`
-- **Logika:** `fetchKeywordVolume()` w `dataforseo.ts`. Basic Auth (DATAFORSEO_LOGIN/PASSWORD). Nigdy nie throwuje — zwraca null przy bledzie. Rate limit 20/min.
+- **Logika:** `fetchKeywordVolume()` w `dataforseo.ts`. Basic Auth (DATAFORSEO_LOGIN/PASSWORD). Nigdy nie throwuje - zwraca null przy bledzie. Rate limit 20/min.
 - **Wykorzystanie:** Step1Input po kliknieciu "Pobierz" (fire-and-forget) -> badge obok keyword -> zapisywane w DB (`search_volume` kolumna)
 
 ### POST /api/csi
@@ -173,7 +173,7 @@ Uruchomienie audytu (asynchroniczny).
   3. Tryb Full: `status: 'benchmarking'` -> SERP fetch (Bright Data SERP API) + crawl top 10 (Bright Data Web Unlocker) + EAV extraction (Gemini API) + **competitor scoring** (1 call per competitor -> estimatedCQS, estimatedCitability, summary, strengths, weaknesses) -> benchmark
      - `writeStageCache(auditId, '03_serp', serpData)`
      - `writeStageCache(auditId, '04_competitors', competitorData)`
-     - `writeStageCache(auditId, '05_benchmark', benchmarkData)` — competitors[] zawiera pola scoring
+     - `writeStageCache(auditId, '05_benchmark', benchmarkData)` - competitors[] zawiera pola scoring
   4. 10 równoległych wywolan Gemini API (CSI-A + D1-D8 + EEAT) via `orchestrator.ts` (`Promise.all`)
      - Tryb Full: prompty dostaja benchmark data (EAV matrix, gaps, PAA)
      - Per wymiar: `writeDimensionCache(auditId, dimensionId, result)`
@@ -242,13 +242,13 @@ Polling statusu joba klasteryzacji.
 Rozszerzenie klastra o powiazane frazy kluczowe wygenerowane przez Gemini.
 
 - **Request:** `{ clusterId: number }`
-- **Response:** `{ suggestions: ExpandedKeyword[] }` — kazda fraza: keyword, type (longtail/question/variant/subtopic), suggestedTitle (50-65 zn.), volume (number | null), similarity (number | null)
+- **Response:** `{ suggestions: ExpandedKeyword[] }` - kazda fraza: keyword, type (longtail/question/variant/subtopic), suggestedTitle (50-65 zn.), volume (number | null), similarity (number | null)
 - **Auth:** wymagany login, ownership check (userId === session.userId || admin)
 - **maxDuration:** 60s
 - **Logika:**
   1. Pobiera job z DB, sprawdza ownership i status (musi byc completed)
   2. Pobiera klaster po clusterId z clusters JSON
-  3. `sanitize()` na cluster label/keywords — stripuje markdown/instrukcje z user-influenced danych
+  3. `sanitize()` na cluster label/keywords - stripuje markdown/instrukcje z user-influenced danych
   4. Gemini (temp 0.5) generuje 10-15 powiazanych fraz z ramka semantyczna (Agent/Cause/Result/Manner/Time/Quantity/Comparison) + terminologia (synonimy/hiponimy/meronimy)
   5. Walidacja typow fraz (odrzuca nieprawidlowe typy)
   6. Dedup: odrzucenie sugestii duplikujacych istniejace keywords klastra
@@ -296,7 +296,7 @@ Lista jobow pruning + formularz nowego joba. Server Component (auth, SidebarWrap
 
 ### Schema Gaps (`/schema`)
 
-Lista jobow schema gaps + formularz nowego joba. Server Component (auth, SidebarWrapper, dane z DB). Client Component `SchemaContent.tsx` (formularz: URL sitemapy). Polling co 3s z progress bar 0-100%, auto-expand przy ukonczeniu. Wyniki w 2 zakladkach: (1) Summary — sitewide stats (total pages, issues, success rate), najczestsze brakujace schemas (ranking), rozklad profili stron, (2) Pages — tabela URL-i z: badge profilu (article/product/faq/etc.), detected schemas, missing/incomplete schemas, filtr (all/issues/ok). Eksport CSV. Warning banner gdy success rate <50%. 1 kredyt per analiza. Link w Sidebar sekcja "Inne narzedzia" obok Klasteryzacji i Pruningu. i18n: klucze `schemaGaps.*` (osobne od `schema.*` uzywanych w SchemaAuditBlock raportu audytu).
+Lista jobow schema gaps + formularz nowego joba. Server Component (auth, SidebarWrapper, dane z DB). Client Component `SchemaContent.tsx` (formularz: URL sitemapy). Polling co 3s z progress bar 0-100%, auto-expand przy ukonczeniu. Wyniki w 2 zakladkach: (1) Summary - sitewide stats (total pages, issues, success rate), najczestsze brakujace schemas (ranking), rozklad profili stron, (2) Pages - tabela URL-i z: badge profilu (article/product/faq/etc.), detected schemas, missing/incomplete schemas, filtr (all/issues/ok). Eksport CSV. Warning banner gdy success rate <50%. 1 kredyt per analiza. Link w Sidebar sekcja "Inne narzedzia" obok Klasteryzacji i Pruningu. i18n: klucze `schemaGaps.*` (osobne od `schema.*` uzywanych w SchemaAuditBlock raportu audytu).
 
 ### POST /api/schema
 
@@ -311,7 +311,7 @@ Tworzenie joba schema gaps.
   2. Direct HTTP fetch per URL (5 concurrent, 15s timeout, `redirect: 'error'`, `validateUrl()`) + cheerio JSON-LD extraction (obsluga `@graph` + bare JSON arrays) [5-85%]
   3. `detectPageProfile()` per URL (heurystyka: existing schemas → URL patterns → content body patterns) + `detectRecommendedSchemas()` (reuse z `schema-catalog.ts`) [85-95%]
   4. Agregacja site-wide summary + zapis do DB [95-100%]
-- **Koszt:** 0 Gemini calls, 0 Bright Data — direct HTTP fetch
+- **Koszt:** 0 Gemini calls, 0 Bright Data - direct HTTP fetch
 - **Error handling:** try-catch na sitemap parse, per-URL fetch, DB save. Success rate tracking + warning <50%
 
 ### GET /api/schema/[id]
@@ -324,12 +324,12 @@ Polling statusu joba schema gaps.
 
 ## Wzorce auth w Server Actions i API Routes
 
-### Server Actions — `getCurrentUser()` poza try-catch
+### Server Actions - `getCurrentUser()` poza try-catch
 
 `getCurrentUser()` wywołuje `redirect('/login')` z `next/navigation` które rzuca specjalny Next.js error. Jeśli wewnątrz try-catch, redirect zostanie przechwycony i Server Action zwróci error response zamiast przekierowania.
 
 ```typescript
-// ✅ POPRAWNIE — getCurrentUser() PRZED try
+// ✅ POPRAWNIE - getCurrentUser() PRZED try
 export async function myAction(): Promise<{ success: boolean; error?: string }> {
   const session = await getCurrentUser();
   try {
@@ -339,7 +339,7 @@ export async function myAction(): Promise<{ success: boolean; error?: string }> 
   }
 }
 
-// ❌ ŹLE — redirect przechwycony przez catch
+// ❌ ŹLE - redirect przechwycony przez catch
 export async function myAction() {
   try {
     const session = await getCurrentUser(); // redirect() -> caught!
@@ -350,7 +350,7 @@ export async function myAction() {
 }
 ```
 
-### API Routes — `getSession()` z DB role refresh
+### API Routes - `getSession()` z DB role refresh
 
 `getSession()` odświeża rolę z bazy danych przy każdym wywołaniu (`getUserById()`). Jeśli user usunięty z DB → sesja unieważniona (return null). Chroni przed stale claims po zmianie roli admina.
 
@@ -363,12 +363,12 @@ const geminiKey = await resolveGeminiKey(session.userId);
 const result = await callClaudeJSON<T>(prompt, 8192, geminiKey);
 ```
 
-Brak globalnego `setGeminiApiKey()` — eliminuje race conditions w concurrent batches.
+Brak globalnego `setGeminiApiKey()` - eliminuje race conditions w concurrent batches.
 
 ## Strony publiczne (bez logowania)
 
 ### Login (`/login`)
-Formularz email + checkbox zgody na Regulamin i Politykę Prywatności + opcjonalny checkbox zgody marketingowej ("Chcę otrzymywać informacje o aktualizacjach narzędzia - bez spamu" — nie blokuje logowania). Przycisk "Wyślij kod" zablokowany dopóki checkbox RODO niezaznaczony. Linki do `/regulamin` i `/polityka-prywatnosci` otwieraja nowe karty. Zgoda marketingowa: OTP flow → hidden field → query param `mc` → verify page → `createUser(mc)`. Google OAuth → query param `mc` → `oauth_mc` cookie → callback → `createUser(mc)`. Istniejący user + zaznaczony checkbox → zgoda aktualizowana (nigdy auto-wycofywana).
+Formularz email + checkbox zgody na Regulamin i Politykę Prywatności + opcjonalny checkbox zgody marketingowej ("Chcę otrzymywać informacje o aktualizacjach narzędzia - bez spamu" - nie blokuje logowania). Przycisk "Wyślij kod" zablokowany dopóki checkbox RODO niezaznaczony. Linki do `/regulamin` i `/polityka-prywatnosci` otwieraja nowe karty. Zgoda marketingowa: OTP flow → hidden field → query param `mc` → verify page → `createUser(mc)`. Google OAuth → query param `mc` → `oauth_mc` cookie → callback → `createUser(mc)`. Istniejący user + zaznaczony checkbox → zgoda aktualizowana (nigdy auto-wycofywana).
 
 ### Weryfikacja kodu (`/login/verify`)
 Formularz 6-cyfrowego kodu OTP.

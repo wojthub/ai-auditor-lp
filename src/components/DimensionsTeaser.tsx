@@ -89,7 +89,7 @@ export default function DimensionsTeaser() {
           style={{ marginBottom: 20 }}
         >
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.75, margin: 0 }}>
-            CitationOne analizuje treść przez pryzmat 10 wymiarów jakości — tych samych parametrów, które modele językowe biorą pod uwagę wybierając źródła odpowiedzi. Każdy wymiar jest mierzony osobno i porównywany z bezpośrednią konkurencją z Top 10 SERP.
+            CitationOne analizuje treść przez pryzmat 10 wymiarów jakości - tych samych parametrów, które modele językowe biorą pod uwagę wybierając źródła odpowiedzi. Każdy wymiar jest mierzony osobno i porównywany z bezpośrednią konkurencją z Top 10 SERP.
           </p>
 
           <div style={{
@@ -124,7 +124,7 @@ export default function DimensionsTeaser() {
           </a>
         </motion.div>
 
-        {/* Copy — indicators intro */}
+        {/* Copy - indicators intro */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +140,7 @@ export default function DimensionsTeaser() {
             lineHeight: 1.2,
             marginBottom: 12,
           }}>
-            Twoje treści w liczbach — nie w domysłach.
+            Obiektywna ocena treści wyrażona w liczbach
           </h3>
           <p style={{ fontSize: 16, color: '#36394a', lineHeight: 1.72, margin: '0 0 14px' }}>
             Analiza przekuwana jest w dwa precyzyjne wskaźniki:

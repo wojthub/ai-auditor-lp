@@ -119,7 +119,7 @@ export default function Hero() {
                   border: 'none',
                   cursor: 'pointer',
                   letterSpacing: '-0.01em',
-                  whiteSpace: 'nowrap',
+                  minHeight: 44,
                 }}
               >
                 Zrób audyt →

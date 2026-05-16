@@ -220,7 +220,7 @@ async function runAudit(auditId: string, input: AuditInput): Promise<void> {
     const report = await generateReport(...);
     // Osobne try/catch -- blad jednego nie blokuje drugiego
     try { await saveRecommendations(auditId, report.recommendations); } catch { ... }
-    try { await saveReportExtras(auditId, { structure, srlTransforms, eeatBlocks, tfidfMapping: [] }); } catch { ... }  // tfidfMapping puste — TF-IDF mapping usuniety z report prompt
+    try { await saveReportExtras(auditId, { structure, srlTransforms, eeatBlocks, tfidfMapping: [] }); } catch { ... }  // tfidfMapping puste - TF-IDF mapping usuniety z report prompt
     writeStageCache(auditId, '08_report', report).catch(console.warn);
     stageLog.push({ stage: '08_report', status: 'completed', ... });
   } catch (err) {
@@ -249,7 +249,7 @@ async function crawlUrl(url: string, keyword?: string): Promise<CrawlResult> {
   return result;
 }
 
-// W lib/services/dataforseo.ts (nazwa legacy — pod spodem Bright Data SERP API)
+// W lib/services/dataforseo.ts (nazwa legacy - pod spodem Bright Data SERP API)
 async function searchSerp(keyword: string): Promise<SerpResult> {
   const cached = await readSharedCache<SerpResult>('serp', keyword);
   if (cached) return cached;

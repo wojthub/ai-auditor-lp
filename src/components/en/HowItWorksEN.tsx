@@ -168,7 +168,7 @@ export default function HowItWorksEN() {
           align-items: center;
           justify-content: center;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           .howitworks-grid { grid-template-columns: 1fr; gap: 12px; }
           .step-connector { display: none !important; }
         }

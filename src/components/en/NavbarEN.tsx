@@ -115,7 +115,8 @@ export default function NavbarEN() {
         .nav-cta {
           display: inline-flex;
           align-items: center;
-          padding: 10px 20px;
+          padding: 11px 20px;
+          min-height: 44px;
           border-radius: 6px;
           background: #0b7983;
           color: #ffffff;

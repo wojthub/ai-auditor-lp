@@ -1,14 +1,14 @@
-# CLAUDE.md — CitationOne LP
+# CLAUDE.md - CitationOne LP
 
 ## Opis projektu
 
-Landing page dla narzędzia **CitationOne** (`citationone.com`) — webapp do audytu contentu pod kątem AI Search (ChatGPT, Perplexity, Google AI Overview, Bing Copilot).
+Landing page dla narzędzia **CitationOne** (`citationone.com`) - webapp do audytu contentu pod kątem AI Search (ChatGPT, Perplexity, Google AI Overview, Bing Copilot).
 
 **Cel LP:** konwersja na logowanie/rejestrację (`/login`) lub zakup pakietu audytów.
 
 **Języki:** EN (domyślny, root `/`) + PL (`/pl`). Osobne komponenty per język w `src/components/` (PL) i `src/components/en/` (EN).
 
-**Powiązane repo:** aplikacja główna w `../ai-auditor/` — specyfikacja w `spec/` (patrz `ai-auditor/CLAUDE.md`).
+**Powiązane repo:** aplikacja główna w `../ai-auditor/` - specyfikacja w `spec/` (patrz `ai-auditor/CLAUDE.md`).
 
 ---
 
@@ -16,10 +16,10 @@ Landing page dla narzędzia **CitationOne** (`citationone.com`) — webapp do au
 
 - **Framework:** Next.js 15 (App Router, static export `output: 'export'`)
 - **Runtime:** React 19, TypeScript strict
-- **Styling:** Tailwind CSS 4 — CSS-first config przez `@theme inline` w `src/app/globals.css`. **Brak pliku `tailwind.config.js`.**
+- **Styling:** Tailwind CSS 4 - CSS-first config przez `@theme inline` w `src/app/globals.css`. **Brak pliku `tailwind.config.js`.**
 - **Animacje:** Framer Motion (`motion`, `AnimatePresence`)
 - **Font:** Inter (Google Fonts, `variable: --font-inter`, subsets: latin + latin-ext)
-- **Icons:** inline SVG (nie ma biblioteki ikon — wszystkie ikony to JSX SVG)
+- **Icons:** inline SVG (nie ma biblioteki ikon - wszystkie ikony to JSX SVG)
 - **Dev server:** `npm run dev` → domyślnie port 3000 (fallback na 3001 jeśli zajęty)
 
 ---
@@ -62,25 +62,25 @@ ai-auditor-lp-clone/
 │   │           ├── page.tsx
 │   │           └── WymiaryContent.tsx
 │   └── components/
-│       ├── Navbar.tsx           # PL Navbar — switcher EN → /
+│       ├── Navbar.tsx           # PL Navbar - switcher EN → /
 │       ├── Hero.tsx
 │       ├── TechLogos.tsx
 │       ├── Problem.tsx
 │       ├── Solution.tsx
 │       ├── HowItWorks.tsx
 │       ├── Features.tsx         # 5 sekcji PL (wymiary, benchmark, before/after, eksport, quick wins)
-│       ├── BrandMorph.tsx      # Shared — animowane logo CitatioNone→CitationOne (typing effect)
+│       ├── BrandMorph.tsx      # Shared - animowane logo CitatioNone→CitationOne (typing effect)
 │       ├── ForWho.tsx
 │       ├── ClosingCta.tsx
 │       ├── RadarIllustration.tsx # PL etykiety
-│       ├── Footer.tsx           # PL Footer — linki /pl/*
+│       ├── Footer.tsx           # PL Footer - linki /pl/*
 │       ├── CtaSection.tsx
 │       ├── SocialProof.tsx      # UKRYTA
 │       ├── Pricing.tsx          # UKRYTA
 │       ├── ReportExample.tsx    # UKRYTA
 │       ├── FAQ.tsx              # UKRYTA
 │       └── en/                  # EN komponenty
-│           ├── NavbarEN.tsx     # EN Navbar — switcher PL → /pl
+│           ├── NavbarEN.tsx     # EN Navbar - switcher PL → /pl
 │           ├── HeroEN.tsx
 │           ├── TechLogosEN.tsx
 │           ├── ProblemEN.tsx
@@ -231,12 +231,12 @@ const APP_URL = 'https://app.citationone.com';
 | CTA / Login | `APP_URL/login?lang=pl` | `APP_URL/login?lang=en` |
 | Audyt z URL (Hero) | `APP_URL/login?lang=pl&audit-url={URL}` | `APP_URL/login?lang=en&audit-url={URL}` |
 
-### Hero — input URL → audyt
+### Hero - input URL → audyt
 
 - Input "Wklej link do strony..." (PL) / "Paste your page URL..." (EN) z walidacją URL po stronie klienta.
 - `normalizeUrl`: trim + auto-prefix `https://` jeśli brak protokołu.
 - `isValidUrl`: `new URL()` try/catch + protokół `http:`/`https:` + `hostname` musi zawierać `.`.
-- Submit → `${APP_URL}/login?lang={pl|en}&audit-url={encoded}` gdzie `encoded = encodeURIComponent(normalized).replace(/%3A/gi, ':').replace(/%2F/gi, '/')` — `:` i `/` zostają nieencodowane w query (RFC 3986).
+- Submit → `${APP_URL}/login?lang={pl|en}&audit-url={encoded}` gdzie `encoded = encodeURIComponent(normalized).replace(/%3A/gi, ':').replace(/%2F/gi, '/')` - `:` i `/` zostają nieencodowane w query (RFC 3986).
 - Komunikaty błędów: "Podaj adres URL." / "Podaj poprawny adres URL (np. https://example.com/strona)." (PL); odpowiedniki EN.
 
 ### Cennik (Hero CTA caption + /pricing + /pl/cennik)
@@ -244,10 +244,10 @@ const APP_URL = 'https://app.citationone.com';
 - Cena: **€2.00 / audyt** (pay-as-you-go, brak abonamentów).
 - Pod CTA w Hero: ikona prezentu (teal) + "Pierwsze 3 audyty są darmowe." / "First 3 audits are free."
 
-### SEO — title template i FAQ schema
+### SEO - title template i FAQ schema
 
-- Root layout: `title.template: '%s - CitationOne'` (EN); PL layout ma własny template. **Strony `metadata.title` NIE dopisują " - CitationOne"** — template robi to automatycznie. Wyjątek: `openGraph.title` jest standalone i może zawierać brand.
-- `FAQPage` JSON-LD schema renderowana w [FAQ.tsx](src/components/FAQ.tsx) i [FAQEN.tsx](src/components/en/FAQEN.tsx) — generowana z tablicy `faqs` (UI i structured data zawsze zsync).
+- Root layout: `title.template: '%s - CitationOne'` (EN); PL layout ma własny template. **Strony `metadata.title` NIE dopisują " - CitationOne"** - template robi to automatycznie. Wyjątek: `openGraph.title` jest standalone i może zawierać brand.
+- `FAQPage` JSON-LD schema renderowana w [FAQ.tsx](src/components/FAQ.tsx) i [FAQEN.tsx](src/components/en/FAQEN.tsx) - generowana z tablicy `faqs` (UI i structured data zawsze zsync).
 
 ### Language switcher
 
@@ -263,7 +263,7 @@ const APP_URL = 'https://app.citationone.com';
 
 | Token | Wartość | Użycie |
 |-------|---------|--------|
-| `--color-accent` | `#0b7983` | Teal — primary, CTA, akcenty |
+| `--color-accent` | `#0b7983` | Teal - primary, CTA, akcenty |
 | `--color-accent-hover` | `#097380` | Hover przycisku |
 | `--color-background` | `#ffffff` | Tło strony |
 | `--color-surface` | `#f8fafb` | Tło sekcji |
@@ -275,7 +275,7 @@ const APP_URL = 'https://app.citationone.com';
 
 ### Logo
 
-- **Logotyp PNG:** `https://app.citationone.com/logo.png` — Navbar (36px), Footer (28px)
+- **Logotyp PNG:** `https://app.citationone.com/logo.png` - Navbar (36px), Footer (28px)
 - **Favicon SVG:** `src/app/icon.svg`
 
 ### Typografia
@@ -290,17 +290,21 @@ const APP_URL = 'https://app.citationone.com';
 
 ## Konwencje kodowania
 
-- Style inline (`style={{ }}`) — Tailwind tylko do layout (`flex`, `items-center`, `hidden sm:flex`)
+- Style inline (`style={{ }}`) - Tailwind tylko do layout (`flex`, `items-center`, `hidden sm:flex`)
 - Responsywność przez `<style>` tag z `@media` w komponentach
 - Ikony: JSX SVG inline
-- `'use client'` — komponenty z animacjami/state
+- `'use client'` - komponenty z animacjami/state
 - Brak emoji w UI
-- `output: 'export'` — static export, brak middleware/server-side redirects. Redirecty przez `public/_redirects`
+- `output: 'export'` - static export, brak middleware/server-side redirects. Redirecty przez `public/_redirects`
 
 ## RWD / Mobile
 
-- **Breakpoint:** `sm:` (640px) Navbar, `768px` gridy
-- **Navbar:** hamburger + panel, auto-close, full-width CTA, touch targets 44px+
-- **Gridy responsive:** dims 3→2→1, ba 2→1, feat 2→1, problem/forwho/howitworks 3→1
-- **Solution card:** 80%→100% na mobile, score font 40→32px, **radar ukryty na mobile** (`.sol-radar-wrap { display: none }` na <=768px — widoczny w Hero, nie powtarza się)
+- **Viewport:** `export const viewport` w [layout.tsx](src/app/layout.tsx) (`width: device-width, initialScale: 1, maximumScale: 5`). PL layout dziedziczy z root.
+- **Breakpointy:** `sm:` (640px) Navbar, 900px HowItWorks (3 kroki z connectorami), 768px pozostałe gridy.
+- **Navbar:** hamburger + panel, auto-close, full-width CTA. `.nav-cta` ma `min-height: 44px` (touch target tablet/mobile).
+- **Hero button:** `min-height: 44`, bez `whiteSpace: nowrap` (uniknięcie overflow <360px). Input+button stack na <580px.
+- **Gridy responsive:** dims 3→2→1, ba 2→1, feat 2→1, howitworks 5→1 (≤900px), problem/forwho 3→1.
+- **Section padding mobile:** globalna reguła w [globals.css](src/app/globals.css) - sekcje z inline `padding: 90px 0` → `padding: 48px 0 !important` na ≤640px (overrides przez attribute selector `section[style*="padding: 90px 0"]`).
+- **FAQ button:** `minHeight: 44` (touch target).
+- **Solution card:** 80%→100% na mobile, score font 40→32px, **radar ukryty na mobile** (`.sol-radar-wrap { display: none }` na <=768px - widoczny w Hero, nie powtarza się).
 - **TechLogos:** Gemini, Bright Data, Jina AI, DataForSEO

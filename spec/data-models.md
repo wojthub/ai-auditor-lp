@@ -68,18 +68,18 @@ interface SerpConsensus {
     sourceContext: AlignmentLevel;
     centralSearchIntent: AlignmentLevel;
     predicate: AlignmentLevel;
-    contentType?: AlignmentLevel;      // opcjonalne — porównanie artykuł vs SERP
+    contentType?: AlignmentLevel;      // opcjonalne - porównanie artykuł vs SERP
     contentFormat?: AlignmentLevel;
     contentAngle?: AlignmentLevel;
   };
   serpThemes: string[];
   topPaaSignals: string[];
-  // Analiza treści SERP (opcjonalne — backward compat)
+  // Analiza treści SERP (opcjonalne - backward compat)
   contentType?: SerpContentType;
   contentFormat?: SerpContentFormat;
   contentAngle?: SerpContentAngle;
   contentData?: SerpContentData;
-  // Źródło — typ/format/perspektywa artykułu (określone przez AI)
+  // Źródło - typ/format/perspektywa artykułu (określone przez AI)
   sourceContentType?: string;
   sourceContentFormat?: string[];
   sourceContentAngle?: string;
@@ -101,7 +101,7 @@ interface Audit {
   sourceContent: string;
   sourceWordCount: number;
   keyword: string | null;        // Slowo kluczowe (tryb Full: do SERP)
-  sourceLanguage: string | null; // ISO 639-1 (np. 'pl', 'en') — NULL = stary audyt (domyslnie pl)
+  sourceLanguage: string | null; // ISO 639-1 (np. 'pl', 'en') - NULL = stary audyt (domyslnie pl)
   // CSI
   centralEntity: string;
   sourceContext: string;
@@ -210,7 +210,7 @@ interface CompetitorData {
   domain: string;
   title: string;
   wordCount: number;
-  // Opcjonalne — wypelniane po scoring (tryb Full, competitors z wystarczajaca trescia)
+  // Opcjonalne - wypelniane po scoring (tryb Full, competitors z wystarczajaca trescia)
   estimatedCQS?: number;
   estimatedCitability?: number;
   qualitySummary?: string;
@@ -236,7 +236,7 @@ interface BenchmarkGap {
   priority: 'P1' | 'P2' | 'P3' | 'P4';
   urrClass: URRClass;
   coverage: string;              // "7/10", "5/10"
-  coverageCount?: number;        // numeryczna wartosc — do sortowania (P1->P4, potem coverageCount desc)
+  coverageCount?: number;        // numeryczna wartosc - do sortowania (P1->P4, potem coverageCount desc)
   action: string;                // "Dedykowana sekcja H2"
 }
 
@@ -398,10 +398,10 @@ interface WizardPrefill {
 type ClusteringJobStatus = 'pending' | 'running' | 'completed' | 'error';
 
 interface ClusteringConfig {
-  clusterThreshold: number;   // 0.5-1.0, default 0.95 — cosine similarity threshold
-  minClusterSize: number;     // 1-20, default 1 — minimalny rozmiar klastra
-  maxKeywords: number;        // default 500 — cap keywords per job
-  serpResults: number;        // 1-10, default 5 — top N organic results per keyword
+  clusterThreshold: number;   // 0.5-1.0, default 0.95 - cosine similarity threshold
+  minClusterSize: number;     // 1-20, default 1 - minimalny rozmiar klastra
+  maxKeywords: number;        // default 500 - cap keywords per job
+  serpResults: number;        // 1-10, default 5 - top N organic results per keyword
 }
 
 const DEFAULT_CLUSTERING_CONFIG: ClusteringConfig = {
@@ -446,8 +446,8 @@ interface ClusteringJob {
 type PruningJobStatus = 'pending' | 'running' | 'completed' | 'error';
 
 interface PruningConfig {
-  pruningPercentile: number;        // 50-99, default 90 — percentile for pruning candidates
-  cannibalizationThreshold: number; // 0.7-1.0, default 0.9 — cosine similarity threshold
+  pruningPercentile: number;        // 50-99, default 90 - percentile for pruning candidates
+  cannibalizationThreshold: number; // 0.7-1.0, default 0.9 - cosine similarity threshold
 }
 
 const DEFAULT_PRUNING_CONFIG: PruningConfig = {

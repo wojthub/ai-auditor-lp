@@ -78,3 +78,12 @@ button:active { transform: scale(0.97); }
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* ── Mobile section padding (overrides inline 90px 0) ── */
+@media (max-width: 640px) {
+  section[style*="padding: 90px 0"],
+  section[style*="padding:90px 0"] {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+}

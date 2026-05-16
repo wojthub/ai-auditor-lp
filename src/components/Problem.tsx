@@ -63,7 +63,7 @@ function WordCycle() {
 export default function Problem() {
   return (
     <>
-      {/* Section 1 — problem, 2-col layout */}
+      {/* Section 1 - problem, 2-col layout */}
       <section style={{ background: '#ffffff', padding: '90px 0', position: 'relative', overflow: 'hidden' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <div className="problem-header-grid">
@@ -117,7 +117,7 @@ export default function Problem() {
         `}</style>
       </section>
 
-      {/* WordCycle standalone — centered, 3× size */}
+      {/* WordCycle standalone - centered, 3× size */}
       <section style={{ background: '#ffffff', padding: '48px 24px 56px', textAlign: 'center' }}>
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
@@ -136,7 +136,7 @@ export default function Problem() {
         </motion.div>
       </section>
 
-      {/* Section 2 — solution, centered single column */}
+      {/* Section 2 - solution, centered single column */}
       <section style={{ background: '#ffffff', padding: '56px 0 90px', overflow: 'hidden' }}>
         <div style={{ maxWidth: 680, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>
           <motion.div

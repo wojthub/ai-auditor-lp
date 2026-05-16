@@ -36,7 +36,7 @@ CQS = (CSI-A x 0.13 + Fan-Out x 0.13 + EAV x 0.13 + Density x 0.11 + BLUF x 0.11
 CSI = (CSI Alignment + BLUF + Chunk + URR + Query Fan-Out) / 5
 
 ### Quick Wins  ← sekcja po Executive Summary, jesli sa quick wins
-- [source badge] tytul — opis  ← max 7 algorytmicznych quick wins z buildQuickWins(audit)
+- [source badge] tytul - opis  ← max 7 algorytmicznych quick wins z buildQuickWins(audit)
 
 ## 2. Diagnoza
 
@@ -55,8 +55,8 @@ CSI = (CSI Alignment + BLUF + Chunk + URR + Query Fan-Out) / 5
 - Content Format Intelligence: tabele/listy/infografiki/bibliografia -- freq vs nasz
 
 ## 3. Action Plan
-- Docelowa struktura H1/H2/H3 — PELNA (WSZYSTKIE istniejace naglowki + nowe). [OK] sekcje bez zmian, [ZMIEN] z originalTitle + nowy title, [NOWA] do dodania. Generowana na podstawie: chunk optimization + gaps z benchmarku + sub-zapytania Fan-Out (POKRYTE/NIEPOKRYTE → niepokryte = [NOWA] sekcja) + twierdzenia AI Overview (niepokryte → [NOWA] lub [ZMIEN])
-- BLUF per H2 z BEFORE/AFTER (currentBluf + suggestedBluf per kazda sekcja H2 — wymuszane w prompcie)
+- Docelowa struktura H1/H2/H3 - PELNA (WSZYSTKIE istniejace naglowki + nowe). [OK] sekcje bez zmian, [ZMIEN] z originalTitle + nowy title, [NOWA] do dodania. Generowana na podstawie: chunk optimization + gaps z benchmarku + sub-zapytania Fan-Out (POKRYTE/NIEPOKRYTE → niepokryte = [NOWA] sekcja) + twierdzenia AI Overview (niepokryte → [NOWA] lub [ZMIEN])
+- BLUF per H2 z BEFORE/AFTER (currentBluf + suggestedBluf per kazda sekcja H2 - wymuszane w prompcie)
 - Rekomendacje (z recommendation-builder, nie z report prompt): KRYTYCZNE / WYSOKIE / SREDNIE z BEFORE/AFTER + clientWhy (💡) + impact (oba widoczne)
 - Pokrycie encji z CSI Alignment benchmark (luki sortowane P1→P4 najpierw, potem pokryte encje; dane z bm.gaps i bm.eavMatrix)
 - Transformacje SRL (CE Patient -> Agent)
@@ -70,7 +70,7 @@ CSI = (CSI Alignment + BLUF + Chunk + URR + Query Fan-Out) / 5
 - Obecna meta description (lub "(brak)") + analiza SEO
 - Rekomendowana meta description (z dlugoscia)
 
-## 15. Schema.org (opcjonalne — jesli reportExtras.schemaAudit istnieje)
+## 15. Schema.org (opcjonalne - jesli reportExtras.schemaAudit istnieje)
 - Lista rekomendacji schema.org per typ:
   - Typ + label PL/EN
   - Status: present / incomplete / missing
@@ -81,11 +81,11 @@ CSI = (CSI Alignment + BLUF + Chunk + URR + Query Fan-Out) / 5
   - Google Rich Result eligibility
 ```
 
-### SerpConsensusPanel (w AuditReport — tab Podsumowanie)
+### SerpConsensusPanel (w AuditReport - tab Podsumowanie)
 
 Panel "Walidacja SERP" renderowany jesli `audit.serpConsensus` istnieje. Przyjmuje opcjonalny prop `benchmark?: { paa: string[]; related: string[] }` do wyswietlania Related Searches z Bright Data SERP:
 
-- **Badge zgodnosci:** "Wysoka zgodność" (zielony) / "Częściowa zgodność" (żółty) / "Niska zgodność" (czerwony) — obliczana server-side ze średniej 7 pól fieldAlignment
+- **Badge zgodnosci:** "Wysoka zgodność" (zielony) / "Częściowa zgodność" (żółty) / "Niska zgodność" (czerwony) - obliczana server-side ze średniej 7 pól fieldAlignment
 - **Explanation:** 2-3 zdania wyjaśniające zgodność
 - **Tabela porównawcza 7 wierszy:**
 
@@ -103,9 +103,9 @@ Panel "Walidacja SERP" renderowany jesli `audit.serpConsensus` istnieje. Przyjmu
 - **Kluczowe dane** (poza tabelą): lista `contentData.essentialDataPoints` + tagi formatów
 - **Tematy SERP:** tagi z `serpThemes`
 - **Sygnały PAA:** lista z `topPaaSignals`
-- **Related Searches:** badge z `benchmark.related` (dane Bright Data SERP) — wyswietlane pod sekcja tematow/PAA, oddzielone `border-t`. PAA NIE duplikowana — "Sygnaly PAA" z SERP consensus jest wystarczajace. Widoczne gdy `benchmark` prop przekazany i `benchmark.related` niepuste
-- **Prop `benchmark`:** opcjonalny `{ paa: string[]; related: string[] }` — przekazywany z `AuditReport` do `SerpConsensusPanel`. i18n klucze: `serp.paa`, `serp.related`
-- Backward compat: stare audyty bez contentType/Format/Angle — te wiersze nie renderowane
+- **Related Searches:** badge z `benchmark.related` (dane Bright Data SERP) - wyswietlane pod sekcja tematow/PAA, oddzielone `border-t`. PAA NIE duplikowana - "Sygnaly PAA" z SERP consensus jest wystarczajace. Widoczne gdy `benchmark` prop przekazany i `benchmark.related` niepuste
+- **Prop `benchmark`:** opcjonalny `{ paa: string[]; related: string[] }` - przekazywany z `AuditReport` do `SerpConsensusPanel`. i18n klucze: `serp.paa`, `serp.related`
+- Backward compat: stare audyty bez contentType/Format/Angle - te wiersze nie renderowane
 
 ## Komponenty -- szczegoly
 
@@ -115,15 +115,15 @@ Połączony box pod ScoreCards, widoczny gdy są rekomendacje LUB profil non-art
 - Liczba problemów critical+high (polska odmiana: 1 "problem", 2-4 "problemy", 5+ "problemów")
 - Najważniejsza zmiana (pierwszy critical, fallback na pierwszy rec)
 - Badge profilu typu treści (tylko non-article): "Profil audytu: **Listing / Katalog** - wagi i kryteria dostosowane do typu treści"
-- **Quick Wins** (zwijanra sekcja, domyslnie rozwiniety jesli sa quick wins): max 7 algorytmicznych quick wins z `buildQuickWins(audit)` w `lib/ai/quick-wins.ts`. Zrodla: Effort checks, Title/Meta, EEAT brakujace sygnaly, TF-IDF brakujace terminy, Fan-Out niepokryte CONFIRMED, BLUF, Chunk. Kazdy quick win: tytul + opis + source badge (kolorowy tag np. "Effort", "EEAT") + klikalny link nawigujacy do odpowiedniego wymiaru (`targetDimId`). 0 Gemini calls — czysto algorytmiczne
+- **Quick Wins** (zwijanra sekcja, domyslnie rozwiniety jesli sa quick wins): max 7 algorytmicznych quick wins z `buildQuickWins(audit)` w `lib/ai/quick-wins.ts`. Zrodla: Effort checks, Title/Meta, EEAT brakujace sygnaly, TF-IDF brakujace terminy, Fan-Out niepokryte CONFIRMED, BLUF, Chunk. Kazdy quick win: tytul + opis + source badge (kolorowy tag np. "Effort", "EEAT") + klikalny link nawigujacy do odpowiedniego wymiaru (`targetDimId`). 0 Gemini calls - czysto algorytmiczne
 
 ### Wpływ jakości na pozycję (w Top 10 SERP)
 
 4. metryka benchmarkowa obok Śr. CQS, Śr. Citability, Śr. słów:
 - Spearman rank correlation (odporny na male probki i outliery, w przeciwienstwie do Pearsona)
-- Dual signal: srednia dwoch korelacji — CQS↔position + Citability↔position — stabilniejszy sygnal niz sam CQS
+- Dual signal: srednia dwoch korelacji - CQS↔position + Citability↔position - stabilniejszy sygnal niz sam CQS
 - `impact = Math.round(Math.max(0, -avgR) * 100)` (ujemna korelacja = pozytywny wplyw)
-- Floor 10%: jesli surowa wartosc >=5% (korelacja istnieje), wynik podnoszony do minimum 10% — redukuje czeste 0% przy malych probach
+- Floor 10%: jesli surowa wartosc >=5% (korelacja istnieje), wynik podnoszony do minimum 10% - redukuje czeste 0% przy malych probach
 - Min 3 scored competitors wymagane, inaczej "-"
 - Kolorowanie: zielony ≥50% (silny wpływ), żółty ≥30% (umiarkowany), szary <30% (słaby)
 - InfoHint z glossary key `cqsImpact`
@@ -135,15 +135,15 @@ Algorytmiczny wskaznik obliczany z istniejacych Spearman correlations (0 Gemini 
 - >60% = Contentowa (zielony badge), <40% = Linkowa (accent/niebieski badge), 40-60% = Mieszana (zolty badge)
 - Wyswietlany w: TopBar subtitle (obok KD) i naglowek Top 10 SERP (obok KD)
 - NIE w siatce 5 metryk benchmarkowych (kolumny bez zmian)
-- Min wymaganie: oba impacty >= 5%, min 3 konkurentow ze score + DR — inaczej ukryty
+- Min wymaganie: oba impacty >= 5%, min 3 konkurentow ze score + DR - inaczej ukryty
 - `cursor-help` + tooltip per typ (contentDrivenTooltip/linkDrivenTooltip/mixedTooltip)
 - i18n: `benchmark.keywordProfile`, `benchmark.contentDriven`/`linkDriven`/`mixed` + tooltips PL/EN
 - Glossary: `keywordProfile` entry
-- `serpBenchmark` glossary entry zaktualizowany — wspomina DR, RD, link impact, keyword profile, KD, mocne/slabe strony konkurentow
+- `serpBenchmark` glossary entry zaktualizowany - wspomina DR, RD, link impact, keyword profile, KD, mocne/slabe strony konkurentow
 
 ### ScoreCard
 
-Duzy numer (CQS 0-100 lub Citability 0-10). Tlo karty kolorowane wg statusu (ok/warn/critical). Opcjonalny `hintKey` prop — InfoHint tooltip.
+Duzy numer (CQS 0-100 lub Citability 0-10). Tlo karty kolorowane wg statusu (ok/warn/critical). Opcjonalny `hintKey` prop - InfoHint tooltip.
 
 ### RadarChart
 
@@ -162,12 +162,12 @@ Rozwiniety widok wymiaru. Zawiera:
 - Lista mocnych stron
 - Problemy z BeforeAfter per problem
 - Dane dodatkowe zalezne od wymiaru:
-  - CSI-A: Pokrycie encji (tabela pokrytych + luk P1-P4 sortowanych wg priorytetu + coverageCount desc) + Macierz EAV (tagi) — sorting w orchestratorze + UI-side sort dla starych audytow (tryb Full)
+  - CSI-A: Pokrycie encji (tabela pokrytych + luk P1-P4 sortowanych wg priorytetu + coverageCount desc) + Macierz EAV (tagi) - sorting w orchestratorze + UI-side sort dla starych audytow (tryb Full)
   - Graf wiedzy (EAV): KnowledgeGraph (interaktywny graf) + EAVTable (trójki z badge: pokryte/unikalne/luka) + Macierz EAV (tagi pokrycia) + Formaty treści
   - Chunk: ChunkMap z dlugosciami sekcji
   - TF-IDF: Tabela "Pokrycie terminow konkurencji" (luki NAJPIERW, potem pokryte; tylko bigramy+; tryb Full)
   - SRL: Tabela instancji SRL z BEFORE/AFTER transformacjami
-  - Fan-Out i AIO: Tabela sub-zapytan z typem (semantic/intent/verification), grounding tag (CONFIRMED/OVERVIEW/PREDICTED/SERP-ONLY — obliczany algorytmicznie w postProcessRawResponse, nie przez Gemini), mapowana sekcja H2, status pokrycia. InfoHint na wszystkich kolumnach naglowkowych (Sub-zapytanie, Typ, Sekcja, Status, Grounding). Coverage stats (tagi z liczbami). Lista niepokrytych sub-zapytan (czerwony callout). AiOverviewCoverageCard (karta pokrycia AI Overview — przeniesiona z Summary tab). Ta sama tabela z InfoHint wyswietlana w 3 miejscach: SummaryTab (karta Pokrycie Fan-Out), RecommendationsTab, DimensionDetail (queryFanout).
+  - Fan-Out i AIO: Tabela sub-zapytan z typem (semantic/intent/verification), grounding tag (CONFIRMED/OVERVIEW/PREDICTED/SERP-ONLY - obliczany algorytmicznie w postProcessRawResponse, nie przez Gemini), mapowana sekcja H2, status pokrycia. InfoHint na wszystkich kolumnach naglowkowych (Sub-zapytanie, Typ, Sekcja, Status, Grounding). Coverage stats (tagi z liczbami). Lista niepokrytych sub-zapytan (czerwony callout). AiOverviewCoverageCard (karta pokrycia AI Overview - przeniesiona z Summary tab). Ta sama tabela z InfoHint wyswietlana w 3 miejscach: SummaryTab (karta Pokrycie Fan-Out), RecommendationsTab, DimensionDetail (queryFanout).
 
 ### ChunkMap
 
@@ -195,7 +195,7 @@ Karta "Title & Meta Description" w Summary tab (renderowana tylko jesli `reportE
   - Current description: `bg-muted`, `font-mono`, badge dlugosci (zielony 70-155 zn., zolty 1-69 lub 156-200, czerwony >200 lub brak)
   - Analiza AI
   - Recommended description: `bg-success/5`, `border-success/20`, `font-mono`, badge dlugosci
-- Backward compat: stare audyty bez `titleDescription` — karta nie renderowana
+- Backward compat: stare audyty bez `titleDescription` - karta nie renderowana
 - Kryteria SEO best practices (title: 55-60 zn., keyword na poczatku, CE w tytule; desc: do 155 zn., active voice, CTA)
 
 ### ExportTab
@@ -203,16 +203,16 @@ Karta "Title & Meta Description" w Summary tab (renderowana tylko jesli `reportE
 Zakladka "Eksport" w raporcie audytu. Dwa stany:
 
 **Przed generowaniem raportu:** 3 przyciski:
-- "Generuj raport Markdown" — POST `/api/audit/[id]/report`, wynik w state `markdown`
-- "Pobierz .pdf" — client-side `html2pdf.js` + `buildExportHTML()`
-- "Brief do klienta" — generuje podglad markdown pod przyciskami, potem "Kopiuj do schowka"
+- "Generuj raport Markdown" - POST `/api/audit/[id]/report`, wynik w state `markdown`
+- "Pobierz .pdf" - client-side `html2pdf.js` + `buildExportHTML()`
+- "Brief do klienta" - generuje podglad markdown pod przyciskami, potem "Kopiuj do schowka"
 
 **Po wygenerowaniu raportu:** 4 przyciski + podglad raportu:
 - "Pobierz .md", "Pobierz .pdf", "Kopiuj do schowka" (pelny raport), "Brief do klienta"
 - `<pre>` z markdownem (max-h-600, overflow-y-auto)
 - Brief do klienta renderowany pod podgladem raportu (jesli wygenerowany)
 
-**"Brief do klienta"** — `buildClientBriefMarkdown(audit)`:
+**"Brief do klienta"** - `buildClientBriefMarkdown(audit)`:
 - CQS + Citability w naglowku
 - Rekomendacje w formacie klienta: 📍 Gdzie (section) + ✏️ Co zrobic (actionType + after) + 💡 Dlaczego (clientWhy)
 - Docelowa struktura z emoji (✅/✏️/➕)
@@ -221,11 +221,11 @@ Zakladka "Eksport" w raporcie audytu. Dwa stany:
 
 **Wspolne cechy MD + PDF eksportow:**
 - **Grounding labels przetlumaczone:** CONFIRMED → "Potwierdzone", OVERVIEW → "AIO", PREDICTED → "Przewidywane", SERP-ONLY → "Tylko SERP" (zamiast surowych angielskich tagow)
-- **Keyword Profile:** KD badge + Contentowa/Linkowa/Mieszana — MD: w naglowku benchmarku, PDF: badge w headerze
+- **Keyword Profile:** KD badge + Contentowa/Linkowa/Mieszana - MD: w naglowku benchmarku, PDF: badge w headerze
 - **Quick Wins:** MD: sekcja po Executive Summary, PDF: w bloku executiveSummary. Oba importuja `buildQuickWins` z `lib/ai/quick-wins.ts`
 - **Schema.org:** MD: sekcja 15 (tabela rekomendacji z typem, statusem, priorytetem, brakujacymi polami). PDF: blok schema z badge status/priority per rekomendacja. Widoczne tylko jesli `reportExtras.schemaAudit` istnieje i niepuste
 
-### SchemaAuditBlock (w AuditReport — Summary tab + Report Builder)
+### SchemaAuditBlock (w AuditReport - Summary tab + Report Builder)
 
 Karta audytu schema.org JSON-LD renderowana jesli `reportExtras.schemaAudit` istnieje i zawiera rekomendacje:
 
@@ -239,15 +239,15 @@ Karta audytu schema.org JSON-LD renderowana jesli `reportExtras.schemaAudit` ist
   - Missing required (jesli sa): lista brakujacych wymaganych pol (czerwona)
   - Missing recommended (jesli sa): lista brakujacych rekomendowanych pol (zolta)
   - Google Rich Result info: badge "Rich Result" jesli typ kwalifikuje sie
-- **Backward compat:** stare audyty bez `schemaAudit` w `reportExtras` — sekcja calkowicie ukryta
-- **0 Gemini calls** — detekcja czysto algorytmiczna (katalog typow + regex + profil)
-- **Blok w Report Builder:** `schemaAudit` — dostepny do drag & drop, domyslnie widoczny, warunkowy (ukryty gdy brak danych)
+- **Backward compat:** stare audyty bez `schemaAudit` w `reportExtras` - sekcja calkowicie ukryta
+- **0 Gemini calls** - detekcja czysto algorytmiczna (katalog typow + regex + profil)
+- **Blok w Report Builder:** `schemaAudit` - dostepny do drag & drop, domyslnie widoczny, warunkowy (ukryty gdy brak danych)
 
 ### Pola rekomendacji (brief do klienta)
 
 Rekomendacje generowane algorytmicznie z wymiarow przez `buildRecommendationsFromDimensions()` w `recommendation-builder.ts` (0 Gemini calls). `DimensionProblem` rozszerzony o 4 opcjonalne pola (`title`, `section`, `actionType`, `clientWhy`) generowane przez kazdy prompt wymiaru.
 
-Każda rekomendacja ma 3 opcjonalne pola (backward compat — stare audyty = undefined → fallback):
-- `section` — nazwa sekcji H2 (lub "Lead", "Meta description", "Title tag", "Nowa sekcja"). Wyświetlane: UI (pod tytułem), markdown (📍 Sekcja), PDF (· sekcja), brief (📍 Gdzie)
-- `actionType` — "zamień" | "dodaj" | "usuń" | "przenieś" | "rozszerz". Wyświetlane: UI (badge accent), markdown (Akcja), PDF (· akcja), brief (emoji)
-- `clientWhy` — uzasadnienie w języku klienta bez żargonu SEO/AI. Wyświetlane: UI (💡 accent, zamiast impact), markdown (💡), PDF (💡 accent), brief (💡 Dlaczego). Fallback: `impact`
+Każda rekomendacja ma 3 opcjonalne pola (backward compat - stare audyty = undefined → fallback):
+- `section` - nazwa sekcji H2 (lub "Lead", "Meta description", "Title tag", "Nowa sekcja"). Wyświetlane: UI (pod tytułem), markdown (📍 Sekcja), PDF (· sekcja), brief (📍 Gdzie)
+- `actionType` - "zamień" | "dodaj" | "usuń" | "przenieś" | "rozszerz". Wyświetlane: UI (badge accent), markdown (Akcja), PDF (· akcja), brief (emoji)
+- `clientWhy` - uzasadnienie w języku klienta bez żargonu SEO/AI. Wyświetlane: UI (💡 accent, zamiast impact), markdown (💡), PDF (💡 accent), brief (💡 Dlaczego). Fallback: `impact`

@@ -27,13 +27,13 @@ Dwa tryby: **Content-only** i **Full** (domyslny, z benchmarkiem SERP).
     │   ├── searchSerp(keyword) -> top 10 (Bright Data, fallback: DataForSEO) + PAA + related  [SERP cache hit]
     │   ├── Kontekst artykulu: tytul + snippet tresci (do analizy typ/format/perspektywa zrodla)
     │   ├── Gemini -> consensus CE/SC/CSI/Predicate + typ/format/perspektywa SERP + typ/format/perspektywa artykulu + alignment per pole (7 pol: 4 CSI + 3 content)
-    │   ├── Server-side computeOverallAlignment() — wazona srednia z hard cap (CE/Predicate 2x, hard cap: CE=low|Predicate=low → overall=low) (nadpisuje Gemini)
+    │   ├── Server-side computeOverallAlignment() - wazona srednia z hard cap (CE/Predicate 2x, hard cap: CE=low|Predicate=low → overall=low) (nadpisuje Gemini)
     │   └── Dane persisted -- zapisywane w DB (kolumna serp_consensus w tabeli audits) + opcjonalnie do orchestratora (CSI Alignment)
     └── Uzytkownik potwierdza lub edytuje (moze skorygowac CSI na podstawie konsensusu)
     |
     v
 [Krok 2b: Benchmark SERP -- tylko tryb Full]
-    ├── POST /api/serp (Bright Data SERP API, default SERP — no udm param) -> {organic URLs, PAA, related}
+    ├── POST /api/serp (Bright Data SERP API, default SERP - no udm param) -> {organic URLs, PAA, related}
     │   ├── Filtr social media/video (YouTube, Facebook, Instagram, TikTok, etc.) z organic results
     │   └── cache: shared/serp/{keywordHash}.json + audits/{id}/03_serp.json
     ├── POST /api/extract (Bright Data Web Unlocker) x top 10 URLs -> Markdown konkurentow
@@ -77,8 +77,8 @@ Dwa tryby: **Content-only** i **Full** (domyslny, z benchmarkiem SERP).
         -> buildRecommendationsFromDimensions(dimensions, eeat, cqsWeights)
         -> DimensionProblem[] → Recommendation[] (priorytet z impact + waga CQS)
         -> fuzzy dedup (token overlap >=80%), cap 20, EEAT bonus recs
-        -> saveRecommendations() — zapis do DB PRZED raportem (odporne na blad raportu)
-        -> buildQuickWins(audit) — algorytmicznie max 7 quick wins (0 Gemini calls, Effort/Title/EEAT/TF-IDF/Fan-Out/BLUF/Chunk)
+        -> saveRecommendations() - zapis do DB PRZED raportem (odporne na blad raportu)
+        -> buildQuickWins(audit) - algorytmicznie max 7 quick wins (0 Gemini calls, Effort/Title/EEAT/TF-IDF/Fan-Out/BLUF/Chunk)
     |
     v
 [Schema Auditor (algorytmiczny, 0 Gemini calls)]
@@ -97,14 +97,14 @@ Dwa tryby: **Content-only** i **Full** (domyslny, z benchmarkiem SERP).
         -> tryb Full: + gaps P1-P4, benchmark vs SERP, Content Format Intelligence
         -> proponowana struktura zasilana: chunk optimization + gaps + sub-zapytania Fan-Out (POKRYTE/NIEPOKRYTE) + twierdzenia AI Overview (jesli obecne)
         -> NIE generuje rekomendacji (przeniesione do recommendation-builder)
-        -> tfidfMissingTerms przekazywane jako `[]` (TF-IDF mapping usuniety z raportu — oszczednosc ~600-1200 tokenow)
-        -> 7 zadan (bylo 8 — usuniety task 1 "rekomendacje")
+        -> tfidfMissingTerms przekazywane jako `[]` (TF-IDF mapping usuniety z raportu - oszczednosc ~600-1200 tokenow)
+        -> 7 zadan (bylo 8 - usuniety task 1 "rekomendacje")
         └── cache: audits/{id}/08_report.json
     |
     v
 [Dashboard raportu]
     └── /audyt/[id] -> pelny raport z wykresami
-        ├── Tab Podsumowanie: CQS, Citability, Radar, CSI, Walidacja SERP (z DB — tabela 7 wierszy: CE/SC/CSI/Predicate/Typ/Format/Perspektywa + kluczowe dane), Title & Description (current vs recommended), Top 10 SERP (keyword + volume + KD (estimated, avg DR/10) + 5 metryk benchmarkowych: Śr. CQS/Citability/długość/Wpływ jakości/Wpływ linków + tabela ranked competitors z DR/RD)
+        ├── Tab Podsumowanie: CQS, Citability, Radar, CSI, Walidacja SERP (z DB - tabela 7 wierszy: CE/SC/CSI/Predicate/Typ/Format/Perspektywa + kluczowe dane), Title & Description (current vs recommended), Top 10 SERP (keyword + volume + KD (estimated, avg DR/10) + 5 metryk benchmarkowych: Śr. CQS/Citability/długość/Wpływ jakości/Wpływ linków + tabela ranked competitors z DR/RD)
         ├── Tab Rekomendacje: priorytetyzowane (z recommendation-builder, generowane przed raportem)
         └── Tab Eksport: Markdown (.md) + PDF (.pdf, client-side html2pdf.js + marked)
     |
@@ -117,43 +117,43 @@ Dwa tryby: **Content-only** i **Full** (domyslny, z benchmarkiem SERP).
 
 Klient Google GenAI SDK z per-call API key threading:
 
-- **`callClaude(prompt, maxTokens?, apiKey?)`** — zwraca raw text
-- **`callClaudeJSON<T>(prompt, maxTokens?, apiKey?)`** — zwraca parsed JSON (wrapper na `callClaudeJSONWithMeta`)
-- **`callClaudeJSONWithMeta<T>(prompt, maxTokens?, apiKey?)`** — concurrent-safe, zwraca `{ data: T, meta: CallMeta }`. Użyj w `Promise.allSettled` zamiast `callClaudeJSON` + `getLastCallMeta()`.
-- **`getLastCallMeta()`** — globalny singleton, bezpieczny TYLKO w kodzie sekwencyjnym (race condition w concurrent batches)
-- **Client cache:** `getOrCreateClient(apiKey)` — reużywa client jeśli ten sam klucz. `resolveClient(apiKey?)` — fallback na `resolveCredential('GEMINI_API_KEY')`.
+- **`callClaude(prompt, maxTokens?, apiKey?)`** - zwraca raw text
+- **`callClaudeJSON<T>(prompt, maxTokens?, apiKey?)`** - zwraca parsed JSON (wrapper na `callClaudeJSONWithMeta`)
+- **`callClaudeJSONWithMeta<T>(prompt, maxTokens?, apiKey?)`** - concurrent-safe, zwraca `{ data: T, meta: CallMeta }`. Użyj w `Promise.allSettled` zamiast `callClaudeJSON` + `getLastCallMeta()`.
+- **`getLastCallMeta()`** - globalny singleton, bezpieczny TYLKO w kodzie sekwencyjnym (race condition w concurrent batches)
+- **Client cache:** `getOrCreateClient(apiKey)` - reużywa client jeśli ten sam klucz. `resolveClient(apiKey?)` - fallback na `resolveCredential('GEMINI_API_KEY')`.
 - **JSON mode:** `responseMimeType: 'application/json'` (natywny structured output Gemini)
 - **Auto-retry:** jeśli `finishReason === 'MAX_TOKENS'` → ponawia z 2x tokenami
-- **JSON repair:** `extractBalancedJSON()` — wyciąga pierwszy zbalansowany `{...}` obiekt z odpowiedzi z trailing garbage
+- **JSON repair:** `extractBalancedJSON()` - wyciąga pierwszy zbalansowany `{...}` obiekt z odpowiedzi z trailing garbage
 
 ### Sekwencyjne wywolania AI
 
 Orkiestrator (`lib/ai/orchestrator.ts`) uruchamia wymiary **równolegle** via `Promise.all` (9 wymiarów + EEAT = 10 concurrent Gemini calls):
 
-- **Per-call API key:** orchestrator otrzymuje `apiKey` z API route (`resolveGeminiKey(userId)`) i przekazuje go do wszystkich wywołań `callClaude`/`callClaudeJSON` jako parametr — brak globalnego singletona.
+- **Per-call API key:** orchestrator otrzymuje `apiKey` z API route (`resolveGeminiKey(userId)`) i przekazuje go do wszystkich wywołań `callClaude`/`callClaudeJSON` jako parametr - brak globalnego singletona.
 - **Batch 0 (tylko tryb Full):** SERP fetch + zachowanie source URL w `competitors[]` z pozycja SERP (wordCount: 0, nie crawlowany) + filtrowanie source z crawlingu + crawl remaining (failed crawls dodawane z wordCount: 0) + filtr `wordCount >= MIN_COMPETITOR_WORDS` dla EAV/scoringu + EAV extraction + **competitor scoring** (1 call AI per usable competitor -> estimatedCQS, estimatedCitability, summary, strengths, weaknesses) + **backlinks fetch** (DataForSEO Backlinks Summary, domain-level DR/RD, ~$0.02/domain) -> benchmark
 - **Batch 1 (równolegle via Promise.all):** CSI-A, D1-D8, EEAT (9 wymiarów + EEAT = 10 concurrent calls)
   - CSI-A otrzymuje opcjonalnie `serpConsensus` (jesli dostepny z Kroku 2) -- wzbogaca analize o porownanie z konsensusem SERP
-  - **EEAT pre-detekcja:** przed budowaniem prompta EEAT, orchestrator wywoluje `detectEeatSignals(content, htmlMetrics)` z `eeat-detection.ts` — regex/keyword detekcja ~15 sygnalow. `formatPreDetectedSignals()` tworzy blok wstrzykiwany do `buildPrompt(..., preDetectedBlock)`. Gemini weryfikuje + ocenia sile (oszczednosc ~700-1000 tokenow/audyt)
+  - **EEAT pre-detekcja:** przed budowaniem prompta EEAT, orchestrator wywoluje `detectEeatSignals(content, htmlMetrics)` z `eeat-detection.ts` - regex/keyword detekcja ~15 sygnalow. `formatPreDetectedSignals()` tworzy blok wstrzykiwany do `buildPrompt(..., preDetectedBlock)`. Gemini weryfikuje + ocenia sile (oszczednosc ~700-1000 tokenow/audyt)
   - Kazdy wymiar zapisywany do DB natychmiast po zakonczeniu (`saveDimensionResults`)
   - `rawResponse` zapisywany razem z wynikiem wymiaru (surowa odpowiedz AI)
   - Polling w UI pokazuje biezacy postep (tylko jeden wymiar jako "running")
   - **Error handling per wymiar:** try/catch -- blad jednego wymiaru nie przerywa calego audytu (fallback: score=0, puste pola)
   - **Warning detection:** jesli AI zwroci score=0 i brak summary -> status `'warning'` w `_meta.json`
 - **Batch 2a (po batch 1):** Budowanie rekomendacji algorytmicznie z wymiarow + Schema Auditor
-  - `buildRecommendationsFromDimensions()` w `recommendation-builder.ts` — 0 Gemini calls
+  - `buildRecommendationsFromDimensions()` w `recommendation-builder.ts` - 0 Gemini calls
   - Konwersja DimensionProblem[] → Recommendation[] z priorytetem, dedup, cap 20
-  - `saveRecommendations()` — zapis do DB PRZED raportem (odporne na blad raportu)
+  - `saveRecommendations()` - zapis do DB PRZED raportem (odporne na blad raportu)
   - Recommendation IDs generowane przez `nanoid()` (nie AI-generated `rec_N`)
-  - `detectRecommendedSchemas()` w `schema-catalog.ts` — algorytmiczna analiza schema.org JSON-LD (0 Gemini calls), wynik zapisywany do `reportExtras.schemaAudit`
+  - `detectRecommendedSchemas()` w `schema-catalog.ts` - algorytmiczna analiza schema.org JSON-LD (0 Gemini calls), wynik zapisywany do `reportExtras.schemaAudit`
 - **Batch 2b (po batch 2a):** Generowanie raportu (tylko extras)
-  - Report prompt: 7 zadan (bylo 8 — usuniety task 1 "rekomendacje")
-  - Generuje: struktura H1/H2/H3, BLUF per H2, SRL transforms, EEAT blocks, Title & Meta Description, AIO coverage. TF-IDF mapping task otrzymuje pusta liste (`[]`) — `tfidfMapping` puste (oszczednosc ~600-1200 tokenow/audyt). Konsumenci uzywaja `rawResponse.missingTerms`
-  - Report retry (2 proby) — blad raportu nie traci rekomendacji (juz zapisane)
+  - Report prompt: 7 zadan (bylo 8 - usuniety task 1 "rekomendacje")
+  - Generuje: struktura H1/H2/H3, BLUF per H2, SRL transforms, EEAT blocks, Title & Meta Description, AIO coverage. TF-IDF mapping task otrzymuje pusta liste (`[]`) - `tfidfMapping` puste (oszczednosc ~600-1200 tokenow/audyt). Konsumenci uzywaja `rawResponse.missingTerms`
+  - Report retry (2 proby) - blad raportu nie traci rekomendacji (juz zapisane)
   - `saveReportExtras` z niezaleznym try/catch
   - `parseReportResponse()` nie zwraca juz rekomendacji
 
-**Cancellation:** Orchestrator sprawdza `getAuditStatus(auditId)` przed i po batchu równoległych wymiarów (nie między poszczególnymi — max ~15s opóźnienia detekcji). Jesli `'cancelled'` -- rzuca `AuditCancelledError` i konczy prace bez nadpisywania statusu w DB.
+**Cancellation:** Orchestrator sprawdza `getAuditStatus(auditId)` przed i po batchu równoległych wymiarów (nie między poszczególnymi - max ~15s opóźnienia detekcji). Jesli `'cancelled'` -- rzuca `AuditCancelledError` i konczy prace bez nadpisywania statusu w DB.
 
 Szacowany czas:
 - **Content-only:** ~15-25s (batch 1 rownolegle, 10 wywolan) + ~10-15s (batch 2) = ~25-40s
@@ -302,7 +302,7 @@ Grupowanie fraz kluczowych w tematyczne klastry na podstawie nakladania sie wyni
     └── Union-Find clustering (threshold default 0.95, minClusterSize default 1)
     |
     v
-[3. Analiza + volumes — równolegle]
+[3. Analiza + volumes - równolegle]
     ├── Gemini analiza per klaster (label, intent, pillar suggestion)
     └── DataForSEO batch volume fetch (do 700 keywords per call)
     |
@@ -323,7 +323,7 @@ Wykrywanie zbednych stron (tematycznie odbiegajacych) i kanibalizujacych sie tre
     |
     v
 [1. Sitemap parse] (0-5%)
-    ├── parseSitemap(url) — rekursywne XML, nested sitemaps, filtr mediow
+    ├── parseSitemap(url) - rekursywne XML, nested sitemaps, filtr mediow
     ├── SSRF walidacja URL-i
     └── Cap 2000 URL-i
     |
@@ -336,7 +336,7 @@ Wykrywanie zbednych stron (tematycznie odbiegajacych) i kanibalizujacych sie tre
     |
     v
 [3. Embeddings] (40-55%)
-    ├── generateEmbeddings(texts) — Gemini gemini-embedding-2-preview (configurable via EMBEDDING_MODEL_NAME)
+    ├── generateEmbeddings(texts) - Gemini gemini-embedding-2-preview (configurable via EMBEDDING_MODEL_NAME)
     ├── 5 concurrent calls (1 text per call)
     └── Empty → zero vector fallback
     |
@@ -375,23 +375,23 @@ Wykrywanie zbednych stron (tematycznie odbiegajacych) i kanibalizujacych sie tre
 
 ### Pipeline Schema Gaps (`lib/schema-gaps/`)
 
-Sitemap-wide analiza schema.org JSON-LD — ekstrakcja istniejacych schemat + detekcja luk per strona + agregacja sitewide.
+Sitemap-wide analiza schema.org JSON-LD - ekstrakcja istniejacych schemat + detekcja luk per strona + agregacja sitewide.
 
 ```
 [POST /api/schema] → after() → runSchemaGapsAnalysis()
     |
     v
 [1. Sitemap parse] (0-5%)
-    ├── parseSitemap(url) — reuse z lib/pruning/sitemap-parser.ts
+    ├── parseSitemap(url) - reuse z lib/pruning/sitemap-parser.ts
     ├── Rekursywne XML, nested sitemaps, filtr mediow
     ├── SSRF walidacja URL-i
     └── Cap 500 URL-i (Lambda timeout constraint, nizszy niz pruning 2000)
     |
     v
 [2. Per-URL fetch + JSON-LD extraction] (5-85%)
-    ├── Direct HTTP fetch (nie Bright Data — 0 kosztu)
+    ├── Direct HTTP fetch (nie Bright Data - 0 kosztu)
     ├── 5 concurrent, 15s timeout per URL
-    ├── redirect: 'error' — blokuje redirecty (SSRF defense)
+    ├── redirect: 'error' - blokuje redirecty (SSRF defense)
     ├── validateUrl() na kazdym URL
     ├── cheerio: parsuje <script type="application/ld+json">
     ├── Obsluga @graph (WordPress Yoast/RankMath)
@@ -401,11 +401,11 @@ Sitemap-wide analiza schema.org JSON-LD — ekstrakcja istniejacych schemat + de
     |
     v
 [3. Profile detection + gap analysis] (85-95%)
-    ├── detectPageProfile(schemas, url, htmlBody) — heurystyka z 3 zrodel:
+    ├── detectPageProfile(schemas, url, htmlBody) - heurystyka z 3 zrodel:
     │   ├── (1) Istniejace JSON-LD schemas (np. Product → 'product')
     │   ├── (2) URL patterns (np. /faq → 'faq', /produkt/ → 'product')
     │   └── (3) Content body patterns (regex na HTML)
-    ├── detectRecommendedSchemas() per strona — reuse z schema-catalog.ts
+    ├── detectRecommendedSchemas() per strona - reuse z schema-catalog.ts
     └── Wynik: SchemaPageResult[] (url, profile, schemas, recommendations, issues)
     |
     v
@@ -461,11 +461,11 @@ Rozszerzanie klastra o powiazane frazy kluczowe generowane przez Gemini, z walid
 **Graceful degradation:** embeddings fail → similarity=null, volume fail → volume=null.
 **Prompt sanitization:** `sanitize()` stripuje markdown/instrukcje z user-influenced cluster label/keywords.
 
-### Error handling — ulepszenia wspolne dla 3 narzedzi
+### Error handling - ulepszenia wspolne dla 3 narzedzi
 
 Wszystkie 3 narzedzia standalone (Schema Gaps, Pruning, Clustering) stosuja wspolne wzorce error handling:
 
-- **Schema Gaps:** pelne pokrycie try-catch (sitemap parse, per-URL fetch, DB save). Success rate tracking — orchestrator liczy udane vs nieudane fetche. UI: warning banner "Niska skutecznosc pobierania (X%)" gdy <50%
-- **Pruning:** try-catch dodany na sitemap parse + embeddings batch + scraping. **Embeddings min 50% success threshold** — odrzuca caly job jesli >50% embeddingow zwraca zero vector (zamiast cichego fallbacku i generowania bezsensownych klastrow)
+- **Schema Gaps:** pelne pokrycie try-catch (sitemap parse, per-URL fetch, DB save). Success rate tracking - orchestrator liczy udane vs nieudane fetche. UI: warning banner "Niska skutecznosc pobierania (X%)" gdy <50%
+- **Pruning:** try-catch dodany na sitemap parse + embeddings batch + scraping. **Embeddings min 50% success threshold** - odrzuca caly job jesli >50% embeddingow zwraca zero vector (zamiast cichego fallbacku i generowania bezsensownych klastrow)
 - **Clustering:** try-catch dodany na SERP fetch per keyword
 - **Wspolne:** success rate logging we wszystkich pipeline'ach. Komunikaty bledow po polsku (PL error messages w `errorMessage` DB kolumnie)

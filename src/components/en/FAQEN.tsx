@@ -58,6 +58,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '18px 20px',
+          minHeight: 44,
           background: 'none',
           border: 'none',
           cursor: 'pointer',

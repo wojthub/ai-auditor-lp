@@ -124,7 +124,7 @@ export default function DimensionsTeaserEN() {
           </a>
         </motion.div>
 
-        {/* Copy — indicators intro */}
+        {/* Copy - indicators intro */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +140,7 @@ export default function DimensionsTeaserEN() {
             lineHeight: 1.2,
             marginBottom: 12,
           }}>
-            Your content in numbers - not guesses.
+            Objective content evaluation expressed in numbers
           </h3>
           <p style={{ fontSize: 16, color: '#36394a', lineHeight: 1.72, margin: '0 0 14px' }}>
             The analysis translates into two precise indicators:
