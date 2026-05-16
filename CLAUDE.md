@@ -43,12 +43,24 @@ ai-auditor-lp-clone/
 │   │   ├── how-it-works/        # EN "How it works" (/how-it-works)
 │   │   │   ├── page.tsx
 │   │   │   └── PageContentEN.tsx
+│   │   ├── pricing/             # EN "Pricing" (/pricing)
+│   │   │   ├── page.tsx
+│   │   │   └── PricingContentEN.tsx
+│   │   ├── dimensions/          # EN "Dimensions" (/dimensions)
+│   │   │   ├── page.tsx
+│   │   │   └── DimensionsContent.tsx
 │   │   └── pl/                  # Wersja PL
 │   │       ├── layout.tsx       # PL layout (lang="pl", metadata PL, hreflang)
 │   │       ├── page.tsx         # PL homepage (/pl)
-│   │       └── jak-to-dziala/   # PL "Jak to działa?" (/pl/jak-to-dziala)
+│   │       ├── jak-to-dziala/   # PL "Jak to działa?" (/pl/jak-to-dziala)
+│   │       │   ├── page.tsx
+│   │       │   └── PageContent.tsx
+│   │       ├── cennik/          # PL "Cennik" (/pl/cennik)
+│   │       │   ├── page.tsx
+│   │       │   └── PricingContent.tsx
+│   │       └── wymiary/         # PL "Wymiary" (/pl/wymiary)
 │   │           ├── page.tsx
-│   │           └── PageContent.tsx
+│   │           └── WymiaryContent.tsx
 │   └── components/
 │       ├── Navbar.tsx           # PL Navbar — switcher EN → /
 │       ├── Hero.tsx
@@ -78,7 +90,7 @@ ai-auditor-lp-clone/
 │           ├── ForWhoEN.tsx
 │           ├── ClosingCtaEN.tsx
 │           ├── RadarIllustrationEN.tsx
-│           └── FooterEN.tsx     # + Privacy Policy + Terms links
+│           └── FooterEN.tsx     # Mirror PL: logo + /how-it-works + /#who-is-it-for + CTA
 ```
 
 ---
@@ -91,6 +103,8 @@ ai-auditor-lp-clone/
 |-----|-----------|-------|
 | `/` | EN HP (komponenty EN) | AI Search Content Audit - CitationOne |
 | `/how-it-works` | PageContentEN | How does CitationOne work? - CitationOne |
+| `/pricing` | PricingContentEN | Pricing - CitationOne |
+| `/dimensions` | DimensionsContent | 10 content quality dimensions + E-E-A-T - CitationOne |
 
 ### PL (katalog /pl)
 
@@ -98,6 +112,8 @@ ai-auditor-lp-clone/
 |-----|-----------|-------|
 | `/pl` | PL HP (komponenty PL) | Audyt treści pod AI Search - CitationOne |
 | `/pl/jak-to-dziala` | PageContent PL | Jak działa CitationOne? - CitationOne |
+| `/pl/cennik` | PricingContent PL | Cennik - CitationOne |
+| `/pl/wymiary` | WymiaryContent PL | 10 wymiarów jakości treści + E-E-A-T - CitationOne |
 
 ### 301 Redirecty (`public/_redirects`)
 
@@ -176,6 +192,25 @@ Schema.org Audit i Information Gain tylko na podstronach (nie na HP).
 | D9 | Editorial Effort | Effort |
 | EEAT | E-E-A-T | - |
 
+### Wymiary na stronach `/dimensions` i `/pl/wymiary`
+
+Lista 10 wymiarów (numerowana 01–10, używana w sekcji edukacyjnej):
+
+| # | EN (/dimensions) | PL (/pl/wymiary) |
+|---|------------------|------------------|
+| 01 | Intent Alignment | Zgodność z intencją |
+| 02 | Info Density | Gęstość informacji |
+| 03 | BLUF | BLUF |
+| 04 | Knowledge Graph (EAV) | Graf wiedzy (EAV) |
+| 05 | Information Chunks | Autonomiczność sekcji |
+| 06 | Cost of Retrieval (Conciseness) | Koszt ekstrakcji |
+| 07 | Information Gain (Uniqueness) | Wysiłek redakcyjny |
+| 08 | AIO Coverage (Query Fan-out) | Pokrycie AI Overview |
+| 09 | Semantic Role Logic (SRL) | Role semantyczne |
+| 10 | TF-IDF (SERP Benchmark) | TF-IDF |
+
+Plus blok E-E-A-T (Experience / Expertise / Authoritativeness / Trustworthiness).
+
 ### Statusy / URR
 
 | | PL | EN |
@@ -194,14 +229,25 @@ const APP_URL = 'https://app.citationone.com';
 | Kontekst | PL | EN |
 |----------|----|----|
 | CTA / Login | `APP_URL/login?lang=pl` | `APP_URL/login?lang=en` |
-| Privacy Policy | - | `APP_URL/privacy-policy` (FooterEN) |
-| Terms of Service | - | `APP_URL/terms` (FooterEN) |
+| Audyt z URL (Hero) | `APP_URL/login?lang=pl&audit-url={URL}` | `APP_URL/login?lang=en&audit-url={URL}` |
 
-### Pricing info (Hero + ClosingCta, PL + EN)
+### Hero — input URL → audyt
 
-- Linia 1: "1,50 EUR / audyt" (PL) / "EUR 1.50 / audit" (EN) — `fontSize: 13`, `color: #818898`
-- Linia 2: ikona prezentu (teal SVG gift box) + "Każde nowe konto otrzymuje 3 darmowe audyty." (PL) / "Every new account receives 3 free audits." (EN)
-- Umieszczone pod CTA button, poza flex-row
+- Input "Wklej link do strony..." (PL) / "Paste your page URL..." (EN) z walidacją URL po stronie klienta.
+- `normalizeUrl`: trim + auto-prefix `https://` jeśli brak protokołu.
+- `isValidUrl`: `new URL()` try/catch + protokół `http:`/`https:` + `hostname` musi zawierać `.`.
+- Submit → `${APP_URL}/login?lang={pl|en}&audit-url={encoded}` gdzie `encoded = encodeURIComponent(normalized).replace(/%3A/gi, ':').replace(/%2F/gi, '/')` — `:` i `/` zostają nieencodowane w query (RFC 3986).
+- Komunikaty błędów: "Podaj adres URL." / "Podaj poprawny adres URL (np. https://example.com/strona)." (PL); odpowiedniki EN.
+
+### Cennik (Hero CTA caption + /pricing + /pl/cennik)
+
+- Cena: **€2.00 / audyt** (pay-as-you-go, brak abonamentów).
+- Pod CTA w Hero: ikona prezentu (teal) + "Pierwsze 3 audyty są darmowe." / "First 3 audits are free."
+
+### SEO — title template i FAQ schema
+
+- Root layout: `title.template: '%s - CitationOne'` (EN); PL layout ma własny template. **Strony `metadata.title` NIE dopisują " - CitationOne"** — template robi to automatycznie. Wyjątek: `openGraph.title` jest standalone i może zawierać brand.
+- `FAQPage` JSON-LD schema renderowana w [FAQ.tsx](src/components/FAQ.tsx) i [FAQEN.tsx](src/components/en/FAQEN.tsx) — generowana z tablicy `faqs` (UI i structured data zawsze zsync).
 
 ### Language switcher
 

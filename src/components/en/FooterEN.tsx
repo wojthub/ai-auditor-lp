@@ -24,13 +24,9 @@ export default function FooterEN() {
             </a>
           </div>
 
-          <div className="flex items-center gap-1" style={{ fontSize: 12.5, color: '#a4acb9' }}>
-            <span>&copy; {new Date().getFullYear()} CitationOne</span>
-            <span style={{ margin: '0 4px' }}>·</span>
-            <a href={`${APP_URL}/privacy-policy`} style={{ color: '#a4acb9', textDecoration: 'none', padding: '4px 0' }}>Privacy Policy</a>
-            <span style={{ margin: '0 4px' }}>·</span>
-            <a href={`${APP_URL}/terms`} style={{ color: '#a4acb9', textDecoration: 'none', padding: '4px 0' }}>Terms</a>
-          </div>
+          <span style={{ fontSize: 12.5, color: '#a4acb9' }}>
+            &copy; {new Date().getFullYear()} CitationOne
+          </span>
         </div>
       </div>
     </footer>

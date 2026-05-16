@@ -4,65 +4,142 @@ import { motion } from 'framer-motion';
 
 const audiences = [
   {
+    tag: 'SEO Specialist',
     title: 'SEO Specialist',
-    highlights: ['10 citation dimensions with separate 0-10 scores', 'Top 10 SERP benchmark - see the gap to the leader', 'Before/After with estimated CQS impact'],
-    icon: (
-      <svg width="42" height="42" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0} strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /><path d="M8 11h6M8 8h4" />
-      </svg>
-    ),
+    color: '#e07a4a',
+    colorBg: 'rgba(224,122,74,0.11)',
+    highlights: [
+      'Access to hard analytical data.',
+      'Precise benchmark against the top 10 SERP results.',
+      'A concrete CQS metric that simplifies strategy planning.',
+    ],
   },
   {
-    title: 'Marketer / Content Manager',
-    highlights: ['Clear results without technical expertise', 'Ready-made recommendations on what to change', 'PDF report to share with your team'],
-    icon: (
-      <svg width="42" height="42" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 01-3.46 0" /><path d="M22 8c0-1.1-.2-2.15-.56-3.12" />
-      </svg>
-    ),
+    tag: 'Marketer · Content Manager',
+    title: 'Marketer & Content Manager',
+    color: '#0b7983',
+    colorBg: 'rgba(11,121,131,0.10)',
+    highlights: [
+      'Clear PDF reports you can hand straight to editors and copywriters.',
+      'Markdown reports ready to share with editors and copywriters.',
+      'A clear action plan and confidence that your content budget delivers ROI.',
+    ],
   },
   {
-    title: 'Agency / Freelancer',
-    highlights: ['New service offering - no extra headcount', 'Report ready to send to client as-is', 'Credit packs, no subscription, invoice included'],
-    icon: (
-      <svg width="42" height="42" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z" /><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" /><path d="M2 12h9m11 0h-4" />
-      </svg>
-    ),
+    tag: 'Agency · Freelancer',
+    title: 'Agency & Freelancer',
+    color: '#c47a2a',
+    colorBg: 'rgba(196,122,42,0.11)',
+    highlights: [
+      'A new service in your portfolio that sets you apart from competitors.',
+      'A ready, professional client-facing report generated with one click.',
+      'Budget flexibility - buy audits one at a time. First 3 audits are free.',
+    ],
   },
 ];
 
 export default function ForWhoEN() {
   return (
-    <section id="who-is-it-for" style={{
-      background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
-      padding: '90px 0', position: 'relative', overflow: 'hidden', zIndex: 1,
-    }}>
-      <span aria-hidden style={{ position: 'absolute', top: 36, left: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201C'}</span>
-      <span aria-hidden style={{ position: 'absolute', bottom: 36, right: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201D'}</span>
+    <section id="who-is-it-for" style={{ background: '#ffffff', padding: '90px 0', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 1 }}>
 
-      <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 2 }}>
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: 56 }}>
-          <p style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.65)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>Who is it for</p>
-          <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.25rem)', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.025em' }}>
-            You don&#39;t need to be an expert to audit like one
-          </h2>
-        </motion.div>
+        {/* Section label */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
+          <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+          <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Who is it for</span>
+          <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+        </div>
 
+        {/* 2-col header */}
+        <div className="forwho-header-grid" style={{ marginBottom: 56 }}>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.55 }}
+            style={{
+              fontSize: 'clamp(2rem, 4.5vw, 3rem)',
+              fontWeight: 700,
+              color: '#0d0d12',
+              letterSpacing: '-0.035em',
+              lineHeight: 1.15,
+              margin: 0,
+            }}
+          >
+            AI Search visibility<br />for every team
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            style={{
+              fontSize: 17,
+              color: '#36394a',
+              lineHeight: 1.72,
+              margin: 0,
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            Whether you plan strategy, write content or serve clients - CitationOne gives you a hard benchmark to act on.
+          </motion.p>
+        </div>
+
+        {/* Cards */}
         <div className="forwho-grid">
           {audiences.map((a, i) => (
-            <motion.div key={a.title} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -4, boxShadow: '0 8px 24px rgba(11,121,131,0.1)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-              viewport={{ once: true, margin: '-40px' }} transition={{ duration: 0.5, delay: i * 0.1 }}
-              style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '32px 28px', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ width: 88, height: 88, borderRadius: 16, background: '#0b7983', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 24, color: '#ffffff' }}>
-                {a.icon}
+            <motion.div
+              key={a.title}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(0,0,0,0.08)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              style={{
+                background: '#ffffff',
+                border: '1px solid #dfe1e7',
+                borderRadius: 12,
+                padding: '32px 28px',
+                display: 'flex',
+                flexDirection: 'column',
+                position: 'relative',
+                overflow: 'hidden',
+              }}
+            >
+              {/* Audience tag */}
+              <div style={{ marginBottom: 24, position: 'relative', zIndex: 1 }}>
+                <span style={{
+                  display: 'inline-block',
+                  fontSize: 11, fontWeight: 700,
+                  color: a.color,
+                  background: a.colorBg,
+                  border: `1px solid ${a.color}33`,
+                  borderRadius: 100,
+                  padding: '4px 14px',
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                }}>
+                  {a.tag}
+                </span>
               </div>
-              <h3 style={{ fontSize: 17, fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.02em', lineHeight: 1.3, marginBottom: 12 }}>{a.title}</h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+
+              <h3 style={{
+                fontSize: 20, fontWeight: 700,
+                color: '#0d0d12',
+                letterSpacing: '-0.025em', lineHeight: 1.25,
+                marginBottom: 24,
+                position: 'relative', zIndex: 1,
+              }}>
+                {a.title}
+              </h3>
+
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 14, position: 'relative', zIndex: 1 }}>
                 {a.highlights.map((h) => (
-                  <li key={h} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#36394a', lineHeight: 1.4 }}>
-                    <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#0b7983', flexShrink: 0 }} />{h}
+                  <li key={h} style={{ display: 'flex', alignItems: 'flex-start', gap: 12, fontSize: 14, color: '#36394a', lineHeight: 1.55 }}>
+                    <span style={{ width: 16, height: 2, background: a.color, flexShrink: 0, marginTop: 9, borderRadius: 1 }} />
+                    {h}
                   </li>
                 ))}
               </ul>
@@ -72,8 +149,24 @@ export default function ForWhoEN() {
       </div>
 
       <style>{`
-        .forwho-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-        @media (max-width: 768px) { .forwho-grid { grid-template-columns: 1fr; } }
+        .forwho-header-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 64px;
+          align-items: center;
+        }
+        .forwho-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
+        @media (max-width: 900px) {
+          .forwho-grid { grid-template-columns: 1fr 1fr; }
+          .forwho-header-grid { grid-template-columns: 1fr; gap: 24px; }
+        }
+        @media (max-width: 600px) {
+          .forwho-grid { grid-template-columns: 1fr; }
+        }
       `}</style>
     </section>
   );

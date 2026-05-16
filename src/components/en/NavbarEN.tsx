@@ -32,7 +32,8 @@ export default function NavbarEN() {
         {/* Desktop nav */}
         <div className="hidden sm:flex items-center">
           <a href="/how-it-works" className="nav-link">How it works</a>
-          <a href="#who-is-it-for" className="nav-link">Who is it for?</a>
+          <a href="/dimensions" className="nav-link">Dimensions</a>
+          <a href="/pricing" className="nav-link">Pricing</a>
           <a href={`${APP_URL}/login?lang=en`} className="nav-cta">Run audit</a>
           <a href="/pl" className="nav-lang" title="Wersja polska">PL</a>
         </div>
@@ -77,8 +78,11 @@ export default function NavbarEN() {
           <a href="/how-it-works" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             How it works
           </a>
-          <a href="#who-is-it-for" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
-            Who is it for?
+          <a href="/dimensions" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+            Dimensions
+          </a>
+          <a href="/pricing" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+            Pricing
           </a>
           <a href="/pl" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             PL - Wersja polska

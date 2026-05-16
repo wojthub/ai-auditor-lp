@@ -5,34 +5,34 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const faqs = [
   {
-    question: 'Czy CitationOne zastępuje tradycyjne narzędzia SEO?',
+    question: 'Does CitationOne replace traditional SEO tools?',
     answer:
-      'Nie. Tradycyjne narzędzia SEO służą do badania pozycji w klasycznym Google. CitationOne sprawdza, czy Twoje treści są zauważane i cytowane przez algorytmy ChatGPT, Perplexity czy Google AI Overview.',
+      'No. Traditional SEO tools measure your rankings in classic Google search. CitationOne checks whether your content is noticed and cited by the algorithms behind ChatGPT, Perplexity and Google AI Overview.',
   },
   {
-    question: 'Jak szybko otrzymam wynik audytu?',
+    question: 'How quickly do I get the audit result?',
     answer:
-      'Pełna analiza pojedynczej treści trwa poniżej 3 minut.',
+      'A full analysis of a single piece of content takes under 3 minutes.',
   },
   {
-    question: 'Czy muszę integrować narzędzie ze swoją stroną?',
+    question: 'Do I need to integrate the tool with my site?',
     answer:
-      'Nie. CitationOne działa w chmurze. Wystarczy podać adres URL, sitemapę lub wkleić tekst. Nie musisz instalować żadnych wtyczek ani modyfikować kodu witryny.',
+      'No. CitationOne runs in the cloud. Just provide a URL, sitemap or paste the text. No plugins or code changes required.',
   },
   {
-    question: 'Jak działa system kredytowy i audyt masowy?',
+    question: 'How does the credit system and bulk audit work?',
     answer:
-      'Stosujemy prosty model: 1 kredyt = 1 pełny audyt URL. W audycie masowym analiza intencji i dobór słów dla sitemapy do 200 URL-i kosztuje tylko 1 kredyt. Ty decydujesz, dla których stron chcesz wygenerować pełne raporty.',
+      'We use a simple model: 1 credit = 1 full URL audit. Bulk intent analysis and keyword mapping for a sitemap of up to 200 URLs costs just 1 credit. You decide which pages to generate full reports for.',
   },
   {
-    question: 'Czy moje kredyty mają datę ważności?',
+    question: 'Do my credits have an expiration date?',
     answer:
-      'Nie. W CitationOne nie ma subskrypcji. Kupujesz kredyty w modelu Pay-as-you-go, a one nie przepadają. Korzystasz z nich tylko wtedy, gdy faktycznie audytujesz treść.',
+      'No. CitationOne has no subscription. You buy credits Pay-as-you-go and they never expire. You only spend them when you actually audit content.',
   },
   {
-    question: 'Jak wykorzystać 3 darmowe kredyty na start?',
+    question: 'How do I use the 3 free starter credits?',
     answer:
-      'Wystarczy założyć konto przez Google lub e-mail. Od razu otrzymujesz 3 kredyty, które pozwalają na wykonanie 3 pełnych audytów lub analizę masową sitemapy. Bez podpinania karty.',
+      'Just sign up with Google or email. You instantly get 3 credits to run 3 full audits or analyze an entire sitemap. No card required.',
   },
 ];
 
@@ -112,7 +112,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   );
 }
 
-export default function FAQ() {
+export default function FAQEN() {
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -148,7 +148,7 @@ export default function FAQ() {
               letterSpacing: '-0.025em',
             }}
           >
-            Masz pytania? Poznaj konkrety
+            Got questions? Here are the details
           </h2>
         </motion.div>
 

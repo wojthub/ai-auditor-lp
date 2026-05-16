@@ -32,7 +32,8 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden sm:flex items-center">
           <a href="/pl/jak-to-dziala" className="nav-link">Jak to działa?</a>
-          <a href="#dla-kogo" className="nav-link">Dla kogo?</a>
+          <a href="/pl/wymiary" className="nav-link">Wymiary</a>
+          <a href="/pl/cennik" className="nav-link">Cennik</a>
           <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zrób audyt</a>
           <a href="/" className="nav-lang" title="English version">EN</a>
         </div>
@@ -82,11 +83,18 @@ export default function Navbar() {
             Jak to działa?
           </a>
           <a
-            href="#dla-kogo"
+            href="/pl/wymiary"
             onClick={() => setMobileOpen(false)}
             className="nav-mobile-link"
           >
-            Dla kogo?
+            Wymiary
+          </a>
+          <a
+            href="/pl/cennik"
+            onClick={() => setMobileOpen(false)}
+            className="nav-mobile-link"
+          >
+            Cennik
           </a>
           <a href="/" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             EN - English version
@@ -108,30 +116,29 @@ export default function Navbar() {
         .nav-link {
           font-size: 15px;
           font-weight: 500;
-          color: #666d80;
+          color: #36394a;
           text-decoration: none;
           padding: 6px 14px;
           border-radius: 6px;
-          transition: color 0.14s ease, background 0.14s ease;
-          letter-spacing: -0.01em;
+          transition: color 0.14s ease;
+          letter-spacing: -0.015em;
         }
         .nav-link:hover {
-          color: #0d0d12;
-          background: #f6f8fa;
+          color: #0b7983;
           opacity: 1;
         }
         .nav-cta {
           display: inline-flex;
           align-items: center;
-          padding: 10px 20px;
+          padding: 9px 20px;
           border-radius: 6px;
           background: #0b7983;
           color: #ffffff;
           font-size: 15px;
           font-weight: 600;
           text-decoration: none;
-          margin-left: 6px;
-          letter-spacing: -0.01em;
+          margin-left: 8px;
+          letter-spacing: -0.015em;
           transition: background 0.14s ease;
         }
         .nav-cta:hover {
@@ -143,15 +150,16 @@ export default function Navbar() {
           font-weight: 600;
           color: #a4acb9;
           text-decoration: none;
-          padding: 6px 10px;
+          padding: 5px 10px;
           margin-left: 4px;
           border-radius: 4px;
           border: 1px solid #dfe1e7;
+          letter-spacing: 0.02em;
           transition: color 0.14s ease, border-color 0.14s ease;
         }
         .nav-lang:hover {
-          color: #0d0d12;
-          border-color: #818898;
+          color: #0b7983;
+          border-color: #0b7983;
         }
         .nav-mobile-link {
           display: block;
@@ -161,7 +169,7 @@ export default function Navbar() {
           text-decoration: none;
           padding: 14px 0;
           border-bottom: 1px solid #eceff3;
-          letter-spacing: -0.01em;
+          letter-spacing: -0.015em;
         }
         .nav-mobile-cta {
           display: flex;
@@ -177,7 +185,7 @@ export default function Navbar() {
           font-size: 16px;
           font-weight: 600;
           text-decoration: none;
-          letter-spacing: -0.01em;
+          letter-spacing: -0.015em;
         }
       `}</style>
     </nav>

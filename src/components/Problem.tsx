@@ -1,181 +1,180 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const cards = [
-  {
-    icon: (
-      <svg width="42" height="42" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0} strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="8" />
-        <path d="M21 21l-4.35-4.35" />
-      </svg>
-    ),
-    statement: 'Ranking w Google to dziś dopiero połowa sukcesu',
-    body: 'ChatGPT, Perplexity i Google AI Overview wybierają źródła według własnych kryteriów – często zupełnie niezależnie od tego, jak wysoko rankuje Twoja podstrona czy ile linków do niej prowadzi.',
-  },
-  {
-    icon: (
-      <svg width="42" height="42" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-    statement: 'Klasyczne narzędzia SEO nie widzą tego, co ocenia AI',
-    body: 'Klasyczne narzędzia SEO nie powiedzą Ci, czy Twoja podstrona jest czytelna dla modeli językowych. AI ocenia strukturę odpowiedzi, gęstość informacji i konkretne dane, a nie tylko nasycenie słowami kluczowymi. Jeśli nie mierzysz tych parametrów, działasz po omacku.',
-  },
-  {
-    icon: (
-      <svg width="42" height="42" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0} strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-    ),
-    statement: 'Ręczna analiza to cały dzień żmudnej pracy',
-    body: 'Ręczne zestawienie parametrów Twojej podstrony z TOP 10 konkurencji to dla eksperta cały dzień roboty. CitationOne automatyzuje ten proces, dostarczając precyzyjny benchmark i gotowe rekomendacje w czasie, gdy Ty parzysz kawę.',
-  },
+const APP_URL = 'https://app.citationone.com';
+
+const STAGES = [
+  { none: true },
+  { none: false },
 ];
+const PAUSES = [1800, 3000];
 
-const closing = {
-  statement: 'Działanie bez diagnozy to palenie budżetu',
-  body: 'CitationOne precyzyjnie wskazuje, który wymiar obniża Twój Content Quality Score (CQS). Dowiedz się dokładnie, jakie zmiany na podstronie wprowadzić, by zacząć być widocznym dla algorytmów AI Search.',
-};
+function WordCycle() {
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const t = setTimeout(() => setIdx(i => (i + 1) % STAGES.length), PAUSES[idx]);
+    return () => clearTimeout(t);
+  }, [idx]);
+
+  const stage = STAGES[idx];
+
+  return (
+    <div style={{
+      position: 'relative',
+      height: '1.15em',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+    }}>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={idx}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+          style={{ display: 'inline-block' }}
+        >
+          {stage.none ? (
+            <>
+              <span style={{ color: '#0d0d12' }}>Citatio</span>
+              <span style={{ color: '#a4acb9' }}>None?</span>
+            </>
+          ) : (
+            <span style={{
+              background: 'linear-gradient(90deg, #1a3a4a 0%, #0b7983 55%, #0b9aa6 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              CitationOne
+            </span>
+          )}
+        </motion.span>
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function Problem() {
   return (
-    <section style={{
-      background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
-      padding: '90px 0',
-      position: 'relative',
-      overflow: 'hidden',
-    }}>
-      {/* Dekoracyjne cudzysłowy */}
-      <span aria-hidden style={{
-        position: 'absolute', top: 36, left: 52,
-        fontSize: 200, lineHeight: 1, fontWeight: 400,
-        color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif',
-        userSelect: 'none', pointerEvents: 'none',
-      }}>{'\u201C'}</span>
-      <span aria-hidden style={{
-        position: 'absolute', bottom: 36, right: 52,
-        fontSize: 200, lineHeight: 1, fontWeight: 400,
-        color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif',
-        userSelect: 'none', pointerEvents: 'none',
-      }}>{'\u201D'}</span>
-
-      <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 2 }}>
-
-        {/* Nagłówek */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.55 }}
-          style={{ marginBottom: 56, textAlign: 'center' }}
-        >
-          <h2 style={{
-            fontSize: 'clamp(1.6rem, 3.5vw, 2.25rem)',
-            fontWeight: 600,
-            color: '#ffffff',
-            letterSpacing: '-0.025em',
-            lineHeight: 1.25,
-            maxWidth: 620,
-            margin: '0 auto',
-          }}>
-            Wysoka pozycja w Google nie oznacza cytowania przez AI
-          </h2>
-        </motion.div>
-
-        {/* 3 karty */}
-        <div className="problem-grid">
-          {cards.map((p, i) => (
+    <>
+      {/* Section 1 — problem, 2-col layout */}
+      <section style={{ background: '#ffffff', padding: '90px 0', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+          <div className="problem-header-grid">
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 28 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: i * 0.09 }}
-              style={{
-                background: '#ffffff',
-                border: '1px solid #dfe1e7',
-                borderRadius: 10,
-                padding: '32px 28px',
-              }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.55 }}
             >
-              <div style={{
-                width: 88,
-                height: 88,
-                borderRadius: 16,
-                background: '#0b7983',
-                border: '1px solid rgba(255,255,255,0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: 24,
-                color: '#ffffff',
-              }}>
-                {p.icon}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
+                <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+                <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Problem</span>
+                <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
               </div>
-              <h3 style={{
-                fontSize: 17,
-                fontWeight: 600,
+              <h2 style={{
+                fontSize: 'clamp(2rem, 4.5vw, 3rem)',
+                fontWeight: 700,
                 color: '#0d0d12',
-                letterSpacing: '-0.02em',
-                lineHeight: 1.35,
-                marginBottom: 12,
+                letterSpacing: '-0.035em',
+                lineHeight: 1.15,
+                margin: 0,
               }}>
-                {p.statement}
-              </h3>
-              <p style={{ fontSize: 14, color: '#666d80', lineHeight: 1.7, margin: 0 }}>
-                {p.body}
+                Czy AI widzi Twoje treści?
+              </h2>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
+              <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.72, margin: 0 }}>
+                Wysokie pozycje w wyszukiwarce nie oznaczają, że Twoja marka istnieje dla ChatGPT, Google AI Overview czy Perplexity. Klasyczne narzędzia SEO nie mierzą tego, jak sztuczna inteligencja interpretuje treści. Ręczna analiza zajmuje godziny.
               </p>
             </motion.div>
-          ))}
+          </div>
         </div>
 
-        {/* Zamknięcie sekcji — biały tekst poniżej kart na turkusowym tle */}
+        <style>{`
+          .problem-header-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+          }
+          @media (max-width: 768px) {
+            .problem-header-grid { grid-template-columns: 1fr; gap: 32px; }
+          }
+        `}</style>
+      </section>
+
+      {/* WordCycle standalone — centered, 3× size */}
+      <section style={{ background: '#ffffff', padding: '48px 24px 56px', textAlign: 'center' }}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            marginTop: 56,
-            textAlign: 'center',
-            maxWidth: 680,
-            margin: '56px auto 0',
+            fontSize: 'clamp(2.88rem, 7.2vw, 5.4rem)',
+            fontWeight: 700,
+            letterSpacing: '-0.04em',
+            lineHeight: 1,
+            display: 'inline-block',
           }}
         >
-          <h3 style={{
-            fontSize: 'clamp(1.2rem, 2.5vw, 1.55rem)',
-            fontWeight: 700,
-            color: '#ffffff',
-            letterSpacing: '-0.025em',
-            lineHeight: 1.3,
-            marginBottom: 14,
-          }}>
-            {closing.statement}
-          </h3>
-          <p style={{
-            fontSize: 16,
-            color: 'rgba(255,255,255,0.82)',
-            lineHeight: 1.72,
-            margin: 0,
-          }}>
-            {closing.body}
-          </p>
+          <WordCycle />
         </motion.div>
+      </section>
 
-      </div>
-
-      <style>{`
-        .problem-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
-        }
-        @media (max-width: 768px) {
-          .problem-grid { grid-template-columns: 1fr; }
-        }
-      `}</style>
-    </section>
+      {/* Section 2 — solution, centered single column */}
+      <section style={{ background: '#ffffff', padding: '56px 0 90px', overflow: 'hidden' }}>
+        <div style={{ maxWidth: 680, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5 }}
+          >
+            <p style={{ fontSize: 18, color: '#36394a', lineHeight: 1.72, marginBottom: 36 }}>
+              CitationOne przeanalizuje Twoją witrynę pod kątem AI Search, dzięki czemu zoptymalizujesz swoją witrynę pod kątem odpowiedzi w LLM-ach. Narzędzie przygotowuje gotowe rekomendacje. Konkretne zmiany, dzięki którym roboty AI zaczną wybierać Twoją stronę jako źródło odpowiedzi dla użytkowników.
+            </p>
+            <motion.a
+              href={`${APP_URL}/login?lang=pl`}
+              whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
+              whileTap={{ scale: 0.97 }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '15px 36px',
+                borderRadius: 8,
+                background: '#0b7983',
+                color: '#ffffff',
+                fontWeight: 700,
+                fontSize: 15,
+                textDecoration: 'none',
+                letterSpacing: '-0.01em',
+                boxShadow: '0 4px 20px rgba(11,121,131,0.25)',
+              }}
+            >
+              Zrób audyt
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </motion.a>
+          </motion.div>
+        </div>
+      </section>
+    </>
   );
 }

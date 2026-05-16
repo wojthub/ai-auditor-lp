@@ -16,63 +16,57 @@ function fadeUp(delay = 0) {
 
 function SectionLabel({ children }: { children: string }) {
   return (
-    <p style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 14, margin: '0 0 14px' }}>
-      {children}
-    </p>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+      <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+      <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{children}</span>
+      <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+    </div>
   );
 }
 
 
-/* ── Visual: CQS + Citability breakdown ──────────────────────────────── */
-function ScoresVisual() {
-  const rows = [
-    { label: 'Zgodność z intencją', weight: '×0.25', score: 8.4 },
-    { label: 'E-E-A-T', weight: '×0.20', score: 7.1 },
-    { label: 'Koszt ekstrakcji', weight: '×0.20', score: 9.0 },
-    { label: 'Gęstość informacji', weight: '×0.15', score: 6.8 },
-    { label: 'TF-IDF', weight: '×0.10', score: 7.5 },
-    { label: 'Role semantyczne', weight: '×0.10', score: 5.2 },
-  ];
+/* ── Score cards: CQS + Citability (1:1 z DimensionsTeaser na SG) ───── */
+function BenchmarkBar({ label, value, max, color, bold }: {
+  label: string; value: number; max: number; color: string; bold?: boolean;
+}) {
+  const pct = Math.round((value / max) * 100);
   return (
-    <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '28px 24px', boxShadow: '0 4px 24px rgba(0,0,0,0.05)' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 22 }}>
-        {[
-          { label: 'CQS', score: '84', unit: '/100', color: '#16A34A', badge: 'OK', badgeBg: 'rgba(22,163,74,0.12)', badgeBorder: 'rgba(22,163,74,0.25)' },
-          { label: 'Citability', score: '6.4', unit: '/10', color: '#CA8A04', badge: 'UWAGA', badgeBg: 'rgba(202,138,4,0.12)', badgeBorder: 'rgba(202,138,4,0.25)' },
-        ].map(item => (
-          <div key={item.label} style={{ background: `${item.color}0f`, borderLeft: `3px solid ${item.color}`, borderRadius: 8, padding: '14px 16px' }}>
-            <p style={{ fontSize: 10, fontWeight: 700, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 6px' }}>{item.label}</p>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginBottom: 6 }}>
-              <span style={{ fontSize: 36, fontWeight: 700, color: item.color, lineHeight: 1, letterSpacing: '-0.04em' }}>{item.score}</span>
-              <span style={{ fontSize: 13, color: '#a4acb9', fontWeight: 500 }}>{item.unit}</span>
-            </div>
-            <span style={{ fontSize: 9, fontWeight: 700, color: item.color, background: item.badgeBg, border: `1px solid ${item.badgeBorder}`, borderRadius: 4, padding: '2px 7px', letterSpacing: '0.06em' }}>{item.badge}</span>
-          </div>
-        ))}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontSize: 13, color: bold ? '#0d0d12' : '#666d80', fontWeight: bold ? 700 : 400 }}>{label}</span>
+        <span style={{ fontSize: 13, color: bold ? '#0d0d12' : '#a4acb9', fontWeight: bold ? 700 : 400 }}>{value}</span>
       </div>
-      <div style={{ borderTop: '1px solid #eceff3', paddingTop: 16 }}>
-        <p style={{ fontSize: 10, fontWeight: 600, color: '#a4acb9', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 10px' }}>Składowe CQS</p>
-        {rows.map((item) => {
-          const color = item.score >= 7 ? '#16A34A' : item.score >= 5 ? '#CA8A04' : '#DC2626';
-          return (
-            <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 7 }}>
-              <span style={{ fontSize: 11.5, color: '#36394a', flex: 1 }}>{item.label}</span>
-              <span style={{ fontSize: 10, color: '#a4acb9', width: 32, textAlign: 'right' }}>{item.weight}</span>
-              <div style={{ width: 64, height: 4, background: '#eceff3', borderRadius: 2, overflow: 'hidden' }}>
-                <motion.div
-                  initial={{ width: 0 }} whileInView={{ width: `${(item.score / 10) * 100}%` }}
-                  viewport={{ once: true }} transition={{ duration: 0.8, ease: 'easeOut' }}
-                  style={{ height: '100%', background: color, borderRadius: 2 }}
-                />
-              </div>
-              <span style={{ fontSize: 11.5, fontWeight: 700, color, width: 24, textAlign: 'right' }}>{item.score}</span>
-            </div>
-          );
-        })}
+      <div style={{ height: 4, background: '#eceff3', borderRadius: 2, overflow: 'hidden' }}>
+        <div style={{ height: '100%', width: `${pct}%`, background: color, borderRadius: 2 }} />
       </div>
     </div>
   );
 }
+
+const SCORE_CARDS = [
+  {
+    scale: 'SKALA 0 – 10',
+    title: 'AI Citability Score',
+    desc: 'Prawdopodobieństwo, z jakim silniki AI zacytują Twój tekst w odpowiedzi dla użytkownika.',
+    score: 4.9, max: 10, color: '#B91C1C',
+    rows: [
+      { label: 'Niski próg', value: 2.1, bold: false },
+      { label: 'Twój wynik', value: 4.9, bold: true },
+      { label: 'Lider SERP', value: 8.3, bold: false },
+    ],
+  },
+  {
+    scale: 'SKALA 0 – 100',
+    title: 'CQS · Content Quality Score',
+    desc: 'Suma punktów w 10 wymiarach jakości + E-E-A-T w odniesieniu do konkurencji z Top 10 SERP.',
+    score: 78, max: 100, color: '#CA8A04',
+    rows: [
+      { label: 'Średnia SERP', value: 42, bold: false },
+      { label: 'Twój wynik', value: 78, bold: true },
+      { label: 'Lider SERP', value: 91, bold: false },
+    ],
+  },
+];
 
 /* ── Visual: Benchmark SERP ───────────────────────────────────────────── */
 const SERP_ROWS = [
@@ -357,14 +351,27 @@ export default function PageContent() {
       <section style={{ background: '#ffffff', padding: '72px 0 64px', borderBottom: '1px solid #eceff3' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
-            <p style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 16 }}>
-              Jak to działa
-            </p>
-            <h1 style={{ fontSize: 'clamp(2.6rem, 5.85vw, 3.9rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: 22, background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', display: 'inline-block' }}>
-              Jak działa CitationOne?
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 18 }}>
+              <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Jak to działa</span>
+              <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+            </div>
+            <h1 style={{
+              fontSize: 'clamp(2.6rem, 5.85vw, 3.9rem)',
+              fontWeight: 700,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.15,
+              marginBottom: 22,
+              background: 'linear-gradient(90deg, #1a3a4a 0%, #0b7983 55%, #0b9aa6 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              display: 'inline-block',
+            }}>
+              Poznaj mechanizm, który otwiera drzwi do AI Search
             </h1>
             <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.7, maxWidth: 640, margin: '0 auto 36px' }}>
-              CitationOne analizuje artykuł i odpowiada na jedno pytanie: czy modele AI - ChatGPT, Perplexity i Google AI Overview - zacytują Twoją treść zamiast konkurencji. Rozkłada artykuł na 10 wymiarów jakości, porównuje z top 10 SERP i generuje priorytetyzowane rekomendacje z gotowymi poprawkami do wklejenia.
+              Zobacz, jak w mniej niż 3 minuty CitationOne prześwietla Twój tekst i zamienia skomplikowaną analizę algorytmiczną w proste wytyczne dla redakcji. Bez skomplikowanej integracji, bez zmian w kodzie Twojej strony.
             </p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               {[
@@ -384,50 +391,55 @@ export default function PageContent() {
       </section>
 
       {/* 3 KROKI */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
-        padding: '120px 0',
-        position: 'relative',
-        overflow: 'hidden',
-        zIndex: 1,
-      }}>
-        <span aria-hidden style={{ position: 'absolute', top: 36, left: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201C'}</span>
-        <span aria-hidden style={{ position: 'absolute', bottom: 36, right: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201D'}</span>
-        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 2 }}>
+      <section style={{ background: '#f8fafb', padding: '90px 0' }}>
+        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 52 }}>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.025em', margin: 0 }}>
-              3 kroki do raportu
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 18 }}>
+              <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>3 kroki</span>
+              <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+            </div>
+            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', margin: 0 }}>
+              Od wklejenia tekstu do gotowych wytycznych w 180 sekund
             </h2>
           </motion.div>
           <div className="steps-grid">
             {[
               {
-                n: '1', title: 'Wklej URL artykułu',
-                body: 'Podajesz adres strony i słowo kluczowe. Narzędzie automatycznie pobiera treść - żadnych ręcznych copy-paste. Do wyboru: tryb Full (z benchmarkiem SERP, ~3 min) lub Content-only (szybszy, ~30-60 sek, bez danych konkurencji).',
-                icon: <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0}><path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>,
+                n: '01', color: '#e07a4a',
+                title: 'Wprowadzasz dane',
+                body: 'Podajesz link do opublikowanego już artykułu lub wklejasz roboczą wersję tekstu, którą dopiero planujesz dodać na stronę. Wpisujesz słowo kluczowe, na które chcesz zdobyć cytowanie w AI Search.',
               },
               {
-                n: '2', title: 'AI analizuje równolegle',
-                body: '10 równoległych wywołań AI jednocześnie: 9 wymiarów jakości + E-E-A-T, plus algorytmiczny wysiłek redakcyjny. W trybie Full narzędzie crawluje top 10 SERP, ekstrahuje encje z każdego artykułu i buduje benchmark konkurencji.',
-                icon: <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0}><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423L16.5 15.75l.394 1.183a2.25 2.25 0 001.423 1.423L19.5 18.75l-1.183.394a2.25 2.25 0 00-1.423 1.423z" /></svg>,
+                n: '02', color: '#0b7983',
+                title: 'Algorytm wykonuje benchmark z Top 10 SERP',
+                body: 'W mniej niż 3 minuty system CitationOne pobiera i analizuje Twoją treść. W tym samym czasie bada 10 najlepiej rankujących stron konkurencji. Narzędzie porównuje Twój materiał z liderami rynku pod kątem 10 wymiarów jakości oraz sygnałów E-E-A-T.',
               },
               {
-                n: '3', title: 'Odbierasz gotowy raport',
-                body: 'Raport zawiera priorytetyzowane rekomendacje Przed i Po - dosłowny cytat z artykułu i gotową wersję po poprawce z szacowanym wpływem na wynik. Całość eksportujesz jednym kliknięciem: PDF do wysłania klientowi, Markdown do dalszej pracy.',
-                icon: <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.0}><path strokeLinecap="round" strokeLinejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12" /></svg>,
+                n: '03', color: '#c47a2a',
+                title: 'Odbierasz gotową listę rekomendacji „Quick Wins"',
+                body: 'System generuje kompletny raport. Nie dostajesz ogólnych porad, ale precyzyjny plan działania. Narzędzie wskazuje konkretne akapity do poprawy i podaje gotowe wytyczne strukturalne dla Twoich redaktorów.',
               },
             ].map((step, i) => (
-              <motion.div key={step.n} {...fadeUp(i * 0.13)} style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '32px 28px', display: 'flex', flexDirection: 'column' }}>
-                <motion.div
-                  whileHover={{ scale: 1.06, rotate: 3, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
-                  style={{ width: 88, height: 88, borderRadius: 16, background: '#0b7983', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', marginBottom: 24 }}
-                >
-                  {step.icon}
-                </motion.div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: '#0b7983', background: 'rgba(11,121,131,0.1)', borderRadius: 4, padding: '2px 8px', letterSpacing: '0.05em' }}>KROK {step.n}</span>
-                  <h3 style={{ fontSize: 16, fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.02em', lineHeight: 1.3, margin: 0 }}>{step.title}</h3>
+              <motion.div
+                key={step.n}
+                {...fadeUp(i * 0.13)}
+                whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(0,0,0,0.07)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
+                style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '28px 24px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
+              >
+                <div style={{
+                  fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)',
+                  fontWeight: 800,
+                  color: step.color,
+                  letterSpacing: '-0.04em',
+                  lineHeight: 1,
+                  marginBottom: 20,
+                }}>
+                  {step.n}
                 </div>
+                <h3 style={{ fontSize: 17, fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.02em', lineHeight: 1.3, marginBottom: 10 }}>
+                  {step.title}
+                </h3>
                 <p style={{ fontSize: 14, color: '#36394a', lineHeight: 1.65, margin: 0 }}>{step.body}</p>
               </motion.div>
             ))}
@@ -438,45 +450,95 @@ export default function PageContent() {
       {/* CQS + CITABILITY */}
       <section style={{ background: '#ffffff', padding: '80px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-          <div className="feat-grid">
-            <motion.div {...fadeUp()}>
-              <SectionLabel>Wyniki główne</SectionLabel>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
-                Jeden wynik zamiast domysłów
-              </h2>
-              <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>
-                <strong>CQS (0-100)</strong> to zagregowany wynik z 10 wymiarów - pokazuje, jak daleko Twoja treść jest od standardu, który AI chętnie cytuje. <strong>AI Citability (0-10)</strong> mierzy szansę, że model językowy wybierze właśnie Twoją stronę zamiast konkurencji.
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {['Każdy z 10 wymiarów z osobnym wynikiem 0-10', 'Status na pierwszy rzut oka: OK / UWAGA / KRYTYCZNY', 'Porównanie Twojego wyniku z top 10 SERP'].map(item => (
-                  <li key={item} style={{ display: 'flex', gap: 10, fontSize: 14, color: '#36394a' }}>
-                    <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>-</span>{item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-            <motion.div {...fadeUp(0.12)}><ScoresVisual /></motion.div>
+          <motion.div {...fadeUp()} style={{ marginBottom: 40, maxWidth: 760 }}>
+            <SectionLabel>Wyniki główne</SectionLabel>
+            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
+              Twarde dane, które przekładają się na cytowania
+            </h2>
+            <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 16px' }}>
+              Twój raport CitationOne nie opiera się na domysłach. Wynik audytu zobaczysz w postaci dwóch precyzyjnych wskaźników: <strong>CQS (0–100)</strong> - matematyczna suma punktów zebranych w 10 wymiarach jakości, oraz <strong>AI Citability Score (0–10)</strong> - bezpośrednie określenie prawdopodobieństwa, że AI wybierze Twoją stronę jako oficjalne źródło.
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {['Każdy z 10 wymiarów z osobnym wynikiem 0-10', 'Status na pierwszy rzut oka: OK / UWAGA / KRYTYCZNY', 'Porównanie Twojego wyniku z top 10 SERP'].map(item => (
+                <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#36394a', lineHeight: 1.65 }}>
+                  <span style={{ width: 14, height: 2, background: ACCENT, flexShrink: 0, marginTop: 9, borderRadius: 1 }} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <div className="scores-cards-grid">
+            {SCORE_CARDS.map((card, ci) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: ci * 0.1 }}
+                style={{
+                  background: '#ffffff',
+                  border: '1px solid #dfe1e7',
+                  borderRadius: 14,
+                  padding: '24px 26px 26px',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14 }}>
+                  <span style={{
+                    display: 'inline-block',
+                    fontSize: 11, fontWeight: 500,
+                    color: '#818898',
+                    border: '1px solid #dfe1e7',
+                    borderRadius: 100,
+                    padding: '3px 10px',
+                    letterSpacing: '0.04em',
+                  }}>
+                    {card.scale}
+                  </span>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 3 }}>
+                    <span style={{ fontSize: 'clamp(2rem, 3.2vw, 2.6rem)', fontWeight: 700, color: card.color, lineHeight: 1, letterSpacing: '-0.04em' }}>
+                      {card.score}
+                    </span>
+                    <span style={{ fontSize: 13, color: '#a4acb9', fontWeight: 500 }}>/ {card.max}</span>
+                  </div>
+                </div>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', lineHeight: 1.25, margin: '0 0 6px' }}>
+                  {card.title}
+                </h3>
+                <p style={{ fontSize: 13, color: '#666d80', lineHeight: 1.55, margin: '0 0 18px' }}>
+                  {card.desc}
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {card.rows.map(row => (
+                    <BenchmarkBar
+                      key={row.label}
+                      label={row.label}
+                      value={row.value}
+                      max={card.max}
+                      color={row.bold ? card.color : '#dde1e8'}
+                      bold={row.bold}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* 10 WYMIARÓW */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
-        padding: '120px 0',
-        position: 'relative',
-        overflow: 'hidden',
-        zIndex: 1,
-      }}>
-        <span aria-hidden style={{ position: 'absolute', top: 36, left: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201C'}</span>
-        <span aria-hidden style={{ position: 'absolute', bottom: 36, right: 52, fontSize: 200, lineHeight: 1, color: 'rgba(255,255,255,0.15)', fontFamily: 'Georgia,serif', userSelect: 'none', pointerEvents: 'none' }}>{'\u201D'}</span>
-        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 2 }}>
+      <section style={{ background: '#ffffff', padding: '90px 0' }}>
+        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 48 }}>
-            <p style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase' as const, letterSpacing: '0.08em', margin: '0 0 14px' }}>10 wymiarów + E-E-A-T</p>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.025em', marginBottom: 14 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 18 }}>
+              <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>10 wymiarów + E-E-A-T</span>
+              <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+            </div>
+            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
               Co dokładnie analizuje narzędzie?
             </h2>
-            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.82)', maxWidth: 560, margin: '0 auto', lineHeight: 1.65 }}>
+            <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, margin: '0 auto', lineHeight: 1.65 }}>
               Każdy wymiar to osobne wywołanie AI z dedykowanym promptem - osobny wynik 0-10, osobne problemy i osobne rekomendacje.
             </p>
           </motion.div>
@@ -486,18 +548,13 @@ export default function PageContent() {
                 key={dim.id}
                 {...fadeUp(i * 0.04)}
                 whileHover={{ y: -3, boxShadow: '0 6px 20px rgba(0,0,0,0.07)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-                style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '20px 20px 18px' }}
+                style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '22px 22px 20px' }}
               >
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 12 }}>
-                  <div style={{ width: 40, height: 40, borderRadius: 8, background: '#0b7983', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', marginBottom: 10 }}>
-                    {dim.icon}
-                  </div>
-                  <div style={{ textAlign: 'center' }}>
-                    <span style={{ fontSize: 9, fontWeight: 700, color: '#a4acb9', textTransform: 'uppercase' as const, letterSpacing: '0.08em', display: 'block' }}>{dim.id}</span>
-                    <h3 style={{ fontSize: 13.5, fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.02em', margin: 0 }}>{dim.label}</h3>
-                  </div>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 10, flexWrap: 'wrap' }}>
+                  <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: 0 }}>{dim.label}</h3>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#a4acb9', textTransform: 'uppercase', letterSpacing: '0.07em' }}>{dim.id}</span>
                 </div>
-                <p style={{ fontSize: 13, color: '#36394a', lineHeight: 1.6, margin: '0 0 8px' }}>{dim.medium}</p>
+                <p style={{ fontSize: 13.5, color: '#36394a', lineHeight: 1.65, margin: 0 }}>{dim.medium}</p>
               </motion.div>
             ))}
           </div>
@@ -510,7 +567,7 @@ export default function PageContent() {
           <div className="feat-grid">
             <motion.div {...fadeUp()}>
               <SectionLabel>Benchmark SERP</SectionLabel>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
                 Zobacz, czy i dlaczego odstajesz od liderów
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>
@@ -518,8 +575,9 @@ export default function PageContent() {
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {['Porównanie tabelaryczne CQS dla każdej analizowanej podstrony.', 'Identyfikacja liderów oraz słabych punktów w aktualnym SERP', 'Analiza struktury i formatu najlepiej ocenianych treści.'].map(item => (
-                  <li key={item} style={{ display: 'flex', gap: 10, fontSize: 14, color: '#36394a' }}>
-                    <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>-</span>{item}
+                  <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#36394a', lineHeight: 1.65 }}>
+                    <span style={{ width: 14, height: 2, background: ACCENT, flexShrink: 0, marginTop: 9, borderRadius: 1 }} />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -534,7 +592,7 @@ export default function PageContent() {
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ marginBottom: 40 }}>
             <SectionLabel>Rekomendacje Przed i Po</SectionLabel>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
+            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
               Konkretne rekomendacje z mierzalnym wpływem na CQS
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 600, lineHeight: 1.65, margin: '0 0 4px' }}>
@@ -552,7 +610,7 @@ export default function PageContent() {
             <motion.div {...fadeUp(0.1)}><AIOverviewVisual /></motion.div>
             <motion.div {...fadeUp()}>
               <SectionLabel>AI Overview Coverage</SectionLabel>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
                 Google AI Overview to synteza wielu pod-pytań
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>
@@ -560,8 +618,9 @@ export default function PageContent() {
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {['Dekompozycja syntezy AI Overview na sub-zapytania', 'Mapa pokrycia: które sub-zapytania obsługujesz', 'Rekomendacje uzupełnienia luk z konkretną treścią'].map(item => (
-                  <li key={item} style={{ display: 'flex', gap: 10, fontSize: 14, color: '#36394a' }}>
-                    <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>-</span>{item}
+                  <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#36394a', lineHeight: 1.65 }}>
+                    <span style={{ width: 14, height: 2, background: ACCENT, flexShrink: 0, marginTop: 9, borderRadius: 1 }} />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -576,7 +635,7 @@ export default function PageContent() {
           <div className="feat-grid">
             <motion.div {...fadeUp()}>
               <SectionLabel>Graf wiedzy (EAV)</SectionLabel>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
                 AI widzi encje - nie tylko słowa kluczowe
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>
@@ -584,8 +643,9 @@ export default function PageContent() {
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {['Pełna tabela encji z klasyfikacją Wyróżnik/Podstawa/Rzadki', 'Mapa pokrycia: pokryte / luka / unikalne', 'Interaktywny graf wiedzy w aplikacji'].map(item => (
-                  <li key={item} style={{ display: 'flex', gap: 10, fontSize: 14, color: '#36394a' }}>
-                    <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>-</span>{item}
+                  <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#36394a', lineHeight: 1.65 }}>
+                    <span style={{ width: 14, height: 2, background: ACCENT, flexShrink: 0, marginTop: 9, borderRadius: 1 }} />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -602,11 +662,11 @@ export default function PageContent() {
             <motion.div {...fadeUp(0.1)}><ExportVisual /></motion.div>
             <motion.div {...fadeUp()}>
               <SectionLabel>Eksport raportu</SectionLabel>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
-                Raport gotowy do wysłania klientowi
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
+                Narzędzie stworzone z myślą o płynnej pracy zespołu
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>
-                CitationOne dostarcza dane w formie gotowej do natychmiastowego wykorzystania. Pobierz PDF, aby dostarczyć zespołowi lub klientowi profesjonalną analizę jakości podstrony. Wybierz Markdown, by wygodnie zarządzać optymalizacją treści wewnątrz zespołu.
+                Wyniki każdego audytu możesz natychmiast pobrać i wdrożyć. <strong>Raport PDF</strong> - czytelne, pozbawione technicznego żargonu podsumowanie gotowe do wysyłki do klienta. <strong>Plik Markdown</strong> - gotowy zestaw wytycznych strukturalnych dla copywriterów i redaktorów. <strong>Plan „Quick Wins"</strong> - wyselekcjonowana lista poprawek, które skokowo podniosą jakość contentu w oczach AI.
               </p>
               <div style={{ display: 'flex', gap: 12 }}>
                 {[
@@ -630,7 +690,7 @@ export default function PageContent() {
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ marginBottom: 36 }}>
             <SectionLabel>Quick Wins</SectionLabel>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
+            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
               Szybkie poprawki - od razu po audycie
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 640, lineHeight: 1.65 }}>
@@ -661,7 +721,7 @@ export default function PageContent() {
           <div className="feat-grid">
             <motion.div {...fadeUp()}>
               <SectionLabel>Schema.org</SectionLabel>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
                 Audyt danych strukturalnych
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 16 }}>
@@ -731,7 +791,7 @@ export default function PageContent() {
             </motion.div>
             <motion.div {...fadeUp()}>
               <SectionLabel>Information Gain</SectionLabel>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
                 Ile unikatowej wartości wnosi Twoja treść?
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 16 }}>
@@ -746,25 +806,62 @@ export default function PageContent() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)', padding: '96px 0' }}>
+      <section style={{ background: '#ffffff', padding: '90px 0', borderTop: '1px solid #eceff3' }}>
         <div style={{ maxWidth: 640, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>
           <motion.div {...fadeUp()}>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3.8vw, 2.6rem)', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.03em', lineHeight: 1.2, marginBottom: 18 }}>
-              Sprawdź, czy Twoja treść<br />jest gotowa na AI Search.
+            <h2 style={{
+              fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
+              fontWeight: 700,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.15,
+              marginBottom: 10,
+              background: 'linear-gradient(90deg, #1a3a4a 0%, #0b7983 55%, #0b9aa6 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              display: 'inline-block',
+            }}>
+              Pozyskaj ruch z AI Search.
             </h2>
-            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.72)', lineHeight: 1.65, marginBottom: 36 }}>
-              Pierwszy audyt zajmuje ~3 minuty. Raport gotowy do wysłania klientowi od razu po zakończeniu.
+            <p style={{
+              fontSize: 'clamp(1.1rem, 2.5vw, 1.45rem)',
+              fontWeight: 500,
+              color: '#36394a',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.3,
+              marginBottom: 24,
+            }}>
+              Sprawdź swoje teksty już teraz.
+            </p>
+            <p style={{ fontSize: 17, color: '#666d80', lineHeight: 1.68, maxWidth: 480, margin: '0 auto 36px' }}>
+              Dołącz do zespołów, które już teraz optymalizują treści pod kątem AI Search.
             </p>
             <motion.a
               href={`${APP_URL}/login?lang=pl`}
               whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
               whileTap={{ scale: 0.97 }}
-              style={{ display: 'inline-flex', alignItems: 'center', padding: '16px 33px', borderRadius: 8, background: '#ffffff', color: '#0b7983', fontWeight: 700, fontSize: 16, textDecoration: 'none', letterSpacing: '-0.01em' }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '15px 36px',
+                borderRadius: 8,
+                background: '#0b7983',
+                color: '#ffffff',
+                fontWeight: 700,
+                fontSize: 15,
+                textDecoration: 'none',
+                letterSpacing: '-0.01em',
+                boxShadow: '0 4px 20px rgba(11,121,131,0.25)',
+              }}
             >
               Zrób audyt
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </motion.a>
-            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', marginTop: 18 }}>
-              Bez subskrypcji · Faktura VAT · Płatność przelewem
+            <p style={{ fontSize: 13, color: '#a4acb9', marginTop: 16 }}>
+              Pierwsze 3 audyty są całkowicie darmowe. Rejestracja zajmie Ci mniej niż minutę.
             </p>
           </motion.div>
         </div>
@@ -787,6 +884,11 @@ export default function PageContent() {
           gap: 64px;
           align-items: center;
         }
+        .scores-cards-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
         .feat-grid-reverse > *:first-child { order: 1; }
         .feat-grid-reverse > *:last-child  { order: 0; }
         @media (max-width: 768px) {
@@ -794,6 +896,7 @@ export default function PageContent() {
           .dims-grid  { grid-template-columns: 1fr; }
           .feat-grid  { grid-template-columns: 1fr; gap: 36px; }
           .feat-grid-reverse > * { order: unset !important; }
+          .scores-cards-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </div>

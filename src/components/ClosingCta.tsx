@@ -21,21 +21,29 @@ export default function ClosingCta() {
             color: '#0d0d12',
             letterSpacing: '-0.03em',
             lineHeight: 1.15,
-            marginBottom: 20,
+            marginBottom: 10,
           }}>
-            Sprawdź, czy Twoja treść<br />
-            jest gotowa na AI Search.
+            Pozyskaj ruch z AI Search.
           </h2>
+          <p style={{
+            fontSize: 'clamp(1.1rem, 2.5vw, 1.45rem)',
+            fontWeight: 500,
+            color: '#36394a',
+            letterSpacing: '-0.02em',
+            lineHeight: 1.3,
+            marginBottom: 24,
+          }}>
+            Sprawdź swoje teksty już teraz.
+          </p>
 
           <p style={{
             fontSize: 17,
             color: '#666d80',
             lineHeight: 1.68,
-            marginBottom: 36,
-            maxWidth: 440,
+            maxWidth: 460,
             margin: '0 auto 36px',
           }}>
-            Wklej URL artykułu i słowo kluczowe. Gotowy raport z rekomendacjami Przed i Po w mniej niż 3 minuty.
+            Dołącz do zespołów, które już teraz optymalizują treści pod kątem AI Search
           </p>
 
           <motion.a
@@ -48,7 +56,7 @@ export default function ClosingCta() {
               gap: 8,
               padding: '14px 32px',
               borderRadius: 8,
-              background: 'linear-gradient(135deg, #0b7983 0%, #268f9a 100%)',
+              background: '#0b7983',
               color: '#ffffff',
               fontWeight: 700,
               fontSize: 15,
@@ -56,20 +64,14 @@ export default function ClosingCta() {
               letterSpacing: '-0.01em',
             }}
           >
-            Wygeneruj raport w 3 minuty
+            Zrób audyt
             <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </motion.a>
 
           <p style={{ fontSize: 13, color: '#a4acb9', marginTop: 16 }}>
-            2 EUR / audyt
-          </p>
-          <p style={{ fontSize: 13, color: '#a4acb9', marginTop: 6, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0b7983" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-              <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z" />
-            </svg>
-            Każde nowe konto otrzymuje 3 darmowe audyty.
+            Pierwsze 3 audyty są całkowicie darmowe. Rejestracja zajmie Ci mniej niż minutę.
           </p>
 
         </motion.div>
