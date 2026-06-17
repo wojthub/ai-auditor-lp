@@ -53,7 +53,7 @@ export default function ReportSectionEN() {
             Data ready to implement
           </h2>
           <p style={{ fontSize: 16, color: '#666d80', lineHeight: 1.7, margin: '0 0 32px' }}>
-            As an outcome of the audit you receive a clear PDF file and a Markdown document you can hand straight to your team, manager or client.
+            As an outcome of the audit you receive an interactive online report plus PDF and Markdown files you can hand straight to your team, manager or client.
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 36 }}>
@@ -156,7 +156,7 @@ export default function ReportSectionEN() {
               }}>
                 <div style={{ position: 'relative', borderRadius: 8, overflow: 'hidden', boxShadow: 'inset 0 0 0 1px rgba(13,13,18,0.04)' }}>
                   <img
-                    src="/report-preview.png"
+                    src="/report-preview-en.png"
                     alt="Sample CitationOne report - Content Quality Score, AI Citability Score, 10-dimension profile and Quick Wins"
                     style={{ display: 'block', width: '100%', height: 'auto' }}
                   />

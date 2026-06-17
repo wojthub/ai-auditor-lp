@@ -53,7 +53,7 @@ export default function ReportSection() {
             Dane gotowe do wdrożenia
           </h2>
           <p style={{ fontSize: 16, color: '#666d80', lineHeight: 1.7, margin: '0 0 32px' }}>
-            Jako efekt audytu otrzymujesz przejrzysty plik PDF oraz dokument Markdown, które możesz natychmiast przekazać zespołowi, managerowi lub klientowi.
+            Jako efekt audytu otrzymujesz interaktywny raport online oraz pliki PDF i Markdown, które możesz natychmiast przekazać zespołowi, managerowi lub klientowi.
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 36 }}>
