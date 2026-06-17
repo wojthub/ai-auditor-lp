@@ -65,12 +65,14 @@ ai-auditor-lp-clone/
 │       ├── Navbar.tsx           # PL Navbar - switcher EN → /
 │       ├── Hero.tsx
 │       ├── TechLogos.tsx
+│       ├── Showcase.tsx         # Mockup panelu (sam mockup, bez copy) - na HP
 │       ├── Problem.tsx
-│       ├── Solution.tsx
+│       ├── Solution.tsx         # NIEUŻYWANA na HP
 │       ├── HowItWorks.tsx
-│       ├── Features.tsx         # 5 sekcji PL (wymiary, benchmark, before/after, eksport, quick wins)
+│       ├── Features.tsx         # 5 sekcji PL - NIEUŻYWANA na HP
 │       ├── BrandMorph.tsx      # Shared - animowane logo CitatioNone→CitationOne (typing effect)
 │       ├── ForWho.tsx
+│       ├── AuthorSection.tsx    # Karta autora (foto + bio + LinkedIn) - na HP, po FAQ
 │       ├── ClosingCta.tsx
 │       ├── RadarIllustration.tsx # PL etykiety
 │       ├── Footer.tsx           # PL Footer - linki /pl/*
@@ -78,16 +80,20 @@ ai-auditor-lp-clone/
 │       ├── SocialProof.tsx      # UKRYTA
 │       ├── Pricing.tsx          # UKRYTA
 │       ├── ReportExample.tsx    # UKRYTA
-│       ├── FAQ.tsx              # UKRYTA
+│       ├── FAQ.tsx              # na HP (PL); EN: en/FAQEN.tsx
+│       ├── DimensionsTeaser.tsx # na HP; EN: en/DimensionsTeaserEN.tsx
+│       ├── ReportSection.tsx    # na HP; EN: en/ReportSectionEN.tsx
 │       └── en/                  # EN komponenty
 │           ├── NavbarEN.tsx     # EN Navbar - switcher PL → /pl
 │           ├── HeroEN.tsx
 │           ├── TechLogosEN.tsx
+│           ├── ShowcaseEN.tsx    # Mockup panelu (sam mockup, bez copy) - na HP
 │           ├── ProblemEN.tsx
-│           ├── SolutionEN.tsx
+│           ├── SolutionEN.tsx    # NIEUŻYWANA na HP
 │           ├── HowItWorksEN.tsx
-│           ├── FeaturesEN.tsx
+│           ├── FeaturesEN.tsx    # NIEUŻYWANA na HP
 │           ├── ForWhoEN.tsx
+│           ├── AuthorSectionEN.tsx # Karta autora (foto + bio + LinkedIn) - na HP, po FAQ
 │           ├── ClosingCtaEN.tsx
 │           ├── RadarIllustrationEN.tsx
 │           └── FooterEN.tsx     # Mirror PL: logo + /how-it-works + /#who-is-it-for + CTA
@@ -132,10 +138,18 @@ ai-auditor-lp-clone/
 ### Kolejność sekcji HP (identyczna EN i PL)
 
 ```
-Navbar → Hero → TechLogos → Problem → Solution → HowItWorks → Features (5 sekcji) → ForWho → ClosingCta → Footer
+Navbar → Hero → Showcase → Problem → HowItWorks → TechLogos → DimensionsTeaser → ReportSection → ForWho → FAQ → AuthorSection → ClosingCta → Footer
 ```
 
-Features HP: Wymiary, Benchmark SERP, Before/After, Eksport, Quick Wins
+Pliki: PL [page.tsx](src/app/pl/page.tsx), EN [page.tsx](src/app/page.tsx) (komponenty EN w `src/components/en/*EN.tsx`).
+
+**Showcase** ([Showcase.tsx](src/components/Showcase.tsx) / [en/ShowcaseEN.tsx](src/components/en/ShowcaseEN.tsx)) - sam mockup panelu w ramce urządzenia (cienki bezel, metaliczna krawędź, połysk), zanikający ku dołowi przez `maskImage` linear-gradient. Bez copy/CTA. Hover = lekki zoom (`scale: 1.025`). Umieszczony zaraz po Hero - górny kawałek mockupu widoczny above the fold (Showcase `padding: 76px 0 96px`, Hero zredukowany: bez `minHeight`/flex-center, `padding: 40px 24px 28px`). Mockup `animate` z `delay: 1` - wjeżdża od dołu po 1 s. Screeny: `public/dashboard-preview.png` (EN), `public/dashboard-preview-pl.png` (PL) - oba z usuniętym bannerem TESTING PHASE / FAZA TESTÓW.
+
+**ReportSection** ([ReportSection.tsx](src/components/ReportSection.tsx) / [en/ReportSectionEN.tsx](src/components/en/ReportSectionEN.tsx)) - "Dane gotowe do wdrożenia". Układ 2-kolumnowy (stack <900px): lewa = label + h2 + opis + 3 punkty (Raport PDF / Audyt Schema / Historia rewizji) + CTA "Zobacz przykładowy raport"/"View sample report" (otwiera udostępniony raport online w nowej karcie, `target="_blank"`); prawa = podgląd raportu w papierowej ramce (cień, połysk, zanikanie ku dołowi przez `maskImage`, perspektywa, hover-zoom), też klikalny → raport. Linki (stała `REPORT_URL` w każdym komponencie, osobne dla języka): PL `…/share/khZUjVCAgSvScSUGnQ3tgZ58?lang=pl`, EN `…/share/KgJEod9h3yAYswnhLMsTq4a-?lang=en`. Podgląd: `public/report-preview.png` (screenshot udostępnionego raportu web - score'y, profil 10 wymiarów, Quick Wins).
+
+**AuthorSection** ([AuthorSection.tsx](src/components/AuthorSection.tsx) / [en/AuthorSectionEN.tsx](src/components/en/AuthorSectionEN.tsx)) - karta autora: zdjęcie z lewej (kolumna 208px, na mobile pełna szerokość na górze) + treść z prawej (label "O autorze"/"About the author", nazwisko **Wojciech Władziński-Ulatowski**, rola "Twórca CitationOne"/"Creator of CitationOne", bio, przycisk LinkedIn w accentcie). Zdjęcie: `public/author.jpg` (B&W, wyszywane logo usunięte z koszuli).
+
+> Uwaga: na HP nie ma sekcji `Solution` ani `Features` (komponenty istnieją w repo, ale są nieużywane na HP).
 
 ### Kolejność sekcji /how-it-works i /pl/jak-to-dziala
 

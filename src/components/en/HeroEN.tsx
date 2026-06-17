@@ -29,19 +29,16 @@ export default function HeroEN() {
       className="relative overflow-hidden"
       style={{
         background: '#ffffff',
-        minHeight: 'calc(100vh - 64px - 80px)',
-        display: 'flex',
-        alignItems: 'center',
       }}
     >
       <div className="absolute inset-0 dot-grid" style={{ opacity: 0.14 }} />
 
-      <div className="relative" style={{ maxWidth: 720, margin: '0 auto', padding: '64px 24px 56px', textAlign: 'center', width: '100%' }}>
+      <div className="relative" style={{ maxWidth: 720, margin: '0 auto', padding: '40px 24px 28px', textAlign: 'center', width: '100%' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h1 style={{ marginBottom: 14 }}>
+          <h1 style={{ marginBottom: 32 }}>
             <span style={{
               display: 'block',
               fontSize: 'clamp(2.4rem, 4.56vw, 3.6rem)', fontWeight: 700,
@@ -51,21 +48,17 @@ export default function HeroEN() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              Get traffic from AI Search.
+              Check your content for AI Search
             </span>
             <span style={{
               display: 'block',
-              fontSize: 'clamp(1.3rem, 2.8vw, 1.9rem)', fontWeight: 600,
-              lineHeight: 1.2, letterSpacing: '-0.025em', color: '#0d0d12',
-              marginTop: 10,
+              fontSize: 17, fontWeight: 400,
+              lineHeight: 1.6, color: '#36394a',
+              maxWidth: 560, margin: '14px auto 0',
             }}>
-              Check your content now.
+              Boost your page&apos;s citation potential in ChatGPT, Perplexity and Google AI Overview.
             </span>
           </h1>
-
-          <p style={{ fontSize: 17, color: '#36394a', fontWeight: 400, lineHeight: 1.6, margin: '0 auto 36px', maxWidth: 520 }}>
-            Join SEO experts and marketers already optimizing content for AI Search
-          </p>
 
           <form
             onSubmit={(e) => {
@@ -136,10 +129,7 @@ export default function HeroEN() {
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0b7983" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z" />
             </svg>
-            First 3 audits are free.
-          </p>
-          <p style={{ fontSize: 13, margin: '10px auto 0', textAlign: 'center' }}>
-            <a href="#how-it-works" style={{ color: '#0b7983', textDecoration: 'underline', textUnderlineOffset: 3 }}>Learn more about the tool</a>
+            Get 3 free audits to start. Full report in 3 minutes.
           </p>
         </motion.div>
       </div>
