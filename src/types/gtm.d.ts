@@ -6,4 +6,7 @@ interface DataLayerEvent {
 
 interface Window {
   dataLayer?: DataLayerEvent[];
+  // Meta Pixel
+  fbq?: (...args: unknown[]) => void;
+  _fbq?: unknown;
 }
