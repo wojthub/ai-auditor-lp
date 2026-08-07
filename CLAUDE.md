@@ -8,7 +8,7 @@ Landing page dla narzędzia **CitationOne** (`citationone.com`) - webapp do audy
 
 **Języki:** EN (domyślny, root `/`) + PL (`/pl`). Osobne komponenty per język w `src/components/` (PL) i `src/components/en/` (EN).
 
-**Powiązane repo:** aplikacja główna w `../ai-auditor/` - specyfikacja w `spec/` (patrz `ai-auditor/CLAUDE.md`).
+**Powiązane repo:** aplikacja główna w `../ai-auditor/`. Jej specyfikacja to **`../ai-auditor/spec/`** (indeks: `../ai-auditor/CLAUDE.md`) — czytaj stamtąd. To repo **nie trzyma własnej kopii** specyfikacji: kopia w `spec/` istniała do 2026-08-07, ale zdążyła się rozjechać z oryginałem o ~3 miesiące i wprowadzała w błąd, więc została usunięta (przywrócenie: `git checkout 616abc1 -- spec/`).
 
 ---
 
@@ -24,21 +24,36 @@ Landing page dla narzędzia **CitationOne** (`citationone.com`) - webapp do audy
 
 ---
 
+## Komendy
+
+```bash
+npm run dev        # Dev server
+npm run build      # Static export → katalog out/ (output: 'export')
+npm run start      # Serwuj build
+```
+
+**Brak testów i lintu** — `package.json` definiuje wyłącznie te trzy skrypty. Nie ma tu Vitest ani ESLint;
+weryfikacja zmiany = `npm run build` (static export wyłapie błędy typów i nieobsłużone dynamiczne API).
+
+---
+
 ## Struktura projektu
 
 ```
-ai-auditor-lp-clone/
+ai-auditor-lp/
 ├── CLAUDE.md
 ├── package.json
 ├── tsconfig.json
 ├── next.config.ts               # output: 'export' (static)
 ├── public/
 │   └── _redirects               # 301 redirecty (Vercel/Netlify)
-├── spec/                        # Specyfikacja aplikacji głównej (read-only)
+│                                # (brak spec/ — specyfikacja aplikacji glownej: ../ai-auditor/spec/)
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx           # Root layout (lang="en"), metadata EN, hreflang
 │   │   ├── page.tsx             # EN homepage (root /)
+│   │   ├── error.tsx            # Route-level error boundary (Client Component)
+│   │   ├── global-error.tsx     # Root layout fallback — wlasne <html>/<body> + inline styles (brak Tailwinda)
 │   │   ├── globals.css          # Tailwind + tokeny kolorów + animacje
 │   │   ├── how-it-works/        # EN "How it works" (/how-it-works)
 │   │   │   ├── page.tsx
