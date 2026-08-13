@@ -304,8 +304,14 @@ const APP_URL = 'https://app.citationone.com';
 
 ### Language switcher
 
-- **PL Navbar:** logo → `/pl`, badge `EN` → `/` (root = EN)
-- **EN Navbar:** logo → `/`, badge `PL` → `/pl`
+- Badge prowadzi na **odpowiednik bieżącej podstrony** w drugim języku (`/pricing` → `/pl/cennik`,
+  `/pl/api` → `/api`), a nie na stronę główną. Dotyczy badge'a desktopowego i pozycji w menu mobilnym.
+- Pary adresów: [src/lib/languageSwitch.ts](src/lib/languageSwitch.ts) (`PAIRS` + `plCounterpart`/`enCounterpart`).
+  **Nowa podstrona = nowa para w tej tablicy** — bez niej przełącznik po cichu wyrzuca na HP (fallback `/` / `/pl`).
+- Navbary czytają ścieżkę przez `usePathname()`. Przy `output: 'export'` docelowy `href` trafia do
+  **statycznego HTML** każdej strony (zweryfikowane w `out/`), więc działa bez czekania na hydratację.
+- **Uwaga:** `alternates.languages` (hreflang) w layoutach wciąż wskazuje HP dla wszystkich podstron —
+  to osobna sprawa niż przełącznik i nadal do naprawienia (mapa z `languageSwitch.ts` się do tego nadaje).
 - CSS class `.nav-lang`: border badge, 13px, `#a4acb9`
 
 ---

@@ -1,12 +1,16 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import BrandMorph from '../BrandMorph';
+import { plCounterpart } from '@/lib/languageSwitch';
 
 const APP_URL = 'https://app.citationone.com';
 
 export default function NavbarEN() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  // Przelacznik prowadzi na POLSKI ODPOWIEDNIK biezacej podstrony, nie na strone glowna.
+  const plHref = plCounterpart(usePathname());
 
   return (
     <nav
@@ -36,7 +40,7 @@ export default function NavbarEN() {
           <a href="/pricing" className="nav-link">Pricing</a>
           <a href="/api" className="nav-link">API</a>
           <a href={`${APP_URL}/login?lang=en`} className="nav-cta">Run audit</a>
-          <a href="/pl" className="nav-lang" title="Wersja polska">PL</a>
+          <a href={plHref} className="nav-lang" title="Wersja polska">PL</a>
         </div>
 
         {/* Mobile hamburger */}
@@ -88,7 +92,7 @@ export default function NavbarEN() {
           <a href="/api" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             API
           </a>
-          <a href="/pl" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+          <a href={plHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             PL - Wersja polska
           </a>
           <a href={`${APP_URL}/login?lang=en`} onClick={() => setMobileOpen(false)} className="nav-mobile-cta">
