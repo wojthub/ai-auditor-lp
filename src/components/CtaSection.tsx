@@ -74,7 +74,7 @@ export default function CtaSection() {
                   marginBottom: 16,
                 }}
               >
-                Mniej niż 3 minuty zamiast godzin eksperckiej pracy
+                Mniej niż 5 minut zamiast godzin eksperckiej pracy
               </h2>
               <p
                 style={{

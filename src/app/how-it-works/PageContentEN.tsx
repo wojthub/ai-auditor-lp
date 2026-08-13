@@ -348,11 +348,11 @@ export default function PageContentEN() {
               Discover the mechanism that opens the door to AI Search
             </h1>
             <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.7, maxWidth: 640, margin: '0 auto 36px' }}>
-              See how, in under 3 minutes, CitationOne scans your text and turns complex algorithmic analysis into clear editorial guidelines. No complex integration, no changes to your site&apos;s code.
+              See how, in under 5 minutes, CitationOne scans your text and turns complex algorithmic analysis into clear editorial guidelines. No complex integration, no changes to your site&apos;s code.
             </p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               {[
-                { text: 'Full report in ~3 minutes' },
+                { text: 'Full report in ~5 minutes' },
                 { text: '10 dimensions + E-E-A-T' },
                 { text: 'Top 10 SERP benchmark' },
                 { text: 'Before/After with ready fixes' },
@@ -390,7 +390,7 @@ export default function PageContentEN() {
               {
                 n: '02', color: '#0b7983',
                 title: 'The algorithm runs a Top 10 SERP benchmark',
-                body: 'In under 3 minutes CitationOne fetches and analyzes your content. At the same time it inspects the 10 top-ranking competitor pages. The tool compares your material with the market leaders across 10 quality dimensions and E-E-A-T signals.',
+                body: 'In under 5 minutes CitationOne fetches and analyzes your content. At the same time it inspects the 10 top-ranking competitor pages. The tool compares your material with the market leaders across 10 quality dimensions and E-E-A-T signals.',
               },
               {
                 n: '03', color: '#c47a2a',

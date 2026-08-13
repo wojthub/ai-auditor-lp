@@ -12,7 +12,7 @@ const faqs = [
   {
     question: 'How quickly do I get the audit result?',
     answer:
-      'A full analysis of a single piece of content takes under 3 minutes.',
+      'A full analysis of a single piece of content takes under 5 minutes.',
   },
   {
     question: 'Do I need to integrate the tool with my site?',

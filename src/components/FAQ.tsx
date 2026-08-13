@@ -12,7 +12,7 @@ const faqs = [
   {
     question: 'Jak szybko otrzymam wynik audytu?',
     answer:
-      'Pełna analiza pojedynczej treści trwa poniżej 3 minut.',
+      'Pełna analiza pojedynczej treści trwa poniżej 5 minut.',
   },
   {
     question: 'Czy muszę integrować narzędzie ze swoją stroną?',

@@ -28,7 +28,7 @@ export default function SolutionEN() {
           <p style={{ fontSize: 16, color: '#666d80', lineHeight: 1.7, marginBottom: 32 }}>
             CitationOne analyzes 10 content quality dimensions and compares
             your article with the top&nbsp;10 SERP. You get prioritized
-            Before/After recommendations - ready in under 3 minutes.
+            Before/After recommendations - ready in under 5 minutes.
           </p>
 
           <motion.a

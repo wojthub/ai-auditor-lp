@@ -371,11 +371,11 @@ export default function PageContent() {
               Poznaj mechanizm, który otwiera drzwi do AI Search
             </h1>
             <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.7, maxWidth: 640, margin: '0 auto 36px' }}>
-              Zobacz, jak w mniej niż 3 minuty CitationOne prześwietla Twój tekst i zamienia skomplikowaną analizę algorytmiczną w proste wytyczne dla redakcji. Bez skomplikowanej integracji, bez zmian w kodzie Twojej strony.
+              Zobacz, jak w mniej niż 5 minut CitationOne prześwietla Twój tekst i zamienia skomplikowaną analizę algorytmiczną w proste wytyczne dla redakcji. Bez skomplikowanej integracji, bez zmian w kodzie Twojej strony.
             </p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               {[
-                { text: 'Pełny raport w ~3 minuty' },
+                { text: 'Pełny raport w ~5 minut' },
                 { text: '10 wymiarów + E-E-A-T' },
                 { text: 'Benchmark top 10 SERP' },
                 { text: 'Przed i Po z gotowymi poprawkami' },
@@ -413,7 +413,7 @@ export default function PageContent() {
               {
                 n: '02', color: '#0b7983',
                 title: 'Algorytm wykonuje benchmark z Top 10 SERP',
-                body: 'W mniej niż 3 minuty system CitationOne pobiera i analizuje Twoją treść. W tym samym czasie bada 10 najlepiej rankujących stron konkurencji. Narzędzie porównuje Twój materiał z liderami rynku pod kątem 10 wymiarów jakości oraz sygnałów E-E-A-T.',
+                body: 'W mniej niż 5 minut system CitationOne pobiera i analizuje Twoją treść. W tym samym czasie bada 10 najlepiej rankujących stron konkurencji. Narzędzie porównuje Twój materiał z liderami rynku pod kątem 10 wymiarów jakości oraz sygnałów E-E-A-T.',
               },
               {
                 n: '03', color: '#c47a2a',

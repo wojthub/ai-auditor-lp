@@ -18,7 +18,7 @@ const steps = [
     numberColor: '#0b7983',
     title: 'Algorytm przeprowadza audyt',
     description:
-      'W mniej niż 3 minuty system sprawdza treść na tle bezpośredniej konkurencji z wyszukiwarki. Narzędzie analizuje tekst pod kątem parametrów, których modele językowe używają do wybierania źródeł odpowiedzi.',
+      'W mniej niż 5 minut system sprawdza treść na tle bezpośredniej konkurencji z wyszukiwarki. Narzędzie analizuje tekst pod kątem parametrów, których modele językowe używają do wybierania źródeł odpowiedzi.',
   },
   {
     number: '03',
@@ -149,7 +149,7 @@ export default function HowItWorks() {
               boxShadow: '0 4px 20px rgba(11,121,131,0.25)',
             }}
           >
-            Wygeneruj raport w 3 minuty
+            Wygeneruj raport w 5 minut
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>

@@ -18,7 +18,7 @@ const steps = [
     numberColor: '#0b7983',
     title: 'Algorithm runs the audit',
     description:
-      'In less than 3 minutes the system checks your content against direct competitors from the search engine. It analyzes text against the parameters language models use to select answer sources.',
+      'In less than 5 minutes the system checks your content against direct competitors from the search engine. It analyzes text against the parameters language models use to select answer sources.',
   },
   {
     number: '03',
@@ -148,7 +148,7 @@ export default function HowItWorksEN() {
               boxShadow: '0 4px 20px rgba(11,121,131,0.25)',
             }}
           >
-            Generate report in 3 minutes
+            Generate report in 5 minutes
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
