@@ -353,7 +353,10 @@ const APP_URL = 'https://app.citationone.com';
 ## RWD / Mobile
 
 - **Viewport:** `export const viewport` w [layout.tsx](src/app/layout.tsx) (`width: device-width, initialScale: 1, maximumScale: 5`). PL layout dziedziczy z root.
-- **Breakpointy:** `sm:` (640px) Navbar, 900px HowItWorks (3 kroki z connectorami), 768px pozostałe gridy.
+- **Breakpointy:** `md:` (768px) Navbar, 900px HowItWorks (3 kroki z connectorami), 768px pozostałe gridy.
+  Navbar przeszedł z `sm:` na `md:` przy dodaniu 5. pozycji („API"): przy 640px logo + 4 linki + CTA + badge
+  języka nie mieściły się w 64px i CTA („Zrób audyt" / „Run audit") łamał się na dwie linie. Dodając kolejną
+  pozycję do menu **zmierz** wysokość `.nav-cta` — zawijanie nie powoduje przewijania strony, więc nie rzuca się w oczy.
 - **Navbar:** hamburger + panel, auto-close, full-width CTA. `.nav-cta` ma `min-height: 44px` (touch target tablet/mobile).
 - **Hero button:** `min-height: 44`, bez `whiteSpace: nowrap` (uniknięcie overflow <360px). Input+button stack na <580px.
 - **Gridy responsive:** dims 3→2→1, ba 2→1, feat 2→1, howitworks 5→1 (≤900px), problem/forwho 3→1.

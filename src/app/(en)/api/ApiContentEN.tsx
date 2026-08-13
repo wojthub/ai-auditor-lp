@@ -226,7 +226,7 @@ export default function ApiContentEN() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           style={{
             marginTop: 48,
-            border: `1px solid rgba(11,121,131,0.28)`,
+            border: '1px solid rgba(11,121,131,0.28)',
             borderRadius: 12,
             padding: '28px 26px',
             background: 'rgba(11,121,131,0.04)',

@@ -30,7 +30,7 @@ export default function NavbarEN() {
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden sm:flex items-center">
+        <div className="hidden md:flex items-center">
           <a href="/how-it-works" className="nav-link">How it works</a>
           <a href="/dimensions" className="nav-link">Dimensions</a>
           <a href="/pricing" className="nav-link">Pricing</a>
@@ -41,7 +41,7 @@ export default function NavbarEN() {
 
         {/* Mobile hamburger */}
         <button
-          className="sm:hidden flex items-center justify-center"
+          className="md:hidden flex items-center justify-center"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           style={{
@@ -69,7 +69,7 @@ export default function NavbarEN() {
       {/* Mobile menu panel */}
       {mobileOpen && (
         <div
-          className="sm:hidden"
+          className="md:hidden"
           style={{
             borderTop: '1px solid #eceff3',
             background: '#ffffff',
