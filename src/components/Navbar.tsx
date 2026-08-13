@@ -34,6 +34,7 @@ export default function Navbar() {
           <a href="/pl/jak-to-dziala" className="nav-link">Jak to działa?</a>
           <a href="/pl/wymiary" className="nav-link">Wymiary</a>
           <a href="/pl/cennik" className="nav-link">Cennik</a>
+          <a href="/pl/api" className="nav-link">API</a>
           <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zrób audyt</a>
           <a href="/" className="nav-lang" title="English version">EN</a>
         </div>
@@ -95,6 +96,13 @@ export default function Navbar() {
             className="nav-mobile-link"
           >
             Cennik
+          </a>
+          <a
+            href="/pl/api"
+            onClick={() => setMobileOpen(false)}
+            className="nav-mobile-link"
+          >
+            API
           </a>
           <a href="/" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             EN - English version

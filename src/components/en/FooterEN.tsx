@@ -14,6 +14,7 @@ export default function FooterEN() {
             {[
               { href: '/how-it-works', label: 'How it works' },
               { href: '/#who-is-it-for', label: 'Who is it for?' },
+              { href: '/api', label: 'API' },
             ].map((l) => (
               <a key={l.href} href={l.href} style={{ fontSize: 14, color: '#818898', textDecoration: 'none', padding: '12px 14px', borderRadius: 5 }}>
                 {l.label}

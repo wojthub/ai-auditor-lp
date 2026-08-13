@@ -34,6 +34,7 @@ export default function NavbarEN() {
           <a href="/how-it-works" className="nav-link">How it works</a>
           <a href="/dimensions" className="nav-link">Dimensions</a>
           <a href="/pricing" className="nav-link">Pricing</a>
+          <a href="/api" className="nav-link">API</a>
           <a href={`${APP_URL}/login?lang=en`} className="nav-cta">Run audit</a>
           <a href="/pl" className="nav-lang" title="Wersja polska">PL</a>
         </div>
@@ -83,6 +84,9 @@ export default function NavbarEN() {
           </a>
           <a href="/pricing" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             Pricing
+          </a>
+          <a href="/api" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+            API
           </a>
           <a href="/pl" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             PL - Wersja polska

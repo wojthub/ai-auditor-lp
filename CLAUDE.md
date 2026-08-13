@@ -64,6 +64,9 @@ ai-auditor-lp/
 │   │   ├── dimensions/          # EN "Dimensions" (/dimensions)
 │   │   │   ├── page.tsx
 │   │   │   └── DimensionsContent.tsx
+│   │   ├── (en)/api/            # EN "API" (/api) — grupa routingu, NIE `src/app/api/`
+│   │   │   ├── page.tsx         #   (patrz nota "Zakladka API" nizej)
+│   │   │   └── ApiContentEN.tsx
 │   │   └── pl/                  # Wersja PL
 │   │       ├── layout.tsx       # PL layout (lang="pl", metadata PL, hreflang)
 │   │       ├── page.tsx         # PL homepage (/pl)
@@ -73,9 +76,12 @@ ai-auditor-lp/
 │   │       ├── cennik/          # PL "Cennik" (/pl/cennik)
 │   │       │   ├── page.tsx
 │   │       │   └── PricingContent.tsx
-│   │       └── wymiary/         # PL "Wymiary" (/pl/wymiary)
+│   │       ├── wymiary/         # PL "Wymiary" (/pl/wymiary)
+│   │       │   ├── page.tsx
+│   │       │   └── WymiaryContent.tsx
+│   │       └── api/             # PL "API" (/pl/api)
 │   │           ├── page.tsx
-│   │           └── WymiaryContent.tsx
+│   │           └── ApiContent.tsx
 │   └── components/
 │       ├── Navbar.tsx           # PL Navbar - switcher EN → /
 │       ├── Hero.tsx
@@ -126,6 +132,7 @@ ai-auditor-lp/
 | `/how-it-works` | PageContentEN | How does CitationOne work? - CitationOne |
 | `/pricing` | PricingContentEN | Pricing - CitationOne |
 | `/dimensions` | DimensionsContent | 10 content quality dimensions + E-E-A-T - CitationOne |
+| `/api` | ApiContentEN | API - CitationOne |
 
 ### PL (katalog /pl)
 
@@ -135,6 +142,23 @@ ai-auditor-lp/
 | `/pl/jak-to-dziala` | PageContent PL | Jak działa CitationOne? - CitationOne |
 | `/pl/cennik` | PricingContent PL | Cennik - CitationOne |
 | `/pl/wymiary` | WymiaryContent PL | 10 wymiarów jakości treści + E-E-A-T - CitationOne |
+| `/pl/api` | ApiContent PL | API - CitationOne |
+
+### Zakładka API (`/api` i `/pl/api`)
+
+Podstrona dla programistów: opis publicznego API v1 aplikacji + dwa wyjścia dokumentacji —
+`https://app.citationone.com/api-docs` (HTML) i `https://app.citationone.com/api-docs.md`
+(`text/markdown` dla agentów AI). Oba adresy są **publiczne** (`PUBLIC_PATHS` w middleware głównej
+apki) i powstają z jednego źródła `lib/api/docs-content.ts` — kontrakt opisany w
+`../ai-auditor/spec/public-api.md`. Linki: Navbar (desktop + mobile) i Footer, w obu językach.
+
+⚠️ **Gotcha — EN wersja NIE może leżeć w `src/app/api/`.** Next traktuje ten katalog jak API routes
+i przy `output: 'export'` build wywala się na `PageNotFoundError: Cannot find module for page:
+/_document` (etap „Collecting page data"). Strona leży więc w grupie routingu
+[src/app/(en)/api/](<src/app/(en)/api/page.tsx>) — URL pozostaje `/api`. PL (`/pl/api`) problemu nie ma.
+
+Dokumentacja w app jest **po polsku** (endpointy/JSON po angielsku); strona EN ma o tym jedno zdanie
+w sekcji o wersji Markdown.
 
 ### 301 Redirecty (`public/_redirects`)
 
