@@ -157,8 +157,13 @@ i przy `output: 'export'` build wywala się na `PageNotFoundError: Cannot find m
 /_document` (etap „Collecting page data"). Strona leży więc w grupie routingu
 [src/app/(en)/api/](<src/app/(en)/api/page.tsx>) — URL pozostaje `/api`. PL (`/pl/api`) problemu nie ma.
 
-Dokumentacja w app jest **po polsku** (endpointy/JSON po angielsku); strona EN ma o tym jedno zdanie
-w sekcji o wersji Markdown.
+**Dokumentacja jest po angielsku** (od `v1.2`, 2026-08-14 — wcześniej PL). Strona PL ma o tym jedno
+zdanie w sekcji o wersji Markdown; strona EN nie potrzebuje żadnej adnotacji.
+
+Siatka cech na LP odwzorowuje kontrakt z `../ai-auditor/src/lib/api/version.ts` — przy bumpie
+`API_VERSION` **sprawdź, czy nie doszła funkcja warta karty** (v1.2 dołożyła webhooki i audyt treści
+podanej wprost). Numeru wersji celowo NIE ma w copy: LP jest statyczne i zwietrzałoby przy pierwszym
+bumpie; w pasku bloku kodu jest `api/v1`, czyli prefiks ścieżki, który zmienia się tylko przy zmianie łamiącej.
 
 ### 301 Redirecty (`public/_redirects`)
 

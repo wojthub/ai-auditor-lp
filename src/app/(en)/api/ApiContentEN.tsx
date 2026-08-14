@@ -17,6 +17,14 @@ const FEATURES = [
     body: 'POST returns 202 with a job id and never holds the connection open. The audit runs in the background, you collect it with GET.',
   },
   {
+    title: 'Webhooks instead of polling',
+    body: 'Pass webhookUrl and the result is POSTed to you when it is ready - signed with HMAC-SHA256. Failures are delivered too, and a batch sends one event per audit.',
+  },
+  {
+    title: 'Audit content before it is published',
+    body: 'Send content instead of url (50-200,000 characters) to audit a draft, a rewrite or copy for a site that does not exist yet. Same dimensions, same 1 credit.',
+  },
+  {
     title: 'Full result as JSON',
     body: 'CQS, AI Citability, 10 dimensions with problems, E-E-A-T, Before/After recommendations, SERP benchmark and Fan-Out coverage.',
   },
@@ -30,7 +38,7 @@ const FEATURES = [
   },
   {
     title: 'Billed in credits',
-    body: 'One API audit costs 1 credit - exactly the same as an audit ordered in the app. No separate API subscription.',
+    body: 'One API audit costs 1 credit - exactly the same as an audit ordered in the app. No separate API subscription; balance and history come from GET /credits/usage.',
   },
 ];
 
@@ -44,7 +52,10 @@ curl -X POST https://app.citationone.com/api/v1/audits \\
 
 # 2. Collect the result
 curl https://app.citationone.com/api/v1/audits/job_V1StGXR8 \\
-  -H "Authorization: Bearer co_live_..."`;
+  -H "Authorization: Bearer co_live_..."
+
+# Or skip step 2: pass "webhookUrl" when submitting and we
+# POST the result to you, signed with HMAC-SHA256.`;
 
 export default function ApiContentEN() {
   return (
@@ -259,9 +270,6 @@ export default function ApiContentEN() {
           }}>
             {DOCS_MD_URL}
           </div>
-          <p style={{ fontSize: 13, color: '#818898', lineHeight: 1.6, marginTop: 14, marginBottom: 0 }}>
-            Note: the reference is written in Polish; all endpoints, payloads and field names are in English.
-          </p>
         </motion.div>
 
         {/* Closing CTA */}

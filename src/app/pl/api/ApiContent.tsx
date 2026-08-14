@@ -17,6 +17,14 @@ const FEATURES = [
     body: 'POST zwraca 202 z identyfikatorem zadania i nie blokuje połączenia. Audyt liczy się w tle, wynik odbierasz przez GET.',
   },
   {
+    title: 'Webhooki zamiast odpytywania',
+    body: 'Podaj webhookUrl, a wynik przyjdzie do Ciebie POST-em - podpisany HMAC-SHA256. Błędy też są wysyłane, a paczka daje osobne zdarzenie per audyt.',
+  },
+  {
+    title: 'Audyt treści przed publikacją',
+    body: 'Zamiast url wyślij content (50-200 000 znaków) i zaudytuj szkic, przeredagowany tekst albo copy dla strony, której jeszcze nie ma. Te same wymiary, ten sam 1 kredyt.',
+  },
+  {
     title: 'Pełny wynik jako JSON',
     body: 'CQS, AI Citability, 10 wymiarów z problemami, E-E-A-T, rekomendacje Przed i Po, benchmark SERP i pokrycie Fan-Out.',
   },
@@ -30,7 +38,7 @@ const FEATURES = [
   },
   {
     title: 'Rozliczenie w kredytach',
-    body: 'Jeden audyt z API kosztuje 1 kredyt - dokładnie tyle samo, co audyt zlecony w panelu. Bez osobnego abonamentu na API.',
+    body: 'Jeden audyt z API kosztuje 1 kredyt - dokładnie tyle samo, co audyt zlecony w panelu. Bez osobnego abonamentu; saldo i historię czytasz z GET /credits/usage.',
   },
 ];
 
@@ -44,7 +52,10 @@ curl -X POST https://app.citationone.com/api/v1/audits \\
 
 # 2. Odbierz wynik
 curl https://app.citationone.com/api/v1/audits/job_V1StGXR8 \\
-  -H "Authorization: Bearer co_live_..."`;
+  -H "Authorization: Bearer co_live_..."
+
+# Albo pomiń krok 2: podaj "webhookUrl" przy zleceniu,
+# a wynik wyślemy POST-em, podpisany HMAC-SHA256.`;
 
 export default function ApiContent() {
   return (
@@ -259,6 +270,9 @@ export default function ApiContent() {
           }}>
             {DOCS_MD_URL}
           </div>
+          <p style={{ fontSize: 13, color: '#818898', lineHeight: 1.6, marginTop: 14, marginBottom: 0 }}>
+            Dokumentacja jest po angielsku - razem z opisami pól i przykładami.
+          </p>
         </motion.div>
 
         {/* Closing CTA */}
