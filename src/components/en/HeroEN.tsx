@@ -56,7 +56,7 @@ export default function HeroEN() {
               lineHeight: 1.6, color: '#36394a',
               maxWidth: 560, margin: '14px auto 0',
             }}>
-              Boost your page&apos;s citation potential in ChatGPT, Perplexity and Google AI Overview.
+              We analyse the content elements that matter most to AI models. Boost your page&apos;s citation potential in ChatGPT, Perplexity and Google AI Overview.
             </span>
           </h1>
 

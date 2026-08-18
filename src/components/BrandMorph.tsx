@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react';
 
 /**
- * Typing animation: CitatioNone → CitationOne
- * Types "CitatioNone", pauses, backspaces "None", types "nOne".
+ * Typing animation: CitationNone? → CitationOne
+ * Types "CitationNone?", pauses, backspaces "None?", types "One".
  * Then loops after a delay.
  */
 
-const FULL_NONE = 'CitatioNone';
+const FULL_NONE = 'CitationNone?';
 const FULL_ONE = 'CitationOne';
-const STATIC_PREFIX = 'Citatio';
+const STATIC_PREFIX = 'Citation';
 
 // Timing (ms)
 const TYPE_SPEED = 80;
@@ -126,8 +126,8 @@ export default function BrandMorph() {
   const prefix = text.slice(0, STATIC_PREFIX.length);
   const suffix = text.slice(STATIC_PREFIX.length);
 
-  // Determine if we're in "One" state (suffix starts with "n" and has "O")
-  const isOneState = suffix.length > 0 && suffix[0] === 'n';
+  // Determine if we're in "One" state (suffix starts with "O", vs "N" for "None?")
+  const isOneState = suffix.length > 0 && suffix[0] === 'O';
 
   return (
     <span

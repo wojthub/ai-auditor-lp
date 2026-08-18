@@ -56,7 +56,7 @@ export default function Hero() {
               lineHeight: 1.6, color: '#36394a',
               maxWidth: 560, margin: '14px auto 0',
             }}>
-              Zwiększ potencjał cytowania strony przez ChatGPT, Perplexity i Google AI Overview.
+              Badamy elementy treści, które najbardziej decydują o cytowaniu przez AI. Zwiększ potencjał cytowania strony przez ChatGPT, Perplexity i Google AI Overview.
             </span>
           </h1>
 
