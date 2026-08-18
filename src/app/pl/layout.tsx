@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Audyt treści pod AI Search',
+    default: 'Narzędzie GEO - audyt treści pod AI Search',
     template: '%s - CitationOne',
   },
   description:

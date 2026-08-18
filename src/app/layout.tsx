@@ -18,7 +18,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'AI Search Content Audit - CitationOne',
+    default: 'GEO & AI Search Content Audit Tool - CitationOne',
     template: '%s - CitationOne',
   },
   description:
