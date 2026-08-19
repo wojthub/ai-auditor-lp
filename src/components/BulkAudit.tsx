@@ -14,7 +14,7 @@ const APP_URL = 'https://app.citationone.com';
 const cards = [
   {
     title: 'Lista URL-i albo sitemapa',
-    desc: 'Wklejasz do 50 adresów naraz lub podajesz sitemapę - system sam pobierze z niej strony.',
+    desc: 'Wklejasz adresy w jednym zleceniu lub podajesz sitemapę - system sam pobierze z niej strony.',
   },
   {
     title: 'Słowa kluczowe bez ręcznej pracy',
@@ -59,7 +59,7 @@ export default function BulkAudit() {
             Sprawdź cały serwis, nie jedną stronę
           </h2>
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.75, margin: 0, maxWidth: 720 }}>
-            Masowy audyt bierze do 50 adresów w jednym zleceniu i przepuszcza każdy z nich przez
+            Masowy audyt bierze całą listę adresów w jednym zleceniu i przepuszcza każdy z nich przez
             <strong style={{ color: '#0d0d12', fontWeight: 600 }}> ten sam algorytm co audyt pojedynczy</strong> - z benchmarkiem Top 10 SERP i pełnym raportem.
             Dostajesz obraz całej sekcji serwisu zamiast pojedynczego artykułu.
           </p>

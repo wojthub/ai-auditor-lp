@@ -14,7 +14,7 @@ const APP_URL = 'https://app.citationone.com';
 const cards = [
   {
     title: 'A URL list or a sitemap',
-    desc: 'Paste up to 50 addresses at once, or point us at your sitemap and we will pull the pages from it.',
+    desc: 'Paste your addresses in a single job, or point us at your sitemap and we will pull the pages from it.',
   },
   {
     title: 'Keywords without the manual work',
@@ -59,7 +59,7 @@ export default function BulkAuditEN() {
             Audit a whole site section, not a single page
           </h2>
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.75, margin: 0, maxWidth: 720 }}>
-            Bulk audit takes up to 50 addresses in one job and runs each of them through
+            Bulk audit takes a whole list of addresses in one job and runs each of them through
             <strong style={{ color: '#0d0d12', fontWeight: 600 }}> the same algorithm as a single audit</strong> - with the Top 10 SERP benchmark and a full report.
             You get a picture of an entire section instead of one article.
           </p>
