@@ -119,6 +119,62 @@ export default function PricingContentEN() {
           </motion.div>
         </div>
 
+        {/* Volume bonus - tiers mirror CREDIT_BONUS_TIERS in the app */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            marginTop: 20,
+            border: '1px solid #dfe1e7',
+            borderRadius: 12,
+            padding: '28px 28px 24px',
+            background: '#f8fafb',
+          }}
+        >
+          <h2 style={{
+            fontSize: 18, fontWeight: 700, color: '#0d0d12',
+            letterSpacing: '-0.02em', margin: '0 0 6px', textAlign: 'center',
+          }}>
+            Buy more, get extra credits
+          </h2>
+          <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 20px', textAlign: 'center' }}>
+            The bonus is added automatically at checkout. 1 credit = 1 audit.
+          </p>
+
+          <div className="bonus-tiers">
+            {[
+              { credits: 100, percent: 10, effective: '€1.82' },
+              { credits: 200, percent: 20, effective: '€1.67' },
+              { credits: 300, percent: 30, effective: '€1.54' },
+            ].map((tier) => (
+              <div
+                key={tier.credits}
+                style={{
+                  border: '1px solid #dfe1e7',
+                  borderRadius: 10,
+                  background: '#ffffff',
+                  padding: '16px 12px',
+                  textAlign: 'center',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 6 }}>
+                  <span style={{ fontSize: 24, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.03em' }}>
+                    {tier.credits}
+                  </span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: '#15803d' }}>
+                    +{tier.percent}%
+                  </span>
+                </div>
+                <div style={{ fontSize: 12.5, color: '#818898', marginTop: 6, lineHeight: 1.5 }}>
+                  credits<br />
+                  <span style={{ color: '#36394a' }}>{tier.effective} / audit</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -160,8 +216,18 @@ export default function PricingContentEN() {
           grid-template-columns: 1fr 1fr;
           gap: 20px;
         }
+        .bonus-tiers {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
+        }
         @media (max-width: 640px) {
           .pricing-cards { grid-template-columns: 1fr; }
+        }
+        /* Three pills collapse to one column below ~500px — "300 +30%" needs
+           roughly 100px on one line, so it breaks awkwardly when narrower. */
+        @media (max-width: 500px) {
+          .bonus-tiers { grid-template-columns: 1fr; }
         }
       `}</style>
     </section>
