@@ -6,6 +6,7 @@ import ProblemEN from '@/components/en/ProblemEN';
 import HowItWorksEN from '@/components/en/HowItWorksEN';
 import DimensionsTeaserEN from '@/components/en/DimensionsTeaserEN';
 import ReportSectionEN from '@/components/en/ReportSectionEN';
+import BulkAuditEN from '@/components/en/BulkAuditEN';
 import ForWhoEN from '@/components/en/ForWhoEN';
 import FAQEN from '@/components/en/FAQEN';
 import AuthorSectionEN from '@/components/en/AuthorSectionEN';
@@ -23,6 +24,7 @@ export default function LandingPage() {
       <TechLogosEN />
       <DimensionsTeaserEN />
       <ReportSectionEN />
+      <BulkAuditEN />
       <ForWhoEN />
       <FAQEN />
       <AuthorSectionEN />

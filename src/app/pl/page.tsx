@@ -6,6 +6,7 @@ import Problem from '@/components/Problem';
 import HowItWorks from '@/components/HowItWorks';
 import DimensionsTeaser from '@/components/DimensionsTeaser';
 import ReportSection from '@/components/ReportSection';
+import BulkAudit from '@/components/BulkAudit';
 import ForWho from '@/components/ForWho';
 import FAQ from '@/components/FAQ';
 import AuthorSection from '@/components/AuthorSection';
@@ -23,6 +24,7 @@ export default function PlLandingPage() {
       <TechLogos />
       <DimensionsTeaser />
       <ReportSection />
+      <BulkAudit />
       <ForWho />
       <FAQ />
       <AuthorSection />
