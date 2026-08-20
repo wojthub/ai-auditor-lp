@@ -16,66 +16,93 @@ function fadeUp(delay = 0) {
 
 const NUM_COLORS = ['#e07a4a', '#0b7983', '#c47a2a'];
 
+// Nazwy i kolejnosc = `dim.*` + DIMENSION_ORDER (RadarChart) w aplikacji — po zakupie user
+// widzi w raporcie dokladnie te etykiety. `slug` musi istniec w src/data/dimensions-pl.ts.
 const DIMS = [
   {
     num: '01',
     id: 'CSI Alignment',
-    label: 'Zgodność z intencją',
-    body: 'Czy treść odpowiada na to, czego naprawdę szuka użytkownik? AI nie cytuje stron, które mijają się z intencją zapytania - nawet jeśli zawierają słowo kluczowe. CSI Alignment mierzy, jak dokładnie Twój artykuł dopasowuje się do oczekiwanego typu odpowiedzi: definicji, porównania, instrukcji lub rekomendacji.',
+    slug: 'zgodnosc-z-csi',
+    label: 'Zgodność z CSI',
+    body: 'Czy treść odpowiada na to, czego naprawdę szuka użytkownik? AI nie cytuje stron, które mijają się z intencją zapytania - nawet jeśli zawierają słowo kluczowe. Ten wymiar mierzy, jak dokładnie Twój artykuł dopasowuje się do oczekiwanego typu odpowiedzi: definicji, porównania, instrukcji lub rekomendacji.',
   },
   {
     num: '02',
-    id: 'D1',
+    id: 'Density',
+    slug: 'gestosc-informacji',
     label: 'Gęstość informacji',
     body: 'Ile faktów, danych i konkretnych stwierdzeń zawiera jeden akapit. Treści o niskiej gęstości informacji są wypełniaczem - AI je pomija. Ten wymiar nagradza każde zdanie, które wnosi coś nowego, i karze tekst, który powtarza to samo innymi słowami.',
   },
   {
     num: '03',
-    id: 'BLUF',
-    label: 'BLUF (Odpowiedź na początku)',
-    body: 'AI modele preferują treści, które podają główną odpowiedź w pierwszym akapicie. BLUF mierzy, jak szybko Twoja treść dochodzi do sedna.',
+    id: 'EAV',
+    slug: 'graf-wiedzy',
+    label: 'Graf wiedzy (EAV)',
+    body: 'Treść buduje sieć powiązanych pojęć: encji, ich atrybutów i wartości. Im gęstszy i spójniejszy graf, tym łatwiej AI rozpoznaje treść jako wiarygodne źródło w danej dziedzinie. Ten wymiar sprawdza, czy teksty tworzą wiedzę - a nie tylko ją wspominają.',
   },
   {
     num: '04',
-    id: 'EAV',
-    label: 'Graf wiedzy (EAV)',
-    body: 'Treść buduje sieć powiązanych pojęć: podmiotów (Entity), atrybutów (Attribute) i wartości (Value). Im gęstszy i spójniejszy graf, tym łatwiej AI rozpoznaje treść jako wiarygodne źródło w danej domenie. Ten wymiar sprawdza, czy teksty tworzą wiedzę - a nie tylko ją wspominają.',
+    id: 'BLUF',
+    slug: 'bluf',
+    label: 'BLUF',
+    body: 'Modele AI preferują treści, które podają główną odpowiedź na początku sekcji. BLUF mierzy, jak szybko Twoja treść dochodzi do sedna - i czy robi to w każdej sekcji, czy tylko w pierwszej.',
   },
   {
     num: '05',
-    id: 'Chunki',
-    label: 'Chunki informacyjne',
-    body: 'AI "wycina" z treści samodzielne fragmenty - zdania lub akapity, które można zrozumieć bez kontekstu całego artykułu. Ten wymiar mierzy, ile takich gotowych do cytowania jednostek zawiera Twoja strona. Im więcej wyraźnych chunków, tym wyższe szanse na pojawienie się w AI Overview lub odpowiedzi asystenta.',
+    id: 'Chunk',
+    slug: 'optymalizacja-chunkow',
+    label: 'Optymalizacja chunków',
+    body: 'AI wycina z treści samodzielne fragmenty - sekcje, które da się zrozumieć bez kontekstu całego artykułu. Ten wymiar mierzy, ile takich gotowych do cytowania jednostek zawiera Twoja strona i czy mają długość właściwą dla tego typu treści.',
   },
   {
     num: '06',
-    id: 'Ekstrakcja',
-    label: 'Koszt ekstrakcji (Zwięzłość)',
-    body: 'Ile wysiłku musi włożyć model, żeby wydobyć z Twojej treści konkretną odpowiedź. Długie zdania, nadmiarowe wstępy i zbędne zastrzeżenia podnoszą koszt ekstrakcji. Niski wynik w tym wymiarze oznacza, że AI wybierze konkurenta, który napisał to samo krócej.',
+    id: 'CoR',
+    slug: 'koszt-pozyskania',
+    label: 'Koszt pozyskania',
+    body: 'Ile wysiłku kosztuje wyciągnięcie ze strony konkretnej odpowiedzi. Hierarchia nagłówków, tabele, listy i wyróżnienia obniżają ten koszt; ściana tekstu go podnosi. Przy porównywalnej treści model wybierze źródło tańsze w obsłudze.',
   },
   {
     num: '07',
-    id: 'Information Gain',
-    label: 'Information Gain (Unikalność)',
-    body: 'Czy Twoja treść wnosi coś, czego nie ma na pozostałych 10 stronach w top10? Information Gain mierzy różnicę między tym, co piszesz, a tym, co jest już ogólnie dostępne. Ten wskaźnik jest podnoszony przez unikalne dane, własne obserwacje i nieoczywiste wnioski.',
+    id: 'TF-IDF',
+    slug: 'tf-idf',
+    label: 'TF-IDF',
+    body: 'Porównanie terminologii Twojej strony ze słownictwem konkurencji z Top 10. Brakujący termin specjalistyczny to zwykle brakujący wątek - CitationOne wskazuje dokładnie, których pojęć nie używasz i w jakim kontekście robi to konkurencja.',
   },
   {
     num: '08',
-    id: 'Query Fan-out',
-    label: 'Pokrycie AI Overview (Query Fan-out)',
-    body: 'Jedno zapytanie użytkownika generuje dziesiątki powiązanych pytań, które AI rozwiązuje w tle. Ten wymiar sprawdza, ile z tych pytań satelitarnych odpowiada dana treść. Szersze pokrycie tematu = wyższe prawdopodobieństwo, że fragment Twojej strony pojawi się w syntetycznej odpowiedzi.',
+    id: 'SRL',
+    slug: 'role-semantyczne',
+    label: 'Role semantyczne',
+    body: 'Czy główny temat strony jest w zdaniach wykonawcą czynności, czy tylko jej przedmiotem. Strona czynna daje modelowi komplet „kto - co robi - z czym"; strona bierna zostawia w tej strukturze dziurę.',
   },
   {
     num: '09',
-    id: 'SRL',
-    label: 'Logika ról semantycznych (SRL)',
-    body: 'Logika ról semantycznych ocenia, czy treść ma wyraźną strukturę: podmiot, działanie, efekt. Im precyzyjniejszy język, tym łatwiej modelowi wyciąć i zacytować dokładnie ten fragment, który pasuje do odpowiedzi.',
+    id: 'Fan-Out',
+    slug: 'pokrycie-fan-out',
+    label: 'Pokrycie Fan-Out i AIO',
+    body: 'Jedno zapytanie użytkownika rozkłada się na kilkanaście pytań pobocznych, które AI rozwiązuje w tle. Ten wymiar sprawdza, na ile z nich odpowiada Twoja treść - bo cytowanie zdobywa się na pytaniach pobocznych, nie na głównym.',
   },
   {
     num: '10',
-    id: 'TF-IDF',
-    label: 'TF-IDF (Benchmark SERP)',
-    body: 'Klasyczny wskaźnik statystyczny porównujący częstotliwość słów w tekście do norm dla danego zapytania w top10 SERP. Zbyt niski wynik - temat potraktowany powierzchownie. Zbyt wysoki - sygnał upychania słów kluczowych. CitationOne wskazuje dokładnie, które terminy są niedoreprezentowane względem konkurencji.',
+    id: 'Effort',
+    slug: 'effort-score',
+    label: 'Effort Score',
+    body: 'Algorytmiczna checklista kompletności: długość względem konkurencji, materiały wizualne, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji. Każdy niespełniony punkt to poprawka na kwadrans.',
+  },
+];
+
+// Poza dziesiatka wymiarow: E-E-A-T ma wlasna sekcje nizej, Wartosc dodana jest metryka
+// informacyjna (nie wchodzi do oceny koncowej) — dlatego oba stoja obok gridu, nie w nim.
+const EXTRA = [
+  {
+    slug: 'e-e-a-t',
+    label: 'E-E-A-T',
+    body: 'Doświadczenie, ekspertyza, autorytet i wiarygodność - cztery osobno oceniane składowe, liczone z sygnałów obecnych w treści i w kodzie strony.',
+  },
+  {
+    slug: 'wartosc-dodana',
+    label: 'Wartość dodana',
+    body: 'Ile Twoja treść wnosi ponad to, co już jest w Top 10. Metryka strategiczna: pokazuje, gdzie budować przewagę, i nie wpływa na ocenę końcową.',
   },
 ];
 
@@ -161,8 +188,9 @@ export default function WymiaryContent() {
 
           <div className="dims-list-grid">
             {DIMS.map((dim, i) => (
-              <motion.div
+              <motion.a
                 key={dim.id}
+                href={`/pl/wymiary/${dim.slug}`}
                 {...fadeUp(i * 0.03)}
                 whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(0,0,0,0.07)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
                 style={{
@@ -173,6 +201,7 @@ export default function WymiaryContent() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'flex-start',
+                  textDecoration: 'none',
                 }}
               >
                 <div style={{
@@ -193,10 +222,48 @@ export default function WymiaryContent() {
                     {dim.id}
                   </span>
                 </div>
-                <p style={{ fontSize: 13.5, color: '#36394a', lineHeight: 1.65, margin: 0 }}>{dim.body}</p>
-              </motion.div>
+                <p style={{ fontSize: 13.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 14px' }}>{dim.body}</p>
+                <span style={{ fontSize: 13, fontWeight: 600, color: ACCENT, marginTop: 'auto' }}>
+                  Jak to liczymy →
+                </span>
+              </motion.a>
             ))}
           </div>
+
+          {/* Poza dziesiatka: E-E-A-T + Wartosc dodana */}
+          <motion.div {...fadeUp(0.1)} style={{ marginTop: 44 }}>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: '0 0 6px' }}>
+              Poza dziesiątką wymiarów
+            </h3>
+            <p style={{ fontSize: 14.5, color: '#666d80', lineHeight: 1.65, margin: '0 0 18px', maxWidth: 640 }}>
+              Dwie analizy raportowane osobno - E-E-A-T jako fundament wiarygodności, wartość dodana jako miara tego, co wnosisz ponad Top 10.
+            </p>
+            <div className="dims-extra-grid">
+              {EXTRA.map((item) => (
+                <motion.a
+                  key={item.slug}
+                  href={`/pl/wymiary/${item.slug}`}
+                  whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(0,0,0,0.07)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
+                  style={{
+                    background: '#ffffff',
+                    border: '1px solid #dfe1e7',
+                    borderRadius: 10,
+                    padding: '22px 24px',
+                    display: 'block',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <span style={{ fontSize: 16, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', display: 'block', marginBottom: 8 }}>
+                    {item.label}
+                  </span>
+                  <span style={{ fontSize: 13.5, color: '#36394a', lineHeight: 1.65, display: 'block', marginBottom: 12 }}>
+                    {item.body}
+                  </span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: ACCENT }}>Jak to liczymy →</span>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -311,6 +378,11 @@ export default function WymiaryContent() {
           grid-template-columns: repeat(2, 1fr);
           gap: 16px;
         }
+        .dims-extra-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
         .eeat-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -318,6 +390,7 @@ export default function WymiaryContent() {
         }
         @media (max-width: 860px) {
           .dims-list-grid { grid-template-columns: 1fr; }
+          .dims-extra-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
           .eeat-grid { grid-template-columns: repeat(2, 1fr); }

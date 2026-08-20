@@ -16,66 +16,93 @@ function fadeUp(delay = 0) {
 
 const NUM_COLORS = ['#e07a4a', '#0b7983', '#c47a2a'];
 
+// Names and order follow `dim.*` + DIMENSION_ORDER (RadarChart) in the app — after purchase the
+// user sees exactly these labels in the report. `slug` must exist in src/data/dimensions-en.ts.
 const DIMS = [
   {
     num: '01',
     id: 'CSI Alignment',
-    label: 'Intent Alignment',
-    body: 'Does your content answer what users are really looking for? AI does not cite pages that miss the query intent - even if they contain the keyword. CSI Alignment measures how precisely your article matches the expected answer type: definition, comparison, instruction, or recommendation.',
+    slug: 'csi-alignment',
+    label: 'CSI Alignment',
+    body: 'Does your content answer what users are really looking for? AI does not cite pages that miss the query intent - even if they contain the keyword. This dimension measures how precisely your article matches the expected answer type: definition, comparison, instruction, or recommendation.',
   },
   {
     num: '02',
-    id: 'D1',
-    label: 'Info Density',
+    id: 'Density',
+    slug: 'information-density',
+    label: 'Information Density',
     body: 'How many facts, data points and concrete statements a single paragraph contains. Low-density content is filler - AI skips it. This dimension rewards every sentence that adds something new and penalizes text that repeats the same idea in different words.',
   },
   {
     num: '03',
-    id: 'BLUF',
-    label: 'BLUF (Bottom Line Up Front)',
-    body: 'AI models prefer content that delivers the main answer in the first paragraph. BLUF measures how quickly your content gets to the point.',
+    id: 'EAV',
+    slug: 'knowledge-graph-eav',
+    label: 'Knowledge Graph (EAV)',
+    body: 'Content builds a network of related concepts: entities, their attributes and values. The denser and more coherent the graph, the easier it is for AI to recognize the content as a credible source in the field. This dimension checks whether your texts create knowledge - not just mention it.',
   },
   {
     num: '04',
-    id: 'EAV',
-    label: 'Knowledge Graph (EAV)',
-    body: 'Content builds a network of related concepts: entities, attributes and values. The denser and more coherent the graph, the easier it is for AI to recognize the content as a credible source in the domain. This dimension checks whether your texts create knowledge - not just mention it.',
+    id: 'BLUF',
+    slug: 'bluf',
+    label: 'BLUF',
+    body: 'AI models prefer content that delivers the answer at the start of a section. BLUF measures how quickly your content gets to the point - and whether it does so in every section, not only the first.',
   },
   {
     num: '05',
-    id: 'Chunks',
-    label: 'Information Chunks',
-    body: 'AI "extracts" self-contained fragments from content - sentences or paragraphs that can be understood without the full article context. This dimension measures how many such citation-ready units your page contains. The more distinct chunks, the higher the chance of appearing in AI Overview or an assistant answer.',
+    id: 'Chunk',
+    slug: 'chunk-optimization',
+    label: 'Chunk Optimization',
+    body: 'AI retrieves self-contained fragments - sections that can be understood without the full article context. This dimension measures how many citation-ready units your page contains and whether they run to the length that suits this content type.',
   },
   {
     num: '06',
-    id: 'Cost of Retrieval',
-    label: 'Cost of Retrieval (Conciseness)',
-    body: 'How much effort the model has to spend to pull a concrete answer from your content. Long sentences, redundant intros and unnecessary disclaimers raise the cost of retrieval. A low score here means AI will pick a competitor who said the same thing in fewer words.',
+    id: 'CoR',
+    slug: 'cost-of-retrieval',
+    label: 'Cost of Retrieval',
+    body: 'How much effort it takes to pull a concrete answer off the page. Heading hierarchy, tables, lists and emphasis lower that cost; a wall of text raises it. With comparable content, the model picks the source that is cheaper to handle.',
   },
   {
     num: '07',
-    id: 'Information Gain',
-    label: 'Information Gain (Uniqueness)',
-    body: 'Does your content add something the other 10 pages in the top 10 do not have? Information Gain measures the difference between what you write and what is already widely available. This metric is boosted by unique data, original observations and non-obvious conclusions.',
+    id: 'TF-IDF',
+    slug: 'tf-idf',
+    label: 'TF-IDF',
+    body: 'A comparison of your page terminology with the vocabulary of the Top 10. A missing specialist term usually means a missing angle - CitationOne shows exactly which concepts you skip and in what context competitors use them.',
   },
   {
     num: '08',
-    id: 'Query Fan-out',
-    label: 'AIO Coverage (Query Fan-out)',
-    body: 'A single user query generates dozens of related sub-questions that AI resolves in the background. This dimension checks how many of those satellite questions your content answers. Wider topic coverage = higher probability that a fragment of your page appears in the synthetic answer.',
+    id: 'SRL',
+    slug: 'semantic-roles',
+    label: 'Semantic Roles',
+    body: 'Whether the main topic of the page performs the action in your sentences or merely receives it. The active voice gives the model a complete "who - does what - to what"; the passive voice leaves a hole in that structure.',
   },
   {
     num: '09',
-    id: 'SRL',
-    label: 'Semantic Role Logic (SRL)',
-    body: 'Semantic Role Logic evaluates whether the content has a clear structure: subject, action, effect. The more precise the language, the easier it is for the model to cut out and cite exactly the fragment that fits the answer.',
+    id: 'Fan-Out',
+    slug: 'query-fan-out',
+    label: 'Fan-Out & AIO Coverage',
+    body: 'A single user query decomposes into a dozen or so side questions that AI resolves in the background. This dimension checks how many of them your content answers - because citations are won on the side questions, not the main one.',
   },
   {
     num: '10',
-    id: 'TF-IDF',
-    label: 'TF-IDF (SERP Benchmark)',
-    body: 'A classic statistical metric comparing word frequency in your text to norms for the given query in the top 10 SERP. Too low - the topic is treated superficially. Too high - a keyword-stuffing signal. CitationOne points to exactly which terms are underrepresented compared to competitors.',
+    id: 'Effort',
+    slug: 'effort-score',
+    label: 'Effort Score',
+    body: 'An algorithmic completeness checklist: length against competitors, visual material, tables, lists, heading hierarchy, table of contents and a visible update date. Every unmet item is a fifteen-minute fix.',
+  },
+];
+
+// Outside the ten dimensions: E-E-A-T has its own section below, Information Gain is an
+// informational metric (it does not enter the final score) — hence both sit beside the grid.
+const EXTRA = [
+  {
+    slug: 'e-e-a-t',
+    label: 'E-E-A-T',
+    body: 'Experience, expertise, authoritativeness and trust - four separately scored components, computed from signals present in the content and in the page code.',
+  },
+  {
+    slug: 'information-gain',
+    label: 'Information Gain',
+    body: 'How much your content adds over the Top 10. A strategic metric: it shows where to build an advantage and does not affect the final score.',
   },
 ];
 
@@ -161,8 +188,9 @@ export default function DimensionsContent() {
 
           <div className="dims-list-grid">
             {DIMS.map((dim, i) => (
-              <motion.div
+              <motion.a
                 key={dim.id}
+                href={`/dimensions/${dim.slug}`}
                 {...fadeUp(i * 0.03)}
                 whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(0,0,0,0.07)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
                 style={{
@@ -173,6 +201,7 @@ export default function DimensionsContent() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'flex-start',
+                  textDecoration: 'none',
                 }}
               >
                 <div style={{
@@ -193,10 +222,48 @@ export default function DimensionsContent() {
                     {dim.id}
                   </span>
                 </div>
-                <p style={{ fontSize: 13.5, color: '#36394a', lineHeight: 1.65, margin: 0 }}>{dim.body}</p>
-              </motion.div>
+                <p style={{ fontSize: 13.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 14px' }}>{dim.body}</p>
+                <span style={{ fontSize: 13, fontWeight: 600, color: ACCENT, marginTop: 'auto' }}>
+                  How we measure it →
+                </span>
+              </motion.a>
             ))}
           </div>
+
+          {/* Outside the ten: E-E-A-T + Information Gain */}
+          <motion.div {...fadeUp(0.1)} style={{ marginTop: 44 }}>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: '0 0 6px' }}>
+              Beyond the ten dimensions
+            </h3>
+            <p style={{ fontSize: 14.5, color: '#666d80', lineHeight: 1.65, margin: '0 0 18px', maxWidth: 640 }}>
+              Two analyses reported separately - E-E-A-T as the foundation of credibility, information gain as the measure of what you add over the Top 10.
+            </p>
+            <div className="dims-extra-grid">
+              {EXTRA.map((item) => (
+                <motion.a
+                  key={item.slug}
+                  href={`/dimensions/${item.slug}`}
+                  whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(0,0,0,0.07)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
+                  style={{
+                    background: '#ffffff',
+                    border: '1px solid #dfe1e7',
+                    borderRadius: 10,
+                    padding: '22px 24px',
+                    display: 'block',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <span style={{ fontSize: 16, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', display: 'block', marginBottom: 8 }}>
+                    {item.label}
+                  </span>
+                  <span style={{ fontSize: 13.5, color: '#36394a', lineHeight: 1.65, display: 'block', marginBottom: 12 }}>
+                    {item.body}
+                  </span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: ACCENT }}>How we measure it →</span>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -311,6 +378,11 @@ export default function DimensionsContent() {
           grid-template-columns: repeat(2, 1fr);
           gap: 16px;
         }
+        .dims-extra-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
         .eeat-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -318,6 +390,7 @@ export default function DimensionsContent() {
         }
         @media (max-width: 860px) {
           .dims-list-grid { grid-template-columns: 1fr; }
+          .dims-extra-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
           .eeat-grid { grid-template-columns: repeat(2, 1fr); }

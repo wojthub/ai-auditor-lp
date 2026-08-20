@@ -63,7 +63,10 @@ ai-auditor-lp/
 │   │   │   └── PricingContentEN.tsx
 │   │   ├── dimensions/          # EN "Dimensions" (/dimensions)
 │   │   │   ├── page.tsx
-│   │   │   └── DimensionsContent.tsx
+│   │   │   ├── DimensionsContent.tsx
+│   │   │   └── [slug]/page.tsx  # 12 podstron EN (/dimensions/bluf itd.) — patrz nota niżej
+│   │   ├── sitemap.ts           # out/sitemap.xml (34 URL-e + hreflangi); wymaga dynamic='force-static'
+│   │   ├── robots.ts            # out/robots.txt — wskazuje sitemapę
 │   │   ├── (en)/api/            # EN "API" (/api) — grupa routingu, NIE `src/app/api/`
 │   │   │   ├── page.tsx         #   (patrz nota "Zakladka API" nizej)
 │   │   │   └── ApiContentEN.tsx
@@ -78,11 +81,17 @@ ai-auditor-lp/
 │   │       │   └── PricingContent.tsx
 │   │       ├── wymiary/         # PL "Wymiary" (/pl/wymiary)
 │   │       │   ├── page.tsx
-│   │       │   └── WymiaryContent.tsx
+│   │       │   ├── WymiaryContent.tsx
+│   │       │   └── [slug]/page.tsx  # 12 podstron PL (/pl/wymiary/bluf itd.)
 │   │       └── api/             # PL "API" (/pl/api)
 │   │           ├── page.tsx
 │   │           └── ApiContent.tsx
+│   ├── data/                    # Treść podstron wymiarów (czyste dane, zero JSX)
+│   │   ├── dimension-types.ts   # Typy + STRINGS_PL/STRINGS_EN + DIMENSION_SLUG_PAIRS (hreflang)
+│   │   ├── dimensions-pl.ts     # 12 wymiarów PL
+│   │   └── dimensions-en.ts     # 12 wymiarów EN (lustro)
 │   └── components/
+│       ├── DimensionPage.tsx    # Shared - szablon podstrony wymiaru (PL i EN przez prop `t`)
 │       ├── Navbar.tsx           # PL Navbar - switcher EN → /
 │       ├── Hero.tsx
 │       ├── TechLogos.tsx
@@ -91,7 +100,7 @@ ai-auditor-lp/
 │       ├── Solution.tsx         # NIEUŻYWANA na HP
 │       ├── HowItWorks.tsx
 │       ├── Features.tsx         # 5 sekcji PL - NIEUŻYWANA na HP
-│       ├── BrandMorph.tsx      # Shared - animowane logo CitatioNone→CitationOne (typing effect)
+│       ├── BrandMorph.tsx      # Shared - animowane logo CitationNone?→CitationOne (typing effect)
 │       ├── ForWho.tsx
 │       ├── AuthorSection.tsx    # Karta autora (foto + bio + LinkedIn) - na HP, po FAQ
 │       ├── ClosingCta.tsx
@@ -128,20 +137,22 @@ ai-auditor-lp/
 
 | URL | Komponent | Title |
 |-----|-----------|-------|
-| `/` | EN HP (komponenty EN) | AI Search Content Audit - CitationOne |
+| `/` | EN HP (komponenty EN) | GEO & AI Search Content Audit Tool - CitationOne |
 | `/how-it-works` | PageContentEN | How does CitationOne work? - CitationOne |
 | `/pricing` | PricingContentEN | Pricing - CitationOne |
 | `/dimensions` | DimensionsContent | 10 content quality dimensions + E-E-A-T - CitationOne |
+| `/dimensions/[slug]` | DimensionPage + dimensions-en.ts | H1 = title, np. `What is BLUF in SEO and GEO?` |
 | `/api` | ApiContentEN | API - CitationOne |
 
 ### PL (katalog /pl)
 
 | URL | Komponent | Title |
 |-----|-----------|-------|
-| `/pl` | PL HP (komponenty PL) | Audyt treści pod AI Search - CitationOne |
+| `/pl` | PL HP (komponenty PL) | Narzędzie GEO - audyt treści pod AI Search - CitationOne |
 | `/pl/jak-to-dziala` | PageContent PL | Jak działa CitationOne? - CitationOne |
 | `/pl/cennik` | PricingContent PL | Cennik - CitationOne |
 | `/pl/wymiary` | WymiaryContent PL | 10 wymiarów jakości treści + E-E-A-T - CitationOne |
+| `/pl/wymiary/[slug]` | DimensionPage + dimensions-pl.ts | H1 = title, np. `Czym jest BLUF w SEO i GEO?` |
 | `/pl/api` | ApiContent PL | API - CitationOne |
 
 ### Zakładka API (`/api` i `/pl/api`)
@@ -252,22 +263,56 @@ Schema.org Audit i Information Gain tylko na podstronach (nie na HP).
 
 ### Wymiary na stronach `/dimensions` i `/pl/wymiary`
 
-Lista 10 wymiarów (numerowana 01–10, używana w sekcji edukacyjnej):
+Lista 10 wymiarów (numerowana 01–10) — **nazwy i kolejność = `dim.*` + `DIMENSION_ORDER`
+(RadarChart) w aplikacji**, żeby klient widział po zakupie te same etykiety co na LP.
+Każdy kafel linkuje do własnej podstrony.
 
-| # | EN (/dimensions) | PL (/pl/wymiary) |
-|---|------------------|------------------|
-| 01 | Intent Alignment | Zgodność z intencją |
-| 02 | Info Density | Gęstość informacji |
-| 03 | BLUF | BLUF |
-| 04 | Knowledge Graph (EAV) | Graf wiedzy (EAV) |
-| 05 | Information Chunks | Autonomiczność sekcji |
-| 06 | Cost of Retrieval (Conciseness) | Koszt ekstrakcji |
-| 07 | Information Gain (Uniqueness) | Wysiłek redakcyjny |
-| 08 | AIO Coverage (Query Fan-out) | Pokrycie AI Overview |
-| 09 | Semantic Role Logic (SRL) | Role semantyczne |
-| 10 | TF-IDF (SERP Benchmark) | TF-IDF |
+| # | EN (/dimensions) | PL (/pl/wymiary) | slug EN | slug PL |
+|---|------------------|------------------|---------|---------|
+| 01 | CSI Alignment | Zgodność z CSI | `csi-alignment` | `zgodnosc-z-csi` |
+| 02 | Information Density | Gęstość informacji | `information-density` | `gestosc-informacji` |
+| 03 | Knowledge Graph (EAV) | Graf wiedzy (EAV) | `knowledge-graph-eav` | `graf-wiedzy` |
+| 04 | BLUF | BLUF | `bluf` | `bluf` |
+| 05 | Chunk Optimization | Optymalizacja chunków | `chunk-optimization` | `optymalizacja-chunkow` |
+| 06 | Cost of Retrieval | Koszt pozyskania | `cost-of-retrieval` | `koszt-pozyskania` |
+| 07 | TF-IDF | TF-IDF | `tf-idf` | `tf-idf` |
+| 08 | Semantic Roles | Role semantyczne | `semantic-roles` | `role-semantyczne` |
+| 09 | Fan-Out & AIO Coverage | Pokrycie Fan-Out i AIO | `query-fan-out` | `pokrycie-fan-out` |
+| 10 | Effort Score | Effort Score | `effort-score` | `effort-score` |
 
-Plus blok E-E-A-T (Experience / Expertise / Authoritativeness / Trustworthiness).
+**Poza dziesiątką** (osobny blok pod gridem, bo w kodzie aplikacji nie są wymiarami z radaru):
+E-E-A-T (`e-e-a-t`) oraz Wartość dodana / Information Gain (`information-gain` / `wartosc-dodana`).
+
+> **Trzy pułapki, przez które ta lista rozjechała się z aplikacją do 2026-08 i nie mogą wrócić:**
+> (1) „Information Gain" figurował jako wymiar 07 — w kodzie NIE jest w `DimensionId` ani w wagach
+> CQS, to osobny moduł zasilający ranking terminów TF-IDF. (2) `cor` był opisany jako „koszt
+> ekstrakcji / zwięzłość" — mierzy STRUKTURĘ (hierarchia, tabele, listy, boldy), nie długość zdań.
+> (3) Brakowało `effort` — jedynego wymiaru liczonego w 100% algorytmicznie, bez modelu.
+
+### Podstrony wymiarów (`/dimensions/[slug]`, `/pl/wymiary/[slug]`)
+
+24 statyczne podstrony (12 per język) opisujące każdy wymiar: czym jest, dlaczego obchodzi modele
+AI, jak jest liczony, co podnosi i obniża wynik, co widać w raporcie, FAQ.
+
+- **Treść to czyste dane** — `src/data/dimensions-pl.ts` i `dimensions-en.ts`. Jeden szablon
+  (`components/DimensionPage.tsx`) renderuje obie wersje; etykiety interfejsu przychodzą propem
+  `t` (`STRINGS_PL` / `STRINGS_EN`). Zmiana copy = edycja danych, nigdy JSX-a.
+- **Slugi idą za językiem strony** (wyjątek od zasady angielskich URL-i w aplikacji): PL po polsku
+  bez diakrytyków, EN po angielsku. Nie mapują się jeden do jednego, więc pary trzyma
+  `DIMENSION_SLUG_PAIRS` w `dimension-types.ts` — **to jedyne źródło hreflangów i sitemapy**.
+  Dodanie wymiaru bez wpisu tam = strona bez wersji alternatywnej.
+- **`heading` musi równać się `title`** (H1 = tytuł w SERP). Osobne pola `whyHeading` i
+  `howHeading` trzymają pełne zdania, bo polska odmiana nie skleja się z `name`: „Dlaczego
+  zgodność jest **ważna**", ale „graf **ważny**", „role **są ważne**"; „Jak liczymy wartość
+  **dodaną**" wymaga biernika.
+- **Wag CQS nie publikujemy** — profil typu treści je nadpisuje, więc każda liczba byłaby
+  nieprawdziwa dla części audytów. Dotyczy to też przeliczników w rodzaju „wpływ: wysoki/średni".
+- **Progi oceny 1-10 świadomie usunięte** z podstron (decyzja z 2026-08-20); wzory zostają tam,
+  gdzie istnieją: gęstość, koszt pozyskania, TF-IDF, role semantyczne.
+- **JSON-LD** per strona: `BreadcrumbList` + `DefinedTerm` + `FAQPage`, budowane z tych samych
+  danych co widoczne FAQ — nie da się rozjechać znaczników z treścią.
+- `related[].slug` musi wskazywać slug z **tej samej** mapy językowej; nieznany slug renderuje się
+  jako karta bez linku (zamiast 404), więc literówka nie wysypie builda — tylko cicho zgasi link.
 
 ### Statusy / URR
 
