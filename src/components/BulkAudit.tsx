@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 
 const APP_URL = 'https://app.citationone.com';
+const ACCENT = '#0b7983';
 
 /**
  * Masowy audyt (Bulk Audit) — sekcja HP.
@@ -134,17 +135,77 @@ export default function BulkAudit() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </motion.a>
-          <span style={{ fontSize: 14, color: '#666d80', lineHeight: 1.6 }}>
-            Masowe zlecenia obsługuje też{' '}
-            <a href="/pl/api" style={{ color: '#0b7983', fontWeight: 500, textDecoration: 'underline', textUnderlineOffset: 3 }}>
-              publiczne API
-            </a>.
-          </span>
+        </motion.div>
+
+        {/* Dwie drogi skalowania — panel dla ludzi, API dla systemow. */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.5 }}
+          style={{ marginTop: 44, paddingTop: 36, borderTop: '1px solid #dfe1e7' }}
+        >
+          <h3 style={{
+            fontSize: 'clamp(1.3rem, 2.5vw, 1.7rem)', fontWeight: 700, color: '#0d0d12',
+            letterSpacing: '-0.025em', lineHeight: 1.25, margin: '0 0 12px',
+          }}>
+            Dwie drogi, gdy audytów jest więcej niż kilka
+          </h3>
+          <p style={{ fontSize: 16, color: '#36394a', lineHeight: 1.72, margin: '0 0 24px', maxWidth: 720 }}>
+            Jeden artykuł audytuje się z panelu. Przy setkach adresów - migracji serwisu, przeglądzie
+            całego bloga, obsłudze kilku klientów naraz - potrzebny jest tryb, w którym audyt przestaje
+            być czynnością, a staje się procesem.
+          </p>
+
+          <div className="bulk-scale-grid">
+            <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 14, padding: '24px 26px' }}>
+              <span style={{
+                fontSize: 10.5, fontWeight: 700, color: ACCENT, textTransform: 'uppercase',
+                letterSpacing: '0.08em', display: 'block', marginBottom: 10,
+              }}>
+                Z panelu
+              </span>
+              <h4 style={{ fontSize: 17, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: '0 0 8px' }}>
+                Masowy audyt
+              </h4>
+              <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 14px' }}>
+                Wklejasz listę adresów albo sitemapę i zamykasz kartę. Kolejka mieli w tle, a Ty wracasz
+                do folderu z osobnym raportem dla każdej strony. Bez integracji i bez pisania kodu.
+              </p>
+              <span style={{ fontSize: 13.5, color: '#666d80', lineHeight: 1.6 }}>
+                Dla zespołów redakcyjnych i agencji.
+              </span>
+            </div>
+
+            <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 14, padding: '24px 26px' }}>
+              <span style={{
+                fontSize: 10.5, fontWeight: 700, color: ACCENT, textTransform: 'uppercase',
+                letterSpacing: '0.08em', display: 'block', marginBottom: 10,
+              }}>
+                Przez API
+              </span>
+              <h4 style={{ fontSize: 17, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: '0 0 8px' }}>
+                Audyt jako element Twojego procesu
+              </h4>
+              <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 14px' }}>
+                Zlecasz audyt z własnego systemu i odbierasz wynik jako JSON - webhookiem, bez odpytywania.
+                Treść możesz sprawdzić jeszcze przed publikacją, prosto z CMS-a albo z pipeline&apos;u.
+              </p>
+              <a href="/pl/api" style={{ fontSize: 13.5, fontWeight: 600, color: ACCENT, textDecoration: 'none' }}>
+                Zobacz dokumentację API →
+              </a>
+            </div>
+          </div>
         </motion.div>
 
       </div>
 
       <style>{`
+        .bulk-scale-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
         .bulk-cards-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -152,6 +213,7 @@ export default function BulkAudit() {
         }
         @media (max-width: 860px) {
           .bulk-cards-grid { grid-template-columns: 1fr; }
+          .bulk-scale-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </section>

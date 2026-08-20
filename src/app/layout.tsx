@@ -19,10 +19,12 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     default: 'GEO & AI Search Content Audit Tool - CitationOne',
-    template: '%s - CitationOne',
+    // Marka TYLKO na stronie glownej (w `default`) — podstrony maja wlasny, pelny tytul
+    // i sufiks tylko zjadalby znaki w SERP.
+    template: '%s',
   },
   description:
-    'Check if ChatGPT, Perplexity and Google AI Overview will cite your content. 10 analysis dimensions, top 10 SERP benchmark, Before/After recommendations. Report in 5 minutes.',
+    'Check whether ChatGPT, Perplexity and Google AI Overview will cite your content. 10 dimensions, SERP benchmark, Before/After fixes. Report in 5 minutes.',
   openGraph: {
     title: 'CitationOne - AI Search Content Audit',
     description: 'Check if AI will cite your content. 10 dimensions, SERP benchmark, Before/After recommendations. Report in 5 minutes.',

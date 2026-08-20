@@ -7,14 +7,14 @@ const REPORT_URL = 'https://app.citationone.com/share/AOlGargxePO9E-hRsQrWxy0V?l
 const items = [
   {
     number: '01',
-    label: 'PDF Report',
-    desc: 'in two versions - for the manager or the client.',
+    label: 'Before / After fixes',
+    desc: 'the rewritten text itself, not advice - each with an estimated CQS gain.',
     color: '#e07a4a',
   },
   {
     number: '02',
-    label: 'Schema Audit',
-    desc: 'list of missing structural tags that make AI parsing easier.',
+    label: 'Applied to your content',
+    desc: 'tick the fixes and the tool writes them into your text, ready to paste into the CMS.',
     color: '#0b7983',
   },
   {

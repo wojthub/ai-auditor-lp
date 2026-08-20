@@ -558,6 +558,24 @@ export default function PageContent() {
               </motion.div>
             ))}
           </div>
+
+          {/* Wejscie do podstron wymiarow — po usunieciu „Wymiary" z gornej nawigacji to
+              glowna sciezka do nich z tresci. */}
+          <motion.div {...fadeUp(0.1)} style={{ textAlign: 'center', marginTop: 36 }}>
+            <a
+              href="/pl/wymiary"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                fontSize: 15, fontWeight: 600, color: '#0b7983', textDecoration: 'none',
+                border: '1px solid #dfe1e7', borderRadius: 8, padding: '12px 24px', minHeight: 44,
+              }}
+            >
+              Poznaj wszystkie wymiary - definicje i sposób liczenia
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+          </motion.div>
         </div>
       </section>
 

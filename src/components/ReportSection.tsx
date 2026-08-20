@@ -7,14 +7,14 @@ const REPORT_URL = 'https://app.citationone.com/share/khZUjVCAgSvScSUGnQ3tgZ58?l
 const items = [
   {
     number: '01',
-    label: 'Raport PDF',
-    desc: 'w dwóch wersjach - dla managera lub klienta.',
+    label: 'Rekomendacje Przed / Po',
+    desc: 'gotowy tekst zamiast wskazówki - z szacowanym przyrostem CQS przy każdej poprawce.',
     color: '#e07a4a',
   },
   {
     number: '02',
-    label: 'Audyt Schema',
-    desc: 'lista brakujących tagów strukturalnych, które ułatwiają pracę AI.',
+    label: 'Wdrożenie w treść',
+    desc: 'zaznaczasz poprawki, a narzędzie nanosi je na Twój tekst i oddaje gotowca do CMS-a.',
     color: '#0b7983',
   },
   {

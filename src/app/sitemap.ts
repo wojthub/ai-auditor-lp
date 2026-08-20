@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next';
 import { dimensionSlugsPl } from '@/data/dimensions-pl';
 import { dimensionSlugsEn } from '@/data/dimensions-en';
 import { enSlugForPl } from '@/data/dimension-types';
+import { toolSlugsPl } from '@/data/tools-pl';
+import { toolEnSlugForPl } from '@/data/tool-types';
 
 // Wymagane przy output: 'export' — bez tego build przerywa sie na kolekcji danych trasy.
 export const dynamic = 'force-static';
@@ -22,6 +24,7 @@ const STATIC_PAGES: { en: string; pl: string; priority: number }[] = [
   { en: '/how-it-works', pl: '/pl/jak-to-dziala', priority: 0.8 },
   { en: '/dimensions', pl: '/pl/wymiary', priority: 0.8 },
   { en: '/pricing', pl: '/pl/cennik', priority: 0.8 },
+  { en: '/tools', pl: '/pl/narzedzia', priority: 0.8 },
   { en: '/api', pl: '/pl/api', priority: 0.6 },
 ];
 
@@ -48,10 +51,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
+  const toolEntries: MetadataRoute.Sitemap = toolSlugsPl().flatMap((pl) => {
+    const en = toolEnSlugForPl(pl);
+    if (!en) return [{ url: `${SITE}/pl/narzedzia/${pl}`, lastModified, priority: 0.7 }];
+
+    const languages = { en: `${SITE}/tools/${en}`, pl: `${SITE}/pl/narzedzia/${pl}` };
+    return [
+      { url: `${SITE}/tools/${en}`, lastModified, priority: 0.7, alternates: { languages } },
+      { url: `${SITE}/pl/narzedzia/${pl}`, lastModified, priority: 0.7, alternates: { languages } },
+    ];
+  });
+
   // Strona EN bez odpowiednika PL nie istnieje dzisiaj, ale gdyby powstala — nie zgub jej.
   const orphanEn: MetadataRoute.Sitemap = dimensionSlugsEn()
     .filter((en) => !dimensionSlugsPl().some((pl) => enSlugForPl(pl) === en))
     .map((en) => ({ url: `${SITE}/dimensions/${en}`, lastModified, priority: 0.7 }));
 
-  return [...staticEntries, ...dimensionEntries, ...orphanEn];
+  return [...staticEntries, ...dimensionEntries, ...toolEntries, ...orphanEn];
 }

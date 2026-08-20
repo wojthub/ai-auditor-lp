@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import PricingContent from './PricingContent';
 
 export const metadata: Metadata = {
-  title: 'Cennik',
+  title: 'Cennik - 3 darmowe audyty, potem 2 EUR za audyt',
   description:
     'Proste zasady. Płacisz tylko za to, z czego korzystasz. 3 darmowe audyty na start, 2 EUR za pojedynczy audyt, pakiety elastyczne bez daty ważności.',
   openGraph: {

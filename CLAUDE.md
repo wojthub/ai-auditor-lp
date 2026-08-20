@@ -65,8 +65,9 @@ ai-auditor-lp/
 │   │   │   ├── page.tsx
 │   │   │   ├── DimensionsContent.tsx
 │   │   │   └── [slug]/page.tsx  # 12 podstron EN (/dimensions/bluf itd.) — patrz nota niżej
-│   │   ├── sitemap.ts           # out/sitemap.xml (34 URL-e + hreflangi); wymaga dynamic='force-static'
+│   │   ├── sitemap.ts           # out/sitemap.xml (44 URL-e + hreflangi); wymaga dynamic='force-static'
 │   │   ├── robots.ts            # out/robots.txt — wskazuje sitemapę
+│   │   ├── tools/               # EN "Tools" (/tools) + [slug]/ — 4 podstrony narzędzi
 │   │   ├── (en)/api/            # EN "API" (/api) — grupa routingu, NIE `src/app/api/`
 │   │   │   ├── page.tsx         #   (patrz nota "Zakladka API" nizej)
 │   │   │   └── ApiContentEN.tsx
@@ -83,15 +84,21 @@ ai-auditor-lp/
 │   │       │   ├── page.tsx
 │   │       │   ├── WymiaryContent.tsx
 │   │       │   └── [slug]/page.tsx  # 12 podstron PL (/pl/wymiary/bluf itd.)
+│   │       ├── narzedzia/       # PL "Narzędzia" (/pl/narzedzia) + [slug]/ — 4 podstrony
 │   │       └── api/             # PL "API" (/pl/api)
 │   │           ├── page.tsx
 │   │           └── ApiContent.tsx
-│   ├── data/                    # Treść podstron wymiarów (czyste dane, zero JSX)
+│   ├── data/                    # Treść podstron (czyste dane, zero JSX)
 │   │   ├── dimension-types.ts   # Typy + STRINGS_PL/STRINGS_EN + DIMENSION_SLUG_PAIRS (hreflang)
 │   │   ├── dimensions-pl.ts     # 12 wymiarów PL
-│   │   └── dimensions-en.ts     # 12 wymiarów EN (lustro)
+│   │   ├── dimensions-en.ts     # 12 wymiarów EN (lustro)
+│   │   ├── tool-types.ts        # Typy narzędzi + TOOL_STRINGS_* + TOOL_SLUG_PAIRS
+│   │   ├── tools-pl.ts          # 4 narzędzia PL
+│   │   └── tools-en.ts          # 4 narzędzia EN (lustro)
 │   └── components/
 │       ├── DimensionPage.tsx    # Shared - szablon podstrony wymiaru (PL i EN przez prop `t`)
+│       ├── ToolPage.tsx         # Shared - szablon podstrony narzędzia
+│       ├── ToolsHub.tsx         # Shared - lista narzędzi (/pl/narzedzia, /tools)
 │       ├── Navbar.tsx           # PL Navbar - switcher EN → /
 │       ├── Hero.tsx
 │       ├── TechLogos.tsx
@@ -138,22 +145,26 @@ ai-auditor-lp/
 | URL | Komponent | Title |
 |-----|-----------|-------|
 | `/` | EN HP (komponenty EN) | GEO & AI Search Content Audit Tool - CitationOne |
-| `/how-it-works` | PageContentEN | How does CitationOne work? - CitationOne |
-| `/pricing` | PricingContentEN | Pricing - CitationOne |
-| `/dimensions` | DimensionsContent | 10 content quality dimensions + E-E-A-T - CitationOne |
+| `/how-it-works` | PageContentEN | How does CitationOne work? |
+| `/pricing` | PricingContentEN | Pricing |
+| `/dimensions` | DimensionsContent | 10 content quality dimensions + E-E-A-T |
 | `/dimensions/[slug]` | DimensionPage + dimensions-en.ts | H1 = title, np. `What is BLUF in SEO and GEO?` |
-| `/api` | ApiContentEN | API - CitationOne |
+| `/tools` | ToolsHub + tools-en.ts | SEO and GEO tools in CitationOne |
+| `/tools/[slug]` | ToolPage + tools-en.ts | H1 = title, np. `What is keyword clustering?` |
+| `/api` | ApiContentEN | CitationOne API - audyty AI Search przez REST |
 
 ### PL (katalog /pl)
 
 | URL | Komponent | Title |
 |-----|-----------|-------|
-| `/pl` | PL HP (komponenty PL) | Narzędzie GEO - audyt treści pod AI Search - CitationOne |
-| `/pl/jak-to-dziala` | PageContent PL | Jak działa CitationOne? - CitationOne |
-| `/pl/cennik` | PricingContent PL | Cennik - CitationOne |
-| `/pl/wymiary` | WymiaryContent PL | 10 wymiarów jakości treści + E-E-A-T - CitationOne |
+| `/pl` | PL HP (komponenty PL) | Narzędzie GEO - audyt treści pod AI Search - CitationOne (jedyna strona z marką w title) |
+| `/pl/jak-to-dziala` | PageContent PL | Jak działa CitationOne? |
+| `/pl/cennik` | PricingContent PL | Cennik |
+| `/pl/wymiary` | WymiaryContent PL | 10 wymiarów jakości treści + E-E-A-T |
 | `/pl/wymiary/[slug]` | DimensionPage + dimensions-pl.ts | H1 = title, np. `Czym jest BLUF w SEO i GEO?` |
-| `/pl/api` | ApiContent PL | API - CitationOne |
+| `/pl/narzedzia` | ToolsHub + tools-pl.ts | Narzędzia SEO i GEO w CitationOne |
+| `/pl/narzedzia/[slug]` | ToolPage + tools-pl.ts | H1 = title, np. `Czym jest klasteryzacja słów kluczowych?` |
+| `/pl/api` | ApiContent PL | API CitationOne - audyty AI Search przez REST |
 
 ### Zakładka API (`/api` i `/pl/api`)
 
@@ -313,6 +324,22 @@ AI, jak jest liczony, co podnosi i obniża wynik, co widać w raporcie, FAQ.
   danych co widoczne FAQ — nie da się rozjechać znaczników z treścią.
 - `related[].slug` musi wskazywać slug z **tej samej** mapy językowej; nieznany slug renderuje się
   jako karta bez linku (zamiast 404), więc literówka nie wysypie builda — tylko cicho zgasi link.
+
+### Podstrony narzędzi (`/tools/[slug]`, `/pl/narzedzia/[slug]`)
+
+Cztery narzędzia poza audytem strony: klasteryzacja, pruning, analiza schema.org, linki
+wewnętrzne. Ta sama mechanika co przy wymiarach (dane osobno od szablonu, slugi za językiem,
+pary w `TOOL_SLUG_PAIRS`), ale **własny szablon** — zamiast „co podnosi/obniża wynik" mamy
+kroki działania, tabelę konfiguracji, listę wyników i sekcję kosztów.
+
+- **Źródło faktów:** [`../ai-auditor/spec/tools.md`](../ai-auditor/spec/tools.md).
+- **Limity są TYMCZASOWE w specyfikacji** (500 URL dla pruningu i schemy, 200 dla linkowania,
+  5-500 fraz dla klasteryzacji), a mimo to podajemy je na LP — user musi wiedzieć, czy jego
+  sitemapa się zmieści. Zmiana limitu w aplikacji **wymaga poprawki w `tools-pl.ts` i `tools-en.ts`**.
+- **Koszt:** 1 kredyt za zadanie, zwrot przy błędzie (`failToolJobWithRefund`). Rozwinięcie
+  klastra to osobny kredyt. To pisane wprost, bo są to pytania sprzed zakupu.
+- **Masowy audyt NIE ma własnej podstrony** — ma sekcję na HP; hub linkuje do `/pl#masowy-audyt`.
+- CTA prowadzi bezpośrednio do narzędzia w aplikacji (`appPath`), niezalogowany trafi na `/login`.
 
 ### Statusy / URR
 

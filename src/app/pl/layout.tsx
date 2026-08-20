@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Narzędzie GEO - audyt treści pod AI Search',
-    template: '%s - CitationOne',
+    default: 'Narzędzie GEO - audyt treści pod AI Search - CitationOne',
+    // Marka TYLKO na stronie glownej (w `default`) — patrz nota w src/app/layout.tsx.
+    template: '%s',
   },
   description:
-    'Sprawdź, czy ChatGPT, Perplexity i Google AI Overview zacytują Twoją treść. 10 wymiarów analizy, benchmark top 10 SERP, rekomendacje Przed i Po z gotowymi poprawkami. Raport w 5 minut.',
+    'Sprawdź, czy ChatGPT, Perplexity i Google AI Overview zacytują Twoją treść. 10 wymiarów, benchmark SERP, gotowe poprawki Przed i Po. Raport w 5 minut.',
   openGraph: {
     title: 'CitationOne - Audyt treści pod AI Search',
     description: 'Sprawdź, czy AI zacytuje Twoją treść. 10 wymiarów, benchmark SERP, rekomendacje Przed i Po. Raport w 5 minut.',

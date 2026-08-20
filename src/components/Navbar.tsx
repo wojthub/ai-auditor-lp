@@ -36,7 +36,7 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center">
           <a href="/pl/jak-to-dziala" className="nav-link">Jak to działa?</a>
-          <a href="/pl/wymiary" className="nav-link">Wymiary</a>
+          <a href="/pl/narzedzia" className="nav-link">Narzędzia</a>
           <a href="/pl/cennik" className="nav-link">Cennik</a>
           <a href="/pl/api" className="nav-link">API</a>
           <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zrób audyt</a>
@@ -88,11 +88,11 @@ export default function Navbar() {
             Jak to działa?
           </a>
           <a
-            href="/pl/wymiary"
+            href="/pl/narzedzia"
             onClick={() => setMobileOpen(false)}
             className="nav-mobile-link"
           >
-            Wymiary
+            Narzędzia
           </a>
           <a
             href="/pl/cennik"

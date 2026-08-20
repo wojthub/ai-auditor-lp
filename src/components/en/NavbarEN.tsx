@@ -36,7 +36,7 @@ export default function NavbarEN() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center">
           <a href="/how-it-works" className="nav-link">How it works</a>
-          <a href="/dimensions" className="nav-link">Dimensions</a>
+          <a href="/tools" className="nav-link">Tools</a>
           <a href="/pricing" className="nav-link">Pricing</a>
           <a href="/api" className="nav-link">API</a>
           <a href={`${APP_URL}/login?lang=en`} className="nav-cta">Run audit</a>
@@ -83,8 +83,8 @@ export default function NavbarEN() {
           <a href="/how-it-works" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             How it works
           </a>
-          <a href="/dimensions" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
-            Dimensions
+          <a href="/tools" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+            Tools
           </a>
           <a href="/pricing" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             Pricing
