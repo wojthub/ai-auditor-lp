@@ -390,7 +390,13 @@ const APP_URL = 'https://app.citationone.com';
 - Badge prowadzi na **odpowiednik bieżącej podstrony** w drugim języku (`/pricing` → `/pl/cennik`,
   `/pl/api` → `/api`), a nie na stronę główną. Dotyczy badge'a desktopowego i pozycji w menu mobilnym.
 - Pary adresów: [src/lib/languageSwitch.ts](src/lib/languageSwitch.ts) (`PAIRS` + `plCounterpart`/`enCounterpart`).
-  **Nowa podstrona = nowa para w tej tablicy** — bez niej przełącznik po cichu wyrzuca na HP (fallback `/` / `/pl`).
+  **Nowa podstrona = działający przełącznik, zawsze** — bez pary przełącznik po cichu wyrzuca na HP
+  (fallback `/` / `/pl`), więc brak wpisu nie wysypie builda i łatwo go przeoczyć.
+  - Statyczne route'y (`/pricing`, `/api`, huby) dopisujesz ręcznie do `STATIC_PAIRS`.
+  - Rodziny stron z danych (wymiary, narzędzia) **generują się same** z `DIMENSION_SLUG_PAIRS`
+    i `TOOL_SLUG_PAIRS` — tych samych tablic, które zasilają hreflangi i sitemapę. Nowy wymiar czy
+    narzędzie działa w przełączniku od razu. Nową rodzinę stron podłącz tak samo, zamiast
+    utrzymywać drugą listę adresów.
 - Navbary czytają ścieżkę przez `usePathname()`. Przy `output: 'export'` docelowy `href` trafia do
   **statycznego HTML** każdej strony (zweryfikowane w `out/`), więc działa bez czekania na hydratację.
 - **Uwaga:** `alternates.languages` (hreflang) w layoutach wciąż wskazuje HP dla wszystkich podstron —
