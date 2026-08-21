@@ -189,21 +189,15 @@ export default function DimensionPage({ dim, known, all, t }: {
               {dim.lead}
             </p>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {dim.chips.map((chip) => (
-                <span key={chip} style={{
-                  fontSize: 12.5, color: '#36394a',
-                  background: '#f8fafb', border: '1px solid #dfe1e7', borderRadius: 100,
-                  padding: '5px 13px', lineHeight: 1.5,
-                }}>
-                  {chip}
-                </span>
-              ))}
-            </div>
+            {/*
+              Chipsow (skala / metoda / wejscie) w hero NIE renderujemy — decyzja z 2026-08-21,
+              ta sama co przy narzedziach. Skala i metoda sa opisane w sekcji „Jak liczymy".
+              Pole `dim.chips` zostaje w danych, ale nie ma juz zadnego konsumenta.
+            */}
 
             {/* Spis tresci — ten sam zabieg, ktory zalecamy w wymiarze „koszt pozyskania". */}
             <nav aria-label={t.tocAria} style={{
-              marginTop: 26, paddingTop: 20, borderTop: '1px solid #eceff3',
+              marginTop: 4, paddingTop: 20, borderTop: '1px solid #eceff3',
               display: 'flex', flexWrap: 'wrap', gap: '8px 18px',
             }}>
               {t.toc.map((item) => (

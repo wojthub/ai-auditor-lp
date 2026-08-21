@@ -140,20 +140,15 @@ export default function ToolPage({ tool, all, t }: {
               <span style={{ fontSize: 14, color: '#666d80', lineHeight: 1.6 }}>{t.heroNote}</span>
             </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {tool.chips.map((chip) => (
-                <span key={chip} style={{
-                  fontSize: 12.5, color: '#36394a', background: '#f8fafb',
-                  border: '1px solid #dfe1e7', borderRadius: 100, padding: '5px 13px', lineHeight: 1.5,
-                }}>
-                  {chip}
-                </span>
-              ))}
-            </div>
+            {/*
+              Chipsow (koszt / wejscie / wynik) w hero NIE renderujemy — decyzja z 2026-08-21.
+              Kazda z tych informacji ma nizej wlasna sekcje, a `tool.chips` nadal zywi
+              karty na hubie (ToolsHub), wiec pole zostaje w danych.
+            */}
 
             {/* Spis tresci — ten sam wzorzec co na podstronach wymiarow. */}
             <nav aria-label={t.tocAria} style={{
-              marginTop: 26, paddingTop: 20, borderTop: '1px solid #eceff3',
+              marginTop: 4, paddingTop: 20, borderTop: '1px solid #eceff3',
               display: 'flex', flexWrap: 'wrap', gap: '8px 18px',
             }}>
               {t.toc.map((item) => (

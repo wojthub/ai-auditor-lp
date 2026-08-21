@@ -32,6 +32,7 @@ export interface DimensionData {
   description: string;
   lead: string;
   /** Pasek meta pod H1: skala, sposob pomiaru, dane wejsciowe. */
+  /** NIEUZYWANE od 2026-08-21 — chipsy zniknely z hero, pole czeka na decyzje o usunieciu. */
   chips: string[];
   /**
    * Naglowek sekcji „dlaczego". Pelne zdanie, NIE sklejka z `name` — w PL rodzaj gramatyczny
