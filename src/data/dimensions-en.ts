@@ -22,11 +22,11 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'What Central Search Intent is and how CitationOne measures alignment: predicate, reader knowledge level, attribute coverage and gaps against the Top 10 SERP.',
     lead:
       'CSI Alignment checks whether your content answers the question the user actually asked - not the one next to it. It is the dimension above the others: they measure how well the job is done, this one measures whether you are writing about the right thing at all.',
-    chips: ['Score 1-10', 'Assessed by a language model', 'Input: content + CSI + Top 10 SERP benchmark'],
+    chips: ['Score 0-10', 'Assessed by a language model', 'Input: content + CSI + Top 10 SERP benchmark'],
     whyHeading: 'Why does CSI alignment matter to AI models?',
     why: [
       'Central Search Intent is the query taken apart: the central entity the query is about, its context, the specific thing the user wants to learn, and the predicate - the type of action behind it: informational, commercial, transactional, operational, navigational or local.',
-      'AI models do not cite pages that miss the intent, even when those pages contain the keyword and are written flawlessly. The classic mismatch: the query is commercial (“X or Y - which to choose") while the page is a review of X alone. The second common error is a level mismatch - the intent belongs to a beginner, and the text assumes expert knowledge from the first paragraph.',
+      'AI models do not cite pages that miss the intent, even when those pages contain the keyword and are written flawlessly. The classic mismatch: the query is commercial (“X or Y - which to choose”) while the page is a review of X alone. The second common error is a level mismatch - the intent belongs to a beginner, and the text assumes expert knowledge from the first paragraph.',
       'This dimension is also the foundation of the audit technically: CSI is passed into every other dimension as the reference point. A misread intent shifts the entire result.',
     ],
     howHeading: 'How do we measure CSI alignment?',
@@ -38,7 +38,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         {
           head: ['Area', 'What is checked'],
           rows: [
-            ['Predicate delivery', 'Whether the content does what the intent expects: compares, instructs, sells, defines. Catches mismatches such as “commercial intent, informational content".'],
+            ['Predicate delivery', 'Whether the content does what the intent expects: compares, instructs, sells, defines. Catches mismatches such as “commercial intent, informational content”.'],
             ['Knowledge assumption', 'Whether the level of the argument matches the reader behind the intent - an expert text under a beginner query is a real loss.'],
             ['Attribute coverage', 'How many aspects of the topic that the intent expects, and competitors cover, you actually discuss.'],
             ['Attribute placement', 'Your differentiator belongs in the H1 or lead, a baseline attribute in a dedicated H2, a niche attribute in an H3 or FAQ.'],
@@ -58,7 +58,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       ],
     },
     raises: [
-      'Content delivers the intent predicate rather than the neighbouring one (“comparison" means a side-by-side, not a review of one option)',
+      'Content delivers the intent predicate rather than the neighbouring one (“comparison” means a side-by-side, not a review of one option)',
       'Depth matched to the reader behind the query',
       'Baseline attributes of the category get their own H2 sections',
       'Your differentiator visible in the H1 or lead, not in the last paragraph',
@@ -106,10 +106,10 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'The ratio of fact-bearing sentences to filler. How CitationOne computes information density, which signals raise and lower it, and how to swap generalities for data.',
     lead:
       'Information density is the share of sentences carrying a verifiable fact. It is not about length or style - it is about how many sentences would survive if you deleted everything that cannot be checked.',
-    chips: ['Score 1-10', 'Computed algorithmically + examples from the model', 'Input: content'],
+    chips: ['Score 0-10', 'Computed algorithmically + examples from the model', 'Input: content'],
     whyHeading: 'Why does information density matter to AI models?',
     why: [
-      'A model answering a user has limited room for a quotation. It picks the passage that packs the most checkable substance per sentence - a number, a date, a unit, a proper name. A paragraph built from “many companies", “modern solutions" and “broad experience" cannot be quoted, because it contains no claim anyone could confirm or refute.',
+      'A model answering a user has limited room for a quotation. It picks the passage that packs the most checkable substance per sentence - a number, a date, a unit, a proper name. A paragraph built from “many companies”, “modern solutions” and “broad experience” cannot be quoted, because it contains no claim anyone could confirm or refute.',
       'This reverses an old SEO instinct. Volume used to help - longer text ranked better, so stretching paragraphs paid off. In GEO the opposite ratio counts: diluting facts lowers the odds of being cited, even when the facts are there. The same material written half as long performs better.',
     ],
     howHeading: 'How do we measure information density?',
@@ -124,12 +124,12 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
           head: ['Signal in a sentence', 'Effect'],
           rows: [
             ['A concrete number, amount or date', 'up'],
-            ['A value attached to a property (“21.3% efficiency")', 'up'],
+            ['A value attached to a property (“21.3% efficiency”)', 'up'],
             ['A single, checkable claim', 'up'],
             ['A proper name, brand, standard or institution', 'slightly up'],
-            ['Filler phrase (“it is worth knowing", “in today\'s world")', 'strongly down'],
-            ['Hedging word (“may", “usually", “rather")', 'down'],
-            ['Unsupported evaluative adjective (“best", “effective")', 'down'],
+            ['Filler phrase (“it is worth knowing”, “in today’s world”)', 'strongly down'],
+            ['Hedging word (“may”, “usually”, “rather”)', 'down'],
+            ['Unsupported evaluative adjective (“best”, “effective”)', 'down'],
             ['Rhetorical question', 'down'],
           ],
         },
@@ -144,8 +144,8 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     ],
     lowers: [
       'Introductory paragraphs without a single checkable statement',
-      'Filler phrases: “it is worth knowing", “in today\'s world", “as we all know"',
-      'Hedging: “may", “usually", “rather", “in a sense"',
+      'Filler phrases: “it is worth knowing”, “in today’s world”, “as we all know”',
+      'Hedging: “may”, “usually”, “rather”, “in a sense”',
       'Evaluative adjectives with no data behind them',
       'Rhetorical questions instead of answers',
     ],
@@ -153,14 +153,14 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       caption: 'The fastest fix is trading generalities for data - same sentence, different density',
       head: ['Instead of', 'Write'],
       rows: [
-        ['“many people"', '“67% of respondents"'],
-        ['“expensive to run"', '“from $300 a month"'],
-        ['“modern technology"', 'the name of the technology and the year it shipped'],
-        ['“significantly more efficient"', '“18% more efficient than model X"'],
+        ['“many people”', '“67% of respondents”'],
+        ['“expensive to run”', '“from $300 a month”'],
+        ['“modern technology”', 'the name of the technology and the year it shipped'],
+        ['“significantly more efficient”', '“18% more efficient than model X”'],
       ],
     },
     swapNote:
-      'When hard data is missing, ranges, proportions and comparisons still work - “3-5 days", “1 in 4 tickets", “twice the average".',
+      'When hard data is missing, ranges, proportions and comparisons still work - “3-5 days”, “1 in 4 tickets”, “twice the average”.',
     report: [
       'You get the share of fact-bearing sentences with a score, plus two lists pulled from your own text: sentences counted as facts and sentences counted as filler. These are not generic examples - they are your sentences, so you can see exactly which paragraphs drag the result down.',
       'Recommendations come in a Before / After format with a concrete rewrite proposed.',
@@ -172,7 +172,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       },
       {
         q: 'What if I do not have hard data?',
-        a: 'Use ranges, proportions and comparisons. “3-5 business days", “1 in 4 tickets", “twice the average" all count as concrete, because they can be verified. Only statements nobody can check are worthless.',
+        a: 'Use ranges, proportions and comparisons. “3-5 business days”, “1 in 4 tickets”, “twice the average” all count as concrete, because they can be verified. Only statements nobody can check are worthless.',
       },
       {
         q: 'Does the score depend on what the model decides?',
@@ -200,10 +200,10 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'Entity-Attribute-Value triples, or how AI models read facts off a page. How CitationOne builds the graph and compares coverage with the Top 10 SERP.',
     lead:
       'A knowledge graph breaks content into Entity - Attribute - Value triples: what you write about, which property of it you describe and what exactly you say about that property. This dimension checks how many of your sentences decompose into such facts, and how many remain description.',
-    chips: ['Score 1-10', 'Language model + algorithmic signals', 'Input: content + Top 10 SERP benchmark'],
+    chips: ['Score 0-10', 'Language model + algorithmic signals', 'Input: content + Top 10 SERP benchmark'],
     whyHeading: 'Why does the knowledge graph matter to AI models?',
     why: [
-      'Search engines stopped operating on keywords years ago; they work with entities and facts about them - and the Entity-Attribute-Value triple is the basic structure of every knowledge graph. “Mortgage" is the entity, “interest rate" is its attribute, “7.2%" is the value. Only the complete set forms a fact that can be stored, cross-checked against another source and quoted.',
+      'Search engines stopped operating on keywords years ago; they work with entities and facts about them - and the Entity-Attribute-Value triple is the basic structure of every knowledge graph. “Mortgage” is the entity, “interest rate” is its attribute, “7.2%” is the value. Only the complete set forms a fact that can be stored, cross-checked against another source and quoted.',
       'In GEO this translates directly: the model builds its answer from facts, not from paragraphs. A page that names entities but never gives their attributes and values is, to the model, a text without content - summarisable, but with nothing to quote. Conversely, a dense and consistent graph makes the model recognise the page as a source of knowledge in its field.',
     ],
     howHeading: 'How do we measure the knowledge graph?',
@@ -216,9 +216,9 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
           caption: 'What one fact is made of',
           head: ['Element', 'The question it answers'],
           rows: [
-            ['Entity', 'What are you talking about? - “mortgage", “solar panel"'],
-            ['Attribute', 'Which property are you describing? - “interest rate", “efficiency"'],
-            ['Value', 'What exactly do you say about it? - “7.2%", “21.3%"'],
+            ['Entity', 'What are you talking about? - “mortgage”, “solar panel”'],
+            ['Attribute', 'Which property are you describing? - “interest rate”, “efficiency”'],
+            ['Value', 'What exactly do you say about it? - “7.2%”, “21.3%”'],
           ],
         },
         {
@@ -240,8 +240,8 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'Facts spread across topical sections rather than crammed into one table',
     ],
     lowers: [
-      'Entities named without attributes (“we offer mortgages" and nothing more)',
-      'Attributes without values (“competitive interest rate" instead of “7.2%")',
+      'Entities named without attributes (“we offer mortgages” and nothing more)',
+      'Attributes without values (“competitive interest rate” instead of “7.2%”)',
       'Missing an attribute that is standard among competitors',
       'Internally contradictory facts - two different prices for the same thing',
       'A graph built from template elements instead of substantive content',
@@ -281,10 +281,10 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'What BLUF is and how CitationOne measures it: the answer within the first 50 words of a section, and separate rules for FAQ, listing and encyclopedia pages.',
     lead:
       'BLUF (Bottom Line Up Front) checks one thing: whether the answer to a section question lands within its first 50 words, or only after a paragraph of warm-up. It is a dimension about the order of information, not its amount - the same text with its sentences rearranged scores differently.',
-    chips: ['Score 1-10', 'Assessed by a language model', 'Input: content + CSI + content-type profile'],
+    chips: ['Score 0-10', 'Assessed by a language model', 'Input: content + CSI + content-type profile'],
     whyHeading: 'Why does BLUF matter to AI models?',
     why: [
-      'The RAG systems behind ChatGPT, Perplexity and AI Overview do not read a page whole. They cut it into chunks of roughly 200-500 words and score each one separately, without the context of the rest of the article. If a section opens with “In today\'s world, more and more companies...", the model sees a fragment that answers nothing - and reaches for the competitor who put the answer in the first sentence.',
+      'The RAG systems behind ChatGPT, Perplexity and AI Overview do not read a page whole. They cut it into chunks of roughly 200-500 words and score each one separately, without the context of the rest of the article. If a section opens with “In today’s world, more and more companies...”, the model sees a fragment that answers nothing - and reaches for the competitor who put the answer in the first sentence.',
       'In classic SEO the same rule powered featured snippets - the box went to the paragraph that answered immediately. In GEO the stakes are higher, because a generative engine does not link the page, it quotes a fragment of it: a chunk without an answer up front looks to the model like a chunk with no answer at all.',
       'The pattern that works is Answer → Evidence → Context. First the conclusion with a number, then the justification, then the background. The reverse order - background, justification, conclusion - is natural in academic writing and lethal in AI Search.',
     ],
@@ -299,10 +299,10 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
           head: ['Content type', 'What a correct BLUF looks like'],
           rows: [
             ['Article', 'An answer with a number within the first 50 words of the section'],
-            ['FAQ', 'The first sentence after the question is the answer (“From $99 a month"), not “It depends on..."'],
-            ['Listing / catalogue', '1-2 summary sentences above the list, with a specific such as “12 entries, top rated: X"'],
+            ['FAQ', 'The first sentence after the question is the answer (“From $99 a month”), not “It depends on...”'],
+            ['Listing / catalogue', '1-2 summary sentences above the list, with a specific such as “12 entries, top rated: X”'],
             ['Encyclopedia / definition', 'A defining first sentence under the H2, the way a Wikipedia entry opens'],
-            ['Tool / calculator', 'The “what it computes" section - a formula or result range in one sentence; forms are skipped'],
+            ['Tool / calculator', 'The “what it computes” section - a formula or result range in one sentence; forms are skipped'],
           ],
         },
       ],
@@ -315,27 +315,27 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'For a complex question, 2-3 sentences with steps instead of one vague line',
     ],
     lowers: [
-      'Tension-building openers (“In today\'s world", “We live in an era")',
-      'Announcements (“In this article we will present", “Before we move on to")',
-      'Empty adjectives (“best", “comprehensive", “innovative")',
-      'SEO fluff (“years of experience", “individual approach")',
-      'Hedges (“essentially", “one could say that")',
-      'Meta-commentary (“it is worth noting", “it should be stressed")',
+      'Tension-building openers (“In today’s world”, “We live in an era”)',
+      'Announcements (“In this article we will present”, “Before we move on to”)',
+      'Empty adjectives (“best”, “comprehensive”, “innovative”)',
+      'SEO fluff (“years of experience”, “individual approach”)',
+      'Hedges (“essentially”, “one could say that”)',
+      'Meta-commentary (“it is worth noting”, “it should be stressed”)',
     ],
     swapTable: {
       caption: 'A separate, measurable loss comes from generalities where a number would fit',
       head: ['Instead of', 'Write'],
       rows: [
-        ['“many"', 'a specific number or range (“5-10")'],
-        ['“often"', '“in 40% of cases", “every 3 days on average"'],
-        ['“quickly"', '“within 24 hours"'],
-        ['“significantly"', '“by 30%", “twofold"'],
-        ['“most"', '“7 in 10", “over 70%"'],
-        ['“cheap"', 'a specific amount or bracket'],
+        ['“many”', 'a specific number or range (“5-10”)'],
+        ['“often”', '“in 40% of cases”, “every 3 days on average”'],
+        ['“quickly”', '“within 24 hours”'],
+        ['“significantly”', '“by 30%”, “twofold”'],
+        ['“most”', '“7 in 10”, “over 70%”'],
+        ['“cheap”', 'a specific amount or bracket'],
       ],
     },
     swapNote:
-      'When hard data is missing, ranges (“3-5 days"), proportions (“1 in 3") and comparisons (“2x the average") still work.',
+      'When hard data is missing, ranges (“3-5 days”), proportions (“1 in 3”) and comparisons (“2x the average”) still work.',
     report: [
       'A section-by-section breakdown: for every H2 we show its first 50 words and the verdict on whether the answer is there.',
       'For sections without a BLUF you get a ready first sentence - and for sections missing entirely against the Top 10, a short expansion as well. Everything comes in a Before / After format, so you see exactly what to swap.',
@@ -356,7 +356,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     ],
     beforeAfter: {
       intro: 'The same paragraph before and after the fix - no new knowledge added, only reordering and swapping generalities for data.',
-      before: 'In today\'s world, more and more people are considering a heat pump. Before we get to the specifics, it is worth understanding what drives the cost of such an investment.',
+      before: 'In today’s world, more and more people are considering a heat pump. Before we get to the specifics, it is worth understanding what drives the cost of such an investment.',
       after: 'A heat pump installation costs between $9,000 and $15,000, or from $5,000 with a subsidy. The total covers the unit, labour and upgrading the existing system.',
     },
     related: [
@@ -375,17 +375,17 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'AI engines cut a page into fragments and score each separately. How CitationOne measures section autonomy, chunk length per content type and passage citability.',
     lead:
       'A chunk is a fragment of a page that an AI engine retrieves and scores in isolation - most often a single H2 or H3 section. This dimension checks whether your sections stand on their own, or only make sense to someone who has read the whole page.',
-    chips: ['Score 1-10', 'Language model + algorithmic signals', 'Input: content + CSI + content-type profile'],
+    chips: ['Score 0-10', 'Language model + algorithmic signals', 'Input: content + CSI + content-type profile'],
     whyHeading: 'Why does chunk optimization matter to AI models?',
     why: [
       'A generative engine does not load the whole page into its answer. It indexes the page in fragments and, when a question arrives, retrieves the ones that look most relevant. Your fragment reaches the model without the article title, without the previous section and without the introduction.',
-      'That is why “as mentioned above, this parameter is crucial" is a loss in GEO - out of context it means nothing and cannot be quoted. The same goes for a section that never repeats the topic it discusses, relying on a pronoun pointing at a heading two screens up.',
+      'That is why “as mentioned above, this parameter is crucial” is a loss in GEO - out of context it means nothing and cannot be quoted. The same goes for a section that never repeats the topic it discusses, relying on a pronoun pointing at a heading two screens up.',
       'The reverse also holds: a section written as a standalone answer can be cited even when the rest of the page is average. In AI Search the chunk is the unit of competition - not the page.',
     ],
     howHeading: 'How do we measure chunk optimization?',
     how: {
       intro: [
-        'The model examines each section separately on four points: whether it opens with an answer, whether it repeats the main topic at least twice, whether it avoids pointing at other fragments (“above", “as we wrote earlier"), and whether its length suits the content type.',
+        'The model examines each section separately on four points: whether it opens with an answer, whether it repeats the main topic at least twice, whether it avoids pointing at other fragments (“above”, “as we wrote earlier”), and whether its length suits the content type.',
         'That last criterion is not a single threshold for everything - an FAQ answer should be short, an encyclopedia entry may be long:',
       ],
       tables: [
@@ -411,9 +411,9 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'Facts and numbers inside the section, not in a separate summary at the end of the page',
     ],
     lowers: [
-      'References such as “above", “as we already mentioned", “in the previous part"',
-      'A section opening with a rhetorical question or a connective (“However", “That said")',
-      'Opening with a pronoun that points at nothing (“This means that...")',
+      'References such as “above”, “as we already mentioned”, “in the previous part”',
+      'A section opening with a rhetorical question or a connective (“However”, “That said”)',
+      'Opening with a pronoun that points at nothing (“This means that...”)',
       'A wall of text with no section breaks',
       'Thirty-word sections in an article, or 900-word answers in an FAQ',
     ],
@@ -428,7 +428,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'No, the length has to match the content type. An encyclopedia entry can run 1500-word sections, an FAQ answer 50. Artificially cutting an article into 100-word pieces lowers the score just like a wall of text does.',
       },
       {
-        q: 'Do phrases like “as mentioned above" really hurt?',
+        q: 'Do phrases like “as mentioned above” really hurt?',
         a: 'Yes, and specifically so. The section reaches the model without its neighbours, so the reference points at something that is not there. Such a fragment stops being quotable even when it is the strongest material on the page.',
       },
       {
@@ -457,7 +457,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'How much effort it takes to extract an answer from your page. A points-based structure checklist: heading hierarchy, tables, lists, emphasis and a summary.',
     lead:
       'Cost of Retrieval measures how much work it takes to pull a specific answer off a page. The clearer the structure - heading hierarchy, tables, lists, emphasis - the lower the cost and the higher the score.',
-    chips: ['Score 1-10', 'Points-based structure checklist', 'Input: content + HTML structure'],
+    chips: ['Score 0-10', 'Points-based structure checklist', 'Input: content + HTML structure'],
     whyHeading: 'Why does cost of retrieval matter to AI models?',
     why: [
       'A model building an answer processes many sources at once. A page where the answer has to be dug out of ten paragraphs of running text is more expensive to handle than a competitor who put the same information in a table. With comparable content, the cheaper one wins.',
@@ -530,13 +530,13 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     heading: 'What is TF-IDF in a content audit?',
     title: 'What is TF-IDF in a content audit?',
     description:
-      'Comparing your page\'s terminology against the Top 10 SERP corpus. How CitationOne finds missing specialist terms and suggests the context to use them in.',
+      'Comparing your page’s terminology against the Top 10 SERP corpus. How CitationOne finds missing specialist terms and suggests the context to use them in.',
     lead:
       'TF-IDF compares the vocabulary of your content with the vocabulary of the Top 10. What matters are rare, specialist terms - those prove familiarity with the subject, unlike words that appear everywhere.',
-    chips: ['Score 1-10', 'Statistical analysis + language model', 'Input: content + Top 10 SERP corpus'],
+    chips: ['Score 0-10', 'Statistical analysis + language model', 'Input: content + Top 10 SERP corpus'],
     whyHeading: 'Why does TF-IDF matter to AI models?',
     why: [
-      'Terminology is the cheapest proof of competence. A text about mortgages that never mentions “loan-to-value ratio", “creditworthiness" or “bank margin" describes the topic from the outside - and that is exactly how it looks to a model comparing it with ten pages that do use those concepts.',
+      'Terminology is the cheapest proof of competence. A text about mortgages that never mentions “loan-to-value ratio”, “creditworthiness” or “bank margin” describes the topic from the outside - and that is exactly how it looks to a model comparing it with ten pages that do use those concepts.',
       'In GEO this carries extra weight, because a missing term usually means a missing angle. If nine competitors write about something absent from your page, it is not a matter of style - it is a substantive gap the model will see when assembling its answer.',
     ],
     howHeading: 'How do we measure TF-IDF?',
@@ -544,7 +544,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       intro: [
         'We build a corpus from competitor content and identify the terms with high informational value: specialist, industry-specific, often multi-word. Function words and generic nouns are discarded. The score is the ratio of terms present in your content to those expected, rescaled to ten.',
         'The formula: specialist terms present in the content divided by expected terms, times 10.',
-        'Missing terms are not ranked by raw frequency alone. How strongly a term binds to the page\'s main topic counts as well - so the top of the list is not occupied by a word that is popular among competitors but topically distant from yours. On top of that, a domain holding several positions in the Top 10 carries less weight, so no single site dictates the whole vocabulary.',
+        'Missing terms are not ranked by raw frequency alone. How strongly a term binds to the page’s main topic counts as well - so the top of the list is not occupied by a word that is popular among competitors but topically distant from yours. On top of that, a domain holding several positions in the Top 10 carries less weight, so no single site dictates the whole vocabulary.',
       ],
       tables: [
         {
@@ -562,17 +562,17 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'Industry concepts used inside an explanation, not merely listed',
       'Multi-word phrases the industry actually uses, rather than colloquial substitutes',
       'Terms present at most of the Top 10 competitors',
-      'A term used in the context competitors pair it with - “cortisol" next to “elevated", not in isolation',
+      'A term used in the context competitors pair it with - “cortisol” next to “elevated”, not in isolation',
     ],
     lowers: [
       'Describing the topic in general language, skipping the names of the phenomena involved',
       'Missing concepts that are standard among competitors',
       'Terms dumped as a list at the end of the text, with no explanation',
-      'Replacing a term with a description (“that indicator which shows...") instead of naming it',
+      'Replacing a term with a description (“that indicator which shows...”) instead of naming it',
     ],
     report: [
       'You get a list of missing terms ordered by how many competitors use them and how strongly they bind to the page topic.',
-      'Where a term consistently appears alongside another concept among competitors, we surface that context - the recommendation then reads “add term X in the context of Y, 6 of 10 competitors connect them", rather than a bare “add X".',
+      'Where a term consistently appears alongside another concept among competitors, we surface that context - the recommendation then reads “add term X in the context of Y, 6 of 10 competitors connect them”, rather than a bare “add X”.',
     ],
     faq: [
       {
@@ -603,17 +603,17 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'Whether the main topic of the page performs actions or merely receives them. How CitationOne measures semantic roles and why the passive voice hurts in AI Search.',
     lead:
-      'Semantic roles check who your main topic is in your sentences: the one performing the action, or the one it happens to. “The bank grants the loan" and “the loan is granted" carry the same fact, but only the first states who does it.',
-    chips: ['Score 1-10', 'Assessed by a language model', 'Input: content + central entity from CSI'],
+      'Semantic roles check who your main topic is in your sentences: the one performing the action, or the one it happens to. “The bank grants the loan” and “the loan is granted” carry the same fact, but only the first states who does it.',
+    chips: ['Score 0-10', 'Assessed by a language model', 'Input: content + central entity from CSI'],
     whyHeading: 'Why do semantic roles matter to AI models?',
     why: [
-      'A model extracts facts as “who - does what - to what". A passive sentence with the actor dropped leaves a hole in that structure, which the model has to guess or skip. An active sentence delivers the full set and can be quoted without rewriting.',
-      'The second effect is about visibility. When the main topic consistently appears as the actor, the model binds attributes and actions to it - the page starts being “about something" in the entity sense, not merely containing words on the subject. A blurred perspective yields blurred connections.',
+      'A model extracts facts as “who - does what - to what”. A passive sentence with the actor dropped leaves a hole in that structure, which the model has to guess or skip. An active sentence delivers the full set and can be quoted without rewriting.',
+      'The second effect is about visibility. When the main topic consistently appears as the actor, the model binds attributes and actions to it - the page starts being “about something” in the entity sense, not merely containing words on the subject. A blurred perspective yields blurred connections.',
     ],
     howHeading: 'How do we measure semantic roles?',
     how: {
       intro: [
-        'We check the role the page\'s central entity plays across sentences: the actor performing an action, the object of that action, or absent. The actor role counts in full, the object role counts half, absence counts for nothing. The score is the sum of collected points divided by the maximum possible, rescaled to ten.',
+        'We check the role the page’s central entity plays across sentences: the actor performing an action, the object of that action, or absent. The actor role counts in full, the object role counts half, absence counts for nothing. The score is the sum of collected points divided by the maximum possible, rescaled to ten.',
         'The reference point: a well-written page has its main topic in the actor role in over 70% of the sentences where it appears at all.',
       ],
       tables: [
@@ -621,8 +621,8 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
           caption: 'How a role counts in a sentence',
           head: ['Role of the central entity', 'Value'],
           rows: [
-            ['Actor (“The bank grants the loan")', 'full'],
-            ['Object (“The loan is granted by the bank")', 'half'],
+            ['Actor (“The bank grants the loan”)', 'full'],
+            ['Object (“The loan is granted by the bank”)', 'half'],
             ['Absent from the sentence', 'none'],
           ],
         },
@@ -631,12 +631,12 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     raises: [
       'Active voice with an explicit actor',
       'The main topic named directly instead of replaced by a pronoun',
-      'Concrete verbs (“lowers", “shortens") instead of constructions built on “is"',
+      'Concrete verbs (“lowers”, “shortens”) instead of constructions built on “is”',
       'A consistent perspective across the text - the same protagonist in the sentences',
     ],
     lowers: [
-      'Passive voice with the actor dropped (“was implemented", “is applied")',
-      'Subjectless constructions (“one should remember", “it is worth considering")',
+      'Passive voice with the actor dropped (“was implemented”, “is applied”)',
+      'Subjectless constructions (“one should remember”, “it is worth considering”)',
       'Replacing the topic with a pronoun for whole paragraphs',
       'A shifting protagonist - product, then customer, then company, with no reason',
     ],
@@ -644,9 +644,9 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       caption: 'The most common fix is turning the passive voice active',
       head: ['Instead of', 'Write'],
       rows: [
-        ['“The loan is granted for up to 30 years"', '“The bank grants the loan for up to 30 years"'],
-        ['“The panel was installed"', '“The crew installs the panel in a single day"'],
-        ['“Servicing should be remembered"', '“A heat pump needs servicing once a year"'],
+        ['“The loan is granted for up to 30 years”', '“The bank grants the loan for up to 30 years”'],
+        ['“The panel was installed”', '“The crew installs the panel in a single day”'],
+        ['“Servicing should be remembered”', '“A heat pump needs servicing once a year”'],
       ],
     },
     report: [
@@ -656,11 +656,11 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     faq: [
       {
         q: 'Is the passive voice always a mistake?',
-        a: 'No - the problem starts when the actor is dropped. “The bank makes the decision" is fine; “a decision is made" leaves the model with no information about who makes it.',
+        a: 'No - the problem starts when the actor is dropped. “The bank makes the decision” is fine; “a decision is made” leaves the model with no information about who makes it.',
       },
       {
         q: 'What if the topic is a service rather than a company?',
-        a: 'Then the actor is often the service or product itself: “the policy covers treatment costs", “the heat pump cuts the bill by 40%". The point is an unambiguous role for the main topic, not inserting the company name everywhere.',
+        a: 'Then the actor is often the service or product itself: “the policy covers treatment costs”, “the heat pump cuts the bill by 40%”. The point is an unambiguous role for the main topic, not inserting the company name everywhere.',
       },
       {
         q: 'How quickly can this be fixed?',
@@ -688,17 +688,17 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'How AI engines break one question into a dozen sub-queries, and how CitationOne measures the share your content covers - using AI Overview and real SERP questions.',
     lead:
       'Fan-Out is the decomposition of one query into a dozen or so side questions an AI engine resolves in the background before assembling its answer. This dimension measures how many of them your page answers - because citations are won on the side questions, not the main one.',
-    chips: ['Score 1-10', 'Two model passes + SERP data', 'Input: CSI + SERP questions + AI Overview'],
+    chips: ['Score 0-10', 'Two model passes + SERP data', 'Input: CSI + SERP questions + AI Overview'],
     whyHeading: 'Why does Fan-Out coverage matter to AI models?',
     why: [
-      'A user asks “how to choose a heat pump", and the model does not search for that phrase. It breaks it into component questions: what capacity for what floor area, how much installation costs, what the efficiency is in freezing weather, whether a permit is needed. It retrieves each separately and only then composes a single answer.',
+      'A user asks “how to choose a heat pump”, and the model does not search for that phrase. It breaks it into component questions: what capacity for what floor area, how much installation costs, what the efficiency is in freezing weather, whether a permit is needed. It retrieves each separately and only then composes a single answer.',
       'This is where SEO and GEO part ways. In classic search, winning one query was enough to earn the click. In AI Search you win as many times as you have ready answers to side questions - a page that exhausts the topic only in the main thread gets cited once, or not at all, despite an excellent SERP position.',
       'It works the other way too: side questions are cheaper to win than the head phrase. Competitors fight over the headline, while the gap usually sits in a question nobody has covered.',
     ],
     howHeading: 'How do we measure Fan-Out coverage?',
     how: {
       intro: [
-        'Starting from the page\'s intent, the model decomposes the query into a dozen or so sub-queries - and it does so in two independent passes with different levels of boldness, merging the results, because a single pass depends too heavily on model randomness. To that we add real questions from the SERP: the “People also ask" box and related searches. Finally we check which of those questions your content genuinely answers.',
+        'Starting from the page’s intent, the model decomposes the query into a dozen or so sub-queries - and it does so in two independent passes with different levels of boldness, merging the results, because a single pass depends too heavily on model randomness. To that we add real questions from the SERP: the “People also ask” box and related searches. Finally we check which of those questions your content genuinely answers.',
         'The set is cleaned of homonyms - if the phrase has a second meaning, questions from that other domain are discarded instead of producing recommendations about nothing.',
         'The score goes up for fully covering the verification questions, and down for every uncovered question whose existence the SERP confirms.',
       ],
@@ -716,7 +716,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
           caption: 'Not every question weighs the same - what counts is whether search data confirms it exists',
           head: ['Question status', 'What it means'],
           rows: [
-            ['Confirmed by the SERP', 'Google itself shows it under “People also ask" - not a hypothesis, a real query'],
+            ['Confirmed by the SERP', 'Google itself shows it under “People also ask” - not a hypothesis, a real query'],
             ['Present in AI Overview', 'The thread appears in the AI summary for this phrase'],
             ['Predicted by the model', 'Follows from the intent, but has no confirmation in SERP data'],
             ['Confirmed gap', 'The question is in the SERP and your content does not address it - this lowers the score'],
@@ -726,7 +726,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     },
     raises: [
       'H2 sections answering specific side questions rather than variants of the head phrase',
-      'Coverage of questions from the “People also ask" box',
+      'Coverage of questions from the “People also ask” box',
       'Answers to verification questions - numbers, dates, conditions a model must confirm',
       'An FAQ built from real questions rather than search phrases',
       'Exhausting side threads competitors have not touched',
@@ -740,16 +740,16 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     report: [
       'You get a list of side questions marked by whether your content covers them, along with where each question came from: confirmed by the SERP or predicted by the model.',
       'Uncovered questions confirmed by the search engine go to the top of the recommendations, because they are the cheapest gaps to close: we know people ask them, and we know your page has no answer.',
-      'Plus AI Overview coverage for your phrase - whether Google\'s summary appears at all and which threads it touches.',
+      'Plus AI Overview coverage for your phrase - whether Google’s summary appears at all and which threads it touches.',
     ],
     faq: [
       {
         q: 'How are side questions different from long-tail phrases?',
-        a: 'Long tail means variants of the same query; side questions are separate threads the model must resolve to build an answer. “Cheap heat pump" is long tail; “does a heat pump work at minus 20 degrees" is a side question.',
+        a: 'Long tail means variants of the same query; side questions are separate threads the model must resolve to build an answer. “Cheap heat pump” is long tail; “does a heat pump work at minus 20 degrees” is a side question.',
       },
       {
         q: 'Do I have to answer all of them?',
-        a: 'No - priority goes to the ones confirmed by the search engine. A question Google shows under “People also ask" is a certain gap; a question predicted by the model is a hypothesis and weighs less.',
+        a: 'No - priority goes to the ones confirmed by the search engine. A question Google shows under “People also ask” is a certain gap; a question predicted by the model is a hypothesis and weighs less.',
       },
       {
         q: 'Is an FAQ section enough?',
@@ -772,7 +772,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'An algorithmic completeness checklist: length against competitors, images, video, tables, lists, heading hierarchy, table of contents and a visible update date.',
     lead:
       'Effort Score measures the work put into a page: whether it has what a properly made piece on this topic has - adequate length, visual material, tables, lists, a clear hierarchy and a visible date. It is computed entirely by an algorithm, with no language model involved.',
-    chips: ['Score 1-10', '100% algorithmic - zero model calls', 'Input: content + HTML structure + Top 10 average'],
+    chips: ['Score 0-10', '100% algorithmic - zero model calls', 'Input: content + HTML structure + Top 10 average'],
     whyHeading: 'Why does Effort Score matter to AI models?',
     why: [
       'Completeness signals are the oldest proxy for quality search engines use: a page with a table, visual material and a current date more often comes from someone who actually worked through the topic than a page made of five paragraphs. It is not proof of quality, but it is a strong hint - and it is treated as one.',
@@ -888,7 +888,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       ],
     },
     raises: [
-      'A bylined author with concrete credentials, not “the editorial team"',
+      'A bylined author with concrete credentials, not “the editorial team”',
       'Citations to research and data with the source stated',
       'Links to a range of institutions instead of repeated links to one site',
       'A visible update date and a contact',
@@ -897,7 +897,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     lowers: [
       'Text with no author and no date',
       'Statistics given with no source',
-      'Claims of competence with nothing behind them (“years of experience")',
+      'Claims of competence with nothing behind them (“years of experience”)',
       'No external links whatsoever',
       'Referring exclusively to your own material',
     ],
@@ -911,7 +911,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'Not as a single parameter. It is a set of quality criteria Google uses to describe good content, and generative models apply the same reasoning when choosing a source. We measure the signals actually present on the page.',
       },
       {
-        q: 'Is adding “author: the editorial team" enough?',
+        q: 'Is adding “author: the editorial team” enough?',
         a: 'No. A signal counts only when it is anchored in the content - a byline with no credentials, affiliation or trace of experience changes nothing. The rule is deliberately strict so the audit does not credit expertise the page never claims.',
       },
       {
@@ -939,7 +939,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     whyHeading: 'Why does information gain matter to AI models?',
     why: [
       'A generative engine does not need ten sources saying the same thing. It builds an answer from a few, and picks the ones that add something the others lack. Content that is correct but entirely overlapping with competitors is interchangeable to it - any other source does the same job.',
-      'This is the opposite of the “write what the top ten wrote, only better" strategy. A better-written duplicate is still a duplicate. The advantage comes from your own number, your own case, your own comparison.',
+      'This is the opposite of the “write what the top ten wrote, only better” strategy. A better-written duplicate is still a duplicate. The advantage comes from your own number, your own case, your own comparison.',
     ],
     howHeading: 'How do we measure information gain?',
     how: {

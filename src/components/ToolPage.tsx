@@ -92,6 +92,8 @@ export default function ToolPage({ tool, all, t }: {
   t: ToolStrings;
 }) {
   const ctaHref = `${t.appUrl}${tool.appPath}`;
+  // Kotwice sekcji ida z `t.toc`, wiec strona EN ma angielskie id, a PL polskie.
+  const sectionId = (i: number) => t.toc[i].id;
 
   return (
     <div>
@@ -148,12 +150,26 @@ export default function ToolPage({ tool, all, t }: {
                 </span>
               ))}
             </div>
+
+            {/* Spis tresci — ten sam wzorzec co na podstronach wymiarow. */}
+            <nav aria-label={t.tocAria} style={{
+              marginTop: 26, paddingTop: 20, borderTop: '1px solid #eceff3',
+              display: 'flex', flexWrap: 'wrap', gap: '8px 18px',
+            }}>
+              {t.toc.map((item) => (
+                <a key={item.id} href={`#${item.id}`} style={{
+                  fontSize: 13.5, color: ACCENT, textDecoration: 'none', fontWeight: 500,
+                }}>
+                  {item.label}
+                </a>
+              ))}
+            </nav>
           </motion.div>
         </div>
       </section>
 
       {/* CZYM JEST */}
-      <section style={{ background: '#ffffff', padding: '64px 0 68px' }}>
+      <section id={sectionId(0)} style={{ background: '#ffffff', padding: '64px 0 68px' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelDefinition}</SectionLabel>
@@ -164,7 +180,7 @@ export default function ToolPage({ tool, all, t }: {
       </section>
 
       {/* PO CO */}
-      <section style={{ background: '#f8fafb', padding: '72px 0' }}>
+      <section id={sectionId(1)} style={{ background: '#f8fafb', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelWhy}</SectionLabel>
@@ -175,7 +191,7 @@ export default function ToolPage({ tool, all, t }: {
       </section>
 
       {/* JAK DZIALA */}
-      <section style={{ background: '#ffffff', padding: '72px 0' }}>
+      <section id={sectionId(2)} style={{ background: '#ffffff', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelHow}</SectionLabel>
@@ -208,7 +224,7 @@ export default function ToolPage({ tool, all, t }: {
       </section>
 
       {/* WYNIK */}
-      <section style={{ background: '#f8fafb', padding: '72px 0' }}>
+      <section id={sectionId(3)} style={{ background: '#f8fafb', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelOutput}</SectionLabel>
@@ -228,7 +244,7 @@ export default function ToolPage({ tool, all, t }: {
       </section>
 
       {/* KOSZT I LIMITY */}
-      <section style={{ background: '#ffffff', padding: '72px 0' }}>
+      <section id={sectionId(4)} style={{ background: '#ffffff', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelLimits}</SectionLabel>
@@ -246,7 +262,7 @@ export default function ToolPage({ tool, all, t }: {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: '#f8fafb', padding: '72px 0' }}>
+      <section id={sectionId(5)} style={{ background: '#f8fafb', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelQuestions}</SectionLabel>

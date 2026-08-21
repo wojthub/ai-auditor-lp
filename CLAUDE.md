@@ -320,6 +320,14 @@ AI, jak jest liczony, co podnosi i obniża wynik, co widać w raporcie, FAQ.
   nieprawdziwa dla części audytów. Dotyczy to też przeliczników w rodzaju „wpływ: wysoki/średni".
 - **Progi oceny 1-10 świadomie usunięte** z podstron (decyzja z 2026-08-20); wzory zostają tam,
   gdzie istnieją: gęstość, koszt pozyskania, TF-IDF, role semantyczne.
+- **Typografia treści** (audyt z 2026-08-21): cudzysłowy zamykamy znakiem `”` (U+201D) — PL `„…”`,
+  EN `“…”`; apostrof w EN to `’`. Wcześniej 284 cytaty otwierały się typograficznie, a zamykały
+  prostym `"`. Skala wymiaru to **0-10** (`scoring.ts`, prompty) — nie 1-10.
+- **Kotwice sekcji idą z `t.toc`**, nie z twardych `id` w szablonie: strona EN ma
+  `#why-it-matters`, PL `#dlaczego`. Kolejność w `toc` musi odpowiadać kolejności sekcji.
+  Ten sam mechanizm mają podstrony narzędzi (`TOOL_STRINGS_*.toc`, 6 pozycji).
+  Etykiety w formie pytania dostają w PL pytajnik („Jak liczymy?"), po angielsku nie
+  („How we measure it" to fraza oznajmująca, nie okaleczone pytanie).
 - **JSON-LD** per strona: `BreadcrumbList` + `DefinedTerm` + `FAQPage`, budowane z tych samych
   danych co widoczne FAQ — nie da się rozjechać znaczników z treścią.
 - `related[].slug` musi wskazywać slug z **tej samej** mapy językowej; nieznany slug renderuje się

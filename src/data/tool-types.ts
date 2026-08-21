@@ -57,6 +57,9 @@ export interface ToolStrings {
   breadcrumbAria: string;
   /** Nota pod CTA w hero — zamiast obietnicy „za darmo", ktorej narzedzia nie maja. */
   heroNote: string;
+  tocAria: string;
+  /** Spis tresci w hero. Kolejnosc MUSI odpowiadac kolejnosci sekcji w ToolPage. */
+  toc: { id: string; label: string }[];
   labelDefinition: string;
   labelWhy: string;
   labelHow: string;
@@ -93,6 +96,15 @@ export const TOOL_STRINGS_PL: ToolStrings = {
   breadcrumbRoot: 'Narzędzia',
   breadcrumbAria: 'Ścieżka nawigacji',
   heroNote: 'Bez abonamentu - płacisz kredytem za analizę.',
+  tocAria: 'Na tej stronie',
+  toc: [
+    { id: 'czym-to-jest', label: 'Czym to jest?' },
+    { id: 'po-co', label: 'Po co to?' },
+    { id: 'jak-dziala', label: 'Jak działa?' },
+    { id: 'wynik', label: 'Co dostajesz?' },
+    { id: 'koszt', label: 'Ile kosztuje?' },
+    { id: 'faq', label: 'FAQ' },
+  ],
   labelDefinition: 'Definicja',
   labelWhy: 'Po co to',
   labelHow: 'Jak działa',
@@ -113,6 +125,15 @@ export const TOOL_STRINGS_EN: ToolStrings = {
   breadcrumbRoot: 'Tools',
   breadcrumbAria: 'Breadcrumb',
   heroNote: 'No subscription - you pay one credit per run.',
+  tocAria: 'On this page',
+  toc: [
+    { id: 'what-it-is', label: 'What it is' },
+    { id: 'why', label: 'Why it matters' },
+    { id: 'how-it-works', label: 'How it works' },
+    { id: 'what-you-get', label: 'What you get' },
+    { id: 'cost', label: 'What it costs' },
+    { id: 'faq', label: 'FAQ' },
+  ],
   labelDefinition: 'Definition',
   labelWhy: 'Why',
   labelHow: 'How it works',

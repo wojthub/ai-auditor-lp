@@ -27,7 +27,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
     whyHeading: 'Why cluster keywords?',
     why: [
       'Without clustering you get the most expensive mistake in content: several separate texts targeting phrases that mean the same thing to a search engine. The pages start competing with each other, none accumulates full strength, and the editorial budget goes into duplicating the same material.',
-      'Word similarity does not settle this - "car insurance" and "auto policy" share no word, yet their search results largely coincide. Conversely, two phrases differing by a single word can have disjoint SERPs, because the intent behind them differs.',
+      'Word similarity does not settle this - “car insurance” and “auto policy” share no word, yet their search results largely coincide. Conversely, two phrases differing by a single word can have disjoint SERPs, because the intent behind them differs.',
       'So we group by overlapping URLs in the results: a cluster is a set of phrases one page can genuinely serve.',
     ],
     stepsHeading: 'How does clustering work?',
@@ -43,11 +43,11 @@ export const TOOLS_EN: Record<string, ToolData> = {
       head: ['Parameter', 'Range and default'],
       rows: [
         ['Similarity threshold', '0.5-1.0 (default 0.95) - the higher, the tighter the clusters'],
-        ['Minimum cluster size', '1-20 - phrases below it land in the "unclustered" bucket'],
+        ['Minimum cluster size', '1-20 - phrases below it land in the “unclustered” bucket'],
         ['SERP results considered', '1-10 - how many positions we compare'],
       ],
     },
-    outputHeading: 'What you get',
+    outputHeading: 'What do you get?',
     output: [
       'Cluster cards with a label, intent and combined volume, each holding a table of phrases - a ready basis for a content plan.',
       'A pillar page suggestion per cluster: the topic that would serve the whole group of queries.',
@@ -64,7 +64,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
     faq: [
       {
         q: 'How is this different from clustering by word similarity?',
-        a: 'The criterion differs: what counts is overlapping search results, not textual similarity. That is why "car insurance" and "auto policy" can land in one cluster despite sharing no word - Google returns the same pages for both.',
+        a: 'The criterion differs: what counts is overlapping search results, not textual similarity. That is why “car insurance” and “auto policy” can land in one cluster despite sharing no word - Google returns the same pages for both.',
       },
       {
         q: 'Which similarity threshold should I pick?',
@@ -122,7 +122,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
         ['Cannibalisation threshold', '0.7-1.0 (default 0.9) - the similarity at which pages count as competing'],
       ],
     },
-    outputHeading: 'What you get',
+    outputHeading: 'What do you get?',
     output: [
       'A table of pruning candidates with guidance on what to do: remove, redirect or rebuild.',
       'Cannibalisation groups with a similarity score and a suggestion: keep the strongest page and redirect, merge the content, or differentiate the pages so they target different queries.',
@@ -183,11 +183,11 @@ export const TOOLS_EN: Record<string, ToolData> = {
       { title: 'Reading the sitemap', desc: 'The same path as pruning: nested sitemaps, media filtered out, the address validated before the run.' },
       { title: 'Fetching page code', desc: 'We fetch the HTML of every URL - unsimplified, because structured data lives in markup that content simplification strips away.' },
       { title: 'Extracting markup', desc: 'We read both JSON-LD (including the bundled form popular plugins emit) and microdata embedded in the HTML. Every finding shows its source.' },
-      { title: 'Identifying the page type', desc: 'We score the page against 19 profiles - from homepage and article to job posting and contact page. When the signals are too weak it stays "unknown" instead of guessing.' },
+      { title: 'Identifying the page type', desc: 'We score the page against 19 profiles - from homepage and article to job posting and contact page. When the signals are too weak it stays “unknown” instead of guessing.' },
       { title: 'Comparing with the catalogue', desc: 'For the identified profile we check which of the 30-plus schema types are missing and which are unnecessary.' },
       { title: 'Filtering false positives', desc: 'A recipe recommendation without an ingredient list, or a job posting without the matching phrasing, is discarded - better to skip than to push wrong markup into your code.' },
     ],
-    outputHeading: 'What you get',
+    outputHeading: 'What do you get?',
     output: [
       'A site-wide summary: page count, issue count, the most frequently missing schema types and the distribution of page types.',
       'A table of every URL with its identified profile, detected and missing markup, and a filter that shows only pages with issues.',
@@ -209,7 +209,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
         a: 'Yes. We also read the bundled JSON-LD form in which popular plugins pack all their markup at once, along with microdata embedded directly in the HTML.',
       },
       {
-        q: 'Why do some pages come back as "unknown"?',
+        q: 'Why do some pages come back as “unknown”?',
         a: 'Because the signals were too weak to assign a type with reasonable confidence. That is deliberate: a wrong identification would lead to recommending markup that hurts the page.',
       },
     ],
@@ -234,7 +234,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
     defHeading: 'How do you find internal links to add automatically?',
     def: [
       'By hand you work from the target: you have a new article and you hunt for places worth linking from. An automated pass runs the other way - it reviews every paragraph of every page and checks whether a URL exists that the paragraph substantively points to.',
-      'Matching is semantic rather than exact-phrase, so it also catches paragraphs describing the topic in different words. The output is not a list of pages "worth linking" but a pair: a specific fragment of text and a specific target URL with a ready anchor.',
+      'Matching is semantic rather than exact-phrase, so it also catches paragraphs describing the topic in different words. The output is not a list of pages “worth linking” but a pair: a specific fragment of text and a specific target URL with a ready anchor.',
     ],
     whyHeading: 'Why does internal linking matter in AI Search?',
     why: [
@@ -262,7 +262,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
         ['Model verification', 'off by default'],
       ],
     },
-    outputHeading: 'What you get',
+    outputHeading: 'What do you get?',
     output: [
       'A table of suggestions: source page, proposed anchor text, target page and the match score.',
       'Site statistics: pages collecting the most incoming links, and orphaned pages with no internal link pointing at them at all.',

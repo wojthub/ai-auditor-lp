@@ -27,8 +27,8 @@ export const TOOLS_PL: Record<string, ToolData> = {
     ],
     whyHeading: 'Po co klasteryzować frazy?',
     why: [
-      'Bez klasteryzacji powstaje najdroższy błąd w contencie: kilka osobnych tekstów pod frazy, które dla wyszukiwarki znaczą to samo. Strony zaczynają konkurować ze sobą, żadna nie zbiera pełnej siły, a budżet redakcyjny idzie na powielanie tego samego materiału.',
-      'Podobieństwo słów tego nie rozstrzyga - „ubezpieczenie samochodu" i „polisa OC" nie mają wspólnego wyrazu, a wyniki wyszukiwania mają w dużej mierze te same. Odwrotnie, dwie frazy różniące się jednym słowem potrafią mieć rozłączne SERP-y, bo stoi za nimi inna intencja.',
+      'Bez klasteryzacji powstaje najdroższy błąd w treści: kilka osobnych tekstów pod frazy, które dla wyszukiwarki znaczą to samo. Strony zaczynają konkurować ze sobą, żadna nie zbiera pełnej siły, a budżet redakcyjny idzie na powielanie tego samego materiału.',
+      'Podobieństwo słów tego nie rozstrzyga - „ubezpieczenie samochodu” i „polisa OC” nie mają wspólnego wyrazu, a wyniki wyszukiwania mają w dużej mierze te same. Odwrotnie, dwie frazy różniące się jednym słowem potrafią mieć rozłączne SERP-y, bo stoi za nimi inna intencja.',
       'Dlatego grupujemy po nakładaniu się adresów w wynikach: klaster to zbiór fraz, które realnie da się obsłużyć jedną stroną.',
     ],
     stepsHeading: 'Jak działa klasteryzacja?',
@@ -44,7 +44,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
       head: ['Parametr', 'Zakres i domyślna wartość'],
       rows: [
         ['Próg podobieństwa', '0,5-1,0 (domyślnie 0,95) - im wyżej, tym ciaśniejsze klastry'],
-        ['Minimalny rozmiar klastra', '1-20 - frazy poniżej progu trafiają do kubełka „bez klastra"'],
+        ['Minimalny rozmiar klastra', '1-20 - frazy poniżej progu trafiają do kubełka „bez klastra”'],
         ['Liczba wyników SERP', '1-10 - ile pozycji bierzemy pod uwagę przy porównaniu'],
       ],
     },
@@ -65,7 +65,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
     faq: [
       {
         q: 'Czym to się różni od klasteryzacji po podobieństwie słów?',
-        a: 'Kryterium jest inne: liczy się nakładanie wyników wyszukiwania, a nie podobieństwo tekstu. Dzięki temu „ubezpieczenie samochodu" i „polisa OC" mogą trafić do jednego klastra, mimo że nie mają wspólnego słowa - bo Google pokazuje na nie te same strony.',
+        a: 'Kryterium jest inne: liczy się nakładanie wyników wyszukiwania, a nie podobieństwo tekstu. Dzięki temu „ubezpieczenie samochodu” i „polisa OC” mogą trafić do jednego klastra, mimo że nie mają wspólnego słowa - bo Google pokazuje na nie te same strony.',
       },
       {
         q: 'Jaki próg podobieństwa wybrać?',
@@ -184,7 +184,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
       { title: 'Wczytanie sitemapy', desc: 'Ta sama ścieżka co w pruningu: zagnieżdżone sitemapy, odsiew mediów, walidacja adresu przed startem.' },
       { title: 'Pobranie kodu stron', desc: 'Pobieramy HTML każdego adresu - bez uproszczeń, bo dane strukturalne siedzą w znacznikach, które upraszczanie treści usuwa.' },
       { title: 'Ekstrakcja znaczników', desc: 'Wyciągamy zarówno JSON-LD (w tym postać zbiorczą, jakiej używają popularne wtyczki), jak i mikrodane osadzone w HTML. Przy każdym znalezisku widzisz źródło.' },
-      { title: 'Rozpoznanie typu strony', desc: 'Punktowo klasyfikujemy stronę do jednego z 19 profili - od strony głównej i artykułu po ofertę pracy czy stronę kontaktową. Przy zbyt słabych sygnałach zostaje „nieznany", zamiast zgadywać.' },
+      { title: 'Rozpoznanie typu strony', desc: 'Punktowo klasyfikujemy stronę do jednego z 19 profili - od strony głównej i artykułu po ofertę pracy czy stronę kontaktową. Przy zbyt słabych sygnałach zostaje „nieznany”, zamiast zgadywać.' },
       { title: 'Porównanie z katalogiem', desc: 'Dla rozpoznanego profilu sprawdzamy, których z ponad 30 typów schema brakuje, a które są zbędne.' },
       { title: 'Odsiew fałszywych trafień', desc: 'Rekomendacja przepisu bez listy składników czy oferty pracy bez charakterystycznych zwrotów jest odrzucana - lepiej pominąć niż wysłać w kod błędny znacznik.' },
     ],
@@ -210,7 +210,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
         a: 'Tak. Czytamy również zbiorczą postać JSON-LD, w której popularne wtyczki pakują wszystkie znaczniki naraz, oraz mikrodane osadzone bezpośrednio w HTML.',
       },
       {
-        q: 'Dlaczego część stron ma profil „nieznany"?',
+        q: 'Dlaczego część stron ma profil „nieznany”?',
         a: 'Bo sygnały były zbyt słabe, żeby przypisać typ z sensowną pewnością. To celowe: fałszywe rozpoznanie prowadziłoby do rekomendacji wdrożenia znacznika, który tej stronie zaszkodzi.',
       },
     ],
@@ -235,7 +235,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
     defHeading: 'Jak automatycznie znaleźć linki wewnętrzne do dodania?',
     def: [
       'Ręcznie robi się to od strony docelowej: masz nowy tekst i szukasz miejsc, z których warto do niego podlinkować. Automat idzie odwrotnie - przegląda każdy akapit każdej strony i sprawdza, czy istnieje adres, do którego ten akapit merytorycznie pasuje.',
-      'Dopasowanie jest semantyczne, a nie po dokładnym wystąpieniu frazy, więc łapie też akapity opisujące temat innymi słowami. Efektem nie jest lista „warto polinkować", tylko para: konkretny fragment tekstu i konkretny adres docelowy z gotowym anchorem.',
+      'Dopasowanie jest semantyczne, a nie po dokładnym wystąpieniu frazy, więc łapie też akapity opisujące temat innymi słowami. Efektem nie jest lista „warto polinkować”, tylko para: konkretny fragment tekstu i konkretny adres docelowy z gotowym anchorem.',
     ],
     whyHeading: 'Po co linkowanie wewnętrzne w AI Search?',
     why: [

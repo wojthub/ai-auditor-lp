@@ -156,6 +156,10 @@ export default function DimensionPage({ dim, known, all, t }: {
   all: { slug: string; name: string }[];
   t: DimensionStrings;
 }) {
+  // Kotwice sekcji ida z `t.toc` — dzieki temu strona EN ma angielskie #why-it-matters,
+  // a nie polskie #dlaczego. Kolejnosc w `toc` MUSI odpowiadac kolejnosci sekcji nizej.
+  const sectionId = (i: number) => t.toc[i].id;
+
   return (
     <div>
       {/* HERO */}
@@ -215,7 +219,7 @@ export default function DimensionPage({ dim, known, all, t }: {
       </section>
 
       {/* DLACZEGO */}
-      <section id="dlaczego" style={{ background: '#f8fafb', padding: '72px 0' }}>
+      <section id={sectionId(0)} style={{ background: '#f8fafb', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelContext}</SectionLabel>
@@ -226,7 +230,7 @@ export default function DimensionPage({ dim, known, all, t }: {
       </section>
 
       {/* JAK JEST LICZONY */}
-      <section id="jak-liczymy" style={{ background: '#ffffff', padding: '72px 0' }}>
+      <section id={sectionId(1)} style={{ background: '#ffffff', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelMethod}</SectionLabel>
@@ -238,7 +242,7 @@ export default function DimensionPage({ dim, known, all, t }: {
       </section>
 
       {/* CZYNNIKI */}
-      <section id="czynniki" style={{ background: '#f8fafb', padding: '72px 0' }}>
+      <section id={sectionId(2)} style={{ background: '#f8fafb', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelFactors}</SectionLabel>
@@ -270,7 +274,7 @@ export default function DimensionPage({ dim, known, all, t }: {
       </section>
 
       {/* W RAPORCIE */}
-      <section id="raport" style={{ background: '#ffffff', padding: '72px 0' }}>
+      <section id={sectionId(3)} style={{ background: '#ffffff', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelPractice}</SectionLabel>
@@ -281,7 +285,7 @@ export default function DimensionPage({ dim, known, all, t }: {
       </section>
 
       {/* FAQ */}
-      <section id="faq" style={{ background: '#f8fafb', padding: '72px 0' }}>
+      <section id={sectionId(4)} style={{ background: '#f8fafb', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelQuestions}</SectionLabel>

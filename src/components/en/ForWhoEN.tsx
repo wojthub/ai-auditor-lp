@@ -46,7 +46,7 @@ export default function ForWhoEN() {
         {/* Section label */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
           <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
-          <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Who is it for</span>
+          <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Who is it for?</span>
           <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
         </div>
 

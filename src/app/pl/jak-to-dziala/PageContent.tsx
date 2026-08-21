@@ -309,7 +309,7 @@ export default function PageContent() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 18 }}>
               <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Jak to działa</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Jak to działa?</span>
               <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
             </div>
             <h1 style={{

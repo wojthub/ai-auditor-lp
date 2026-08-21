@@ -39,12 +39,12 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Czym jest Central Search Intent i jak CitationOne mierzy zgodność treści z intencją: predykat, poziom wiedzy odbiorcy, pokrycie atrybutów i luki względem Top 10 SERP.',
     lead:
       'Zgodność z CSI sprawdza, czy Twoja treść odpowiada na to pytanie, które użytkownik faktycznie zadał - a nie na sąsiednie. To wymiar nadrzędny: pozostałe mierzą jakość wykonania, ten mierzy, czy w ogóle piszesz o właściwej rzeczy.',
-    chips: ['Skala 1-10', 'Ocena modelem językowym', 'Wejście: treść + CSI + benchmark Top 10 SERP'],
+    chips: ['Skala 0-10', 'Ocena modelem językowym', 'Wejście: treść + CSI + benchmark Top 10 SERP'],
     whyHeading: 'Dlaczego zgodność z CSI jest ważna dla modeli AI?',
     howHeading: 'Jak liczymy zgodność z CSI?',
     why: [
       'Central Search Intent to rozłożone na części zapytanie: główna encja (o czym jest zapytanie), jej kontekst, konkretna rzecz, której użytkownik chce się dowiedzieć, oraz predykat - typ działania, jaki za tym stoi: informacyjny, komercyjny, transakcyjny, operacyjny, nawigacyjny lub lokalny.',
-      'Modele AI nie cytują stron, które mijają się z intencją, nawet jeśli zawierają słowo kluczowe i są napisane bez zarzutu. Klasyczny rozjazd: zapytanie jest komercyjne („X czy Y - co wybrać"), a strona to recenzja samego X. Drugi typowy błąd to rozjazd poziomu: intencja należy do kogoś, kto dopiero zaczyna, a tekst od pierwszego akapitu zakłada wiedzę eksperta.',
+      'Modele AI nie cytują stron, które mijają się z intencją, nawet jeśli zawierają słowo kluczowe i są napisane bez zarzutu. Klasyczny rozjazd: zapytanie jest komercyjne („X czy Y - co wybrać”), a strona to recenzja samego X. Drugi typowy błąd to rozjazd poziomu: intencja należy do kogoś, kto dopiero zaczyna, a tekst od pierwszego akapitu zakłada wiedzę eksperta.',
       'Ten wymiar jest fundamentem audytu również technicznie - CSI trafia do wszystkich pozostałych wymiarów jako punkt odniesienia. Źle rozpoznana intencja przesuwa cały wynik.',
     ],
     how: {
@@ -55,7 +55,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
         {
           head: ['Obszar', 'Co jest sprawdzane'],
           rows: [
-            ['Realizacja predykatu', 'Czy treść robi to, czego oczekuje intencja: porównuje, instruuje, sprzedaje, definiuje. Wykrywa rozjazd typu „CSI komercyjne, treść informacyjna".'],
+            ['Realizacja predykatu', 'Czy treść robi to, czego oczekuje intencja: porównuje, instruuje, sprzedaje, definiuje. Wykrywa rozjazd typu „CSI komercyjne, treść informacyjna”.'],
             ['Założenie wiedzy', 'Czy poziom wywodu odpowiada odbiorcy intencji - tekst ekspercki pod zapytanie początkującego to realna strata.'],
             ['Pokrycie atrybutów', 'Ile cech tematu, których oczekuje intencja i pokazuje konkurencja, faktycznie omawiasz.'],
             ['Umiejscowienie atrybutów', 'Wyróżnik ma być w H1 lub leadzie, atrybut podstawowy w dedykowanej sekcji H2, atrybut niszowy w H3 lub FAQ.'],
@@ -75,7 +75,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       ],
     },
     raises: [
-      'Treść realizuje predykat intencji, a nie sąsiedni („porównanie" to zestawienie, nie recenzja jednej opcji)',
+      'Treść realizuje predykat intencji, a nie sąsiedni („porównanie” to zestawienie, nie recenzja jednej opcji)',
       'Poziom wywodu dopasowany do odbiorcy zapytania',
       'Atrybuty podstawowe kategorii mają własne sekcje H2',
       'Twój wyróżnik widoczny w H1 lub leadzie, nie w ostatnim akapicie',
@@ -123,11 +123,11 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Trójki Encja-Atrybut-Wartość, czyli jak modele AI czytają fakty ze strony. Jak CitationOne buduje graf wiedzy, klasyfikuje atrybuty i porównuje pokrycie z Top 10 SERP.',
     lead:
       'Graf wiedzy rozkłada treść na trójki Encja - Atrybut - Wartość: o czym piszesz, jaką cechę tej rzeczy opisujesz i co konkretnie o niej mówisz. Wymiar sprawdza, ile Twoich zdań daje się rozłożyć na takie fakty, a ile zostaje samym opisem.',
-    chips: ['Skala 1-10', 'Model językowy + sygnały algorytmiczne', 'Wejście: treść + benchmark Top 10 SERP'],
+    chips: ['Skala 0-10', 'Model językowy + sygnały algorytmiczne', 'Wejście: treść + benchmark Top 10 SERP'],
     whyHeading: 'Dlaczego graf wiedzy jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy graf wiedzy?',
     why: [
-      'Wyszukiwarki od lat nie operują na słowach kluczowych, tylko na encjach i faktach o nich - trójka Encja-Atrybut-Wartość to podstawowa struktura każdego grafu wiedzy. „Kredyt hipoteczny" to encja, „oprocentowanie" to jej atrybut, „7,2%" to wartość. Dopiero komplet stanowi fakt, który da się zapamiętać, zestawić z innym źródłem i zacytować.',
+      'Wyszukiwarki od lat nie operują na słowach kluczowych, tylko na encjach i faktach o nich - trójka Encja-Atrybut-Wartość to podstawowa struktura każdego grafu wiedzy. „Kredyt hipoteczny” to encja, „oprocentowanie” to jej atrybut, „7,2%” to wartość. Dopiero komplet stanowi fakt, który da się zapamiętać, zestawić z innym źródłem i zacytować.',
       'W GEO ma to bezpośrednie przełożenie: model buduje odpowiedź z faktów, nie z akapitów. Strona, która wymienia encje, ale nie podaje ich atrybutów i wartości, jest dla niego tekstem bez treści - można ją streścić, ale nie ma z niej czego zacytować. Odwrotnie: gęsty, spójny graf sprawia, że model rozpoznaje stronę jako źródło wiedzy w danej dziedzinie.',
     ],
     how: {
@@ -139,9 +139,9 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
           caption: 'Z czego składa się jeden fakt',
           head: ['Element', 'Pytanie, na które odpowiada'],
           rows: [
-            ['Encja', 'O czym mówisz? - „kredyt hipoteczny", „panel fotowoltaiczny"'],
-            ['Atrybut', 'Jaką cechę opisujesz? - „oprocentowanie", „sprawność"'],
-            ['Wartość', 'Co konkretnie o niej mówisz? - „7,2%", „21,3%"'],
+            ['Encja', 'O czym mówisz? - „kredyt hipoteczny”, „panel fotowoltaiczny”'],
+            ['Atrybut', 'Jaką cechę opisujesz? - „oprocentowanie”, „sprawność”'],
+            ['Wartość', 'Co konkretnie o niej mówisz? - „7,2%”, „21,3%”'],
           ],
         },
         {
@@ -163,8 +163,8 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Fakty rozłożone po sekcjach tematycznych, a nie stłoczone w jednej tabeli',
     ],
     lowers: [
-      'Encje wymienione bez atrybutów („oferujemy kredyty hipoteczne" i nic więcej)',
-      'Atrybuty bez wartości („korzystne oprocentowanie" zamiast „7,2%")',
+      'Encje wymienione bez atrybutów („oferujemy kredyty hipoteczne” i nic więcej)',
+      'Atrybuty bez wartości („korzystne oprocentowanie” zamiast „7,2%”)',
       'Brak atrybutu, który u konkurencji jest standardem',
       'Fakty sprzeczne wewnętrznie - dwie różne ceny tej samej rzeczy',
       'Graf zbudowany z elementów szablonu zamiast z treści merytorycznej',
@@ -186,11 +186,11 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     faq: [
       {
         q: 'Czym pytania poboczne różnią się od fraz z długiego ogona?',
-        a: 'Długi ogon to warianty tego samego zapytania, a pytania poboczne to osobne wątki, które model musi rozstrzygnąć, żeby zbudować odpowiedź. „Tania pompa ciepła" to długi ogon; „czy pompa ciepła działa przy minus 20 stopniach" to pytanie poboczne.',
+        a: 'Długi ogon to warianty tego samego zapytania, a pytania poboczne to osobne wątki, które model musi rozstrzygnąć, żeby zbudować odpowiedź. „Tania pompa ciepła” to długi ogon; „czy pompa ciepła działa przy minus 20 stopniach” to pytanie poboczne.',
       },
       {
         q: 'Czy muszę odpowiedzieć na wszystkie?',
-        a: 'Nie, priorytet mają te potwierdzone przez wyszukiwarkę. Pytanie, które Google sam pokazuje w „Podobnych pytaniach", jest pewną luką; pytanie przewidziane przez model to hipoteza i waży mniej.',
+        a: 'Nie, priorytet mają te potwierdzone przez wyszukiwarkę. Pytanie, które Google sam pokazuje w „Podobnych pytaniach”, jest pewną luką; pytanie przewidziane przez model to hipoteza i waży mniej.',
       },
       {
         q: 'Czy sekcja FAQ załatwia sprawę?',
@@ -204,18 +204,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Jak silniki AI rozbijają jedno pytanie na kilkanaście sub-zapytań i jak CitationOne mierzy, ile z nich pokrywa Twoja treść - z danymi z AI Overview i pytań z SERP.',
     lead:
       'Fan-Out to rozbicie jednego zapytania na kilkanaście pytań pobocznych, które silnik AI rozwiązuje w tle, zanim ułoży odpowiedź. Ten wymiar mierzy, na ile z nich odpowiada Twoja strona - bo cytowanie zdobywa się na pytaniach pobocznych, nie na głównym.',
-    chips: ['Skala 1-10', 'Dwa przebiegi modelu + dane z SERP', 'Wejście: CSI + pytania z SERP + AI Overview'],
+    chips: ['Skala 0-10', 'Dwa przebiegi modelu + dane z SERP', 'Wejście: CSI + pytania z SERP + AI Overview'],
     whyHeading: 'Dlaczego pokrycie Fan-Out jest ważne dla modeli AI?',
     howHeading: 'Jak liczymy pokrycie Fan-Out i AIO?',
     why: [
-      'Użytkownik pyta „jak wybrać pompę ciepła", a model nie szuka tej frazy. Rozkłada ją na pytania składowe: jaka moc do jakiego metrażu, ile kosztuje montaż, jaka jest sprawność przy mrozie, czy potrzebne jest pozwolenie. Każde z nich pobiera osobno i dopiero z odpowiedzi składa jedną wypowiedź.',
+      'Użytkownik pyta „jak wybrać pompę ciepła”, a model nie szuka tej frazy. Rozkłada ją na pytania składowe: jaka moc do jakiego metrażu, ile kosztuje montaż, jaka jest sprawność przy mrozie, czy potrzebne jest pozwolenie. Każde z nich pobiera osobno i dopiero z odpowiedzi składa jedną wypowiedź.',
       'Stąd bierze się różnica między SEO a GEO. W klasycznym wyszukiwaniu wystarczyło wygrać jedno zapytanie, żeby zdobyć kliknięcie. W AI Search wygrywasz tyle razy, na ile pytań pobocznych masz gotową odpowiedź - strona, która wyczerpuje temat tylko w głównym wątku, zostanie zacytowana raz albo wcale, mimo świetnej pozycji w SERP.',
       'To działa też w drugą stronę: pytania poboczne są tańsze do zdobycia niż główna fraza. Konkurencja walczy o nagłówek, a luka najczęściej siedzi w pytaniu, którego nikt nie opisał.',
     ],
     how: {
       intro: [
-        'Na podstawie intencji strony model rozkłada zapytanie na kilkanaście sub-zapytań, a robi to w dwóch niezależnych przebiegach o różnej „śmiałości" i scala wyniki - jeden przebieg zbyt mocno zależy od losowości modelu. Do tego dokładamy prawdziwe pytania z SERP: sekcję „Podobne pytania" i powiązane wyszukiwania. Na koniec sprawdzamy, na które z tych pytań Twoja treść faktycznie odpowiada.',
-        'Zestaw jest oczyszczany z homonimów - jeśli fraza ma drugie znaczenie (klasyczny przypadek: „schody" jako konstrukcja i jako tytuł serialu), pytania z tej drugiej dziedziny są odrzucane, zamiast produkować rekomendacje o niczym.',
+        'Na podstawie intencji strony model rozkłada zapytanie na kilkanaście sub-zapytań, a robi to w dwóch niezależnych przebiegach o różnej „śmiałości” i scala wyniki - jeden przebieg zbyt mocno zależy od losowości modelu. Do tego dokładamy prawdziwe pytania z SERP: sekcję „Podobne pytania” i powiązane wyszukiwania. Na koniec sprawdzamy, na które z tych pytań Twoja treść faktycznie odpowiada.',
+        'Zestaw jest oczyszczany z homonimów - jeśli fraza ma drugie znaczenie (klasyczny przypadek: „schody” jako konstrukcja i jako tytuł serialu), pytania z tej drugiej dziedziny są odrzucane, zamiast produkować rekomendacje o niczym.',
         'Ocena idzie w górę za komplet odpowiedzi na pytania weryfikacyjne, a w dół za każde niepokryte pytanie, którego istnienie potwierdza SERP.',
       ],
       tables: [
@@ -232,7 +232,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
           caption: 'Nie każde pytanie waży tyle samo - liczy się to, czy dane wyszukiwarki potwierdzają jego istnienie',
           head: ['Status pytania', 'Co oznacza'],
           rows: [
-            ['Potwierdzone przez SERP', 'Google sam pokazuje je w „Podobnych pytaniach" - to nie jest hipoteza, tylko realne zapytanie'],
+            ['Potwierdzone przez SERP', 'Google sam pokazuje je w „Podobnych pytaniach” - to nie jest hipoteza, tylko realne zapytanie'],
             ['Obecne w AI Overview', 'Wątek pojawia się w syntezie AI dla tej frazy'],
             ['Przewidziane przez model', 'Wynika z intencji, ale nie ma potwierdzenia w danych SERP'],
             ['Potwierdzona luka', 'Pytanie jest w SERP, a Twoja treść go nie porusza - to obniża ocenę wymiaru'],
@@ -242,7 +242,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     },
     raises: [
       'Sekcje H2 odpowiadające na konkretne pytania poboczne, nie na warianty głównej frazy',
-      'Pokryte pytania z sekcji „Podobne pytania" w SERP',
+      'Pokryte pytania z sekcji „Podobne pytania” w SERP',
       'Odpowiedzi na pytania weryfikacyjne - liczby, daty, warunki, które model musi potwierdzić',
       'FAQ zbudowane z realnych pytań, a nie z fraz pod wyszukiwarkę',
       'Wyczerpanie wątków pobocznych, których konkurencja nie tknęła',
@@ -274,7 +274,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       },
       {
         q: 'Co zrobić, jeśli nie mam twardych danych?',
-        a: 'Użyj zakresów, proporcji i porównań. „3-5 dni roboczych", „1 na 4 zgłoszenia", „dwa razy więcej niż średnia" liczą się jako konkret, bo są sprawdzalne. Bezwartościowe są dopiero określenia, których nie da się zweryfikować.',
+        a: 'Użyj zakresów, proporcji i porównań. „3-5 dni roboczych”, „1 na 4 zgłoszenia”, „dwa razy więcej niż średnia” liczą się jako konkret, bo są sprawdzalne. Bezwartościowe są dopiero określenia, których nie da się zweryfikować.',
       },
       {
         q: 'Czy wynik zależy od tego, co uzna model?',
@@ -293,11 +293,11 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Stosunek zdań z faktem do zdań wypełniających. Jak CitationOne liczy gęstość informacji, jakie sygnały ją podnoszą i obniżają oraz jak zamienić ogólniki na konkrety.',
     lead:
       'Gęstość informacji to udział zdań niosących weryfikowalny fakt w całości tekstu. Nie chodzi o długość ani o styl - chodzi o to, ile zdań zostałoby, gdyby usunąć wszystko, czego nie da się sprawdzić.',
-    chips: ['Skala 1-10', 'Wyliczenie algorytmiczne + przykłady od modelu', 'Wejście: treść'],
+    chips: ['Skala 0-10', 'Wyliczenie algorytmiczne + przykłady od modelu', 'Wejście: treść'],
     whyHeading: 'Dlaczego gęstość informacji jest ważna dla modeli AI?',
     howHeading: 'Jak liczymy gęstość informacji?',
     why: [
-      'Model odpowiadający użytkownikowi ma ograniczone miejsce na cytat. Wybierze fragment, w którym na jedno zdanie przypada najwięcej sprawdzalnej treści - liczba, data, jednostka, nazwa własna. Akapit zbudowany z „wielu firm", „nowoczesnych rozwiązań" i „szerokiego doświadczenia" nie daje się zacytować, bo nie ma w nim twierdzenia, które można potwierdzić lub obalić.',
+      'Model odpowiadający użytkownikowi ma ograniczone miejsce na cytat. Wybierze fragment, w którym na jedno zdanie przypada najwięcej sprawdzalnej treści - liczba, data, jednostka, nazwa własna. Akapit zbudowany z „wielu firm”, „nowoczesnych rozwiązań” i „szerokiego doświadczenia” nie daje się zacytować, bo nie ma w nim twierdzenia, które można potwierdzić lub obalić.',
       'To odwrócenie starego odruchu SEO. Kiedyś objętość pomagała - dłuższy tekst rankował lepiej, więc opłacało się rozciągać akapity. W GEO liczy się odwrotna proporcja: rozwodnienie faktów obniża szansę na cytowanie, nawet jeśli fakty w tekście są. Ten sam materiał zapisany o połowę krócej wypada lepiej.',
     ],
     how: {
@@ -311,12 +311,12 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
           head: ['Sygnał w zdaniu', 'Wpływ'],
           rows: [
             ['Konkretna liczba, kwota, data', 'w górę'],
-            ['Wartość przypisana cesze („sprawność 21,3%")', 'w górę'],
+            ['Wartość przypisana cesze („sprawność 21,3%”)', 'w górę'],
             ['Pojedyncze, sprawdzalne twierdzenie', 'w górę'],
             ['Nazwa własna, marka, norma, instytucja', 'lekko w górę'],
-            ['Pusta fraza („warto wiedzieć", „w dzisiejszych czasach")', 'mocno w dół'],
-            ['Słowo modalne („może", „zwykle", „raczej")', 'w dół'],
-            ['Przymiotnik oceniający bez pokrycia („najlepszy", „skuteczny")', 'w dół'],
+            ['Pusta fraza („warto wiedzieć”, „w dzisiejszych czasach”)', 'mocno w dół'],
+            ['Słowo modalne („może”, „zwykle”, „raczej”)', 'w dół'],
+            ['Przymiotnik oceniający bez pokrycia („najlepszy”, „skuteczny”)', 'w dół'],
             ['Pytanie retoryczne', 'w dół'],
           ],
         },
@@ -331,8 +331,8 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     ],
     lowers: [
       'Akapity wprowadzające bez ani jednego sprawdzalnego twierdzenia',
-      'Frazy wypełniające: „warto wiedzieć", „w dzisiejszych czasach", „jak wiadomo"',
-      'Asekuracja: „może", „zwykle", „raczej", „w pewnym sensie"',
+      'Frazy wypełniające: „warto wiedzieć”, „w dzisiejszych czasach”, „jak wiadomo”',
+      'Asekuracja: „może”, „zwykle”, „raczej”, „w pewnym sensie”',
       'Przymiotniki oceniające bez danych za nimi',
       'Pytania retoryczne zamiast odpowiedzi',
     ],
@@ -340,14 +340,14 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       caption: 'Najszybsza poprawa to wymiana ogólników na dane - to samo zdanie, inna gęstość',
       head: ['Zamiast', 'Napisz'],
       rows: [
-        ['„wiele osób"', '„67% badanych"'],
-        ['„drogi w utrzymaniu"', '„od 1200 zł miesięcznie"'],
-        ['„nowoczesna technologia"', 'nazwa technologii i rok wdrożenia'],
-        ['„znacznie wydajniejszy"', '„o 18% wydajniejszy od modelu X"'],
+        ['„wiele osób”', '„67% badanych”'],
+        ['„drogi w utrzymaniu”', '„od 1200 zł miesięcznie”'],
+        ['„nowoczesna technologia”', 'nazwa technologii i rok wdrożenia'],
+        ['„znacznie wydajniejszy”', '„o 18% wydajniejszy od modelu X”'],
       ],
     },
     swapNote:
-      'Jeśli twardych danych nie masz, działają zakresy, proporcje i porównania - „3-5 dni", „1 na 4 zgłoszenia", „dwa razy więcej niż średnia".',
+      'Jeśli twardych danych nie masz, działają zakresy, proporcje i porównania - „3-5 dni”, „1 na 4 zgłoszenia”, „dwa razy więcej niż średnia”.',
     report: [
       'Dostajesz udział zdań faktycznych w treści wraz z oceną, a do tego dwie listy wyciągnięte z Twojego tekstu: zdania uznane za fakty i zdania uznane za wypełnienie. To nie są przykłady ogólne, tylko Twoje własne zdania - widzisz dokładnie, które akapity ciągną wynik w dół.',
       'Rekomendacje idą w formacie Przed / Po, z propozycją konkretnego przepisania zdania.',
@@ -367,7 +367,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
         a: 'Nie, długość ma być dopasowana do typu treści. Hasło encyklopedyczne może mieć sekcje po 1500 słów, odpowiedź w FAQ - 50. Sztuczne cięcie artykułu na kawałki po 100 słów obniża wynik tak samo jak ściana tekstu.',
       },
       {
-        q: 'Czy odwołania w rodzaju „jak wspomniano wyżej" naprawdę szkodzą?',
+        q: 'Czy odwołania w rodzaju „jak wspomniano wyżej” naprawdę szkodzą?',
         a: 'Tak, i to konkretnie. Sekcja trafia do modelu bez sąsiednich fragmentów, więc odwołanie wskazuje na coś, czego w danym momencie nie ma. Taki fragment przestaje nadawać się do zacytowania, nawet jeśli merytorycznie jest najlepszy na stronie.',
       },
       {
@@ -387,17 +387,17 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Silniki AI tną stronę na fragmenty i oceniają każdy osobno. Jak CitationOne mierzy autonomiczność sekcji, długość chunków per typ treści i cytowalność fragmentów.',
     lead:
       'Chunk to fragment strony, który silnik AI pobiera i ocenia w oderwaniu od reszty - najczęściej pojedyncza sekcja H2 lub H3. Ten wymiar sprawdza, czy Twoje sekcje bronią się samodzielnie, czy rozumie je dopiero ktoś, kto przeczytał całość.',
-    chips: ['Skala 1-10', 'Model językowy + sygnały algorytmiczne', 'Wejście: treść + CSI + profil typu treści'],
+    chips: ['Skala 0-10', 'Model językowy + sygnały algorytmiczne', 'Wejście: treść + CSI + profil typu treści'],
     whyHeading: 'Dlaczego optymalizacja chunków jest ważna dla modeli AI?',
     howHeading: 'Jak liczymy optymalizację chunków?',
     why: [
       'Wyszukiwarka generatywna nie wczytuje całej strony do odpowiedzi. Indeksuje ją pociętą na fragmenty i przy pytaniu użytkownika pobiera te, które wyglądają na najtrafniejsze. Twój fragment trafia do modelu bez tytułu artykułu, bez poprzedniej sekcji i bez wprowadzenia.',
-      'Dlatego zdanie „jak wspomniano wyżej, ten parametr jest kluczowy" jest w GEO stratą - poza kontekstem nie znaczy nic i nie da się go zacytować. To samo dotyczy sekcji, która nigdy nie powtarza tematu, o którym mówi, bo posługuje się zaimkiem odsyłającym do nagłówka sprzed dwóch ekranów.',
+      'Dlatego zdanie „jak wspomniano wyżej, ten parametr jest kluczowy” jest w GEO stratą - poza kontekstem nie znaczy nic i nie da się go zacytować. To samo dotyczy sekcji, która nigdy nie powtarza tematu, o którym mówi, bo posługuje się zaimkiem odsyłającym do nagłówka sprzed dwóch ekranów.',
       'Odwrotnie: sekcja napisana jak samodzielna odpowiedź może zostać zacytowana nawet wtedy, gdy reszta strony jest przeciętna. Chunk jest jednostką konkurowania w AI Search - nie strona.',
     ],
     how: {
       intro: [
-        'Model sprawdza każdą sekcję osobno pod kątem czterech rzeczy: czy zaczyna się od odpowiedzi, czy powtarza główny temat co najmniej dwa razy, czy nie odsyła do innych fragmentów („powyżej", „jak już pisaliśmy") i czy ma długość adekwatną do typu treści.',
+        'Model sprawdza każdą sekcję osobno pod kątem czterech rzeczy: czy zaczyna się od odpowiedzi, czy powtarza główny temat co najmniej dwa razy, czy nie odsyła do innych fragmentów („powyżej”, „jak już pisaliśmy”) i czy ma długość adekwatną do typu treści.',
         'Ostatnie kryterium nie jest jednym progiem dla wszystkiego - sekcja FAQ ma być krótka, hasło encyklopedyczne może być długie:',
       ],
       tables: [
@@ -423,9 +423,9 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Fakty i liczby wewnątrz sekcji, nie w osobnym podsumowaniu na końcu strony',
     ],
     lowers: [
-      'Odwołania w rodzaju „powyżej", „jak już wspominaliśmy", „w poprzedniej części"',
-      'Sekcja otwarta pytaniem retorycznym albo spójnikiem („Jednak", „Natomiast")',
-      'Otwarcie zaimkiem bez wskazania, do czego się odnosi („To oznacza, że...")',
+      'Odwołania w rodzaju „powyżej”, „jak już wspominaliśmy”, „w poprzedniej części”',
+      'Sekcja otwarta pytaniem retorycznym albo spójnikiem („Jednak”, „Natomiast”)',
+      'Otwarcie zaimkiem bez wskazania, do czego się odnosi („To oznacza, że...”)',
       'Ściana tekstu bez podziału na sekcje',
       'Sekcje po 30 słów w artykule albo po 900 w FAQ',
     ],
@@ -464,7 +464,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Ile wysiłku kosztuje wyciągnięcie odpowiedzi z Twojej strony. Punktowana checklista struktury: hierarchia nagłówków, tabele, listy, wyróżnienia, podsumowanie.',
     lead:
       'Koszt pozyskania mierzy, ile pracy trzeba wykonać, żeby wyjąć ze strony konkretną odpowiedź. Im czytelniejsza struktura - hierarchia nagłówków, tabele, listy, wyróżnienia - tym koszt niższy, a ocena wyższa.',
-    chips: ['Skala 1-10', 'Punktowana checklista struktury', 'Wejście: treść + struktura HTML'],
+    chips: ['Skala 0-10', 'Punktowana checklista struktury', 'Wejście: treść + struktura HTML'],
     whyHeading: 'Dlaczego koszt pozyskania jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy koszt pozyskania?',
     why: [
@@ -540,11 +540,11 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Porównanie terminologii Twojej strony z korpusem Top 10 SERP. Jak CitationOne znajduje brakujące terminy specjalistyczne i podpowiada kontekst, w jakim ich użyć.',
     lead:
       'TF-IDF porównuje słownictwo Twojej treści ze słownictwem konkurencji z Top 10. Interesują nas terminy rzadkie i specjalistyczne - to one świadczą o znajomości tematu, a nie słowa, które padają wszędzie.',
-    chips: ['Skala 1-10', 'Analiza statystyczna + model językowy', 'Wejście: treść + korpus Top 10 SERP'],
+    chips: ['Skala 0-10', 'Analiza statystyczna + model językowy', 'Wejście: treść + korpus Top 10 SERP'],
     whyHeading: 'Dlaczego TF-IDF jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy TF-IDF?',
     why: [
-      'Terminologia jest najtańszym dowodem kompetencji. Tekst o kredycie hipotecznym, w którym nie pada „wskaźnik LTV", „zdolność kredytowa" ani „marża banku", opisuje temat z zewnątrz - i tak właśnie wygląda dla modelu porównującego go z dziesięcioma stronami, które tych pojęć używają.',
+      'Terminologia jest najtańszym dowodem kompetencji. Tekst o kredycie hipotecznym, w którym nie pada „wskaźnik LTV”, „zdolność kredytowa” ani „marża banku”, opisuje temat z zewnątrz - i tak właśnie wygląda dla modelu porównującego go z dziesięcioma stronami, które tych pojęć używają.',
       'W GEO ma to dodatkowe znaczenie, bo brakujący termin to zwykle brakujący wątek. Jeśli dziewięciu konkurentów pisze o czymś, czego u Ciebie nie ma, to nie jest kwestia stylu - to luka merytoryczna, którą model zobaczy przy składaniu odpowiedzi.',
     ],
     how: {
@@ -569,17 +569,17 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Pojęcia branżowe użyte w wyjaśnieniu, a nie tylko wymienione',
       'Frazy wielowyrazowe, którymi posługuje się branża, a nie ich potoczne odpowiedniki',
       'Terminy obecne u większości konkurentów z Top 10',
-      'Termin użyty w kontekście, w którym łączy go konkurencja - „kortyzol" obok „podwyższony", nie w oderwaniu',
+      'Termin użyty w kontekście, w którym łączy go konkurencja - „kortyzol” obok „podwyższony”, nie w oderwaniu',
     ],
     lowers: [
       'Opis tematu językiem ogólnym, z pominięciem nazw własnych zjawisk',
       'Brak pojęć, które są standardem u konkurencji',
       'Terminy wrzucone listą na końcu tekstu, bez wyjaśnienia',
-      'Zastępowanie terminu opisem („taki wskaźnik, który pokazuje...") zamiast nazwania go',
+      'Zastępowanie terminu opisem („taki wskaźnik, który pokazuje...”) zamiast nazwania go',
     ],
     report: [
       'Dostajesz listę brakujących terminów uszeregowaną według tego, ilu konkurentów ich używa i jak mocno wiążą się z tematem strony.',
-      'Przy terminach, które u konkurencji występują w stałym towarzystwie innego pojęcia, podpowiadamy ten kontekst - rekomendacja brzmi wtedy „dodaj termin X w kontekście Y, tak łączy je 6 z 10 konkurentów", a nie samo „dodaj X".',
+      'Przy terminach, które u konkurencji występują w stałym towarzystwie innego pojęcia, podpowiadamy ten kontekst - rekomendacja brzmi wtedy „dodaj termin X w kontekście Y, tak łączy je 6 z 10 konkurentów”, a nie samo „dodaj X”.',
     ],
     related: [
       { slug: 'graf-wiedzy', name: 'Graf wiedzy', desc: 'Czy pojęcia układają się w kompletne fakty.' },
@@ -593,11 +593,11 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     faq: [
       {
         q: 'Czy strona bierna jest zawsze błędem?',
-        a: 'Nie, problemem jest dopiero pominięcie wykonawcy. „Decyzję podejmuje bank" jest w porządku; „decyzja jest podejmowana" zostawia model bez informacji, kto ją podejmuje.',
+        a: 'Nie, problemem jest dopiero pominięcie wykonawcy. „Decyzję podejmuje bank” jest w porządku; „decyzja jest podejmowana” zostawia model bez informacji, kto ją podejmuje.',
       },
       {
         q: 'Co, jeśli tematem strony jest usługa, a nie firma?',
-        a: 'Wtedy wykonawcą bywa sama usługa albo produkt: „ubezpieczenie pokrywa koszty leczenia", „pompa ciepła obniża rachunek o 40%". Chodzi o jednoznaczną rolę głównego tematu, nie o to, żeby wszędzie wpisać nazwę firmy.',
+        a: 'Wtedy wykonawcą bywa sama usługa albo produkt: „ubezpieczenie pokrywa koszty leczenia”, „pompa ciepła obniża rachunek o 40%”. Chodzi o jednoznaczną rolę głównego tematu, nie o to, żeby wszędzie wpisać nazwę firmy.',
       },
       {
         q: 'Jak szybko da się to poprawić?',
@@ -615,13 +615,13 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Czy główny temat strony jest wykonawcą czynności, czy tylko jej przedmiotem. Jak CitationOne mierzy role semantyczne i dlaczego strona bierna szkodzi w AI Search.',
     lead:
-      'Role semantyczne sprawdzają, kim jest główny temat w Twoich zdaniach: wykonawcą czynności czy jej przedmiotem. „Bank udziela kredytu" i „kredyt jest udzielany" niosą ten sam fakt, ale tylko pierwsze zdanie jednoznacznie wskazuje, kto go wykonuje.',
-    chips: ['Skala 1-10', 'Ocena modelem językowym', 'Wejście: treść + główna encja z CSI'],
+      'Role semantyczne sprawdzają, kim jest główny temat w Twoich zdaniach: wykonawcą czynności czy jej przedmiotem. „Bank udziela kredytu” i „kredyt jest udzielany” niosą ten sam fakt, ale tylko pierwsze zdanie jednoznacznie wskazuje, kto go wykonuje.',
+    chips: ['Skala 0-10', 'Ocena modelem językowym', 'Wejście: treść + główna encja z CSI'],
     whyHeading: 'Dlaczego role semantyczne są ważne dla modeli AI?',
     howHeading: 'Jak liczymy role semantyczne?',
     why: [
-      'Model wyciąga z tekstu fakty w postaci „kto - co robi - z czym". Zdanie w stronie biernej z pominiętym wykonawcą zostawia w tej strukturze dziurę, którą model musi zgadywać albo pominąć. Zdanie w stronie czynnej daje komplet i nadaje się do zacytowania bez przeróbek.',
-      'Drugi efekt jest widocznościowy. Jeśli główny temat strony konsekwentnie występuje jako wykonawca, model wiąże z nim atrybuty i działania - strona zaczyna być „o czymś" w sensie encji, a nie tylko zawierać słowa na ten temat. Rozmyta perspektywa daje rozmyte powiązania.',
+      'Model wyciąga z tekstu fakty w postaci „kto - co robi - z czym”. Zdanie w stronie biernej z pominiętym wykonawcą zostawia w tej strukturze dziurę, którą model musi zgadywać albo pominąć. Zdanie w stronie czynnej daje komplet i nadaje się do zacytowania bez przeróbek.',
+      'Drugi efekt dotyczy widoczności. Jeśli główny temat strony konsekwentnie występuje jako wykonawca, model wiąże z nim atrybuty i działania - strona zaczyna być „o czymś” w sensie encji, a nie tylko zawierać słowa na ten temat. Rozmyta perspektywa daje rozmyte powiązania.',
     ],
     how: {
       intro: [
@@ -633,8 +633,8 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
           caption: 'Jak liczy się rola w zdaniu',
           head: ['Rola głównej encji', 'Wartość'],
           rows: [
-            ['Wykonawca czynności („Bank udziela kredytu")', 'pełna'],
-            ['Przedmiot czynności („Kredyt jest udzielany przez bank")', 'połowiczna'],
+            ['Wykonawca czynności („Bank udziela kredytu”)', 'pełna'],
+            ['Przedmiot czynności („Kredyt jest udzielany przez bank”)', 'połowiczna'],
             ['Nieobecna w zdaniu', 'zerowa'],
           ],
         },
@@ -643,12 +643,12 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     raises: [
       'Strona czynna z jawnym wykonawcą',
       'Główny temat nazwany wprost zamiast zastąpiony zaimkiem',
-      'Czasowniki konkretne („obniża", „skraca") zamiast konstrukcji z „jest"',
+      'Czasowniki konkretne („obniża”, „skraca”) zamiast konstrukcji z „jest”',
       'Spójna perspektywa w całym tekście - ten sam bohater zdań',
     ],
     lowers: [
-      'Strona bierna z pominiętym wykonawcą („zostało wdrożone", „jest stosowany")',
-      'Zdania bezpodmiotowe („należy pamiętać", „warto rozważyć")',
+      'Strona bierna z pominiętym wykonawcą („zostało wdrożone”, „jest stosowany”)',
+      'Zdania bezpodmiotowe („należy pamiętać”, „warto rozważyć”)',
       'Zastępowanie tematu zaimkiem przez całe akapity',
       'Zmienny bohater - raz produkt, raz klient, raz firma, bez uzasadnienia',
     ],
@@ -656,9 +656,9 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       caption: 'Najczęstsza poprawka to zamiana strony biernej na czynną',
       head: ['Zamiast', 'Napisz'],
       rows: [
-        ['„Kredyt jest udzielany na 30 lat"', '„Bank udziela kredytu na 30 lat"'],
-        ['„Panel został zamontowany"', '„Ekipa montuje panel w jeden dzień"'],
-        ['„Należy pamiętać o przeglądzie"', '„Pompa ciepła wymaga przeglądu raz w roku"'],
+        ['„Kredyt jest udzielany na 30 lat”', '„Bank udziela kredytu na 30 lat”'],
+        ['„Panel został zamontowany”', '„Ekipa montuje panel w jeden dzień”'],
+        ['„Należy pamiętać o przeglądzie”', '„Pompa ciepła wymaga przeglądu raz w roku”'],
       ],
     },
     report: [
@@ -695,7 +695,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Algorytmiczna checklista kompletności strony: długość względem konkurencji, obrazy, wideo, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji.',
     lead:
       'Effort Score mierzy wysiłek włożony w stronę: czy ma to, co ma porządnie zrobiona treść w tym temacie - odpowiednią długość, materiały wizualne, tabele, listy, czytelną hierarchię i widoczną datę. Liczy go wyłącznie algorytm, bez udziału modelu językowego.',
-    chips: ['Skala 1-10', 'W 100% algorytmiczny - zero wywołań modelu', 'Wejście: treść + struktura HTML + średnia Top 10'],
+    chips: ['Skala 0-10', 'W 100% algorytmiczny - zero wywołań modelu', 'Wejście: treść + struktura HTML + średnia Top 10'],
     whyHeading: 'Dlaczego Effort Score jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy Effort Score?',
     why: [
@@ -761,7 +761,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
         a: 'Nie w sensie pojedynczego parametru. To zestaw kryteriów jakości, którymi Google opisuje dobrą treść, a modele generatywne kierują się tym samym przy wyborze źródła. My mierzymy sygnały, które faktycznie są na stronie.',
       },
       {
-        q: 'Czy wystarczy dopisać „autor: redakcja"?',
+        q: 'Czy wystarczy dopisać „autor: redakcja”?',
         a: 'Nie. Sygnał uznajemy tylko wtedy, gdy ma pokrycie w treści - podpis bez kwalifikacji, afiliacji ani śladu doświadczenia niczego nie zmienia. Zasada jest celowo twarda, żeby audyt nie przyznawał kompetencji, których strona nie deklaruje.',
       },
       {
@@ -795,7 +795,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
             ['Doświadczenie', 'Własna historia, studium przypadku, zdjęcia i zrzuty z użycia, opis testu wykonanego samodzielnie'],
             ['Ekspertyza', 'Cytaty z badań, dane ze wskazanym źródłem, terminologia branżowa, wyjaśnienie mechanizmu, bibliografia'],
             ['Autorytet', 'Bio autora z kwalifikacjami, afiliacja instytucjonalna, publikacje, cytowania z zewnątrz, nagrody'],
-            ['Wiarygodność', 'Zastrzeżenia i disclaimery, data aktualizacji, kontakt do autora, polityka redakcyjna, bezpieczne połączenie'],
+            ['Wiarygodność', 'Zastrzeżenia i noty prawne, data aktualizacji, kontakt do autora, polityka redakcyjna, bezpieczne połączenie'],
           ],
         },
         {
@@ -811,7 +811,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       ],
     },
     raises: [
-      'Podpis autora z konkretnymi kwalifikacjami, nie „zespół redakcyjny"',
+      'Podpis autora z konkretnymi kwalifikacjami, nie „zespół redakcyjny”',
       'Przypisy do badań i danych z podaniem źródła',
       'Linki do różnych instytucji zamiast wielokrotnych odesłań do jednego serwisu',
       'Widoczna data aktualizacji i kontakt',
@@ -820,7 +820,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     lowers: [
       'Tekst bez autora i bez daty',
       'Statystyki podane bez źródła',
-      'Deklaracje kompetencji bez pokrycia w treści („wieloletnie doświadczenie")',
+      'Deklaracje kompetencji bez pokrycia w treści („wieloletnie doświadczenie”)',
       'Brak jakichkolwiek linków zewnętrznych',
       'Powoływanie się wyłącznie na własne materiały',
     ],
@@ -857,13 +857,13 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Ile nowego wnosi Twoja treść względem Top 10 SERP. Cztery sygnały unikalności: własne twierdzenia, unikalne fakty, terminy nieobecne u konkurencji i rzadkie formaty.',
     lead:
-      'Wartość dodana odpowiada na pytanie, którego nie zadaje żaden inny wymiar: co jest u Ciebie, czego nie ma u nikogo w Top 10. Wynik jest podawany w skali setnej i ma charakter informacyjny - nie wchodzi do oceny końcowej.',
+      'Wartość dodana odpowiada na pytanie, którego nie zadaje żaden inny wymiar: co jest u Ciebie, czego nie ma u nikogo w Top 10. Wynik podajemy w skali od 0 do 100 i ma on charakter informacyjny - nie wchodzi do oceny końcowej.',
     chips: ['Skala 0-100', 'Nie wpływa na ocenę końcową', 'Wejście: treść + korpus Top 10 SERP'],
     whyHeading: 'Dlaczego wartość dodana jest ważna dla modeli AI?',
     howHeading: 'Jak liczymy wartość dodaną?',
     why: [
       'Silnik generatywny nie potrzebuje dziesięciu źródeł mówiących to samo. Buduje odpowiedź z kilku, a wybiera te, które dokładają coś, czego nie ma w pozostałych. Treść poprawna, ale w całości pokrywająca się z konkurencją, jest dla niego wymienna - każde inne źródło zrobi tę samą robotę.',
-      'To odwrotność strategii „napiszmy to, co pierwsza dziesiątka, tylko lepiej". Lepiej napisany duplikat nadal jest duplikatem. Przewagę daje własna liczba, własny przypadek, własne zestawienie.',
+      'To odwrotność strategii „napiszmy to, co pierwsza dziesiątka, tylko lepiej”. Lepiej napisany duplikat nadal jest duplikatem. Przewagę daje własna liczba, własny przypadek, własne zestawienie.',
     ],
     how: {
       intro: [
@@ -934,11 +934,11 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Czym jest BLUF i jak CitationOne go mierzy: odpowiedź w pierwszych 50 słowach sekcji oraz osobne reguły dla FAQ, listingu i encyklopedii.',
     lead:
       'BLUF (Bottom Line Up Front) sprawdza jedną rzecz: czy odpowiedź na pytanie sekcji pada w jej pierwszych 50 słowach, czy dopiero po akapicie rozgrzewki. To wymiar o kolejności informacji, nie o ich ilości - ten sam tekst z przestawionymi zdaniami dostaje inną ocenę.',
-    chips: ['Skala 1-10', 'Ocena modelem językowym', 'Wejście: treść + CSI + profil typu treści'],
+    chips: ['Skala 0-10', 'Ocena modelem językowym', 'Wejście: treść + CSI + profil typu treści'],
     whyHeading: 'Dlaczego BLUF jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy BLUF?',
     why: [
-      'Systemy RAG, które stoją za ChatGPT, Perplexity i AI Overview, nie czytają strony w całości. Tną ją na chunki po ~200-500 słów i oceniają każdy osobno, bez kontekstu reszty artykułu. Jeśli sekcja zaczyna się od „W dzisiejszych czasach coraz więcej firm...", model widzi fragment, który nie odpowiada na nic - i sięga po konkurenta, który odpowiedź postawił w pierwszym zdaniu.',
+      'Systemy RAG, które stoją za ChatGPT, Perplexity i AI Overview, nie czytają strony w całości. Tną ją na chunki po ~200-500 słów i oceniają każdy osobno, bez kontekstu reszty artykułu. Jeśli sekcja zaczyna się od „W dzisiejszych czasach coraz więcej firm...”, model widzi fragment, który nie odpowiada na nic - i sięga po konkurenta, który odpowiedź postawił w pierwszym zdaniu.',
       'W klasycznym SEO ta sama reguła stała za featured snippetami - do ramki trafiał akapit, który odpowiadał od razu. W GEO stawka jest wyższa, bo silnik generatywny nie linkuje strony, tylko cytuje jej fragment: chunk bez odpowiedzi na początku wygląda dla modelu jak chunk bez odpowiedzi w ogóle.',
       'Wzorzec, który działa, to Odpowiedź → Dowód → Kontekst. Najpierw konkluzja z liczbą, potem uzasadnienie, na końcu tło. Odwrotna kolejność - tło, uzasadnienie, wniosek - jest naturalna w piśmie akademickim i zabójcza w AI Search.',
     ],
@@ -952,10 +952,10 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
           head: ['Typ treści', 'Czym jest poprawny BLUF'],
           rows: [
             ['Artykuł', 'Odpowiedź z liczbą w pierwszych 50 słowach sekcji'],
-            ['FAQ', 'Pierwsze zdanie po pytaniu to odpowiedź („Od 99 zł miesięcznie"), nie „To zależy od..."'],
-            ['Listing / katalog', '1-2 zdania podsumowania nad listą, z konkretem typu „12 pozycji, najwyżej oceniana: X"'],
+            ['FAQ', 'Pierwsze zdanie po pytaniu to odpowiedź („Od 99 zł miesięcznie”), nie „To zależy od...”'],
+            ['Listing / katalog', '1-2 zdania podsumowania nad listą, z konkretem typu „12 pozycji, najwyżej oceniana: X”'],
             ['Encyklopedia / definicja', 'Pierwsze zdanie definicyjne pod H2, jak otwarcie hasła w Wikipedii'],
-            ['Narzędzie / kalkulator', 'Sekcja „co liczy" - wzór lub zakres wyniku w jednym zdaniu; formularze pomijane'],
+            ['Narzędzie / kalkulator', 'Sekcja „co liczy” - wzór lub zakres wyniku w jednym zdaniu; formularze pomijane'],
           ],
         },
       ],
@@ -968,27 +968,27 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Przy pytaniu złożonym 2-3 zdania z krokami zamiast jednego ogólnego',
     ],
     lowers: [
-      'Wstępy budujące napięcie („W dzisiejszych czasach", „Żyjemy w erze")',
-      'Zapowiedzi („W tym artykule przedstawimy", „Zanim przejdziemy do")',
-      'Puste przymiotniki („najlepszy", „kompleksowy", „innowacyjny")',
-      'SEO fluff („wieloletnie doświadczenie", „indywidualne podejście")',
-      'Kwalifikatory („zasadniczo", „można powiedzieć, że")',
-      'Meta-komentarze („warto zauważyć", „należy podkreślić")',
+      'Wstępy budujące napięcie („W dzisiejszych czasach”, „Żyjemy w erze”)',
+      'Zapowiedzi („W tym artykule przedstawimy”, „Zanim przejdziemy do”)',
+      'Puste przymiotniki („najlepszy”, „kompleksowy”, „innowacyjny”)',
+      'Wata słowna z ofert („wieloletnie doświadczenie”, „indywidualne podejście”)',
+      'Kwalifikatory („zasadniczo”, „można powiedzieć, że”)',
+      'Meta-komentarze („warto zauważyć”, „należy podkreślić”)',
     ],
     swapTable: {
       caption: 'Osobna, mierzalna strata to ogólniki tam, gdzie da się podać liczbę',
       head: ['Zamiast', 'Napisz'],
       rows: [
-        ['„wiele"', 'konkretną liczbę lub zakres („5-10")'],
-        ['„często"', '„w 40% przypadków", „średnio co 3 dni"'],
-        ['„szybko"', '„w ciągu 24 godzin"'],
-        ['„znacząco"', '„o 30%", „dwukrotnie"'],
-        ['„większość"', '„7 na 10", „ponad 70%"'],
-        ['„tanio"', 'konkretną kwotę lub widełki'],
+        ['„wiele”', 'konkretną liczbę lub zakres („5-10”)'],
+        ['„często”', '„w 40% przypadków”, „średnio co 3 dni”'],
+        ['„szybko”', '„w ciągu 24 godzin”'],
+        ['„znacząco”', '„o 30%”, „dwukrotnie”'],
+        ['„większość”', '„7 na 10”, „ponad 70%”'],
+        ['„tanio”', 'konkretną kwotę lub widełki'],
       ],
     },
     swapNote:
-      'Gdy twardych danych nie ma, zostają zakresy („3-5 dni"), proporcje („1 na 3") i porównania („2x więcej niż średnia").',
+      'Gdy twardych danych nie ma, zostają zakresy („3-5 dni”), proporcje („1 na 3”) i porównania („2x więcej niż średnia”).',
     report: [
       'Rozbicie sekcja po sekcji: dla każdego H2 pokazujemy jego pierwsze 50 słów i werdykt, czy odpowiedź tam jest.',
       'Do sekcji bez BLUF-u dostajesz gotową propozycję pierwszego zdania - a dla sekcji, których w ogóle brakuje względem konkurencji z Top 10, także krótkie rozwinięcie. Wszystko w formacie Przed / Po, więc widzisz dokładnie, co zamienić.',
