@@ -12,13 +12,18 @@ export const TOOLS_EN: Record<string, ToolData> = {
   'keyword-clustering': {
     slug: 'keyword-clustering',
     name: 'Keyword Clustering',
-    heading: 'What is keyword clustering?',
-    title: 'What is keyword clustering?',
+    heading: 'Keyword clustering tool for SEO',
+    title: 'Keyword clustering tool for SEO',
     description:
-      'Grouping keywords by overlapping search results. How clustering works in CitationOne: similarity threshold, cluster intent and a pillar page suggestion.',
+      'Group keywords by overlapping search results: clusters with intent, volume and a pillar page suggestion. 1 credit per run, CSV export.',
     lead:
-      'Clustering groups keywords by whether Google returns the same pages for them. If two queries share results in the SERP, one page can serve both - and that is the only reliable criterion, because it comes from the search engine rather than from word similarity.',
+      'Paste a list of keywords and get ready topical groups - each with its intent, combined search volume and a pillar page suggestion. Instead of guessing how many articles to write, you read it straight from the search results.',
     chips: ['1 credit per run', 'Input: a keyword list or CSV', 'Output: clusters + CSV'],
+    defHeading: 'What is keyword clustering?',
+    def: [
+      'Clustering groups keywords by whether Google returns the same pages for them. If two queries share results in the SERP, one page can serve both - and that is the only reliable criterion, because it comes from the search engine rather than from word similarity.',
+      'In practice a cluster answers the question of how many texts you need at all. A dozen queries can fit inside one topic, while two seemingly close phrases may demand separate pages.',
+    ],
     whyHeading: 'Why cluster keywords?',
     why: [
       'Without clustering you get the most expensive mistake in content: several separate texts targeting phrases that mean the same thing to a search engine. The pages start competing with each other, none accumulates full strength, and the editorial budget goes into duplicating the same material.',
@@ -81,13 +86,18 @@ export const TOOLS_EN: Record<string, ToolData> = {
   'content-pruning': {
     slug: 'content-pruning',
     name: 'Content Pruning',
-    heading: 'What are content pruning and keyword cannibalisation?',
-    title: 'What are content pruning and keyword cannibalisation?',
+    heading: 'Content pruning and cannibalisation tool for SEO',
+    title: 'Content pruning and cannibalisation tool for SEO',
     description:
-      'Finding pages that drift off-topic and content competing with itself. How CitationOne analyses a whole sitemap and what it proposes for every page it flags.',
+      'Point it at a sitemap and see which pages drift off-topic and which compete with each other - with a proposed action for every one. 1 credit, CSV export.',
     lead:
-      'Pruning answers two questions about an existing site: which pages drift far enough from the main topic to blur its profile, and which are so similar to each other that they compete for the same query.',
+      'You submit a sitemap and come back with a list of pages that blur what your site is about, plus groups of pages fighting each other for the same query - each with a suggestion: remove, redirect, merge or differentiate.',
     chips: ['1 credit per run', 'Input: sitemap', 'Output: 3 tabs + CSV'],
+    defHeading: 'What are content pruning and keyword cannibalisation?',
+    def: [
+      'Pruning answers two questions about an existing site: which pages drift far enough from the main topic to blur its profile, and which are so similar to each other that they compete for the same query.',
+      'Cannibalisation is that second case: two of your own URLs aiming at the same intent. Pruning responds to both - it is not about deleting everything old, but about deciding which page should carry the topic.',
+    ],
     whyHeading: 'Why prune content?',
     why: [
       'Sites grow in layers: old blog posts, seasonal campaigns, texts targeting phrases nobody searches for any more. Every such page blurs the picture of what the domain is about - and that picture is what search engines and models use to decide where you are a credible source.',
@@ -150,13 +160,18 @@ export const TOOLS_EN: Record<string, ToolData> = {
   'schema-gaps': {
     slug: 'schema-gaps',
     name: 'Schema Gaps',
-    heading: 'What are structured data gaps (schema.org)?',
-    title: 'What are structured data gaps (schema.org)?',
+    heading: 'Schema.org structured data audit tool for SEO',
+    title: 'Schema.org structured data audit tool for SEO',
     description:
-      'A schema.org audit across a whole sitemap: what you have, what is missing and which types each page should carry. No AI calls, 1 credit per run.',
+      'Check schema.org across a whole sitemap: what you have, what is missing and which types each page should carry. No AI calls, 1 credit per run.',
     lead:
-      'The schema.org analysis walks your entire sitemap and checks what structured data each page carries - and above all, what it lacks relative to what that page actually is.',
+      'You point it at a sitemap and it walks every URL, showing which markup a page carries and which it lacks relative to what that page actually is. No AI models involved - it works on your page code, which makes it the fastest tool of the set.',
     chips: ['1 credit per run', 'Input: sitemap', 'Zero AI model calls'],
+    defHeading: 'What are structured data gaps (schema.org)?',
+    def: [
+      'Structured data is the markup in your page code that tells a search engine outright what the page is: an article with an author and a date, a product, a recipe, a job posting. A gap is a type of markup that a given kind of page ought to carry and does not.',
+      'Not every absence is a problem - only pairing a page with its type shows what is genuinely missing. That is why the analysis first identifies the page profile and only then compares it with the catalogue of expected schema types.',
+    ],
     whyHeading: 'Why does structured data matter for AI Search?',
     why: [
       'Structured data is the only place where you tell a search engine outright what a page is: a product, a recipe, an article with a date and an author, a job posting. Everything else is inference from the text.',
@@ -209,13 +224,18 @@ export const TOOLS_EN: Record<string, ToolData> = {
   'internal-linking': {
     slug: 'internal-linking',
     name: 'Internal Linking',
-    heading: 'How do you find internal links to add automatically?',
-    title: 'How do you find internal links to add automatically?',
+    heading: 'Internal linking tool for SEO',
+    title: 'Internal linking tool for SEO',
     description:
-      'Internal link suggestions across a whole sitemap: semantic matching of a paragraph to a target page, a ready anchor text and detection of orphaned pages.',
+      'Internal link suggestions across a whole sitemap: the exact paragraph, a ready anchor, the target URL and a list of orphaned pages. 1 credit, CSV export.',
     lead:
-      'The tool reads the content of every page in your sitemap and points to the specific places where an internal link belongs - together with the anchor text to use and the target URL.',
+      'The tool reads the content of every page in your sitemap and points to the specific places where an internal link belongs - together with the anchor text to use and the target URL. Along the way it catches pages nothing links to.',
     chips: ['1 credit per run', 'Input: sitemap', 'Output: suggestions + CSV'],
+    defHeading: 'How do you find internal links to add automatically?',
+    def: [
+      'By hand you work from the target: you have a new article and you hunt for places worth linking from. An automated pass runs the other way - it reviews every paragraph of every page and checks whether a URL exists that the paragraph substantively points to.',
+      'Matching is semantic rather than exact-phrase, so it also catches paragraphs describing the topic in different words. The output is not a list of pages "worth linking" but a pair: a specific fragment of text and a specific target URL with a ready anchor.',
+    ],
     whyHeading: 'Why does internal linking matter in AI Search?',
     why: [
       'Internal links spread the signal that a topic is covered on your site by more than one page. To a search engine that is information about the structure of your knowledge, not merely navigation.',

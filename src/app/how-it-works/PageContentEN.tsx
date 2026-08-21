@@ -24,49 +24,6 @@ function SectionLabel({ children }: { children: string }) {
   );
 }
 
-/* ── Score cards: CQS + Citability ───── */
-function BenchmarkBar({ label, value, max, color, bold }: {
-  label: string; value: number; max: number; color: string; bold?: boolean;
-}) {
-  const pct = Math.round((value / max) * 100);
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontSize: 13, color: bold ? '#0d0d12' : '#666d80', fontWeight: bold ? 700 : 400 }}>{label}</span>
-        <span style={{ fontSize: 13, color: bold ? '#0d0d12' : '#a4acb9', fontWeight: bold ? 700 : 400 }}>{value}</span>
-      </div>
-      <div style={{ height: 4, background: '#eceff3', borderRadius: 2, overflow: 'hidden' }}>
-        <div style={{ height: '100%', width: `${pct}%`, background: color, borderRadius: 2 }} />
-      </div>
-    </div>
-  );
-}
-
-const SCORE_CARDS = [
-  {
-    scale: 'SCALE 0 – 10',
-    title: 'AI Citability Score',
-    desc: 'The probability that AI engines will cite your text in the answer they show the user.',
-    score: 4.9, max: 10, color: '#B91C1C',
-    rows: [
-      { label: 'Low threshold', value: 2.1, bold: false },
-      { label: 'Your score', value: 4.9, bold: true },
-      { label: 'SERP leader', value: 8.3, bold: false },
-    ],
-  },
-  {
-    scale: 'SCALE 0 – 100',
-    title: 'CQS · Content Quality Score',
-    desc: 'Aggregated score across 10 quality dimensions + E-E-A-T, benchmarked against the Top 10 SERP competition.',
-    score: 78, max: 100, color: '#CA8A04',
-    rows: [
-      { label: 'SERP average', value: 42, bold: false },
-      { label: 'Your score', value: 78, bold: true },
-      { label: 'SERP leader', value: 91, bold: false },
-    ],
-  },
-];
-
 /* ── Visual: Benchmark SERP ───────────────────────────────────────────── */
 const SERP_ROWS = [
   { label: 'Your article', score: 72, highlight: true },
@@ -377,7 +334,7 @@ export default function PageContentEN() {
               <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
             </div>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', margin: 0 }}>
-              From pasted text to ready guidelines in 180 seconds
+              From pasted text to ready guidelines in 5 minutes
             </h2>
           </motion.div>
           <div className="steps-grid">
@@ -418,85 +375,6 @@ export default function PageContentEN() {
                   {step.title}
                 </h3>
                 <p style={{ fontSize: 14, color: '#36394a', lineHeight: 1.65, margin: 0 }}>{step.body}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CQS + CITABILITY */}
-      <section style={{ background: '#ffffff', padding: '80px 0' }}>
-        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-          <motion.div {...fadeUp()} style={{ marginBottom: 40, maxWidth: 760 }}>
-            <SectionLabel>Main scores</SectionLabel>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
-              Hard data that translates into citations
-            </h2>
-            <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 16px' }}>
-              Your CitationOne report isn&apos;t based on guesswork. The audit result comes as two precise indicators: <strong>CQS (0–100)</strong> - a mathematical sum of points across 10 quality dimensions, and <strong>AI Citability Score (0–10)</strong> - a direct measure of the probability that AI will pick your page as an authoritative source.
-            </p>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {['Each of 10 dimensions with a separate 0-10 score', 'Status at a glance: OK / WARNING / CRITICAL', 'Your score compared with top 10 SERP'].map(item => (
-                <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#36394a', lineHeight: 1.65 }}>
-                  <span style={{ width: 14, height: 2, background: ACCENT, flexShrink: 0, marginTop: 9, borderRadius: 1 }} />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <div className="scores-cards-grid">
-            {SCORE_CARDS.map((card, ci) => (
-              <motion.div
-                key={card.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: ci * 0.1 }}
-                style={{
-                  background: '#ffffff',
-                  border: '1px solid #dfe1e7',
-                  borderRadius: 14,
-                  padding: '24px 26px 26px',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14 }}>
-                  <span style={{
-                    display: 'inline-block',
-                    fontSize: 11, fontWeight: 500,
-                    color: '#818898',
-                    border: '1px solid #dfe1e7',
-                    borderRadius: 100,
-                    padding: '3px 10px',
-                    letterSpacing: '0.04em',
-                  }}>
-                    {card.scale}
-                  </span>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 3 }}>
-                    <span style={{ fontSize: 'clamp(2rem, 3.2vw, 2.6rem)', fontWeight: 700, color: card.color, lineHeight: 1, letterSpacing: '-0.04em' }}>
-                      {card.score}
-                    </span>
-                    <span style={{ fontSize: 13, color: '#a4acb9', fontWeight: 500 }}>/ {card.max}</span>
-                  </div>
-                </div>
-                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', lineHeight: 1.25, margin: '0 0 6px' }}>
-                  {card.title}
-                </h3>
-                <p style={{ fontSize: 13, color: '#666d80', lineHeight: 1.55, margin: '0 0 18px' }}>
-                  {card.desc}
-                </p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {card.rows.map(row => (
-                    <BenchmarkBar
-                      key={row.label}
-                      label={row.label}
-                      value={row.value}
-                      max={card.max}
-                      color={row.bold ? card.color : '#dde1e8'}
-                      bold={row.bold}
-                    />
-                  ))}
-                </div>
               </motion.div>
             ))}
           </div>
@@ -879,11 +757,6 @@ export default function PageContentEN() {
           gap: 64px;
           align-items: center;
         }
-        .scores-cards-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-        }
         .feat-grid-reverse > *:first-child { order: 1; }
         .feat-grid-reverse > *:last-child  { order: 0; }
         @media (max-width: 768px) {
@@ -891,7 +764,6 @@ export default function PageContentEN() {
           .dims-grid  { grid-template-columns: 1fr; }
           .feat-grid  { grid-template-columns: 1fr; gap: 36px; }
           .feat-grid-reverse > * { order: unset !important; }
-          .scores-cards-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </div>

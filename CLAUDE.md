@@ -150,7 +150,7 @@ ai-auditor-lp/
 | `/dimensions` | DimensionsContent | 10 content quality dimensions + E-E-A-T |
 | `/dimensions/[slug]` | DimensionPage + dimensions-en.ts | H1 = title, np. `What is BLUF in SEO and GEO?` |
 | `/tools` | ToolsHub + tools-en.ts | SEO and GEO tools in CitationOne |
-| `/tools/[slug]` | ToolPage + tools-en.ts | H1 = title, np. `What is keyword clustering?` |
+| `/tools/[slug]` | ToolPage + tools-en.ts | H1 = title, fraza sprzedażowa `… tool for SEO`, np. `Keyword clustering tool for SEO` |
 | `/api` | ApiContentEN | CitationOne API - audyty AI Search przez REST |
 
 ### PL (katalog /pl)
@@ -163,7 +163,7 @@ ai-auditor-lp/
 | `/pl/wymiary` | WymiaryContent PL | 10 wymiarów jakości treści + E-E-A-T |
 | `/pl/wymiary/[slug]` | DimensionPage + dimensions-pl.ts | H1 = title, np. `Czym jest BLUF w SEO i GEO?` |
 | `/pl/narzedzia` | ToolsHub + tools-pl.ts | Narzędzia SEO i GEO w CitationOne |
-| `/pl/narzedzia/[slug]` | ToolPage + tools-pl.ts | H1 = title, np. `Czym jest klasteryzacja słów kluczowych?` |
+| `/pl/narzedzia/[slug]` | ToolPage + tools-pl.ts | H1 = title, fraza sprzedażowa `Narzędzie do … dla SEO`, np. `Narzędzie do klasteryzacji słów kluczowych dla SEO` |
 | `/pl/api` | ApiContent PL | API CitationOne - audyty AI Search przez REST |
 
 ### Zakładka API (`/api` i `/pl/api`)
@@ -333,9 +333,15 @@ pary w `TOOL_SLUG_PAIRS`), ale **własny szablon** — zamiast „co podnosi/obn
 kroki działania, tabelę konfiguracji, listę wyników i sekcję kosztów.
 
 - **Źródło faktów:** [`../ai-auditor/spec/tools.md`](../ai-auditor/spec/tools.md).
-- **Limity są TYMCZASOWE w specyfikacji** (500 URL dla pruningu i schemy, 200 dla linkowania,
-  5-500 fraz dla klasteryzacji), a mimo to podajemy je na LP — user musi wiedzieć, czy jego
-  sitemapa się zmieści. Zmiana limitu w aplikacji **wymaga poprawki w `tools-pl.ts` i `tools-en.ts`**.
+- **Hierarchia nagłówków jest inna niż przy wymiarach** (decyzja z 2026-08-21): intencja na tych
+  adresach jest transakcyjna, więc H1 (`heading` = `title`) to fraza sprzedażowa zakończona
+  kwalifikatorem `dla SEO` / `for SEO` na **wszystkich czterech** narzędziach (spójny wzorzec,
+  nie decyzja per strona), a w hero od razu siedzi CTA do aplikacji + nota `heroNote`. Pytanie definicyjne
+  („Czym jest…?") zeszło do pierwszej sekcji treści jako H2 — pola `defHeading` + `def`.
+  Zasada H1 = `title` obowiązuje dalej, zmienił się tylko charakter tego tytułu.
+- **Limitów (capów URL-i i fraz) świadomie NIE publikujemy** — decyzja z 2026-08-20. W specyfikacji
+  są oznaczone jako TYMCZASOWE, więc każda liczba na LP szybko kłamie, a przed zakupem i tak nie
+  jest argumentem. Sekcja `limits` została przy samych kosztach i zwrotach kredytu.
 - **Koszt:** 1 kredyt za zadanie, zwrot przy błędzie (`failToolJobWithRefund`). Rozwinięcie
   klastra to osobny kredyt. To pisane wprost, bo są to pytania sprzed zakupu.
 - **Masowy audyt NIE ma własnej podstrony** — ma sekcję na HP; hub linkuje do `/pl#masowy-audyt`.
@@ -440,6 +446,15 @@ const APP_URL = 'https://app.citationone.com';
   Navbar przeszedł z `sm:` na `md:` przy dodaniu 5. pozycji („API"): przy 640px logo + 4 linki + CTA + badge
   języka nie mieściły się w 64px i CTA („Zrób audyt" / „Run audit") łamał się na dwie linie. Dodając kolejną
   pozycję do menu **zmierz** wysokość `.nav-cta` — zawijanie nie powoduje przewijania strony, więc nie rzuca się w oczy.
+- **Navbar — menu „Narzędzia":** desktop ma rozwijaną listę (`TOOLS_MENU` w `Navbar.tsx` /
+  `en/NavbarEN.tsx`), otwieraną **czystym CSS-em** (`:hover` + `:focus-within`), więc działa przed
+  hydratacją i dla klawiatury. Na górze listy jest **Audytor treści** → `/pl/jak-to-dziala`
+  (`/how-it-works`), bo audyt strony nie ma własnej podstrony narzędzia; niżej 4 narzędzia
+  i link do huba. **„Kanibalizacja treści" to piąta pozycja prowadząca pod TEN SAM adres co
+  Content Pruning** (jedno zadanie, dwie zakładki wyniku) — dlatego `key` w mapowaniu idzie po
+  `label`, nie po `href`. Na mobile ta sama tablica renderuje się jako rozwijana grupa
+  (stan `toolsOpen`) — inaczej menu otwierałoby się na 10 pozycji.
+  Sam napis „Narzędzia" pozostaje linkiem do huba, nie tylko przełącznikiem.
 - **Navbar:** hamburger + panel, auto-close, full-width CTA. `.nav-cta` ma `min-height: 44px` (touch target tablet/mobile).
 - **Hero button:** `min-height: 44`, bez `whiteSpace: nowrap` (uniknięcie overflow <360px). Input+button stack na <580px.
 - **Gridy responsive:** dims 3→2→1, ba 2→1, feat 2→1, howitworks 5→1 (≤900px), problem/forwho 3→1.

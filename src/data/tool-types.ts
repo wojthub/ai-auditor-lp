@@ -19,13 +19,21 @@ export interface ToolData {
   slug: string;
   /** Nazwa narzedzia — jak w sidebarze aplikacji. */
   name: string;
-  /** H1 = title. Ta sama zasada co przy wymiarach. */
+  /**
+   * H1 = title. Ta sama zasada co przy wymiarach, ale TU jest to fraza sprzedazowa
+   * („Narzedzie do ..."), nie pytanie — hero ma zlapac intencje transakcyjna i dac CTA.
+   * Pytanie definicyjne przenieslismy nizej, do `defHeading` (H2).
+   */
   heading: string;
   title: string;
   description: string;
+  /** Krotki lead sprzedazowy pod H1 (co dostaje user), nie definicja. */
   lead: string;
   /** Pasek meta pod H1: koszt, wejscie, wynik. */
   chips: string[];
+  /** Pytanie definicyjne — pierwsza sekcja tresci, H2 („Czym jest ...?"). */
+  defHeading: string;
+  def: string[];
   whyHeading: string;
   why: string[];
   stepsHeading: string;
@@ -47,6 +55,9 @@ export interface ToolStrings {
   basePath: string;
   breadcrumbRoot: string;
   breadcrumbAria: string;
+  /** Nota pod CTA w hero — zamiast obietnicy „za darmo", ktorej narzedzia nie maja. */
+  heroNote: string;
+  labelDefinition: string;
   labelWhy: string;
   labelHow: string;
   labelOutput: string;
@@ -81,6 +92,8 @@ export const TOOL_STRINGS_PL: ToolStrings = {
   basePath: '/pl/narzedzia',
   breadcrumbRoot: 'Narzędzia',
   breadcrumbAria: 'Ścieżka nawigacji',
+  heroNote: 'Bez abonamentu - płacisz kredytem za analizę.',
+  labelDefinition: 'Definicja',
   labelWhy: 'Po co to',
   labelHow: 'Jak działa',
   labelOutput: 'Wynik',
@@ -99,6 +112,8 @@ export const TOOL_STRINGS_EN: ToolStrings = {
   basePath: '/tools',
   breadcrumbRoot: 'Tools',
   breadcrumbAria: 'Breadcrumb',
+  heroNote: 'No subscription - you pay one credit per run.',
+  labelDefinition: 'Definition',
   labelWhy: 'Why',
   labelHow: 'How it works',
   labelOutput: 'Output',

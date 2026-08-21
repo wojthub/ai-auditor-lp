@@ -7,8 +7,23 @@ import { enCounterpart } from '@/lib/languageSwitch';
 
 const APP_URL = 'https://app.citationone.com';
 
+/**
+ * Menu „Narzedzia". Audytor jest na gorze i celowo NIE ma wlasnej podstrony narzedzia —
+ * to glowny produkt, wiec prowadzi do opisu dzialania audytu.
+ */
+const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
+  { href: '/pl/jak-to-dziala', label: 'Audytor treści', desc: 'Oceń stronę i dostań gotowe poprawki' },
+  { href: '/pl/narzedzia/klasteryzacja', label: 'Klasteryzacja słów kluczowych', desc: 'Przypisz słowa kluczowe do stron docelowych' },
+  { href: '/pl/narzedzia/pruning', label: 'Content Pruning', desc: 'Usuń strony, które rozmywają temat serwisu' },
+  // Kanibalizacja to druga zakladka tego samego zadania (pruning) — osobne wejscie, ten sam adres.
+  { href: '/pl/narzedzia/pruning', label: 'Kanibalizacja treści', desc: 'Wykryj strony walczące o to samo zapytanie' },
+  { href: '/pl/narzedzia/analiza-schema', label: 'Analiza schema.org', desc: 'Uzupełnij brakujące znaczniki w kodzie' },
+  { href: '/pl/narzedzia/linki-wewnetrzne', label: 'Linki wewnętrzne', desc: 'Zobacz, który akapit gdzie podlinkować' },
+];
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
   // Przelacznik prowadzi na ANGIELSKI ODPOWIEDNIK biezacej podstrony, nie na strone glowna.
   const enHref = enCounterpart(usePathname());
 
@@ -36,7 +51,26 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center">
           <a href="/pl/jak-to-dziala" className="nav-link">Jak to działa?</a>
-          <a href="/pl/narzedzia" className="nav-link">Narzędzia</a>
+          {/* Narzedzia + rozwijane menu (hover i :focus-within — bez JS, dziala od razu po SSR) */}
+          <div className="nav-dd">
+            <a href="/pl/narzedzia" className="nav-link nav-dd-trigger">
+              Narzędzia
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+            <div className="nav-dd-menu">
+              <div className="nav-dd-card">
+                {TOOLS_MENU.map((item, i) => (
+                  <a key={item.label} href={item.href} className={i === 0 ? 'nav-dd-item nav-dd-item-first' : 'nav-dd-item'}>
+                    <span className="nav-dd-label">{item.label}</span>
+                    <span className="nav-dd-desc">{item.desc}</span>
+                  </a>
+                ))}
+                <a href="/pl/narzedzia" className="nav-dd-all">Wszystkie narzędzia →</a>
+              </div>
+            </div>
+          </div>
           <a href="/pl/cennik" className="nav-link">Cennik</a>
           <a href="/pl/api" className="nav-link">API</a>
           <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zrób audyt</a>
@@ -87,13 +121,34 @@ export default function Navbar() {
           >
             Jak to działa?
           </a>
-          <a
-            href="/pl/narzedzia"
-            onClick={() => setMobileOpen(false)}
-            className="nav-mobile-link"
+          {/* Narzedzia: wiersz rozwijany, zeby menu mobilne nie urraslo o 7 pozycji na starcie */}
+          <button
+            type="button"
+            onClick={() => setToolsOpen(!toolsOpen)}
+            aria-expanded={toolsOpen}
+            className="nav-mobile-link nav-mobile-toggle"
           >
             Narzędzia
-          </a>
+            <svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden
+              style={{ transform: toolsOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.16s ease' }}
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          {toolsOpen && (
+            <div className="nav-mobile-sub">
+              {TOOLS_MENU.map((item) => (
+                <a key={item.label} href={item.href} onClick={() => setMobileOpen(false)} className="nav-mobile-sublink">
+                  {item.label}
+                </a>
+              ))}
+              <a href="/pl/narzedzia" onClick={() => setMobileOpen(false)} className="nav-mobile-sublink">
+                Wszystkie narzędzia
+              </a>
+            </div>
+          )}
           <a
             href="/pl/cennik"
             onClick={() => setMobileOpen(false)}
@@ -138,6 +193,104 @@ export default function Navbar() {
         .nav-link:hover {
           color: #0b7983;
           opacity: 1;
+        }
+        .nav-dd {
+          position: relative;
+        }
+        .nav-dd-trigger {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+        }
+        .nav-dd-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          padding-top: 10px;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-4px);
+          transition: opacity 0.14s ease, transform 0.14s ease, visibility 0.14s;
+        }
+        .nav-dd:hover .nav-dd-menu,
+        .nav-dd:focus-within .nav-dd-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+        .nav-dd-card {
+          width: 292px;
+          background: #ffffff;
+          border: 1px solid #dfe1e7;
+          border-radius: 12px;
+          box-shadow: 0 12px 32px rgba(13,13,18,0.10);
+          padding: 6px;
+        }
+        .nav-dd-item {
+          display: block;
+          padding: 9px 12px;
+          border-radius: 8px;
+          text-decoration: none;
+          transition: background 0.14s ease;
+        }
+        .nav-dd-item:hover {
+          background: #f8fafb;
+          opacity: 1;
+        }
+        .nav-dd-item-first {
+          border-bottom: 1px solid #eceff3;
+          border-radius: 8px 8px 0 0;
+          margin-bottom: 4px;
+          padding-bottom: 11px;
+        }
+        .nav-dd-label {
+          display: block;
+          font-size: 14.5px;
+          font-weight: 600;
+          color: #0d0d12;
+          letter-spacing: -0.015em;
+        }
+        .nav-dd-desc {
+          display: block;
+          font-size: 11.5px;
+          color: #818898;
+          line-height: 1.45;
+          margin-top: 2px;
+        }
+        .nav-dd-all {
+          display: block;
+          padding: 10px 12px 6px;
+          font-size: 13px;
+          font-weight: 600;
+          color: #0b7983;
+          text-decoration: none;
+          border-top: 1px solid #eceff3;
+          margin-top: 4px;
+        }
+        /* Podwojna klasa — .nav-mobile-link jest nizej w arkuszu i inaczej nadpisalby display */
+        .nav-mobile-link.nav-mobile-toggle {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: none;
+          border: none;
+          border-bottom: 1px solid #eceff3;
+          cursor: pointer;
+          font-family: inherit;
+          text-align: left;
+        }
+        .nav-mobile-sub {
+          padding: 4px 0 8px 14px;
+          border-bottom: 1px solid #eceff3;
+        }
+        .nav-mobile-sublink {
+          display: block;
+          font-size: 15px;
+          color: #666d80;
+          text-decoration: none;
+          padding: 10px 0;
+          letter-spacing: -0.015em;
         }
         .nav-cta {
           display: inline-flex;

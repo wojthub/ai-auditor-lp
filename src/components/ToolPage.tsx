@@ -117,6 +117,27 @@ export default function ToolPage({ tool, all, t }: {
 
             <p style={{ fontSize: 17.5, color: '#36394a', lineHeight: 1.72, margin: '0 0 24px' }}>{tool.lead}</p>
 
+            {/* CTA od razu w hero — intencja na tych stronach jest transakcyjna. */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 16, marginBottom: 26 }}>
+              <motion.a
+                href={ctaHref}
+                whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 30px',
+                  borderRadius: 8, background: ACCENT, color: '#ffffff', fontWeight: 700, fontSize: 15,
+                  textDecoration: 'none', letterSpacing: '-0.01em',
+                  boxShadow: '0 4px 20px rgba(11,121,131,0.25)', minHeight: 44,
+                }}
+              >
+                {t.cta}
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </motion.a>
+              <span style={{ fontSize: 14, color: '#666d80', lineHeight: 1.6 }}>{t.heroNote}</span>
+            </div>
+
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {tool.chips.map((chip) => (
                 <span key={chip} style={{
@@ -127,6 +148,17 @@ export default function ToolPage({ tool, all, t }: {
                 </span>
               ))}
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CZYM JEST */}
+      <section style={{ background: '#ffffff', padding: '64px 0 68px' }}>
+        <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+          <motion.div {...fadeUp()}>
+            <SectionLabel>{t.labelDefinition}</SectionLabel>
+            <H2>{tool.defHeading}</H2>
+            {tool.def.map((p) => <Para key={p.slice(0, 24)}>{p}</Para>)}
           </motion.div>
         </div>
       </section>

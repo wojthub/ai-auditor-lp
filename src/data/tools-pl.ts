@@ -13,13 +13,18 @@ export const TOOLS_PL: Record<string, ToolData> = {
   klasteryzacja: {
     slug: 'klasteryzacja',
     name: 'Klasteryzacja słów kluczowych',
-    heading: 'Czym jest klasteryzacja słów kluczowych?',
-    title: 'Czym jest klasteryzacja słów kluczowych?',
+    heading: 'Narzędzie do klasteryzacji słów kluczowych dla SEO',
+    title: 'Narzędzie do klasteryzacji słów kluczowych dla SEO',
     description:
-      'Grupowanie fraz według nakładania się wyników SERP. Jak działa klasteryzacja w CitationOne: próg podobieństwa, intencja klastra i strona filarowa.',
+      'Grupuj frazy według nakładania się wyników SERP: klastry z intencją, wolumenem i propozycją strony filarowej. 1 kredyt za analizę, eksport CSV.',
     lead:
-      'Klasteryzacja grupuje frazy kluczowe według tego, czy Google pokazuje na nie te same strony. Jeśli dwa zapytania mają wspólne wyniki w SERP, jedna strona może obsłużyć oba - i to jest jedyne wiarygodne kryterium, bo pochodzi od wyszukiwarki, a nie z podobieństwa słów.',
+      'Wklejasz listę fraz, dostajesz gotowe grupy tematyczne - każda z intencją, sumarycznym wolumenem i propozycją strony filarowej. Zamiast zgadywać, ile tekstów napisać, widzisz to wprost z wyników wyszukiwania.',
     chips: ['1 kredyt za analizę', 'Wejście: lista fraz albo plik CSV', 'Wynik: klastry + CSV'],
+    defHeading: 'Czym jest klasteryzacja słów kluczowych?',
+    def: [
+      'Klasteryzacja grupuje frazy kluczowe według tego, czy Google pokazuje na nie te same strony. Jeśli dwa zapytania mają wspólne wyniki w SERP, jedna strona może obsłużyć oba - i to jest jedyne wiarygodne kryterium, bo pochodzi od wyszukiwarki, a nie z podobieństwa słów.',
+      'W praktyce klaster odpowiada na pytanie, ile tekstów w ogóle trzeba napisać. Kilkanaście zapytań potrafi zmieścić się w jednym temacie, a dwie pozornie bliskie frazy - wymagać osobnych stron.',
+    ],
     whyHeading: 'Po co klasteryzować frazy?',
     why: [
       'Bez klasteryzacji powstaje najdroższy błąd w contencie: kilka osobnych tekstów pod frazy, które dla wyszukiwarki znaczą to samo. Strony zaczynają konkurować ze sobą, żadna nie zbiera pełnej siły, a budżet redakcyjny idzie na powielanie tego samego materiału.',
@@ -82,13 +87,18 @@ export const TOOLS_PL: Record<string, ToolData> = {
   pruning: {
     slug: 'pruning',
     name: 'Content Pruning',
-    heading: 'Czym jest content pruning i kanibalizacja treści?',
-    title: 'Czym jest content pruning i kanibalizacja treści?',
+    heading: 'Narzędzie do content pruningu i kanibalizacji treści dla SEO',
+    title: 'Narzędzie do content pruningu i kanibalizacji treści dla SEO',
     description:
-      'Wykrywanie stron odbiegających tematycznie i treści konkurujących ze sobą. Jak CitationOne analizuje całą sitemapę i co proponuje zrobić z każdą znalezioną stroną.',
+      'Wskaż sitemapę, a analiza pokaże strony odbiegające tematycznie i te konkurujące ze sobą - z propozycją działania dla każdej. 1 kredyt, eksport CSV.',
     lead:
-      'Pruning odpowiada na dwa pytania o istniejący serwis: które strony odstają od głównego tematu na tyle, że rozmywają jego profil, i które są tak podobne do siebie, że konkurują o to samo zapytanie.',
+      'Podajesz sitemapę, a wracasz z listą stron, które rozmywają temat serwisu, i grup stron walczących ze sobą o to samo zapytanie - każda z podpowiedzią, czy usunąć, przekierować, scalić czy zróżnicować.',
     chips: ['1 kredyt za analizę', 'Wejście: sitemapa', 'Wynik: 3 zakładki + CSV'],
+    defHeading: 'Czym jest content pruning i kanibalizacja treści?',
+    def: [
+      'Pruning odpowiada na dwa pytania o istniejący serwis: które strony odstają od głównego tematu na tyle, że rozmywają jego profil, i które są tak podobne do siebie, że konkurują o to samo zapytanie.',
+      'Kanibalizacja to ta druga sytuacja: dwa własne adresy celujące w tę samą intencję. Pruning jest reakcją na obie - nie polega na kasowaniu wszystkiego, co stare, tylko na decyzji, która strona ma zostać nośnikiem tematu.',
+    ],
     whyHeading: 'Po co przycinać treść?',
     why: [
       'Serwisy rosną warstwami: stare wpisy blogowe, akcje sezonowe, teksty pod frazy, których już nikt nie szuka. Każda taka strona rozmywa obraz tego, o czym jest domena - a to obraz, na podstawie którego wyszukiwarki i modele decydują, w czym jesteś wiarygodnym źródłem.',
@@ -151,13 +161,18 @@ export const TOOLS_PL: Record<string, ToolData> = {
   'analiza-schema': {
     slug: 'analiza-schema',
     name: 'Analiza schema.org',
-    heading: 'Czym są luki w danych strukturalnych (schema.org)?',
-    title: 'Czym są luki w danych strukturalnych (schema.org)?',
+    heading: 'Narzędzie do audytu danych strukturalnych schema.org dla SEO',
+    title: 'Narzędzie do audytu danych strukturalnych schema.org dla SEO',
     description:
-      'Audyt schema.org dla całej sitemapy: co masz wdrożone, czego brakuje i jakiego typu danych oczekuje każdy rodzaj strony. Bez wywołań AI, 1 kredyt za analizę.',
+      'Sprawdź schema.org na całej sitemapie: co masz wdrożone, czego brakuje i jakich znaczników oczekuje każdy typ strony. Bez wywołań AI, 1 kredyt za analizę.',
     lead:
-      'Analiza schema.org przechodzi całą sitemapę i sprawdza, jakie dane strukturalne ma każda strona - a przede wszystkim, jakich brakuje względem tego, czym ta strona jest.',
+      'Wskazujesz sitemapę, a narzędzie przechodzi każdy adres i pokazuje, jakie znaczniki ma, a jakich brakuje względem tego, czym ta strona jest. Bez modeli AI - działa na kodzie Twoich stron, więc jest najszybsze z całego zestawu.',
     chips: ['1 kredyt za analizę', 'Wejście: sitemapa', 'Zero wywołań modelu AI'],
+    defHeading: 'Czym są luki w danych strukturalnych (schema.org)?',
+    def: [
+      'Dane strukturalne to znaczniki w kodzie strony, którymi mówisz wyszukiwarce wprost, czym ona jest: artykułem z autorem i datą, produktem, przepisem, ofertą pracy. Luka to brak znacznika, którego dany typ strony powinien mieć.',
+      'Nie każdy brak jest problemem - dopiero zestawienie strony z jej typem pokazuje, czego naprawdę brakuje. Dlatego analiza najpierw rozpoznaje profil strony, a dopiero potem porównuje go z katalogiem oczekiwanych typów schema.',
+    ],
     whyHeading: 'Po co dane strukturalne przy AI Search?',
     why: [
       'Dane strukturalne to jedyne miejsce, w którym mówisz wyszukiwarce wprost, czym jest strona: produktem, przepisem, artykułem z datą i autorem, ofertą pracy. Reszta to domysły z treści.',
@@ -210,13 +225,18 @@ export const TOOLS_PL: Record<string, ToolData> = {
   'linki-wewnetrzne': {
     slug: 'linki-wewnetrzne',
     name: 'Linki wewnętrzne',
-    heading: 'Jak automatycznie znaleźć linki wewnętrzne do dodania?',
-    title: 'Jak automatycznie znaleźć linki wewnętrzne do dodania?',
+    heading: 'Narzędzie do linkowania wewnętrznego dla SEO',
+    title: 'Narzędzie do linkowania wewnętrznego dla SEO',
     description:
-      'Propozycje linkowania wewnętrznego z całej sitemapy: dopasowanie semantyczne akapitu do strony docelowej, gotowy anchor i wykrywanie stron osieroconych.',
+      'Propozycje linków wewnętrznych z całej sitemapy: konkretny akapit, gotowy anchor, adres docelowy i lista stron osieroconych. 1 kredyt, eksport CSV.',
     lead:
-      'Narzędzie czyta treść wszystkich stron z sitemapy i wskazuje konkretne miejsca, w których warto wstawić link wewnętrzny - razem z gotowym tekstem odnośnika i adresem docelowym.',
+      'Narzędzie czyta treść wszystkich stron z sitemapy i wskazuje konkretne miejsca, w których warto wstawić link wewnętrzny - razem z gotowym tekstem odnośnika i adresem docelowym. Przy okazji wyłapuje strony, do których nie prowadzi żaden link.',
     chips: ['1 kredyt za analizę', 'Wejście: sitemapa', 'Wynik: propozycje + CSV'],
+    defHeading: 'Jak automatycznie znaleźć linki wewnętrzne do dodania?',
+    def: [
+      'Ręcznie robi się to od strony docelowej: masz nowy tekst i szukasz miejsc, z których warto do niego podlinkować. Automat idzie odwrotnie - przegląda każdy akapit każdej strony i sprawdza, czy istnieje adres, do którego ten akapit merytorycznie pasuje.',
+      'Dopasowanie jest semantyczne, a nie po dokładnym wystąpieniu frazy, więc łapie też akapity opisujące temat innymi słowami. Efektem nie jest lista „warto polinkować", tylko para: konkretny fragment tekstu i konkretny adres docelowy z gotowym anchorem.',
+    ],
     whyHeading: 'Po co linkowanie wewnętrzne w AI Search?',
     why: [
       'Linki wewnętrzne rozprowadzają po serwisie sygnał, że temat jest u Ciebie opisany szerzej niż jedną stroną. Dla wyszukiwarki to informacja o strukturze wiedzy, a nie tylko nawigacja.',
