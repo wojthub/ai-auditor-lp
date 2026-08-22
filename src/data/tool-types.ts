@@ -49,9 +49,13 @@ export interface ToolData {
   related: { slug: string; name: string; desc: string }[];
   /** Sciezka narzedzia w aplikacji (deep link CTA). */
   appPath: string;
+  /** Podglad wyniku renderowany w sekcji „Wynik" — na razie tylko lista klastrow. */
+  preview?: 'clusters' | 'pruning' | 'schema' | 'interlinking';
 }
 
 export interface ToolStrings {
+  /** Jezyk podgladow wyniku — komponenty podgladu maja wlasne teksty dla obu wersji. */
+  lang: 'pl' | 'en';
   basePath: string;
   breadcrumbRoot: string;
   breadcrumbAria: string;
@@ -92,6 +96,7 @@ export function toolPlSlugForEn(en: string): string | undefined {
 }
 
 export const TOOL_STRINGS_PL: ToolStrings = {
+  lang: 'pl',
   basePath: '/pl/narzedzia',
   breadcrumbRoot: 'Narzędzia',
   breadcrumbAria: 'Ścieżka nawigacji',
@@ -99,9 +104,9 @@ export const TOOL_STRINGS_PL: ToolStrings = {
   tocAria: 'Na tej stronie',
   toc: [
     { id: 'czym-to-jest', label: 'Definicja' },
+    { id: 'wynik', label: 'Wynik' },
     { id: 'po-co', label: 'Zastosowanie' },
     { id: 'jak-dziala', label: 'Zasada działania' },
-    { id: 'wynik', label: 'Wynik' },
     { id: 'koszt', label: 'Koszt' },
     { id: 'faq', label: 'FAQ' },
   ],
@@ -121,6 +126,7 @@ export const TOOL_STRINGS_PL: ToolStrings = {
 };
 
 export const TOOL_STRINGS_EN: ToolStrings = {
+  lang: 'en',
   basePath: '/tools',
   breadcrumbRoot: 'Tools',
   breadcrumbAria: 'Breadcrumb',
@@ -128,9 +134,9 @@ export const TOOL_STRINGS_EN: ToolStrings = {
   tocAria: 'On this page',
   toc: [
     { id: 'what-it-is', label: 'What it is' },
+    { id: 'what-you-get', label: 'What you get' },
     { id: 'why', label: 'Why it matters' },
     { id: 'how-it-works', label: 'How it works' },
-    { id: 'what-you-get', label: 'What you get' },
     { id: 'cost', label: 'What it costs' },
     { id: 'faq', label: 'FAQ' },
   ],

@@ -82,6 +82,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
       { slug: 'analiza-schema', name: 'Analiza schema.org', desc: 'Czego brakuje w danych strukturalnych serwisu.' },
     ],
     appPath: '/klasteryzacja',
+    preview: 'clusters',
   },
 
   pruning: {
@@ -156,13 +157,14 @@ export const TOOLS_PL: Record<string, ToolData> = {
       { slug: 'analiza-schema', name: 'Analiza schema.org', desc: 'Audyt danych strukturalnych dla całej sitemapy.' },
     ],
     appPath: '/pruning',
+    preview: 'pruning',
   },
 
   'analiza-schema': {
     slug: 'analiza-schema',
     name: 'Analiza schema.org',
-    heading: 'Narzędzie do audytu danych strukturalnych schema.org dla SEO',
-    title: 'Narzędzie do audytu danych strukturalnych schema.org dla SEO',
+    heading: 'Narzędzie do audytu danych strukturalnych dla SEO',
+    title: 'Narzędzie do audytu danych strukturalnych dla SEO',
     description:
       'Sprawdź schema.org na całej sitemapie: co masz wdrożone, czego brakuje i jakich znaczników oczekuje każdy typ strony. Bez wywołań AI, 1 kredyt za analizę.',
     lead:
@@ -220,6 +222,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
       { slug: 'klasteryzacja', name: 'Klasteryzacja słów kluczowych', desc: 'Planowanie treści przed wdrożeniem.' },
     ],
     appPath: '/schema',
+    preview: 'schema',
   },
 
   'linki-wewnetrzne': {
@@ -295,6 +298,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
       { slug: 'analiza-schema', name: 'Analiza schema.org', desc: 'Dane strukturalne dla tych samych adresów.' },
     ],
     appPath: '/interlinking',
+    preview: 'interlinking',
   },
 };
 

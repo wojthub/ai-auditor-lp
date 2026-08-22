@@ -81,6 +81,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
       { slug: 'schema-gaps', name: 'Schema Gaps', desc: 'What is missing from your structured data.' },
     ],
     appPath: '/klasteryzacja',
+    preview: 'clusters',
   },
 
   'content-pruning': {
@@ -155,13 +156,14 @@ export const TOOLS_EN: Record<string, ToolData> = {
       { slug: 'schema-gaps', name: 'Schema Gaps', desc: 'A sitemap-wide structured data audit.' },
     ],
     appPath: '/pruning',
+    preview: 'pruning',
   },
 
   'schema-gaps': {
     slug: 'schema-gaps',
     name: 'Schema Gaps',
-    heading: 'Schema.org structured data audit tool for SEO',
-    title: 'Schema.org structured data audit tool for SEO',
+    heading: 'Structured data audit tool for SEO',
+    title: 'Structured data audit tool for SEO',
     description:
       'Check schema.org across a whole sitemap: what you have, what is missing and which types each page should carry. No AI calls, 1 credit per run.',
     lead:
@@ -219,6 +221,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
       { slug: 'keyword-clustering', name: 'Keyword Clustering', desc: 'Planning content before implementation.' },
     ],
     appPath: '/schema',
+    preview: 'schema',
   },
 
   'internal-linking': {
@@ -294,6 +297,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
       { slug: 'schema-gaps', name: 'Schema Gaps', desc: 'Structured data for the same set of URLs.' },
     ],
     appPath: '/interlinking',
+    preview: 'interlinking',
   },
 };
 

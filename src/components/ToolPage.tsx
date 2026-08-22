@@ -1,6 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import ClusterPreview from '@/components/ClusterPreview';
+import PruningPreview from '@/components/PruningPreview';
+import SchemaPreview from '@/components/SchemaPreview';
+import InterlinkingPreview from '@/components/InterlinkingPreview';
 import type { ToolData, ToolStrings, DimTable } from '@/data/tool-types';
 
 const ACCENT = '#0b7983';
@@ -174,8 +178,32 @@ export default function ToolPage({ tool, all, t }: {
         </div>
       </section>
 
-      {/* PO CO */}
+      {/* WYNIK — druga sekcja: user ma najpierw zobaczyc, co dostaje */}
       <section id={sectionId(1)} style={{ background: '#f8fafb', padding: '72px 0' }}>
+        <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+          <motion.div {...fadeUp()}>
+            <SectionLabel>{t.labelOutput}</SectionLabel>
+            <H2>{tool.outputHeading}</H2>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
+              {tool.output.map((item) => (
+                <li key={item.slice(0, 24)} style={{ display: 'flex', alignItems: 'flex-start', gap: 11, fontSize: 15.5, color: '#36394a', lineHeight: 1.7 }}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#15803d" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 5 }}>
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            {tool.preview === 'clusters' && <ClusterPreview lang={t.lang} />}
+            {tool.preview === 'pruning' && <PruningPreview lang={t.lang} />}
+            {tool.preview === 'schema' && <SchemaPreview lang={t.lang} />}
+            {tool.preview === 'interlinking' && <InterlinkingPreview lang={t.lang} />}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* PO CO */}
+      <section id={sectionId(2)} style={{ background: '#ffffff', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelWhy}</SectionLabel>
@@ -186,7 +214,7 @@ export default function ToolPage({ tool, all, t }: {
       </section>
 
       {/* JAK DZIALA */}
-      <section id={sectionId(2)} style={{ background: '#ffffff', padding: '72px 0' }}>
+      <section id={sectionId(3)} style={{ background: '#f8fafb', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelHow}</SectionLabel>
@@ -218,25 +246,6 @@ export default function ToolPage({ tool, all, t }: {
         </div>
       </section>
 
-      {/* WYNIK */}
-      <section id={sectionId(3)} style={{ background: '#f8fafb', padding: '72px 0' }}>
-        <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-          <motion.div {...fadeUp()}>
-            <SectionLabel>{t.labelOutput}</SectionLabel>
-            <H2>{tool.outputHeading}</H2>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
-              {tool.output.map((item) => (
-                <li key={item.slice(0, 24)} style={{ display: 'flex', alignItems: 'flex-start', gap: 11, fontSize: 15.5, color: '#36394a', lineHeight: 1.7 }}>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#15803d" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 5 }}>
-                    <path d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        </div>
-      </section>
 
       {/* KOSZT I LIMITY */}
       <section id={sectionId(4)} style={{ background: '#ffffff', padding: '72px 0' }}>
