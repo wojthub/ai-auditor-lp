@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import type { DimensionData, DimTable, DimensionStrings } from '@/data/dimension-types';
+import type { DimensionData, DimTable, DimensionStrings, DimRecommendation } from '@/data/dimension-types';
 
 const ACCENT = '#0b7983';
 
@@ -122,27 +122,43 @@ function FactorList({ items, tone }: { items: string[]; tone: 'up' | 'down' }) {
   );
 }
 
-/** Przed → po: dwie kolumny, czerwona i zielona, jak w raporcie audytu. */
-function BeforeAfter({ data, t }: { data: NonNullable<DimensionData['beforeAfter']>; t: DimensionStrings }) {
-  const cols: { label: string; text: string; color: string; bg: string }[] = [
-    { label: t.beforeLabel, text: data.before, color: '#B91C1C', bg: 'rgba(185,28,28,0.04)' },
-    { label: t.afterLabel, text: data.after, color: '#15803d', bg: 'rgba(21,128,61,0.04)' },
-  ];
+/**
+ * Przykladowe rekomendacje — uklad 1:1 z raportem w aplikacji: zdanie o problemie,
+ * pod nim karty PRZED (czerwona) i PO (zielona). Zeby user rozpoznal to, co kupuje.
+ */
+function Recommendations({ items, t }: { items: DimRecommendation[]; t: DimensionStrings }) {
   return (
-    <div style={{ marginTop: 28 }}>
-      <p style={{ fontSize: 14, color: '#666d80', margin: '0 0 12px', fontWeight: 500 }}>{data.intro}</p>
-      <div className="dim-ba-grid">
-        {cols.map((col) => (
-          <div key={col.label} style={{
-            border: '1px solid #dfe1e7', borderRadius: 12, padding: '18px 20px', background: col.bg,
-          }}>
-            <span style={{
-              fontSize: 10.5, fontWeight: 700, color: col.color, textTransform: 'uppercase',
-              letterSpacing: '0.08em', display: 'block', marginBottom: 10,
-            }}>
-              {col.label}
-            </span>
-            <p style={{ fontSize: 15, color: '#36394a', lineHeight: 1.7, margin: 0 }}>{col.text}</p>
+    <div style={{ marginTop: 34 }}>
+      <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: '0 0 6px' }}>
+        {t.recommendationsHeading}
+      </h3>
+      <p style={{ fontSize: 13.5, color: '#818898', margin: '0 0 22px' }}>{t.recommendationsNote}</p>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 26 }}>
+        {items.map((rec) => (
+          <div key={rec.problem}>
+            <p style={{ fontSize: 15, color: '#36394a', lineHeight: 1.65, margin: '0 0 12px' }}>
+              <span style={{ fontWeight: 600, color: '#B91C1C' }}>{t.problemLabel}: </span>
+              {rec.problem}
+            </p>
+            <div className="dim-ba-grid">
+              {([
+                { label: t.beforeLabel, text: rec.before, color: '#B91C1C', bg: 'rgba(185,28,28,0.04)' },
+                { label: t.afterLabel, text: rec.after, color: '#15803d', bg: 'rgba(21,128,61,0.04)' },
+              ] as const).map((col) => (
+                <div key={col.label} style={{
+                  border: '1px solid #dfe1e7', borderRadius: 12, padding: '18px 20px', background: col.bg,
+                }}>
+                  <span style={{
+                    fontSize: 10.5, fontWeight: 700, color: col.color, textTransform: 'uppercase',
+                    letterSpacing: '0.08em', display: 'block', marginBottom: 10,
+                  }}>
+                    {col.label}
+                  </span>
+                  <p style={{ fontSize: 15, color: '#36394a', lineHeight: 1.7, margin: 0 }}>{col.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
@@ -223,8 +239,22 @@ export default function DimensionPage({ dim, known, all, t }: {
         </div>
       </section>
 
-      {/* JAK JEST LICZONY */}
+      {/* W RAPORCIE — stoi jako druga sekcja: dowod przed metodologia */}
       <section id={sectionId(1)} style={{ background: '#ffffff', padding: '72px 0' }}>
+        <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+          <motion.div {...fadeUp()}>
+            <SectionLabel>{t.labelPractice}</SectionLabel>
+            <H2>{t.reportHeading}</H2>
+            {dim.report.map((p) => <Para key={p.slice(0, 24)}>{p}</Para>)}
+            {dim.recommendations && dim.recommendations.length > 0 && (
+              <Recommendations items={dim.recommendations} t={t} />
+            )}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* JAK JEST LICZONY */}
+      <section id={sectionId(2)} style={{ background: '#f8fafb', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelMethod}</SectionLabel>
@@ -236,7 +266,7 @@ export default function DimensionPage({ dim, known, all, t }: {
       </section>
 
       {/* CZYNNIKI */}
-      <section id={sectionId(2)} style={{ background: '#f8fafb', padding: '72px 0' }}>
+      <section id={sectionId(3)} style={{ background: '#ffffff', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
             <SectionLabel>{t.labelFactors}</SectionLabel>
@@ -262,18 +292,6 @@ export default function DimensionPage({ dim, known, all, t }: {
               </div>
             )}
 
-            {dim.beforeAfter && <BeforeAfter data={dim.beforeAfter} t={t} />}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* W RAPORCIE */}
-      <section id={sectionId(3)} style={{ background: '#ffffff', padding: '72px 0' }}>
-        <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-          <motion.div {...fadeUp()}>
-            <SectionLabel>{t.labelPractice}</SectionLabel>
-            <H2>{t.reportHeading}</H2>
-            {dim.report.map((p) => <Para key={p.slice(0, 24)}>{p}</Para>)}
           </motion.div>
         </div>
       </section>

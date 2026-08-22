@@ -33,7 +33,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
     ],
     stepsHeading: 'Jak działa klasteryzacja?',
     steps: [
-      { title: 'Pobranie wyników wyszukiwania', desc: 'Dla każdej frazy z listy pobieramy wyniki wyszukiwania – to one są danymi wejściowymi, nie same frazy.' },
+      { title: 'Pobranie wyników wyszukiwania', desc: 'Dla każdej frazy z listy pobieramy wyniki wyszukiwania – to one są danymi wejściowymi analizy.' },
       { title: 'Macierz fraza × adres', desc: 'Budujemy macierz obecności adresów w wynikach i liczymy podobieństwo każdej pary fraz.' },
       { title: 'Łączenie w klastry', desc: 'Frazy powiązane podobieństwem powyżej progu trafiają do wspólnych grup.' },
       { title: 'Opis klastra', desc: 'Model nadaje klastrowi etykietę, rozpoznaje intencję i proponuje temat strony filarowej.' },
@@ -97,7 +97,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
     defHeading: 'Czym jest content pruning i kanibalizacja treści?',
     def: [
       'Pruning odpowiada na dwa pytania o istniejący serwis: które strony odstają od głównego tematu na tyle, że rozmywają jego profil, i które są tak podobne do siebie, że konkurują o to samo zapytanie.',
-      'Kanibalizacja to ta druga sytuacja: dwa własne adresy celujące w tę samą intencję. Pruning jest reakcją na obie – nie polega na kasowaniu wszystkiego, co stare, tylko na decyzji, która strona ma zostać nośnikiem tematu.',
+      'Kanibalizacja to ta druga sytuacja: dwa własne adresy celujące w tę samą intencję. Pruning jest reakcją na obie sytuacje: rozstrzyga, która strona ma zostać nośnikiem tematu, a które warto usunąć, przekierować albo scalić.',
     ],
     whyHeading: 'Dlaczego warto przycinać treść?',
     why: [
@@ -235,7 +235,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
     defHeading: 'Jak automatycznie znaleźć linki wewnętrzne do dodania?',
     def: [
       'Ręcznie robi się to od strony docelowej: masz nowy tekst i szukasz miejsc, z których warto do niego podlinkować. Automat idzie odwrotnie – przegląda każdy akapit każdej strony i sprawdza, czy istnieje adres, do którego ten akapit merytorycznie pasuje.',
-      'Dopasowanie jest semantyczne, a nie po dokładnym wystąpieniu frazy, więc łapie też akapity opisujące temat innymi słowami. Efektem nie jest lista „warto polinkować”, tylko para: konkretny fragment tekstu i konkretny adres docelowy z gotowym anchorem.',
+      'Dopasowanie jest semantyczne, a nie po dokładnym wystąpieniu frazy, więc łapie też akapity opisujące temat innymi słowami. Efektem jest para: konkretny fragment tekstu i konkretny adres docelowy z gotowym anchorem.',
     ],
     whyHeading: 'Dlaczego linkowanie wewnętrzne jest ważne w AI Search?',
     why: [

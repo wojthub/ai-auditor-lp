@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import CqsScoreCard from '@/components/CqsScoreCard';
 
 const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
@@ -38,7 +39,7 @@ const DIMS = [
     id: 'EAV',
     slug: 'graf-wiedzy',
     label: 'Graf wiedzy (EAV)',
-    body: 'Treść buduje sieć powiązanych pojęć: encji, ich atrybutów i wartości. Im gęstszy i spójniejszy graf, tym łatwiej AI rozpoznaje treść jako wiarygodne źródło w danej dziedzinie. Ten wymiar sprawdza, czy teksty tworzą wiedzę – a nie tylko ją wspominają.',
+    body: 'Treść buduje sieć powiązanych pojęć: encji, ich atrybutów i wartości. Im gęstszy i spójniejszy graf, tym łatwiej AI rozpoznaje treść jako wiarygodne źródło w danej dziedzinie. Ten wymiar sprawdza, czy teksty budują wiedzę, czy tylko wspominają o pojęciach.',
   },
   {
     num: '04',
@@ -80,7 +81,7 @@ const DIMS = [
     id: 'Fan-Out',
     slug: 'pokrycie-fan-out',
     label: 'Pokrycie Fan-Out i AIO',
-    body: 'Jedno zapytanie użytkownika rozkłada się na kilkanaście pytań pobocznych, które AI rozwiązuje w tle. Ten wymiar sprawdza, na ile z nich odpowiada Twoja treść – bo cytowanie zdobywa się na pytaniach pobocznych, nie na głównym.',
+    body: 'Jedno zapytanie użytkownika rozkłada się na kilkanaście pytań pobocznych, które AI rozwiązuje w tle. Ten wymiar sprawdza, na ile z nich odpowiada Twoja treść, bo to na pytaniach pobocznych zdobywa się cytowanie.',
   },
   {
     num: '10',
@@ -107,7 +108,7 @@ const EXTRA = [
 ];
 
 const EEAT = [
-  { letter: 'E', label: 'Experience', desc: 'Czy tekst zawiera dowody praktycznego obcowania z tematem?' },
+  { letter: 'E', label: 'Experience', desc: 'Czy tekst zawiera dowody praktycznego doświadczenia z tematem?' },
   { letter: 'E', label: 'Expertise', desc: 'Jak głęboka jest analiza merytoryczna?' },
   { letter: 'A', label: 'Authoritativeness', desc: 'Czy Twoja marka jest rozpoznawalnym źródłem w niszy?' },
   { letter: 'T', label: 'Trustworthiness', desc: 'Czy dane i źródła są podane transparentnie?' },
@@ -137,29 +138,32 @@ export default function WymiaryContent() {
               10 wymiarów jakości treści + E-E-A-T
             </h1>
             <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.7, maxWidth: 680, margin: '0 auto 36px' }}>
-              Duże modele językowe (LLM), takie jak te napędzające ChatGPT czy Google AI Overview, nie czytają tekstów w sposób tradycyjny. Korzystają z algorytmów do matematycznej oceny przydatności i wiarygodności treści. CitationOne przekłada te procesy na 10 mierzalnych wymiarów, które składają się na Twój Content Quality Score (CQS).
+              Modele stojące za ChatGPT i Google AI Overview oceniają treść algorytmicznie. CitationOne przekłada te procesy na 10 mierzalnych wymiarów, które składają się na Twój Content Quality Score (CQS).
             </p>
 
             {/* CQS box */}
-            <div style={{
+            <div className="cqs-box" style={{
               background: '#f8fafb',
               border: '1px solid #dfe1e7',
               borderRadius: 12,
               padding: '28px 32px',
               textAlign: 'left',
-              maxWidth: 640,
+              maxWidth: 760,
               margin: '0 auto',
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                <div style={{ width: 16, height: 2, background: ACCENT, borderRadius: 1 }} />
-                <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Czym jest CQS?</span>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                  <div style={{ width: 16, height: 2, background: ACCENT, borderRadius: 1 }} />
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Czym jest CQS?</span>
+                </div>
+                <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: '0 0 10px' }}>
+                  Content Quality Score
+                </h3>
+                <p style={{ fontSize: 15, color: '#36394a', lineHeight: 1.7, margin: 0 }}>
+                  CQS w skali 0–100 pokazuje, jak Twoja treść wypada na tle Top 10 pod kątem parametrów istotnych dla AI Search. Każdy z 10 wymiarów wchodzi do wyniku z własną wagą.
+                </p>
               </div>
-              <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: '0 0 10px' }}>
-                Content Quality Score
-              </h3>
-              <p style={{ fontSize: 15, color: '#36394a', lineHeight: 1.7, margin: 0 }}>
-                CQS to wskaźnik w skali 0–100, który określa, jak dobrze Twoja treść wypada na tle Top 10 wyników z wyszukiwarki pod kątem parametrów istotnych dla AI Search. Każdy z 10 wymiarów ma przypisaną wagę, co pozwala na precyzyjną ocenę Twojej szansy na cytowanie.
-              </p>
+              <CqsScoreCard />
             </div>
           </motion.div>
         </div>
@@ -373,6 +377,15 @@ export default function WymiaryContent() {
       </section>
 
       <style>{`
+        .cqs-box {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 28px;
+          align-items: center;
+        }
+        @media (max-width: 720px) {
+          .cqs-box { grid-template-columns: 1fr; gap: 20px; }
+        }
         .dims-list-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);

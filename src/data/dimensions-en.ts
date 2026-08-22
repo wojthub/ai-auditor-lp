@@ -21,7 +21,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'What Central Search Intent is and how CitationOne measures alignment: predicate, reader knowledge level, attribute coverage and gaps against the Top 10 SERP.',
     lead:
-      'CSI Alignment checks whether your content answers the question the user actually asked - not the one next to it. It is the dimension above the others: they measure how well the job is done, this one measures whether you are writing about the right thing at all.',
+      'Does your content answer what users are really looking for? AI does not cite pages that miss the query intent - even if they contain the keyword. This dimension measures how precisely your article matches the expected answer type: definition, comparison, instruction, or recommendation.',
     chips: ['Score 0-10', 'Assessed by a language model', 'Input: content + CSI + Top 10 SERP benchmark'],
     whyHeading: 'Why does CSI alignment matter to AI models?',
     why: [
@@ -90,6 +90,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'It can, but the score is computed against one primary intent. When content splits across two intents it usually delivers neither in full - and that shows in the result. Splitting it into two pages works better than closing both in one text.',
       },
     ],
+    recommendations: [
+      {
+        problem: 'The “polling rate” attribute appears at 4 of 10 competitors, and with a transactional intent it is the parameter that decides which model a buyer picks.',
+        before: 'Key technical parameters: resolution from 800 up to 26,000 DPI, acceleration up to 50G, 1 ms response time.',
+        after: 'Add the polling rate (1000 Hz or 8000 Hz) as a parameter that affects cursor smoothness.',
+      },
+      {
+        problem: 'Buying incentives — 0% instalments, 24 h shipping, in-store pickup — sit on product cards, while a transactional intent expects them in the lead.',
+        before: 'Gaming mice are precision pointing devices designed for fast, responsive gameplay.',
+        after: 'Add the purchase terms to the lead: “211 models from €19.99, 0% instalments, shipping in 24 h or in-store pickup”.',
+      },
+    ],
     related: [
       { slug: 'knowledge-graph-eav', name: 'Knowledge Graph', desc: 'What the attributes measured here are built from.' },
       { slug: 'query-fan-out', name: 'Fan-Out & AIO Coverage', desc: 'How many sub-questions around the intent your page answers.' },
@@ -105,7 +117,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'The ratio of fact-bearing sentences to filler. How CitationOne computes information density, which signals raise and lower it, and how to swap generalities for data.',
     lead:
-      'Information density is the share of sentences carrying a verifiable fact. It is not about length or style - it is about how many sentences would survive if you deleted everything that cannot be checked.',
+      'How many facts, data points and concrete statements a single paragraph contains. Low-density content is filler - AI skips it. This dimension rewards every sentence that adds something new and penalizes text that repeats the same idea in different words.',
     chips: ['Score 0-10', 'Computed algorithmically + examples from the model', 'Input: content'],
     whyHeading: 'Why does information density matter to AI models?',
     why: [
@@ -115,8 +127,8 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     howHeading: 'How do we measure information density?',
     how: {
       intro: [
-        'The basis is algorithmic, not a judgement call: we split the text into sentences and use patterns to detect which ones carry a fact - a number, date, unit, amount, proper name or a concrete claim. The result is the share of such sentences, rescaled to a ten-point score.',
-        'The formula: sentences carrying a fact divided by all sentences, times 10. The language model does not compute this score - it supplies the examples, meaning actual sentences from your text on both sides of the line.',
+        'The basis is algorithmic: we split the text into sentences and use patterns to detect which ones carry a fact - a number, date, unit, amount, proper name or a concrete claim. The result is the share of such sentences, rescaled to a ten-point score.',
+        'The formula: sentences carrying a fact divided by all sentences, times 10. The algorithm alone computes this score, and the language model supplies the examples: actual sentences from your text on both sides of the line.',
       ],
       tables: [
         {
@@ -162,7 +174,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     swapNote:
       'When hard data is missing, ranges, proportions and comparisons still work - “3-5 days”, “1 in 4 tickets”, “twice the average”.',
     report: [
-      'You get the share of fact-bearing sentences with a score, plus two lists pulled from your own text: sentences counted as facts and sentences counted as filler. These are not generic examples - they are your sentences, so you can see exactly which paragraphs drag the result down.',
+      'You get the share of fact-bearing sentences with a score, plus two lists pulled from your own text: sentences counted as facts and sentences counted as filler. Both lists are built from your own sentences, so you can see exactly which paragraphs drag the result down.',
       'Recommendations come in a Before / After format with a concrete rewrite proposed.',
     ],
     faq: [
@@ -179,11 +191,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'No. The share of fact-bearing sentences is computed by an algorithm over patterns - number, date, unit, amount, proper name. The language model only adds examples from your text so you can see which paragraphs are meant.',
       },
     ],
-    beforeAfter: {
-      intro: 'Two sentences carrying the same message - the only difference is how much of it can be verified.',
-      before: 'Our panels feature high efficiency and modern technology, and installation is quick and hassle-free.',
-      after: 'The panels reach 21.3% efficiency and carry a 25-year power warranty. Installation on a pitched roof takes one day.',
-    },
+    recommendations: [
+      {
+        problem: 'The paragraph opens with a rhetorical question — there is no claim in it that could be confirmed or refuted.',
+        before: 'Want to know more? Use our recommendations and browse products in specific categories.',
+        after: 'Replace the question with a fact: “Buying guides and related categories — 12 topics”.',
+      },
+      {
+        problem: 'The sentence is built entirely from generalities: “varied”, “perfectly”, “maximum precision” — no verifiable data.',
+        before: 'Thanks to varied sensors, shapes and functions you will match the mouse perfectly to your needs and reach maximum precision in every game.',
+        after: 'Give the criterion: “A 26,000 DPI optical sensor and a claw-grip profile cut cursor tracking errors in FPS games”.',
+      },
+    ],
     related: [
       { slug: 'knowledge-graph-eav', name: 'Knowledge Graph', desc: 'Whether the facts form complete Entity-Attribute-Value triples.' },
       { slug: 'bluf', name: 'BLUF', desc: 'Whether the fact comes at the start of a section or after an intro.' },
@@ -199,11 +218,11 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'Entity-Attribute-Value triples, or how AI models read facts off a page. How CitationOne builds the graph and compares coverage with the Top 10 SERP.',
     lead:
-      'A knowledge graph breaks content into Entity - Attribute - Value triples: what you write about, which property of it you describe and what exactly you say about that property. This dimension checks how many of your sentences decompose into such facts, and how many remain description.',
+      'Content builds a network of related concepts: entities, their attributes and values. The denser and more coherent the graph, the easier it is for AI to recognize the content as a credible source in the field. This dimension checks whether your texts create knowledge - not just mention it.',
     chips: ['Score 0-10', 'Language model + algorithmic signals', 'Input: content + Top 10 SERP benchmark'],
     whyHeading: 'Why does the knowledge graph matter to AI models?',
     why: [
-      'Search engines stopped operating on keywords years ago; they work with entities and facts about them - and the Entity-Attribute-Value triple is the basic structure of every knowledge graph. “Mortgage” is the entity, “interest rate” is its attribute, “7.2%” is the value. Only the complete set forms a fact that can be stored, cross-checked against another source and quoted.',
+      'Search engines have worked with entities and facts about them for years now - and the Entity-Attribute-Value triple is the basic structure of every knowledge graph. “Mortgage” is the entity, “interest rate” is its attribute, “7.2%” is the value. Only the complete set forms a fact that can be stored, cross-checked against another source and quoted.',
       'In GEO this translates directly: the model builds its answer from facts, not from paragraphs. A page that names entities but never gives their attributes and values is, to the model, a text without content - summarisable, but with nothing to quote. Conversely, a dense and consistent graph makes the model recognize the page as a source of knowledge in its field.',
     ],
     howHeading: 'How do we measure the knowledge graph?',
@@ -265,6 +284,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'No, we show them as a warning with no effect on the result. They are still worth fixing: generative systems compute a contradiction risk per document and skip the page as a source once it crosses a threshold.',
       },
     ],
+    recommendations: [
+      {
+        problem: 'The “weight” attribute is named without a value, and for esports players it is one of the parameters that settles the purchase.',
+        before: 'Some mice also let you adjust the weight with removable weights.',
+        after: 'Give the ranges: “from 58 g in ultralight models up to 120 g with the full set of weights”.',
+      },
+      {
+        problem: 'The product card describes the box contents instead of the entity — without the full model name the facts have nothing to attach to.',
+        before: 'Product type: mouse. Signal transmission: wired. In the box: mouse, quick start guide.',
+        after: 'Open the card with the full commercial model name and hang the parameters off it as attributes with values.',
+      },
+    ],
     related: [
       { slug: 'csi-alignment', name: 'CSI Alignment', desc: 'Whether the covered attributes match the query intent.' },
       { slug: 'information-density', name: 'Information Density', desc: 'How many of your sentences carry a fact at all.' },
@@ -280,19 +311,19 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'What BLUF is and how CitationOne measures it: the answer within the first 50 words of a section, and separate rules for FAQ, listing and encyclopedia pages.',
     lead:
-      'BLUF (Bottom Line Up Front) checks one thing: whether the answer to a section question lands within its first 50 words, or only after a paragraph of warm-up. It is a dimension about the order of information, not its amount - the same text with its sentences rearranged scores differently.',
+      'AI models prefer content that delivers the answer at the start of a section. BLUF measures how quickly your content gets to the point - and whether it does so in every section, not only the first.',
     chips: ['Score 0-10', 'Assessed by a language model', 'Input: content + CSI + content-type profile'],
     whyHeading: 'Why does BLUF matter to AI models?',
     why: [
-      'The RAG systems behind ChatGPT, Perplexity and AI Overview do not read a page whole. They cut it into chunks of roughly 200-500 words and score each one separately, without the context of the rest of the article. If a section opens with “In today’s world, more and more companies...”, the model sees a fragment that answers nothing - and reaches for the competitor who put the answer in the first sentence.',
-      'In classic SEO the same rule powered featured snippets - the box went to the paragraph that answered immediately. In GEO the stakes are higher, because a generative engine does not link the page, it quotes a fragment of it: a chunk without an answer up front looks to the model like a chunk with no answer at all.',
+      'BLUF stands for Bottom Line Up Front: the most important information goes first. The RAG systems behind ChatGPT, Perplexity and AI Overview read a page in fragments. They cut it into chunks of roughly 200-500 words and score each one separately, without the context of the rest of the article. If a section opens with “In today’s world, more and more companies...”, the model sees a fragment that answers nothing - and reaches for the competitor who put the answer in the first sentence.',
+      'In classic SEO the same rule powered featured snippets - the box went to the paragraph that answered immediately. In GEO the stakes are higher, because a generative engine quotes a fragment of the page instead of linking to it: a chunk without an answer up front looks to the model like a chunk with no answer at all.',
       'The pattern that works is Answer → Evidence → Context. First the conclusion with a number, then the justification, then the background. The reverse order - background, justification, conclusion - is natural in academic writing and lethal in AI Search.',
     ],
     howHeading: 'How do we measure BLUF?',
     how: {
       intro: [
         'The model receives the content split into H2 sections, the page Central Search Intent and the content-type profile from the SERP consensus. For each section it isolates the first 50 words and decides whether they contain a direct answer to that section question. The dimension score is the share of sections with a correct BLUF, adjusted for the presence of concrete numbers.',
-        'The rule depends on the page type - this is not one template for everything:',
+        'The rule depends on the page type:',
       ],
       tables: [
         {
@@ -354,11 +385,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'One for a simple question, two or three for a complex one. The limit is the first 50 words of the section - that is where the answer belongs, not an announcement of what the section will cover.',
       },
     ],
-    beforeAfter: {
-      intro: 'The same paragraph before and after the fix - no new knowledge added, only reordering and swapping generalities for data.',
-      before: 'In today’s world, more and more people are considering a heat pump. Before we get to the specifics, it is worth understanding what drives the cost of such an investment.',
-      after: 'A heat pump installation costs between $9,000 and $15,000, or from $5,000 with a subsidy. The total covers the unit, labour and upgrading the existing system.',
-    },
+    recommendations: [
+      {
+        problem: 'There is no category summary above the product list — the first thing the model gets is a heading and a counter.',
+        before: '# Gaming mice (211)',
+        after: 'Add two sentences under the H1: “211 gaming mice from €19.99 to €169, wired and wireless”.',
+      },
+      {
+        problem: 'The section opens with a generic definition — not a single number appears in the first 50 words.',
+        before: 'The core element of every gaming mouse is an optical or laser sensor, which affects tracking accuracy.',
+        after: 'Open with the fact: “Optical sensors deliver 800–26,000 DPI, 650 IPS tracking speed and a 1 ms response time”.',
+      },
+    ],
     related: [
       { slug: 'chunk-optimization', name: 'Chunk Optimization', desc: 'Whether the section stands on its own without the rest.' },
       { slug: 'information-density', name: 'Information Density', desc: 'How many facts each paragraph carries.' },
@@ -374,11 +412,11 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'AI engines cut a page into fragments and score each separately. How CitationOne measures section autonomy, chunk length per content type and passage citability.',
     lead:
-      'A chunk is a fragment of a page that an AI engine retrieves and scores in isolation - most often a single H2 or H3 section. This dimension checks whether your sections stand on their own, or only make sense to someone who has read the whole page.',
+      'AI retrieves self-contained fragments - sections that can be understood without the full article context. This dimension measures how many citation-ready units your page contains and whether they run to the length that suits this content type.',
     chips: ['Score 0-10', 'Language model + algorithmic signals', 'Input: content + CSI + content-type profile'],
     whyHeading: 'Why does chunk optimization matter to AI models?',
     why: [
-      'A generative engine does not load the whole page into its answer. It indexes the page in fragments and, when a question arrives, retrieves the ones that look most relevant. Your fragment reaches the model without the article title, without the previous section and without the introduction.',
+      'A generative engine does not load the whole page into its answer. It indexes the page in fragments - most often single H2 or H3 sections - and, when a question arrives, retrieves the ones that look most relevant. Your fragment reaches the model without the article title, without the previous section and without the introduction.',
       'That is why “as mentioned above, this parameter is crucial” is a loss in GEO - out of context it means nothing and cannot be quoted. The same goes for a section that never repeats the topic it discusses, relying on a pronoun pointing at a heading two screens up.',
       'The reverse also holds: a section written as a standalone answer can be cited even when the rest of the page is average. In AI Search the chunk is the unit of competition - not the page.',
     ],
@@ -386,7 +424,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     how: {
       intro: [
         'The model examines each section separately on four points: whether it opens with an answer, whether it repeats the main topic at least twice, whether it avoids pointing at other fragments (“above”, “as we wrote earlier”), and whether its length suits the content type.',
-        'That last criterion is not a single threshold for everything - an FAQ answer should be short, an encyclopedia entry may be long:',
+        'That last criterion depends on the content type: an FAQ answer should be short, an encyclopedia entry may be long:',
       ],
       tables: [
         {
@@ -436,11 +474,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'No, it is a complementary metric shown alongside the score. It tells you which sections have the best odds of being selected as a source, but it does not enter the final result.',
       },
     ],
-    beforeAfter: {
-      intro: 'A section opening line: the first needs the previous paragraph, the second stands on its own.',
-      before: 'As mentioned above, this parameter is crucial when choosing a unit.',
-      after: 'The COP rating drives heating costs: a pump with a COP of 4.5 uses 25% less electricity than a model rated 3.6.',
-    },
+    recommendations: [
+      {
+        problem: 'The section and its H3 headings have zero citable density — empty fragments go into the index.',
+        before: '### Check related categories ### Looking for a specific brand? ### Want to know more?',
+        after: 'Add 30–50 words under each heading with category names, brands and guide titles.',
+      },
+      {
+        problem: 'The product card carries no model name, so once cut out of the listing it stops meaning anything.',
+        before: 'Product type: mouse. Scroll wheel: yes. Transmission: wired. €34.90.',
+        after: 'Put the full commercial name at the top of the card — a chunk has to stand without the rest of the page.',
+      },
+    ],
     related: [
       { slug: 'bluf', name: 'BLUF', desc: 'Whether the section opens with the answer.' },
       { slug: 'query-fan-out', name: 'Fan-Out & AIO Coverage', desc: 'Which sub-questions your sections answer.' },
@@ -456,7 +501,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'How much effort it takes to extract an answer from your page. A points-based structure checklist: heading hierarchy, tables, lists, emphasis and a summary.',
     lead:
-      'Cost of Retrieval measures how much work it takes to pull a specific answer off a page. The clearer the structure - heading hierarchy, tables, lists, emphasis - the lower the cost and the higher the score.',
+      'How much effort it takes to pull a concrete answer off the page. Heading hierarchy, tables, lists and emphasis lower that cost; a wall of text raises it. With comparable content, the model picks the source that is cheaper to handle.',
     chips: ['Score 0-10', 'Points-based structure checklist', 'Input: content + HTML structure'],
     whyHeading: 'Why does cost of retrieval matter to AI models?',
     why: [
@@ -517,6 +562,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'No - a table counts when you have data to line up. If you compare parameters, prices or variants, a table lowers the cost of reaching the answer more than any other change. A text with no comparative data gains nothing from one.',
       },
     ],
+    recommendations: [
+      {
+        problem: 'Parameters are scattered across a list instead of being laid out in a table — the model assembles the answer from four separate bullets.',
+        before: 'Key technical parameters: 800–26,000 DPI resolution, acceleration up to 50G, 1 ms response time, new-generation optical sensors.',
+        after: 'Add a table: Game genre | Recommended sensor / DPI | Connection type | Weight.',
+      },
+      {
+        problem: 'Empty H3 headings in the footer raise the processing cost — the parser walks a structure that holds no content.',
+        before: '### Customer service ### Shopping ### Current promotions ### Bestsellers ### Trending',
+        after: 'Remove the headings from footer navigation or give each one a sentence of content; leave plain links as a normal list.',
+      },
+    ],
     related: [
       { slug: 'chunk-optimization', name: 'Chunk Optimization', desc: 'Whether sections stand on their own.' },
       { slug: 'effort-score', name: 'Effort Score', desc: 'The wider checklist of formats and page completeness.' },
@@ -532,12 +589,12 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'Comparing your page’s terminology against the Top 10 SERP corpus. How CitationOne finds missing specialist terms and suggests the context to use them in.',
     lead:
-      'TF-IDF compares the vocabulary of your content with the vocabulary of the Top 10. What matters are rare, specialist terms - those prove familiarity with the subject, unlike words that appear everywhere.',
+      'A comparison of your page terminology with the vocabulary of the Top 10. A missing specialist term usually means a missing angle - CitationOne shows exactly which concepts you skip and in what context competitors use them.',
     chips: ['Score 0-10', 'Statistical analysis + language model', 'Input: content + Top 10 SERP corpus'],
     whyHeading: 'Why does TF-IDF matter to AI models?',
     why: [
       'Terminology is the cheapest proof of competence. A text about mortgages that never mentions “loan-to-value ratio”, “creditworthiness” or “bank margin” describes the topic from the outside - and that is exactly how it looks to a model comparing it with ten pages that do use those concepts.',
-      'In GEO this carries extra weight, because a missing term usually means a missing angle. If nine competitors write about something absent from your page, it is not a matter of style - it is a substantive gap the model will see when assembling its answer.',
+      'In GEO this carries extra weight, because a missing term usually means a missing angle. If nine competitors write about something absent from your page, you have a substantive gap the model will see when assembling its answer.',
     ],
     howHeading: 'How do we measure TF-IDF?',
     how: {
@@ -588,6 +645,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'From the content of the Top 10 competitors for your phrase. A domain holding several positions in the results carries less weight, so a single site does not dictate the entire vocabulary.',
       },
     ],
+    recommendations: [
+      {
+        problem: 'The phrase “optical dpi” appears at 5 of 8 competitors when describing the sensor, and never once in your content.',
+        before: 'The optical sensor affects tracking accuracy and response speed.',
+        after: 'Use the term in an explanation: “an optical dpi resolution of 26,000 translates into tracking accuracy without interpolation”.',
+      },
+      {
+        problem: 'The advisory phrase “best gaming mouse” appears at 4 of 8 competitors, usually next to selection criteria — you do not use it at all.',
+        before: 'Thanks to varied sensors and shapes you will match the mouse to your needs.',
+        after: 'Add an advisory section: “Best gaming mouse for FPS — the parameters that matter”.',
+      },
+    ],
     related: [
       { slug: 'knowledge-graph-eav', name: 'Knowledge Graph', desc: 'Whether the concepts form complete facts.' },
       { slug: 'information-gain', name: 'Information Gain', desc: 'Which of your terms are unique across the whole Top 10.' },
@@ -603,7 +672,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'Whether the main topic of the page performs actions or merely receives them. How CitationOne measures semantic roles and why the passive voice hurts in AI Search.',
     lead:
-      'Semantic roles check who your main topic is in your sentences: the one performing the action, or the one it happens to. “The bank grants the loan” and “the loan is granted” carry the same fact, but only the first states who does it.',
+      'Whether the main topic of the page performs the action in your sentences or merely receives it. The active voice gives the model a complete "who - does what - to what"; the passive voice leaves a hole in that structure.',
     chips: ['Score 0-10', 'Assessed by a language model', 'Input: content + central entity from CSI'],
     whyHeading: 'Why do semantic roles matter to AI models?',
     why: [
@@ -667,11 +736,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'It is usually the cheapest dimension to repair. The fixes are mechanical - reordering a sentence - and need no new content or new data.',
       },
     ],
-    beforeAfter: {
-      intro: 'The fix is purely syntactic - the same fact, but with an explicit actor.',
-      before: 'A mortgage is granted for a period of up to 30 years, and the decision is made within 21 days.',
-      after: 'The bank grants a mortgage for up to 30 years and makes its decision within 21 days.',
-    },
+    recommendations: [
+      {
+        problem: 'The main topic is the object of the reader’s action: the agent of the sentence is “you”, not the product being described.',
+        before: 'In our store you will find a wide choice of wired and wireless models optimised for different game genres.',
+        after: 'Wired and wireless gaming mice cover every game genre — from FPS, through strategy, to MMO.',
+      },
+      {
+        problem: 'The sentence says what “you can do” instead of what the product does — the agent disappears from the fact.',
+        before: 'Thanks to varied sensors you can match the mouse to your needs.',
+        after: 'Sensors with up to 26,000 DPI match the mouse sensitivity to your play style.',
+      },
+    ],
     related: [
       { slug: 'information-density', name: 'Information Density', desc: 'Whether the sentence carries a checkable fact at all.' },
       { slug: 'knowledge-graph-eav', name: 'Knowledge Graph', desc: 'How facts combine into entities, attributes and values.' },
@@ -687,7 +763,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'How AI engines break one question into a dozen sub-queries, and how CitationOne measures the share your content covers - using AI Overview and real SERP questions.',
     lead:
-      'Fan-Out is the decomposition of one query into a dozen or so side questions an AI engine resolves in the background before assembling its answer. This dimension measures how many of them your page answers - because citations are won on the side questions, not the main one.',
+      'A single user query decomposes into a dozen or so side questions that AI resolves in the background. This dimension checks how many of them your content answers - because citations are won on the side questions, not the main one.',
     chips: ['Score 0-10', 'Two model passes + SERP data', 'Input: CSI + SERP questions + AI Overview'],
     whyHeading: 'Why does Fan-Out coverage matter to AI models?',
     why: [
@@ -716,7 +792,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
           caption: 'Not every question weighs the same - what counts is whether search data confirms it exists',
           head: ['Question status', 'What it means'],
           rows: [
-            ['Confirmed by the SERP', 'Google itself shows it under “People also ask” - not a hypothesis, a real query'],
+            ['Confirmed by the SERP', 'Google itself shows it under “People also ask”, so somebody demonstrably asks it'],
             ['Present in AI Overview', 'The thread appears in the AI summary for this phrase'],
             ['Predicted by the model', 'Follows from the intent, but has no confirmation in SERP data'],
             ['Confirmed gap', 'The question is in the SERP and your content does not address it - this lowers the score'],
@@ -756,6 +832,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'Partly. An FAQ closes short, factual questions well, but a thread that needs development works better as a full H2 section with an answer, data and context.',
       },
     ],
+    recommendations: [
+      {
+        problem: 'Google shows “What are the best gaming mice?” in People Also Ask, and no section of the page answers it.',
+        before: 'No ranking or shortlist of recommended models anywhere in the content.',
+        after: 'Add an H2 section “Gaming mouse ranking — recommended models” with five entries and the reason behind each pick.',
+      },
+      {
+        problem: 'The budget question is confirmed in the SERP, and the page does not touch it in a single sentence.',
+        before: 'No section on price segmentation: budget models versus tournament ones.',
+        after: 'Describe which parameters matter under €40, between €40 and €90, and above €90.',
+      },
+    ],
     related: [
       { slug: 'csi-alignment', name: 'CSI Alignment', desc: 'The intent the side questions are derived from.' },
       { slug: 'chunk-optimization', name: 'Chunk Optimization', desc: 'Whether the answering section stands on its own.' },
@@ -771,17 +859,17 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'An algorithmic completeness checklist: length against competitors, images, video, tables, lists, heading hierarchy, table of contents and a visible update date.',
     lead:
-      'Effort Score measures the work put into a page: whether it has what a properly made piece on this topic has - adequate length, visual material, tables, lists, a clear hierarchy and a visible date. It is computed entirely by an algorithm, with no language model involved.',
+      'An algorithmic completeness checklist: length against competitors, visual material, tables, lists, heading hierarchy, table of contents and a visible update date. Every unmet item is a fifteen-minute fix.',
     chips: ['Score 0-10', '100% algorithmic - zero model calls', 'Input: content + HTML structure + Top 10 average'],
     whyHeading: 'Why does Effort Score matter to AI models?',
     why: [
-      'Completeness signals are the oldest proxy for quality search engines use: a page with a table, visual material and a current date more often comes from someone who actually worked through the topic than a page made of five paragraphs. It is not proof of quality, but it is a strong hint - and it is treated as one.',
+      'Completeness signals are the oldest proxy for quality search engines use: a page with a table, visual material and a current date more often comes from someone who actually worked through the topic than a page made of five paragraphs. Search engines treat it as a strong hint of quality.',
       'The practical value of this dimension differs from the others: it is a list of things you can fix today without rewriting a word. A missing table of contents, no update date, three images instead of four - each of those is a fifteen-minute fix.',
     ],
     howHeading: 'How do we measure Effort Score?',
     how: {
       intro: [
-        'The checklist covers up to eleven criteria. Some are absolute, some are relative to competitors - the length threshold is the Top 10 average for your phrase, not a fixed word count.',
+        'The checklist covers up to eleven criteria and an algorithm alone computes it, with no language model involved. Some are absolute, some are relative to competitors - the length threshold is the Top 10 average for your phrase, not a fixed word count.',
         'The criteria adapt to the page type: a table of contents is only checked for articles and encyclopedia entries, and a visible date is skipped on landing pages, where an old date hurts conversion. A skipped criterion does not lower the score - the maximum pool shrinks along with it.',
       ],
       tables: [
@@ -837,6 +925,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'No. We only check it on articles and encyclopedia entries. On a listing, product page or landing page the criterion is skipped and does not shrink the pool the score is computed from.',
       },
     ],
+    recommendations: [
+      {
+        problem: 'The content is clearly shorter than the Top 10 average for this query (1,460 words) — competitors cover the topic more widely.',
+        before: 'Four short descriptive sections under the product list.',
+        after: 'Add the missing threads — a wired versus wireless comparison and a model ranking — until the content reaches the competitor average.',
+      },
+      {
+        problem: 'The page shows neither a publication nor an update date, the simplest freshness signal there is.',
+        before: 'Copyright © 2025. No datePublished or dateModified in the markup.',
+        after: 'Add a visible update date plus datePublished and dateModified in JSON-LD, and refresh it whenever the offer changes.',
+      },
+    ],
     related: [
       { slug: 'cost-of-retrieval', name: 'Cost of Retrieval', desc: 'Whether the structure makes answers easy to extract.' },
       { slug: 'e-e-a-t', name: 'E-E-A-T', desc: 'Whether the page shows an author, sources and updates.' },
@@ -852,7 +952,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'Experience, expertise, authoritativeness and trust: which signals CitationOne detects and why each one needs a quotation from your text.',
     lead:
-      'E-E-A-T is four separately scored components: experience, expertise, authoritativeness and trustworthiness. Each gets its own ten-point score based on signals genuinely present in the content and in the page code.',
+      'Experience, expertise, authoritativeness and trust - four separately scored components, computed from signals present in the content and in the page code.',
     chips: ['Four scores 0-10', 'Algorithmic detection + model verification', 'Input: content + page code + external links'],
     whyHeading: 'Why does E-E-A-T matter to AI models?',
     why: [
@@ -919,6 +1019,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
         a: 'Recognised institutions and industry publications, and a variety of them. Five links to five credible domains weigh more than five links to a single site.',
       },
     ],
+    recommendations: [
+      {
+        problem: 'The content has no author and no trace of experience — to the model it is an anonymous category description.',
+        before: 'Category copy with no byline, no bio, no note on how the hardware was tested.',
+        after: 'Sign the content with credentials: “Kamil Nowak, gaming peripherals specialist, 8 years of testing esports hardware”.',
+      },
+      {
+        problem: 'The trust signals a transactional page needs are missing: returns, warranty and payment security.',
+        before: 'All products come from official distribution and carry full technical support.',
+        after: 'Put the specifics up front: “30-day free returns, 24-month manufacturer warranty, SSL-encrypted payments”.',
+      },
+    ],
     related: [
       { slug: 'effort-score', name: 'Effort Score', desc: 'Whether the page has a date, material and a complete structure.' },
       { slug: 'information-density', name: 'Information Density', desc: 'Whether the claims are checkable.' },
@@ -934,7 +1046,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     description:
       'How much your content adds over the Top 10 SERP. Four uniqueness signals: original claims, unique facts, terms absent from competitors and rare formats.',
     lead:
-      'Information Gain answers a question no other dimension asks: what is on your page that nobody in the Top 10 has. The result is given on a hundred-point scale and is informational - it does not enter the final score.',
+      'How much your content adds over the Top 10. A strategic metric: it shows where to build an advantage and does not affect the final score.',
     chips: ['Score 0-100', 'Does not affect the final score', 'Input: content + Top 10 SERP corpus'],
     whyHeading: 'Why does information gain matter to AI models?',
     why: [
@@ -944,7 +1056,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     howHeading: 'How do we measure information gain?',
     how: {
       intro: [
-        'We compare your content against the Top 10 corpus and compute four independent signals that make up the result:',
+        'We compare your content against the Top 10 corpus and compute four independent signals that make up the result on a 0-100 scale:',
       ],
       tables: [
         {
@@ -988,6 +1100,18 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       {
         q: 'Does low information gain mean poor topic coverage?',
         a: 'No, those are two different things. Topic coverage is measured by other dimensions; here the only question is how much of your content does not repeat across the remaining results.',
+      },
+    ],
+    recommendations: [
+      {
+        problem: 'The content repeats what is already in the Top 10 — not one claim on the page is missing from the competition.',
+        before: 'Parameter descriptions copied from the manufacturers’ spec sheets.',
+        after: 'Add your own data: switch durability test results or return rates broken down by grip type.',
+      },
+      {
+        problem: 'Format advantage 17/100 — competitors use formats the page never reaches for.',
+        before: 'Text and a bulleted list in every section.',
+        after: 'Add a model comparison table and a short test video — both formats are rare in this SERP.',
       },
     ],
     related: [

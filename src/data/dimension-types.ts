@@ -14,9 +14,13 @@ export interface DimFaq {
   a: string;
 }
 
-/** Przyklad „przed → po". Tylko tam, gdzie poprawka jest widoczna w jednym akapicie. */
-export interface DimBeforeAfter {
-  intro: string;
+/**
+ * Przykladowa rekomendacja z raportu — dokladnie w formie, jaka user zobaczy w aplikacji:
+ * zdanie o problemie, pod nim karty PRZED (fragment jego tresci) i PO (co z tym zrobic).
+ * MAX 2 na wymiar — sekcja stoi wysoko na stronie i ma byc dowodem, nie katalogiem.
+ */
+export interface DimRecommendation {
+  problem: string;
   before: string;
   after: string;
 }
@@ -52,9 +56,14 @@ export interface DimensionData {
   swapTable?: DimTable;
   swapNote?: string;
   report: string[];
+  /**
+   * Przykladowe rekomendacje z raportu — MAX 2. Renderowane w sekcji „W raporcie",
+   * ktora stoi jako DRUGA na stronie (zaraz po „dlaczego"), bo to najmocniejszy dowod
+   * wartosci i ma trafic przed metodologie.
+   */
+  recommendations?: DimRecommendation[];
   /** Pytania, ktore ludzie realnie zadaja — zamykaja tez wlasny Fan-Out tej podstrony. */
   faq: DimFaq[];
-  beforeAfter?: DimBeforeAfter;
   related: { slug: string; name: string; desc: string }[];
 }
 
@@ -74,6 +83,10 @@ export interface DimensionStrings {
   labelRelated: string;
   factorsHeading: string;
   reportHeading: string;
+  /** Naglowek nad przykladowymi rekomendacjami + nota o tym, skad pochodza. */
+  recommendationsHeading: string;
+  recommendationsNote: string;
+  problemLabel: string;
   faqHeading: string;
   relatedHeading: string;
   raisesLabel: string;
@@ -120,9 +133,9 @@ export const STRINGS_PL: DimensionStrings = {
   // Etykiety w formie pytania dostaja pytajnik (PL); „W raporcie" i „FAQ" pytaniami nie sa.
   toc: [
     { id: 'dlaczego', label: 'Dlaczego to ważne?' },
+    { id: 'raport', label: 'W raporcie' },
     { id: 'jak-liczymy', label: 'Jak liczymy?' },
     { id: 'czynniki', label: 'Co podnosi i obniża?' },
-    { id: 'raport', label: 'W raporcie' },
     { id: 'faq', label: 'FAQ' },
   ],
   labelContext: 'Kontekst',
@@ -133,6 +146,9 @@ export const STRINGS_PL: DimensionStrings = {
   labelRelated: 'Powiązane',
   factorsHeading: 'Co podnosi, a co obniża wynik?',
   reportHeading: 'Co zobaczysz w raporcie?',
+  recommendationsHeading: 'Przykładowe rekomendacje',
+  recommendationsNote: 'Fragmenty raportu z audytu strony kategorii w sklepie z elektroniką.',
+  problemLabel: 'Problem',
   faqHeading: 'Najczęstsze pytania',
   relatedHeading: 'Powiązane wymiary',
   raisesLabel: 'Podnosi',
@@ -152,9 +168,9 @@ export const STRINGS_EN: DimensionStrings = {
   // Kotwice po angielsku — sekcje na stronie biora id wlasnie stad (patrz DimensionPage).
   toc: [
     { id: 'why-it-matters', label: 'Why it matters' },
+    { id: 'in-the-report', label: 'In the report' },
     { id: 'how-we-measure-it', label: 'How we measure it' },
     { id: 'what-helps-and-hurts', label: 'What helps and hurts' },
-    { id: 'in-the-report', label: 'In the report' },
     { id: 'faq', label: 'FAQ' },
   ],
   labelContext: 'Context',
@@ -165,6 +181,9 @@ export const STRINGS_EN: DimensionStrings = {
   labelRelated: 'Related',
   factorsHeading: 'What raises and what lowers the score?',
   reportHeading: 'What will you see in the report?',
+  recommendationsHeading: 'Sample recommendations',
+  recommendationsNote: 'Fragments of a report from an audit of an electronics store category page.',
+  problemLabel: 'Problem',
   faqHeading: 'Frequently asked questions',
   relatedHeading: 'Related dimensions',
   raisesLabel: 'Raises',

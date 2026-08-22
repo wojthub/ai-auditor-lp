@@ -13,7 +13,7 @@
 
 import type { DimensionData } from './dimension-types';
 
-export type { DimensionData, DimTable, DimFaq, DimBeforeAfter } from './dimension-types';
+export type { DimensionData, DimTable, DimFaq, DimRecommendation } from './dimension-types';
 
 export const DIMENSIONS_PL: Record<string, DimensionData> = {
   'zgodnosc-z-csi': {
@@ -38,7 +38,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Czym jest Central Search Intent i jak CitationOne mierzy zgodność treści z intencją: predykat, poziom wiedzy odbiorcy, pokrycie atrybutów i luki względem Top 10 SERP.',
     lead:
-      'Zgodność z CSI sprawdza, czy Twoja treść odpowiada na to pytanie, które użytkownik faktycznie zadał – a nie na sąsiednie. To wymiar nadrzędny: pozostałe mierzą jakość wykonania, ten mierzy, czy w ogóle piszesz o właściwej rzeczy.',
+      'Czy treść odpowiada na to, czego naprawdę szuka użytkownik? AI nie cytuje stron, które mijają się z intencją zapytania – nawet jeśli zawierają słowo kluczowe. Ten wymiar mierzy, jak dokładnie Twój artykuł dopasowuje się do oczekiwanego typu odpowiedzi: definicji, porównania, instrukcji lub rekomendacji.',
     chips: ['Skala 0–10', 'Ocena modelem językowym', 'Wejście: treść + CSI + benchmark Top 10 SERP'],
     whyHeading: 'Dlaczego zgodność z CSI jest ważna dla modeli AI?',
     howHeading: 'Jak liczymy zgodność z CSI?',
@@ -93,6 +93,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Do tego pełna mapa atrybutów – pokryte, brakujące z priorytetem według frekwencji u konkurencji, oraz nadmiarowe, czyli te, które masz tylko Ty. Problemy są ustawione według tego, ilu konkurentów ma dany element, więc lista zaczyna się od rzeczy, których brak najbardziej kosztuje.',
       'Osobno pokazujemy luki formatowe: jeśli 8 konkurentów tłumaczy temat tabelą lub FAQ, a Ty prozą, zobaczysz to jako konkretną rekomendację.',
     ],
+    recommendations: [
+      {
+        problem: 'Atrybut „częstotliwość odświeżania (polling rate)” ma 4 z 10 konkurentów, a przy intencji transakcyjnej to parametr rozstrzygający o wyborze modelu.',
+        before: 'Najważniejsze parametry techniczne: rozdzielczość od 800 do 26 000 DPI, akceleracja do 50G, czas reakcji 1 ms.',
+        after: 'Dopisz częstotliwość odświeżania (1000 Hz lub 8000 Hz) jako parametr wpływający na płynność ruchu kursora.',
+      },
+      {
+        problem: 'Wyróżniki oferty — raty 0%, wysyłka w 24 h, odbiór w sklepie — siedzą na kartach produktów, a intencja transakcyjna oczekuje ich już w leadzie.',
+        before: 'Myszki gamingowe to precyzyjne urządzenia wskazujące, zaprojektowane z myślą o dynamicznej obsłudze gier komputerowych.',
+        after: 'Uzupełnij lead o warunki zakupu: „211 modeli w cenach od 89,99 zł, raty 0%, wysyłka w 24 h lub odbiór w sklepie”.',
+      },
+    ],
     related: [
       { slug: 'graf-wiedzy', name: 'Graf wiedzy', desc: 'Z czego zbudowane są atrybuty, których pokrycie tu mierzymy.' },
       { slug: 'pokrycie-fan-out', name: 'Pokrycie Fan-Out i AIO', desc: 'Na ile pytań pobocznych wokół intencji odpowiada strona.' },
@@ -122,12 +134,12 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Trójki Encja-Atrybut-Wartość, czyli jak modele AI czytają fakty ze strony. Jak CitationOne buduje graf wiedzy, klasyfikuje atrybuty i porównuje pokrycie z Top 10 SERP.',
     lead:
-      'Graf wiedzy rozkłada treść na trójki Encja – Atrybut – Wartość: o czym piszesz, jaką cechę tej rzeczy opisujesz i co konkretnie o niej mówisz. Wymiar sprawdza, ile Twoich zdań daje się rozłożyć na takie fakty, a ile zostaje samym opisem.',
+      'Treść buduje sieć powiązanych pojęć: encji, ich atrybutów i wartości. Im gęstszy i spójniejszy graf, tym łatwiej AI rozpoznaje treść jako wiarygodne źródło w danej dziedzinie. Ten wymiar sprawdza, czy teksty budują wiedzę, czy tylko wspominają o pojęciach.',
     chips: ['Skala 0–10', 'Model językowy + sygnały algorytmiczne', 'Wejście: treść + benchmark Top 10 SERP'],
     whyHeading: 'Dlaczego graf wiedzy jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy graf wiedzy?',
     why: [
-      'Wyszukiwarki od lat nie operują na słowach kluczowych, tylko na encjach i faktach o nich – trójka Encja-Atrybut-Wartość to podstawowa struktura każdego grafu wiedzy. „Kredyt hipoteczny” to encja, „oprocentowanie” to jej atrybut, „7,2%” to wartość. Dopiero komplet stanowi fakt, który da się zapamiętać, zestawić z innym źródłem i zacytować.',
+      'Wyszukiwarki od lat operują na encjach i faktach o nich – trójka Encja-Atrybut-Wartość to podstawowa struktura każdego grafu wiedzy. „Kredyt hipoteczny” to encja, „oprocentowanie” to jej atrybut, „7,2%” to wartość. Dopiero komplet stanowi fakt, który da się zapamiętać, zestawić z innym źródłem i zacytować.',
       'W GEO ma to bezpośrednie przełożenie: model buduje odpowiedź z faktów, nie z akapitów. Strona, która wymienia encje, ale nie podaje ich atrybutów i wartości, jest dla niego tekstem bez treści – można ją streścić, ale nie ma z niej czego zacytować. Odwrotnie: gęsty, spójny graf sprawia, że model rozpoznaje stronę jako źródło wiedzy w danej dziedzinie.',
     ],
     how: {
@@ -174,6 +186,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Do tego graf encji z typami i relacjami między nimi. Relacje są dodatkowo weryfikowane algorytmicznie – sprawdzamy, czy dwie encje faktycznie występują razem w zdaniach Twojej treści, czy pojawiają się razem w pytaniach z SERP i u ilu konkurentów ta sama para jest połączona. Sam graf relacji nie wpływa na ocenę wymiaru; służy do zobaczenia, gdzie wiedza jest spójna, a gdzie urywa się na pojedynczych wzmiankach.',
       'Osobno, jako ostrzeżenie bez wpływu na wynik, pokazujemy sprzeczności: tę samą encję i atrybut opisane różnymi wartościami. Dla modelu jedna sprzeczna liczba potrafi zdyskwalifikować całą stronę jako źródło.',
     ],
+    recommendations: [
+      {
+        problem: 'Atrybut „waga” pada bez wartości, a dla graczy e-sportowych to jeden z parametrów rozstrzygających o zakupie.',
+        before: 'Niektóre myszki oferują także regulację wagi za pomocą wymiennych ciężarków.',
+        after: 'Podaj przedziały: „od 58 g w modelach ultralekkich do 120 g z kompletem ciężarków”.',
+      },
+      {
+        problem: 'Karta produktu opisuje zawartość opakowania zamiast encji — bez pełnej nazwy modelu fakty nie mają do czego się przypiąć.',
+        before: 'Typ produktu: mysz. Transmisja sygnału: przewodowa. W opakowaniu: mysz, skrócona instrukcja obsługi.',
+        after: 'Zacznij kartę od pełnej nazwy handlowej modelu i podpinaj parametry pod nią jako atrybuty z wartościami.',
+      },
+    ],
     related: [
       { slug: 'zgodnosc-z-csi', name: 'Zgodność z CSI', desc: 'Czy pokryte atrybuty odpowiadają intencji zapytania.' },
       { slug: 'gestosc-informacji', name: 'Gęstość informacji', desc: 'Ile z Twoich zdań w ogóle niesie fakt.' },
@@ -203,7 +227,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Jak silniki AI rozbijają jedno pytanie na kilkanaście podzapytań i jak CitationOne mierzy, ile z nich pokrywa Twoja treść – z danymi z AI Overview i pytań z SERP.',
     lead:
-      'Fan-Out to rozbicie jednego zapytania na kilkanaście pytań pobocznych, które silnik AI rozwiązuje w tle, zanim ułoży odpowiedź. Ten wymiar mierzy, na ile z nich odpowiada Twoja strona – bo cytowanie zdobywa się na pytaniach pobocznych, nie na głównym.',
+      'Jedno zapytanie użytkownika rozkłada się na kilkanaście pytań pobocznych, które AI rozwiązuje w tle. Ten wymiar sprawdza, na ile z nich odpowiada Twoja treść, bo to na pytaniach pobocznych zdobywa się cytowanie.',
     chips: ['Skala 0–10', 'Dwa przebiegi modelu + dane z SERP', 'Wejście: CSI + pytania z SERP + AI Overview'],
     whyHeading: 'Dlaczego pokrycie Fan-Out jest ważne dla modeli AI?',
     howHeading: 'Jak liczymy pokrycie Fan-Out i AIO?',
@@ -232,7 +256,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
           caption: 'Nie każde pytanie waży tyle samo – liczy się to, czy dane wyszukiwarki potwierdzają jego istnienie',
           head: ['Status pytania', 'Co oznacza'],
           rows: [
-            ['Potwierdzone przez SERP', 'Google sam pokazuje je w „Podobnych pytaniach” – to nie jest hipoteza, tylko realne zapytanie'],
+            ['Potwierdzone przez SERP', 'Google sam pokazuje je w „Podobnych pytaniach”, więc wiadomo, że ktoś je faktycznie zadaje'],
             ['Obecne w AI Overview', 'Wątek pojawia się w syntezie AI dla tej frazy'],
             ['Przewidziane przez model', 'Wynika z intencji, ale nie ma potwierdzenia w danych SERP'],
             ['Potwierdzona luka', 'Pytanie jest w SERP, a Twoja treść go nie porusza – to obniża ocenę wymiaru'],
@@ -258,6 +282,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Niepokryte pytania potwierdzone przez wyszukiwarkę trafiają na górę listy rekomendacji, bo to najtańsze do zamknięcia luki: wiadomo, że ktoś je zadaje, i wiadomo, że u Ciebie odpowiedzi nie ma.',
       'Do tego pokrycie AI Overview dla Twojej frazy – czy synteza Google w ogóle się pojawia i jakie wątki porusza.',
     ],
+    recommendations: [
+      {
+        problem: 'Pytanie „Jakie są najlepsze myszki gamingowe?” Google pokazuje w Podobnych pytaniach, a treść nie odpowiada na nie w żadnej sekcji.',
+        before: 'Brak zestawienia albo rankingu polecanych modeli w całej treści.',
+        after: 'Dodaj sekcję H2 „Ranking myszek gamingowych — polecane modele” z pięcioma pozycjami i uzasadnieniem wyboru.',
+      },
+      {
+        problem: 'Wątek doboru sprzętu do budżetu jest potwierdzony w SERP, a strona nie porusza go ani zdaniem.',
+        before: 'Brak sekcji o segmentacji cenowej: modele budżetowe kontra turniejowe.',
+        after: 'Opisz, na jakie parametry patrzeć w przedziałach do 150 zł, 150–350 zł i powyżej 350 zł.',
+      },
+    ],
     related: [
       { slug: 'zgodnosc-z-csi', name: 'Zgodność z CSI', desc: 'Intencja, z której rozkładane są pytania poboczne.' },
       { slug: 'optymalizacja-chunkow', name: 'Optymalizacja chunków', desc: 'Czy sekcja z odpowiedzią broni się w oderwaniu od reszty.' },
@@ -281,18 +317,13 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
         a: 'Nie. Udział zdań z faktem liczy algorytm na wzorcach – liczba, data, jednostka, kwota, nazwa własna. Model językowy dokłada tylko przykłady zdań z Twojego tekstu po obu stronach, żeby było widać, o które akapity chodzi.',
       },
     ],
-    beforeAfter: {
-      intro: 'Dwa zdania o tej samej treści – różni je wyłącznie to, ile z nich da się sprawdzić.',
-      before: 'Nasze panele charakteryzują się wysoką sprawnością i nowoczesną technologią, a montaż przebiega szybko i sprawnie.',
-      after: 'Panele mają sprawność 21,3% i 25-letnią gwarancję mocy. Montaż na dachu skośnym zajmuje jeden dzień.',
-    },
     name: 'Gęstość informacji',
     heading: 'Czym jest gęstość informacji w treści?',
     title: 'Czym jest gęstość informacji w treści?',
     description:
       'Stosunek zdań z faktem do zdań wypełniających. Jak CitationOne liczy gęstość informacji, jakie sygnały ją podnoszą i obniżają oraz jak zamienić ogólniki na konkrety.',
     lead:
-      'Gęstość informacji to udział zdań niosących weryfikowalny fakt w całości tekstu. Nie chodzi o długość ani o styl – chodzi o to, ile zdań zostałoby, gdyby usunąć wszystko, czego nie da się sprawdzić.',
+      'Ile faktów, danych i konkretnych stwierdzeń zawiera jeden akapit. Treści o niskiej gęstości informacji są wypełniaczem – AI je pomija. Ten wymiar nagradza każde zdanie, które wnosi coś nowego, i karze tekst, który powtarza to samo innymi słowami.',
     chips: ['Skala 0–10', 'Wyliczenie algorytmiczne + przykłady od modelu', 'Wejście: treść'],
     whyHeading: 'Dlaczego gęstość informacji jest ważna dla modeli AI?',
     howHeading: 'Jak liczymy gęstość informacji?',
@@ -302,8 +333,8 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     ],
     how: {
       intro: [
-        'Podstawa jest algorytmiczna, nie uznaniowa: dzielimy tekst na zdania i sprawdzamy wzorcami, które z nich zawierają fakt – liczbę, datę, jednostkę, kwotę, nazwę własną lub konkretne twierdzenie. Wynik to udział takich zdań w całości, przeskalowany do dziesięciostopniowej oceny.',
-        'Wzór: zdania z faktem podzielone przez wszystkie zdania, razy 10. Model językowy nie liczy tego wyniku – dokłada do niego przykłady, czyli konkretne zdania z Twojego tekstu po jednej i po drugiej stronie.',
+        'Podstawa jest algorytmiczna: dzielimy tekst na zdania i sprawdzamy wzorcami, które z nich zawierają fakt – liczbę, datę, jednostkę, kwotę, nazwę własną lub konkretne twierdzenie. Wynik to udział takich zdań w całości, przeskalowany do dziesięciostopniowej oceny.',
+        'Wzór: zdania z faktem podzielone przez wszystkie zdania, razy 10. Wynik liczy sam algorytm, a model językowy dokłada do niego przykłady: konkretne zdania z Twojego tekstu po jednej i po drugiej stronie.',
       ],
       tables: [
         {
@@ -349,8 +380,20 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     swapNote:
       'Jeśli twardych danych nie masz, działają zakresy, proporcje i porównania – „3–5 dni”, „1 na 4 zgłoszenia”, „dwa razy więcej niż średnia”.',
     report: [
-      'Dostajesz udział zdań z faktem w treści wraz z oceną, a do tego dwie listy wyciągnięte z Twojego tekstu: zdania uznane za fakty i zdania uznane za wypełnienie. To nie są przykłady ogólne, tylko Twoje własne zdania – widzisz dokładnie, które akapity ciągną wynik w dół.',
+      'Dostajesz udział zdań z faktem w treści wraz z oceną, a do tego dwie listy wyciągnięte z Twojego tekstu: zdania uznane za fakty i zdania uznane za wypełnienie. Obie listy zbudowane są z Twoich własnych zdań, więc widzisz dokładnie, które akapity ciągną wynik w dół.',
       'Rekomendacje idą w formacie Przed / Po, z propozycją konkretnego przepisania zdania.',
+    ],
+    recommendations: [
+      {
+        problem: 'Akapit otwiera pytanie retoryczne — nie ma w nim twierdzenia, które dałoby się potwierdzić albo obalić.',
+        before: 'Chcesz dowiedzieć się więcej? Skorzystaj z rekomendacji i sprawdź produkty w konkretnych kategoriach.',
+        after: 'Zastąp pytanie konkretem: „Przewodniki zakupowe i kategorie powiązane — 12 tematów”.',
+      },
+      {
+        problem: 'Zdanie zbudowane z samych ogólników: „zróżnicowane”, „idealnie”, „maksymalna precyzja” — zero sprawdzalnych danych.',
+        before: 'Dzięki zróżnicowanym sensorom, kształtom i funkcjom dopasujesz mysz idealnie do swoich potrzeb, osiągając maksymalną precyzję w rozgrywce.',
+        after: 'Podaj kryterium: „Sensor optyczny 26 000 DPI i profil claw ograniczają błędy śledzenia kursora w grach FPS”.',
+      },
     ],
     related: [
       { slug: 'graf-wiedzy', name: 'Graf wiedzy', desc: 'Czy fakty układają się w kompletne trójki Encja-Atrybut-Wartość.' },
@@ -375,30 +418,25 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
         a: 'Nie, to metryka uzupełniająca pokazywana obok wyniku. Mówi, które sekcje mają największą szansę zostać wybrane jako źródło, ale nie wchodzi do oceny końcowej.',
       },
     ],
-    beforeAfter: {
-      intro: 'Zdanie otwierające sekcję: pierwsze wymaga poprzedniego akapitu, drugie broni się samo.',
-      before: 'Jak wspomniano wyżej, ten parametr jest kluczowy przy wyborze urządzenia.',
-      after: 'Współczynnik COP decyduje o koszcie ogrzewania: pompa z COP 4,5 zużywa o 25% mniej prądu niż model z COP 3,6.',
-    },
     name: 'Optymalizacja chunków',
     heading: 'Czym są chunki treści w systemach RAG?',
     title: 'Czym są chunki treści w systemach RAG?',
     description:
       'Silniki AI tną stronę na fragmenty i oceniają każdy osobno. Jak CitationOne mierzy autonomiczność sekcji, długość chunków dla każdego typu treści i cytowalność fragmentów.',
     lead:
-      'Chunk to fragment strony, który silnik AI pobiera i ocenia w oderwaniu od reszty – najczęściej pojedyncza sekcja H2 lub H3. Ten wymiar sprawdza, czy Twoje sekcje bronią się samodzielnie, czy rozumie je dopiero ktoś, kto przeczytał całość.',
+      'AI wycina z treści samodzielne fragmenty – sekcje, które da się zrozumieć bez kontekstu całego artykułu. Ten wymiar mierzy, ile takich gotowych do cytowania jednostek zawiera Twoja strona i czy mają długość właściwą dla tego typu treści.',
     chips: ['Skala 0–10', 'Model językowy + sygnały algorytmiczne', 'Wejście: treść + CSI + profil typu treści'],
     whyHeading: 'Dlaczego optymalizacja chunków jest ważna dla modeli AI?',
     howHeading: 'Jak liczymy optymalizację chunków?',
     why: [
-      'Wyszukiwarka generatywna nie wczytuje całej strony do odpowiedzi. Indeksuje ją pociętą na fragmenty i przy pytaniu użytkownika pobiera te, które wyglądają na najtrafniejsze. Twój fragment trafia do modelu bez tytułu artykułu, bez poprzedniej sekcji i bez wprowadzenia.',
+      'Wyszukiwarka generatywna nie wczytuje całej strony do odpowiedzi. Indeksuje ją pociętą na fragmenty – najczęściej pojedyncze sekcje H2 lub H3 – i przy pytaniu użytkownika pobiera te, które wyglądają na najtrafniejsze. Twój fragment trafia do modelu bez tytułu artykułu, bez poprzedniej sekcji i bez wprowadzenia.',
       'Dlatego zdanie „jak wspomniano wyżej, ten parametr jest kluczowy” jest w GEO stratą – poza kontekstem nie znaczy nic i nie da się go zacytować. To samo dotyczy sekcji, która nigdy nie powtarza tematu, o którym mówi, bo posługuje się zaimkiem odsyłającym do nagłówka sprzed dwóch ekranów.',
       'Odwrotnie: sekcja napisana jak samodzielna odpowiedź może zostać zacytowana nawet wtedy, gdy reszta strony jest przeciętna. Chunk jest jednostką konkurowania w AI Search – nie strona.',
     ],
     how: {
       intro: [
         'Model sprawdza każdą sekcję osobno pod kątem czterech rzeczy: czy zaczyna się od odpowiedzi, czy powtarza główny temat co najmniej dwa razy, czy nie odsyła do innych fragmentów („powyżej”, „jak już pisaliśmy”) i czy ma długość adekwatną do typu treści.',
-        'Ostatnie kryterium nie jest jednym progiem dla wszystkiego – sekcja FAQ ma być krótka, hasło encyklopedyczne może być długie:',
+        'Ostatnie kryterium zależy od typu treści: sekcja FAQ ma być krótka, hasło encyklopedyczne może być długie:',
       ],
       tables: [
         {
@@ -434,6 +472,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Do tego dwie metryki uzupełniające, liczone algorytmicznie i pokazywane obok wyniku, ale nie wliczane do oceny. Pierwsza to cytowalność poszczególnych sekcji, czyli szansa, że akurat ta zostanie wybrana jako źródło – składają się na nią dopasowanie nagłówka do intencji, samodzielność pierwszego zdania, udział zdań oznajmujących, pozycja na stronie i zagnieżdżenie nagłówka. Druga to gęstość cytowalnych fragmentów w całym tekście, czyli jaki procent słów siedzi w kawałkach nadających się do zacytowania.',
       'Osobno pokazujemy nagłówki powtarzające się u konkurencji z Top 10, z zaznaczeniem, których nie masz – to gotowa lista sekcji do dopisania.',
     ],
+    recommendations: [
+      {
+        problem: 'Sekcja i jej nagłówki H3 mają zerową gęstość cytowalną — do indeksu trafiają puste fragmenty.',
+        before: '### Sprawdź powiązane kategorie ### Szukasz konkretnego producenta? ### Chcesz wiedzieć więcej?',
+        after: 'Pod każdym nagłówkiem dopisz 30–50 słów z nazwami kategorii, marek i tytułami poradników.',
+      },
+      {
+        problem: 'Karta produktu nie zawiera nazwy modelu, więc wycięta z listingu przestaje cokolwiek znaczyć.',
+        before: 'Typ produktu: mysz. Rolka przewijania: tak. Transmisja: przewodowa. 149,00 zł.',
+        after: 'Umieść pełną nazwę handlową na początku karty — fragment ma bronić się bez reszty strony.',
+      },
+    ],
     related: [
       { slug: 'bluf', name: 'BLUF', desc: 'Czy sekcja zaczyna się od odpowiedzi.' },
       { slug: 'pokrycie-fan-out', name: 'Pokrycie Fan-Out i AIO', desc: 'Na które pytania poboczne odpowiadają Twoje sekcje.' },
@@ -463,7 +513,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Ile wysiłku kosztuje wyciągnięcie odpowiedzi z Twojej strony. Punktowana checklista struktury: hierarchia nagłówków, tabele, listy, wyróżnienia, podsumowanie.',
     lead:
-      'Koszt pozyskania mierzy, ile pracy trzeba wykonać, żeby wyjąć ze strony konkretną odpowiedź. Im czytelniejsza struktura – hierarchia nagłówków, tabele, listy, wyróżnienia – tym koszt niższy, a ocena wyższa.',
+      'Ile wysiłku kosztuje wyciągnięcie ze strony konkretnej odpowiedzi. Hierarchia nagłówków, tabele, listy i wyróżnienia obniżają ten koszt; ściana tekstu go podnosi. Przy porównywalnej treści model wybierze źródło tańsze w obsłudze.',
     chips: ['Skala 0–10', 'Punktowana checklista struktury', 'Wejście: treść + struktura HTML'],
     whyHeading: 'Dlaczego koszt pozyskania jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy koszt pozyskania?',
@@ -473,7 +523,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     ],
     how: {
       intro: [
-        'To checklista punktowa, a nie ocena uznaniowa. Sprawdzamy obecność elementów struktury i sumujemy punkty do maksymalnie dziesięciu:',
+        'To checklista punktowa: sprawdzamy obecność elementów struktury i sumujemy punkty do maksymalnie dziesięciu:',
       ],
       tables: [
         {
@@ -510,6 +560,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Dostajesz checklistę z zaznaczeniem, które elementy struktury masz, a których brakuje. Każdy niespełniony punkt to gotowa poprawka – najczęściej kilkuminutowa, bo nie wymaga pisania nowej treści, tylko przeorganizowania istniejącej.',
       'Do tego wykryte usterki hierarchii nagłówków: brak H1, kilka H1 albo sekcje H3 bez nadrzędnego H2.',
     ],
+    recommendations: [
+      {
+        problem: 'Parametry rozsypane po liście zamiast zestawione w tabeli — model składa odpowiedź z czterech osobnych punktów.',
+        before: 'Najważniejsze parametry techniczne: rozdzielczość 800–26 000 DPI, akceleracja do 50G, czas reakcji 1 ms, sensory optyczne nowej generacji.',
+        after: 'Dodaj tabelę: Gatunek gry | Zalecany sensor / DPI | Typ łączności | Waga.',
+      },
+      {
+        problem: 'Puste nagłówki H3 w stopce podbijają koszt przetwarzania — parser schodzi po strukturze, która nie ma treści.',
+        before: '### Obsługa klienta ### Zakupy ### Aktualne promocje ### Bestsellery ### Na czasie',
+        after: 'Usuń nagłówki z nawigacji stopki albo uzupełnij je zdaniem treści; same linki zostaw jako zwykłą listę.',
+      },
+    ],
     related: [
       { slug: 'optymalizacja-chunkow', name: 'Optymalizacja chunków', desc: 'Czy sekcje bronią się samodzielnie.' },
       { slug: 'effort-score', name: 'Effort Score', desc: 'Szersza checklista formatów i kompletności strony.' },
@@ -539,13 +601,13 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Porównanie terminologii Twojej strony z korpusem Top 10 SERP. Jak CitationOne znajduje brakujące terminy specjalistyczne i podpowiada kontekst, w jakim ich użyć.',
     lead:
-      'TF-IDF porównuje słownictwo Twojej treści ze słownictwem konkurencji z Top 10. Interesują nas terminy rzadkie i specjalistyczne – to one świadczą o znajomości tematu, a nie słowa, które padają wszędzie.',
+      'Porównanie terminologii Twojej strony ze słownictwem konkurencji z Top 10. Brakujący termin specjalistyczny to zwykle brakujący wątek – CitationOne wskazuje dokładnie, których pojęć nie używasz i w jakim kontekście robi to konkurencja.',
     chips: ['Skala 0–10', 'Analiza statystyczna + model językowy', 'Wejście: treść + korpus Top 10 SERP'],
     whyHeading: 'Dlaczego TF-IDF jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy TF-IDF?',
     why: [
       'Terminologia jest najtańszym dowodem kompetencji. Tekst o kredycie hipotecznym, w którym nie pada „wskaźnik LTV”, „zdolność kredytowa” ani „marża banku”, opisuje temat z zewnątrz – i tak właśnie wygląda dla modelu porównującego go z dziesięcioma stronami, które tych pojęć używają.',
-      'W GEO ma to dodatkowe znaczenie, bo brakujący termin to zwykle brakujący wątek. Jeśli dziewięciu konkurentów pisze o czymś, czego u Ciebie nie ma, to nie jest kwestia stylu – to luka merytoryczna, którą model zobaczy przy składaniu odpowiedzi.',
+      'W GEO ma to dodatkowe znaczenie, bo brakujący termin to zwykle brakujący wątek. Jeśli dziewięciu konkurentów pisze o czymś, czego u Ciebie nie ma, masz lukę merytoryczną, którą model zobaczy przy składaniu odpowiedzi.',
     ],
     how: {
       intro: [
@@ -581,6 +643,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Dostajesz listę brakujących terminów uszeregowaną według tego, ilu konkurentów ich używa i jak mocno wiążą się z tematem strony.',
       'Przy terminach, które u konkurencji występują w stałym towarzystwie innego pojęcia, podpowiadamy ten kontekst – rekomendacja brzmi wtedy „dodaj termin X w kontekście Y, tak łączy je 6 z 10 konkurentów”, a nie samo „dodaj X”.',
     ],
+    recommendations: [
+      {
+        problem: 'Fraza „dpi optyczna” pada u 5 z 8 konkurentów przy opisie sensora, a w Twojej treści nie występuje ani razu.',
+        before: 'Sensor optyczny wpływa na dokładność śledzenia ruchu i szybkość reakcji.',
+        after: 'Użyj terminu w wyjaśnieniu: „rozdzielczość dpi optyczna 26 000 przekłada się na dokładność śledzenia bez interpolacji”.',
+      },
+      {
+        problem: 'Fraza doradcza „najlepsza myszka” występuje u 4 z 8 konkurentów, zwykle przy kryteriach doboru — u Ciebie jej nie ma.',
+        before: 'Dzięki zróżnicowanym sensorom i kształtom dopasujesz mysz do swoich potrzeb.',
+        after: 'Dodaj sekcję doradczą: „Najlepsza myszka do FPS — jakie parametry mają znaczenie”.',
+      },
+    ],
     related: [
       { slug: 'graf-wiedzy', name: 'Graf wiedzy', desc: 'Czy pojęcia układają się w kompletne fakty.' },
       { slug: 'wartosc-dodana', name: 'Wartość dodana', desc: 'Które z Twoich terminów są unikalne w całym Top 10.' },
@@ -604,18 +678,13 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
         a: 'To zwykle najtańszy wymiar do naprawy. Poprawki są mechaniczne – przestawienie szyku zdania – i nie wymagają dopisywania nowej treści ani nowych danych.',
       },
     ],
-    beforeAfter: {
-      intro: 'Poprawka jest czysto składniowa – ten sam fakt, ale z jawnym wykonawcą.',
-      before: 'Kredyt hipoteczny jest udzielany na okres do 30 lat, a decyzja jest podejmowana w ciągu 21 dni.',
-      after: 'Bank udziela kredytu hipotecznego na maksymalnie 30 lat i podejmuje decyzję w ciągu 21 dni.',
-    },
     name: 'Role semantyczne',
     heading: 'Czym są role semantyczne (SRL) w treści?',
     title: 'Czym są role semantyczne (SRL) w treści?',
     description:
       'Czy główny temat strony jest wykonawcą czynności, czy tylko jej przedmiotem. Jak CitationOne mierzy role semantyczne i dlaczego strona bierna szkodzi w AI Search.',
     lead:
-      'Role semantyczne sprawdzają, kim jest główny temat w Twoich zdaniach: wykonawcą czynności czy jej przedmiotem. „Bank udziela kredytu” i „kredyt jest udzielany” niosą ten sam fakt, ale tylko pierwsze zdanie jednoznacznie wskazuje, kto go wykonuje.',
+      'Czy główny temat strony jest w zdaniach wykonawcą czynności, czy tylko jej przedmiotem. Strona czynna daje modelowi komplet „kto – co robi – z czym”; strona bierna zostawia w tej strukturze dziurę.',
     chips: ['Skala 0–10', 'Ocena modelem językowym', 'Wejście: treść + główna encja z CSI'],
     whyHeading: 'Dlaczego role semantyczne są ważne dla modeli AI?',
     howHeading: 'Jak liczymy role semantyczne?',
@@ -665,6 +734,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Dostajesz udział zdań, w których główny temat jest wykonawcą, oraz listę zdań do przepisania – z gotową propozycją w stronie czynnej.',
       'To zwykle najszybszy do wdrożenia wymiar: poprawki są mechaniczne i nie wymagają dopisywania nowej treści.',
     ],
+    recommendations: [
+      {
+        problem: 'Główny temat jest dopełnieniem czynności czytelnika: wykonawcą zdania jesteś „ty”, a nie opisywany produkt.',
+        before: 'W sklepie znajdziesz szeroki wybór modeli przewodowych i bezprzewodowych, zoptymalizowanych pod różne gatunki gier.',
+        after: 'Myszki gamingowe przewodowe i bezprzewodowe obsługują wszystkie gatunki gier — od FPS, przez strategie, po MMO.',
+      },
+      {
+        problem: 'Zdanie mówi, co „możesz zrobić”, zamiast tego, co robi produkt — sprawca akcji znika z faktu.',
+        before: 'Dzięki zróżnicowanym sensorom możesz dopasować mysz do swoich potrzeb.',
+        after: 'Sensory o rozdzielczości do 26 000 DPI dopasowują czułość myszy do stylu gry.',
+      },
+    ],
     related: [
       { slug: 'gestosc-informacji', name: 'Gęstość informacji', desc: 'Czy zdanie w ogóle niesie sprawdzalny fakt.' },
       { slug: 'graf-wiedzy', name: 'Graf wiedzy', desc: 'Jak fakty łączą się w encje, atrybuty i wartości.' },
@@ -694,17 +775,17 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Algorytmiczna checklista kompletności strony: długość względem konkurencji, obrazy, wideo, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji.',
     lead:
-      'Effort Score mierzy wysiłek włożony w stronę: czy ma to, co ma porządnie zrobiona treść w tym temacie – odpowiednią długość, materiały wizualne, tabele, listy, czytelną hierarchię i widoczną datę. Liczy go wyłącznie algorytm, bez udziału modelu językowego.',
+      'Algorytmiczna checklista kompletności: długość względem konkurencji, materiały wizualne, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji. Każdy niespełniony punkt to poprawka na kwadrans.',
     chips: ['Skala 0–10', 'W 100% algorytmiczny – zero wywołań modelu', 'Wejście: treść + struktura HTML + średnia Top 10'],
     whyHeading: 'Dlaczego Effort Score jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy Effort Score?',
     why: [
-      'Sygnały kompletności są dla wyszukiwarek najstarszym przybliżeniem jakości: strona z tabelą, materiałem wizualnym i aktualną datą częściej pochodzi od kogoś, kto temat faktycznie przerobił, niż strona złożona z pięciu akapitów. To nie dowód jakości, ale mocna poszlaka – i tak jest traktowana.',
+      'Sygnały kompletności są dla wyszukiwarek najstarszym przybliżeniem jakości: strona z tabelą, materiałem wizualnym i aktualną datą częściej pochodzi od kogoś, kto temat faktycznie przerobił, niż strona złożona z pięciu akapitów. Wyszukiwarki traktują to jako mocną poszlakę jakości.',
       'Praktyczna wartość tego wymiaru jest inna niż pozostałych: to lista rzeczy, które da się naprawić dziś, bez przepisywania treści. Brakujący spis treści, brak daty aktualizacji, trzy obrazy zamiast czterech – każdy taki punkt to poprawka na kwadrans.',
     ],
     how: {
       intro: [
-        'Checklista obejmuje do jedenastu kryteriów. Część jest bezwzględna, część odnosi się do konkurencji – próg długości to średnia z Top 10 dla Twojej frazy, a nie sztywna liczba słów.',
+        'Checklista obejmuje do jedenastu kryteriów i liczy ją wyłącznie algorytm, bez udziału modelu językowego. Część jest bezwzględna, część odnosi się do konkurencji – próg długości to średnia z Top 10 dla Twojej frazy, a nie sztywna liczba słów.',
         'Zestaw kryteriów dopasowuje się do typu strony: spis treści sprawdzamy tylko dla artykułów i haseł encyklopedycznych, a widoczną datę pomijamy na landingach, gdzie stara data szkodzi konwersji. Pominięte kryterium nie obniża wyniku – maksymalna pula punktów zmniejsza się razem z nim.',
       ],
       tables: [
@@ -746,6 +827,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Osobno pokazujemy świeżość: datę publikacji, datę aktualizacji i wiek treści w miesiącach.',
       'Jedno ograniczenie warto znać: obrazy, wideo i data są odczytywane z kodu strony, więc przy audycie treści wklejonej z edytora zamiast z adresu URL te kryteria nie mają skąd się wziąć.',
     ],
+    recommendations: [
+      {
+        problem: 'Treść jest wyraźnie krótsza niż średnia Top 10 dla tej frazy (1460 słów) — konkurencja tłumaczy temat szerzej.',
+        before: 'Cztery krótkie sekcje opisowe pod listą produktów.',
+        after: 'Dopisz brakujące wątki — porównanie przewodowe/bezprzewodowe i ranking modeli — aż treść dobije do średniej konkurencji.',
+      },
+      {
+        problem: 'Strona nie pokazuje daty publikacji ani aktualizacji, czyli najprostszego sygnału świeżości.',
+        before: 'Copyright © 2025. W kodzie brak datePublished i dateModified.',
+        after: 'Dodaj widoczną datę aktualizacji oraz datePublished i dateModified w JSON-LD; odświeżaj ją przy każdej zmianie oferty.',
+      },
+    ],
     related: [
       { slug: 'koszt-pozyskania', name: 'Koszt pozyskania', desc: 'Czy struktura ułatwia wyciągnięcie odpowiedzi.' },
       { slug: 'e-e-a-t', name: 'E-E-A-T', desc: 'Czy strona pokazuje autora, źródła i aktualizacje.' },
@@ -775,7 +868,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Doświadczenie, ekspertyza, autorytet i wiarygodność w treści. Jakie sygnały CitationOne wykrywa, jak weryfikuje źródła i dlaczego każdy sygnał wymaga cytatu z tekstu.',
     lead:
-      'E-E-A-T to cztery osobno oceniane składowe: doświadczenie, ekspertyza, autorytet i wiarygodność. Każda dostaje własną ocenę w skali dziesięciostopniowej na podstawie sygnałów faktycznie obecnych w treści i w kodzie strony.',
+      'Doświadczenie, ekspertyza, autorytet i wiarygodność – cztery osobno oceniane składowe, liczone z sygnałów obecnych w treści i w kodzie strony.',
     chips: ['Cztery oceny 0–10', 'Wykrywanie algorytmiczne + weryfikacja modelem', 'Wejście: treść + kod strony + linki zewnętrzne'],
     whyHeading: 'Dlaczego E-E-A-T jest ważne dla modeli AI?',
     howHeading: 'Jak liczymy E-E-A-T?',
@@ -828,6 +921,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Dostajesz cztery osobne oceny wraz z listą wykrytych sygnałów – każdy z cytatem z Twojej treści, który go potwierdza.',
       'Do tego lista twierdzeń wysokiego ryzyka bez źródła w akapicie. To najczęstsza i najtańsza poprawka: liczba, która już w tekście jest, potrzebuje wyłącznie przypisu.',
     ],
+    recommendations: [
+      {
+        problem: 'Treść nie ma autora ani śladu doświadczenia — dla modelu to anonimowy opis kategorii.',
+        before: 'Opis kategorii bez podpisu, bez biogramu, bez informacji o testowaniu sprzętu.',
+        after: 'Podpisz treść kwalifikacjami: „Kamil Nowak, specjalista ds. peryferiów gamingowych, 8 lat testowania sprzętu e-sportowego”.',
+      },
+      {
+        problem: 'Brakuje sygnałów wiarygodności, których strona transakcyjna wymaga: zwrotów, gwarancji i bezpieczeństwa płatności.',
+        before: 'Wszystkie produkty pochodzą z oficjalnej dystrybucji i mają pełne wsparcie techniczne.',
+        after: 'Wyeksponuj konkrety: „30 dni na darmowy zwrot, 24 miesiące gwarancji producenta, płatności szyfrowane SSL”.',
+      },
+    ],
     related: [
       { slug: 'effort-score', name: 'Effort Score', desc: 'Czy strona ma datę, materiały i kompletną strukturę.' },
       { slug: 'gestosc-informacji', name: 'Gęstość informacji', desc: 'Czy twierdzenia są sprawdzalne.' },
@@ -857,7 +962,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Ile nowego wnosi Twoja treść względem Top 10 SERP. Cztery sygnały unikalności: własne twierdzenia, unikalne fakty, terminy nieobecne u konkurencji i rzadkie formaty.',
     lead:
-      'Wartość dodana odpowiada na pytanie, którego nie zadaje żaden inny wymiar: co jest u Ciebie, czego nie ma u nikogo w Top 10. Wynik podajemy w skali od 0 do 100 i ma on charakter informacyjny – nie wchodzi do oceny końcowej.',
+      'Ile Twoja treść wnosi ponad to, co już jest w Top 10. Metryka strategiczna: pokazuje, gdzie budować przewagę, i nie wpływa na ocenę końcową.',
     chips: ['Skala 0–100', 'Nie wpływa na ocenę końcową', 'Wejście: treść + korpus Top 10 SERP'],
     whyHeading: 'Dlaczego wartość dodana jest ważna dla modeli AI?',
     howHeading: 'Jak liczymy wartość dodaną?',
@@ -867,7 +972,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     ],
     how: {
       intro: [
-        'Porównujemy Twoją treść z korpusem konkurencji z Top 10 i liczymy cztery niezależne sygnały, które składają się na wynik:',
+        'Porównujemy Twoją treść z korpusem konkurencji z Top 10 i liczymy cztery niezależne sygnały, które składają się na wynik w skali od 0 do 100:',
       ],
       tables: [
         {
@@ -899,6 +1004,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Do tego podpowiedzi, jakim typem materiału najłatwiej podnieść wynik przy tym konkretnym temacie: własnymi danymi, studium przypadku, porównaniem, komentarzem eksperta albo małym badaniem.',
       'Wartość dodana świadomie nie wpływa na ocenę końcową. Jest metryką strategiczną – pokazuje, gdzie budować przewagę, a nie co poprawić w tekście.',
     ],
+    recommendations: [
+      {
+        problem: 'Treść powtarza to, co jest w Top 10 — nie ma w niej ani jednego twierdzenia, którego nie znajdziesz u konkurencji.',
+        before: 'Opis parametrów przepisany z kart katalogowych producentów.',
+        after: 'Dodaj własne dane: wyniki testu żywotności przełączników albo statystykę zwrotów według typu chwytu.',
+      },
+      {
+        problem: 'Przewaga formatowa 17/100 — konkurencja sięga po formaty, których na stronie nie ma.',
+        before: 'Tekst i lista punktowana w każdej sekcji.',
+        after: 'Dodaj tabelę porównawczą modeli i krótkie wideo z testu — oba formaty są rzadkie w tym SERP-ie.',
+      },
+    ],
     related: [
       { slug: 'tf-idf', name: 'TF-IDF', desc: 'Terminologia, której brakuje względem konkurencji.' },
       { slug: 'graf-wiedzy', name: 'Graf wiedzy', desc: 'Które Twoje fakty są wyróżnikiem.' },
@@ -922,30 +1039,25 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
         a: 'Przy prostym pytaniu jedno, przy złożonym dwa lub trzy. Limit to pierwsze 50 słów sekcji – w tym miejscu ma paść odpowiedź, a nie zapowiedź tego, o czym będzie sekcja.',
       },
     ],
-    beforeAfter: {
-      intro: 'Ten sam akapit przed poprawką i po niej – bez dopisywania nowej wiedzy, wyłącznie przez zmianę kolejności i wymianę ogólników na dane.',
-      before: 'W dzisiejszych czasach coraz więcej osób zastanawia się nad montażem pompy ciepła. Zanim przejdziemy do konkretów, warto zrozumieć, od czego zależy koszt takiej inwestycji.',
-      after: 'Montaż pompy ciepła kosztuje od 35 000 do 60 000 zł, a z dofinansowaniem – od 20 000 zł. Na kwotę składa się urządzenie, robocizna i modernizacja instalacji.',
-    },
     name: 'BLUF',
     heading: 'Czym jest BLUF w SEO i GEO?',
     title: 'Czym jest BLUF w SEO i GEO?',
     description:
       'Czym jest BLUF i jak CitationOne go mierzy: odpowiedź w pierwszych 50 słowach sekcji oraz osobne reguły dla FAQ, listingu i encyklopedii.',
     lead:
-      'BLUF (Bottom Line Up Front) sprawdza jedną rzecz: czy odpowiedź na pytanie sekcji pada w jej pierwszych 50 słowach, czy dopiero po akapicie rozgrzewki. To wymiar o kolejności informacji, nie o ich ilości – ten sam tekst z przestawionymi zdaniami dostaje inną ocenę.',
+      'Modele AI preferują treści, które podają główną odpowiedź na początku sekcji. BLUF mierzy, jak szybko Twoja treść dochodzi do sedna – i czy robi to w każdej sekcji, czy tylko w pierwszej.',
     chips: ['Skala 0–10', 'Ocena modelem językowym', 'Wejście: treść + CSI + profil typu treści'],
     whyHeading: 'Dlaczego BLUF jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy BLUF?',
     why: [
-      'Systemy RAG, które stoją za ChatGPT, Perplexity i AI Overview, nie czytają strony w całości. Tną ją na chunki po około 200–500 słów i oceniają każdy osobno, bez kontekstu reszty artykułu. Jeśli sekcja zaczyna się od „W dzisiejszych czasach coraz więcej firm...”, model widzi fragment, który nie odpowiada na nic – i sięga po konkurenta, który odpowiedź postawił w pierwszym zdaniu.',
-      'W klasycznym SEO ta sama reguła stała za featured snippetami – do ramki trafiał akapit, który odpowiadał od razu. W GEO stawka jest wyższa, bo silnik generatywny nie linkuje strony, tylko cytuje jej fragment: chunk bez odpowiedzi na początku wygląda dla modelu jak chunk bez odpowiedzi w ogóle.',
+      'BLUF to skrót od Bottom Line Up Front: najważniejsza informacja idzie na sam początek. Systemy RAG, które stoją za ChatGPT, Perplexity i AI Overview, czytają stronę fragmentami. Tną ją na chunki po około 200–500 słów i oceniają każdy osobno, bez kontekstu reszty artykułu. Jeśli sekcja zaczyna się od „W dzisiejszych czasach coraz więcej firm...”, model widzi fragment, który nie odpowiada na nic – i sięga po konkurenta, który odpowiedź postawił w pierwszym zdaniu.',
+      'W klasycznym SEO ta sama reguła stała za featured snippetami – do ramki trafiał akapit, który odpowiadał od razu. W GEO stawka jest wyższa, bo silnik generatywny cytuje fragment strony, zamiast do niej linkować: chunk bez odpowiedzi na początku wygląda dla modelu jak chunk bez odpowiedzi w ogóle.',
       'Wzorzec, który działa, to Odpowiedź → Dowód → Kontekst. Najpierw konkluzja z liczbą, potem uzasadnienie, na końcu tło. Odwrotna kolejność – tło, uzasadnienie, wniosek – jest naturalna w piśmie akademickim i zabójcza w AI Search.',
     ],
     how: {
       intro: [
         'Model dostaje treść pociętą na sekcje H2, Central Search Intent strony oraz profil typu treści z konsensusu SERP. Dla każdej sekcji izoluje pierwsze 50 słów i rozstrzyga, czy zawierają bezpośrednią odpowiedź na pytanie tej sekcji. Ocena całego wymiaru to udział sekcji z poprawnym BLUF-em, korygowany o obecność konkretów liczbowych.',
-        'Reguła zależy od typu strony – to nie jest jeden szablon dla wszystkiego:',
+        'Reguła zależy od typu strony:',
       ],
       tables: [
         {
@@ -992,6 +1104,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     report: [
       'Rozbicie sekcja po sekcji: dla każdego H2 pokazujemy jego pierwsze 50 słów i werdykt, czy odpowiedź tam jest.',
       'Do sekcji bez BLUF-u dostajesz gotową propozycję pierwszego zdania – a dla sekcji, których w ogóle brakuje względem konkurencji z Top 10, także krótkie rozwinięcie. Wszystko w formacie Przed / Po, więc widzisz dokładnie, co zamienić.',
+    ],
+    recommendations: [
+      {
+        problem: 'Nad listą produktów nie ma podsumowania kategorii — pierwsze, co dostaje model, to nagłówek i licznik.',
+        before: '# Myszki gamingowe (211)',
+        after: 'Dodaj pod H1 dwa zdania: „W ofercie 211 myszek gamingowych w cenach od 89,99 zł do 769 zł, przewodowych i bezprzewodowych”.',
+      },
+      {
+        problem: 'Sekcja otwiera się definicją ogólną — w pierwszych 50 słowach nie pada żadna liczba.',
+        before: 'Podstawowym elementem każdej myszki gamingowej jest sensor optyczny lub laserowy, który wpływa na dokładność śledzenia ruchu.',
+        after: 'Zacznij od faktu: „Sensory optyczne dają 800–26 000 DPI, prędkość śledzenia 650 IPS i czas reakcji 1 ms”.',
+      },
     ],
     related: [
       { slug: 'optymalizacja-chunkow', name: 'Optymalizacja chunków', desc: 'Czy sekcja broni się bez kontekstu całości.' },

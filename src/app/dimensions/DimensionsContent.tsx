@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import CqsScoreCard from '@/components/CqsScoreCard';
 
 const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
@@ -134,32 +135,35 @@ export default function DimensionsContent() {
               backgroundClip: 'text',
               display: 'inline-block',
             }}>
-              10 Content Quality Dimensions
+              10 Content Quality Dimensions + E-E-A-T
             </h1>
             <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.7, maxWidth: 680, margin: '0 auto 36px' }}>
-              Large language models (the ones powering ChatGPT or Google AI Overview) do not read texts the traditional way. They use algorithms to mathematically evaluate the usefulness and credibility of content. CitationOne translates those processes into 10 measurable dimensions that make up your Content Quality Score (CQS).
+              The models behind ChatGPT and Google AI Overview evaluate content algorithmically. CitationOne translates those processes into 10 measurable dimensions that make up your Content Quality Score (CQS).
             </p>
 
             {/* CQS box */}
-            <div style={{
+            <div className="cqs-box" style={{
               background: '#f8fafb',
               border: '1px solid #dfe1e7',
               borderRadius: 12,
               padding: '28px 32px',
               textAlign: 'left',
-              maxWidth: 640,
+              maxWidth: 760,
               margin: '0 auto',
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                <div style={{ width: 16, height: 2, background: ACCENT, borderRadius: 1 }} />
-                <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>What is CQS?</span>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                  <div style={{ width: 16, height: 2, background: ACCENT, borderRadius: 1 }} />
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>What is CQS?</span>
+                </div>
+                <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: '0 0 10px' }}>
+                  Content Quality Score
+                </h3>
+                <p style={{ fontSize: 15, color: '#36394a', lineHeight: 1.7, margin: 0 }}>
+                  CQS on a 0–100 scale shows how your content performs against the Top 10 across the parameters that matter for AI Search. Each of the 10 dimensions carries its own weight in the result.
+                </p>
               </div>
-              <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: '0 0 10px' }}>
-                Content Quality Score
-              </h3>
-              <p style={{ fontSize: 15, color: '#36394a', lineHeight: 1.7, margin: 0 }}>
-                CQS is a 0-100 indicator that shows how well your content performs against the top 10 search results across parameters that matter for AI Search. Each of the 10 dimensions carries an assigned weight, allowing for a precise estimate of your chance of being cited.
-              </p>
+              <CqsScoreCard badge="WARNING" />
             </div>
           </motion.div>
         </div>
@@ -373,6 +377,15 @@ export default function DimensionsContent() {
       </section>
 
       <style>{`
+        .cqs-box {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 28px;
+          align-items: center;
+        }
+        @media (max-width: 720px) {
+          .cqs-box { grid-template-columns: 1fr; gap: 20px; }
+        }
         .dims-list-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
