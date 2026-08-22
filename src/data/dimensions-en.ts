@@ -45,14 +45,14 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
           ],
         },
         {
-          caption: 'In benchmark mode every missing attribute is prioritised by how common it is among competitors',
+          caption: 'In benchmark mode every missing attribute is prioritized by how common it is among competitors',
           head: ['Status', 'What it means'],
           rows: [
             ['Covered', 'The attribute is present both on your page and among competitors'],
             ['Critical gap', 'A baseline attribute present at 7 of 10 competitors, missing on your page'],
             ['High gap', 'A baseline attribute at 5-6 competitors, additionally confirmed by SERP questions'],
             ['Medium and low gap', 'A rare attribute - present in SERP questions or at individual competitors'],
-            ['Surplus', 'Something you have and nobody else does - a candidate for your differentiator'],
+            ['Unique to you', 'Something you have and nobody else does - a candidate for your differentiator'],
           ],
         },
       ],
@@ -204,7 +204,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     whyHeading: 'Why does the knowledge graph matter to AI models?',
     why: [
       'Search engines stopped operating on keywords years ago; they work with entities and facts about them - and the Entity-Attribute-Value triple is the basic structure of every knowledge graph. “Mortgage” is the entity, “interest rate” is its attribute, “7.2%” is the value. Only the complete set forms a fact that can be stored, cross-checked against another source and quoted.',
-      'In GEO this translates directly: the model builds its answer from facts, not from paragraphs. A page that names entities but never gives their attributes and values is, to the model, a text without content - summarisable, but with nothing to quote. Conversely, a dense and consistent graph makes the model recognise the page as a source of knowledge in its field.',
+      'In GEO this translates directly: the model builds its answer from facts, not from paragraphs. A page that names entities but never gives their attributes and values is, to the model, a text without content - summarisable, but with nothing to quote. Conversely, a dense and consistent graph makes the model recognize the page as a source of knowledge in its field.',
     ],
     howHeading: 'How do we measure the knowledge graph?',
     how: {
@@ -461,7 +461,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     whyHeading: 'Why does cost of retrieval matter to AI models?',
     why: [
       'A model building an answer processes many sources at once. A page where the answer has to be dug out of ten paragraphs of running text is more expensive to handle than a competitor who put the same information in a table. With comparable content, the cheaper one wins.',
-      'The same mechanism works on the human side - structure that helps a reader scan the page helps a model find a fragment to quote. This is one of the few dimensions where optimising for AI and optimising for people is exactly the same work.',
+      'The same mechanism works on the human side - structure that helps a reader scan the page helps a model find a fragment to quote. This is one of the few dimensions where optimizing for AI and optimizing for people is exactly the same work.',
     ],
     howHeading: 'How do we measure cost of retrieval?',
     how: {
@@ -500,7 +500,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'Bold scattered across the whole text - it stops meaning anything',
     ],
     report: [
-      'You get a checklist marking which structural elements you have and which are missing. Every unmet point is a ready fix - usually a matter of minutes, because it needs no new content, only reorganising what is already there.',
+      'You get a checklist marking which structural elements you have and which are missing. Every unmet point is a ready fix - usually a matter of minutes, because it needs no new content, only reorganizing what is already there.',
       'Plus detected heading hierarchy defects: a missing H1, several H1s, or H3 sections with no parent H2.',
     ],
     faq: [

@@ -43,8 +43,8 @@ export const TOOLS_EN: Record<string, ToolData> = {
       head: ['Parameter', 'Range and default'],
       rows: [
         ['Similarity threshold', '0.5-1.0 (default 0.95) - the higher, the tighter the clusters'],
-        ['Minimum cluster size', '1-20 - phrases below it land in the “unclustered” bucket'],
-        ['SERP results considered', '1-10 - how many positions we compare'],
+        ['Minimum cluster size', '1-20 (default 1) - groups smaller than this never become a cluster, and their phrases go to the “Unclustered” group'],
+        ['SERP results considered', '1-10 (default 5) - how many positions we compare'],
       ],
     },
     outputHeading: 'What do you get?',
@@ -76,7 +76,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
       },
     ],
     related: [
-      { slug: 'content-pruning', name: 'Content Pruning', desc: 'Which existing pages cannibalise each other.' },
+      { slug: 'content-pruning', name: 'Content Pruning', desc: 'Which existing pages cannibalize each other.' },
       { slug: 'internal-linking', name: 'Internal Linking', desc: 'How to connect pages within a cluster.' },
       { slug: 'schema-gaps', name: 'Schema Gaps', desc: 'What is missing from your structured data.' },
     ],
@@ -86,17 +86,17 @@ export const TOOLS_EN: Record<string, ToolData> = {
   'content-pruning': {
     slug: 'content-pruning',
     name: 'Content Pruning',
-    heading: 'Content pruning and cannibalisation tool for SEO',
-    title: 'Content pruning and cannibalisation tool for SEO',
+    heading: 'Content pruning and cannibalization tool for SEO',
+    title: 'Content pruning and cannibalization tool for SEO',
     description:
       'Point it at a sitemap and see which pages drift off-topic and which compete with each other - with a proposed action for every one. 1 credit, CSV export.',
     lead:
       'You submit a sitemap and come back with a list of pages that blur what your site is about, plus groups of pages fighting each other for the same query - each with a suggestion: remove, redirect, merge or differentiate.',
     chips: ['1 credit per run', 'Input: sitemap', 'Output: 3 tabs + CSV'],
-    defHeading: 'What are content pruning and keyword cannibalisation?',
+    defHeading: 'What are content pruning and keyword cannibalization?',
     def: [
       'Pruning answers two questions about an existing site: which pages drift far enough from the main topic to blur its profile, and which are so similar to each other that they compete for the same query.',
-      'Cannibalisation is that second case: two of your own URLs aiming at the same intent. Pruning responds to both - it is not about deleting everything old, but about deciding which page should carry the topic.',
+      'Cannibalization is that second case: two of your own URLs aiming at the same intent. Pruning responds to both - it is not about deleting everything old, but about deciding which page should carry the topic.',
     ],
     whyHeading: 'Why prune content?',
     why: [
@@ -111,7 +111,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
       { title: 'Semantic representation', desc: 'Every page gets a vector describing its content, so we compare meaning rather than word overlap.' },
       { title: 'The site main topic', desc: 'We group the pages and derive the main topic plus side topics from characteristic two-word phrases.' },
       { title: 'Pruning candidates', desc: 'We measure how far each page sits from the centre of the main topic and cut off the chosen percentile.' },
-      { title: 'Cannibalisation groups', desc: 'We compare pages pairwise and group those whose similarity crosses the threshold.' },
+      { title: 'Cannibalization groups', desc: 'We compare pages pairwise and group those whose similarity crosses the threshold.' },
       { title: 'Recommendations', desc: 'The model describes what was found and proposes an action for each case.' },
     ],
     configTable: {
@@ -119,13 +119,13 @@ export const TOOLS_EN: Record<string, ToolData> = {
       head: ['Parameter', 'Range and default'],
       rows: [
         ['Deviation percentile', '50-99 (default 90) - above it a page becomes a candidate'],
-        ['Cannibalisation threshold', '0.7-1.0 (default 0.9) - the similarity at which pages count as competing'],
+        ['Cannibalization threshold', '0.7-1.0 (default 0.9) - the similarity at which pages count as competing'],
       ],
     },
     outputHeading: 'What do you get?',
     output: [
       'A table of pruning candidates with guidance on what to do: remove, redirect or rebuild.',
-      'Cannibalisation groups with a similarity score and a suggestion: keep the strongest page and redirect, merge the content, or differentiate the pages so they target different queries.',
+      'Cannibalization groups with a similarity score and a suggestion: keep the strongest page and redirect, merge the content, or differentiate the pages so they target different queries.',
       'A topical summary of the site: the main topic and side topics derived from actual content rather than from what you assume it covers.',
       'CSV export, plus a clear message when the analysis found nothing to fix.',
     ],
@@ -145,8 +145,8 @@ export const TOOLS_EN: Record<string, ToolData> = {
         a: 'For an extensive site it is better to submit section sitemaps separately: blog, categories, products. The results are sharper, because the main topic is then computed within one section instead of being averaged across the whole domain - and it is that topic which decides which pages count as drifting.',
       },
       {
-        q: 'How is cannibalisation different from ordinary topical overlap?',
-        a: 'By threshold and consequence. Two pages on a related topic are normal; cannibalisation starts where they are similar enough that the search engine has no reason to prefer one. You set that threshold yourself before the run.',
+        q: 'How is cannibalization different from ordinary topical overlap?',
+        a: 'By threshold and consequence. Two pages on a related topic are normal; cannibalization starts where they are similar enough that the search engine has no reason to prefer one. You set that threshold yourself before the run.',
       },
     ],
     related: [
@@ -183,7 +183,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
       { title: 'Reading the sitemap', desc: 'The same path as pruning: nested sitemaps, media filtered out, the address validated before the run.' },
       { title: 'Fetching page code', desc: 'We fetch the HTML of every URL - unsimplified, because structured data lives in markup that content simplification strips away.' },
       { title: 'Extracting markup', desc: 'We read both JSON-LD (including the bundled form popular plugins emit) and microdata embedded in the HTML. Every finding shows its source.' },
-      { title: 'Identifying the page type', desc: 'We score the page against 19 profiles - from homepage and article to job posting and contact page. When the signals are too weak it stays “unknown” instead of guessing.' },
+      { title: 'Identifying the page type', desc: 'We score the page against 18 profiles - from homepage and article to job posting and contact page. When the signals are too weak it stays “unknown” instead of guessing.' },
       { title: 'Comparing with the catalogue', desc: 'For the identified profile we check which of the 30-plus schema types are missing and which are unnecessary.' },
       { title: 'Filtering false positives', desc: 'A recipe recommendation without an ingredient list, or a job posting without the matching phrasing, is discarded - better to skip than to push wrong markup into your code.' },
     ],
@@ -258,7 +258,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
         ['Similarity threshold', '0.5-1.0 (default 0.75)'],
         ['Max links per page', '1-30 (default 5)'],
         ['Max links to one target', '1-50 (default 10)'],
-        ['Anchor length', 'from 1-10 to 1-15 words (default 2-6)'],
+        ['Anchor length', 'minimum 1-10 words (default 2), maximum 1-15 words (default 6)'],
         ['Model verification', 'off by default'],
       ],
     },
