@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import HeroBackdrop from '@/components/HeroBackdrop';
 
@@ -65,16 +66,16 @@ function BeforeAfterVisual() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <div style={{ background: '#fafafa', border: '1px solid #e5e7eb', borderRadius: 8, padding: '16px' }}>
-          <span style={{ fontSize: 10, fontWeight: 700, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 10 }}>Przed</span>
-          <p style={{ fontSize: 12.5, color: '#9ca3af', lineHeight: 1.6, margin: 0, textDecoration: 'line-through' }}>
+        <div style={{ background: 'rgba(185,28,28,0.04)', border: '1px solid #dfe1e7', borderRadius: 8, padding: '16px' }}>
+          <span style={{ fontSize: 10, fontWeight: 700, color: '#B91C1C', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 10 }}>Przed</span>
+          <p style={{ fontSize: 12.5, color: '#818898', lineHeight: 1.6, margin: 0, textDecoration: 'line-through' }}>
             Optymalizacja pod AI jest ważna, ponieważ modele językowe dobierają treści według własnych kryteriów.
           </p>
         </div>
-        <div style={{ background: 'rgba(11,121,131,0.04)', border: '1px solid rgba(11,121,131,0.2)', borderRadius: 8, padding: '16px' }}>
-          <span style={{ fontSize: 10, fontWeight: 700, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 10 }}>Po</span>
+        <div style={{ background: 'rgba(21,128,61,0.04)', border: '1px solid #dfe1e7', borderRadius: 8, padding: '16px' }}>
+          <span style={{ fontSize: 10, fontWeight: 700, color: '#15803d', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 10 }}>Po</span>
           <p style={{ fontSize: 12.5, color: '#36394a', lineHeight: 1.6, margin: 0 }}>
-            <strong style={{ color: ACCENT }}>CitationOne</strong> mierzy 10 wymiarów cytowania przez AI - z szacowanym wpływem każdego na CQS i konkretną poprawką do wklejenia.
+            <strong style={{ color: ACCENT }}>CitationOne</strong> mierzy <Link href="/pl/wymiary" style={{ color: ACCENT, textDecoration: 'underline', textUnderlineOffset: 2 }}>10 wymiarów cytowania przez AI</Link> - z szacowanym wpływem każdego na CQS i konkretną poprawką do wklejenia.
           </p>
         </div>
       </div>
@@ -190,7 +191,7 @@ const REPORT_ITEMS = [
   'Content Quality Score (0–100) z rozbiciem na wymiary',
   'AI Citability Score (0–10)',
   'Wykres radarowy 10 wymiarów',
-  'Benchmark top 10 SERP - tabela porównawcza',
+  'Analiza konkurencji - tabela porównawcza Top 10 SERP',
   'Rekomendacje Przed i Po z priorytetami',
   'Graf wiedzy i tabela encji EAV',
   'AI Overview Coverage i analiza sub-zapytań',
@@ -335,7 +336,7 @@ export default function PageContent() {
               {[
                 { text: 'Pełny raport w ~5 minut' },
                 { text: '10 wymiarów + E-E-A-T' },
-                { text: 'Benchmark top 10 SERP' },
+                { text: 'Analiza konkurencji' },
                 { text: 'Przed i Po z gotowymi poprawkami' },
               ].map((item) => (
                 <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', background: '#f8fafb', border: '1px solid #dfe1e7', borderRadius: 8, fontSize: 13, color: '#36394a' }}>
@@ -370,12 +371,12 @@ export default function PageContent() {
               },
               {
                 n: '02', color: '#0b7983',
-                title: 'Algorytm wykonuje benchmark z Top 10 SERP',
+                title: 'Algorytm analizuje konkurencję z Top 10 SERP',
                 body: 'W mniej niż 5 minut system CitationOne pobiera i analizuje Twoją treść. W tym samym czasie bada 10 najlepiej rankujących stron konkurencji. Narzędzie porównuje Twój materiał z liderami rynku pod kątem 10 wymiarów jakości oraz sygnałów E-E-A-T.',
               },
               {
                 n: '03', color: '#c47a2a',
-                title: 'Odbierasz gotową listę rekomendacji „Quick Wins"',
+                title: 'Odbierasz gotową listę rekomendacji Przed i Po',
                 body: 'System generuje kompletny raport. Nie dostajesz ogólnych porad, ale precyzyjny plan działania. Narzędzie wskazuje konkretne akapity do poprawy i podaje gotowe wytyczne strukturalne dla Twoich redaktorów.',
               },
             ].map((step, i) => (
@@ -463,7 +464,7 @@ export default function PageContent() {
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <div className="feat-grid">
             <motion.div {...fadeUp()}>
-              <SectionLabel>Benchmark SERP</SectionLabel>
+              <SectionLabel>Analiza konkurencji</SectionLabel>
               <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
                 Zobacz, czy i dlaczego odstajesz od liderów
               </h2>

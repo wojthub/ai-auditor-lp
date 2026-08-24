@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import HeroBackdrop from '@/components/HeroBackdrop';
 
@@ -65,16 +66,16 @@ function BeforeAfterVisual() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <div style={{ background: '#fafafa', border: '1px solid #e5e7eb', borderRadius: 8, padding: '16px' }}>
-          <span style={{ fontSize: 10, fontWeight: 700, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 10 }}>Before</span>
-          <p style={{ fontSize: 12.5, color: '#9ca3af', lineHeight: 1.6, margin: 0, textDecoration: 'line-through' }}>
+        <div style={{ background: 'rgba(185,28,28,0.04)', border: '1px solid #dfe1e7', borderRadius: 8, padding: '16px' }}>
+          <span style={{ fontSize: 10, fontWeight: 700, color: '#B91C1C', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 10 }}>Before</span>
+          <p style={{ fontSize: 12.5, color: '#818898', lineHeight: 1.6, margin: 0, textDecoration: 'line-through' }}>
             AI optimization is important because language models pick content based on their own criteria.
           </p>
         </div>
-        <div style={{ background: 'rgba(11,121,131,0.04)', border: '1px solid rgba(11,121,131,0.2)', borderRadius: 8, padding: '16px' }}>
-          <span style={{ fontSize: 10, fontWeight: 700, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 10 }}>After</span>
+        <div style={{ background: 'rgba(21,128,61,0.04)', border: '1px solid #dfe1e7', borderRadius: 8, padding: '16px' }}>
+          <span style={{ fontSize: 10, fontWeight: 700, color: '#15803d', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 10 }}>After</span>
           <p style={{ fontSize: 12.5, color: '#36394a', lineHeight: 1.6, margin: 0 }}>
-            <strong style={{ color: ACCENT }}>CitationOne</strong> measures 10 AI citation dimensions - each with estimated CQS impact and a specific fix ready to paste.
+            <strong style={{ color: ACCENT }}>CitationOne</strong> measures <Link href="/dimensions" style={{ color: ACCENT, textDecoration: 'underline', textUnderlineOffset: 2 }}>10 AI citation dimensions</Link> - each with estimated CQS impact and a specific fix ready to paste.
           </p>
         </div>
       </div>
@@ -190,7 +191,7 @@ const REPORT_ITEMS = [
   'Content Quality Score (0–100) with dimension breakdown',
   'AI Citability Score (0–10)',
   'Radar chart of 10 dimensions',
-  'Top 10 SERP benchmark - comparison table',
+  'Competitor analysis - Top 10 SERP comparison table',
   'Before/After recommendations with priorities',
   'Knowledge graph and EAV entity table',
   'AI Overview Coverage and sub-query analysis',
@@ -313,7 +314,7 @@ export default function PageContentEN() {
               {[
                 { text: 'Full report in ~5 minutes' },
                 { text: '10 dimensions + E-E-A-T' },
-                { text: 'Top 10 SERP benchmark' },
+                { text: 'Competitor analysis' },
                 { text: 'Before/After with ready fixes' },
               ].map((item) => (
                 <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', background: '#f8fafb', border: '1px solid #dfe1e7', borderRadius: 8, fontSize: 13, color: '#36394a' }}>
@@ -348,12 +349,12 @@ export default function PageContentEN() {
               },
               {
                 n: '02', color: '#0b7983',
-                title: 'The algorithm runs a Top 10 SERP benchmark',
+                title: 'The algorithm analyzes your Top 10 SERP competitors',
                 body: 'In under 5 minutes CitationOne fetches and analyzes your content. At the same time it inspects the 10 top-ranking competitor pages. The tool compares your material with the market leaders across 10 quality dimensions and E-E-A-T signals.',
               },
               {
                 n: '03', color: '#c47a2a',
-                title: 'Receive a ready "Quick Wins" list',
+                title: 'Receive a ready Before / After list',
                 body: 'The system generates a complete report. You don\'t get generic advice - you get a precise action plan. The tool points to specific paragraphs to fix and gives ready structural guidelines for your editors.',
               },
             ].map((step, i) => (
@@ -441,7 +442,7 @@ export default function PageContentEN() {
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <div className="feat-grid">
             <motion.div {...fadeUp()}>
-              <SectionLabel>SERP Benchmark</SectionLabel>
+              <SectionLabel>Competitor analysis</SectionLabel>
               <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
                 See whether - and why - you fall behind the leaders
               </h2>
