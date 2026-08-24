@@ -16,9 +16,9 @@ export const TOOLS_PL: Record<string, ToolData> = {
     heading: 'Narzędzie do klasteryzacji słów kluczowych dla SEO',
     title: 'Narzędzie do klasteryzacji słów kluczowych dla SEO',
     description:
-      'Grupuj frazy według nakładania się wyników SERP: klastry z intencją, wolumenem i propozycją strony filarowej. 1 kredyt za analizę, eksport CSV.',
+      'Grupuj frazy według nakładania się wyników SERP: klastry z intencją, wolumenem i propozycją pillar page. 1 kredyt za analizę, eksport CSV.',
     lead:
-      'Wklejasz listę fraz, dostajesz gotowe grupy tematyczne – każda z intencją, sumarycznym wolumenem i propozycją strony filarowej. Zamiast zgadywać, ile tekstów napisać, widzisz to wprost z wyników wyszukiwania.',
+      'Wklejasz listę fraz, dostajesz gotowe grupy tematyczne – każda z intencją, sumarycznym wolumenem i propozycją pillar page. Zamiast zgadywać, ile tekstów napisać, widzisz to wprost z wyników wyszukiwania.',
     chips: ['1 kredyt za analizę', 'Wejście: lista fraz albo plik CSV', 'Wynik: klastry + CSV'],
     defHeading: 'Czym jest klasteryzacja słów kluczowych?',
     def: [
@@ -36,14 +36,14 @@ export const TOOLS_PL: Record<string, ToolData> = {
       { title: 'Pobranie wyników wyszukiwania', desc: 'Dla każdej frazy z listy pobieramy wyniki wyszukiwania – to one są danymi wejściowymi analizy.' },
       { title: 'Macierz fraza × adres', desc: 'Budujemy macierz obecności adresów w wynikach i liczymy podobieństwo każdej pary fraz.' },
       { title: 'Łączenie w klastry', desc: 'Frazy powiązane podobieństwem powyżej progu trafiają do wspólnych grup.' },
-      { title: 'Opis klastra', desc: 'Model nadaje klastrowi etykietę, rozpoznaje intencję i proponuje temat strony filarowej.' },
+      { title: 'Opis klastra', desc: 'Model nadaje klastrowi etykietę, rozpoznaje intencję i proponuje temat pillar page.' },
       { title: 'Wolumeny', desc: 'Do fraz dociągamy miesięczne liczby wyszukiwań, a klastry sortujemy po sumarycznym wolumenie.' },
     ],
     configTable: {
       caption: 'Co ustawiasz przed startem',
       head: ['Parametr', 'Zakres i domyślna wartość'],
       rows: [
-        ['Próg podobieństwa', '0,5–1,0 (domyślnie 0,95) – im wyżej, tym ciaśniejsze klastry'],
+        ['Próg podobieństwa', '0,5–1,0 (domyślnie 0,95) – im wyżej, tym węższe klastry'],
         ['Minimalny rozmiar klastra', '1–20 (domyślnie 1) – grupy mniejsze niż ta wartość nie stają się klastrem, a ich frazy trafiają do grupy „Bez klastra”'],
         ['Liczba wyników SERP', '1–10 (domyślnie 5) – ile pozycji bierzemy pod uwagę przy porównaniu'],
       ],
@@ -51,10 +51,10 @@ export const TOOLS_PL: Record<string, ToolData> = {
     outputHeading: 'Co dostajesz?',
     output: [
       'Karty klastrów z etykietą, intencją i sumarycznym wolumenem, a pod nimi tabela fraz – gotowa podstawa do planu treści.',
-      'Propozycję strony filarowej dla każdego klastra: temat, który obsłuży całą grupę zapytań.',
+      'Propozycję pillar page dla każdego klastra: temat, który obsłuży całą grupę zapytań.',
       'Osobne grupy na frazy, które nie utworzyły klastra, nie mają wyników wyszukiwania albo których pobranie się nie powiodło. Nic nie znika po cichu – wiesz, co zostało poza analizą i dlaczego.',
       'Rozwinięcie wybranego klastra: 10–15 powiązanych fraz z typem (long-tail, pytanie, wariant, podtemat) i gotowym tytułem artykułu. To osobne działanie za 1 kredyt.',
-      'Eksport CSV z kolumnami: fraza, klaster, wolumen, intencja, strona filarowa.',
+      'Eksport CSV z kolumnami: fraza, klaster, wolumen, intencja, pillar page.',
     ],
     limitsHeading: 'Ile to kosztuje?',
     limits: [
