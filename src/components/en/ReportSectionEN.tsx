@@ -8,19 +8,19 @@ const items = [
   {
     number: '01',
     label: 'Before / After fixes',
-    desc: 'the rewritten text itself, not advice - each with an estimated CQS gain.',
+    desc: 'the rewritten text itself, not advice - each with an estimated Content Quality Score (CQS) gain.',
     color: '#e07a4a',
   },
   {
     number: '02',
     label: 'Applied to your content',
-    desc: 'tick the fixes and the tool writes them into your text, ready to paste into the CMS.',
+    desc: 'tick the recommendations you want and the tool writes them into your text, returning a version ready to paste into the CMS.',
     color: '#0b7983',
   },
   {
     number: '03',
     label: 'Revision History',
-    desc: 'track your progress after applying corrections.',
+    desc: 'every version of the text is kept, so you can see what changed in each pass.',
     color: '#c47a2a',
   },
 ];

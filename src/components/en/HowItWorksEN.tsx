@@ -18,7 +18,7 @@ const steps = [
     numberColor: '#0b7983',
     title: 'Algorithm runs the audit',
     description:
-      'In less than 5 minutes the system checks your content against direct competitors from the search engine. It analyzes text against the parameters language models use to select answer sources.',
+      'In less than 5 minutes the system checks your content against direct competitors from the search engine. It analyzes text against the parameters language models use to select answer sources. A bulk audit works the same way: you send a whole list of URLs or a sitemap in one job.',
   },
   {
     number: '03',

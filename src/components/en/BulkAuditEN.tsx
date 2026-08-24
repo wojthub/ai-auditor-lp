@@ -23,11 +23,11 @@ const cards = [
   },
   {
     title: 'You pay only after confirming',
-    desc: 'Crawling and the preview are free. You see the list of pages, untick the ones to skip, and only then 1 credit is charged per audited address.',
+    desc: 'Crawling and the preview are free. You see the list of pages, untick the ones to skip, and only then a credit is charged per audited address.',
   },
   {
     title: 'The queue runs in the background',
-    desc: 'Audits keep going even if you close the tab. You come back to a folder with a full report for each page separately.',
+    desc: 'Audits run in the background, even if you close the tab. When you come back to the panel, a separate report is waiting for every address.',
   },
 ];
 
@@ -60,9 +60,8 @@ export default function BulkAuditEN() {
             Audit a whole site section, not a single page
           </h2>
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.75, margin: 0, maxWidth: 720 }}>
-            Bulk audit takes a whole list of addresses in one job and runs each of them through
-            <strong style={{ color: '#0d0d12', fontWeight: 600 }}> the same algorithm as a single audit</strong> - with the Top 10 SERP benchmark and a full report.
-            You get a picture of an entire section instead of one article.
+            Bulk audit analyses a whole list of addresses in one job. Every address gets a full report
+            with the Top 10 SERP benchmark, so a single run shows you an entire section of the site.
           </p>
         </motion.div>
 
@@ -149,12 +148,11 @@ export default function BulkAuditEN() {
             fontSize: 'clamp(1.3rem, 2.5vw, 1.7rem)', fontWeight: 700, color: '#0d0d12',
             letterSpacing: '-0.025em', lineHeight: 1.25, margin: '0 0 12px',
           }}>
-            Two ways to scale beyond a handful of audits
+            Bulk audit or the API
           </h3>
           <p style={{ fontSize: 16, color: '#36394a', lineHeight: 1.72, margin: '0 0 24px', maxWidth: 720 }}>
-            One article you audit from the panel. At hundreds of URLs - a site migration, a full blog
-            review, several clients at once - you need a mode where auditing stops being a task and
-            becomes a process.
+            At hundreds of URLs - a site migration, a full blog review, several clients at once - you
+            need a mode where auditing stops being a task and becomes a process.
           </p>
 
           <div className="bulk-scale-grid">
@@ -169,8 +167,8 @@ export default function BulkAuditEN() {
                 Bulk audit
               </h4>
               <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 14px' }}>
-                Paste a list of URLs or a sitemap and close the tab. The queue runs in the background and
-                you come back to a folder with a separate report per page. No integration, no code.
+                Paste a list of URLs or a sitemap and close the tab. Audits run in the background, and the
+                panel holds a separate report for every page. No integration, no code.
               </p>
               <span style={{ fontSize: 13.5, color: '#666d80', lineHeight: 1.6 }}>
                 For editorial teams and agencies.

@@ -8,19 +8,19 @@ const items = [
   {
     number: '01',
     label: 'Rekomendacje Przed / Po',
-    desc: 'gotowy tekst zamiast wskazówki - z szacowanym przyrostem CQS przy każdej poprawce.',
+    desc: 'gotowy tekst zamiast wskazówki - z szacowanym przyrostem Content Quality Score (CQS) przy każdej poprawce.',
     color: '#e07a4a',
   },
   {
     number: '02',
     label: 'Wdrożenie w treść',
-    desc: 'zaznaczasz poprawki, a narzędzie nanosi je na Twój tekst i oddaje gotowca do CMS-a.',
+    desc: 'zaznaczasz wybrane rekomendacje, a narzędzie wpisuje je do Twojego tekstu i zwraca gotową wersję do wklejenia w CMS.',
     color: '#0b7983',
   },
   {
     number: '03',
     label: 'Historia rewizji',
-    desc: 'śledzisz postępy po wprowadzeniu poprawek.',
+    desc: 'kolejne wersje tekstu zostają zapisane, więc widzisz, co zmieniło się w każdym podejściu.',
     color: '#c47a2a',
   },
 ];

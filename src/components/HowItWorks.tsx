@@ -18,7 +18,7 @@ const steps = [
     numberColor: '#0b7983',
     title: 'Algorytm przeprowadza audyt',
     description:
-      'W mniej niż 5 minut system sprawdza treść na tle bezpośredniej konkurencji z wyszukiwarki. Narzędzie analizuje tekst pod kątem parametrów, których modele językowe używają do wybierania źródeł odpowiedzi.',
+      'W mniej niż 5 minut system sprawdza treść na tle bezpośredniej konkurencji z wyszukiwarki. Narzędzie analizuje tekst pod kątem parametrów, których modele językowe używają do wybierania źródeł odpowiedzi. Tak samo działa audyt masowy: całą listę adresów albo sitemapę przepuszczasz w jednym zleceniu.',
   },
   {
     number: '03',

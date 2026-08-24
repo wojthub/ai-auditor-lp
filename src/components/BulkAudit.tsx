@@ -23,11 +23,11 @@ const cards = [
   },
   {
     title: 'Płacisz dopiero po potwierdzeniu',
-    desc: 'Pobranie treści i podgląd są darmowe. Widzisz listę stron, odznaczasz te do pominięcia i dopiero wtedy schodzi 1 kredyt za każdy audytowany adres.',
+    desc: 'Pobranie treści i podgląd są darmowe. Widzisz listę stron, odznaczasz te do pominięcia i dopiero wtedy schodzi kredyt za każdy audytowany adres.',
   },
   {
     title: 'Kolejka działa w tle',
-    desc: 'Audyty wykonują się po Twojej stronie panelu, nawet gdy zamkniesz kartę. Wracasz do folderu z pełnym raportem dla każdej strony osobno.',
+    desc: 'Audyty wykonują się w tle, nawet gdy zamkniesz kartę. Po powrocie do panelu czeka osobny raport dla każdego adresu.',
   },
 ];
 
@@ -60,9 +60,8 @@ export default function BulkAudit() {
             Sprawdź cały serwis, nie jedną stronę
           </h2>
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.75, margin: 0, maxWidth: 720 }}>
-            Masowy audyt bierze całą listę adresów w jednym zleceniu i przepuszcza każdy z nich przez
-            <strong style={{ color: '#0d0d12', fontWeight: 600 }}> ten sam algorytm co audyt pojedynczy</strong> - z benchmarkiem Top 10 SERP i pełnym raportem.
-            Dostajesz obraz całej sekcji serwisu zamiast pojedynczego artykułu.
+            Masowy audyt analizuje całą listę adresów w jednym zleceniu. Każdy adres dostaje pełny
+            raport z benchmarkiem Top 10 SERP, więc w jednym przebiegu widzisz obraz całej sekcji serwisu.
           </p>
         </motion.div>
 
@@ -149,12 +148,11 @@ export default function BulkAudit() {
             fontSize: 'clamp(1.3rem, 2.5vw, 1.7rem)', fontWeight: 700, color: '#0d0d12',
             letterSpacing: '-0.025em', lineHeight: 1.25, margin: '0 0 12px',
           }}>
-            Dwie drogi, gdy audytów jest więcej niż kilka
+            Audyt masowy albo API
           </h3>
           <p style={{ fontSize: 16, color: '#36394a', lineHeight: 1.72, margin: '0 0 24px', maxWidth: 720 }}>
-            Jeden artykuł audytuje się z panelu. Przy setkach adresów - migracji serwisu, przeglądzie
-            całego bloga, obsłudze kilku klientów naraz - potrzebny jest tryb, w którym audyt przestaje
-            być czynnością, a staje się procesem.
+            Przy setkach adresów - migracji serwisu, przeglądzie całego bloga, obsłudze kilku klientów
+            naraz - potrzebny jest tryb, w którym audyt przestaje być czynnością, a staje się procesem.
           </p>
 
           <div className="bulk-scale-grid">
@@ -169,8 +167,8 @@ export default function BulkAudit() {
                 Masowy audyt
               </h4>
               <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 14px' }}>
-                Wklejasz listę adresów albo sitemapę i zamykasz kartę. Kolejka mieli w tle, a Ty wracasz
-                do folderu z osobnym raportem dla każdej strony. Bez integracji i bez pisania kodu.
+                Wklejasz listę adresów albo sitemapę i zamykasz kartę. Audyty wykonują się w tle, a w
+                panelu czeka osobny raport dla każdej strony. Bez integracji i bez pisania kodu.
               </p>
               <span style={{ fontSize: 13.5, color: '#666d80', lineHeight: 1.6 }}>
                 Dla zespołów redakcyjnych i agencji.
