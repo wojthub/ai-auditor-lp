@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-const REPORT_URL = 'https://app.citationone.com/share/AOlGargxePO9E-hRsQrWxy0V?lang=en';
+const REPORT_URL = 'https://app.citationone.com/share/BDBhqK8ZvffG9-rKXPNCeUTW?lang=en';
 
 const items = [
   {

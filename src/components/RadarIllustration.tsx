@@ -44,8 +44,8 @@ const LABELS = [
     def: 'Role semantyczne - perspektywa narracyjna. Mierzy, czy centralna encja (produkt/usługa) pełni rolę aktywnego podmiotu w zdaniach.',
   },
   {
-    short: 'AIO',
-    def: 'Pokrycie AI Overview - sprawdza, czy artykuł odpowiada na wszystkie pod-pytania generowane przez AI wokół głównego tematu.',
+    short: 'Fan-Out',
+    def: 'Pokrycie Fan-Out i AIO - sprawdza, czy artykuł odpowiada na wszystkie pod-pytania generowane przez AI wokół głównego tematu.',
   },
   {
     short: 'Wysiłek',
