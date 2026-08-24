@@ -9,23 +9,23 @@ const steps = [
   {
     number: '01',
     numberColor: '#e07a4a',
-    title: 'Paste a link or text',
+    title: 'Enter your data',
     description:
-      'Enter a sitemap link, a page URL or content you are about to publish. The tool requires no integration or configuration.',
+      'Paste a link to an already published article or a draft you plan to add to the site. Type in the keyword you want to win citations for in AI Search.',
   },
   {
     number: '02',
     numberColor: '#0b7983',
-    title: 'Algorithm runs the audit',
+    title: 'The algorithm analyzes your Top 10 SERP competitors',
     description:
-      'In less than 5 minutes the system checks your content against direct competitors from the search engine. It analyzes text against the parameters language models use to select answer sources. A bulk audit works the same way: you send a whole list of URLs or a sitemap in one job.',
+      'In under 5 minutes CitationOne fetches and analyzes your content. At the same time it inspects the 10 top-ranking competitor pages. The tool compares your material with the market leaders across 10 quality dimensions and E-E-A-T signals.',
   },
   {
     number: '03',
     numberColor: '#c47a2a',
-    title: 'Implement ready guidelines',
+    title: 'Receive a ready Before / After list',
     description:
-      'You receive a clear report with a specific list of changes. Instead of generic advice you get precise instructions on what to fix in the structure and composition of your text so AI starts citing it.',
+      'The system generates a complete report. Instead of generic advice you get a precise action plan. The tool points to specific paragraphs to fix and gives ready structural guidelines for your editors.',
   },
 ];
 

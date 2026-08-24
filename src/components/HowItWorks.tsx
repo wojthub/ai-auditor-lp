@@ -9,23 +9,23 @@ const steps = [
   {
     number: '01',
     numberColor: '#e07a4a',
-    title: 'Wklejasz link lub tekst',
+    title: 'Wprowadzasz dane',
     description:
-      'Podajesz link do sitemapy, adres URL podstrony lub treść, którą dopiero planujesz opublikować. Narzędzie nie wymaga żadnej integracji ani konfiguracji.',
+      'Podajesz link do opublikowanego już artykułu lub wklejasz roboczą wersję tekstu, którą dopiero planujesz dodać na stronę. Wpisujesz słowo kluczowe, na które chcesz zdobyć cytowanie w AI Search.',
   },
   {
     number: '02',
     numberColor: '#0b7983',
-    title: 'Algorytm przeprowadza audyt',
+    title: 'Algorytm analizuje konkurencję z Top 10 SERP',
     description:
-      'W mniej niż 5 minut system sprawdza treść na tle bezpośredniej konkurencji z wyszukiwarki. Narzędzie analizuje tekst pod kątem parametrów, których modele językowe używają do wybierania źródeł odpowiedzi. Tak samo działa audyt masowy: całą listę adresów albo sitemapę przepuszczasz w jednym zleceniu.',
+      'W mniej niż 5 minut system CitationOne pobiera i analizuje Twoją treść. W tym samym czasie bada 10 najlepiej rankujących stron konkurencji. Narzędzie porównuje Twój materiał z liderami rynku pod kątem 10 wymiarów jakości oraz sygnałów E-E-A-T.',
   },
   {
     number: '03',
     numberColor: '#c47a2a',
-    title: 'Wdrażasz gotowe wytyczne',
+    title: 'Odbierasz gotową listę rekomendacji Przed i Po',
     description:
-      'Otrzymujesz czytelny raport z konkretną listą zmian. Zamiast ogólnych porad dostajesz precyzyjne instrukcje, co musisz poprawić w strukturze i kompozycji tekstu, aby roboty AI zaczęły go cytować.',
+      'System generuje kompletny raport. Zamiast ogólnych porad dostajesz precyzyjny plan działania. Narzędzie wskazuje konkretne akapity do poprawy i podaje gotowe wytyczne strukturalne dla Twoich redaktorów.',
   },
 ];
 
