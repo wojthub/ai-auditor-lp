@@ -168,7 +168,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
     description:
       'Sprawdź schema.org na całej sitemapie: co masz wdrożone, czego brakuje i jakich znaczników oczekuje każdy typ strony. Bez wywołań AI, 1 kredyt za analizę.',
     lead:
-      'Wskazujesz sitemapę, a narzędzie przechodzi każdy adres i pokazuje, jakie znaczniki ma, a jakich brakuje względem tego, czym ta strona jest. Bez modeli AI – działa na kodzie Twoich stron, więc jest najszybsze z całego zestawu.',
+      'Wskazujesz sitemapę, a narzędzie sprawdza kod każdej podstrony. Najpierw rozpoznaje jej typ – artykuł, produkt, ofertę pracy – a potem pokazuje, które znaczniki schema.org już ma, a których brakuje przy tym typie strony. Analiza czyta wyłącznie kod Twoich stron, bez wywołań modeli AI, więc jest najszybsza z całego zestawu.',
     chips: ['1 kredyt za analizę', 'Wejście: sitemapa', 'Zero wywołań modelu AI'],
     defHeading: 'Czym są luki w danych strukturalnych (schema.org)?',
     def: [
@@ -183,12 +183,12 @@ export const TOOLS_PL: Record<string, ToolData> = {
     ],
     stepsHeading: 'Jak działa analiza?',
     steps: [
-      { title: 'Wczytanie sitemapy', desc: 'Ta sama ścieżka co w pruningu: zagnieżdżone sitemapy, odsiew mediów, walidacja adresu przed startem.' },
+      { title: 'Wczytanie sitemapy', desc: 'Wczytujemy sitemapę razem z zagnieżdżonymi plikami i pomijamy grafiki oraz pozostałe media. Dostępność adresów sprawdzamy jeszcze przed startem analizy.' },
       { title: 'Pobranie kodu stron', desc: 'Pobieramy HTML każdego adresu – bez uproszczeń, bo dane strukturalne siedzą w znacznikach, które upraszczanie treści usuwa.' },
-      { title: 'Ekstrakcja znaczników', desc: 'Wyciągamy zarówno JSON-LD (w tym postać zbiorczą, jakiej używają popularne wtyczki), jak i mikrodane osadzone w HTML. Przy każdym znalezisku widzisz źródło.' },
+      { title: 'Ekstrakcja znaczników', desc: 'Wyciągamy zarówno JSON-LD (w tym postać zbiorczą, jakiej używają popularne wtyczki), jak i mikrodane osadzone w HTML. Przy każdym wykrytym znaczniku widzisz, skąd pochodzi.' },
       { title: 'Rozpoznanie typu strony', desc: 'Punktowo klasyfikujemy stronę do jednego z 18 profili – od strony głównej i artykułu po ofertę pracy czy stronę kontaktową. Przy zbyt słabych sygnałach zostaje „nieznany”, zamiast zgadywać.' },
       { title: 'Porównanie z katalogiem', desc: 'Dla rozpoznanego profilu sprawdzamy, których z ponad 30 typów schema brakuje, a które są zbędne.' },
-      { title: 'Odsiew fałszywych trafień', desc: 'Rekomendacja przepisu bez listy składników czy oferty pracy bez charakterystycznych zwrotów jest odrzucana – lepiej pominąć niż wstawić w kod błędny znacznik.' },
+      { title: 'Odrzucanie fałszywych trafień', desc: 'Rekomendacja przepisu bez listy składników czy oferty pracy bez charakterystycznych zwrotów jest odrzucana – lepiej pominąć niż wstawić w kod błędny znacznik.' },
     ],
     outputHeading: 'Co dostajesz?',
     output: [
@@ -252,7 +252,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
       { title: 'Podział na fragmenty', desc: 'Treść dzielimy na akapity odpowiedniej długości, pomijając nagłówki – link w nagłówku to zła praktyka, więc nie proponujemy takich miejsc.' },
       { title: 'Dopasowanie semantyczne', desc: 'Porównujemy każdy fragment z tematyką pozostałych stron i wybieramy te pary, które przekraczają próg podobieństwa.' },
       { title: 'Wybór tekstu odnośnika', desc: 'Z fragmentu wybieramy naturalną frazę na anchor, z uwzględnieniem polskiej odmiany i słów nieznaczących.' },
-      { title: 'Odsiew', desc: 'Odrzucamy linki prowadzące do tej samej strony, przekroczone limity na stronę i na cel, adresy już podlinkowane oraz anchory już użyte na tej stronie.' },
+      { title: 'Wykluczenia', desc: 'Odrzucamy linki prowadzące do tej samej strony, przekroczone limity na stronę i na cel, adresy już podlinkowane oraz anchory już użyte na tej stronie.' },
       { title: 'Opcjonalna weryfikacja', desc: 'Na życzenie model dodatkowo sprawdza, czy odnośnik ma sens merytoryczny; odrzucone propozycje możesz obejrzeć osobno.' },
     ],
     configTable: {

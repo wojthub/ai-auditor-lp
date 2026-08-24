@@ -167,7 +167,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
     description:
       'Check schema.org across a whole sitemap: what you have, what is missing and which types each page should carry. No AI calls, 1 credit per run.',
     lead:
-      'You point it at a sitemap and it walks every URL, showing which markup a page carries and which it lacks relative to what that page actually is. No AI models involved - it works on your page code, which makes it the fastest tool of the set.',
+      'You point it at a sitemap and the tool reads the code of every page. First it identifies the page type - an article, a product, a job posting - and then it shows which schema.org markup that page already carries and which is missing for that type. The analysis reads only your page code, with no AI model calls, which makes it the fastest tool of the set.',
     chips: ['1 credit per run', 'Input: sitemap', 'Zero AI model calls'],
     defHeading: 'What are structured data gaps (schema.org)?',
     def: [
@@ -182,9 +182,9 @@ export const TOOLS_EN: Record<string, ToolData> = {
     ],
     stepsHeading: 'How does the analysis work?',
     steps: [
-      { title: 'Reading the sitemap', desc: 'The same path as content pruning: nested sitemaps, media skipped, addresses validated before the run.' },
+      { title: 'Reading the sitemap', desc: 'We read the sitemap along with any nested files and skip images and other media. The addresses are checked for availability before the run starts.' },
       { title: 'Fetching page code', desc: 'We fetch the HTML of every URL - unsimplified, because structured data lives in markup that content simplification strips away.' },
-      { title: 'Extracting markup', desc: 'We read both JSON-LD (including the bundled form popular plugins emit) and microdata embedded in the HTML. Every finding shows its source.' },
+      { title: 'Extracting markup', desc: 'We read both JSON-LD (including the bundled form popular plugins emit) and microdata embedded in the HTML. For every piece of markup we find, you see where it came from.' },
       { title: 'Identifying the page type', desc: 'We score the page against 18 profiles - from homepage and article to job posting and contact page. When the signals are too weak it stays “unknown” instead of guessing.' },
       { title: 'Comparing with the catalogue', desc: 'For the identified profile we check which of the 30-plus schema types are missing and which are unnecessary.' },
       { title: 'Filtering false positives', desc: 'A recipe recommendation without an ingredient list, or a job posting without the matching phrasing, is discarded - better to skip than to push wrong markup into your code.' },
