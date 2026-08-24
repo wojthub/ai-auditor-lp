@@ -39,7 +39,7 @@ const DIMS = [
     num: '03',
     id: 'EAV',
     slug: 'graf-wiedzy',
-    label: 'Graf wiedzy (EAV)',
+    label: 'Graf wiedzy',
     body: 'Treść buduje sieć powiązanych pojęć: encji, ich atrybutów i wartości. Im gęstszy i spójniejszy graf, tym łatwiej AI rozpoznaje treść jako wiarygodne źródło w danej dziedzinie. Ten wymiar sprawdza, czy teksty budują wiedzę, czy tylko wspominają o pojęciach.',
   },
   {

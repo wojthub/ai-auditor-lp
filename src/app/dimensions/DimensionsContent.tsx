@@ -39,7 +39,7 @@ const DIMS = [
     num: '03',
     id: 'EAV',
     slug: 'knowledge-graph-eav',
-    label: 'Knowledge Graph (EAV)',
+    label: 'Knowledge Graph',
     body: 'Content builds a network of related concepts: entities, their attributes and values. The denser and more coherent the graph, the easier it is for AI to recognize the content as a credible source in the field. This dimension checks whether your texts create knowledge - not just mention it.',
   },
   {

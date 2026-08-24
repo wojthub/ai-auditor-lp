@@ -6,6 +6,8 @@ import HeroBackdrop from '@/components/HeroBackdrop';
 
 const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
+// Kolory numerow kafelkow — te same co na hubie wymiarow (WymiaryContent / DimensionsContent).
+const NUM_COLORS = ['#e07a4a', '#0b7983', '#c47a2a'];
 
 function fadeUp(delay = 0) {
   return {
@@ -27,36 +29,77 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 /* ── Visual: Benchmark SERP ───────────────────────────────────────────── */
+// The Top 10 SERP panel from the app, trimmed for the LP — same columns and the same
+// score coloring, so the user recognizes the screen they get after purchase.
+// Neutral domains: we never show real clients or real competitors.
+const SERP_HEAD = { phrase: 'best wireless earbuds' };
+const SERP_LABELS = ['POS.', 'URL', 'WORDS', 'CQS', 'CIT.'];
+const SERP_STATS = [
+  { value: '47', label: 'Avg. SERP CQS' },
+  { value: '4.7', label: 'Avg. Citability' },
+  { value: '2091', label: 'Avg. words' },
+];
 const SERP_ROWS = [
-  { label: 'Your article', score: 72, highlight: true },
-  { label: 'Competitor #1', score: 88 },
-  { label: 'Competitor #2', score: 81 },
-  { label: 'Competitor #3', score: 76 },
-  { label: 'Competitor #4', score: 65 },
-  { label: 'Competitor #5', score: 58 },
+  { pos: '1', url: 'competitor-a.com/best-earbuds', words: '2708', cqs: 73, cit: 7.1 },
+  { pos: '2', url: 'competitor-b.com/wireless-earbuds', words: '3792', cqs: 69, cit: 6.7 },
+  { pos: '4', url: 'competitor-c.com/category/audio', words: '283', cqs: 19, cit: 2.2 },
+  { pos: '6', url: 'competitor-d.com/guides/earbuds', words: '3029', cqs: 70, cit: 6.8 },
+  { pos: '★', url: 'yoursite.com/blog/best-earbuds-2026', words: '5634', cqs: 70, cit: 6.8, mine: true },
 ];
 function BenchmarkVisual() {
+  // Progi kolorow 1:1 z raportem: ponizej 60 CQS / 6.0 CIT czerwony, wyzej bursztyn.
+  const pill = (ok: boolean) => ({
+    fontSize: 11.5, fontWeight: 700, borderRadius: 5, padding: '2px 8px', justifySelf: 'end',
+    color: ok ? '#CA8A04' : '#DC2626',
+    background: ok ? 'rgba(202,138,4,0.10)' : 'rgba(220,38,38,0.10)',
+  });
   return (
-    <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '24px 24px 20px' }}>
-      <p style={{ fontSize: 11, fontWeight: 600, color: '#a4acb9', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 18px' }}>CQS - top 10 SERP comparison</p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {SERP_ROWS.map((row, i) => (
-          <div key={row.label} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <span style={{ fontSize: 12, color: row.highlight ? ACCENT : '#818898', fontWeight: row.highlight ? 700 : 400, width: 110, flexShrink: 0 }}>{row.label}</span>
-            <div style={{ flex: 1, height: 8, background: '#f0f9fa', borderRadius: 4, overflow: 'hidden' }}>
-              <motion.div
-                initial={{ width: 0 }} whileInView={{ width: `${row.score}%` }}
-                viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.08, ease: 'easeOut' }}
-                style={{ height: '100%', background: row.highlight ? ACCENT : '#dfe1e7', borderRadius: 4 }}
-              />
-            </div>
-            <span style={{ fontSize: 12, fontWeight: 700, color: row.highlight ? ACCENT : '#818898', width: 28, textAlign: 'right' }}>{row.score}</span>
+    <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '18px 18px 10px', overflow: 'hidden' }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, flexWrap: 'wrap', marginBottom: 16 }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: '#0d0d12' }}>Top 10 SERP</span>
+        <span style={{ fontSize: 12, color: '#818898' }}>for &bdquo;{SERP_HEAD.phrase}&rdquo;</span>
+      </div>
+
+      <div style={{ display: 'flex', gap: 22, marginBottom: 18, flexWrap: 'wrap' }}>
+        {SERP_STATS.map((s) => (
+          <div key={s.label}>
+            <div style={{ fontSize: 22, fontWeight: 700, color: '#0d0d12', lineHeight: 1.1, letterSpacing: '-0.03em' }}>{s.value}</div>
+            <div style={{ fontSize: 11, color: '#818898', marginTop: 2 }}>{s.label}</div>
           </div>
         ))}
       </div>
-      <div style={{ marginTop: 18, padding: '10px 14px', background: 'rgba(11,121,131,0.06)', borderRadius: 6, border: '1px solid rgba(11,121,131,0.15)' }}>
-        <p style={{ fontSize: 12, color: ACCENT, margin: 0, fontWeight: 500 }}>↑ 16 pts to leader position - the report shows exactly what to change</p>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '26px 1fr 46px 40px 36px', gap: 8, paddingBottom: 8, borderBottom: '1px solid #eceff3' }}>
+        {SERP_LABELS.map((h, i) => (
+          <span key={h} style={{ fontSize: 10, fontWeight: 600, color: '#a4acb9', letterSpacing: '0.06em', textAlign: i > 1 ? 'right' : 'left' }}>{h}</span>
+        ))}
       </div>
+
+      {SERP_ROWS.map((row, i) => (
+        <motion.div
+          key={row.url}
+          initial={{ opacity: 0, y: 6 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: i * 0.07, ease: 'easeOut' }}
+          style={{
+            display: 'grid', gridTemplateColumns: '26px 1fr 46px 40px 36px', gap: 8,
+            alignItems: 'center', padding: '9px 0',
+            borderBottom: i === SERP_ROWS.length - 1 ? 'none' : '1px solid #f4f6f8',
+            background: row.mine ? 'rgba(11,121,131,0.05)' : 'transparent',
+            borderTop: row.mine ? '1px solid rgba(11,121,131,0.25)' : undefined,
+          }}
+        >
+          <span style={{ fontSize: 12, color: row.mine ? ACCENT : '#a4acb9', fontWeight: row.mine ? 700 : 400 }}>{row.pos}</span>
+          <span style={{
+            fontSize: 12, color: row.mine ? ACCENT : '#36394a', fontWeight: row.mine ? 600 : 400,
+            overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+          }}>{row.url}</span>
+          <span style={{ fontSize: 11.5, color: '#818898', textAlign: 'right' }}>{row.words}</span>
+          <span style={pill(row.cqs >= 60)}>{row.cqs}</span>
+          <span style={pill(row.cit >= 6)}>{row.cit}</span>
+        </motion.div>
+      ))}
     </div>
   );
 }
@@ -105,9 +148,14 @@ function AIOverviewVisual() {
   return (
     <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, overflow: 'hidden' }}>
       <div style={{ padding: '14px 18px', borderBottom: '1px solid #dfe1e7', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <div style={{ width: 20, height: 20, borderRadius: 4, background: 'linear-gradient(135deg, #4285f4, #34a853)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <span style={{ fontSize: 10, color: '#fff', fontWeight: 700 }}>G</span>
-        </div>
+        <img
+          src="/logos/google.png"
+          alt=""
+          aria-hidden
+          width={18}
+          height={18}
+          style={{ width: 18, height: 18, display: 'block', flexShrink: 0 }}
+        />
         <span style={{ fontSize: 11, fontWeight: 600, color: '#0d0d12' }}>AI Overview - synthesis decomposition</span>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 5 }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: ACCENT, background: 'rgba(11,121,131,0.08)', border: '1px solid rgba(11,121,131,0.2)', borderRadius: 4, padding: '2px 7px' }}>3/5</span>
@@ -234,47 +282,47 @@ function ExportVisual() {
 /* ── Dimensions data ──────────────────────────────────────────────────── */
 const DIMS = [
   {
-    id: 'CSI-A', label: 'Intent Alignment',
+    num: '01', id: 'CSI Alignment', slug: 'csi-alignment', label: 'CSI Alignment',
     medium: 'Checks whether the article answers exactly the question the user asked - not a similar one, but exactly that one.',
   },
   {
-    id: 'D1', label: 'Info Density',
+    num: '02', id: 'Density', slug: 'information-density', label: 'Information Density',
     medium: 'Measures how many facts are in the article. Generalities and empty sentences lower the score - concrete data and numbers raise it.',
   },
   {
-    id: 'D2', label: 'Knowledge Graph',
+    num: '03', id: 'EAV', slug: 'knowledge-graph-eav', label: 'Knowledge Graph',
     medium: 'AI sees the article as a network of facts: Entity - Attribute - Value. The more complete the network, the higher the chance of citation.',
   },
   {
-    id: 'D3', label: 'BLUF',
+    num: '04', id: 'BLUF', slug: 'bluf', label: 'BLUF',
     medium: 'AI models favor articles that give the answer at the beginning of every section. Not at the end, not after an intro - right at the start.',
   },
   {
-    id: 'D4', label: 'Chunks',
+    num: '05', id: 'Chunk', slug: 'chunk-optimization', label: 'Chunk Optimization',
     medium: 'AI systems split articles into chunks before analysis. Each chunk should make sense without reading the whole article - it should be autonomous.',
   },
   {
-    id: 'D5', label: 'Cost of Retrieval',
+    num: '06', id: 'CoR', slug: 'cost-of-retrieval', label: 'Cost of Retrieval',
     medium: 'The harder it is for AI to find information in the text, the lower the chance of citation. Headings, lists and tables reduce this cost.',
   },
   {
-    id: 'D6', label: 'TF-IDF',
+    num: '07', id: 'TF-IDF', slug: 'tf-idf', label: 'TF-IDF',
     medium: 'Checks whether the article uses domain terminology. Lack of specialized terms signals to AI: "this author doesn\'t know the topic deeply".',
   },
   {
-    id: 'D7', label: 'Semantic Roles',
+    num: '08', id: 'SRL', slug: 'semantic-roles', label: 'Semantic Roles',
     medium: 'AI absorbs knowledge better when the article topic is an active subject in sentences - not a passive object described by others.',
   },
   {
-    id: 'D8', label: 'AIO Coverage',
+    num: '09', id: 'Fan-Out', slug: 'query-fan-out', label: 'Fan-Out & AIO Coverage',
     medium: 'Each query is effectively several sub-queries at once. We check how many your article covers - because AI uses exactly those sub-queries for synthesis.',
   },
   {
-    id: 'D9', label: 'Editorial Effort',
+    num: '10', id: 'Effort', slug: 'effort-score', label: 'Effort Score',
     medium: 'Measures visible editorial effort: article length, images, video, tables and FAQ schema. AI models prefer polished content - not quick drafts.',
   },
   {
-    id: 'E-E-A-T', label: 'E-E-A-T',
+    num: '', id: 'E-E-A-T', slug: 'e-e-a-t', label: 'E-E-A-T',
     medium: 'Google and AI models trust content backed by a real expert with experience. The report measures specific trust signals.',
   },
 ];
@@ -402,18 +450,32 @@ export default function PageContentEN() {
           </motion.div>
           <div className="dims-grid">
             {DIMS.map((dim, i) => (
-              <motion.div
+              <motion.a
                 key={dim.id}
+                href={`/dimensions/${dim.slug}`}
                 {...fadeUp(i * 0.04)}
                 whileHover={{ y: -3, boxShadow: '0 6px 20px rgba(0,0,0,0.07)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-                style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '22px 22px 20px' }}
+                style={{
+                  background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10,
+                  padding: '22px 22px 20px', display: 'flex', flexDirection: 'column',
+                  alignItems: 'flex-start', textDecoration: 'none',
+                }}
               >
+                {dim.num && (
+                  <div style={{
+                    fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 800, color: NUM_COLORS[i % 3],
+                    letterSpacing: '-0.04em', lineHeight: 1, marginBottom: 18,
+                  }}>
+                    {dim.num}
+                  </div>
+                )}
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 10, flexWrap: 'wrap' }}>
                   <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: 0 }}>{dim.label}</h3>
                   <span style={{ fontSize: 11, fontWeight: 600, color: '#a4acb9', textTransform: 'uppercase', letterSpacing: '0.07em' }}>{dim.id}</span>
                 </div>
-                <p style={{ fontSize: 13.5, color: '#36394a', lineHeight: 1.65, margin: 0 }}>{dim.medium}</p>
-              </motion.div>
+                <p style={{ fontSize: 13.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 14px' }}>{dim.medium}</p>
+                <span style={{ fontSize: 13, fontWeight: 600, color: ACCENT, marginTop: 'auto' }}>How we measure it →</span>
+              </motion.a>
             ))}
           </div>
 
@@ -631,51 +693,6 @@ export default function PageContentEN() {
                   );
                 })}
               </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* INFORMATION GAIN */}
-      <section style={{ background: '#f8fafb', padding: '80px 0' }}>
-        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-          <div className="feat-grid feat-grid-reverse">
-            <motion.div {...fadeUp(0.12)}>
-              <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '20px 18px', overflow: 'hidden' }}>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 16 }}>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em' }}>IG Score</span>
-                  <span style={{ fontSize: 28, fontWeight: 700, color: ACCENT, lineHeight: 1 }}>68</span>
-                  <span style={{ fontSize: 13, color: '#a4acb9' }}>/ 100</span>
-                </div>
-                {[
-                  { label: 'Unique claims', pct: 72, color: ACCENT },
-                  { label: 'Unique EAV', pct: 61, color: '#0891b2' },
-                  { label: 'Unique TF-IDF terms', pct: 55, color: '#CA8A04' },
-                  { label: 'Format advantage', pct: 80, color: '#16A34A' },
-                ].map((bar) => (
-                  <div key={bar.label} style={{ marginBottom: 10 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                      <span style={{ fontSize: 11, color: '#818898' }}>{bar.label}</span>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: bar.color }}>{bar.pct}%</span>
-                    </div>
-                    <div style={{ height: 4, background: '#eceff3', borderRadius: 2, overflow: 'hidden' }}>
-                      <motion.div initial={{ width: 0 }} whileInView={{ width: `${bar.pct}%` }} viewport={{ once: true }} transition={{ duration: 0.8, ease: 'easeOut' }} style={{ height: '100%', background: bar.color, borderRadius: 2 }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-            <motion.div {...fadeUp()}>
-              <SectionLabel>Information Gain</SectionLabel>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
-                How much unique value does your content bring?
-              </h2>
-              <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 16 }}>
-                Information Gain measures content uniqueness vs SERP competition. It doesn&apos;t affect CQS - it&apos;s purely an informational metric. Extracts 10-20 factual claims and compares them with competitor content (token overlap).
-              </p>
-              <p style={{ fontSize: 14, color: '#666d80', lineHeight: 1.65 }}>
-                IG Score (0-100) is made up of 4 components: claim uniqueness (40%), unique EAV triples (30%), unique TF-IDF terms (20%) and format advantage (10%). Each claim marked with a unique or common badge.
-              </p>
             </motion.div>
           </div>
         </div>

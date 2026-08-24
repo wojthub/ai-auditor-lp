@@ -42,12 +42,14 @@ const NODES: Array<[number, number, number]> = [
 
 // vbHeight splaszcza uklad pod nizsze naglowki podstron. Bez tego preserveAspectRatio="slice"
 // przycina graf tak mocno, ze wieksza czesc chowa sie pod nawigacja.
-export default function HeroNodes({ vbHeight = 520, height }: { vbHeight?: number; height?: number }) {
+// `tail` = kontynuacja tla w kolejnej sekcji: maska wygasza tylko dol, gora ma sie
+// zlewac z hero, zeby przejscie miedzy sekcjami bylo niewidoczne.
+export default function HeroNodes({ vbHeight = 520, height, tail }: { vbHeight?: number; height?: number; tail?: boolean }) {
   const sy = (y: number) => +(y * vbHeight / 520).toFixed(1);
 
   return (
     <motion.svg
-      className="hero-nodes"
+      className={tail ? 'hero-nodes hero-nodes-tail' : 'hero-nodes'}
       style={height ? { height, bottom: 'auto' } : undefined}
       viewBox={`0 0 1200 ${vbHeight}`}
       preserveAspectRatio="xMidYMid slice"

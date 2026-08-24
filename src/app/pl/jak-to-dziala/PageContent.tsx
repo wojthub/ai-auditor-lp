@@ -6,6 +6,8 @@ import HeroBackdrop from '@/components/HeroBackdrop';
 
 const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
+// Kolory numerow kafelkow — te same co na hubie wymiarow (WymiaryContent / DimensionsContent).
+const NUM_COLORS = ['#e07a4a', '#0b7983', '#c47a2a'];
 
 function fadeUp(delay = 0) {
   return {
@@ -27,36 +29,77 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 /* ── Visual: Benchmark SERP ───────────────────────────────────────────── */
+// Panel Top 10 SERP z aplikacji w wersji na LP — te same kolumny i ten sam sposob
+// kolorowania wynikow, zeby user rozpoznal ekran, ktory zobaczy po zakupie.
+// Domeny neutralne: nie pokazujemy realnych klientow ani realnej konkurencji.
+const SERP_HEAD = { phrase: 'ranking słuchawek bezprzewodowych' };
+const SERP_LABELS = ['POZ.', 'URL', 'SŁOWA', 'CQS', 'CIT.'];
+const SERP_STATS = [
+  { value: '47', label: 'Śr. CQS SERP' },
+  { value: '4.7', label: 'Śr. Citability' },
+  { value: '2091', label: 'Śr. słów' },
+];
 const SERP_ROWS = [
-  { label: 'Twój artykuł', score: 72, highlight: true },
-  { label: 'Konkurent #1', score: 88 },
-  { label: 'Konkurent #2', score: 81 },
-  { label: 'Konkurent #3', score: 76 },
-  { label: 'Konkurent #4', score: 65 },
-  { label: 'Konkurent #5', score: 58 },
+  { pos: '1', url: 'konkurent-a.pl/ranking-sluchawek', words: '2708', cqs: 73, cit: 7.1 },
+  { pos: '2', url: 'konkurent-b.pl/sluchawki-douszne', words: '3792', cqs: 69, cit: 6.7 },
+  { pos: '4', url: 'konkurent-c.pl/kategoria/audio', words: '283', cqs: 19, cit: 2.2 },
+  { pos: '6', url: 'konkurent-d.pl/porady/sluchawki', words: '3029', cqs: 70, cit: 6.8 },
+  { pos: '★', url: 'twojastrona.pl/blog/ranking-2026', words: '5634', cqs: 70, cit: 6.8, mine: true },
 ];
 function BenchmarkVisual() {
+  // Progi kolorow 1:1 z raportem: ponizej 60 CQS / 6.0 CIT czerwony, wyzej bursztyn.
+  const pill = (ok: boolean) => ({
+    fontSize: 11.5, fontWeight: 700, borderRadius: 5, padding: '2px 8px', justifySelf: 'end',
+    color: ok ? '#CA8A04' : '#DC2626',
+    background: ok ? 'rgba(202,138,4,0.10)' : 'rgba(220,38,38,0.10)',
+  });
   return (
-    <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '24px 24px 20px' }}>
-      <p style={{ fontSize: 11, fontWeight: 600, color: '#a4acb9', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 18px' }}>CQS - porównanie top 10 SERP</p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {SERP_ROWS.map((row, i) => (
-          <div key={row.label} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <span style={{ fontSize: 12, color: row.highlight ? ACCENT : '#818898', fontWeight: row.highlight ? 700 : 400, width: 110, flexShrink: 0 }}>{row.label}</span>
-            <div style={{ flex: 1, height: 8, background: '#f0f9fa', borderRadius: 4, overflow: 'hidden' }}>
-              <motion.div
-                initial={{ width: 0 }} whileInView={{ width: `${row.score}%` }}
-                viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.08, ease: 'easeOut' }}
-                style={{ height: '100%', background: row.highlight ? ACCENT : '#dfe1e7', borderRadius: 4 }}
-              />
-            </div>
-            <span style={{ fontSize: 12, fontWeight: 700, color: row.highlight ? ACCENT : '#818898', width: 28, textAlign: 'right' }}>{row.score}</span>
+    <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '18px 18px 10px', overflow: 'hidden' }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, flexWrap: 'wrap', marginBottom: 16 }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: '#0d0d12' }}>Top 10 SERP</span>
+        <span style={{ fontSize: 12, color: '#818898' }}>dla frazy &bdquo;{SERP_HEAD.phrase}&rdquo;</span>
+      </div>
+
+      <div style={{ display: 'flex', gap: 22, marginBottom: 18, flexWrap: 'wrap' }}>
+        {SERP_STATS.map((s) => (
+          <div key={s.label}>
+            <div style={{ fontSize: 22, fontWeight: 700, color: '#0d0d12', lineHeight: 1.1, letterSpacing: '-0.03em' }}>{s.value}</div>
+            <div style={{ fontSize: 11, color: '#818898', marginTop: 2 }}>{s.label}</div>
           </div>
         ))}
       </div>
-      <div style={{ marginTop: 18, padding: '10px 14px', background: 'rgba(11,121,131,0.06)', borderRadius: 6, border: '1px solid rgba(11,121,131,0.15)' }}>
-        <p style={{ fontSize: 12, color: ACCENT, margin: 0, fontWeight: 500 }}>↑ 16 pkt do pozycji lidera - raport wskazuje dokładnie co zmienić</p>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '26px 1fr 46px 40px 36px', gap: 8, paddingBottom: 8, borderBottom: '1px solid #eceff3' }}>
+        {SERP_LABELS.map((h, i) => (
+          <span key={h} style={{ fontSize: 10, fontWeight: 600, color: '#a4acb9', letterSpacing: '0.06em', textAlign: i > 1 ? 'right' : 'left' }}>{h}</span>
+        ))}
       </div>
+
+      {SERP_ROWS.map((row, i) => (
+        <motion.div
+          key={row.url}
+          initial={{ opacity: 0, y: 6 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: i * 0.07, ease: 'easeOut' }}
+          style={{
+            display: 'grid', gridTemplateColumns: '26px 1fr 46px 40px 36px', gap: 8,
+            alignItems: 'center', padding: '9px 0',
+            borderBottom: i === SERP_ROWS.length - 1 ? 'none' : '1px solid #f4f6f8',
+            background: row.mine ? 'rgba(11,121,131,0.05)' : 'transparent',
+            borderTop: row.mine ? '1px solid rgba(11,121,131,0.25)' : undefined,
+          }}
+        >
+          <span style={{ fontSize: 12, color: row.mine ? ACCENT : '#a4acb9', fontWeight: row.mine ? 700 : 400 }}>{row.pos}</span>
+          <span style={{
+            fontSize: 12, color: row.mine ? ACCENT : '#36394a', fontWeight: row.mine ? 600 : 400,
+            overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+          }}>{row.url}</span>
+          <span style={{ fontSize: 11.5, color: '#818898', textAlign: 'right' }}>{row.words}</span>
+          <span style={pill(row.cqs >= 60)}>{row.cqs}</span>
+          <span style={pill(row.cit >= 6)}>{row.cit}</span>
+        </motion.div>
+      ))}
     </div>
   );
 }
@@ -105,9 +148,14 @@ function AIOverviewVisual() {
   return (
     <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, overflow: 'hidden' }}>
       <div style={{ padding: '14px 18px', borderBottom: '1px solid #dfe1e7', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <div style={{ width: 20, height: 20, borderRadius: 4, background: 'linear-gradient(135deg, #4285f4, #34a853)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <span style={{ fontSize: 10, color: '#fff', fontWeight: 700 }}>G</span>
-        </div>
+        <img
+          src="/logos/google.png"
+          alt=""
+          aria-hidden
+          width={18}
+          height={18}
+          style={{ width: 18, height: 18, display: 'block', flexShrink: 0 }}
+        />
         <span style={{ fontSize: 11, fontWeight: 600, color: '#0d0d12' }}>AI Overview - dekompozycja syntezy</span>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 5 }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: ACCENT, background: 'rgba(11,121,131,0.08)', border: '1px solid rgba(11,121,131,0.2)', borderRadius: 4, padding: '2px 7px' }}>3/5</span>
@@ -234,67 +282,67 @@ function ExportVisual() {
 /* ── Dimensions data ──────────────────────────────────────────────────── */
 const DIMS = [
   {
-    id: 'CSI-A', label: 'Zgodność z intencją',
+    num: '01', id: 'CSI Alignment', slug: 'zgodnosc-z-csi', label: 'Zgodność z CSI',
     medium: 'Sprawdza czy artykuł odpowiada na dokładnie to pytanie, które zadał użytkownik - nie podobne, lecz dokładnie to.',
     expert: 'Walidacja Central Entity, Search Context, Predicate. BLUF check w lead, EAV coverage, chunk validation per H2 (200-500 słów, autonomia, CE min 2×). W trybie Full: gap analysis P1-P4 vs benchmark SERP.',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" /></svg>,
   },
   {
-    id: 'D1', label: 'Gęstość informacji',
+    num: '02', id: 'Density', slug: 'gestosc-informacji', label: 'Gęstość informacji',
     medium: 'Mierzy ile faktów jest w artykule. Ogólniki i puste zdania zaniżają wynik - konkretne dane i liczby go podnoszą.',
     expert: 'Score = (zdania_faktyczne / wszystkie) × 10. Kary: słowa modalne (-0.5), puste frazy (-1.0), przymiotniki ocenne. Bonusy: konkretne liczby (+1.0), encje (+0.5), wartości EAV (+1.0).',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18M3 10h14M3 14h10M3 18h7" /></svg>,
   },
   {
-    id: 'D2', label: 'EAV Structure',
+    num: '03', id: 'EAV', slug: 'graf-wiedzy', label: 'Graf wiedzy',
     medium: 'AI widzi artykuł jako sieć faktów: Encja - Atrybut - Wartość. Im kompletniejsza sieć, tym większa szansa na cytowanie.',
     expert: 'Ekstrakcja trójek Entity-Attribute-Value. W trybie Full: algorytmiczna klasyfikacja URR (UNIQUE poniżej 30% / ROOT powyżej 70% / RARE 30-69%) na podstawie eavMatrix z benchmarku SERP.',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="2" /><circle cx="5" cy="19" r="2" /><circle cx="19" cy="19" r="2" /><path d="M12 7v3M12 10l-5 7M12 10l5 7" /></svg>,
   },
   {
-    id: 'D3', label: 'BLUF',
+    num: '04', id: 'BLUF', slug: 'bluf', label: 'BLUF',
     medium: 'Modele AI faworyzują artykuły, które podają odpowiedź na początku każdej sekcji. Nie na końcu, nie po wstępie - na samym początku.',
     expert: 'Bottom Line Up Front: odpowiedź w pierwszych 50 słowach każdej H2. Struktura: Odpowiedź - Dowód - Kontekst. Chunki z BLUF cytowane ~62% jako główne źródło w badaniach RAG.',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><path d="M4 6h16M4 10h10M4 14h12M4 18h7" /><path d="M20 14v6M17 17l3-3 3 3" /></svg>,
   },
   {
-    id: 'D4', label: 'Autonomiczność sekcji',
+    num: '05', id: 'Chunk', slug: 'optymalizacja-chunkow', label: 'Optymalizacja chunków',
     medium: 'Systemy AI dzielą artykuły na kawałki przed analizą. Każdy kawałek powinien mieć sens bez czytania całości - być autonomiczny.',
     expert: 'Autonomiczność sekcji dla RAG (Retrieval-Augmented Generation). Optymalna długość 200-500 słów per H2. Kryteria: brak zaimków odsyłających, CE min 2× per sekcja, brak "jak wspomniano wyżej".',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="8" height="8" rx="1" /><rect x="13" y="3" width="8" height="8" rx="1" /><rect x="3" y="13" width="8" height="8" rx="1" /><rect x="13" y="13" width="8" height="8" rx="1" /></svg>,
   },
   {
-    id: 'D5', label: 'Koszt ekstrakcji',
+    num: '06', id: 'CoR', slug: 'koszt-pozyskania', label: 'Koszt pozyskania',
     medium: 'Im trudniej AI znaleźć informację w tekście, tym mniejsza szansa na cytowanie. Nagłówki, listy i tabele zmniejszają ten koszt.',
     expert: 'System punktowy (max 10): hierarchia H1-H2-H3 (+2), tabele (+2), listy (+1), pogrubienia kluczowych faktów (+1), TL;DR (+1), brak ścian tekstu powyżej 300 słów (+1), brak ogólnikowych wstępów (+1).',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><path d="M9 17H7a4 4 0 010-8h2M15 7h2a4 4 0 010 8h-2M9 12h6" /></svg>,
   },
   {
-    id: 'D6', label: 'TF-IDF',
+    num: '07', id: 'TF-IDF', slug: 'tf-idf', label: 'TF-IDF',
     medium: 'Sprawdza czy artykuł używa terminologii branżowej. Brak specjalistycznych pojęć sygnalizuje AI: "ten autor nie zna tematu głęboko".',
     expert: 'Score = (high_idf_terms_present / oczekiwane) × 10. HIGH IDF: terminy specjalistyczne, wielowyrazowe frazy branżowe. W trybie Full: realne dane z korpusu 10 konkurentów SERP (computeTermStats).',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35M8 11h6M8 8h4" /></svg>,
   },
   {
-    id: 'D7', label: 'Role semantyczne',
+    num: '08', id: 'SRL', slug: 'role-semantyczne', label: 'Role semantyczne',
     medium: 'AI lepiej przyswaja wiedzę, gdy temat artykułu jest aktywnym bohaterem zdań - nie pasywnym obiektem opisywanym przez innych.',
     expert: 'SRL: Central Entity jako Agent (podmiot aktywny) w ponad 70% zdań. Score = (ΣAgent×1.0 + ΣPatient×0.5) / max. Transformacje CE Patient - CE Agent w rekomendacjach.',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" /></svg>,
   },
   {
-    id: 'D8', label: 'Pokrycie AI Overview',
+    num: '09', id: 'Fan-Out', slug: 'pokrycie-fan-out', label: 'Pokrycie Fan-Out i AIO',
     medium: 'Każde zapytanie to de facto kilka pod-pytań naraz. Sprawdzamy ile z nich obsługuje artykuł - bo AI używa właśnie tych pod-pytań do syntezy.',
     expert: 'Dekompozycja CSI na 5-10 sub-queries (semantic/intent/verification). Tryb Full: grounding wobec PAA/Related Searches - tagi CONFIRMED/OVERVIEW/PREDICTED/SERP-ONLY. Malus -1 za niepokryte SERP-ONLY.',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><path d="M12 4v4M8 12l-4 4M16 12l4 4M12 8l-4 4h8l-4-4" /></svg>,
   },
   {
-    id: 'D9', label: 'Wysiłek redakcyjny',
+    num: '10', id: 'Effort', slug: 'effort-score', label: 'Effort Score',
     medium: 'Mierzy widoczny wysiłek redakcyjny: długość artykułu, zdjęcia, wideo, tabele i schema FAQ. Modele AI preferują treści dopracowane - nie pisane na szybko.',
     expert: 'Deterministyczny scoring na podstawie htmlMetrics z crawlera: wordCount (próg ≥1500), imageCount, videoCount, hasFaqSchema, hasTableOfContents. Brak wywołania Gemini - metryki algorytmiczne z analizy struktury. Waga 0.06 w CQS.',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18" /><path d="M7 16l4-4 4 4 4-8" /></svg>,
   },
   {
-    id: 'E-E-A-T', label: 'E-E-A-T',
+    num: '', id: 'E-E-A-T', slug: 'e-e-a-t', label: 'E-E-A-T',
     medium: 'Google i modele AI ufają treściom stojącym za prawdziwym ekspertem z doświadczeniem. Raport mierzy konkretne sygnały tego zaufania.',
     expert: 'Experience: personal story, case study, screenshots. Expertise: cytaty z badań, terminologia (+2). Authority: bio autora z kwalifikacjami (+3), afiliacja instytucjonalna (+2). Trust: disclaimer, data aktualizacji, kontakt do autora.',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>,
@@ -424,18 +472,32 @@ export default function PageContent() {
           </motion.div>
           <div className="dims-grid">
             {DIMS.map((dim, i) => (
-              <motion.div
+              <motion.a
                 key={dim.id}
+                href={`/pl/wymiary/${dim.slug}`}
                 {...fadeUp(i * 0.04)}
                 whileHover={{ y: -3, boxShadow: '0 6px 20px rgba(0,0,0,0.07)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-                style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '22px 22px 20px' }}
+                style={{
+                  background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10,
+                  padding: '22px 22px 20px', display: 'flex', flexDirection: 'column',
+                  alignItems: 'flex-start', textDecoration: 'none',
+                }}
               >
+                {dim.num && (
+                  <div style={{
+                    fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 800, color: NUM_COLORS[i % 3],
+                    letterSpacing: '-0.04em', lineHeight: 1, marginBottom: 18,
+                  }}>
+                    {dim.num}
+                  </div>
+                )}
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 10, flexWrap: 'wrap' }}>
                   <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: 0 }}>{dim.label}</h3>
                   <span style={{ fontSize: 11, fontWeight: 600, color: '#a4acb9', textTransform: 'uppercase', letterSpacing: '0.07em' }}>{dim.id}</span>
                 </div>
-                <p style={{ fontSize: 13.5, color: '#36394a', lineHeight: 1.65, margin: 0 }}>{dim.medium}</p>
-              </motion.div>
+                <p style={{ fontSize: 13.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 14px' }}>{dim.medium}</p>
+                <span style={{ fontSize: 13, fontWeight: 600, color: ACCENT, marginTop: 'auto' }}>Jak to liczymy →</span>
+              </motion.a>
             ))}
           </div>
 
@@ -653,51 +715,6 @@ export default function PageContent() {
                   );
                 })}
               </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* INFORMATION GAIN */}
-      <section style={{ background: '#f8fafb', padding: '80px 0' }}>
-        <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-          <div className="feat-grid feat-grid-reverse">
-            <motion.div {...fadeUp(0.12)}>
-              <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '20px 18px', overflow: 'hidden' }}>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 16 }}>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em' }}>IG Score</span>
-                  <span style={{ fontSize: 28, fontWeight: 700, color: ACCENT, lineHeight: 1 }}>68</span>
-                  <span style={{ fontSize: 13, color: '#a4acb9' }}>/ 100</span>
-                </div>
-                {[
-                  { label: 'Unikatowe twierdzenia', pct: 72, color: ACCENT },
-                  { label: 'Unikatowe EAV', pct: 61, color: '#0891b2' },
-                  { label: 'Unikatowe terminy TF-IDF', pct: 55, color: '#CA8A04' },
-                  { label: 'Przewaga formatów', pct: 80, color: '#16A34A' },
-                ].map((bar) => (
-                  <div key={bar.label} style={{ marginBottom: 10 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                      <span style={{ fontSize: 11, color: '#818898' }}>{bar.label}</span>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: bar.color }}>{bar.pct}%</span>
-                    </div>
-                    <div style={{ height: 4, background: '#eceff3', borderRadius: 2, overflow: 'hidden' }}>
-                      <motion.div initial={{ width: 0 }} whileInView={{ width: `${bar.pct}%` }} viewport={{ once: true }} transition={{ duration: 0.8, ease: 'easeOut' }} style={{ height: '100%', background: bar.color, borderRadius: 2 }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-            <motion.div {...fadeUp()}>
-              <SectionLabel>Information Gain</SectionLabel>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>
-                Ile unikatowej wartości wnosi Twoja treść?
-              </h2>
-              <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 16 }}>
-                Information Gain mierzy unikatowość treści vs konkurencja SERP. Nie wpływa na CQS - to czysto informacyjna metryka. Ekstrahuje 10-20 twierdzeń faktowych i porównuje z treściami konkurentów (token overlap).
-              </p>
-              <p style={{ fontSize: 14, color: '#666d80', lineHeight: 1.65 }}>
-                IG Score (0-100) składa się z 4 składowych: unikatowość twierdzeń (40%), unikatowe trójki EAV (30%), unikatowe terminy TF-IDF (20%) i przewaga formatów (10%). Każde twierdzenie oznaczone badge'em unique lub common.
-              </p>
             </motion.div>
           </div>
         </div>
