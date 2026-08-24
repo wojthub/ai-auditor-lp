@@ -1,14 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import HeroBackdrop from '@/components/HeroBackdrop';
 
 const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
 
 export default function PricingContent() {
   return (
-    <section style={{ background: '#ffffff', padding: '44px 0 96px' }}>
-      <div style={{ maxWidth: 720, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+    <section style={{ background: '#ffffff', padding: '44px 0 96px', position: 'relative', overflow: 'hidden' }}>
+      <HeroBackdrop />
+      <div style={{ maxWidth: 720, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative' }}>
 
         {/* Heading */}
         <motion.div

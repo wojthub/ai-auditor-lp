@@ -44,7 +44,7 @@ export default function Hero() {
         background: '#ffffff',
       }}
     >
-      <div className="absolute inset-0 dot-grid dot-grid-drift" style={{ opacity: 0.14 }} aria-hidden />
+      <div className="absolute inset-0 dot-grid" style={{ opacity: 0.14 }} aria-hidden />
       <HeroNodes />
       <div className="relative" style={{ maxWidth: 720, margin: '0 auto', padding: '40px 24px 28px', textAlign: 'center', width: '100%' }}>
         <motion.div

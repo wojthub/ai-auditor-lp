@@ -88,87 +88,43 @@ button:active { transform: scale(0.97); }
   }
 }
 
-/* ── Hero: ruch tła ──────────────────────────────────── */
+/* ── Tło nagłówka: graf węzłów ───────────────────────── */
+/* WAZNE: animacje CSS na DZIECIACH svg (line, circle, path) nie odmalowuja sie —
+   getComputedStyle raportuje zmienione wartosci, ale na ekranie zostaje stan bazowy
+   z reguly. Dlatego wnetrze grafu jest w pelni statyczne, a animowany jest wylacznie
+   sam element <svg>. Nie przenos animacji z powrotem na dzieci: graf zniknie. */
 
-/* Kafel siatki ma 28px, więc przesunięcie o dokładnie 28px zapętla się bezszwowo. */
-.dot-grid-drift { animation: dot-drift 30s linear infinite; }
-@keyframes dot-drift {
-  from { background-position: 0 0; }
-  to   { background-position: 28px 28px; }
-}
-
-/* Warstwa węzłów (HeroNodes.tsx) — graf przy krawędziach sekcji. */
 .hero-nodes {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  /* preserveAspectRatio="slice" przycina graf na krawedziach sekcji i linie urywaly sie
-     ostrym cieciem. Maska wygasza warstwe zanim dojdzie do krawedzi, wiec przy kazdej
-     szerokosci okna graf po prostu rozplywa sie w tle. */
+  /* preserveAspectRatio="slice" przycina graf na krawedziach sekcji — maska wygasza
+     warstwe zanim dojdzie do ciecia, przy kazdej szerokosci okna. */
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 58%, transparent 88%);
   mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 58%, transparent 88%);
+  /* Jednorazowe wejscie robi Framer Motion w HeroNodes.tsx (style inline z JS).
+     Keyframes CSS tu NIE dzialaja — patrz komentarz nad ta sekcja. */
 }
 
-/* Linie rysują się i znikają: pełna długość krawędzi to ~200px, stąd dasharray. */
 .hero-node-edge {
   stroke: #0b7983;
   stroke-width: 1;
   opacity: 0.16;
-  stroke-dasharray: 220;
-  stroke-dashoffset: 0;
-  animation: edge-draw 22s ease-in-out infinite;
-}
-/* Animujemy WYLACZNIE stroke-dashoffset. Opacity trzymamy stale — keyframes na opacity
-   startujace od 0 potrafia nie odmalowac sie na elementach SVG i linie znikaja calkiem. */
-@keyframes edge-draw {
-  0%, 100%  { stroke-dashoffset: 220; }
-  35%, 65%  { stroke-dashoffset: 0; }
 }
 
-/* Impuls biegnący po łamanej — krótka kreska wędrująca wzdłuż ścieżki. */
-.hero-node-trace {
-  fill: none;
-  stroke: #0b9aa6;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-dasharray: 26 900;
-  stroke-dashoffset: 26;
-  opacity: 0.28;
-  animation: trace-run 11s linear infinite;
-}
-@keyframes trace-run {
-  from { stroke-dashoffset: 26; }
-  to   { stroke-dashoffset: -900; }
-}
-
-/* Węzły pulsują niezależnie od linii. */
 .hero-node {
   fill: #0b7983;
-  opacity: 0.18;
-  animation: node-pulse 9s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-@keyframes node-pulse {
-  0%, 100% { opacity: 0.16; transform: scale(0.9); }
-  50%      { opacity: 0.4;  transform: scale(1.08); }
+  opacity: 0.3;
 }
 
-/* Na waskich ekranach preserveAspectRatio="slice" rozdmuchalby graf na cala szerokosc
-   i wszedl pod tekst — to warstwa czysto dekoracyjna, wiec po prostu znika. */
 @media (max-width: 900px) {
   .hero-nodes { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dot-grid-drift,
-  .hero-node-edge,
-  .hero-node-trace,
-  .hero-node { animation: none; }
-  .hero-node-edge { opacity: 0.14; stroke-dashoffset: 0; }
-  .hero-node-trace { opacity: 0; }
+  .hero-nodes { opacity: 1 !important; transform: none !important; }
 }
 
 /* Hero: nazwa silnika AI z ikoną — ikona i nazwa nigdy się nie rozjeżdżają na osobne wiersze. */

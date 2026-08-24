@@ -6,6 +6,7 @@ import PruningPreview from '@/components/PruningPreview';
 import SchemaPreview from '@/components/SchemaPreview';
 import InterlinkingPreview from '@/components/InterlinkingPreview';
 import type { ToolData, ToolStrings, DimTable } from '@/data/tool-types';
+import HeroBackdrop from './HeroBackdrop';
 
 const ACCENT = '#0b7983';
 
@@ -102,8 +103,9 @@ export default function ToolPage({ tool, all, t }: {
   return (
     <div>
       {/* HERO */}
-      <section style={{ background: '#ffffff', padding: '56px 0 52px', borderBottom: '1px solid #eceff3' }}>
-        <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+      <section style={{ background: '#ffffff', padding: '56px 0 52px', borderBottom: '1px solid #eceff3', position: 'relative', overflow: 'hidden' }}>
+        <HeroBackdrop />
+        <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}>
             <nav aria-label={t.breadcrumbAria} style={{ fontSize: 13, color: '#818898', marginBottom: 20 }}>
               <a href={t.basePath} style={{ color: '#818898', textDecoration: 'none' }}>{t.breadcrumbRoot}</a>

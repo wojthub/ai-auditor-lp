@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import HeroBackdrop from '@/components/HeroBackdrop';
 
 const APP_URL = 'https://app.citationone.com';
 const DOCS_URL = `${APP_URL}/api-docs`;
@@ -59,8 +60,9 @@ curl https://app.citationone.com/api/v1/audits/job_V1StGXR8 \\
 
 export default function ApiContent() {
   return (
-    <section style={{ background: '#ffffff', padding: '44px 0 96px' }}>
-      <div style={{ maxWidth: 840, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+    <section style={{ background: '#ffffff', padding: '44px 0 96px', position: 'relative', overflow: 'hidden' }}>
+      <HeroBackdrop />
+      <div style={{ maxWidth: 840, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative' }}>
 
         {/* Heading */}
         <motion.div

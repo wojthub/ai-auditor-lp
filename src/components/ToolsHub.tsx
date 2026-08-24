@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import type { ToolData, ToolStrings } from '@/data/tool-types';
+import HeroBackdrop from './HeroBackdrop';
 
 const ACCENT = '#0b7983';
 
@@ -24,8 +25,9 @@ export default function ToolsHub({ tools, t, s }: {
 }) {
   return (
     <div>
-      <section style={{ background: '#ffffff', padding: '56px 0 48px', borderBottom: '1px solid #eceff3' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>
+      <section style={{ background: '#ffffff', padding: '56px 0 48px', borderBottom: '1px solid #eceff3', position: 'relative', overflow: 'hidden' }}>
+        <HeroBackdrop />
+        <div style={{ maxWidth: 900, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center', position: 'relative' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 18 }}>
               <div style={{ width: 20, height: 2, background: ACCENT, borderRadius: 1 }} />

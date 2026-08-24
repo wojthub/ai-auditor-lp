@@ -382,6 +382,15 @@ const APP_URL = 'https://app.citationone.com';
 - `isValidUrl`: `new URL()` try/catch + protokół `http:`/`https:` + `hostname` musi zawierać `.`.
 - Submit → `${APP_URL}/login?lang={pl|en}&audit-url={encoded}` gdzie `encoded = encodeURIComponent(normalized).replace(/%3A/gi, ':').replace(/%2F/gi, '/')` - `:` i `/` zostają nieencodowane w query (RFC 3986).
 - Komunikaty błędów: "Podaj adres URL." / "Podaj poprawny adres URL (np. https://example.com/strona)." (PL); odpowiedniki EN.
+- **Placeholder pisze się sam** — [useTypewriterPlaceholder.ts](src/lib/useTypewriterPlaceholder.ts) przewija
+  przykładowe adresy (`twojastrona.pl/…` / `yoursite.com/…`, zawsze neutralne, nigdy domena klienta).
+  Kasuje **tylko do wspólnego prefiksu** z następnym przykładem, więc placeholder nigdy nie robi się pusty
+  i nie miga między zachętą a przykładem. Wyłącza się gdy użytkownik zacznie pisać oraz przy
+  `prefers-reduced-motion: reduce`; do pierwszego wpisania zwraca `''` (chroni przed rozjazdem hydracji).
+- **Ikony silników AI** w podtytule: `public/logos/{chatgpt,perplexity,google}.png` (48px, ~1-3 KB),
+  serwowane lokalnie — **nie hotlinkujemy** faviconów (`chatgpt.com/favicon.ico` zwraca 403 dla nie-przeglądarki,
+  a każdy odwiedzający wysyłałby request do OpenAI/Perplexity/Google). Klasa `.hero-brand` (inline-flex +
+  `white-space: nowrap`) trzyma ikonę przy nazwie, żeby nie rozjechały się na osobne wiersze.
 
 ### Cennik (Hero CTA caption + /pricing + /pl/cennik)
 
@@ -441,6 +450,49 @@ const APP_URL = 'https://app.citationone.com';
 - SectionLabel: fontSize 11, uppercase, `#818898`
 - Body: 14-17px, lineHeight 1.65-1.7
 - Navbar: 15px/500 (linki), 15px/600 (CTA)
+
+---
+
+## Tło nagłówków - graf węzłów
+
+Dekoracyjna warstwa w tle nagłówków: węzły połączone cienkimi liniami (nawiązanie do grafu wiedzy, który
+audyt mierzy). [HeroNodes.tsx](src/components/HeroNodes.tsx) - samo SVG, [HeroBackdrop.tsx](src/components/HeroBackdrop.tsx)
+- SVG + siatka kropek dla podstron.
+
+- **Gdzie:** HP (PL i EN, wewnątrz `Hero`/`HeroEN`) + nagłówki 11 podstron: `jak-to-dziala`/`how-it-works`,
+  `cennik`/`pricing`, `wymiary`/`dimensions`, `api` (obie wersje) oraz współdzielone `ToolsHub`,
+  `ToolPage`, `DimensionPage` (te trzy obsługują PL i EN naraz).
+- **Osadzanie:** sekcja musi mieć `position: 'relative'` + `overflow: 'hidden'`, a jej kontener treści
+  `position: 'relative'` - inaczej treść wyląduje POD tłem.
+- **Stała wysokość zamiast `inset: 0`:** `HeroBackdrop` domyślnie 340px. Cennik i API to **jedna sekcja
+  obejmująca całą stronę** - rozciągnięcie tła na jej wysokość rozdmuchałoby graf przez
+  `preserveAspectRatio="slice"`. `vbHeight` spłaszcza układ pod niższe nagłówki; bez tego graf ucieka
+  w górę i chowa się pod nawigacją.
+- **Maska wygaszająca:** `mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 58%, transparent 88%)`.
+  `slice` przycina graf inaczej przy każdej proporcji okna - bez maski linie kończyły się ostrym cięciem
+  na krawędzi sekcji. Przesuwanie węzłów tego nie naprawia (dla jednej szerokości dobrze, dla innej znów ucina).
+- **Mobile:** `display: none` poniżej 900px - `slice` rozdmuchałby graf na całą szerokość i wszedłby pod tekst.
+- **Ruch tylko na wejściu:** jednorazowy fade + 10px w górę (1,3s, delay 0,25s), potem tło stoi.
+  Ciągły ruch obok pola URL odciąga uwagę od głównej konwersji.
+
+### PUŁAPKA: animacje CSS nie działają na elementach SVG
+
+**`@keyframes` nie odmalowują się ani na dzieciach `<svg>` (`line`, `circle`, `path`), ani na samym `<svg>`.**
+`getComputedStyle` grzecznie raportuje wartość końcową (`opacity: 1`, `stroke-dashoffset: 0`,
+`matrix(1,0,0,1,0,0)`), element ma poprawny `getBoundingClientRect`, animacja ma stan `finished` -
+a na ekranie zostaje to, co jest w **regule bazowej**. Każdy wariant z bazowym `opacity: 0`, `transform: scale(0)`
+albo `stroke-dashoffset: 220` jest po prostu niewidoczny.
+
+Stąd zasady dla tej warstwy:
+
+1. Wnętrze grafu jest **w pełni statyczne** - linie i węzły mają wartości docelowe w regule bazowej CSS.
+2. Wejście robi **Framer Motion** (`motion.svg`, style inline z JS) - to działa niezawodnie.
+3. `prefers-reduced-motion` obsługuje CSS z `!important` (`opacity: 1 !important; transform: none !important`) -
+   deklaracja `!important` z arkusza bije style inline Motion, więc animacja nie startuje.
+
+Nie przenoś animacji z powrotem na `@keyframes`: graf zniknie, a wszystkie narzędzia deweloperskie będą
+twierdzić, że jest w porządku. **Weryfikuj próbkowaniem pikseli, nie na oko** - linie 1px przy 16% krycia
+znikają przy skalowaniu zrzutu ekranu i łatwo uznać działający efekt za zepsuty.
 
 ---
 

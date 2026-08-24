@@ -1,9 +1,16 @@
-// Dekoracyjna warstwa tla hero: wezly polaczone cienkimi liniami — nawiazanie do grafu
-// wiedzy (encja-atrybut-wartosc), ktory audyt mierzy. Wspolna dla PL i EN.
+'use client';
+
+import { motion } from 'framer-motion';
+
+// Dekoracyjna warstwa tla: wezly polaczone cienkimi liniami — nawiazanie do grafu wiedzy
+// (encja-atrybut-wartosc), ktory audyt mierzy. Wspolna dla PL i EN, dla hero i podstron.
 //
-// Wszystko jest czystym SVG + CSS (zero JS w runtime), wiec nie ma kosztu hydracji.
-// Wezly siedza WYLACZNIE przy krawedziach — srodek (240-960 w ukladzie viewBox) zostaje
-// pusty pod naglowek i formularz.
+// Wnetrze grafu jest STATYCZNE (linie i wezly maja docelowe wartosci w regule bazowej CSS).
+// Jedyna animacja to jednorazowe wejscie calego <svg> przez Framer Motion — patrz komentarz
+// nad sekcja `.hero-nodes` w globals.css: keyframes CSS na elementach SVG nie odmalowuja sie.
+//
+// Wezly siedza WYLACZNIE przy krawedziach; srodek (240-1010 w ukladzie viewBox) zostaje pusty
+// pod naglowek i formularz.
 
 const EDGES: Array<[number, number, number, number]> = [
   // lewa grupa
@@ -33,44 +40,38 @@ const NODES: Array<[number, number, number]> = [
   [1010, 435, 2.5],
 ];
 
-// Krawedzie, po ktorych biegnie impuls — po jednej z kazdej strony.
-const PULSE_PATHS = [
-  'M150,60 L90,170 L200,250 L70,330 L240,410',
-  'M1090,70 L1130,165 L1020,250 L1150,355 L1010,435',
-];
+// vbHeight splaszcza uklad pod nizsze naglowki podstron. Bez tego preserveAspectRatio="slice"
+// przycina graf tak mocno, ze wieksza czesc chowa sie pod nawigacja.
+export default function HeroNodes({ vbHeight = 520, height }: { vbHeight?: number; height?: number }) {
+  const sy = (y: number) => +(y * vbHeight / 520).toFixed(1);
 
-export default function HeroNodes() {
   return (
-    <svg
+    <motion.svg
       className="hero-nodes"
-      viewBox="0 0 1200 520"
+      style={height ? { height, bottom: 'auto' } : undefined}
+      viewBox={`0 0 1200 ${vbHeight}`}
       preserveAspectRatio="xMidYMid slice"
       aria-hidden
       focusable="false"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.3, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
     >
       {EDGES.map(([x1, y1, x2, y2], i) => (
         <line
           key={`e${i}`}
-          x1={x1} y1={y1} x2={x2} y2={y2}
+          x1={x1} y1={sy(y1)} x2={x2} y2={sy(y2)}
           className="hero-node-edge"
-          style={{ animationDelay: `${i * 0.55}s` }}
         />
-      ))}
-
-      {PULSE_PATHS.map((d, i) => (
-        <g key={`p${i}`}>
-          <path d={d} className="hero-node-trace" style={{ animationDelay: `${i * 3.5}s` }} />
-        </g>
       ))}
 
       {NODES.map(([cx, cy, r], i) => (
         <circle
           key={`n${i}`}
-          cx={cx} cy={cy} r={r}
+          cx={cx} cy={sy(cy)} r={r}
           className="hero-node"
-          style={{ animationDelay: `${i * 0.7}s` }}
         />
       ))}
-    </svg>
+    </motion.svg>
   );
 }

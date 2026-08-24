@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import CqsScoreCard from '@/components/CqsScoreCard';
+import HeroBackdrop from '@/components/HeroBackdrop';
 
 const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
@@ -118,8 +119,9 @@ export default function DimensionsContent() {
   return (
     <div>
       {/* HERO */}
-      <section style={{ background: '#ffffff', padding: '72px 0 64px', borderBottom: '1px solid #eceff3' }}>
-        <div style={{ maxWidth: 800, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>
+      <section style={{ background: '#ffffff', padding: '72px 0 64px', borderBottom: '1px solid #eceff3', position: 'relative', overflow: 'hidden' }}>
+        <HeroBackdrop />
+        <div style={{ maxWidth: 800, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center', position: 'relative' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 18 }}>
               <div style={{ width: 20, height: 2, background: ACCENT, borderRadius: 1 }} />
