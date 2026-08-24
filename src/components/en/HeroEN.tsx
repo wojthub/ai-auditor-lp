@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTypewriterPlaceholder } from '@/lib/useTypewriterPlaceholder';
-import HeroNodes from '../HeroNodes';
 
 const APP_URL = 'https://app.citationone.com';
 
@@ -37,15 +36,10 @@ export default function HeroEN() {
     }
   };
 
+  // Tlo (siatka kropek + graf wezlow) daje HeroBand — wspolnie z sekcja mockupu,
+  // zeby linie nie urywaly sie na granicy sekcji.
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{
-        background: '#ffffff',
-      }}
-    >
-      <div className="absolute inset-0 dot-grid" style={{ opacity: 0.14 }} aria-hidden />
-      <HeroNodes />
+    <section className="relative">
       <div className="relative" style={{ maxWidth: 720, margin: '0 auto', padding: '40px 24px 28px', textAlign: 'center', width: '100%' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}

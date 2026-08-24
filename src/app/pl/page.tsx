@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import HeroBand from '@/components/HeroBand';
 import Hero from '@/components/Hero';
 import Showcase from '@/components/Showcase';
 import TechLogos from '@/components/TechLogos';
@@ -17,8 +18,10 @@ export default function PlLandingPage() {
   return (
     <main className="min-h-screen">
       <Navbar />
-      <Hero />
-      <Showcase />
+      <HeroBand>
+        <Hero />
+        <Showcase />
+      </HeroBand>
       <Problem />
       <HowItWorks />
       <TechLogos />

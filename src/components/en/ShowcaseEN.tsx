@@ -1,22 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import HeroNodes from '../HeroNodes';
 
 export default function ShowcaseEN() {
+  // Tlo (siatka kropek + graf) i gradient daje HeroBand — ta sekcja musi zostac
+  // przezroczysta, inaczej zaslonilaby wspolna warstwe tla.
   return (
-    <section style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(180deg, #ffffff 0%, #f4f7f8 100%)', padding: '76px 0 96px' }}>
-      {/* Tlo z hero przechodzi tu dalej: siatka kropek i graf wezlow wygaszane ku dolowi. */}
-      <div
-        aria-hidden
-        className="dot-grid"
-        style={{
-          position: 'absolute', top: 0, left: 0, right: 0, height: 460, opacity: 0.14,
-          WebkitMaskImage: 'linear-gradient(to bottom, #000 0%, #000 40%, transparent 88%)',
-          maskImage: 'linear-gradient(to bottom, #000 0%, #000 40%, transparent 88%)',
-        }}
-      />
-      <HeroNodes vbHeight={460} height={460} tail />
+    <section style={{ position: 'relative', overflow: 'hidden', padding: '76px 0 96px' }}>
 
       {/* soft accent glow behind the device */}
       <div

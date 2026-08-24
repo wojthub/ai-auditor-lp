@@ -1,4 +1,5 @@
 import NavbarEN from '@/components/en/NavbarEN';
+import HeroBand from '@/components/HeroBand';
 import HeroEN from '@/components/en/HeroEN';
 import ShowcaseEN from '@/components/en/ShowcaseEN';
 import TechLogosEN from '@/components/en/TechLogosEN';
@@ -17,8 +18,10 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen">
       <NavbarEN />
-      <HeroEN />
-      <ShowcaseEN />
+      <HeroBand>
+        <HeroEN />
+        <ShowcaseEN />
+      </HeroBand>
       <ProblemEN />
       <HowItWorksEN />
       <TechLogosEN />
