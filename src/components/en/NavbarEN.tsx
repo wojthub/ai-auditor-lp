@@ -7,16 +7,10 @@ import { plCounterpart } from '@/lib/languageSwitch';
 
 const APP_URL = 'https://app.citationone.com';
 
-/**
- * „Tools" menu — mirror of ../Navbar.tsx. The auditor sits on top and deliberately has NO tool
- * subpage of its own: it is the core product, so it points at the description of how it works.
- */
+/** „Other tools" menu — mirror of ../Navbar.tsx. Add-on tools only; the audit has its own nav entry. */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
-  { href: '/how-it-works', label: 'Content auditor', desc: 'Score a page and get ready fixes' },
   { href: '/tools/keyword-clustering', label: 'Keyword Clustering', desc: 'Map keywords to their target pages' },
-  { href: '/tools/content-pruning', label: 'Content Pruning', desc: 'Cut pages that blur your site topic' },
-  // Cannibalisation is the second tab of the same job (pruning) — separate entry, same URL.
-  { href: '/tools/content-pruning', label: 'Keyword Cannibalisation', desc: 'Spot pages fighting for the same query' },
+  { href: '/tools/content-pruning', label: 'Content Pruning & Cannibalisation', desc: 'Pages that blur your topic or fight for one query' },
   { href: '/tools/schema-gaps', label: 'Schema Gaps', desc: 'Fill the missing markup in your code' },
   { href: '/tools/internal-linking', label: 'Internal Linking', desc: 'See which paragraph should link where' },
 ];
@@ -50,24 +44,23 @@ export default function NavbarEN() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center">
-          <a href="/how-it-works" className="nav-link">How it works</a>
+          <a href="/how-it-works" className="nav-link">How the auditor works</a>
           {/* Tools + dropdown (hover and :focus-within — no JS, works straight after SSR) */}
           <div className="nav-dd">
-            <a href="/tools" className="nav-link nav-dd-trigger">
-              Tools
+            <button type="button" className="nav-link nav-dd-trigger" aria-haspopup="true">
+              Other tools
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M6 9l6 6 6-6" />
               </svg>
-            </a>
+            </button>
             <div className="nav-dd-menu">
               <div className="nav-dd-card">
-                {TOOLS_MENU.map((item, i) => (
-                  <a key={item.label} href={item.href} className={i === 0 ? 'nav-dd-item nav-dd-item-first' : 'nav-dd-item'}>
+                {TOOLS_MENU.map((item) => (
+                  <a key={item.label} href={item.href} className="nav-dd-item">
                     <span className="nav-dd-label">{item.label}</span>
                     <span className="nav-dd-desc">{item.desc}</span>
                   </a>
                 ))}
-                <a href="/tools" className="nav-dd-all">All tools →</a>
               </div>
             </div>
           </div>
@@ -115,7 +108,7 @@ export default function NavbarEN() {
           }}
         >
           <a href="/how-it-works" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
-            How it works
+            How the auditor works
           </a>
           {/* Tools: collapsible row, so the mobile menu does not open 7 items tall */}
           <button
@@ -124,7 +117,7 @@ export default function NavbarEN() {
             aria-expanded={toolsOpen}
             className="nav-mobile-link nav-mobile-toggle"
           >
-            Tools
+            Other tools
             <svg
               width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden
@@ -140,9 +133,6 @@ export default function NavbarEN() {
                   {item.label}
                 </a>
               ))}
-              <a href="/tools" onClick={() => setMobileOpen(false)} className="nav-mobile-sublink">
-                All tools
-              </a>
             </div>
           )}
           <a href="/pricing" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
@@ -186,6 +176,11 @@ export default function NavbarEN() {
           display: inline-flex;
           align-items: center;
           gap: 5px;
+          background: none;
+          border: none;
+          font-family: inherit;
+          line-height: inherit;
+          cursor: default;
         }
         .nav-dd-menu {
           position: absolute;
@@ -222,12 +217,6 @@ export default function NavbarEN() {
           background: #f8fafb;
           opacity: 1;
         }
-        .nav-dd-item-first {
-          border-bottom: 1px solid #eceff3;
-          border-radius: 8px 8px 0 0;
-          margin-bottom: 4px;
-          padding-bottom: 11px;
-        }
         .nav-dd-label {
           display: block;
           font-size: 14.5px;
@@ -241,16 +230,6 @@ export default function NavbarEN() {
           color: #818898;
           line-height: 1.45;
           margin-top: 2px;
-        }
-        .nav-dd-all {
-          display: block;
-          padding: 10px 12px 6px;
-          font-size: 13px;
-          font-weight: 600;
-          color: #0b7983;
-          text-decoration: none;
-          border-top: 1px solid #eceff3;
-          margin-top: 4px;
         }
         /* Podwojna klasa — .nav-mobile-link jest nizej w arkuszu i inaczej nadpisalby display */
         .nav-mobile-link.nav-mobile-toggle {

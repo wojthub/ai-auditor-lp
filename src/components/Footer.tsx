@@ -8,9 +8,8 @@ const APP_URL = 'https://app.citationone.com';
  */
 
 const NAV_LINKS = [
-  { href: '/pl/jak-to-dziala', label: 'Jak to działa?' },
+  { href: '/pl/jak-to-dziala', label: 'Jak działa audytor?' },
   { href: '/pl/wymiary', label: 'Wymiary' },
-  { href: '/pl/narzedzia', label: 'Narzędzia' },
   { href: '/pl/cennik', label: 'Cennik' },
   { href: '/pl#dla-kogo', label: 'Dla kogo?' },
   { href: '/pl/api', label: 'API' },

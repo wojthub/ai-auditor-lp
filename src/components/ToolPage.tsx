@@ -108,7 +108,7 @@ export default function ToolPage({ tool, all, t }: {
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}>
             <nav aria-label={t.breadcrumbAria} style={{ fontSize: 13, color: '#818898', marginBottom: 20 }}>
-              <a href={t.basePath} style={{ color: '#818898', textDecoration: 'none' }}>{t.breadcrumbRoot}</a>
+              <span>{t.breadcrumbRoot}</span>
               <span style={{ margin: '0 7px', color: '#c3c9d3' }}>›</span>
               <span style={{ color: '#36394a' }}>{tool.name}</span>
             </nav>

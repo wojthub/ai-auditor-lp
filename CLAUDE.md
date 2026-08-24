@@ -65,9 +65,9 @@ ai-auditor-lp/
 │   │   │   ├── page.tsx
 │   │   │   ├── DimensionsContent.tsx
 │   │   │   └── [slug]/page.tsx  # 12 podstron EN (/dimensions/bluf itd.) — patrz nota niżej
-│   │   ├── sitemap.ts           # out/sitemap.xml (44 URL-e + hreflangi); wymaga dynamic='force-static'
+│   │   ├── sitemap.ts           # out/sitemap.xml (42 URL-e + hreflangi); wymaga dynamic='force-static'
 │   │   ├── robots.ts            # out/robots.txt — wskazuje sitemapę
-│   │   ├── tools/               # EN "Tools" (/tools) + [slug]/ — 4 podstrony narzędzi
+│   │   ├── tools/[slug]/        # 4 podstrony narzędzi EN — hub /tools usunięty 2026-08-24
 │   │   ├── (en)/api/            # EN "API" (/api) — grupa routingu, NIE `src/app/api/`
 │   │   │   ├── page.tsx         #   (patrz nota "Zakladka API" nizej)
 │   │   │   └── ApiContentEN.tsx
@@ -84,7 +84,7 @@ ai-auditor-lp/
 │   │       │   ├── page.tsx
 │   │       │   ├── WymiaryContent.tsx
 │   │       │   └── [slug]/page.tsx  # 12 podstron PL (/pl/wymiary/bluf itd.)
-│   │       ├── narzedzia/       # PL "Narzędzia" (/pl/narzedzia) + [slug]/ — 4 podstrony
+│   │       ├── narzedzia/[slug]/ # 4 podstrony narzędzi PL — hub /pl/narzedzia usunięty 2026-08-24
 │   │       └── api/             # PL "API" (/pl/api)
 │   │           ├── page.tsx
 │   │           └── ApiContent.tsx
@@ -98,7 +98,6 @@ ai-auditor-lp/
 │   └── components/
 │       ├── DimensionPage.tsx    # Shared - szablon podstrony wymiaru (PL i EN przez prop `t`)
 │       ├── ToolPage.tsx         # Shared - szablon podstrony narzędzia
-│       ├── ToolsHub.tsx         # Shared - lista narzędzi (/pl/narzedzia, /tools)
 │       ├── Navbar.tsx           # PL Navbar - switcher EN → /
 │       ├── Hero.tsx
 │       ├── TechLogos.tsx
@@ -149,7 +148,6 @@ ai-auditor-lp/
 | `/pricing` | PricingContentEN | Pricing |
 | `/dimensions` | DimensionsContent | 10 content quality dimensions + E-E-A-T |
 | `/dimensions/[slug]` | DimensionPage + dimensions-en.ts | H1 = title, np. `What is BLUF in SEO and GEO?` |
-| `/tools` | ToolsHub + tools-en.ts | SEO and GEO tools in CitationOne |
 | `/tools/[slug]` | ToolPage + tools-en.ts | H1 = title, fraza sprzedażowa `… tool for SEO`, np. `Keyword clustering tool for SEO` |
 | `/api` | ApiContentEN | CitationOne API - audyty AI Search przez REST |
 
@@ -162,7 +160,6 @@ ai-auditor-lp/
 | `/pl/cennik` | PricingContent PL | Cennik |
 | `/pl/wymiary` | WymiaryContent PL | 10 wymiarów jakości treści + E-E-A-T |
 | `/pl/wymiary/[slug]` | DimensionPage + dimensions-pl.ts | H1 = title, np. `Czym jest BLUF w SEO i GEO?` |
-| `/pl/narzedzia` | ToolsHub + tools-pl.ts | Narzędzia SEO i GEO w CitationOne |
 | `/pl/narzedzia/[slug]` | ToolPage + tools-pl.ts | H1 = title, fraza sprzedażowa `Narzędzie do … dla SEO`, np. `Narzędzie do klasteryzacji słów kluczowych dla SEO` |
 | `/pl/api` | ApiContent PL | API CitationOne - audyty AI Search przez REST |
 
@@ -340,6 +337,12 @@ wewnętrzne. Ta sama mechanika co przy wymiarach (dane osobno od szablonu, slugi
 pary w `TOOL_SLUG_PAIRS`), ale **własny szablon** — zamiast „co podnosi/obniża wynik" mamy
 kroki działania, tabelę konfiguracji, listę wyników i sekcję kosztów.
 
+- **Nie ma huba narzędzi** (`/tools`, `/pl/narzedzia` usunięte 2026-08-24). Wejściem jest rozwijane
+  menu „Narzędzia" w Navbarze — jego trigger to `<button>`, nie link, bo nie ma dokąd prowadzić.
+  Nawigację między narzędziami przejmuje lista pigułek („Wszystkie narzędzia") na dole każdej
+  podstrony, a breadcrumb ma nieklikalny korzeń. `TOOL_STRINGS_*.basePath` ZOSTAJE — napędza
+  linki do rodzeństwa, nie do huba. Audyt treści ma własne wejście „Jak to działa?", więc
+  w menu narzędzi go nie ma.
 - **Źródło faktów:** [`../ai-auditor/spec/tools.md`](../ai-auditor/spec/tools.md).
 - **Hierarchia nagłówków jest inna niż przy wymiarach** (decyzja z 2026-08-21): intencja na tych
   adresach jest transakcyjna, więc H1 (`heading` = `title`) to fraza sprzedażowa zakończona

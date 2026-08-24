@@ -7,16 +7,10 @@ import { enCounterpart } from '@/lib/languageSwitch';
 
 const APP_URL = 'https://app.citationone.com';
 
-/**
- * Menu „Narzedzia". Audytor jest na gorze i celowo NIE ma wlasnej podstrony narzedzia —
- * to glowny produkt, wiec prowadzi do opisu dzialania audytu.
- */
+/** Menu „Narzedzia" — same narzedzia dodatkowe; audyt tresci ma wlasne wejscie „Jak to dziala?". */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
-  { href: '/pl/jak-to-dziala', label: 'Audytor treści', desc: 'Oceń stronę i dostań gotowe poprawki' },
   { href: '/pl/narzedzia/klasteryzacja', label: 'Klasteryzacja słów kluczowych', desc: 'Przypisz słowa kluczowe do stron docelowych' },
-  { href: '/pl/narzedzia/pruning', label: 'Content Pruning', desc: 'Usuń strony, które rozmywają temat serwisu' },
-  // Kanibalizacja to druga zakladka tego samego zadania (pruning) — osobne wejscie, ten sam adres.
-  { href: '/pl/narzedzia/pruning', label: 'Kanibalizacja treści', desc: 'Wykryj strony walczące o to samo zapytanie' },
+  { href: '/pl/narzedzia/pruning', label: 'Content Pruning i kanibalizacja', desc: 'Strony rozmywające temat i walczące o tę samą frazę' },
   { href: '/pl/narzedzia/analiza-schema', label: 'Analiza schema.org', desc: 'Uzupełnij brakujące znaczniki w kodzie' },
   { href: '/pl/narzedzia/linki-wewnetrzne', label: 'Linki wewnętrzne', desc: 'Zobacz, który akapit gdzie podlinkować' },
 ];
@@ -50,24 +44,23 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center">
-          <a href="/pl/jak-to-dziala" className="nav-link">Jak to działa?</a>
+          <a href="/pl/jak-to-dziala" className="nav-link">Jak działa audytor?</a>
           {/* Narzedzia + rozwijane menu (hover i :focus-within — bez JS, dziala od razu po SSR) */}
           <div className="nav-dd">
-            <a href="/pl/narzedzia" className="nav-link nav-dd-trigger">
-              Narzędzia
+            <button type="button" className="nav-link nav-dd-trigger" aria-haspopup="true">
+              Inne narzędzia
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M6 9l6 6 6-6" />
               </svg>
-            </a>
+            </button>
             <div className="nav-dd-menu">
               <div className="nav-dd-card">
-                {TOOLS_MENU.map((item, i) => (
-                  <a key={item.label} href={item.href} className={i === 0 ? 'nav-dd-item nav-dd-item-first' : 'nav-dd-item'}>
+                {TOOLS_MENU.map((item) => (
+                  <a key={item.label} href={item.href} className="nav-dd-item">
                     <span className="nav-dd-label">{item.label}</span>
                     <span className="nav-dd-desc">{item.desc}</span>
                   </a>
                 ))}
-                <a href="/pl/narzedzia" className="nav-dd-all">Wszystkie narzędzia →</a>
               </div>
             </div>
           </div>
@@ -119,7 +112,7 @@ export default function Navbar() {
             onClick={() => setMobileOpen(false)}
             className="nav-mobile-link"
           >
-            Jak to działa?
+            Jak działa audytor?
           </a>
           {/* Narzedzia: wiersz rozwijany, zeby menu mobilne nie urraslo o 7 pozycji na starcie */}
           <button
@@ -128,7 +121,7 @@ export default function Navbar() {
             aria-expanded={toolsOpen}
             className="nav-mobile-link nav-mobile-toggle"
           >
-            Narzędzia
+            Inne narzędzia
             <svg
               width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden
@@ -144,9 +137,6 @@ export default function Navbar() {
                   {item.label}
                 </a>
               ))}
-              <a href="/pl/narzedzia" onClick={() => setMobileOpen(false)} className="nav-mobile-sublink">
-                Wszystkie narzędzia
-              </a>
             </div>
           )}
           <a
@@ -201,6 +191,11 @@ export default function Navbar() {
           display: inline-flex;
           align-items: center;
           gap: 5px;
+          background: none;
+          border: none;
+          font-family: inherit;
+          line-height: inherit;
+          cursor: default;
         }
         .nav-dd-menu {
           position: absolute;
@@ -237,12 +232,6 @@ export default function Navbar() {
           background: #f8fafb;
           opacity: 1;
         }
-        .nav-dd-item-first {
-          border-bottom: 1px solid #eceff3;
-          border-radius: 8px 8px 0 0;
-          margin-bottom: 4px;
-          padding-bottom: 11px;
-        }
         .nav-dd-label {
           display: block;
           font-size: 14.5px;
@@ -256,16 +245,6 @@ export default function Navbar() {
           color: #818898;
           line-height: 1.45;
           margin-top: 2px;
-        }
-        .nav-dd-all {
-          display: block;
-          padding: 10px 12px 6px;
-          font-size: 13px;
-          font-weight: 600;
-          color: #0b7983;
-          text-decoration: none;
-          border-top: 1px solid #eceff3;
-          margin-top: 4px;
         }
         /* Podwojna klasa — .nav-mobile-link jest nizej w arkuszu i inaczej nadpisalby display */
         .nav-mobile-link.nav-mobile-toggle {

@@ -16,7 +16,6 @@ const STATIC_PAIRS: ReadonlyArray<readonly [en: string, pl: string]> = [
   ['/how-it-works', '/pl/jak-to-dziala'],
   ['/pricing', '/pl/cennik'],
   ['/dimensions', '/pl/wymiary'],
-  ['/tools', '/pl/narzedzia'],
   ['/api', '/pl/api'],
 ];
 

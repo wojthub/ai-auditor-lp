@@ -45,8 +45,7 @@ function buildJsonLd(tool: (typeof TOOLS_EN)[string]) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'CitationOne', item: SITE },
-          { '@type': 'ListItem', position: 2, name: 'Tools', item: `${SITE}/tools` },
-          { '@type': 'ListItem', position: 3, name: tool.name, item: url },
+          { '@type': 'ListItem', position: 2, name: tool.name, item: url },
         ],
       },
       {

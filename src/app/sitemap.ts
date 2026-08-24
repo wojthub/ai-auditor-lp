@@ -24,7 +24,6 @@ const STATIC_PAGES: { en: string; pl: string; priority: number }[] = [
   { en: '/how-it-works', pl: '/pl/jak-to-dziala', priority: 0.8 },
   { en: '/dimensions', pl: '/pl/wymiary', priority: 0.8 },
   { en: '/pricing', pl: '/pl/cennik', priority: 0.8 },
-  { en: '/tools', pl: '/pl/narzedzia', priority: 0.8 },
   { en: '/api', pl: '/pl/api', priority: 0.6 },
 ];
 
