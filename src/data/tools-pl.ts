@@ -93,14 +93,14 @@ export const TOOLS_PL: Record<string, ToolData> = {
     description:
       'Wskaż sitemapę, a analiza pokaże strony odbiegające tematycznie i te konkurujące ze sobą – z propozycją działania dla każdej. 1 kredyt, eksport CSV.',
     lead:
-      'Podajesz sitemapę, a wracasz z listą stron, które rozmywają temat serwisu, i grup stron walczących ze sobą o to samo zapytanie – każda z podpowiedzią, czy usunąć, przekierować, scalić czy zróżnicować.',
+      'Podajesz sitemapę, a analiza porównuje ze sobą wszystkie adresy z serwisu. Dostajesz listę stron, które rozmywają jego temat, oraz grupy stron walczących o to samo zapytanie. Przy każdej pozycji jest propozycja działania: usunąć, przekierować, scalić albo zróżnicować.',
     chips: ['1 kredyt za analizę', 'Wejście: sitemapa', 'Wynik: 3 zakładki + CSV'],
     defHeading: 'Czym jest content pruning i kanibalizacja treści?',
     def: [
       'Pruning odpowiada na dwa pytania o istniejący serwis: które strony odstają od głównego tematu na tyle, że rozmywają jego profil, i które są tak podobne do siebie, że konkurują o to samo zapytanie.',
       'Kanibalizacja to ta druga sytuacja: dwa własne adresy celujące w tę samą intencję. Pruning jest reakcją na obie sytuacje: rozstrzyga, która strona ma zostać nośnikiem tematu, a które warto usunąć, przekierować albo scalić.',
     ],
-    whyHeading: 'Dlaczego warto przycinać treść?',
+    whyHeading: 'Dlaczego warto uporządkować treści?',
     why: [
       'Serwisy rosną warstwami: stare wpisy blogowe, akcje sezonowe, teksty pod frazy, których już nikt nie szuka. Każda taka strona rozmywa obraz tego, o czym jest domena – a to obraz, na podstawie którego wyszukiwarki i modele decydują, w czym jesteś wiarygodnym źródłem.',
       'Drugi problem jest gorszy, bo niewidoczny: dwie własne strony celujące w to samo zapytanie. Zamiast jednej mocnej pozycji masz dwie słabsze, a przy odpowiedzi generatywnej model i tak wybierze jedno źródło – albo cudze.',
@@ -108,11 +108,11 @@ export const TOOLS_PL: Record<string, ToolData> = {
     ],
     stepsHeading: 'Jak działa analiza?',
     steps: [
-      { title: 'Wczytanie sitemapy', desc: 'Rozwijamy sitemapę wraz z zagnieżdżonymi sitemapami, odsiewamy pliki mediów i sprawdzamy dostępność adresu jeszcze przed startem.' },
+      { title: 'Wczytanie sitemapy', desc: 'Wczytujemy sitemapę razem z zagnieżdżonymi plikami i pomijamy grafiki oraz pozostałe media. Dostępność adresów sprawdzamy jeszcze przed startem analizy.' },
       { title: 'Pobranie stron', desc: 'Z każdego adresu pobieramy tytuł, nagłówek H1 i opis meta – to wystarcza do porównania tematycznego i jest szybkie.' },
       { title: 'Reprezentacja semantyczna', desc: 'Każda strona dostaje wektor opisujący jej treść, dzięki czemu porównujemy znaczenie, a nie zbieżność słów.' },
       { title: 'Główny temat serwisu', desc: 'Grupujemy strony i wyliczamy temat główny oraz tematy poboczne na podstawie charakterystycznych fraz dwuwyrazowych.' },
-      { title: 'Kandydaci do przycięcia', desc: 'Mierzymy odległość każdej strony od centrum głównego tematu i odcinamy wskazany percentyl.' },
+      { title: 'Strony odbiegające od tematu', desc: 'Mierzymy, jak daleko każda strona odchodzi od tematu głównego, i wskazujemy te powyżej ustawionego przez Ciebie progu.' },
       { title: 'Grupy kanibalizacji', desc: 'Porównujemy strony parami i łączymy w grupy te, których podobieństwo przekracza próg.' },
       { title: 'Rekomendacje', desc: 'Model opisuje znalezione przypadki i proponuje działanie dla każdego z nich.' },
     ],
@@ -120,16 +120,16 @@ export const TOOLS_PL: Record<string, ToolData> = {
       caption: 'Co ustawiasz przed startem',
       head: ['Parametr', 'Zakres i domyślna wartość'],
       rows: [
-        ['Percentyl odchylenia', '50–99 (domyślnie 90) – powyżej niego strona trafia na listę kandydatów'],
+        ['Percentyl odchylenia', '50–99 (domyślnie 90) – powyżej niego strona trafia na listę odbiegających od tematu'],
         ['Próg kanibalizacji', '0,7–1,0 (domyślnie 0,9) – od jakiego podobieństwa uznajemy strony za konkurujące'],
       ],
     },
     outputHeading: 'Co dostajesz?',
     output: [
-      'Tabelę kandydatów do przycięcia wraz z instrukcją, co z nimi zrobić: usunąć, przekierować czy przebudować.',
-      'Grupy kanibalizacji z wynikiem podobieństwa i podpowiedzią: wybrać najmocniejszą stronę i ustawić przekierowania, scalić treści albo zróżnicować je tak, żeby celowały w różne zapytania.',
-      'Podsumowanie tematyczne serwisu: temat główny i tematy poboczne wyliczone z realnej treści, nie z deklaracji.',
-      'Eksport CSV oraz jasny komunikat, gdy analiza nie znalazła nic do poprawy.',
+      'Tabelę stron odbiegających od tematu serwisu, każda z propozycją działania: usunąć, przekierować albo przebudować.',
+      'Grupy stron konkurujących ze sobą, z wynikiem podobieństwa i propozycją: wskazać stronę główną i ustawić przekierowania, scalić treści albo rozdzielić je na różne zapytania.',
+      'Podsumowanie tematyczne serwisu: temat główny i tematy poboczne wyliczone z treści opublikowanych stron.',
+      'Eksport CSV. Gdy analiza nie znajdzie nic do poprawy, dostajesz o tym komunikat.',
     ],
     limitsHeading: 'Ile to kosztuje?',
     limits: [
@@ -140,7 +140,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
     faq: [
       {
         q: 'Czy narzędzie skasuje mi strony?',
-        a: 'Nie. Analiza jest wyłącznie doradcza – dostajesz listę kandydatów i propozycję działania, decyzję i wykonanie zostawiamy Tobie. Nie łączymy się z Twoim CMS-em.',
+        a: 'Nie. Analiza jest wyłącznie doradcza – dostajesz listę stron i propozycję działania, a decyzja i wykonanie zostają po Twojej stronie. Nie łączymy się z Twoim CMS-em.',
       },
       {
         q: 'Mam duży serwis – podać jedną sitemapę czy kilka?',

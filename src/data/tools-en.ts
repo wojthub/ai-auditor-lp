@@ -92,14 +92,14 @@ export const TOOLS_EN: Record<string, ToolData> = {
     description:
       'Point it at a sitemap and see which pages drift off-topic and which compete with each other - with a proposed action for every one. 1 credit, CSV export.',
     lead:
-      'You submit a sitemap and come back with a list of pages that blur what your site is about, plus groups of pages fighting each other for the same query - each with a suggestion: remove, redirect, merge or differentiate.',
+      'You submit a sitemap and the analysis compares every URL on the site with every other. You get a list of pages that blur what your site is about, plus groups of pages fighting for the same query. Each entry comes with a proposed action: remove, redirect, merge or differentiate.',
     chips: ['1 credit per run', 'Input: sitemap', 'Output: 3 tabs + CSV'],
     defHeading: 'What are content pruning and keyword cannibalization?',
     def: [
       'Pruning answers two questions about an existing site: which pages drift far enough from the main topic to blur its profile, and which are so similar to each other that they compete for the same query.',
       'Cannibalization is that second case: two of your own URLs aiming at the same intent. Pruning responds to both - it is not about deleting everything old, but about deciding which page should carry the topic.',
     ],
-    whyHeading: 'Why prune content?',
+    whyHeading: 'Why tidy up your content?',
     why: [
       'Sites grow in layers: old blog posts, seasonal campaigns, texts targeting phrases nobody searches for any more. Every such page blurs the picture of what the domain is about - and that picture is what search engines and models use to decide where you are a credible source.',
       'The second problem is worse because it is invisible: two of your own pages aiming at the same query. Instead of one strong position you hold two weaker ones, and in a generative answer the model will pick a single source anyway - possibly somebody else.',
@@ -107,11 +107,11 @@ export const TOOLS_EN: Record<string, ToolData> = {
     ],
     stepsHeading: 'How does the analysis work?',
     steps: [
-      { title: 'Reading the sitemap', desc: 'We expand the sitemap along with nested ones, filter out media files and verify the address is reachable before the run starts.' },
+      { title: 'Reading the sitemap', desc: 'We read the sitemap along with any nested files and skip images and other media. The addresses are checked for availability before the run starts.' },
       { title: 'Fetching pages', desc: 'From each URL we take the title, H1 and meta description - enough for topical comparison and fast to collect.' },
       { title: 'Semantic representation', desc: 'Every page gets a vector describing its content, so we compare meaning rather than word overlap.' },
       { title: 'The site main topic', desc: 'We group the pages and derive the main topic plus side topics from characteristic two-word phrases.' },
-      { title: 'Pruning candidates', desc: 'We measure how far each page sits from the centre of the main topic and cut off the chosen percentile.' },
+      { title: 'Pages drifting off-topic', desc: 'We measure how far each page sits from the main topic and flag the ones above the threshold you set.' },
       { title: 'Cannibalization groups', desc: 'We compare pages pairwise and group those whose similarity crosses the threshold.' },
       { title: 'Recommendations', desc: 'The model describes what was found and proposes an action for each case.' },
     ],
@@ -119,16 +119,16 @@ export const TOOLS_EN: Record<string, ToolData> = {
       caption: 'What you set before the run',
       head: ['Parameter', 'Range and default'],
       rows: [
-        ['Deviation percentile', '50-99 (default 90) - above it a page becomes a candidate'],
+        ['Deviation percentile', '50-99 (default 90) - above it a page is listed as drifting off-topic'],
         ['Cannibalization threshold', '0.7-1.0 (default 0.9) - the similarity at which pages count as competing'],
       ],
     },
     outputHeading: 'What do you get?',
     output: [
-      'A table of pruning candidates with guidance on what to do: remove, redirect or rebuild.',
-      'Cannibalization groups with a similarity score and a suggestion: keep the strongest page and redirect, merge the content, or differentiate the pages so they target different queries.',
-      'A topical summary of the site: the main topic and side topics derived from actual content rather than from what you assume it covers.',
-      'CSV export, plus a clear message when the analysis found nothing to fix.',
+      'A table of pages drifting off your site topic, each with a proposed action: remove, redirect or rebuild.',
+      'Groups of competing pages, with a similarity score and a proposal: pick the main page and set up redirects, merge the content, or split it across different queries.',
+      'A topical summary of the site: the main topic and side topics derived from the content of your published pages.',
+      'CSV export. When the analysis finds nothing to fix, it tells you so.',
     ],
     limitsHeading: 'What does it cost?',
     limits: [
@@ -139,7 +139,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
     faq: [
       {
         q: 'Will the tool delete my pages?',
-        a: 'No. The analysis is advisory only - you get a list of candidates and a proposed action, while the decision and the execution stay with you. We do not connect to your CMS.',
+        a: 'No. The analysis is advisory only - you get a list of pages and a proposed action, while the decision and the execution stay with you. We do not connect to your CMS.',
       },
       {
         q: 'Large site - one sitemap or several?',
@@ -182,7 +182,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
     ],
     stepsHeading: 'How does the analysis work?',
     steps: [
-      { title: 'Reading the sitemap', desc: 'The same path as pruning: nested sitemaps, media filtered out, the address validated before the run.' },
+      { title: 'Reading the sitemap', desc: 'The same path as content pruning: nested sitemaps, media skipped, addresses validated before the run.' },
       { title: 'Fetching page code', desc: 'We fetch the HTML of every URL - unsimplified, because structured data lives in markup that content simplification strips away.' },
       { title: 'Extracting markup', desc: 'We read both JSON-LD (including the bundled form popular plugins emit) and microdata embedded in the HTML. Every finding shows its source.' },
       { title: 'Identifying the page type', desc: 'We score the page against 18 profiles - from homepage and article to job posting and contact page. When the signals are too weak it stays “unknown” instead of guessing.' },
