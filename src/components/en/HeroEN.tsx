@@ -2,12 +2,25 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTypewriterPlaceholder } from '@/lib/useTypewriterPlaceholder';
+import HeroNodes from '../HeroNodes';
 
 const APP_URL = 'https://app.citationone.com';
+
+// Neutral placeholder domain — we never point at a real client.
+// All variants share the same start, so the typewriter only erases the tail.
+const URL_EXAMPLES = [
+  'yoursite.com/blog/guide',
+  'yoursite.com/services/content-audit',
+  'yoursite.com/product/product-name',
+  'yoursite.com/category/rankings',
+];
+
 
 export default function HeroEN() {
   const [url, setUrl] = useState('');
   const [error, setError] = useState('');
+  const typed = useTypewriterPlaceholder(URL_EXAMPLES, !url);
 
   const normalizeUrl = (raw: string) => {
     const trimmed = raw.trim();
@@ -31,8 +44,8 @@ export default function HeroEN() {
         background: '#ffffff',
       }}
     >
-      <div className="absolute inset-0 dot-grid" style={{ opacity: 0.14 }} />
-
+      <div className="absolute inset-0 dot-grid dot-grid-drift" style={{ opacity: 0.14 }} aria-hidden />
+      <HeroNodes />
       <div className="relative" style={{ maxWidth: 720, margin: '0 auto', padding: '40px 24px 28px', textAlign: 'center', width: '100%' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -56,7 +69,7 @@ export default function HeroEN() {
               lineHeight: 1.6, color: '#36394a',
               maxWidth: 560, margin: '14px auto 0',
             }}>
-              We analyse the content elements that matter most to AI models. Boost your page&apos;s citation potential in ChatGPT, Perplexity and Google AI Overview.
+              We analyse the content elements that matter most to AI models. Boost your page&apos;s citation potential in <span className="hero-brand"><img src="/logos/chatgpt.png" alt="" aria-hidden width={16} height={16} />ChatGPT</span>, <span className="hero-brand"><img src="/logos/perplexity.png" alt="" aria-hidden width={16} height={16} />Perplexity</span> and <span className="hero-brand"><img src="/logos/google.png" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview.
             </span>
           </h1>
 
@@ -83,7 +96,7 @@ export default function HeroEN() {
                 type="text"
                 value={url}
                 onChange={(e) => { setUrl(e.target.value); if (error) setError(''); }}
-                placeholder="Paste your page URL..."
+                placeholder={typed ? `Paste a link, e.g. ${typed}` : 'Paste your page URL...'}
                 aria-invalid={!!error}
                 style={{
                   flex: 1,
