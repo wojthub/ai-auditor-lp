@@ -32,7 +32,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     alternates: {
       canonical: `${SITE}/pl/wymiary/${dim.slug}`,
       // hreflang dziala tylko wtedy, gdy WSKAZUJE na istniejaca strone — stad para ze slownika.
-      languages: en ? { pl: `${SITE}/pl/wymiary/${dim.slug}`, en: `${SITE}/dimensions/${en}` } : undefined,
+      languages: en
+        ? { pl: `${SITE}/pl/wymiary/${dim.slug}`, en: `${SITE}/dimensions/${en}`, 'x-default': `${SITE}/dimensions/${en}` }
+        : undefined,
     },
   };
 }

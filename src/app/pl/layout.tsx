@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { alternatesFor } from '@/lib/languageSwitch';
 
 export const metadata: Metadata = {
   title: {
@@ -21,12 +22,7 @@ export const metadata: Metadata = {
     title: 'CitationOne - Audyt treści pod AI Search',
     description: 'Sprawdź, czy AI zacytuje Twoją treść. 10 wymiarów, benchmark SERP, rekomendacje Przed i Po. Raport w 5 minut.',
   },
-  alternates: {
-    languages: {
-      'en': 'https://citationone.com',
-      'pl': 'https://citationone.com/pl',
-    },
-  },
+  alternates: alternatesFor('/pl'),
 };
 
 export default function PlLayout({

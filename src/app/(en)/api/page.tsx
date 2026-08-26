@@ -4,6 +4,7 @@
 // przerywal sie na `PageNotFoundError: Cannot find module for page: /_document`
 // juz na etapie „Collecting page data". Nie przenos tego katalogu z powrotem.
 import type { Metadata } from 'next';
+import { alternatesFor } from '@/lib/languageSwitch';
 import NavbarEN from '@/components/en/NavbarEN';
 import FooterEN from '@/components/en/FooterEN';
 import ApiContentEN from './ApiContentEN';
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
     description:
       'REST + JSON, API key auth, bulk requests, public report links. 1 audit = 1 credit. Docs also served as Markdown for agents.',
   },
+  alternates: alternatesFor('/api'),
 };
 
 export default function ApiPage() {

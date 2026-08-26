@@ -169,7 +169,8 @@ Podstrona dla programistów: opis publicznego API v1 aplikacji + dwa wyjścia do
 `https://app.citationone.com/api-docs` (HTML) i `https://app.citationone.com/api-docs.md`
 (`text/markdown` dla agentów AI). Oba adresy są **publiczne** (`PUBLIC_PATHS` w middleware głównej
 apki) i powstają z jednego źródła `lib/api/docs-content.ts` — kontrakt opisany w
-`../ai-auditor/spec/public-api.md`. Linki: Navbar (desktop + mobile) i Footer, w obu językach.
+`../ai-auditor/spec/public-api.md`. Linki: Navbar (w rozwijanym menu „Audyt treści", desktop
+i mobile — API zleca wyłącznie audyty) i Footer, w obu językach.
 
 ⚠️ **Gotcha — EN wersja NIE może leżeć w `src/app/api/`.** Next traktuje ten katalog jak API routes
 i przy `output: 'export'` build wywala się na `PageNotFoundError: Cannot find module for page:
@@ -339,10 +340,11 @@ pary w `TOOL_SLUG_PAIRS`), ale **własny szablon** — zamiast „co podnosi/obn
 kroki działania, tabelę konfiguracji, listę wyników i sekcję kosztów.
 
 - **Nie ma huba narzędzi** (`/tools`, `/pl/narzedzia` usunięte 2026-08-24). Wejściem jest rozwijane
-  menu „Narzędzia" w Navbarze — jego trigger to `<button>`, nie link, bo nie ma dokąd prowadzić.
+  menu „Narzędzia" w Navbarze — jego trigger to `<button>`, nie link, bo nie ma dokąd prowadzić
+  (inaczej niż trigger „Audytu treści", który jest linkiem na `/pl/jak-to-dziala`).
   Nawigację między narzędziami przejmuje lista pigułek („Wszystkie narzędzia") na dole każdej
   podstrony, a breadcrumb ma nieklikalny korzeń. `TOOL_STRINGS_*.basePath` ZOSTAJE — napędza
-  linki do rodzeństwa, nie do huba. Audyt treści ma własne wejście „Jak to działa?", więc
+  linki do rodzeństwa, nie do huba. Audyt treści ma własne menu „Audyt treści", więc
   w menu narzędzi go nie ma.
 - **Źródło faktów:** [`../ai-auditor/spec/tools.md`](../ai-auditor/spec/tools.md).
 - **Hierarchia nagłówków jest inna niż przy wymiarach** (decyzja z 2026-08-21): intencja na tych
@@ -420,8 +422,15 @@ const APP_URL = 'https://app.citationone.com';
     utrzymywać drugą listę adresów.
 - Navbary czytają ścieżkę przez `usePathname()`. Przy `output: 'export'` docelowy `href` trafia do
   **statycznego HTML** każdej strony (zweryfikowane w `out/`), więc działa bez czekania na hydratację.
-- **Uwaga:** `alternates.languages` (hreflang) w layoutach wciąż wskazuje HP dla wszystkich podstron —
-  to osobna sprawa niż przełącznik i nadal do naprawienia (mapa z `languageSwitch.ts` się do tego nadaje).
+- **hreflangi i canonical idą z tej samej mapy** (naprawione 2026-08-26): `alternatesFor(path)`
+  w [languageSwitch.ts](src/lib/languageSwitch.ts) zwraca self-canonical + `en`/`pl`/`x-default`.
+  Layouty deklarują parę stron głównych, a Next **dziedziczy metadane w dół drzewa** — dlatego
+  każda statyczna podstrona musi wołać `alternatesFor` sama; bez tego mówiła Google'owi, że jej
+  odpowiednikiem w drugim języku jest HP. Rodziny `[slug]` liczą pary z własnych słowników
+  (`DIMENSION_SLUG_PAIRS`, `TOOL_SLUG_PAIRS`) i **bez pary nie emitują hreflanga wcale** — celowo,
+  bo fallback na HP byłby wskazaniem nieprawdziwym, gorszym niż brak. `x-default` = wersja EN
+  (ta z roota). `sitemap.ts` buduje listę stron statycznych z `STATIC_PAIRS`, więc trzecia kopia
+  adresów zniknęła — zostaje sama mapa priorytetów.
 - CSS class `.nav-lang`: border badge, 13px, `#a4acb9`
 
 ---
@@ -522,18 +531,28 @@ znikają przy skalowaniu zrzutu ekranu i łatwo uznać działający efekt za zep
   Dodając kolejną pozycję **zmierz** wysokość `.nav-cta` (zawijanie = >46px) — nie powoduje przewijania
   strony, więc nie rzuca się w oczy. Uwaga przy pomiarze: logo `BrandMorph` animuje szerokość przez ~3 s,
   więc mierz po ustabilizowaniu, inaczej pasek wychodzi węższy niż jest naprawdę.
-- **Kolejność menu** (2026-08-26, PL i EN): Jak działa audytor? → **Audyt masowy** → Cennik →
-  Inne narzędzia → API. Audyt masowy stoi przed API świadomie: to ta sama obietnica skalowania
-  w mniej technicznej formie, a wcześniej przekaz z reklamy domykało samo API, przez co skalowanie
-  wyglądało na dostępne wyłącznie przez integrację. **Audyt masowy nie ma własnej podstrony** — link
-  to kotwica `/pl#masowy-audyt` (`/#bulk-audit`), zawsze pełną ścieżką, bo nawigacja działa też na podstronach.
-- **Navbar — menu „Inne narzędzia":** desktop ma rozwijaną listę (`TOOLS_MENU` w `Navbar.tsx` /
-  `en/NavbarEN.tsx`), otwieraną **czystym CSS-em** (`:hover` + `:focus-within`), więc działa przed
-  hydratacją i dla klawiatury. W liście są 4 narzędzia; audyt treści ma własne wejście „Jak działa
-  audytor?", a Content Pruning i kanibalizacja to jedna pozycja (jedno zadanie, dwie zakładki wyniku).
-  Trigger to `<button>`, nie link — huba narzędzi nie ma, więc nie ma dokąd prowadzić. `key` w mapowaniu
-  idzie po `label`, nie po `href`. Na mobile ta sama tablica renderuje się jako rozwijana grupa
-  (stan `toolsOpen`) — inaczej menu otwierałoby się na 9 pozycji.
+- **Kolejność menu** (2026-08-26, PL i EN): **Audyt treści ▾** → **Narzędzia ▾** → Cennik.
+  Dwie grupy dzielą menu wzdłuż tego, czym rzeczy są: pierwsza to JEDEN produkt opisany z trzech stron
+  (mechanizm → kryteria → skala), druga to katalog osobnych narzędzi. Płaska lista z 2026-08 (Jak działa
+  audytor? → Audyt masowy → Cennik → Inne narzędzia → API) mieszała te porządki, stawiała kotwicę HP
+  w randze podstrony i **nie miała żadnego wejścia do huba wymiarów** — `/pl/wymiary` wisiało wyłącznie
+  na linkach w treści. „Inne narzędzia" definiowały się przez odróżnienie od czegoś, czego w menu nie było.
+- **Navbar — menu „Audyt treści":** `AUDIT_MENU` w `Navbar.tsx` / `en/NavbarEN.tsx` — „Jak działa
+  audytor?" (`/pl/jak-to-dziala`), „Wymiary oceny" (`/pl/wymiary`), „Audyt masowy", **API**.
+  API siedzi tu, a nie na pasku, bo publiczne API v1 obsługuje **wyłącznie audyty**
+  (`/audits`, `/audits/bulk`, `/audits/{id}/share`, `/me`, `/projects`, `/credits/usage`) — żadne
+  z czterech narzędzi nie ma endpointu. To czwarty sposób dostępu do tego samego produktu.
+  Gdyby API kiedyś objęło narzędzia, ta pozycja wraca na pasek. Trigger to
+  **`<a href>` na `/pl/jak-to-dziala`**, nie `<button>`: najważniejsza podstrona nie może zniknąć za
+  rozwinięciem, stąd wyjątkowa reguła `a.nav-dd-trigger { cursor: pointer }` obok bazowego
+  `cursor: default` przycisku narzędzi. **Audyt masowy nie ma własnej podstrony** — link to kotwica
+  `/pl#masowy-audyt` (`/#bulk-audit`), zawsze pełną ścieżką, bo nawigacja działa też na podstronach.
+- **Navbar — menu „Narzędzia":** desktop ma rozwijaną listę (`TOOLS_MENU`), otwieraną **czystym CSS-em**
+  (`:hover` + `:focus-within`), więc działa przed hydratacją i dla klawiatury. W liście są 4 narzędzia;
+  audyt treści ma własne menu, a Content Pruning i kanibalizacja to jedna pozycja (jedno zadanie, dwie
+  zakładki wyniku). Trigger to `<button>`, nie link — huba narzędzi nie ma, więc nie ma dokąd prowadzić.
+  `key` w mapowaniu idzie po `label`, nie po `href`. Na mobile obie tablice renderują się jako rozwijane
+  grupy (stany `auditOpen` i `toolsOpen`) — inaczej menu otwierałoby się na kilkanaście pozycji.
 - **Navbar:** hamburger + panel, auto-close, full-width CTA. `.nav-cta` ma `min-height: 44px` (touch target tablet/mobile).
 - **Hero button:** `min-height: 44`, bez `whiteSpace: nowrap` (uniknięcie overflow <360px). Input+button stack na <580px.
 - **Gridy responsive:** dims 3→2→1, ba 2→1, feat 2→1, howitworks 5→1 (≤900px), problem/forwho 3→1.

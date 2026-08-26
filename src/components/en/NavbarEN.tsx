@@ -7,7 +7,7 @@ import { plCounterpart } from '@/lib/languageSwitch';
 
 const APP_URL = 'https://app.citationone.com';
 
-/** „Other tools" menu — mirror of ../Navbar.tsx. Add-on tools only; the audit has its own nav entry. */
+/** „Tools" menu — mirror of ../Navbar.tsx. Add-on tools only, separate from the content audit (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/tools/keyword-clustering', label: 'Keyword Clustering', desc: 'Map keywords to their target pages' },
   { href: '/tools/content-pruning', label: 'Content Pruning & Cannibalisation', desc: 'Pages that blur your topic or fight for one query' },
@@ -15,8 +15,19 @@ const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/tools/internal-linking', label: 'Internal Linking', desc: 'See which paragraph should link where' },
 ];
 
+/** „Content audit" menu — mirror of ../Navbar.tsx: one product from three angles. */
+const AUDIT_MENU: { href: string; label: string; desc: string }[] = [
+  { href: '/how-it-works', label: 'How the auditor works', desc: 'From a URL to ready-to-paste fixes' },
+  { href: '/dimensions', label: 'Scoring dimensions', desc: 'The 10 criteria behind AI citations' },
+  { href: '/#bulk-audit', label: 'Bulk audit', desc: 'Your whole site in a single run' },
+  // API v1 covers audits ONLY (/audits, /audits/bulk, /me) — none of the tools has an endpoint,
+  // so this is a fourth way into the same product, not a separate top-level entry.
+  { href: '/api', label: 'API', desc: 'Run audits over REST and JSON' },
+];
+
 export default function NavbarEN() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [auditOpen, setAuditOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
   // Przelacznik prowadzi na POLSKI ODPOWIEDNIK biezacej podstrony, nie na strone glowna.
   const plHref = plCounterpart(usePathname());
@@ -44,14 +55,31 @@ export default function NavbarEN() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center nav-desktop">
-          <a href="/how-it-works" className="nav-link">How the auditor works</a>
-          {/* Bulk audit has no page of its own — anchor into the homepage section (absolute path: the nav also runs on subpages) */}
-          <a href="/#bulk-audit" className="nav-link">Bulk audit</a>
-          <a href="/pricing" className="nav-link">Pricing</a>
+          {/* Content audit — the trigger is a LINK to /how-it-works so the main page does not
+              disappear behind the dropdown. „Bulk audit" is a homepage anchor (absolute path: the
+              nav also runs on subpages). */}
+          <div className="nav-dd">
+            <a href="/how-it-works" className="nav-link nav-dd-trigger" aria-haspopup="true">
+              Content audit
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+            <div className="nav-dd-menu">
+              <div className="nav-dd-card">
+                {AUDIT_MENU.map((item) => (
+                  <a key={item.label} href={item.href} className="nav-dd-item">
+                    <span className="nav-dd-label">{item.label}</span>
+                    <span className="nav-dd-desc">{item.desc}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
           {/* Tools + dropdown (hover and :focus-within — no JS, works straight after SSR) */}
           <div className="nav-dd">
             <button type="button" className="nav-link nav-dd-trigger" aria-haspopup="true">
-              Other tools
+              Tools
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M6 9l6 6 6-6" />
               </svg>
@@ -67,7 +95,7 @@ export default function NavbarEN() {
               </div>
             </div>
           </div>
-          <a href="/api" className="nav-link">API</a>
+          <a href="/pricing" className="nav-link">Pricing</a>
           <a href={`${APP_URL}/login?lang=en`} className="nav-cta">Run audit</a>
           <a href={plHref} className="nav-lang" title="Wersja polska">PL</a>
         </div>
@@ -109,15 +137,31 @@ export default function NavbarEN() {
             padding: '12px 24px 20px',
           }}
         >
-          <a href="/how-it-works" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
-            How the auditor works
-          </a>
-          <a href="/#bulk-audit" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
-            Bulk audit
-          </a>
-          <a href="/pricing" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
-            Pricing
-          </a>
+          {/* Content audit: collapsible row; the first item is the full „How the auditor works" page. */}
+          <button
+            type="button"
+            onClick={() => setAuditOpen(!auditOpen)}
+            aria-expanded={auditOpen}
+            className="nav-mobile-link nav-mobile-toggle"
+          >
+            Content audit
+            <svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden
+              style={{ transform: auditOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.16s ease' }}
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          {auditOpen && (
+            <div className="nav-mobile-sub">
+              {AUDIT_MENU.map((item) => (
+                <a key={item.label} href={item.href} onClick={() => setMobileOpen(false)} className="nav-mobile-sublink">
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          )}
           {/* Tools: collapsible row, so the mobile menu does not open 7 items tall */}
           <button
             type="button"
@@ -125,7 +169,7 @@ export default function NavbarEN() {
             aria-expanded={toolsOpen}
             className="nav-mobile-link nav-mobile-toggle"
           >
-            Other tools
+            Tools
             <svg
               width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden
@@ -143,8 +187,8 @@ export default function NavbarEN() {
               ))}
             </div>
           )}
-          <a href="/api" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
-            API
+          <a href="/pricing" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+            Pricing
           </a>
           <a href={plHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             PL - Wersja polska
@@ -186,6 +230,10 @@ export default function NavbarEN() {
           font-family: inherit;
           line-height: inherit;
           cursor: default;
+        }
+        /* The „Content audit" trigger is a link — unlike the tools button it has somewhere to go. */
+        a.nav-dd-trigger {
+          cursor: pointer;
         }
         .nav-dd-menu {
           position: absolute;

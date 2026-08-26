@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
+import { alternatesFor } from '@/lib/languageSwitch';
 import './globals.css';
 
 const GTM_ID = 'GTM-M64KFHFS';
@@ -38,12 +39,7 @@ export const metadata: Metadata = {
     title: 'CitationOne - AI Search Content Audit',
     description: 'Check if AI will cite your content. 10 dimensions, SERP benchmark, Before/After recommendations. Report in 5 minutes.',
   },
-  alternates: {
-    languages: {
-      'en': 'https://citationone.com',
-      'pl': 'https://citationone.com/pl',
-    },
-  },
+  alternates: alternatesFor('/'),
 };
 
 export default function RootLayout({

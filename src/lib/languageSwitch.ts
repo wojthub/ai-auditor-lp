@@ -11,7 +11,9 @@
 import { DIMENSION_SLUG_PAIRS } from '@/data/dimension-types';
 import { TOOL_SLUG_PAIRS } from '@/data/tool-types';
 
-const STATIC_PAIRS: ReadonlyArray<readonly [en: string, pl: string]> = [
+export const SITE = 'https://citationone.com';
+
+export const STATIC_PAIRS: ReadonlyArray<readonly [en: string, pl: string]> = [
   ['/', '/pl'],
   ['/how-it-works', '/pl/jak-to-dziala'],
   ['/pricing', '/pl/cennik'],
@@ -30,6 +32,34 @@ function normalize(pathname: string): string {
   const clean = (pathname || '/').split('?')[0].split('#')[0];
   const trimmed = clean.length > 1 ? clean.replace(/\/+$/, '') : clean;
   return trimmed || '/';
+}
+
+/** `/` → `https://citationone.com` (bez koncowego slasha, jak w reszcie metadanych). */
+function abs(path: string): string {
+  return path === '/' ? SITE : `${SITE}${path}`;
+}
+
+/**
+ * `alternates` do `metadata` podstrony: self-canonical + hreflangi obu wersji.
+ *
+ * Layouty deklaruja hreflangi STRON GLOWNYCH, a Next dziedziczy metadane w dol drzewa —
+ * podstrona bez wlasnego `alternates` mowi wiec Google'owi, ze jej odpowiednikiem w drugim
+ * jezyku jest HP. Kazda statyczna podstrona musi to nadpisac (rodziny `[slug]` licza pary
+ * z wlasnych slownikow). Nieznana sciezka dostaje pare HP — ten sam fallback co przelacznik.
+ */
+export function alternatesFor(pathname: string) {
+  const path = normalize(pathname);
+  const pair = PAIRS.find(([en, pl]) => en === path || pl === path) ?? ['/', '/pl'];
+  return {
+    canonical: abs(path),
+    languages: {
+      en: abs(pair[0]),
+      pl: abs(pair[1]),
+      // Bez wskazania domyslnej wersji wybor dla zapytan bez preferencji jezykowej zostaje
+      // po stronie wyszukiwarki; EN jest wersja na roocie, wiec to ona.
+      'x-default': abs(pair[0]),
+    },
+  };
 }
 
 /** Adres PL odpowiadajacy biezacej stronie EN. Nieznana sciezka → `/pl`. */

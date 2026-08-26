@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { alternatesFor } from '@/lib/languageSwitch';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingContent from './PricingContent';
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
     title: 'Cennik CitationOne - Pay-as-you-go bez zobowiązań',
     description: '3 darmowe audyty na start, 2 EUR / audyt, pakiety elastyczne. Bez subskrypcji.',
   },
+  alternates: alternatesFor('/pl/cennik'),
 };
 
 export default function CennikPage() {

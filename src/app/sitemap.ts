@@ -4,6 +4,7 @@ import { dimensionSlugsEn } from '@/data/dimensions-en';
 import { enSlugForPl } from '@/data/dimension-types';
 import { toolSlugsPl } from '@/data/tools-pl';
 import { toolEnSlugForPl } from '@/data/tool-types';
+import { STATIC_PAIRS } from '@/lib/languageSwitch';
 
 // Wymagane przy output: 'export' — bez tego build przerywa sie na kolekcji danych trasy.
 export const dynamic = 'force-static';
@@ -18,14 +19,15 @@ const SITE = 'https://citationone.com';
  * czyli to samo powiazanie PL↔EN, ktore siedzi w <head> obu stron.
  */
 
-/** Strony statyczne: [sciezka EN, sciezka PL] — para napedza hreflangi w mapie. */
-const STATIC_PAGES: { en: string; pl: string; priority: number }[] = [
-  { en: '/', pl: '/pl', priority: 1 },
-  { en: '/how-it-works', pl: '/pl/jak-to-dziala', priority: 0.8 },
-  { en: '/dimensions', pl: '/pl/wymiary', priority: 0.8 },
-  { en: '/pricing', pl: '/pl/cennik', priority: 0.8 },
-  { en: '/api', pl: '/pl/api', priority: 0.6 },
-];
+/**
+ * Strony statyczne: pary bierzemy z `STATIC_PAIRS` (to samo zrodlo co przelacznik jezyka
+ * i `alternatesFor`), tu dokladamy tylko priorytet. Wczesniej byla to trzecia kopia tej
+ * samej listy adresow — nowa podstrona wypadala z mapy albo z hreflangow zaleznie od tego,
+ * ktora liste ktos akurat zaktualizowal.
+ */
+const PRIORITY: Record<string, number> = { '/': 1, '/api': 0.6 };
+
+const STATIC_PAGES = STATIC_PAIRS.map(([en, pl]) => ({ en, pl, priority: PRIORITY[en] ?? 0.8 }));
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

@@ -7,7 +7,7 @@ import { enCounterpart } from '@/lib/languageSwitch';
 
 const APP_URL = 'https://app.citationone.com';
 
-/** Menu „Narzedzia" — same narzedzia dodatkowe; audyt tresci ma wlasne wejscie „Jak to dziala?". */
+/** Menu „Narzedzia" — same narzedzia dodatkowe, osobne od audytu tresci (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/pl/narzedzia/klasteryzacja', label: 'Klasteryzacja słów kluczowych', desc: 'Przypisz słowa kluczowe do stron docelowych' },
   { href: '/pl/narzedzia/pruning', label: 'Content Pruning i kanibalizacja', desc: 'Strony rozmywające temat i walczące o tę samą frazę' },
@@ -15,8 +15,19 @@ const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/pl/narzedzia/linki-wewnetrzne', label: 'Linki wewnętrzne', desc: 'Zobacz, który akapit gdzie podlinkować' },
 ];
 
+/** Menu „Audyt tresci" — jeden produkt z trzech stron: mechanizm, kryteria, skala. */
+const AUDIT_MENU: { href: string; label: string; desc: string }[] = [
+  { href: '/pl/jak-to-dziala', label: 'Jak działa audytor?', desc: 'Droga od adresu URL do gotowych poprawek' },
+  { href: '/pl/wymiary', label: 'Wymiary oceny', desc: '10 kryteriów, które decydują o cytowaniu przez AI' },
+  { href: '/pl#masowy-audyt', label: 'Audyt masowy', desc: 'Cały serwis w jednym przebiegu' },
+  // API v1 obsluguje WYLACZNIE audyty (/audits, /audits/bulk, /me) — zadne z narzedzi nie ma
+  // endpointu, wiec to czwarte wejscie do tego samego produktu, nie osobna pozycja paska.
+  { href: '/pl/api', label: 'API', desc: 'Zlecanie audytów przez REST i JSON' },
+];
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [auditOpen, setAuditOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
   // Przelacznik prowadzi na ANGIELSKI ODPOWIEDNIK biezacej podstrony, nie na strone glowna.
   const enHref = enCounterpart(usePathname());
@@ -44,14 +55,31 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center nav-desktop">
-          <a href="/pl/jak-to-dziala" className="nav-link">Jak działa audytor?</a>
-          {/* Audyt masowy nie ma wlasnej podstrony — kotwica do sekcji na HP (pelna sciezka, bo menu jest tez na podstronach) */}
-          <a href="/pl#masowy-audyt" className="nav-link">Audyt masowy</a>
-          <a href="/pl/cennik" className="nav-link">Cennik</a>
+          {/* Audyt tresci — trigger jest LINKIEM na /pl/jak-to-dziala, zeby glowna podstrona nie
+              zniknela za rozwinieciem. „Audyt masowy" to kotwica na HP (pelna sciezka, bo menu
+              jest tez na podstronach). */}
+          <div className="nav-dd">
+            <a href="/pl/jak-to-dziala" className="nav-link nav-dd-trigger" aria-haspopup="true">
+              Audyt treści
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+            <div className="nav-dd-menu">
+              <div className="nav-dd-card">
+                {AUDIT_MENU.map((item) => (
+                  <a key={item.label} href={item.href} className="nav-dd-item">
+                    <span className="nav-dd-label">{item.label}</span>
+                    <span className="nav-dd-desc">{item.desc}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
           {/* Narzedzia + rozwijane menu (hover i :focus-within — bez JS, dziala od razu po SSR) */}
           <div className="nav-dd">
             <button type="button" className="nav-link nav-dd-trigger" aria-haspopup="true">
-              Inne narzędzia
+              Narzędzia
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M6 9l6 6 6-6" />
               </svg>
@@ -67,7 +95,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <a href="/pl/api" className="nav-link">API</a>
+          <a href="/pl/cennik" className="nav-link">Cennik</a>
           <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zrób audyt</a>
           <a href={enHref} className="nav-lang" title="English version">EN</a>
         </div>
@@ -109,27 +137,31 @@ export default function Navbar() {
             padding: '12px 24px 20px',
           }}
         >
-          <a
-            href="/pl/jak-to-dziala"
-            onClick={() => setMobileOpen(false)}
-            className="nav-mobile-link"
+          {/* Audyt tresci: wiersz rozwijany; pierwsza pozycja to pelna podstrona „Jak dziala audytor?". */}
+          <button
+            type="button"
+            onClick={() => setAuditOpen(!auditOpen)}
+            aria-expanded={auditOpen}
+            className="nav-mobile-link nav-mobile-toggle"
           >
-            Jak działa audytor?
-          </a>
-          <a
-            href="/pl#masowy-audyt"
-            onClick={() => setMobileOpen(false)}
-            className="nav-mobile-link"
-          >
-            Audyt masowy
-          </a>
-          <a
-            href="/pl/cennik"
-            onClick={() => setMobileOpen(false)}
-            className="nav-mobile-link"
-          >
-            Cennik
-          </a>
+            Audyt treści
+            <svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden
+              style={{ transform: auditOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.16s ease' }}
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          {auditOpen && (
+            <div className="nav-mobile-sub">
+              {AUDIT_MENU.map((item) => (
+                <a key={item.label} href={item.href} onClick={() => setMobileOpen(false)} className="nav-mobile-sublink">
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          )}
           {/* Narzedzia: wiersz rozwijany, zeby menu mobilne nie urraslo o 7 pozycji na starcie */}
           <button
             type="button"
@@ -137,7 +169,7 @@ export default function Navbar() {
             aria-expanded={toolsOpen}
             className="nav-mobile-link nav-mobile-toggle"
           >
-            Inne narzędzia
+            Narzędzia
             <svg
               width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden
@@ -156,11 +188,11 @@ export default function Navbar() {
             </div>
           )}
           <a
-            href="/pl/api"
+            href="/pl/cennik"
             onClick={() => setMobileOpen(false)}
             className="nav-mobile-link"
           >
-            API
+            Cennik
           </a>
           <a href={enHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             EN - English version
@@ -205,6 +237,10 @@ export default function Navbar() {
           font-family: inherit;
           line-height: inherit;
           cursor: default;
+        }
+        /* Trigger „Audytu tresci" jest linkiem — inaczej niz przycisk narzedzi ma dokad prowadzic. */
+        a.nav-dd-trigger {
+          cursor: pointer;
         }
         .nav-dd-menu {
           position: absolute;

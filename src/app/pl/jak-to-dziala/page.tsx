@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { alternatesFor } from '@/lib/languageSwitch';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageContent from './PageContent';
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
     title: 'Jak działa CitationOne? 10 wymiarów audytu AI Search',
     description: 'Wklej URL → AI analizuje 10 wymiarów → odbierasz raport Przed i Po z benchmarkiem SERP. 5 minut.',
   },
+  alternates: alternatesFor('/pl/jak-to-dziala'),
 };
 
 export default function JakToDzialaPage() {

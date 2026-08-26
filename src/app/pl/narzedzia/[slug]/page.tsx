@@ -31,7 +31,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     alternates: {
       canonical: `${SITE}/pl/narzedzia/${tool.slug}`,
-      languages: en ? { pl: `${SITE}/pl/narzedzia/${tool.slug}`, en: `${SITE}/tools/${en}` } : undefined,
+      languages: en
+        ? { pl: `${SITE}/pl/narzedzia/${tool.slug}`, en: `${SITE}/tools/${en}`, 'x-default': `${SITE}/tools/${en}` }
+        : undefined,
     },
   };
 }
