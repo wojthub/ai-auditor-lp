@@ -26,56 +26,56 @@ const DIMS = [
     id: 'CSI Alignment',
     slug: 'zgodnosc-z-csi',
     label: 'Zgodność z CSI',
-    body: 'Czy treść odpowiada na to, czego naprawdę szuka użytkownik? AI nie cytuje stron, które mijają się z intencją zapytania – nawet jeśli zawierają słowo kluczowe. Ten wymiar mierzy, jak dokładnie Twój artykuł dopasowuje się do oczekiwanego typu odpowiedzi: definicji, porównania, instrukcji lub rekomendacji.',
+    body: 'Czy treść odpowiada na to, czego naprawdę szuka użytkownik? AI nie cytuje stron, które mijają się z intencją zapytania - nawet jeśli zawierają słowo kluczowe. Zgodność z Central Search Intent (CSI) mierzy, jak dokładnie Twój artykuł dopasowuje się do oczekiwanego typu odpowiedzi: definicji, porównania, instrukcji lub rekomendacji.',
   },
   {
     num: '02',
     id: 'Density',
     slug: 'gestosc-informacji',
     label: 'Gęstość informacji',
-    body: 'Ile faktów, danych i konkretnych stwierdzeń zawiera jeden akapit. Treści o niskiej gęstości informacji są wypełniaczem – AI je pomija. Ten wymiar nagradza każde zdanie, które wnosi coś nowego, i karze tekst, który powtarza to samo innymi słowami.',
+    body: 'Gęstość informacji mówi, ile faktów, danych i konkretnych stwierdzeń zawiera jeden akapit. Treść o niskiej gęstości jest wypełniaczem - AI ją pomija. Wymiar nagradza każde zdanie, które wnosi coś nowego, i obniża ocenę tekstu, który powtarza to samo innymi słowami.',
   },
   {
     num: '03',
     id: 'EAV',
     slug: 'graf-wiedzy',
     label: 'Graf wiedzy',
-    body: 'Treść buduje sieć powiązanych pojęć: encji, ich atrybutów i wartości. Im gęstszy i spójniejszy graf, tym łatwiej AI rozpoznaje treść jako wiarygodne źródło w danej dziedzinie. Ten wymiar sprawdza, czy teksty budują wiedzę, czy tylko wspominają o pojęciach.',
+    body: 'Treść buduje sieć powiązanych pojęć: encji, ich atrybutów i wartości. Im gęstszy i spójniejszy graf, tym łatwiej AI rozpoznaje treść jako wiarygodne źródło w danej dziedzinie. Graf wiedzy sprawdza, czy teksty budują wiedzę, czy tylko wspominają o pojęciach.',
   },
   {
     num: '04',
     id: 'BLUF',
     slug: 'bluf',
     label: 'BLUF',
-    body: 'Modele AI preferują treści, które podają główną odpowiedź na początku sekcji. BLUF mierzy, jak szybko Twoja treść dochodzi do sedna – i czy robi to w każdej sekcji, czy tylko w pierwszej.',
+    body: 'Modele AI preferują treści, które podają główną odpowiedź na początku sekcji. BLUF mierzy, jak szybko Twoja treść dochodzi do sedna - i czy robi to w każdej sekcji, czy tylko w pierwszej.',
   },
   {
     num: '05',
     id: 'Chunk',
     slug: 'optymalizacja-chunkow',
     label: 'Optymalizacja chunków',
-    body: 'AI wycina z treści samodzielne fragmenty – sekcje, które da się zrozumieć bez kontekstu całego artykułu. Ten wymiar mierzy, ile takich gotowych do cytowania jednostek zawiera Twoja strona i czy mają długość właściwą dla tego typu treści.',
+    body: 'AI wycina z treści samodzielne fragmenty - sekcje, które da się zrozumieć bez kontekstu całego artykułu. Optymalizacja chunków mierzy, ile takich gotowych do cytowania jednostek zawiera Twoja strona i czy mają one długość właściwą dla tego typu treści.',
   },
   {
     num: '06',
     id: 'CoR',
     slug: 'koszt-pozyskania',
     label: 'Koszt pozyskania',
-    body: 'Ile wysiłku kosztuje wyciągnięcie ze strony konkretnej odpowiedzi. Hierarchia nagłówków, tabele, listy i wyróżnienia obniżają ten koszt; ściana tekstu go podnosi. Przy porównywalnej treści model wybierze źródło tańsze w obsłudze.',
+    body: 'Koszt pozyskania mówi, ile wysiłku kosztuje wyciągnięcie ze strony konkretnej odpowiedzi. Hierarchia nagłówków, tabele, listy i wyróżnienia obniżają ten koszt; ściana tekstu go podnosi. Przy porównywalnej treści model wybierze źródło tańsze w obsłudze.',
   },
   {
     num: '07',
     id: 'TF-IDF',
     slug: 'tf-idf',
     label: 'TF-IDF',
-    body: 'Porównanie terminologii Twojej strony ze słownictwem konkurencji z Top 10. Brakujący termin specjalistyczny to zwykle brakujący wątek – CitationOne wskazuje dokładnie, których pojęć nie używasz i w jakim kontekście robi to konkurencja.',
+    body: 'Porównanie terminologii Twojej strony ze słownictwem konkurencji z Top 10. Brakujący termin specjalistyczny to zwykle brakujący wątek - CitationOne wskazuje dokładnie, których pojęć nie używasz i w jakim kontekście robi to konkurencja.',
   },
   {
     num: '08',
     id: 'SRL',
     slug: 'role-semantyczne',
     label: 'Role semantyczne',
-    body: 'Czy główny temat strony jest w zdaniach wykonawcą czynności, czy tylko jej przedmiotem. Strona czynna daje modelowi komplet „kto – co robi – z czym”; strona bierna zostawia w tej strukturze dziurę.',
+    body: 'Czy główny temat strony jest w zdaniach wykonawcą czynności, czy tylko jej przedmiotem. Strona czynna daje modelowi komplet „kto - co robi - z czym”; strona bierna zostawia w tej strukturze dziurę.',
   },
   {
     num: '09',
@@ -99,7 +99,7 @@ const EXTRA = [
   {
     slug: 'e-e-a-t',
     label: 'E-E-A-T',
-    body: 'Doświadczenie, ekspertyza, autorytet i wiarygodność – cztery osobno oceniane składowe, liczone z sygnałów obecnych w treści i w kodzie strony.',
+    body: 'Doświadczenie, ekspertyza, autorytet i wiarygodność - cztery osobno oceniane składowe, liczone z sygnałów obecnych w treści i w kodzie strony.',
   },
   {
     slug: 'wartosc-dodana',
@@ -242,7 +242,7 @@ export default function WymiaryContent() {
               Poza dziesiątką wymiarów
             </h3>
             <p style={{ fontSize: 14.5, color: '#666d80', lineHeight: 1.65, margin: '0 0 18px', maxWidth: 640 }}>
-              Dwie analizy raportowane osobno – E-E-A-T jako fundament wiarygodności, wartość dodana jako miara tego, co wnosisz ponad Top 10.
+              Dwie analizy raportowane osobno - E-E-A-T jako fundament wiarygodności, wartość dodana jako miara tego, co wnosisz ponad Top 10.
             </p>
             <div className="dims-extra-grid">
               {EXTRA.map((item) => (
@@ -354,7 +354,7 @@ export default function WymiaryContent() {
               Pozyskaj ruch z AI Search.
             </h2>
             <p style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.45rem)', fontWeight: 500, color: '#36394a', letterSpacing: '-0.01em', lineHeight: 1.4, margin: '0 0 32px' }}>
-              Sprawdź swoje teksty już teraz – pierwsze 3 audyty za darmo.
+              Sprawdź swoje teksty już teraz - pierwsze 3 audyty za darmo.
             </p>
             <motion.a
               href={`${APP_URL}/login?lang=pl`}

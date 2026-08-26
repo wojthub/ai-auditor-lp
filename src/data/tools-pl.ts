@@ -18,22 +18,22 @@ export const TOOLS_PL: Record<string, ToolData> = {
     description:
       'Grupuj frazy według nakładania się wyników SERP: klastry z intencją, wolumenem i propozycją pillar page. 1 kredyt za analizę, eksport CSV.',
     lead:
-      'Wklejasz listę fraz, dostajesz gotowe grupy tematyczne – każda z intencją, sumarycznym wolumenem i propozycją pillar page. Zamiast zgadywać, ile tekstów napisać, widzisz to wprost z wyników wyszukiwania.',
+      'Wklejasz listę fraz, dostajesz gotowe grupy tematyczne - każda z intencją, sumarycznym wolumenem i propozycją pillar page. Zamiast zgadywać, ile tekstów napisać, widzisz to wprost z wyników wyszukiwania.',
     chips: ['1 kredyt za analizę', 'Wejście: lista fraz albo plik CSV', 'Wynik: klastry + CSV'],
     defHeading: 'Czym jest klasteryzacja słów kluczowych?',
     def: [
-      'Klasteryzacja grupuje frazy kluczowe według tego, czy Google pokazuje na nie te same strony. Jeśli dwa zapytania mają wspólne wyniki w SERP, jedna strona może obsłużyć oba – i to jest jedyne wiarygodne kryterium, bo pochodzi od wyszukiwarki, a nie z podobieństwa słów.',
-      'W praktyce klaster odpowiada na pytanie, ile tekstów w ogóle trzeba napisać. Kilkanaście zapytań potrafi zmieścić się w jednym temacie, a dwie pozornie bliskie frazy – wymagać osobnych stron.',
+      'Klasteryzacja grupuje frazy kluczowe według tego, czy Google pokazuje na nie te same strony. Jeśli dwa zapytania mają wspólne wyniki w SERP, jedna strona może obsłużyć oba - i to jest jedyne wiarygodne kryterium, bo pochodzi od wyszukiwarki, a nie z podobieństwa słów.',
+      'W praktyce klaster odpowiada na pytanie, ile tekstów w ogóle trzeba napisać. Kilkanaście zapytań potrafi zmieścić się w jednym temacie, a dwie pozornie bliskie frazy - wymagać osobnych stron.',
     ],
     whyHeading: 'Dlaczego warto klasteryzować frazy?',
     why: [
       'Bez klasteryzacji powstaje najdroższy błąd w treści: kilka osobnych tekstów pod frazy, które dla wyszukiwarki znaczą to samo. Strony zaczynają konkurować ze sobą, żadna nie zbiera pełnej siły, a budżet redakcyjny idzie na powielanie tego samego materiału.',
-      'Podobieństwo słów tego nie rozstrzyga – „ubezpieczenie samochodu” i „polisa OC” nie mają wspólnego wyrazu, a wyniki wyszukiwania mają w dużej mierze te same. Odwrotnie, dwie frazy różniące się jednym słowem potrafią mieć rozłączne SERP-y, bo stoi za nimi inna intencja.',
+      'Podobieństwo słów tego nie rozstrzyga - „ubezpieczenie samochodu” i „polisa OC” nie mają wspólnego wyrazu, a wyniki wyszukiwania mają w dużej mierze te same. Odwrotnie, dwie frazy różniące się jednym słowem potrafią mieć rozłączne SERP-y, bo stoi za nimi inna intencja.',
       'Dlatego grupujemy po nakładaniu się adresów w wynikach: klaster to zbiór fraz, które realnie da się obsłużyć jedną stroną.',
     ],
     stepsHeading: 'Jak działa klasteryzacja?',
     steps: [
-      { title: 'Pobranie wyników wyszukiwania', desc: 'Dla każdej frazy z listy pobieramy wyniki wyszukiwania – to one są danymi wejściowymi analizy.' },
+      { title: 'Pobranie wyników wyszukiwania', desc: 'Dla każdej frazy z listy pobieramy wyniki wyszukiwania - to one są danymi wejściowymi analizy.' },
       { title: 'Macierz fraza × adres', desc: 'Budujemy macierz obecności adresów w wynikach i liczymy podobieństwo każdej pary fraz.' },
       { title: 'Łączenie w klastry', desc: 'Frazy powiązane podobieństwem powyżej progu trafiają do wspólnych grup.' },
       { title: 'Opis klastra', desc: 'Model nadaje klastrowi etykietę, rozpoznaje intencję i proponuje temat pillar page.' },
@@ -43,33 +43,33 @@ export const TOOLS_PL: Record<string, ToolData> = {
       caption: 'Co ustawiasz przed startem',
       head: ['Parametr', 'Zakres i domyślna wartość'],
       rows: [
-        ['Próg podobieństwa', '0,5–1,0 (domyślnie 0,95) – im wyżej, tym węższe klastry'],
-        ['Minimalny rozmiar klastra', '1–20 (domyślnie 1) – grupy mniejsze niż ta wartość nie stają się klastrem, a ich frazy trafiają do grupy „Bez klastra”'],
-        ['Liczba wyników SERP', '1–10 (domyślnie 5) – ile pozycji bierzemy pod uwagę przy porównaniu'],
+        ['Próg podobieństwa', '0,5–1,0 (domyślnie 0,95) - im wyżej, tym węższe klastry'],
+        ['Minimalny rozmiar klastra', '1–20 (domyślnie 1) - grupy mniejsze niż ta wartość nie stają się klastrem, a ich frazy trafiają do grupy „Bez klastra”'],
+        ['Liczba wyników SERP', '1–10 (domyślnie 5) - ile pozycji bierzemy pod uwagę przy porównaniu'],
       ],
     },
     outputHeading: 'Co dostajesz?',
     output: [
-      'Karty klastrów z etykietą, intencją i sumarycznym wolumenem, a pod nimi tabela fraz – gotowa podstawa do planu treści.',
+      'Karty klastrów z etykietą, intencją i sumarycznym wolumenem, a pod nimi tabela fraz - gotowa podstawa do planu treści.',
       'Propozycję pillar page dla każdego klastra: temat, który obsłuży całą grupę zapytań.',
-      'Osobne grupy na frazy, które nie utworzyły klastra, nie mają wyników wyszukiwania albo których pobranie się nie powiodło. Nic nie znika po cichu – wiesz, co zostało poza analizą i dlaczego.',
+      'Osobne grupy na frazy, które nie utworzyły klastra, nie mają wyników wyszukiwania albo których pobranie się nie powiodło. Nic nie znika po cichu - wiesz, co zostało poza analizą i dlaczego.',
       'Rozwinięcie wybranego klastra: 10–15 powiązanych fraz z typem (long-tail, pytanie, wariant, podtemat) i gotowym tytułem artykułu. To osobne działanie za 1 kredyt.',
       'Eksport CSV z kolumnami: fraza, klaster, wolumen, intencja, pillar page.',
     ],
     limitsHeading: 'Ile to kosztuje?',
     limits: [
-      '1 kredyt za jedną klasteryzację – tyle samo co audyt strony.',
+      '1 kredyt za jedną klasteryzację - tyle samo co audyt strony.',
       'Rozwinięcie klastra kosztuje osobny kredyt i można je wykonać raz dla danego klastra.',
       'Jeśli zadanie zakończy się błędem, kredyt wraca automatycznie.',
     ],
     faq: [
       {
         q: 'Czym to się różni od klasteryzacji po podobieństwie słów?',
-        a: 'Kryterium jest inne: liczy się nakładanie wyników wyszukiwania, a nie podobieństwo tekstu. Dzięki temu „ubezpieczenie samochodu” i „polisa OC” mogą trafić do jednego klastra, mimo że nie mają wspólnego słowa – bo Google pokazuje na nie te same strony.',
+        a: 'Kryterium jest inne: liczy się nakładanie wyników wyszukiwania, a nie podobieństwo tekstu. Dzięki temu „ubezpieczenie samochodu” i „polisa OC” mogą trafić do jednego klastra, mimo że nie mają wspólnego słowa - bo Google pokazuje na nie te same strony.',
       },
       {
         q: 'Jaki próg podobieństwa wybrać?',
-        a: 'Domyślne 0,95 daje ciasne, pewne klastry – dobre, gdy planujesz osobne strony. Obniżenie progu skleja szersze grupy tematyczne, przydatne przy budowie sekcji serwisu. Jedną listę fraz można przepuścić dwa razy z różnym progiem i porównać wyniki.',
+        a: 'Domyślne 0,95 daje ciasne, pewne klastry - dobre, gdy planujesz osobne strony. Obniżenie progu skleja szersze grupy tematyczne, przydatne przy budowie sekcji serwisu. Jedną listę fraz można przepuścić dwa razy z różnym progiem i porównać wyniki.',
       },
       {
         q: 'Co z frazami, które nie trafiły do żadnego klastra?',
@@ -91,7 +91,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
     heading: 'Narzędzie do content pruningu i kanibalizacji treści dla SEO',
     title: 'Narzędzie do content pruningu i kanibalizacji treści dla SEO',
     description:
-      'Wskaż sitemapę, a analiza pokaże strony odbiegające tematycznie i te konkurujące ze sobą – z propozycją działania dla każdej. 1 kredyt, eksport CSV.',
+      'Wskaż sitemapę, a analiza pokaże strony odbiegające tematycznie i te konkurujące ze sobą - z propozycją działania dla każdej. 1 kredyt, eksport CSV.',
     lead:
       'Podajesz sitemapę, a analiza porównuje ze sobą wszystkie adresy z serwisu. Dostajesz listę stron, które rozmywają jego temat, oraz grupy stron walczących o to samo zapytanie. Przy każdej pozycji jest propozycja działania: usunąć, przekierować, scalić albo zróżnicować.',
     chips: ['1 kredyt za analizę', 'Wejście: sitemapa', 'Wynik: 3 zakładki + CSV'],
@@ -102,14 +102,14 @@ export const TOOLS_PL: Record<string, ToolData> = {
     ],
     whyHeading: 'Dlaczego warto uporządkować treści?',
     why: [
-      'Serwisy rosną warstwami: stare wpisy blogowe, akcje sezonowe, teksty pod frazy, których już nikt nie szuka. Każda taka strona rozmywa obraz tego, o czym jest domena – a to obraz, na podstawie którego wyszukiwarki i modele decydują, w czym jesteś wiarygodnym źródłem.',
-      'Drugi problem jest gorszy, bo niewidoczny: dwie własne strony celujące w to samo zapytanie. Zamiast jednej mocnej pozycji masz dwie słabsze, a przy odpowiedzi generatywnej model i tak wybierze jedno źródło – albo cudze.',
+      'Serwisy rosną warstwami: stare wpisy blogowe, akcje sezonowe, teksty pod frazy, których już nikt nie szuka. Każda taka strona rozmywa obraz tego, o czym jest domena - a to obraz, na podstawie którego wyszukiwarki i modele decydują, w czym jesteś wiarygodnym źródłem.',
+      'Drugi problem jest gorszy, bo niewidoczny: dwie własne strony celujące w to samo zapytanie. Zamiast jednej mocnej pozycji masz dwie słabsze, a przy odpowiedzi generatywnej model i tak wybierze jedno źródło - albo cudze.',
       'Obu rzeczy nie da się ocenić okiem przy kilkuset adresach. Trzeba porównać każdą stronę z każdą.',
     ],
     stepsHeading: 'Jak działa analiza?',
     steps: [
       { title: 'Wczytanie sitemapy', desc: 'Wczytujemy sitemapę razem z zagnieżdżonymi plikami i pomijamy grafiki oraz pozostałe media. Dostępność adresów sprawdzamy jeszcze przed startem analizy.' },
-      { title: 'Pobranie stron', desc: 'Z każdego adresu pobieramy tytuł, nagłówek H1 i opis meta – to wystarcza do porównania tematycznego i jest szybkie.' },
+      { title: 'Pobranie stron', desc: 'Z każdego adresu pobieramy tytuł, nagłówek H1 i opis meta - to wystarcza do porównania tematycznego i jest szybkie.' },
       { title: 'Reprezentacja semantyczna', desc: 'Każda strona dostaje wektor opisujący jej treść, dzięki czemu porównujemy znaczenie, a nie zbieżność słów.' },
       { title: 'Główny temat serwisu', desc: 'Grupujemy strony i wyliczamy temat główny oraz tematy poboczne na podstawie charakterystycznych fraz dwuwyrazowych.' },
       { title: 'Strony odbiegające od tematu', desc: 'Mierzymy, jak daleko każda strona odchodzi od tematu głównego, i wskazujemy te powyżej ustawionego przez Ciebie progu.' },
@@ -120,8 +120,8 @@ export const TOOLS_PL: Record<string, ToolData> = {
       caption: 'Co ustawiasz przed startem',
       head: ['Parametr', 'Zakres i domyślna wartość'],
       rows: [
-        ['Percentyl odchylenia', '50–99 (domyślnie 90) – powyżej niego strona trafia na listę odbiegających od tematu'],
-        ['Próg kanibalizacji', '0,7–1,0 (domyślnie 0,9) – od jakiego podobieństwa uznajemy strony za konkurujące'],
+        ['Percentyl odchylenia', '50–99 (domyślnie 90) - powyżej niego strona trafia na listę odbiegających od tematu'],
+        ['Próg kanibalizacji', '0,7–1,0 (domyślnie 0,9) - od jakiego podobieństwa uznajemy strony za konkurujące'],
       ],
     },
     outputHeading: 'Co dostajesz?',
@@ -134,17 +134,17 @@ export const TOOLS_PL: Record<string, ToolData> = {
     limitsHeading: 'Ile to kosztuje?',
     limits: [
       '1 kredyt za jedną analizę, niezależnie od liczby stron w sitemapie.',
-      'Strony, których nie udało się pobrać, są wykluczane z rankingu odchyleń – nie chcemy, żeby błąd sieci wyglądał jak treść nie na temat.',
+      'Strony, których nie udało się pobrać, są wykluczane z rankingu odchyleń - nie chcemy, żeby błąd sieci wyglądał jak treść nie na temat.',
       'Zadanie zakończone błędem zwraca kredyt automatycznie.',
     ],
     faq: [
       {
         q: 'Czy narzędzie skasuje mi strony?',
-        a: 'Nie. Analiza jest wyłącznie doradcza – dostajesz listę stron i propozycję działania, a decyzja i wykonanie zostają po Twojej stronie. Nie łączymy się z Twoim CMS-em.',
+        a: 'Nie. Analiza jest wyłącznie doradcza - dostajesz listę stron i propozycję działania, a decyzja i wykonanie zostają po Twojej stronie. Nie łączymy się z Twoim CMS-em.',
       },
       {
-        q: 'Mam duży serwis – podać jedną sitemapę czy kilka?',
-        a: 'Przy rozbudowanym serwisie lepiej podać sitemapy sekcji osobno: blog, kategorie, produkty. Wyniki są wtedy trafniejsze, bo temat główny liczony jest w obrębie jednej sekcji, a nie uśredniany po całej domenie – a to on decyduje, które strony uznamy za odbiegające.',
+        q: 'Mam duży serwis - podać jedną sitemapę czy kilka?',
+        a: 'Przy rozbudowanym serwisie lepiej podać sitemapy sekcji osobno: blog, kategorie, produkty. Wyniki są wtedy trafniejsze, bo temat główny liczony jest w obrębie jednej sekcji, a nie uśredniany po całej domenie - a to on decyduje, które strony uznamy za odbiegające.',
       },
       {
         q: 'Czym różni się kanibalizacja od zwykłego podobieństwa tematów?',
@@ -168,44 +168,44 @@ export const TOOLS_PL: Record<string, ToolData> = {
     description:
       'Sprawdź schema.org na całej sitemapie: co masz wdrożone, czego brakuje i jakich znaczników oczekuje każdy typ strony. Bez wywołań AI, 1 kredyt za analizę.',
     lead:
-      'Wskazujesz sitemapę, a narzędzie sprawdza kod każdej podstrony. Najpierw rozpoznaje jej typ – artykuł, produkt, ofertę pracy – a potem pokazuje, które znaczniki schema.org już ma, a których brakuje przy tym typie strony. Analiza czyta wyłącznie kod Twoich stron, bez wywołań modeli AI, więc jest najszybsza z całego zestawu.',
+      'Wskazujesz sitemapę, a narzędzie sprawdza kod każdej podstrony. Najpierw rozpoznaje jej typ - artykuł, produkt, ofertę pracy - a potem pokazuje, które znaczniki schema.org już ma, a których brakuje przy tym typie strony. Analiza czyta wyłącznie kod Twoich stron, bez wywołań modeli AI, więc jest najszybsza z całego zestawu.',
     chips: ['1 kredyt za analizę', 'Wejście: sitemapa', 'Zero wywołań modelu AI'],
     defHeading: 'Czym są luki w danych strukturalnych (schema.org)?',
     def: [
       'Dane strukturalne to znaczniki w kodzie strony, którymi mówisz wyszukiwarce wprost, czym ta strona jest: artykułem z autorem i datą, produktem, przepisem, ofertą pracy. Luka to brak znacznika, który dany typ strony powinien mieć.',
-      'Nie każdy brak jest problemem – dopiero zestawienie strony z jej typem pokazuje, czego naprawdę brakuje. Dlatego analiza najpierw rozpoznaje profil strony, a dopiero potem porównuje go z katalogiem oczekiwanych typów schema.',
+      'Nie każdy brak jest problemem - dopiero zestawienie strony z jej typem pokazuje, czego naprawdę brakuje. Dlatego analiza najpierw rozpoznaje profil strony, a dopiero potem porównuje go z katalogiem oczekiwanych typów schema.',
     ],
     whyHeading: 'Dlaczego dane strukturalne są ważne w AI Search?',
     why: [
       'Dane strukturalne to jedyne miejsce, w którym mówisz wyszukiwarce wprost, czym jest strona: produktem, przepisem, artykułem z datą i autorem, ofertą pracy. Reszta to domysły z treści.',
-      'W GEO ma to dodatkową wagę przy sygnałach wiarygodności – autorstwo i powiązania profilu autora czytane są właśnie z danych strukturalnych. Strona bez nich zmusza model do zgadywania, kto za nią stoi.',
+      'W GEO ma to dodatkową wagę przy sygnałach wiarygodności - autorstwo i powiązania profilu autora czytane są właśnie z danych strukturalnych. Strona bez nich zmusza model do zgadywania, kto za nią stoi.',
       'Problem polega na tym, że wdrożenia robi się zwykle raz, przy uruchomieniu serwisu, i nikt później nie sprawdza, czy nowe typy stron też je dostały. Ta analiza pokazuje to dla całego serwisu naraz.',
     ],
     stepsHeading: 'Jak działa analiza?',
     steps: [
       { title: 'Wczytanie sitemapy', desc: 'Wczytujemy sitemapę razem z zagnieżdżonymi plikami i pomijamy grafiki oraz pozostałe media. Dostępność adresów sprawdzamy jeszcze przed startem analizy.' },
-      { title: 'Pobranie kodu stron', desc: 'Pobieramy HTML każdego adresu – bez uproszczeń, bo dane strukturalne siedzą w znacznikach, które upraszczanie treści usuwa.' },
+      { title: 'Pobranie kodu stron', desc: 'Pobieramy HTML każdego adresu - bez uproszczeń, bo dane strukturalne siedzą w znacznikach, które upraszczanie treści usuwa.' },
       { title: 'Ekstrakcja znaczników', desc: 'Wyciągamy zarówno JSON-LD (w tym postać zbiorczą, jakiej używają popularne wtyczki), jak i mikrodane osadzone w HTML. Przy każdym wykrytym znaczniku widzisz, skąd pochodzi.' },
-      { title: 'Rozpoznanie typu strony', desc: 'Punktowo klasyfikujemy stronę do jednego z 18 profili – od strony głównej i artykułu po ofertę pracy czy stronę kontaktową. Przy zbyt słabych sygnałach zostaje „nieznany”, zamiast zgadywać.' },
+      { title: 'Rozpoznanie typu strony', desc: 'Punktowo klasyfikujemy stronę do jednego z 18 profili - od strony głównej i artykułu po ofertę pracy czy stronę kontaktową. Przy zbyt słabych sygnałach zostaje „nieznany”, zamiast zgadywać.' },
       { title: 'Porównanie z katalogiem', desc: 'Dla rozpoznanego profilu sprawdzamy, których z ponad 30 typów schema brakuje, a które są zbędne.' },
-      { title: 'Odrzucanie fałszywych trafień', desc: 'Rekomendacja przepisu bez listy składników czy oferty pracy bez charakterystycznych zwrotów jest odrzucana – lepiej pominąć niż wstawić w kod błędny znacznik.' },
+      { title: 'Odrzucanie fałszywych trafień', desc: 'Rekomendacja przepisu bez listy składników czy oferty pracy bez charakterystycznych zwrotów jest odrzucana - lepiej pominąć niż wstawić w kod błędny znacznik.' },
     ],
     outputHeading: 'Co dostajesz?',
     output: [
       'Podsumowanie dla całego serwisu: liczba stron, liczba problemów, najczęściej brakujące typy schema i rozkład typów stron.',
       'Tabelę wszystkich adresów z rozpoznanym profilem, wykrytymi i brakującymi znacznikami oraz filtrem, który pokazuje wyłącznie strony z problemami.',
-      'Eksport CSV, a przy niskiej skuteczności pobierania wyraźne ostrzeżenie – żeby nie wyciągać wniosków z połowy danych.',
+      'Eksport CSV, a przy niskiej skuteczności pobierania wyraźne ostrzeżenie - żeby nie wyciągać wniosków z połowy danych.',
     ],
     limitsHeading: 'Ile to kosztuje?',
     limits: [
       '1 kredyt za analizę całej sitemapy.',
-      'Narzędzie nie korzysta z modeli AI ani z zewnętrznych danych SERP – działa na kodzie Twoich stron, dlatego jest najszybsze z całego zestawu.',
+      'Narzędzie nie korzysta z modeli AI ani z zewnętrznych danych SERP - działa na kodzie Twoich stron, dlatego jest najszybsze z całego zestawu.',
       'Zadanie zakończone błędem zwraca kredyt automatycznie.',
     ],
     faq: [
       {
         q: 'Czy narzędzie wdroży znaczniki za mnie?',
-        a: 'Nie, generuje diagnozę: co jest, czego brakuje i przy jakim typie strony. Wdrożenie zostaje po Twojej stronie – w CMS-ie albo we wtyczce SEO.',
+        a: 'Nie, generuje diagnozę: co jest, czego brakuje i przy jakim typie strony. Wdrożenie zostaje po Twojej stronie - w CMS-ie albo we wtyczce SEO.',
       },
       {
         q: 'Mam wtyczkę SEO, która dodaje schema. Analiza to zobaczy?',
@@ -233,11 +233,11 @@ export const TOOLS_PL: Record<string, ToolData> = {
     description:
       'Propozycje linków wewnętrznych z całej sitemapy: konkretny akapit, gotowy anchor, adres docelowy i lista stron osieroconych. 1 kredyt, eksport CSV.',
     lead:
-      'Narzędzie czyta treść wszystkich stron z sitemapy i wskazuje konkretne miejsca, w których warto wstawić link wewnętrzny – razem z gotowym tekstem odnośnika i adresem docelowym. Przy okazji wyłapuje strony, do których nie prowadzi żaden link.',
+      'Narzędzie czyta treść wszystkich stron z sitemapy i wskazuje konkretne miejsca, w których warto wstawić link wewnętrzny - razem z gotowym tekstem odnośnika i adresem docelowym. Przy okazji wyłapuje strony, do których nie prowadzi żaden link.',
     chips: ['1 kredyt za analizę', 'Wejście: sitemapa', 'Wynik: propozycje + CSV'],
     defHeading: 'Jak automatycznie znaleźć linki wewnętrzne do dodania?',
     def: [
-      'Ręcznie robi się to od strony docelowej: masz nowy tekst i szukasz miejsc, z których warto do niego podlinkować. Automat idzie odwrotnie – przegląda każdy akapit każdej strony i sprawdza, czy istnieje adres, do którego ten akapit merytorycznie pasuje.',
+      'Ręcznie robi się to od strony docelowej: masz nowy tekst i szukasz miejsc, z których warto do niego podlinkować. Automat idzie odwrotnie - przegląda każdy akapit każdej strony i sprawdza, czy istnieje adres, do którego ten akapit merytorycznie pasuje.',
       'Dopasowanie jest semantyczne, a nie po dokładnym wystąpieniu frazy, więc łapie też akapity opisujące temat innymi słowami. Efektem jest para: konkretny fragment tekstu i konkretny adres docelowy z gotowym anchorem.',
     ],
     whyHeading: 'Dlaczego linkowanie wewnętrzne jest ważne w AI Search?',
@@ -248,8 +248,8 @@ export const TOOLS_PL: Record<string, ToolData> = {
     ],
     stepsHeading: 'Jak działa analiza?',
     steps: [
-      { title: 'Pobranie treści', desc: 'Z sitemapy pobieramy pełną treść stron – nie same tytuły, bo dopasowanie działa na poziomie akapitu.' },
-      { title: 'Podział na fragmenty', desc: 'Treść dzielimy na akapity odpowiedniej długości, pomijając nagłówki – link w nagłówku to zła praktyka, więc nie proponujemy takich miejsc.' },
+      { title: 'Pobranie treści', desc: 'Z sitemapy pobieramy pełną treść stron - nie same tytuły, bo dopasowanie działa na poziomie akapitu.' },
+      { title: 'Podział na fragmenty', desc: 'Treść dzielimy na akapity odpowiedniej długości, pomijając nagłówki - link w nagłówku to zła praktyka, więc nie proponujemy takich miejsc.' },
       { title: 'Dopasowanie semantyczne', desc: 'Porównujemy każdy fragment z tematyką pozostałych stron i wybieramy te pary, które przekraczają próg podobieństwa.' },
       { title: 'Wybór tekstu odnośnika', desc: 'Z fragmentu wybieramy naturalną frazę na anchor, z uwzględnieniem polskiej odmiany i słów nieznaczących.' },
       { title: 'Wykluczenia', desc: 'Odrzucamy linki prowadzące do tej samej strony, przekroczone limity na stronę i na cel, adresy już podlinkowane oraz anchory już użyte na tej stronie.' },

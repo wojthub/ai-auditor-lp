@@ -40,20 +40,20 @@ const COPY: Record<'pl' | 'en', Copy> = {
     sideTopics: 'podatek od najmu, wynajem mieszkania (14) · koszt budowy domu, poduszka finansowa (10) · nadpłacanie kredytu, harmonogram spłat (7)',
     tabs: ['Content Pruning (20)', 'Kanibalizacja (14)', 'Analiza AI (6)'],
     exportCsv: 'Eksport CSV',
-    pruningNote: 'To kandydaci do pruningu — strony, których treść tematycznie odbiega od głównego tematu serwisu. Rozważ usunięcie, przekierowanie 301 na pasujący artykuł albo przebudowę treści.',
+    pruningNote: 'To kandydaci do pruningu - strony, których treść tematycznie odbiega od głównego tematu serwisu. Rozważ usunięcie, przekierowanie 301 na pasujący artykuł albo przebudowę treści.',
     colUrl: 'URL',
     colTitle: 'Tytuł',
     colDeviation: 'Score odbiegania',
     colSimilarity: 'Score podobieństwa',
     rows: [
       { url: 'example.com/blog/raport-rynku-nieruchomosci', title: 'Raport rynku nieruchomości 2026', score: '0.257' },
-      { url: 'example.com/blog/konferencja-branzowa-2026', title: 'Konferencja branżowa 2026 – relacja', score: '0.240' },
+      { url: 'example.com/blog/konferencja-branzowa-2026', title: 'Konferencja branżowa 2026 - relacja', score: '0.240' },
       { url: 'example.com/blog/koszt-ksiegi-wieczystej', title: 'Ile kosztuje założenie księgi wieczystej', score: '0.234' },
       { url: 'example.com/blog/finansowanie-aut-w-leasingu', title: 'Zmiany w finansowaniu aut w leasingu', score: '0.220' },
       { url: 'example.com/blog/mieszkanie-do-sprzedazy', title: 'Jak przygotować mieszkanie do sprzedaży', score: '0.206' },
     ],
     cannibalHeading: 'Kanibalizacja',
-    cannibalNote: 'Strony w jednej grupie konkurują o tę samą intencję — wysokie podobieństwo oznacza, że wyszukiwarka nie wie, którą pokazać. Wybierz najmocniejszą, scal pozostałe albo zróżnicuj je na osobne podtematy.',
+    cannibalNote: 'Strony w jednej grupie konkurują o tę samą intencję - wysokie podobieństwo oznacza, że wyszukiwarka nie wie, którą pokazać. Wybierz najmocniejszą, scal pozostałe albo zróżnicuj je na osobne podtematy.',
     // 2-4 -> „strony", reszta -> „stron" (5 stron, 22 strony, 25 stron).
     groupLabel: (n, pages) => {
       const rest = pages % 10;

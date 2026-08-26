@@ -147,7 +147,7 @@ export const STRINGS_PL: DimensionStrings = {
   factorsHeading: 'Co podnosi, a co obniża wynik?',
   reportHeading: 'Co zobaczysz w raporcie?',
   recommendationsHeading: 'Przykładowe rekomendacje',
-  recommendationsNote: 'Fragmenty raportu z audytu strony kategorii w sklepie z elektroniką.',
+  recommendationsNote: 'Fragmenty raportu z audytu strony kategorii z myszkami gamingowymi w sklepie z elektroniką.',
   problemLabel: 'Problem',
   faqHeading: 'Najczęstsze pytania',
   relatedHeading: 'Powiązane wymiary',

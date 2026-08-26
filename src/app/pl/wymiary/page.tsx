@@ -7,10 +7,10 @@ import WymiaryContent from './WymiaryContent';
 export const metadata: Metadata = {
   title: '10 wymiarów jakości treści + E-E-A-T',
   description:
-    '10 wymiarów, które CitationOne ocenia w każdym raporcie – co modele AI biorą pod uwagę w treści i co realnie decyduje o cytowaniu przez ChatGPT i AI Overview.',
+    '10 wymiarów, które CitationOne ocenia w każdym raporcie - co modele AI biorą pod uwagę w treści i co realnie decyduje o cytowaniu przez ChatGPT i AI Overview.',
   openGraph: {
     title: '10 wymiarów jakości treści + E-E-A-T | CitationOne',
-    description: 'Poznaj standard oceny CitationOne – 10 wymiarów AI Citability + E-E-A-T przekładające algorytmy LLM na proste wytyczne redakcyjne.',
+    description: 'Poznaj standard oceny CitationOne - 10 wymiarów AI Citability + E-E-A-T przekładające algorytmy LLM na proste wytyczne redakcyjne.',
   },
   alternates: alternatesFor('/pl/wymiary'),
 };

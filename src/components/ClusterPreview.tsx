@@ -40,7 +40,7 @@ const COPY: Record<'pl' | 'en', Copy> = {
       count: 2,
       intent: 'transactional',
       volume: '44,4K',
-      pillar: 'Kalkulator kredytu gotówkowego – oblicz ratę i całkowity koszt kredytu online',
+      pillar: 'Kalkulator kredytu gotówkowego - oblicz ratę i całkowity koszt kredytu online',
     },
     keywords: [
       { phrase: 'kalkulator kredyt gotówkowy', volume: '22,2K' },
