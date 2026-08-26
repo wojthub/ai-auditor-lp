@@ -1,8 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useReportUrl } from '@/lib/useReportUrl';
 
-const REPORT_URL = 'https://app.citationone.com/share/AsJEcYwZUG2pzJfkebIyYSCR?lang=pl';
+/** Wartość domyślna - właściwy adres przychodzi z panelu admina przez useReportUrl. */
+const REPORT_URL_FALLBACK = 'https://app.citationone.com/share/AsJEcYwZUG2pzJfkebIyYSCR?lang=pl';
 
 const items = [
   {
@@ -26,6 +28,7 @@ const items = [
 ];
 
 export default function ReportSection() {
+  const reportUrl = useReportUrl(REPORT_URL_FALLBACK, 'pl');
   return (
     <section style={{ background: '#ffffff', padding: '90px 0', position: 'relative', overflow: 'hidden' }}>
       <div className="report-grid" style={{ maxWidth: 1124, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 1 }}>
@@ -78,7 +81,7 @@ export default function ReportSection() {
           </div>
 
           <motion.a
-            href={REPORT_URL}
+            href={reportUrl}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
@@ -123,7 +126,7 @@ export default function ReportSection() {
             }}
           />
           <motion.a
-            href={REPORT_URL}
+            href={reportUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Otwórz przykładowy raport"

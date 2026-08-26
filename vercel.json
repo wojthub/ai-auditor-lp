@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/en", "destination": "/", "permanent": true },
+    { "source": "/en/how-it-works", "destination": "/how-it-works", "permanent": true },
+    { "source": "/jak-to-dziala", "destination": "/pl/jak-to-dziala", "permanent": true },
+    { "source": "/admin", "destination": "https://app.citationone.com/admin", "permanent": true }
+  ]
+}

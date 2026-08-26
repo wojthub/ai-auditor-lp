@@ -43,8 +43,11 @@ export default function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center nav-desktop">
           <a href="/pl/jak-to-dziala" className="nav-link">Jak działa audytor?</a>
+          {/* Audyt masowy nie ma wlasnej podstrony — kotwica do sekcji na HP (pelna sciezka, bo menu jest tez na podstronach) */}
+          <a href="/pl#masowy-audyt" className="nav-link">Audyt masowy</a>
+          <a href="/pl/cennik" className="nav-link">Cennik</a>
           {/* Narzedzia + rozwijane menu (hover i :focus-within — bez JS, dziala od razu po SSR) */}
           <div className="nav-dd">
             <button type="button" className="nav-link nav-dd-trigger" aria-haspopup="true">
@@ -64,7 +67,6 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <a href="/pl/cennik" className="nav-link">Cennik</a>
           <a href="/pl/api" className="nav-link">API</a>
           <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zrób audyt</a>
           <a href={enHref} className="nav-lang" title="English version">EN</a>
@@ -72,7 +74,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex items-center justify-center"
+          className="md:hidden flex items-center justify-center nav-burger"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
           style={{
@@ -100,7 +102,7 @@ export default function Navbar() {
       {/* Mobile menu panel */}
       {mobileOpen && (
         <div
-          className="md:hidden"
+          className="md:hidden nav-mobile-panel"
           style={{
             borderTop: '1px solid #eceff3',
             background: '#ffffff',
@@ -113,6 +115,20 @@ export default function Navbar() {
             className="nav-mobile-link"
           >
             Jak działa audytor?
+          </a>
+          <a
+            href="/pl#masowy-audyt"
+            onClick={() => setMobileOpen(false)}
+            className="nav-mobile-link"
+          >
+            Audyt masowy
+          </a>
+          <a
+            href="/pl/cennik"
+            onClick={() => setMobileOpen(false)}
+            className="nav-mobile-link"
+          >
+            Cennik
           </a>
           {/* Narzedzia: wiersz rozwijany, zeby menu mobilne nie urraslo o 7 pozycji na starcie */}
           <button
@@ -139,13 +155,6 @@ export default function Navbar() {
               ))}
             </div>
           )}
-          <a
-            href="/pl/cennik"
-            onClick={() => setMobileOpen(false)}
-            className="nav-mobile-link"
-          >
-            Cennik
-          </a>
           <a
             href="/pl/api"
             onClick={() => setMobileOpen(false)}
@@ -331,6 +340,16 @@ export default function Navbar() {
           font-weight: 600;
           text-decoration: none;
           letter-spacing: -0.015em;
+        }
+        @media (min-width: 820px) and (max-width: 1023px) {
+          .nav-link { padding: 6px 7px; font-size: 14px; }
+          .nav-cta { padding: 11px 13px; font-size: 14px; }
+          .nav-lang { margin-left: 6px; }
+        }
+        @media (max-width: 819px) {
+          .nav-desktop { display: none !important; }
+          .nav-burger { display: inline-flex !important; }
+          .nav-mobile-panel { display: block !important; }
         }
       `}</style>
     </nav>

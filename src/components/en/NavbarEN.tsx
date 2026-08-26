@@ -43,8 +43,11 @@ export default function NavbarEN() {
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center nav-desktop">
           <a href="/how-it-works" className="nav-link">How the auditor works</a>
+          {/* Bulk audit has no page of its own — anchor into the homepage section (absolute path: the nav also runs on subpages) */}
+          <a href="/#bulk-audit" className="nav-link">Bulk audit</a>
+          <a href="/pricing" className="nav-link">Pricing</a>
           {/* Tools + dropdown (hover and :focus-within — no JS, works straight after SSR) */}
           <div className="nav-dd">
             <button type="button" className="nav-link nav-dd-trigger" aria-haspopup="true">
@@ -64,7 +67,6 @@ export default function NavbarEN() {
               </div>
             </div>
           </div>
-          <a href="/pricing" className="nav-link">Pricing</a>
           <a href="/api" className="nav-link">API</a>
           <a href={`${APP_URL}/login?lang=en`} className="nav-cta">Run audit</a>
           <a href={plHref} className="nav-lang" title="Wersja polska">PL</a>
@@ -72,7 +74,7 @@ export default function NavbarEN() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex items-center justify-center"
+          className="md:hidden flex items-center justify-center nav-burger"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           style={{
@@ -100,7 +102,7 @@ export default function NavbarEN() {
       {/* Mobile menu panel */}
       {mobileOpen && (
         <div
-          className="md:hidden"
+          className="md:hidden nav-mobile-panel"
           style={{
             borderTop: '1px solid #eceff3',
             background: '#ffffff',
@@ -109,6 +111,12 @@ export default function NavbarEN() {
         >
           <a href="/how-it-works" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             How the auditor works
+          </a>
+          <a href="/#bulk-audit" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+            Bulk audit
+          </a>
+          <a href="/pricing" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+            Pricing
           </a>
           {/* Tools: collapsible row, so the mobile menu does not open 7 items tall */}
           <button
@@ -135,9 +143,6 @@ export default function NavbarEN() {
               ))}
             </div>
           )}
-          <a href="/pricing" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
-            Pricing
-          </a>
           <a href="/api" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             API
           </a>
@@ -315,6 +320,16 @@ export default function NavbarEN() {
           font-weight: 600;
           text-decoration: none;
           letter-spacing: -0.01em;
+        }
+        @media (min-width: 820px) and (max-width: 1023px) {
+          .nav-link { padding: 6px 7px; font-size: 14px; }
+          .nav-cta { padding: 11px 13px; font-size: 14px; }
+          .nav-lang { margin-left: 6px; }
+        }
+        @media (max-width: 819px) {
+          .nav-desktop { display: none !important; }
+          .nav-burger { display: inline-flex !important; }
+          .nav-mobile-panel { display: block !important; }
         }
       `}</style>
     </nav>

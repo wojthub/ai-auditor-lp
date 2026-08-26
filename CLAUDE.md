@@ -191,6 +191,7 @@ bumpie; w pasku bloku kodu jest `api/v1`, czyli prefiks ścieżki, który zmieni
 | `/en` | `/` | EN przeniesione na root |
 | `/en/how-it-works` | `/how-it-works` | EN przeniesione na root |
 | `/jak-to-dziala` | `/pl/jak-to-dziala` | PL przeniesione do /pl |
+| `/admin` | `app.citationone.com/admin` | Statyczny eksport nie ma własnego logowania |
 
 ### SEO metadata
 
@@ -208,7 +209,7 @@ Pliki: PL [page.tsx](src/app/pl/page.tsx), EN [page.tsx](src/app/page.tsx) (komp
 
 **Showcase** ([Showcase.tsx](src/components/Showcase.tsx) / [en/ShowcaseEN.tsx](src/components/en/ShowcaseEN.tsx)) - sam mockup panelu w ramce urządzenia (cienki bezel, metaliczna krawędź, połysk), zanikający ku dołowi przez `maskImage` linear-gradient. Bez copy/CTA. Hover = lekki zoom (`scale: 1.025`). Umieszczony zaraz po Hero - górny kawałek mockupu widoczny above the fold (Showcase `padding: 76px 0 96px`, Hero zredukowany: bez `minHeight`/flex-center, `padding: 40px 24px 28px`). Mockup `animate` z `delay: 1` - wjeżdża od dołu po 1 s. Screeny: `public/dashboard-preview.png` (EN), `public/dashboard-preview-pl.png` (PL) - oba z usuniętym bannerem TESTING PHASE / FAZA TESTÓW.
 
-**ReportSection** ([ReportSection.tsx](src/components/ReportSection.tsx) / [en/ReportSectionEN.tsx](src/components/en/ReportSectionEN.tsx)) - "Dane gotowe do wdrożenia". Układ 2-kolumnowy (stack <900px): lewa = label + h2 + opis + 3 punkty (Raport PDF / Audyt Schema / Historia rewizji) + CTA "Zobacz przykładowy raport"/"View sample report" (otwiera udostępniony raport online w nowej karcie, `target="_blank"`); prawa = podgląd raportu w papierowej ramce (cień, połysk, zanikanie ku dołowi przez `maskImage`, perspektywa, hover-zoom), też klikalny → raport. Linki (stała `REPORT_URL` w każdym komponencie, osobne dla języka): PL `…/share/khZUjVCAgSvScSUGnQ3tgZ58?lang=pl`, EN `…/share/AOlGargxePO9E-hRsQrWxy0V?lang=en`. Podgląd: `public/report-preview.png` (screenshot udostępnionego raportu web - score'y, profil 10 wymiarów, Quick Wins).
+**ReportSection** ([ReportSection.tsx](src/components/ReportSection.tsx) / [en/ReportSectionEN.tsx](src/components/en/ReportSectionEN.tsx)) - "Dane gotowe do wdrożenia". Układ 2-kolumnowy (stack <900px): lewa = label + h2 + opis + 3 punkty (Raport PDF / Audyt Schema / Historia rewizji) + CTA "Zobacz przykładowy raport"/"View sample report" (otwiera udostępniony raport online w nowej karcie, `target="_blank"`); prawa = podgląd raportu w papierowej ramce (cień, połysk, zanikanie ku dołowi przez `maskImage`, perspektywa, hover-zoom), też klikalny → raport. Linki **ustawia admin w aplikacji**, nie kod: `useReportUrl` ([src/lib/useReportUrl.ts](src/lib/useReportUrl.ts)) dociąga je w runtime z `app.citationone.com/api/public/lp-links` (w aplikacji: `/ustawienia` → karta „Strona citationone.com”, klucze `LP_REPORT_URL_PL` / `LP_REPORT_URL_EN`). Stałe `REPORT_URL_FALLBACK` w obu komponentach to wartość domyślna wypalona w HTML — zostaje, gdy aplikacja nie odpowie, pole jest puste albo odpowiedź nie wygląda jak link `…/share/…`. **LP jest statyczne, więc panelu logowania tu nie postawimy** — `citationone.com/admin` to 301 do panelu aplikacji (`public/_redirects`). Podgląd: `public/report-preview.png` (screenshot udostępnionego raportu web - score'y, profil 10 wymiarów, Quick Wins).
 
 **AuthorSection** ([AuthorSection.tsx](src/components/AuthorSection.tsx) / [en/AuthorSectionEN.tsx](src/components/en/AuthorSectionEN.tsx)) - karta autora: zdjęcie z lewej (kolumna 208px, na mobile pełna szerokość na górze) + treść z prawej (label "O autorze"/"About the author", nazwisko **Wojciech Władziński-Ulatowski**, rola "Twórca CitationOne"/"Creator of CitationOne", bio, przycisk LinkedIn w accentcie). Zdjęcie: `public/author.jpg` (B&W, wyszywane logo usunięte z koszuli).
 
@@ -511,19 +512,28 @@ znikają przy skalowaniu zrzutu ekranu i łatwo uznać działający efekt za zep
 ## RWD / Mobile
 
 - **Viewport:** `export const viewport` w [layout.tsx](src/app/layout.tsx) (`width: device-width, initialScale: 1, maximumScale: 5`). PL layout dziedziczy z root.
-- **Breakpointy:** `md:` (768px) Navbar, 900px HowItWorks (3 kroki z connectorami), 768px pozostałe gridy.
-  Navbar przeszedł z `sm:` na `md:` przy dodaniu 5. pozycji („API"): przy 640px logo + 4 linki + CTA + badge
-  języka nie mieściły się w 64px i CTA („Zrób audyt" / „Run audit") łamał się na dwie linie. Dodając kolejną
-  pozycję do menu **zmierz** wysokość `.nav-cta` — zawijanie nie powoduje przewijania strony, więc nie rzuca się w oczy.
-- **Navbar — menu „Narzędzia":** desktop ma rozwijaną listę (`TOOLS_MENU` w `Navbar.tsx` /
+- **Breakpointy:** **820px Navbar**, 900px HowItWorks (3 kroki z connectorami), 768px pozostałe gridy.
+  Historia progu: `sm:` → `md:` przy 5. pozycji („API"), a przy „Audycie masowym" (2026-08-26) klasa
+  Tailwinda przestała wystarczać — pasek zmieściłby się dopiero od 820px, więc **własna reguła**
+  `@media (max-width: 819px)` chowa `.nav-desktop` i wymusza `.nav-burger` / `.nav-mobile-panel`
+  (`md:` = 768px zostaje w klasach jako baza). Między 820 a 1023px `.nav-link` i `.nav-cta` mają
+  zwężone odstępy. **Te reguły muszą stać PO definicji `.nav-cta`** — mają tę samą specyficzność, więc
+  wcześniejsze `padding-left/right` przegrywało ze skrótem `padding` i CTA dalej łamał się na dwie linie.
+  Dodając kolejną pozycję **zmierz** wysokość `.nav-cta` (zawijanie = >46px) — nie powoduje przewijania
+  strony, więc nie rzuca się w oczy. Uwaga przy pomiarze: logo `BrandMorph` animuje szerokość przez ~3 s,
+  więc mierz po ustabilizowaniu, inaczej pasek wychodzi węższy niż jest naprawdę.
+- **Kolejność menu** (2026-08-26, PL i EN): Jak działa audytor? → **Audyt masowy** → Cennik →
+  Inne narzędzia → API. Audyt masowy stoi przed API świadomie: to ta sama obietnica skalowania
+  w mniej technicznej formie, a wcześniej przekaz z reklamy domykało samo API, przez co skalowanie
+  wyglądało na dostępne wyłącznie przez integrację. **Audyt masowy nie ma własnej podstrony** — link
+  to kotwica `/pl#masowy-audyt` (`/#bulk-audit`), zawsze pełną ścieżką, bo nawigacja działa też na podstronach.
+- **Navbar — menu „Inne narzędzia":** desktop ma rozwijaną listę (`TOOLS_MENU` w `Navbar.tsx` /
   `en/NavbarEN.tsx`), otwieraną **czystym CSS-em** (`:hover` + `:focus-within`), więc działa przed
-  hydratacją i dla klawiatury. Na górze listy jest **Audytor treści** → `/pl/jak-to-dziala`
-  (`/how-it-works`), bo audyt strony nie ma własnej podstrony narzędzia; niżej 4 narzędzia
-  i link do huba. **„Kanibalizacja treści" to piąta pozycja prowadząca pod TEN SAM adres co
-  Content Pruning** (jedno zadanie, dwie zakładki wyniku) — dlatego `key` w mapowaniu idzie po
-  `label`, nie po `href`. Na mobile ta sama tablica renderuje się jako rozwijana grupa
-  (stan `toolsOpen`) — inaczej menu otwierałoby się na 10 pozycji.
-  Sam napis „Narzędzia" pozostaje linkiem do huba, nie tylko przełącznikiem.
+  hydratacją i dla klawiatury. W liście są 4 narzędzia; audyt treści ma własne wejście „Jak działa
+  audytor?", a Content Pruning i kanibalizacja to jedna pozycja (jedno zadanie, dwie zakładki wyniku).
+  Trigger to `<button>`, nie link — huba narzędzi nie ma, więc nie ma dokąd prowadzić. `key` w mapowaniu
+  idzie po `label`, nie po `href`. Na mobile ta sama tablica renderuje się jako rozwijana grupa
+  (stan `toolsOpen`) — inaczej menu otwierałoby się na 9 pozycji.
 - **Navbar:** hamburger + panel, auto-close, full-width CTA. `.nav-cta` ma `min-height: 44px` (touch target tablet/mobile).
 - **Hero button:** `min-height: 44`, bez `whiteSpace: nowrap` (uniknięcie overflow <360px). Input+button stack na <580px.
 - **Gridy responsive:** dims 3→2→1, ba 2→1, feat 2→1, howitworks 5→1 (≤900px), problem/forwho 3→1.
