@@ -57,7 +57,7 @@ export default function SolutionEN() {
           className="sol-card-wrapper"
         >
           <div className="sol-card">
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 2 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 12, marginBottom: 2 }}>
               <div className="sol-score-box" style={{ background: 'rgba(202,138,4,0.06)', borderLeft: '3px solid #CA8A04', borderRadius: 8, padding: '12px 14px', position: 'relative', cursor: 'default', overflow: 'hidden' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                   <p className="sol-score-label" style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>CQS</p>
@@ -69,19 +69,6 @@ export default function SolutionEN() {
                 </div>
                 <div className="sol-score-tooltip">
                   <strong>Content Quality Score</strong> - aggregated content quality rating (0-100) calculated from 10 AI Search dimensions.
-                </div>
-              </div>
-              <div className="sol-score-box" style={{ background: 'rgba(220,38,38,0.06)', borderLeft: '3px solid #DC2626', borderRadius: 8, padding: '12px 14px', position: 'relative', cursor: 'default', overflow: 'hidden' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                  <p className="sol-score-label" style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>Citability</p>
-                  <span className="sol-score-badge" style={{ fontSize: 9, fontWeight: 700, color: '#DC2626', background: 'rgba(220,38,38,0.12)', border: '1px solid rgba(220,38,38,0.25)', borderRadius: 4, padding: '2px 7px', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>CRITICAL</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-                  <span className="sol-score-num" style={{ fontSize: 40, fontWeight: 700, color: '#DC2626', lineHeight: 1, letterSpacing: '-0.04em' }}>4.9</span>
-                  <span style={{ fontSize: 14, color: '#a4acb9', fontWeight: 500 }}>/ 10</span>
-                </div>
-                <div className="sol-score-tooltip">
-                  <strong>AI Citability Score</strong> - probability that AI models will cite your content (0-10).
                 </div>
               </div>
             </div>

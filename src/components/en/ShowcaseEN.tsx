@@ -56,7 +56,7 @@ export default function ShowcaseEN() {
                   <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.05)' }}>
                     <img
                       src="/dashboard-preview.png"
-                      alt="CitationOne dashboard - Content Quality Score, AI Citability Score and the 10-dimension profile"
+                      alt="CitationOne dashboard - Content Quality Score and the 10-dimension profile"
                       style={{ display: 'block', width: '100%', height: 'auto' }}
                     />
                     {/* screen gloss */}

@@ -163,7 +163,7 @@ const AIO_SUBQUERIES = [
   { q: 'jak działa AI Overview Google', covered: true },
   { q: 'jakie metryki mierzy audyt AI', covered: false },
   { q: 'różnica SEO vs AI Search', covered: false },
-  { q: 'jak poprawić citability score', covered: true },
+  { q: 'jak poprawić Content Quality Score', covered: true },
 ];
 
 function AIOverviewVisual() {
@@ -273,7 +273,6 @@ function KnowledgeGraphVisual() {
 /* ─── 6. Eksport ──────────────────────────────────── */
 const REPORT_ITEMS = [
   'Content Quality Score (0–100) z rozbiciem na wymiary',
-  'AI Citability Score (0–10)',
   'Wykres radarowy 10 wymiarów',
   'Benchmark top 10 SERP - tabela porównawcza',
   'Rekomendacje Przed i Po z priorytetami',
@@ -332,7 +331,7 @@ export default function Features() {
               Uruchom audyt 10 wymiarów AI
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 640, margin: '0 auto', lineHeight: 1.65 }}>
-              CitationOne ocenia jakość treści pod kątem AI Search, wykonując 10 równoległych analiz: od intencji i gęstości informacji, przez graf wiedzy, BLUF i chunki, aż po koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AIO oraz wysiłek redakcyjny. Dzięki temu wiesz dokładnie, który element wymaga poprawy, by zwiększyć AI Citability Score swojej podstrony.
+              CitationOne ocenia jakość treści pod kątem AI Search, wykonując 10 równoległych analiz: od intencji i gęstości informacji, przez graf wiedzy, BLUF i chunki, aż po koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AIO oraz wysiłek redakcyjny. Dzięki temu wiesz dokładnie, który element wymaga poprawy, by podnieść Content Quality Score swojej podstrony.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>

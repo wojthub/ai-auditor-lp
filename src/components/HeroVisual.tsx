@@ -21,7 +21,7 @@ export default function HeroVisual() {
               boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
             }}
           >
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 2 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 10, marginBottom: 2 }}>
               {/* CQS */}
               <div className="score-box" style={{ background: 'rgba(202,138,4,0.06)', borderLeft: '3px solid #CA8A04', borderRadius: 8, padding: '12px 14px', position: 'relative', cursor: 'default' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
@@ -34,20 +34,6 @@ export default function HeroVisual() {
                 </div>
                 <div className="score-tooltip">
                   <strong>Content Quality Score</strong> - zagregowana ocena jakości treści (0-100) obliczana z 10 wymiarów AI Search. Im wyższy wynik, tym większa szansa na cytowanie przez modele językowe.
-                </div>
-              </div>
-              {/* Citability */}
-              <div className="score-box" style={{ background: 'rgba(220,38,38,0.06)', borderLeft: '3px solid #DC2626', borderRadius: 8, padding: '12px 14px', position: 'relative', cursor: 'default' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                  <p style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>Citability</p>
-                  <span style={{ fontSize: 9, fontWeight: 700, color: '#DC2626', background: 'rgba(220,38,38,0.12)', border: '1px solid rgba(220,38,38,0.25)', borderRadius: 4, padding: '2px 7px', letterSpacing: '0.06em' }}>KRYTYCZNY</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-                  <span style={{ fontSize: 36, fontWeight: 700, color: '#DC2626', lineHeight: 1, letterSpacing: '-0.04em' }}>4.9</span>
-                  <span style={{ fontSize: 14, color: '#a4acb9', fontWeight: 500 }}>/ 10</span>
-                </div>
-                <div className="score-tooltip">
-                  <strong>AI Citability Score</strong> - prawdopodobieństwo, że ChatGPT, Perplexity lub Google AI Overview zacytuje Twoją treść (0-10). Uwzględnia strukturę BLUF, gęstość informacji i pokrycie sub-zapytań.
                 </div>
               </div>
             </div>

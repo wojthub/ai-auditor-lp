@@ -118,7 +118,6 @@ function BeforeAfterVisual() {
 
 const REPORT_ITEMS = [
   'Content Quality Score (0-100) with dimension breakdown',
-  'AI Citability Score (0-10)',
   'Radar chart of 10 dimensions',
   'Top 10 SERP benchmark - comparison table',
   'Before/After recommendations with priorities',

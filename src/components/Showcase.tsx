@@ -56,7 +56,7 @@ export default function Showcase() {
                   <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.05)' }}>
                     <img
                       src="/dashboard-preview-pl.png"
-                      alt="Panel CitationOne - Content Quality Score, AI Citability Score i profil 10 wymiarów"
+                      alt="Panel CitationOne - Content Quality Score i profil 10 wymiarów"
                       style={{ display: 'block', width: '100%', height: 'auto' }}
                     />
                     {/* połysk ekranu */}

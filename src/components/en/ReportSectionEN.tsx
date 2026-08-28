@@ -160,7 +160,7 @@ export default function ReportSectionEN() {
                 <div style={{ position: 'relative', borderRadius: 8, overflow: 'hidden', boxShadow: 'inset 0 0 0 1px rgba(13,13,18,0.04)' }}>
                   <img
                     src="/report-preview-en.png"
-                    alt="Sample CitationOne report - Content Quality Score, AI Citability Score, 10-dimension profile and Quick Wins"
+                    alt="Sample CitationOne report - Content Quality Score, 10-dimension profile and Quick Wins"
                     style={{ display: 'block', width: '100%', height: 'auto' }}
                   />
                   {/* gloss */}

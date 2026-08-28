@@ -33,21 +33,20 @@ function SectionLabel({ children }: { children: string }) {
 // score coloring, so the user recognizes the screen they get after purchase.
 // Neutral domains: we never show real clients or real competitors.
 const SERP_HEAD = { phrase: 'best wireless earbuds' };
-const SERP_LABELS = ['POS.', 'URL', 'WORDS', 'CQS', 'CIT.'];
+const SERP_LABELS = ['POS.', 'URL', 'WORDS', 'CQS'];
 const SERP_STATS = [
   { value: '47', label: 'Avg. SERP CQS' },
-  { value: '4.7', label: 'Avg. Citability' },
   { value: '2091', label: 'Avg. words' },
 ];
 const SERP_ROWS = [
-  { pos: '1', url: 'competitor-a.com/best-earbuds', words: '2708', cqs: 73, cit: 7.1 },
-  { pos: '2', url: 'competitor-b.com/wireless-earbuds', words: '3792', cqs: 69, cit: 6.7 },
-  { pos: '4', url: 'competitor-c.com/category/audio', words: '283', cqs: 19, cit: 2.2 },
-  { pos: '6', url: 'competitor-d.com/guides/earbuds', words: '3029', cqs: 70, cit: 6.8 },
-  { pos: '★', url: 'yoursite.com/blog/best-earbuds-2026', words: '5634', cqs: 70, cit: 6.8, mine: true },
+  { pos: '1', url: 'competitor-a.com/best-earbuds', words: '2708', cqs: 73 },
+  { pos: '2', url: 'competitor-b.com/wireless-earbuds', words: '3792', cqs: 69 },
+  { pos: '4', url: 'competitor-c.com/category/audio', words: '283', cqs: 19 },
+  { pos: '6', url: 'competitor-d.com/guides/earbuds', words: '3029', cqs: 70 },
+  { pos: '★', url: 'yoursite.com/blog/best-earbuds-2026', words: '5634', cqs: 70, mine: true },
 ];
 function BenchmarkVisual() {
-  // Progi kolorow 1:1 z raportem: ponizej 60 CQS / 6.0 CIT czerwony, wyzej bursztyn.
+  // Prog koloru 1:1 z raportem: ponizej 60 CQS czerwony, wyzej bursztyn.
   const pill = (ok: boolean) => ({
     fontSize: 11.5, fontWeight: 700, borderRadius: 5, padding: '2px 8px', justifySelf: 'end',
     color: ok ? '#CA8A04' : '#DC2626',
@@ -69,7 +68,7 @@ function BenchmarkVisual() {
         ))}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '26px 1fr 46px 40px 36px', gap: 8, paddingBottom: 8, borderBottom: '1px solid #eceff3' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '26px 1fr 46px 40px', gap: 8, paddingBottom: 8, borderBottom: '1px solid #eceff3' }}>
         {SERP_LABELS.map((h, i) => (
           <span key={h} style={{ fontSize: 10, fontWeight: 600, color: '#a4acb9', letterSpacing: '0.06em', textAlign: i > 1 ? 'right' : 'left' }}>{h}</span>
         ))}
@@ -83,7 +82,7 @@ function BenchmarkVisual() {
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: i * 0.07, ease: 'easeOut' }}
           style={{
-            display: 'grid', gridTemplateColumns: '26px 1fr 46px 40px 36px', gap: 8,
+            display: 'grid', gridTemplateColumns: '26px 1fr 46px 40px', gap: 8,
             alignItems: 'center', padding: '9px 0',
             borderBottom: i === SERP_ROWS.length - 1 ? 'none' : '1px solid #f4f6f8',
             background: row.mine ? 'rgba(11,121,131,0.05)' : 'transparent',
@@ -97,7 +96,6 @@ function BenchmarkVisual() {
           }}>{row.url}</span>
           <span style={{ fontSize: 11.5, color: '#818898', textAlign: 'right' }}>{row.words}</span>
           <span style={pill(row.cqs >= 60)}>{row.cqs}</span>
-          <span style={pill(row.cit >= 6)}>{row.cit}</span>
         </motion.div>
       ))}
     </div>
@@ -142,7 +140,7 @@ const AIO_ITEMS = [
   { q: 'how does Google AI Overview work', covered: true },
   { q: 'what metrics does an AI audit measure', covered: false },
   { q: 'SEO vs AI Search difference', covered: false },
-  { q: 'how to improve citability score', covered: true },
+  { q: 'how to improve your Content Quality Score', covered: true },
 ];
 function AIOverviewVisual() {
   return (
@@ -237,7 +235,6 @@ function KnowledgeGraphVisual() {
 /* ── Visual: Export ───────────────────────────────────────────────────── */
 const REPORT_ITEMS = [
   'Content Quality Score (0–100) with dimension breakdown',
-  'AI Citability Score (0–10)',
   'Radar chart of 10 dimensions',
   'Competitor analysis - Top 10 SERP comparison table',
   'Before/After recommendations with priorities',

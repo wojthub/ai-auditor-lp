@@ -219,7 +219,7 @@ Pliki: PL [page.tsx](src/app/pl/page.tsx), EN [page.tsx](src/app/page.tsx) (komp
 ### Kolejność sekcji /how-it-works i /pl/jak-to-dziala
 
 ```
-Navbar → 3 kroki → CQS/Citability → 10 wymiarów → Benchmark → Before/After → AI Overview → Graf wiedzy → Eksport → Quick Wins → Schema.org Audit → Information Gain → CTA → Footer
+Navbar → 3 kroki → CQS → 10 wymiarów → Benchmark → Before/After → AI Overview → Graf wiedzy → Eksport → Quick Wins → Schema.org Audit → Information Gain → CTA → Footer
 ```
 
 Schema.org Audit i Information Gain tylko na podstronach (nie na HP).
