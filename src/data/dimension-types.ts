@@ -182,7 +182,7 @@ export const STRINGS_EN: DimensionStrings = {
   factorsHeading: 'What raises and what lowers the score?',
   reportHeading: 'What will you see in the report?',
   recommendationsHeading: 'Sample recommendations',
-  recommendationsNote: 'Fragments of a report from an audit of an electronics store category page.',
+  recommendationsNote: 'Fragments of a report from an audit of a gaming mice category page in an electronics store.',
   problemLabel: 'Problem',
   faqHeading: 'Frequently asked questions',
   relatedHeading: 'Related dimensions',

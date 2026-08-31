@@ -32,7 +32,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
     ],
     stepsHeading: 'How does clustering work?',
     steps: [
-      { title: 'Fetching search results', desc: 'For every phrase on the list we pull the search results - those are the input data, not the phrases themselves.' },
+      { title: 'Fetching search results', desc: 'For every phrase on the list we pull the search results - those are the input data for the analysis.' },
       { title: 'Phrase × URL matrix', desc: 'We build a matrix of URL presence in the results and compute the similarity of every phrase pair.' },
       { title: 'Grouping into clusters', desc: 'Phrases linked by similarity above the threshold land in shared groups.' },
       { title: 'Describing the cluster', desc: 'The model labels the cluster, identifies its intent and proposes a pillar page topic.' },
@@ -42,7 +42,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
       caption: 'What you set before the run',
       head: ['Parameter', 'Range and default'],
       rows: [
-        ['Similarity threshold', '0.5-1.0 (default 0.95) - the higher, the tighter the clusters'],
+        ['Similarity threshold', '0.5-1.0 (default 0.95) - the higher, the narrower the clusters'],
         ['Minimum cluster size', '1-20 (default 1) - groups smaller than this never become a cluster, and their phrases go to the “Unclustered” group'],
         ['SERP results considered', '1-10 (default 5) - how many positions we compare'],
       ],
@@ -72,7 +72,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
       },
       {
         q: 'What happens to phrases that joined no cluster?',
-        a: 'They go into a separate bucket and stay in the result. We distinguish three cases: the phrase had results but did not join others; the phrase has no results at all; fetching its results failed and is worth retrying.',
+        a: 'They go into a separate “Unclustered” bucket and stay in the result. We distinguish three cases: the phrase had results but did not join others; the phrase has no results at all; fetching its results failed and is worth retrying.',
       },
     ],
     related: [
@@ -97,7 +97,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
     defHeading: 'What are content pruning and keyword cannibalization?',
     def: [
       'Pruning answers two questions about an existing site: which pages drift far enough from the main topic to blur its profile, and which are so similar to each other that they compete for the same query.',
-      'Cannibalization is that second case: two of your own URLs aiming at the same intent. Pruning responds to both - it is not about deleting everything old, but about deciding which page should carry the topic.',
+      'Cannibalization is that second case: two of your own URLs aiming at the same intent. Pruning responds to both situations: it settles which page should carry the topic, and which ones are worth removing, redirecting or merging.',
     ],
     whyHeading: 'Why tidy up your content?',
     why: [
@@ -237,7 +237,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
     defHeading: 'How do you find internal links to add automatically?',
     def: [
       'By hand you work from the target: you have a new article and you hunt for places worth linking from. An automated pass runs the other way - it reviews every paragraph of every page and checks whether a URL exists that the paragraph substantively points to.',
-      'Matching is semantic rather than exact-phrase, so it also catches paragraphs describing the topic in different words. The output is not a list of pages “worth linking” but a pair: a specific fragment of text and a specific target URL with a ready anchor.',
+      'Matching is semantic rather than exact-phrase, so it also catches paragraphs describing the topic in different words. The output is a pair: a specific fragment of text and a specific target URL with a ready anchor.',
     ],
     whyHeading: 'Why does internal linking matter in AI Search?',
     why: [

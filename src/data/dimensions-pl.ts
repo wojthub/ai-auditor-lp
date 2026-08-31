@@ -217,7 +217,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
         a: 'Nie, priorytet mają te potwierdzone przez wyszukiwarkę. Pytanie, które Google sam pokazuje w „Podobnych pytaniach”, jest pewną luką; pytanie przewidziane przez model to hipoteza i waży mniej.',
       },
       {
-        q: 'Czy sekcja FAQ załatwia sprawę?',
+        q: 'Czy sekcja FAQ wystarczy?',
         a: 'Częściowo. FAQ dobrze domyka pytania krótkie i faktograficzne, ale wątek wymagający rozwinięcia lepiej działa jako pełna sekcja H2 z odpowiedzią, danymi i kontekstem.',
       },
     ],
@@ -227,19 +227,19 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Jak silniki AI rozbijają jedno pytanie na kilkanaście podzapytań i jak CitationOne mierzy, ile z nich pokrywa Twoja treść - z danymi z AI Overview i pytań z SERP.',
     lead:
-      'Jedno zapytanie użytkownika rozkłada się na kilkanaście pytań pobocznych, które AI rozwiązuje w tle. Ten wymiar sprawdza, na ile z nich odpowiada Twoja treść, bo to na pytaniach pobocznych zdobywa się cytowanie.',
+      'Jedno zapytanie użytkownika rozkłada się na kilkanaście pytań pobocznych, które AI rozwiązuje w tle. Pokrycie Fan-Out i AIO analizuje, na ile z tych pytań odpowiada Twoja treść, ponieważ to właśnie na pytaniach pobocznych zdobywa się cytowanie.',
     chips: ['Skala 0–10', 'Dwa przebiegi modelu + dane z SERP', 'Wejście: CSI + pytania z SERP + AI Overview'],
     whyHeading: 'Dlaczego pokrycie Fan-Out jest ważne dla modeli AI?',
     howHeading: 'Jak liczymy pokrycie Fan-Out i AIO?',
     why: [
-      'Użytkownik pyta „jak wybrać pompę ciepła”, a model nie szuka tej frazy. Rozkłada ją na pytania składowe: jaka moc do jakiego metrażu, ile kosztuje montaż, jaka jest sprawność przy mrozie, czy potrzebne jest pozwolenie. Każde z nich pobiera osobno i dopiero z odpowiedzi składa jedną wypowiedź.',
+      'Użytkownik pyta „jak wybrać pompę ciepła”, a model nie szuka tej frazy. Rozkłada ją na pytania składowe: jaka moc do jakiego metrażu, ile kosztuje montaż, jaka jest sprawność przy mrozie, czy potrzebne jest pozwolenie. Każde z nich pobiera osobno i wszystkie te odpowiedzi składa w jedną wypowiedź.',
       'Stąd bierze się różnica między SEO a GEO. W klasycznym wyszukiwaniu wystarczyło wygrać jedno zapytanie, żeby zdobyć kliknięcie. W AI Search wygrywasz tyle razy, na ile pytań pobocznych masz gotową odpowiedź - strona, która wyczerpuje temat tylko w głównym wątku, zostanie zacytowana raz albo wcale, mimo świetnej pozycji w SERP.',
-      'To działa też w drugą stronę: pytania poboczne są tańsze do zdobycia niż główna fraza. Konkurencja walczy o nagłówek, a luka najczęściej siedzi w pytaniu, którego nikt nie opisał.',
+      'To działa też w drugą stronę: pytania poboczne są tańsze do zdobycia niż główna fraza. Konkurencja walczy o nagłówek, a luka najczęściej jest w pytaniu, którego nikt nie opisał.',
     ],
     how: {
       intro: [
-        'Na podstawie intencji strony model rozkłada zapytanie na kilkanaście podzapytań, a robi to w dwóch niezależnych przebiegach o różnej „śmiałości” i scala wyniki - jeden przebieg zbyt mocno zależy od losowości modelu. Do tego dokładamy prawdziwe pytania z SERP: sekcję „Podobne pytania” i powiązane wyszukiwania. Na koniec sprawdzamy, na które z tych pytań Twoja treść faktycznie odpowiada.',
-        'Zestaw jest oczyszczany z homonimów - jeśli fraza ma drugie znaczenie (klasyczny przypadek: „schody” jako konstrukcja i jako tytuł serialu), pytania z tej drugiej dziedziny są odrzucane, zamiast produkować rekomendacje o niczym.',
+        'Na podstawie intencji strony model rozkłada zapytanie na kilkanaście podzapytań. Robi to w dwóch niezależnych przebiegach o różnym stopniu swobody, a wyniki scalamy, ponieważ pojedynczy przebieg jest zbyt wrażliwy na losowość modelu. Do zestawu dokładamy rzeczywiste pytania z SERP: sekcję „Podobne pytania” i powiązane wyszukiwania. Na koniec weryfikujemy, na które z nich Twoja treść faktycznie odpowiada.',
+        'Zestaw jest oczyszczany z homonimów. Jeśli fraza ma drugie znaczenie (typowy przypadek: „schody” jako element budynku i jako tytuł serialu), pytania z tej drugiej dziedziny są odrzucane, żeby rekomendacje dotyczyły wyłącznie Twojego tematu.',
         'Ocena idzie w górę za komplet odpowiedzi na pytania weryfikacyjne, a w dół za każde niepokryte pytanie, którego istnienie potwierdza SERP.',
       ],
       tables: [
@@ -256,7 +256,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
           caption: 'Nie każde pytanie waży tyle samo - liczy się to, czy dane wyszukiwarki potwierdzają jego istnienie',
           head: ['Status pytania', 'Co oznacza'],
           rows: [
-            ['Potwierdzone przez SERP', 'Google sam pokazuje je w „Podobnych pytaniach”, więc wiadomo, że ktoś je faktycznie zadaje'],
+            ['Potwierdzone przez SERP', 'Google umieszcza je w sekcji „Podobne pytania”, co potwierdza, że użytkownicy je zadają'],
             ['Obecne w AI Overview', 'Wątek pojawia się w syntezie AI dla tej frazy'],
             ['Przewidziane przez model', 'Wynika z intencji, ale nie ma potwierdzenia w danych SERP'],
             ['Potwierdzona luka', 'Pytanie jest w SERP, a Twoja treść go nie porusza - to obniża ocenę wymiaru'],
@@ -266,10 +266,10 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     },
     raises: [
       'Sekcje H2 odpowiadające na konkretne pytania poboczne, nie na warianty głównej frazy',
-      'Pokryte pytania z sekcji „Podobne pytania” w SERP',
+      'Odpowiedzi na pytania z sekcji „Podobne pytania” w SERP',
       'Odpowiedzi na pytania weryfikacyjne - liczby, daty, warunki, które model musi potwierdzić',
       'FAQ zbudowane z realnych pytań, a nie z fraz pod wyszukiwarkę',
-      'Wyczerpanie wątków pobocznych, których konkurencja nie tknęła',
+      'Wyczerpanie wątków pobocznych pominiętych przez konkurencję',
     ],
     lowers: [
       'Cała treść krąży wokół głównego zapytania',
@@ -279,19 +279,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     ],
     report: [
       'Dostajesz listę pytań pobocznych z oznaczeniem, które z nich Twoja treść pokrywa, a które nie - wraz z informacją, skąd pytanie pochodzi: czy jest potwierdzone przez SERP, czy przewidziane przez model.',
-      'Niepokryte pytania potwierdzone przez wyszukiwarkę trafiają na górę listy rekomendacji, bo to najtańsze do zamknięcia luki: wiadomo, że ktoś je zadaje, i wiadomo, że u Ciebie odpowiedzi nie ma.',
-      'Do tego pokrycie AI Overview dla Twojej frazy - czy synteza Google w ogóle się pojawia i jakie wątki porusza.',
+      'Niepokryte pytania potwierdzone przez wyszukiwarkę trafiają na górę listy rekomendacji, ponieważ zamknięcie takiej luki kosztuje najmniej: jej istnienie potwierdzają dane SERP, a brak odpowiedzi w treści jest jednoznaczny.',
     ],
     recommendations: [
       {
-        problem: 'Pytanie „Jakie są najlepsze myszki gamingowe?” Google pokazuje w Podobnych pytaniach, a treść nie odpowiada na nie w żadnej sekcji.',
+        problem: 'Google pokazuje pytanie „Jakie są najlepsze myszki gamingowe?” w sekcji Podobne pytania, a żadna sekcja treści na nie nie odpowiada.',
         before: 'Brak zestawienia albo rankingu polecanych modeli w całej treści.',
         after: 'Dodaj sekcję H2 „Ranking myszek gamingowych - polecane modele” z pięcioma pozycjami i uzasadnieniem wyboru.',
       },
       {
-        problem: 'Wątek doboru sprzętu do budżetu jest potwierdzony w SERP, a strona nie porusza go ani zdaniem.',
+        problem: 'Wątek doboru sprzętu do budżetu jest potwierdzony w SERP, a strona go nie porusza.',
         before: 'Brak sekcji o segmentacji cenowej: modele budżetowe kontra turniejowe.',
-        after: 'Opisz, na jakie parametry patrzeć w przedziałach do 150 zł, 150–350 zł i powyżej 350 zł.',
+        after: 'Opisz, na jakie parametry zwracać uwagę w przedziałach do 150 zł, 150–350 zł i powyżej 350 zł.',
       },
     ],
     related: [
@@ -586,32 +585,31 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       },
       {
         q: 'Ile terminów trzeba dodać?',
-        a: 'Tyle, ile realnych luk pokazuje raport, zaczynając od góry listy. Terminy są uszeregowane według tego, ilu konkurentów ich używa i jak mocno wiążą się z tematem, więc pierwsze pozycje dają najwięcej.',
+        a: 'Tyle, ile realnych luk wskazuje raport, zaczynając od góry listy. Terminy są uszeregowane według liczby konkurentów, którzy ich używają, oraz siły powiązania z tematem strony, więc pierwsze pozycje dają największy przyrost wyniku.',
       },
       {
         q: 'Skąd bierze się lista brakujących terminów?',
-        a: 'Z treści konkurencji z Top 10 dla Twojej frazy. Domena, która zajmuje w wynikach kilka pozycji, waży mniej, żeby jeden serwis nie narzucał całego słownika.',
+        a: 'Z treści konkurencji z Top 10 dla Twojej frazy.',
       },
     ],
     name: 'TF-IDF',
     heading: 'Czym jest TF-IDF w audycie treści?',
     title: 'Czym jest TF-IDF w audycie treści?',
     description:
-      'Porównanie terminologii Twojej strony z korpusem Top 10 SERP. Jak CitationOne znajduje brakujące terminy specjalistyczne i podpowiada kontekst, w jakim ich użyć.',
+      'Porównanie terminologii Twojej strony ze słownictwem Top 10 SERP. Jak CitationOne znajduje brakujące terminy specjalistyczne i podpowiada kontekst, w jakim ich użyć.',
     lead:
-      'Porównanie terminologii Twojej strony ze słownictwem konkurencji z Top 10. Brakujący termin specjalistyczny to zwykle brakujący wątek - CitationOne wskazuje dokładnie, których pojęć nie używasz i w jakim kontekście robi to konkurencja.',
-    chips: ['Skala 0–10', 'Analiza statystyczna + model językowy', 'Wejście: treść + korpus Top 10 SERP'],
+      'TF-IDF porównuje terminologię Twojej strony ze słownictwem konkurencji z Top 10. Brakujący termin specjalistyczny oznacza zwykle brakujący wątek, dlatego CitationOne wskazuje, których pojęć nie używasz i w jakim kontekście stosuje je konkurencja.',
+    chips: ['Skala 0–10', 'Analiza statystyczna + model językowy', 'Wejście: treść + słownictwo Top 10 SERP'],
     whyHeading: 'Dlaczego TF-IDF jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy TF-IDF?',
     why: [
-      'Terminologia jest najtańszym dowodem kompetencji. Tekst o kredycie hipotecznym, w którym nie pada „wskaźnik LTV”, „zdolność kredytowa” ani „marża banku”, opisuje temat z zewnątrz - i tak właśnie wygląda dla modelu porównującego go z dziesięcioma stronami, które tych pojęć używają.',
+      'Terminologia jest najtańszym do zweryfikowania sygnałem kompetencji. Tekst o kredycie hipotecznym, w którym nie pada „wskaźnik LTV”, „zdolność kredytowa” ani „marża banku”, pokrywa temat powierzchownie, a model porównuje go z dziesięcioma stronami, które tych pojęć używają.',
       'W GEO ma to dodatkowe znaczenie, bo brakujący termin to zwykle brakujący wątek. Jeśli dziewięciu konkurentów pisze o czymś, czego u Ciebie nie ma, masz lukę merytoryczną, którą model zobaczy przy składaniu odpowiedzi.',
     ],
     how: {
       intro: [
-        'Z treści konkurencji budujemy korpus i wyznaczamy terminy o wysokiej wartości informacyjnej: specjalistyczne, branżowe, często wielowyrazowe. Słowa funkcyjne i ogólne rzeczowniki są odrzucane. Ocena to stosunek terminów obecnych u Ciebie do oczekiwanych, przeskalowany do dziesięciostopniowej oceny.',
+        'Z treści konkurencji budujemy zbiór odniesienia i wyznaczamy terminy o wysokiej wartości informacyjnej: specjalistyczne, branżowe, często wielowyrazowe. Słowa funkcyjne i ogólne rzeczowniki są odrzucane. Ocena to stosunek terminów obecnych u Ciebie do oczekiwanych, przeskalowany do dziesięciostopniowej oceny.',
         'Wzór: terminy specjalistyczne obecne w treści podzielone przez terminy oczekiwane, razy 10.',
-        'Brakujące terminy nie są szeregowane po samej częstotliwości. Liczy się też to, jak silnie termin wiąże się z głównym tematem strony - dzięki temu na górze listy nie ląduje słowo popularne u konkurencji, ale tematycznie odległe od Twojego. Dodatkowo domena, która w Top 10 zajmuje kilka pozycji, waży mniej, żeby jeden serwis nie narzucał całego słownika.',
       ],
       tables: [
         {
@@ -639,7 +637,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     ],
     report: [
       'Dostajesz listę brakujących terminów uszeregowaną według tego, ilu konkurentów ich używa i jak mocno wiążą się z tematem strony.',
-      'Przy terminach, które u konkurencji występują w stałym towarzystwie innego pojęcia, podpowiadamy ten kontekst - rekomendacja brzmi wtedy „dodaj termin X w kontekście Y, tak łączy je 6 z 10 konkurentów”, a nie samo „dodaj X”.',
+      'Przy terminach, które u konkurencji występują w stałym towarzystwie innego pojęcia, podpowiadamy ten kontekst - rekomendacja brzmi wtedy „dodaj termin X w kontekście Y, tak łączy je 6 z 10 konkurentów”.',
     ],
     recommendations: [
       {
@@ -682,18 +680,16 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Czy główny temat strony jest wykonawcą czynności, czy tylko jej przedmiotem. Jak CitationOne mierzy role semantyczne i dlaczego strona bierna szkodzi w AI Search.',
     lead:
-      'Czy główny temat strony jest w zdaniach wykonawcą czynności, czy tylko jej przedmiotem. Strona czynna daje modelowi komplet „kto - co robi - z czym”; strona bierna zostawia w tej strukturze dziurę.',
+      'Role semantyczne sprawdzają, czy główny temat strony występuje w zdaniach jako wykonawca czynności, czy tylko jako jej przedmiot. Strona czynna daje modelowi komplet informacji „kto - co robi - z czym”; strona bierna zostawia w tej strukturze lukę.',
     chips: ['Skala 0–10', 'Ocena modelem językowym', 'Wejście: treść + główna encja z CSI'],
     whyHeading: 'Dlaczego role semantyczne są ważne dla modeli AI?',
     howHeading: 'Jak liczymy role semantyczne?',
     why: [
-      'Model wyciąga z tekstu fakty w postaci „kto - co robi - z czym”. Zdanie w stronie biernej z pominiętym wykonawcą zostawia w tej strukturze dziurę, którą model musi zgadywać albo pominąć. Zdanie w stronie czynnej daje komplet i nadaje się do zacytowania bez przeróbek.',
-      'Drugi efekt dotyczy widoczności. Jeśli główny temat strony konsekwentnie występuje jako wykonawca, model wiąże z nim atrybuty i działania - strona zaczyna być „o czymś” w sensie encji, a nie tylko zawierać słowa na ten temat. Rozmyta perspektywa daje rozmyte powiązania.',
+      'Model wyciąga z tekstu fakty w postaci „kto - co robi - z czym”. Zdanie w stronie biernej z pominiętym wykonawcą zostawia w tej strukturze lukę, którą model musi uzupełnić domysłem albo pominąć cały fakt. Zdanie w stronie czynnej dostarcza komplet informacji i nadaje się do zacytowania bez modyfikacji.',
     ],
     how: {
       intro: [
-        'Sprawdzamy, w jakiej roli występuje główna encja strony w kolejnych zdaniach: jako wykonawca czynności, jako jej przedmiot, czy jest nieobecna. Rola wykonawcy liczy się w pełni, rola przedmiotu połowicznie, nieobecność wcale. Ocena to suma zebranych punktów podzielona przez maksymalną możliwą, przeskalowana do dziesięciostopniowej oceny.',
-        'Punkt odniesienia: dobrze napisana strona ma główny temat w roli wykonawcy w ponad 70% zdań, w których w ogóle występuje.',
+        'Punktem odniesienia jest udział zdań, w których główny temat pełni rolę wykonawcy. Dobrze napisana strona osiąga tu ponad 70% spośród zdań, w których temat w ogóle występuje. Poniżej tego progu treść opisuje temat z zewnątrz, zamiast przypisywać mu działania, a model traci powiązania między encją a faktami.',
       ],
       tables: [
         {
@@ -729,7 +725,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       ],
     },
     report: [
-      'Dostajesz udział zdań, w których główny temat jest wykonawcą, oraz listę zdań do przepisania - z gotową propozycją w stronie czynnej.',
+      'Dostajesz udział zdań, w których główny temat jest wykonawcą, oraz listę zdań wymagających przeredagowania - z gotową propozycją w stronie czynnej.',
       'To zwykle najszybszy do wdrożenia wymiar: poprawki są mechaniczne i nie wymagają dopisywania nowej treści.',
     ],
     recommendations: [
@@ -739,7 +735,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
         after: 'Myszki gamingowe przewodowe i bezprzewodowe obsługują wszystkie gatunki gier - od FPS, przez strategie, po MMO.',
       },
       {
-        problem: 'Zdanie mówi, co „możesz zrobić”, zamiast tego, co robi produkt - sprawca akcji znika z faktu.',
+        problem: 'Zdanie mówi, co „możesz zrobić”, zamiast tego, co robi produkt.',
         before: 'Dzięki zróżnicowanym sensorom możesz dopasować mysz do swoich potrzeb.',
         after: 'Sensory o rozdzielczości do 26 000 DPI dopasowują czułość myszy do stylu gry.',
       },
@@ -756,15 +752,15 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     faq: [
       {
         q: 'Czy dłuższy tekst zawsze podnosi wynik?',
-        a: 'Nie, progiem jest średnia z Top 10 dla Twojej frazy, a nie sztywna liczba słów. Na frazach, gdzie konkurencja pisze zwięźle, rozdmuchany tekst nic nie daje - a traci na innych wymiarach.',
+        a: 'Nie, progiem jest średnia z Top 10 dla Twojej frazy, a nie konkretna liczba słów. Na frazach, przy których konkurencja pisze zwięźle, rozbudowywanie tekstu nie podnosi wyniku, a obniża go na pozostałych wymiarach.',
       },
       {
         q: 'Dlaczego audyt nie widzi moich obrazów i wideo?',
-        a: 'Bo te sygnały odczytujemy z kodu strony. Przy audycie treści wklejonej z edytora zamiast z adresu URL nie ma skąd wziąć informacji o obrazach, wideo ani dacie publikacji.',
+        a: 'Bo te sygnały odczytujemy z kodu strony. Audyt treści wklejonej z edytora zamiast z adresu URL nie ma dostępu do informacji o obrazach, wideo ani dacie publikacji.',
       },
       {
         q: 'Czy brak spisu treści zawsze obniża wynik?',
-        a: 'Nie. Sprawdzamy go tylko przy artykułach i hasłach encyklopedycznych. Na listingu, karcie produktu czy landingu ten punkt jest pomijany i nie zmniejsza puli, z której liczy się ocena.',
+        a: 'Nie. Sprawdzamy go tylko przy artykułach i hasłach encyklopedycznych. Na listingu, karcie produktu czy landingu ten punkt jest pomijany.',
       },
     ],
     name: 'Effort Score',
@@ -773,18 +769,17 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Algorytmiczna checklista kompletności strony: długość względem konkurencji, obrazy, wideo, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji.',
     lead:
-      'Algorytmiczna checklista kompletności: długość względem konkurencji, materiały wizualne, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji. Każdy niespełniony punkt to poprawka na kwadrans.',
+      'Effort Score to algorytmiczna checklista kompletności strony: długość względem konkurencji, materiały wizualne, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji.',
     chips: ['Skala 0–10', 'W 100% algorytmiczny - zero wywołań modelu', 'Wejście: treść + struktura HTML + średnia Top 10'],
     whyHeading: 'Dlaczego Effort Score jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy Effort Score?',
     why: [
-      'Sygnały kompletności są dla wyszukiwarek najstarszym przybliżeniem jakości: strona z tabelą, materiałem wizualnym i aktualną datą częściej pochodzi od kogoś, kto temat faktycznie przerobił, niż strona złożona z pięciu akapitów. Wyszukiwarki traktują to jako mocną poszlakę jakości.',
-      'Praktyczna wartość tego wymiaru jest inna niż pozostałych: to lista rzeczy, które da się naprawić dziś, bez przepisywania treści. Brakujący spis treści, brak daty aktualizacji, trzy obrazy zamiast czterech - każdy taki punkt to poprawka na kwadrans.',
+      'Sygnały kompletności to najstarsze przybliżenie jakości, jakim posługują się wyszukiwarki: strona z tabelą, materiałem wizualnym i aktualną datą częściej powstaje w wyniku rzetelnego opracowania tematu niż strona złożona z pięciu akapitów. Wyszukiwarki traktują to jako mocną poszlakę jakości.',
     ],
     how: {
       intro: [
-        'Checklista obejmuje do jedenastu kryteriów i liczy ją wyłącznie algorytm, bez udziału modelu językowego. Część jest bezwzględna, część odnosi się do konkurencji - próg długości to średnia z Top 10 dla Twojej frazy, a nie sztywna liczba słów.',
-        'Zestaw kryteriów dopasowuje się do typu strony: spis treści sprawdzamy tylko dla artykułów i haseł encyklopedycznych, a widoczną datę pomijamy na landingach, gdzie stara data szkodzi konwersji. Pominięte kryterium nie obniża wyniku - maksymalna pula punktów zmniejsza się razem z nim.',
+        'Checklista obejmuje do jedenastu kryteriów i liczy ją wyłącznie algorytm, bez udziału modelu językowego. Część jest bezwzględna, część odnosi się do konkurencji - próg długości to średnia z Top 10 dla Twojej frazy, a nie konkretna liczba słów.',
+        'Zestaw kryteriów dopasowuje się do typu strony: spis treści sprawdzamy tylko dla artykułów i haseł encyklopedycznych, a widoczną datę pomijamy na landingach.',
       ],
       tables: [
         {
@@ -818,18 +813,18 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Brak jakiegokolwiek materiału wizualnego',
       'Ciągły tekst bez list, tabel i wyróżnień',
       'Brak daty - albo data ukryta wyłącznie w warstwie wizualnej, bez znacznika w kodzie',
-      'Popsuta hierarchia nagłówków',
+      'Niepoprawna hierarchia nagłówków',
     ],
     report: [
-      'Dostajesz checklistę z odhaczonymi i brakującymi pozycjami, a przy każdej brakującej - wskazówkę, co dokładnie dodać. Obok stoi porównanie formatów z konkurencją: jeśli sześciu konkurentów ma tabelę, a Ty nie, zobaczysz to wprost.',
-      'Osobno pokazujemy świeżość: datę publikacji, datę aktualizacji i wiek treści w miesiącach.',
-      'Jedno ograniczenie warto znać: obrazy, wideo i data są odczytywane z kodu strony, więc przy audycie treści wklejonej z edytora zamiast z adresu URL te kryteria nie mają skąd się wziąć.',
+      'W raporcie znajdziesz checklistę z odhaczonymi i brakującymi pozycjami, a przy każdej brakującej - wskazówkę, co dokładnie dodać. Obok stoi porównanie formatów z konkurencją: jeśli sześciu konkurentów ma tabelę, a Ty nie, zobaczysz to wprost.',
+      'Osobno raportujemy świeżość treści: datę publikacji, datę aktualizacji oraz wiek treści liczony w miesiącach.',
+      'Obowiązuje przy tym jedno ograniczenie: obrazy, wideo i daty odczytujemy z kodu strony, więc audyt treści wklejonej z edytora zamiast z adresu URL nie obejmuje tych kryteriów.',
     ],
     recommendations: [
       {
         problem: 'Treść jest wyraźnie krótsza niż średnia Top 10 dla tej frazy (1460 słów) - konkurencja tłumaczy temat szerzej.',
         before: 'Cztery krótkie sekcje opisowe pod listą produktów.',
-        after: 'Dopisz brakujące wątki - porównanie przewodowe/bezprzewodowe i ranking modeli - aż treść dobije do średniej konkurencji.',
+        after: 'Dopisz brakujące wątki - porównanie przewodowe/bezprzewodowe i ranking modeli - aż objętość treści osiągnie średnią konkurencji.',
       },
       {
         problem: 'Strona nie pokazuje daty publikacji ani aktualizacji, czyli najprostszego sygnału świeżości.',
@@ -849,15 +844,15 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     faq: [
       {
         q: 'Czy E-E-A-T to czynnik rankingowy?',
-        a: 'Nie w sensie pojedynczego parametru. To zestaw kryteriów jakości, którymi Google opisuje dobrą treść, a modele generatywne kierują się tym samym przy wyborze źródła. My mierzymy sygnały, które faktycznie są na stronie.',
+        a: 'Nie w sensie pojedynczego parametru. To zestaw kryteriów jakości, którymi Google opisuje dobrą treść, a modele generatywne kierują się tym samym przy wyborze źródła.',
       },
       {
         q: 'Czy wystarczy dopisać „autor: redakcja”?',
-        a: 'Nie. Sygnał uznajemy tylko wtedy, gdy ma pokrycie w treści - podpis bez kwalifikacji, afiliacji ani śladu doświadczenia niczego nie zmienia. Zasada jest celowo twarda, żeby audyt nie przyznawał kompetencji, których strona nie deklaruje.',
+        a: 'Nie. Sygnał uznajemy tylko wtedy, gdy ma pokrycie w treści - podpis bez kwalifikacji, afiliacji ani śladu doświadczenia niczego nie zmienia.',
       },
       {
         q: 'Jakie źródła liczą się najbardziej?',
-        a: 'Rozpoznawalne instytucje i publikacje branżowe, a przy tym różnorodne. Pięć odnośników do pięciu wiarygodnych domen waży więcej niż pięć odesłań do jednego serwisu.',
+        a: 'Rozpoznawalne instytucje i publikacje branżowe, przy zachowaniu różnorodności. Pięć odnośników do pięciu wiarygodnych domen waży więcej niż pięć odesłań do tego samego serwisu.',
       },
     ],
     name: 'E-E-A-T',
@@ -866,17 +861,17 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Doświadczenie, ekspertyza, autorytet i wiarygodność w treści. Jakie sygnały CitationOne wykrywa, jak weryfikuje źródła i dlaczego każdy sygnał wymaga cytatu z tekstu.',
     lead:
-      'Doświadczenie, ekspertyza, autorytet i wiarygodność - cztery osobno oceniane składowe, liczone z sygnałów obecnych w treści i w kodzie strony.',
+      'E-E-A-T obejmuje doświadczenie, ekspertyzę, autorytet i wiarygodność - cztery osobno oceniane składowe, liczone z sygnałów obecnych w treści i w kodzie strony.',
     chips: ['Cztery oceny 0–10', 'Wykrywanie algorytmiczne + weryfikacja modelem', 'Wejście: treść + kod strony + linki zewnętrzne'],
     whyHeading: 'Dlaczego E-E-A-T jest ważne dla modeli AI?',
     howHeading: 'Jak liczymy E-E-A-T?',
     why: [
-      'Silnik generatywny bierze na siebie odpowiedzialność za odpowiedź, której nikt już nie zweryfikuje, klikając w link. Dlatego przy wyborze źródła premiuje te, przy których widać, kto pisze, na czym opiera twierdzenia i kiedy ostatnio je sprawdzał. Anonimowy tekst bez źródeł jest ryzykiem, którego model unika.',
-      'To jedyny wymiar, w którym poprawa nie polega na przepisaniu zdań. Bio autora z kwalifikacjami, przypis do badania, data aktualizacji, kontakt - to elementy, które albo są, albo ich nie ma.',
+      'Silnik generatywny odpowiada za treść, której użytkownik nie zweryfikuje już kliknięciem w link. Dlatego przy wyborze źródła premiuje strony wskazujące autora, podstawę twierdzeń i datę ostatniej weryfikacji. Tekst anonimowy i pozbawiony źródeł stanowi ryzyko, którego model unika.',
+      'To jedyny wymiar, w którym poprawa nie wymaga przepisywania zdań. Biogram autora z kwalifikacjami, przypis do badania, data aktualizacji i dane kontaktowe to elementy obecne na stronie albo nieobecne - ocena zależy od ich uzupełnienia, nie od redakcji tekstu.',
     ],
     how: {
       intro: [
-        'Najpierw algorytmicznie wykrywamy sygnały w treści i w kodzie strony, a dopiero potem model je weryfikuje i ocenia siłę. Zasada jest twarda: każdy uznany sygnał musi mieć oparcie w konkretnym fragmencie tekstu - sygnał bez cytatu jest odrzucany, żeby model nie dopisał Ci kompetencji, których strona nie deklaruje.',
+        'Najpierw algorytmicznie wykrywamy sygnały w treści i w kodzie strony, a dopiero potem model je weryfikuje i ocenia siłę. Zasada jest prosta: każdy uznany sygnał musi mieć oparcie w konkretnym fragmencie tekstu. Sygnał bez cytatu zostaje odrzucony, dzięki czemu audyt nie przypisuje stronie kompetencji, których ona nie deklaruje.',
       ],
       tables: [
         {
@@ -896,7 +891,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
             ['Weryfikowalność źródeł', 'Linki zewnętrzne, przypisy, odwołania do znanych instytucji i publikacji'],
             ['Różnorodność źródeł', 'Liczba różnych domen - opieranie się na jednym źródle waży mniej'],
             ['Tożsamość autora', 'Powiązania profilu autora w danych strukturalnych: Wikipedia, ORCID, Google Scholar, LinkedIn'],
-            ['Poparcie twierdzeń', 'Czy ryzykowne twierdzenia - statystyki, daty, wyniki badań - mają źródło w tym samym akapicie'],
+            ['Poparcie twierdzeń', 'Czy twierdzenia wysokiego ryzyka, takie jak statystyki, daty i wyniki badań, mają wskazane źródło w tym samym akapicie'],
           ],
         },
       ],
@@ -917,16 +912,15 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     ],
     report: [
       'Dostajesz cztery osobne oceny wraz z listą wykrytych sygnałów - każdy z cytatem z Twojej treści, który go potwierdza.',
-      'Do tego lista twierdzeń wysokiego ryzyka bez źródła w akapicie. To najczęstsza i najtańsza poprawka: liczba, która już w tekście jest, potrzebuje wyłącznie przypisu.',
     ],
     recommendations: [
       {
-        problem: 'Treść nie ma autora ani śladu doświadczenia - dla modelu to anonimowy opis kategorii.',
-        before: 'Opis kategorii bez podpisu, bez biogramu, bez informacji o testowaniu sprzętu.',
-        after: 'Podpisz treść kwalifikacjami: „Kamil Nowak, specjalista ds. peryferiów gamingowych, 8 lat testowania sprzętu e-sportowego”.',
+        problem: 'Parametry i porównania są podane bez odwołania do źródła, więc żadnego z tych twierdzeń nie da się zweryfikować.',
+        before: 'Sensory optyczne nowej generacji osiągają dokładność śledzenia na poziomie 99,8%.',
+        after: 'Dodaj przypis do źródła pomiaru: „dokładność śledzenia 99,8% według dokumentacji technicznej producenta, 2026”.',
       },
       {
-        problem: 'Brakuje sygnałów wiarygodności, których strona transakcyjna wymaga: zwrotów, gwarancji i bezpieczeństwa płatności.',
+        problem: 'Strona transakcyjna nie podaje sygnałów wiarygodności, których wymaga ten typ treści: warunków zwrotu, gwarancji i zabezpieczenia płatności.',
         before: 'Wszystkie produkty pochodzą z oficjalnej dystrybucji i mają pełne wsparcie techniczne.',
         after: 'Wyeksponuj konkrety: „30 dni na darmowy zwrot, 24 miesiące gwarancji producenta, płatności szyfrowane SSL”.',
       },
@@ -943,7 +937,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     faq: [
       {
         q: 'Dlaczego ta metryka nie wpływa na ocenę?',
-        a: 'Bo mierzy strategię, a nie jakość wykonania. Treść może być bez zarzutu i mieć niską wartość dodaną - to sygnał, żeby dołożyć coś własnego, a nie żeby poprawiać tekst.',
+        a: 'Bo mierzy strategię, a nie jakość wykonania. Treść może być bez zarzutu i mieć jednocześnie niską wartość dodaną - to sygnał, żeby uzupełnić ją o własny materiał, a nie żeby poprawiać redakcję tekstu.',
       },
       {
         q: 'Jak najszybciej ją podnieść?',
@@ -951,7 +945,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       },
       {
         q: 'Czy niska wartość dodana oznacza słabe pokrycie tematu?',
-        a: 'Nie, to dwie różne rzeczy. Pokrycie tematu mierzą inne wymiary; tutaj chodzi wyłącznie o to, ile z Twojej treści nie powtarza się w pozostałych wynikach.',
+        a: 'Nie, to dwie odrębne miary. Pokrycie tematu oceniają wymiary TF-IDF oraz Pokrycie Fan-Out i AIO, natomiast wartość dodana mierzy wyłącznie udział treści, która nie powtarza się w pozostałych wynikach.',
       },
     ],
     name: 'Wartość dodana',
@@ -960,17 +954,16 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     description:
       'Ile nowego wnosi Twoja treść względem Top 10 SERP. Cztery sygnały unikalności: własne twierdzenia, unikalne fakty, terminy nieobecne u konkurencji i rzadkie formaty.',
     lead:
-      'Ile Twoja treść wnosi ponad to, co już jest w Top 10. Metryka strategiczna: pokazuje, gdzie budować przewagę, i nie wpływa na ocenę końcową.',
-    chips: ['Skala 0–100', 'Nie wpływa na ocenę końcową', 'Wejście: treść + korpus Top 10 SERP'],
+      'Wartość dodana mierzy, ile Twoja treść wnosi ponad to, co już jest w Top 10. To metryka strategiczna: pokazuje, gdzie budować przewagę, i nie wpływa na ocenę końcową.',
+    chips: ['Skala 0–100', 'Nie wpływa na ocenę końcową', 'Wejście: treść + słownictwo Top 10 SERP'],
     whyHeading: 'Dlaczego wartość dodana jest ważna dla modeli AI?',
     howHeading: 'Jak liczymy wartość dodaną?',
     why: [
-      'Silnik generatywny nie potrzebuje dziesięciu źródeł mówiących to samo. Buduje odpowiedź z kilku, a wybiera te, które dokładają coś, czego nie ma w pozostałych. Treść poprawna, ale w całości pokrywająca się z konkurencją, jest dla niego wymienna - każde inne źródło zrobi tę samą robotę.',
-      'To odwrotność strategii „napiszmy to, co pierwsza dziesiątka, tylko lepiej”. Lepiej napisany duplikat nadal jest duplikatem. Przewagę daje własna liczba, własny przypadek, własne zestawienie.',
+      'Silnik generatywny nie potrzebuje dziesięciu źródeł mówiących to samo. Buduje odpowiedź z kilku, a wybiera te, które dokładają coś, czego nie ma w pozostałych. Treść poprawna, ale w całości pokrywająca się z konkurencją, jest dla niego wymienna - każde inne źródło spełni tę samą funkcję.',
     ],
     how: {
       intro: [
-        'Porównujemy Twoją treść z korpusem konkurencji z Top 10 i liczymy cztery niezależne sygnały, które składają się na wynik w skali od 0 do 100:',
+        'Porównujemy Twoją treść ze zbiorem tekstów konkurencji z Top 10 i liczymy cztery niezależne sygnały, które składają się na wynik w skali od 0 do 100:',
       ],
       tables: [
         {

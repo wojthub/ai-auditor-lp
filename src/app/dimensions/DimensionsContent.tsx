@@ -26,21 +26,21 @@ const DIMS = [
     id: 'CSI Alignment',
     slug: 'csi-alignment',
     label: 'CSI Alignment',
-    body: 'Does your content answer what users are really looking for? AI does not cite pages that miss the query intent - even if they contain the keyword. This dimension measures how precisely your article matches the expected answer type: definition, comparison, instruction, or recommendation.',
+    body: 'Does your content answer what users are really looking for? AI does not cite pages that miss the query intent - even if they contain the keyword. Alignment with Central Search Intent (CSI) measures how precisely your article matches the expected answer type: definition, comparison, instruction, or recommendation.',
   },
   {
     num: '02',
     id: 'Density',
     slug: 'information-density',
     label: 'Information Density',
-    body: 'How many facts, data points and concrete statements a single paragraph contains. Low-density content is filler - AI skips it. This dimension rewards every sentence that adds something new and penalizes text that repeats the same idea in different words.',
+    body: 'Information density says how many facts, data points and concrete statements a single paragraph contains. Low-density content is filler - AI skips it. The dimension rewards every sentence that adds something new and lowers the score of text that repeats the same idea in different words.',
   },
   {
     num: '03',
     id: 'EAV',
     slug: 'knowledge-graph-eav',
     label: 'Knowledge Graph',
-    body: 'Content builds a network of related concepts: entities, their attributes and values. The denser and more coherent the graph, the easier it is for AI to recognize the content as a credible source in the field. This dimension checks whether your texts create knowledge - not just mention it.',
+    body: 'Content builds a network of related concepts: entities, their attributes and values. The denser and more coherent the graph, the easier it is for AI to recognize the content as a credible source in the field. Knowledge Graph checks whether your texts build knowledge or merely mention concepts.',
   },
   {
     num: '04',
@@ -54,42 +54,42 @@ const DIMS = [
     id: 'Chunk',
     slug: 'chunk-optimization',
     label: 'Chunk Optimization',
-    body: 'AI retrieves self-contained fragments - sections that can be understood without the full article context. This dimension measures how many citation-ready units your page contains and whether they run to the length that suits this content type.',
+    body: 'AI retrieves self-contained fragments - sections that can be understood without the full article context. Chunk Optimization measures how many citation-ready units your page contains and whether they run to the length that suits this content type.',
   },
   {
     num: '06',
     id: 'CoR',
     slug: 'cost-of-retrieval',
     label: 'Cost of Retrieval',
-    body: 'How much effort it takes to pull a concrete answer off the page. Heading hierarchy, tables, lists and emphasis lower that cost; a wall of text raises it. With comparable content, the model picks the source that is cheaper to handle.',
+    body: 'Cost of Retrieval measures how much effort it takes to pull a concrete answer off the page. Heading hierarchy, tables, lists and emphasis lower that cost; a wall of text raises it. With comparable content, the model picks the source that is cheaper to handle.',
   },
   {
     num: '07',
     id: 'TF-IDF',
     slug: 'tf-idf',
     label: 'TF-IDF',
-    body: 'A comparison of your page terminology with the vocabulary of the Top 10. A missing specialist term usually means a missing angle - CitationOne shows exactly which concepts you skip and in what context competitors use them.',
+    body: 'TF-IDF compares your page terminology with the vocabulary of the Top 10. A missing specialist term usually means a missing angle, so CitationOne shows which concepts you skip and in what context competitors use them.',
   },
   {
     num: '08',
     id: 'SRL',
     slug: 'semantic-roles',
     label: 'Semantic Roles',
-    body: 'Whether the main topic of the page performs the action in your sentences or merely receives it. The active voice gives the model a complete "who - does what - to what"; the passive voice leaves a hole in that structure.',
+    body: 'Semantic Roles check whether the main topic of the page performs the action in your sentences or merely receives it. The active voice gives the model the complete set of information “who - does what - to what”; the passive voice leaves a gap in that structure.',
   },
   {
     num: '09',
     id: 'Fan-Out',
     slug: 'query-fan-out',
     label: 'Fan-Out & AIO Coverage',
-    body: 'A single user query decomposes into a dozen or so side questions that AI resolves in the background. This dimension checks how many of them your content answers - because citations are won on the side questions, not the main one.',
+    body: 'A single user query decomposes into a dozen or so side questions that AI resolves in the background. Fan-Out & AIO Coverage analyses how many of those questions your content answers, because citations are won on the side questions.',
   },
   {
     num: '10',
     id: 'Effort',
     slug: 'effort-score',
     label: 'Effort Score',
-    body: 'An algorithmic completeness checklist: length against competitors, visual material, tables, lists, heading hierarchy, table of contents and a visible update date. Every unmet item is a fifteen-minute fix.',
+    body: 'Effort Score is an algorithmic checklist of page completeness: length against competitors, visual material, tables, lists, heading hierarchy, table of contents and a visible update date.',
   },
 ];
 
@@ -99,12 +99,12 @@ const EXTRA = [
   {
     slug: 'e-e-a-t',
     label: 'E-E-A-T',
-    body: 'Experience, expertise, authoritativeness and trust - four separately scored components, computed from signals present in the content and in the page code.',
+    body: 'E-E-A-T covers experience, expertise, authoritativeness and trust - four separately scored components, computed from signals present in the content and in the page code.',
   },
   {
     slug: 'information-gain',
     label: 'Information Gain',
-    body: 'How much your content adds over the Top 10. A strategic metric: it shows where to build an advantage and does not affect the final score.',
+    body: 'Information Gain measures how much your content adds over the Top 10. It is a strategic metric: it shows where to build an advantage and does not affect the final score.',
   },
 ];
 

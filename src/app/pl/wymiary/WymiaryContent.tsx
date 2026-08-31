@@ -68,28 +68,28 @@ const DIMS = [
     id: 'TF-IDF',
     slug: 'tf-idf',
     label: 'TF-IDF',
-    body: 'Porównanie terminologii Twojej strony ze słownictwem konkurencji z Top 10. Brakujący termin specjalistyczny to zwykle brakujący wątek - CitationOne wskazuje dokładnie, których pojęć nie używasz i w jakim kontekście robi to konkurencja.',
+    body: 'TF-IDF porównuje terminologię Twojej strony ze słownictwem konkurencji z Top 10. Brakujący termin specjalistyczny oznacza zwykle brakujący wątek, dlatego CitationOne wskazuje, których pojęć nie używasz i w jakim kontekście stosuje je konkurencja.',
   },
   {
     num: '08',
     id: 'SRL',
     slug: 'role-semantyczne',
     label: 'Role semantyczne',
-    body: 'Czy główny temat strony jest w zdaniach wykonawcą czynności, czy tylko jej przedmiotem. Strona czynna daje modelowi komplet „kto - co robi - z czym”; strona bierna zostawia w tej strukturze dziurę.',
+    body: 'Role semantyczne sprawdzają, czy główny temat strony występuje w zdaniach jako wykonawca czynności, czy tylko jako jej przedmiot. Strona czynna daje modelowi komplet informacji „kto - co robi - z czym”; strona bierna zostawia w tej strukturze lukę.',
   },
   {
     num: '09',
     id: 'Fan-Out',
     slug: 'pokrycie-fan-out',
     label: 'Pokrycie Fan-Out i AIO',
-    body: 'Jedno zapytanie użytkownika rozkłada się na kilkanaście pytań pobocznych, które AI rozwiązuje w tle. Ten wymiar sprawdza, na ile z nich odpowiada Twoja treść, bo to na pytaniach pobocznych zdobywa się cytowanie.',
+    body: 'Jedno zapytanie użytkownika rozkłada się na kilkanaście pytań pobocznych, które AI rozwiązuje w tle. Pokrycie Fan-Out i AIO analizuje, na ile z tych pytań odpowiada Twoja treść, ponieważ to właśnie na pytaniach pobocznych zdobywa się cytowanie.',
   },
   {
     num: '10',
     id: 'Effort',
     slug: 'effort-score',
     label: 'Effort Score',
-    body: 'Algorytmiczna checklista kompletności: długość względem konkurencji, materiały wizualne, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji. Każdy niespełniony punkt to poprawka na kwadrans.',
+    body: 'Effort Score to algorytmiczna checklista kompletności strony: długość względem konkurencji, materiały wizualne, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji.',
   },
 ];
 
@@ -99,12 +99,12 @@ const EXTRA = [
   {
     slug: 'e-e-a-t',
     label: 'E-E-A-T',
-    body: 'Doświadczenie, ekspertyza, autorytet i wiarygodność - cztery osobno oceniane składowe, liczone z sygnałów obecnych w treści i w kodzie strony.',
+    body: 'E-E-A-T obejmuje doświadczenie, ekspertyzę, autorytet i wiarygodność - cztery osobno oceniane składowe, liczone z sygnałów obecnych w treści i w kodzie strony.',
   },
   {
     slug: 'wartosc-dodana',
     label: 'Wartość dodana',
-    body: 'Ile Twoja treść wnosi ponad to, co już jest w Top 10. Metryka strategiczna: pokazuje, gdzie budować przewagę, i nie wpływa na ocenę końcową.',
+    body: 'Wartość dodana mierzy, ile Twoja treść wnosi ponad to, co już jest w Top 10. To metryka strategiczna: pokazuje, gdzie budować przewagę, i nie wpływa na ocenę końcową.',
   },
 ];
 
