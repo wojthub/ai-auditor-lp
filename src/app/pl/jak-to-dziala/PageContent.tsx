@@ -55,10 +55,12 @@ const SERP_ROWS = [
   { pos: '★', url: 'twojastrona.pl/blog/ranking-2026', words: '5634', cqs: 70, mine: true },
 ];
 // Naglowek zrodla wewnatrz bloku „Konkurencja" — jedno zrodlo, jeden naglowek.
-function SourceHeading({ children }: { children: React.ReactNode }) {
+// Ikona 1:1 z Hero i z AIOverviewVisual: plik z public/logos, alt puste + aria-hidden,
+// bo nazwa dostawcy stoi obok w tekscie i czytnik nie ma jej powtarzac.
+function SourceHeading({ logo, children }: { logo: string; children: React.ReactNode }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-      <span style={{ width: 14, height: 2, background: ACCENT, borderRadius: 1, flexShrink: 0 }} />
+    <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 12 }}>
+      <img src={logo} alt="" aria-hidden width={16} height={16} style={{ width: 16, height: 16, display: 'block', flexShrink: 0 }} />
       <span style={{ fontSize: 11, fontWeight: 700, color: '#36394a', textTransform: 'uppercase', letterSpacing: '0.07em' }}>{children}</span>
     </div>
   );
@@ -77,7 +79,7 @@ function BenchmarkVisual() {
         <span style={{ fontSize: 12, color: '#818898' }}>dla frazy &bdquo;{SERP_HEAD.phrase}&rdquo;</span>
       </div>
 
-      <SourceHeading>Google &middot; Top 10 SERP</SourceHeading>
+      <SourceHeading logo="/logos/google.png">Google &middot; Top 10 SERP</SourceHeading>
 
       <div style={{ display: 'flex', gap: 22, marginBottom: 18, flexWrap: 'wrap' }}>
         {SERP_STATS.map((s) => (
@@ -120,7 +122,7 @@ function BenchmarkVisual() {
       ))}
 
       <div style={{ marginTop: 20, paddingTop: 18, borderTop: '1px solid #eceff3' }}>
-        <SourceHeading>ChatGPT</SourceHeading>
+        <SourceHeading logo="/logos/chatgpt.png">ChatGPT</SourceHeading>
 
         <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', marginBottom: 14 }}>
           {LLM_STATUS.map((s) => (
