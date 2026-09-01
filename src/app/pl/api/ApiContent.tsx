@@ -27,7 +27,7 @@ const FEATURES = [
   },
   {
     title: 'Pełny wynik jako JSON',
-    body: 'CQS, 10 wymiarów z problemami, E-E-A-T, rekomendacje Przed i Po, benchmark SERP i pokrycie Fan-Out.',
+    body: 'CQS, 10 wymiarów z problemami, E-E-A-T, rekomendacje Przed i Po, analiza konkurencji (Google i ChatGPT) oraz pokrycie Fan-Out.',
   },
   {
     title: 'Zlecenia masowe',

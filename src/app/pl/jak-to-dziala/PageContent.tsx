@@ -28,9 +28,11 @@ function SectionLabel({ children }: { children: string }) {
   );
 }
 
-/* ── Visual: Benchmark SERP ───────────────────────────────────────────── */
-// Panel Top 10 SERP z aplikacji w wersji na LP — te same kolumny i ten sam sposob
+/* ── Visual: Konkurencja (Google + ChatGPT) ───────────────────────────── */
+// Blok „Konkurencja" z aplikacji w wersji na LP — te same kolumny i ten sam sposob
 // kolorowania wynikow, zeby user rozpoznal ekran, ktory zobaczy po zakupie.
+// Blok niesie DWA zrodla: Top 10 SERP z Google i cytowania z odpowiedzi ChatGPT
+// na te sama fraze — stad naglowek zrodla nad kazda czescia (1:1 z raportem).
 // Domeny neutralne: nie pokazujemy realnych klientow ani realnej konkurencji.
 const SERP_HEAD = { phrase: 'ranking słuchawek bezprzewodowych' };
 const SERP_LABELS = ['POZ.', 'URL', 'SŁOWA', 'CQS'];
@@ -38,6 +40,13 @@ const SERP_STATS = [
   { value: '47', label: 'Śr. CQS SERP' },
   { value: '2091', label: 'Śr. słów' },
 ];
+// Sekcja ChatGPT: status w jednej linii + lista cytowanych stron. Cytowanie (link
+// w odpowiedzi) i wzmianka (sama nazwa w tresci) to DWA niezalezne sygnaly.
+const LLM_STATUS = [
+  { label: 'Twoja strona', value: 'cytowana', ok: true },
+  { label: 'Wzmianka o marce', value: 'obecna', ok: true },
+];
+const LLM_SOURCES = ['konkurent-a.pl/ranking-sluchawek', 'twojastrona.pl/blog/ranking-2026', 'konkurent-e.pl/test-sluchawek'];
 const SERP_ROWS = [
   { pos: '1', url: 'konkurent-a.pl/ranking-sluchawek', words: '2708', cqs: 73 },
   { pos: '2', url: 'konkurent-b.pl/sluchawki-douszne', words: '3792', cqs: 69 },
@@ -45,6 +54,15 @@ const SERP_ROWS = [
   { pos: '6', url: 'konkurent-d.pl/porady/sluchawki', words: '3029', cqs: 70 },
   { pos: '★', url: 'twojastrona.pl/blog/ranking-2026', words: '5634', cqs: 70, mine: true },
 ];
+// Naglowek zrodla wewnatrz bloku „Konkurencja" — jedno zrodlo, jeden naglowek.
+function SourceHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+      <span style={{ width: 14, height: 2, background: ACCENT, borderRadius: 1, flexShrink: 0 }} />
+      <span style={{ fontSize: 11, fontWeight: 700, color: '#36394a', textTransform: 'uppercase', letterSpacing: '0.07em' }}>{children}</span>
+    </div>
+  );
+}
 function BenchmarkVisual() {
   // Prog koloru 1:1 z raportem: ponizej 60 CQS czerwony, wyzej bursztyn.
   const pill = (ok: boolean) => ({
@@ -55,9 +73,11 @@ function BenchmarkVisual() {
   return (
     <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, padding: '18px 18px 10px', overflow: 'hidden' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, flexWrap: 'wrap', marginBottom: 16 }}>
-        <span style={{ fontSize: 13, fontWeight: 700, color: '#0d0d12' }}>Top 10 SERP</span>
+        <span style={{ fontSize: 13, fontWeight: 700, color: '#0d0d12' }}>Konkurencja</span>
         <span style={{ fontSize: 12, color: '#818898' }}>dla frazy &bdquo;{SERP_HEAD.phrase}&rdquo;</span>
       </div>
+
+      <SourceHeading>Google &middot; Top 10 SERP</SourceHeading>
 
       <div style={{ display: 'flex', gap: 22, marginBottom: 18, flexWrap: 'wrap' }}>
         {SERP_STATS.map((s) => (
@@ -98,6 +118,43 @@ function BenchmarkVisual() {
           <span style={pill(row.cqs >= 60)}>{row.cqs}</span>
         </motion.div>
       ))}
+
+      <div style={{ marginTop: 20, paddingTop: 18, borderTop: '1px solid #eceff3' }}>
+        <SourceHeading>ChatGPT</SourceHeading>
+
+        <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', marginBottom: 14 }}>
+          {LLM_STATUS.map((s) => (
+            <div key={s.label}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: s.ok ? ACCENT : '#DC2626', lineHeight: 1.2 }}>{s.value}</div>
+              <div style={{ fontSize: 11, color: '#818898', marginTop: 2 }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ fontSize: 10, fontWeight: 600, color: '#a4acb9', letterSpacing: '0.06em', marginBottom: 6 }}>ŹRÓDŁA W ODPOWIEDZI</div>
+        {LLM_SOURCES.map((src, i) => {
+          const mine = src.startsWith('twojastrona.pl');
+          return (
+            <motion.div
+              key={src}
+              initial={{ opacity: 0, y: 6 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.07, ease: 'easeOut' }}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 8, padding: '7px 0',
+                borderBottom: i === LLM_SOURCES.length - 1 ? 'none' : '1px solid #f4f6f8',
+              }}
+            >
+              <span style={{ width: 5, height: 5, borderRadius: '50%', background: mine ? ACCENT : '#a4acb9', flexShrink: 0 }} />
+              <span style={{
+                fontSize: 12, color: mine ? ACCENT : '#36394a', fontWeight: mine ? 600 : 400,
+                overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+              }}>{src}</span>
+            </motion.div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -236,7 +293,7 @@ function KnowledgeGraphVisual() {
 const REPORT_ITEMS = [
   'Content Quality Score (0–100) z rozbiciem na wymiary',
   'Wykres radarowy 10 wymiarów',
-  'Analiza konkurencji - tabela porównawcza Top 10 SERP',
+  'Analiza konkurencji - Top 10 SERP z Google i cytowania z ChatGPT',
   'Rekomendacje Przed i Po z priorytetami',
   'Graf wiedzy i tabela encji EAV',
   'AI Overview Coverage i analiza sub-zapytań',
@@ -416,8 +473,8 @@ export default function PageContent() {
               },
               {
                 n: '02', color: '#0b7983',
-                title: 'Algorytm analizuje konkurencję z Top 10 SERP',
-                body: 'W mniej niż 5 minut system CitationOne pobiera i analizuje Twoją treść. W tym samym czasie bada 10 najlepiej rankujących stron konkurencji. Narzędzie porównuje Twój materiał z liderami rynku pod kątem 10 wymiarów jakości oraz sygnałów E-E-A-T.',
+                title: 'Algorytm analizuje konkurencję w Google i ChatGPT',
+                body: 'W mniej niż 5 minut system CitationOne pobiera i analizuje Twoją treść. W tym samym czasie bada 10 najlepiej rankujących stron konkurencji i pyta ChatGPT o tę samą frazę, żeby sprawdzić, kogo model podaje jako źródło. Narzędzie porównuje Twój materiał z liderami rynku pod kątem 10 wymiarów jakości oraz sygnałów E-E-A-T.',
               },
               {
                 n: '03', color: '#c47a2a',
@@ -528,10 +585,10 @@ export default function PageContent() {
                 Zobacz, czy i dlaczego odstajesz od liderów
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>
-                CitationOne automatycznie pobiera i analizuje 10 najlepiej rankujących podstron dla wybranego słowa kluczowego. Zestawiamy Twoją treść z realną konkurencją, aby precyzyjnie wskazać lukę optymalizacyjną.
+                CitationOne pyta o Twoją frazę dwa niezależne źródła. Z Google pobiera i analizuje 10 najlepiej rankujących podstron, a ChatGPT pyta wprost o tę samą frazę i sprawdza, czy Twoja strona pojawia się w odpowiedzi. Dzięki temu widzisz lukę optymalizacyjną wobec realnej konkurencji w wyszukiwarce i w AI Search naraz.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {['Porównanie tabelaryczne CQS dla każdej analizowanej podstrony.', 'Identyfikacja liderów oraz słabych punktów w aktualnym SERP', 'Analiza struktury i formatu najlepiej ocenianych treści.'].map(item => (
+                {['Porównanie tabelaryczne CQS dla każdej analizowanej podstrony.', 'Identyfikacja liderów oraz słabych punktów w aktualnym SERP', 'Odpowiedź ChatGPT na Twoją frazę: czy jesteś cytowany i wzmiankowany, oraz jakie strony model podał jako źródła', 'Analiza struktury i formatu najlepiej ocenianych treści.'].map(item => (
                   <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#36394a', lineHeight: 1.65 }}>
                     <span style={{ width: 14, height: 2, background: ACCENT, flexShrink: 0, marginTop: 9, borderRadius: 1 }} />
                     <span>{item}</span>

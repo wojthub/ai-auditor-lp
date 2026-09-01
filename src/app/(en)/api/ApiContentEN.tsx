@@ -27,7 +27,7 @@ const FEATURES = [
   },
   {
     title: 'Full result as JSON',
-    body: 'CQS, 10 dimensions with problems, E-E-A-T, Before/After recommendations, SERP benchmark and Fan-Out coverage.',
+    body: 'CQS, 10 dimensions with problems, E-E-A-T, Before/After recommendations, competitor analysis (Google and ChatGPT) and Fan-Out coverage.',
   },
   {
     title: 'Bulk requests',
