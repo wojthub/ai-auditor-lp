@@ -3,7 +3,8 @@ const APP_URL = 'https://app.citationone.com';
 /**
  * EN footer. Two rows: LP navigation + legal links.
  *
- * Terms and the privacy policy live IN THE APP (`/terms`, `/privacy-policy`) — the LP links to
+ * Contact, terms and the privacy policy live IN THE APP (`/contact`, `/terms`,
+ * `/privacy-policy`) — the LP links to
  * them instead of duplicating, so two diverging versions never appear.
  */
 
@@ -16,6 +17,7 @@ const NAV_LINKS = [
 ];
 
 const LEGAL_LINKS = [
+  { href: `${APP_URL}/contact`, label: 'Contact' },
   { href: `${APP_URL}/terms`, label: 'Terms of Service' },
   { href: `${APP_URL}/privacy-policy`, label: 'Privacy Policy' },
 ];
@@ -36,9 +38,6 @@ export default function FooterEN() {
                 {l.label}
               </a>
             ))}
-            <a href={`${APP_URL}/login?lang=en`} style={{ fontSize: 14, color: '#0b7983', fontWeight: 600, textDecoration: 'none', padding: '12px 14px' }}>
-              Run audit →
-            </a>
           </div>
         </div>
 

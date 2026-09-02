@@ -3,7 +3,8 @@ const APP_URL = 'https://app.citationone.com';
 /**
  * Stopka PL. Dwa rzedy: nawigacja po LP + linki prawne.
  *
- * Regulamin i polityka prywatnosci zyja W APLIKACJI (`/regulamin`, `/polityka-prywatnosci`) —
+ * Kontakt, regulamin i polityka prywatnosci zyja W APLIKACJI (`/kontakt`, `/regulamin`,
+ * `/polityka-prywatnosci`) —
  * LP ich nie duplikuje, tylko linkuje, zeby nie powstaly dwie rozjezdzajace sie wersje.
  */
 
@@ -16,6 +17,7 @@ const NAV_LINKS = [
 ];
 
 const LEGAL_LINKS = [
+  { href: `${APP_URL}/kontakt`, label: 'Kontakt' },
   { href: `${APP_URL}/regulamin`, label: 'Regulamin' },
   { href: `${APP_URL}/polityka-prywatnosci`, label: 'Polityka prywatności' },
 ];
@@ -36,9 +38,6 @@ export default function Footer() {
                 {l.label}
               </a>
             ))}
-            <a href={`${APP_URL}/login?lang=pl`} style={{ fontSize: 14, color: '#0b7983', fontWeight: 600, textDecoration: 'none', padding: '12px 14px' }}>
-              Zrób audyt →
-            </a>
           </div>
         </div>
 
