@@ -86,7 +86,7 @@ export default function Problem() {
                 lineHeight: 1.15,
                 margin: 0,
               }}>
-                Czy AI widzi Twoje treści?
+                Jak AI ocenia Twoje treści?
               </h2>
             </motion.div>
 
@@ -98,7 +98,7 @@ export default function Problem() {
               style={{ display: 'flex', alignItems: 'center' }}
             >
               <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.72, margin: 0 }}>
-                Wysokie pozycje w wyszukiwarce nie oznaczają, że Twoja marka istnieje dla ChatGPT, Google AI Overview czy Perplexity. Klasyczne narzędzia SEO nie mierzą tego, jak sztuczna inteligencja interpretuje treści. Ręczna analiza zajmuje godziny.
+                Pozycja w wyszukiwarce nie mówi nic o ocenie, jaką Twojemu tekstowi wystawia ChatGPT, Google AI Overview czy Perplexity. Model patrzy fragment po fragmencie: czy odpowiedź pada od razu, jak gęsto akapit jest nasycony faktami, czy wnosi coś ponad konkurencję. Klasyczne narzędzia SEO tego nie liczą, a ręczna ocena zajmuje godziny.
               </p>
             </motion.div>
           </div>
@@ -146,7 +146,7 @@ export default function Problem() {
             transition={{ duration: 0.5 }}
           >
             <p style={{ fontSize: 18, color: '#36394a', lineHeight: 1.72, marginBottom: 36 }}>
-              CitationOne przeanalizuje Twoją witrynę pod kątem AI Search, dzięki czemu zoptymalizujesz swoją witrynę pod kątem odpowiedzi w LLM-ach. Narzędzie przygotowuje gotowe rekomendacje. Konkretne zmiany, dzięki którym roboty AI zaczną wybierać Twoją stronę jako źródło odpowiedzi dla użytkowników.
+              CitationOne przeanalizuje Twoją treść pod kątem AI Search, dzięki czemu zoptymalizujesz ją pod odpowiedzi w LLM-ach. Narzędzie przygotowuje gotowe rekomendacje. Konkretne zmiany, dzięki którym roboty AI zaczną wybierać Twoją stronę jako źródło odpowiedzi dla użytkowników.
             </p>
             <motion.a
               href={`${APP_URL}/login?lang=pl`}

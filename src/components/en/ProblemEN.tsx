@@ -86,7 +86,7 @@ export default function ProblemEN() {
                 lineHeight: 1.15,
                 margin: 0,
               }}>
-                Does AI see your content?
+                How does AI rate your content?
               </h2>
             </motion.div>
 
@@ -98,7 +98,7 @@ export default function ProblemEN() {
               style={{ display: 'flex', alignItems: 'center' }}
             >
               <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.72, margin: 0 }}>
-                A high Google ranking doesn&apos;t mean your brand exists for ChatGPT, Google AI Overview or Perplexity. Traditional SEO tools don&apos;t measure how artificial intelligence interprets content. Manual analysis takes hours.
+                Your search ranking says nothing about the score ChatGPT, Google AI Overview or Perplexity give your text. The model looks passage by passage: does the answer come first, how densely the paragraph is packed with facts, does it add anything beyond the competition. Traditional SEO tools skip that, and doing it by hand takes hours.
               </p>
             </motion.div>
           </div>
@@ -146,7 +146,7 @@ export default function ProblemEN() {
             transition={{ duration: 0.5 }}
           >
             <p style={{ fontSize: 18, color: '#36394a', lineHeight: 1.72, marginBottom: 36 }}>
-              CitationOne analyzes your website for AI Search, helping you optimize for answers in LLMs. The tool delivers ready-made recommendations - specific changes that will make AI robots start selecting your page as the source of answers for users.
+              CitationOne analyzes your content for AI Search, helping you optimize it for answers in LLMs. The tool delivers ready-made recommendations - specific changes that will make AI robots start selecting your page as the source of answers for users.
             </p>
             <motion.a
               href={`${APP_URL}/login?lang=en`}
