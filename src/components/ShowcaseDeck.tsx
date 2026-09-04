@@ -1,14 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { animate, motion, useMotionValue } from 'framer-motion';
+import { AnimatePresence, animate, motion, useMotionValue } from 'framer-motion';
 
 const SPRING = { type: 'spring', stiffness: 210, damping: 30, mass: 0.9 } as const;
 
 export type ShowcaseSlide = {
   src: string;
   alt: string;
-  /** Etykieta pigulki nad urzadzeniem — nazwa zakladki panelu widocznej na slajdzie. */
+  /** Nazwa zakladki panelu widocznej na slajdzie — ida do adnotacji nad urzadzeniem. */
   label: string;
 };
 
@@ -21,15 +21,17 @@ type Props = {
 };
 
 /**
- * Ekran mockupu: kilka zrzutow panelu przewijanych pigulkami, strzalkami i swipem.
- * Wspoldzielony przez `Showcase` (PL) i `ShowcaseEN` — same slajdy i etykiety ida propem,
- * tak jak w `DimensionPage`. Autoodtwarzanie gasnie przy pierwszym ruchu uzytkownika,
- * zeby karuzela nie wyrywala mu slajdu sprzed oczu.
+ * Ekran mockupu: kilka zrzutow panelu, ktore przelaczaja sie same, a recznie ida strzalkami
+ * i swipem. Wspoldzielony przez `Showcase` (PL) i `ShowcaseEN` — same slajdy i etykiety ida
+ * propem, tak jak w `DimensionPage`.
  */
 export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel }: Props) {
   const [index, setIndex] = useState(0);
+  // Autoodtwarzanie gasnie tylko przy `prefers-reduced-motion`; recznej zmiany slajdu NIE
+  // konczy na stale — pauzuje je kursor nad karuzela i trwajace przeciagniecie.
   const [autoplay, setAutoplay] = useState(true);
   const [hovering, setHovering] = useState(false);
+  const [dragging, setDragging] = useState(false);
   const count = slides.length;
 
   // Tasme przesuwamy w PIKSELACH, nie w procentach: `drag` liczy przesuniecie w px i mieszanie
@@ -46,8 +48,8 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
 
   // `x` jest wlasna wartoscia ruchu, a nie propem `animate`, bo przy propie framer po
   // puszczeniu myszy sciaga tasme do `dragConstraints` i — gdy indeks sie NIE zmienil —
-  // nic juz jej stamtad nie zabiera: krotki drag na slajdzie 2 przerzucal widok na slajd 1,
-  // zostawiajac zapalona pigulke „2". Snap robimy wiec sami, po kazdym przeciagnieciu.
+  // nic juz jej stamtad nie zabiera: krotki drag na slajdzie 2 przerzucal widok na slajd 1.
+  // Snap robimy wiec sami, po kazdym przeciagnieciu.
   const x = useMotionValue(0);
   const settle = (next: number) => {
     setIndex(next);
@@ -55,10 +57,7 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
   };
   // Ostatni slajd wraca na pierwszy tylko w autoodtwarzaniu; strzalki i swipe zatrzymuja sie
   // na koncach, zeby przeciagniecie nie teleportowalo uzytkownika przez cala talie.
-  const go = (next: number) => {
-    setAutoplay(false);
-    settle(Math.min(count - 1, Math.max(0, next)));
-  };
+  const go = (next: number) => settle(Math.min(count - 1, Math.max(0, next)));
 
   // Zmiana szerokosci (obrot telefonu, resize okna) przelicza pozycje bez animacji —
   // stary offset w px wskazywalby po zmianie na srodek sasiedniego slajdu.
@@ -87,10 +86,10 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
   }, [slides]);
 
   useEffect(() => {
-    if (!autoplay || hovering || count < 2) return;
+    if (!autoplay || hovering || dragging || count < 2) return;
     const id = window.setTimeout(() => settle((index + 1) % count), 5200);
     return () => window.clearTimeout(id);
-  }, [autoplay, hovering, index, count, width]);
+  }, [autoplay, hovering, dragging, index, count, width]);
 
   return (
     <div
@@ -100,19 +99,30 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
-      {/* Pigulki = spis tresci mockupu; klik przelacza slajd i wylacza autoodtwarzanie. */}
-      <div className="deck-tabs">
-        {slides.map((slide, i) => (
-          <button
-            key={slide.src}
-            type="button"
-            onClick={() => go(i)}
-            className={`deck-tab${i === index ? ' deck-tab-active' : ''}`}
-            aria-current={i === index ? 'true' : undefined}
-          >
-            {slide.label}
-          </button>
-        ))}
+      {/* Adnotacja: nazwa widocznego ekranu + pozycja w talii. Czysto informacyjna — zadnych
+          klikalnych elementow poza strzalkami, wiec kreski to `span`, nie przyciski. */}
+      <div className="deck-caption">
+        <span className="deck-caption-dot" aria-hidden />
+        <span className="deck-caption-text">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={slides[index].label}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+            >
+              {slides[index].label}
+            </motion.span>
+          </AnimatePresence>
+        </span>
+        <span className="deck-caption-steps" aria-hidden>
+          {slides.map((slide, i) => (
+            <span key={slide.src} className={i === index ? 'deck-step deck-step-on' : 'deck-step'} />
+          ))}
+        </span>
+        {/* Licznik czyta glosno to samo, co kreski pokazuja wzrokiem. */}
+        <span className="deck-caption-count">{index + 1}/{count}</span>
       </div>
 
       <div style={{ perspective: '2000px', marginBottom: 'clamp(-150px, -14vw, -52px)' }}>
@@ -157,8 +167,9 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
                     dragElastic={0.14}
                     dragMomentum={false}
                     whileDrag={{ cursor: 'grabbing' }}
-                    onDragStart={() => setAutoplay(false)}
+                    onDragStart={() => setDragging(true)}
                     onDragEnd={(_, info) => {
+                      setDragging(false);
                       // Kazde puszczenie konczy sie snapem — takze ponizej progu, zeby tasma
                       // nie zostawala miedzy slajdami.
                       if (info.offset.x < -60 || info.velocity.x < -420) go(index + 1);
@@ -198,6 +209,7 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
                   <button
                     type="button"
                     className="deck-arrow deck-arrow-prev"
+                    onMouseDown={(e) => e.preventDefault()}
                     onClick={() => go(index - 1)}
                     disabled={index === 0}
                     aria-label={prevLabel}
@@ -209,6 +221,7 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
                   <button
                     type="button"
                     className="deck-arrow deck-arrow-next"
+                    onMouseDown={(e) => e.preventDefault()}
                     onClick={() => go(index + 1)}
                     disabled={index === count - 1}
                     aria-label={nextLabel}
@@ -225,47 +238,77 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
       </div>
 
       <style>{`
-        .deck-tabs {
+        .deck-caption {
           display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 6px;
-          margin: 0 auto 22px;
-          padding: 5px;
+          align-items: center;
+          gap: 10px;
           width: fit-content;
           max-width: 100%;
+          margin: 0 auto 22px;
+          padding: 7px 14px 7px 12px;
           border: 1px solid #e4e7ec;
           border-radius: 999px;
           background: rgba(255,255,255,0.72);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
-        }
-        .deck-tab {
-          appearance: none;
-          border: none;
-          background: none;
-          font-family: inherit;
-          font-size: 14px;
-          font-weight: 500;
+          font-size: 13.5px;
           letter-spacing: -0.015em;
-          color: #666d80;
-          padding: 8px 16px;
-          border-radius: 999px;
-          cursor: pointer;
-          white-space: nowrap;
-          transition: color 0.16s ease, background 0.16s ease;
+          color: #36394a;
         }
-        .deck-tab:hover { color: #0b7983; }
-        .deck-tab-active,
-        .deck-tab-active:hover {
+        .deck-caption-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 999px;
           background: #0b7983;
-          color: #ffffff;
+          box-shadow: 0 0 0 3px rgba(11,121,131,0.14);
+          flex: none;
+        }
+        /* Etykieta zmienia sie z crossfade, wiec jej pudelko musi miec stala wysokosc —
+           inaczej pasek podskakuje w trakcie przejscia. */
+        .deck-caption-text {
+          position: relative;
+          display: block;
+          height: 19px;
+          line-height: 19px;
           font-weight: 600;
+          white-space: nowrap;
+        }
+        .deck-caption-text > span {
+          display: block;
+        }
+        .deck-caption-text > span:not(:first-child) {
+          position: absolute;
+          inset: 0;
+        }
+        .deck-caption-steps {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          margin-left: 2px;
+        }
+        .deck-step {
+          width: 8px;
+          height: 3px;
+          border-radius: 999px;
+          background: #d4d8e0;
+          transition: width 0.24s ease, background 0.24s ease;
+        }
+        .deck-step-on {
+          width: 18px;
+          background: #0b7983;
+        }
+        .deck-caption-count {
+          font-size: 12px;
+          font-variant-numeric: tabular-nums;
+          color: #97a0af;
         }
         .deck-arrow {
           position: absolute;
+          /* Wysrodkowanie idzie przez margin-top, NIE translateY(-50%): globalne
+             button:active { transform: scale(0.97) } z globals.css nadpisalo transform
+             i strzalka na czas kliku zjezdzala o pol swojej wysokosci w dol. */
           top: 34%;
-          transform: translateY(-50%);
+          margin-top: -19px;
           width: 38px;
           height: 38px;
           display: flex;
@@ -279,22 +322,22 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
           box-shadow: 0 6px 18px rgba(13,13,18,0.12);
           color: #36394a;
           cursor: pointer;
-          opacity: 0;
+          /* Strzalki sa jedyna widoczna kontrolka, wiec stoja na ekranie od razu — takze na
+             dotyku, gdzie sam swipe niczego o sobie nie mowi. Pod kursorem tylko mocnieja. */
+          opacity: 0.92;
           transition: opacity 0.18s ease, background 0.16s ease, color 0.16s ease;
         }
-        .deck-arrow:hover { background: #ffffff; color: #0b7983; }
-        .deck-arrow:disabled { cursor: default; color: #b6bcc8; }
+        .deck-arrow:hover { opacity: 1; background: #ffffff; color: #0b7983; }
+        /* Na krancach taliii strzalka gasnie zamiast zostawac martwym kolkiem. */
+        .deck-arrow:disabled { opacity: 0; pointer-events: none; }
         .deck-arrow-prev { left: 14px; }
         .deck-arrow-next { right: 14px; }
-        /* Strzalki wychodza dopiero pod kursorem; na dotyku i tak rzadzi swipe. */
-        [aria-roledescription='carousel']:hover .deck-arrow:not(:disabled),
-        .deck-arrow:focus-visible { opacity: 1; }
-        @media (hover: none) {
-          .deck-arrow { display: none; }
-        }
+        /* Wlasne wcisniecie — czysta skala, bez skladowej pionowej. */
+        .deck-arrow:active { transform: scale(0.94); }
         @media (max-width: 560px) {
-          .deck-tabs { gap: 2px; padding: 4px; }
-          .deck-tab { font-size: 12.5px; padding: 7px 11px; }
+          .deck-arrow { width: 32px; height: 32px; margin-top: -16px; }
+          .deck-arrow-prev { left: 8px; }
+          .deck-arrow-next { right: 8px; }
         }
       `}</style>
     </div>
