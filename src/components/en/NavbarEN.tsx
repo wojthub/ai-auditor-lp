@@ -96,7 +96,7 @@ export default function NavbarEN() {
             </div>
           </div>
           <a href="/pricing" className="nav-link">Pricing</a>
-          <a href={`${APP_URL}/login?lang=en`} className="nav-cta">Run audit</a>
+          <a href={`${APP_URL}/login?lang=en`} className="nav-cta">Log in</a>
           <a href={plHref} className="nav-lang" title="Wersja polska">PL</a>
         </div>
 
@@ -193,11 +193,17 @@ export default function NavbarEN() {
           <a href={plHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             PL - Wersja polska
           </a>
+          {/* Sign-up and log-in share one URL — the app has a single `/login` screen (email
+              code or Google) that creates the account on first visit. They sit apart on mobile
+              because they answer two different visitor intents. */}
           <a href={`${APP_URL}/login?lang=en`} onClick={() => setMobileOpen(false)} className="nav-mobile-cta">
-            Run audit
+            Create a free account
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
+          </a>
+          <a href={`${APP_URL}/login?lang=en`} onClick={() => setMobileOpen(false)} className="nav-mobile-cta nav-mobile-cta-ghost">
+            Log in
           </a>
         </div>
       )}
@@ -368,6 +374,12 @@ export default function NavbarEN() {
           font-weight: 600;
           text-decoration: none;
           letter-spacing: -0.01em;
+        }
+        .nav-mobile-cta-ghost {
+          margin-top: 8px;
+          background: #ffffff;
+          color: #0b7983;
+          border: 1px solid #cfe0e2;
         }
         @media (min-width: 820px) and (max-width: 1023px) {
           .nav-link { padding: 6px 7px; font-size: 14px; }

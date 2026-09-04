@@ -394,7 +394,7 @@ const DIMS = [
   {
     num: '10', id: 'Effort', slug: 'effort-score', label: 'Effort Score',
     medium: 'Mierzy widoczny wysiłek redakcyjny: długość artykułu, zdjęcia, wideo, tabele i schema FAQ. Modele AI preferują treści dopracowane - nie pisane na szybko.',
-    expert: 'Deterministyczny scoring na podstawie htmlMetrics z crawlera: wordCount (próg ≥1500), imageCount, videoCount, hasFaqSchema, hasTableOfContents. Brak wywołania Gemini - metryki algorytmiczne z analizy struktury. Waga 0.06 w CQS.',
+    expert: 'Deterministyczny scoring na metrykach ze struktury strony: długość treści (próg = średnia top 10, bez benchmarku 700 słów), imageCount, videoCount, listy i tabele, hierarchia H1/H2/H3, wyróżnienia, spis treści, ściany tekstu, data publikacji lub aktualizacji. Zestaw kryteriów zależy od typu treści. Waga 0.06 w CQS.',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18" /><path d="M7 16l4-4 4 4 4-8" /></svg>,
   },
   {
@@ -523,7 +523,7 @@ export default function PageContent() {
               Co dokładnie analizuje narzędzie?
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, margin: '0 auto', lineHeight: 1.65 }}>
-              Każdy wymiar to osobne wywołanie AI z dedykowanym promptem - osobny wynik 0-10, osobne problemy i osobne rekomendacje.
+              Każdy wymiar oceniany jest osobno - osobny wynik 0-10, osobne problemy i osobne rekomendacje.
             </p>
           </motion.div>
           <div className="dims-grid">
@@ -710,7 +710,7 @@ export default function PageContent() {
               Szybkie poprawki - od razu po audycie
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 640, lineHeight: 1.65 }}>
-              Do 7 gotowych poprawek wygenerowanych algorytmicznie (bez dodatkowego wywołania AI). Każda z badge'em źródła i linkiem do wymiaru, który ją wykrył. Wiesz co poprawić zanim przeczytasz cały raport.
+              Do 7 gotowych poprawek wygenerowanych algorytmicznie. Każda z badge'em źródła i linkiem do wymiaru, który ją wykrył. Wiesz co poprawić zanim przeczytasz cały raport.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
@@ -741,7 +741,7 @@ export default function PageContent() {
                 Audyt danych strukturalnych
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 16 }}>
-                Algorytmiczna analiza schema.org JSON-LD (0 wywołań AI). Wykrywa ~14 typów schematów, sprawdza kompletność pól i wskazuje brakujące wymagane schematy z priorytetem.
+                Algorytmiczna analiza schema.org JSON-LD. Wykrywa 31 typów schematów, sprawdza kompletność pól i wskazuje brakujące wymagane schematy z priorytetem.
               </p>
               <p style={{ fontSize: 14, color: '#666d80', lineHeight: 1.65 }}>
                 Article, FAQPage, Product, HowTo, Review, BreadcrumbList, WebPage, Organization, Person, AggregateRating - każdy z listą wymaganych i rekomendowanych pól. Status: obecny / niekompletny / brakujący. Kwalifikacja do Google Rich Result.

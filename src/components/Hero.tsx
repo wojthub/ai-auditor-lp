@@ -63,7 +63,7 @@ export default function Hero() {
               lineHeight: 1.6, color: '#36394a',
               maxWidth: 560, margin: '14px auto 0',
             }}>
-              Badamy elementy treści, które najbardziej decydują o cytowaniu przez AI. Zwiększ potencjał cytowania strony przez <span className="hero-brand"><img src="/logos/chatgpt.png" alt="" aria-hidden width={16} height={16} />ChatGPT</span>, <span className="hero-brand"><img src="/logos/perplexity.png" alt="" aria-hidden width={16} height={16} />Perplexity</span> i <span className="hero-brand"><img src="/logos/google.png" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview.
+              Badamy najważniejsze elementy treści, które decydują o cytowaniu przez AI. Zwiększ potencjał cytowania strony przez <span className="hero-brand"><img src="/logos/chatgpt.png" alt="" aria-hidden width={16} height={16} />ChatGPT</span>, <span className="hero-brand"><img src="/logos/perplexity.png" alt="" aria-hidden width={16} height={16} />Perplexity</span> i <span className="hero-brand"><img src="/logos/google.png" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview.
             </span>
           </h1>
 

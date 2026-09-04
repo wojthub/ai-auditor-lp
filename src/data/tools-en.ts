@@ -165,10 +165,10 @@ export const TOOLS_EN: Record<string, ToolData> = {
     heading: 'Structured data audit tool for SEO',
     title: 'Structured data audit tool for SEO',
     description:
-      'Check schema.org across a whole sitemap: what you have, what is missing and which types each page should carry. No AI calls, 1 credit per run.',
+      'Check schema.org across a whole sitemap: what you have, what is missing and which types each page should carry. Fully algorithmic analysis, 1 credit per run.',
     lead:
-      'You point it at a sitemap and the tool reads the code of every page. First it identifies the page type - an article, a product, a job posting - and then it shows which schema.org markup that page already carries and which is missing for that type. The analysis reads only your page code, with no AI model calls, which makes it the fastest tool of the set.',
-    chips: ['1 credit per run', 'Input: sitemap', 'Zero AI model calls'],
+      'You point it at a sitemap and the tool reads the code of every page. First it identifies the page type - an article, a product, a job posting - and then it shows which schema.org markup that page already carries and which is missing for that type. The analysis reads only your page code, which makes it the fastest tool of the set.',
+    chips: ['1 credit per run', 'Input: sitemap', 'Fully algorithmic analysis'],
     defHeading: 'What are structured data gaps (schema.org)?',
     def: [
       'Structured data is the markup in your page code that tells a search engine outright what the page is: an article with an author and a date, a product, a recipe, a job posting. A gap is a type of markup that a given kind of page ought to carry and does not.',

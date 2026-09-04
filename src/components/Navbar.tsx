@@ -96,7 +96,7 @@ export default function Navbar() {
             </div>
           </div>
           <a href="/pl/cennik" className="nav-link">Cennik</a>
-          <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zrób audyt</a>
+          <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zaloguj</a>
           <a href={enHref} className="nav-lang" title="English version">EN</a>
         </div>
 
@@ -197,15 +197,25 @@ export default function Navbar() {
           <a href={enHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             EN - English version
           </a>
+          {/* Rejestracja i logowanie prowadza pod ten sam adres — aplikacja ma jeden ekran
+              `/login` (kod na e-mail albo Google), ktory zaklada konto przy pierwszym wejsciu.
+              Na mobile stoja osobno, bo to dwie rozne intencje odwiedzajacego. */}
           <a
             href={`${APP_URL}/login?lang=pl`}
             onClick={() => setMobileOpen(false)}
             className="nav-mobile-cta"
           >
-            Zrób audyt
+            Załóż darmowe konto
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
+          </a>
+          <a
+            href={`${APP_URL}/login?lang=pl`}
+            onClick={() => setMobileOpen(false)}
+            className="nav-mobile-cta nav-mobile-cta-ghost"
+          >
+            Logowanie
           </a>
         </div>
       )}
@@ -376,6 +386,12 @@ export default function Navbar() {
           font-weight: 600;
           text-decoration: none;
           letter-spacing: -0.015em;
+        }
+        .nav-mobile-cta-ghost {
+          margin-top: 8px;
+          background: #ffffff;
+          color: #0b7983;
+          border: 1px solid #cfe0e2;
         }
         @media (min-width: 820px) and (max-width: 1023px) {
           .nav-link { padding: 6px 7px; font-size: 14px; }

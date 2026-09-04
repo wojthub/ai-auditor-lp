@@ -501,7 +501,7 @@ export default function PageContentEN() {
               What exactly does the tool analyze?
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, margin: '0 auto', lineHeight: 1.65 }}>
-              Each dimension is a separate AI call with a dedicated prompt - separate 0-10 score, separate problems and separate recommendations.
+              Each dimension is scored on its own - separate 0-10 score, separate problems and separate recommendations.
             </p>
           </motion.div>
           <div className="dims-grid">
@@ -688,7 +688,7 @@ export default function PageContentEN() {
               Instant fixes - right after the audit
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 640, lineHeight: 1.65 }}>
-              Up to 7 ready-made fixes generated algorithmically (no extra AI calls). Each with a source badge and a link to the dimension that detected it. You know what to fix before you read the full report.
+              Up to 7 ready-made fixes generated algorithmically. Each with a source badge and a link to the dimension that detected it. You know what to fix before you read the full report.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
@@ -719,7 +719,7 @@ export default function PageContentEN() {
                 Structured data audit
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 16 }}>
-                Algorithmic analysis of schema.org JSON-LD (0 AI calls). Detects ~14 schema types, checks field completeness and flags missing required schemas with priority.
+                Algorithmic analysis of schema.org JSON-LD. Detects 31 schema types, checks field completeness and flags missing required schemas with priority.
               </p>
               <p style={{ fontSize: 14, color: '#666d80', lineHeight: 1.65 }}>
                 Article, FAQPage, Product, HowTo, Review, BreadcrumbList, WebPage, Organization, Person, AggregateRating - each with its list of required and recommended fields. Status: present / incomplete / missing. Google Rich Result eligibility.

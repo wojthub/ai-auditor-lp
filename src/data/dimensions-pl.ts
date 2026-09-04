@@ -770,7 +770,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Algorytmiczna checklista kompletności strony: długość względem konkurencji, obrazy, wideo, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji.',
     lead:
       'Effort Score to algorytmiczna checklista kompletności strony: długość względem konkurencji, materiały wizualne, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji.',
-    chips: ['Skala 0–10', 'W 100% algorytmiczny - zero wywołań modelu', 'Wejście: treść + struktura HTML + średnia Top 10'],
+    chips: ['Skala 0–10', 'W 100% algorytmiczny - wynik powtarzalny', 'Wejście: treść + struktura HTML + średnia Top 10'],
     whyHeading: 'Dlaczego Effort Score jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy Effort Score?',
     why: [

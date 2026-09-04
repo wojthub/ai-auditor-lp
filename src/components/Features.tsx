@@ -441,7 +441,7 @@ export default function Features() {
                 Szybkie poprawki od razu po audycie
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 24 }}>
-                Do 7 gotowych poprawek wygenerowanych algorytmicznie - bez dodatkowego wywołania AI. Każda z badge'em źródła i linkiem do wymiaru. Wiesz co poprawić zanim przeczytasz cały raport.
+                Do 7 gotowych poprawek wygenerowanych algorytmicznie. Każda z badge'em źródła i linkiem do wymiaru. Wiesz co poprawić zanim przeczytasz cały raport.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {['Brakujące tabele, listy lub obrazki', 'Title/Meta za długie lub brak', 'Brakujące sygnały E-E-A-T', 'Niepokryte sub-zapytania AI Overview', 'BLUF - brak odpowiedzi w leadzie'].map(item => (

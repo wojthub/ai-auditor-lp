@@ -230,7 +230,7 @@ export default function FeaturesEN() {
             <motion.div {...fadeUp()}>
               <SectionLabel>Quick Wins</SectionLabel>
               <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 16 }}>Instant fixes right after the audit</h2>
-              <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 24 }}>Up to 7 ready-made fixes generated algorithmically - no extra AI calls. Each with a source badge and a link to the relevant dimension. You know what to fix before reading the full report.</p>
+              <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, marginBottom: 24 }}>Up to 7 ready-made fixes generated algorithmically. Each with a source badge and a link to the relevant dimension. You know what to fix before reading the full report.</p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {['Missing tables, lists or images', 'Title/Meta too long or missing', 'Missing E-E-A-T signals', 'Uncovered AI Overview sub-queries', 'BLUF - no answer in the lead'].map(item => (
                   <li key={item} style={{ display: 'flex', gap: 10, fontSize: 14, color: '#36394a' }}><span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>→</span>{item}</li>

@@ -853,7 +853,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'An algorithmic completeness checklist: length against competitors, images, video, tables, lists, heading hierarchy, table of contents and a visible update date.',
     lead:
       'Effort Score is an algorithmic checklist of page completeness: length against competitors, visual material, tables, lists, heading hierarchy, table of contents and a visible update date.',
-    chips: ['Score 0-10', '100% algorithmic - zero model calls', 'Input: content + HTML structure + Top 10 average'],
+    chips: ['Score 0-10', '100% algorithmic - repeatable score', 'Input: content + HTML structure + Top 10 average'],
     whyHeading: 'Why does Effort Score matter to AI models?',
     why: [
       'Completeness signals are the oldest quality proxy search engines rely on: a page with a table, visual material and a current date more often results from thorough work on the topic than a page made of five paragraphs. Search engines treat it as a strong hint of quality.',

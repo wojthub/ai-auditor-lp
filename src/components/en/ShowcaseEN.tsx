@@ -1,6 +1,25 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import ShowcaseDeck, { type ShowcaseSlide } from '../ShowcaseDeck';
+
+/** Three panel screens in working order: score → recommendations → ready copy. */
+const SLIDES: ShowcaseSlide[] = [
+  {
+    src: '/dashboard-preview.png',
+    alt: 'CitationOne dashboard - Content Quality Score and the 10-dimension profile',
+    label: 'Summary',
+  },
+  {
+    src: '/dashboard-recommendations.png',
+    alt: 'CitationOne dashboard - recommendation list with before and after comparison',
+    label: 'Recommendations',
+  },
+  {
+    src: '/dashboard-apply.png',
+    alt: 'CitationOne dashboard - content with applied recommendations and tag changes',
+    label: 'Apply to content',
+  },
+];
 
 export default function ShowcaseEN() {
   // Tlo (siatka kropek + graf) i gradient daje HeroBand — ta sekcja musi zostac
@@ -25,54 +44,12 @@ export default function ShowcaseEN() {
       />
 
       <div style={{ position: 'relative', maxWidth: 1124, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-
-        {/* Device mockup - thin bezel, fades to transparent toward the bottom */}
-        <div style={{ perspective: '2000px', marginBottom: 'clamp(-150px, -14vw, -52px)' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 80, rotateX: 5 }}
-            animate={{ opacity: 1, y: 0, rotateX: 5 }}
-            whileHover={{ scale: 1.025 }}
-            transition={{ duration: 0.9, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              transformOrigin: '50% 0%',
-              maxWidth: 980,
-              margin: '0 auto',
-              filter: 'drop-shadow(-18px 26px 44px rgba(13,13,18,0.2))',
-            }}
-          >
-            <div style={{
-              WebkitMaskImage: 'linear-gradient(to bottom, #000 0%, #000 40%, transparent 76%)',
-              maskImage: 'linear-gradient(to bottom, #000 0%, #000 40%, transparent 76%)',
-            }}>
-              {/* metallic outer rim */}
-              <div style={{
-                background: 'linear-gradient(135deg, #edeff2 0%, #b4b7bd 40%, #d6d8dc 68%, #a6a9af 100%)',
-                borderRadius: 30,
-                padding: 4,
-              }}>
-                {/* dark bezel */}
-                <div style={{ background: '#0b0b0d', borderRadius: 26, padding: 12 }}>
-                  {/* screen */}
-                  <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.05)' }}>
-                    <img
-                      src="/dashboard-preview.png"
-                      alt="CitationOne dashboard - Content Quality Score and the 10-dimension profile"
-                      style={{ display: 'block', width: '100%', height: 'auto' }}
-                    />
-                    {/* screen gloss */}
-                    <div aria-hidden style={{
-                      position: 'absolute',
-                      inset: 0,
-                      pointerEvents: 'none',
-                      background: 'linear-gradient(118deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 16%, rgba(255,255,255,0) 36%)',
-                    }} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
+        <ShowcaseDeck
+          slides={SLIDES}
+          regionLabel="CitationOne panel screens"
+          prevLabel="Previous screen"
+          nextLabel="Next screen"
+        />
       </div>
     </section>
   );

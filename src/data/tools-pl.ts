@@ -166,10 +166,10 @@ export const TOOLS_PL: Record<string, ToolData> = {
     heading: 'Narzędzie do audytu danych strukturalnych dla SEO',
     title: 'Narzędzie do audytu danych strukturalnych dla SEO',
     description:
-      'Sprawdź schema.org na całej sitemapie: co masz wdrożone, czego brakuje i jakich znaczników oczekuje każdy typ strony. Bez wywołań AI, 1 kredyt za analizę.',
+      'Sprawdź schema.org na całej sitemapie: co masz wdrożone, czego brakuje i jakich znaczników oczekuje każdy typ strony. Analiza w całości algorytmiczna, 1 kredyt za przebieg.',
     lead:
-      'Wskazujesz sitemapę, a narzędzie sprawdza kod każdej podstrony. Najpierw rozpoznaje jej typ - artykuł, produkt, ofertę pracy - a potem pokazuje, które znaczniki schema.org już ma, a których brakuje przy tym typie strony. Analiza czyta wyłącznie kod Twoich stron, bez wywołań modeli AI, więc jest najszybsza z całego zestawu.',
-    chips: ['1 kredyt za analizę', 'Wejście: sitemapa', 'Zero wywołań modelu AI'],
+      'Wskazujesz sitemapę, a narzędzie sprawdza kod każdej podstrony. Najpierw rozpoznaje jej typ - artykuł, produkt, ofertę pracy - a potem pokazuje, które znaczniki schema.org już ma, a których brakuje przy tym typie strony. Analiza czyta wyłącznie kod Twoich stron, więc jest najszybsza z całego zestawu.',
+    chips: ['1 kredyt za analizę', 'Wejście: sitemapa', 'Analiza w pełni algorytmiczna'],
     defHeading: 'Czym są luki w danych strukturalnych (schema.org)?',
     def: [
       'Dane strukturalne to znaczniki w kodzie strony, którymi mówisz wyszukiwarce wprost, czym ta strona jest: artykułem z autorem i datą, produktem, przepisem, ofertą pracy. Luka to brak znacznika, który dany typ strony powinien mieć.',

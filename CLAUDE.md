@@ -102,6 +102,7 @@ ai-auditor-lp/
 │       ├── Hero.tsx
 │       ├── TechLogos.tsx
 │       ├── Showcase.tsx         # Mockup panelu (sam mockup, bez copy) - na HP
+│       ├── ShowcaseDeck.tsx     # Shared - karuzela 3 ekranow panelu (pigulki + strzalki + swipe)
 │       ├── Problem.tsx
 │       ├── Solution.tsx         # NIEUŻYWANA na HP
 │       ├── HowItWorks.tsx
@@ -208,7 +209,16 @@ Navbar → Hero → Showcase → Problem → HowItWorks → TechLogos → Dimens
 
 Pliki: PL [page.tsx](src/app/pl/page.tsx), EN [page.tsx](src/app/page.tsx) (komponenty EN w `src/components/en/*EN.tsx`).
 
-**Showcase** ([Showcase.tsx](src/components/Showcase.tsx) / [en/ShowcaseEN.tsx](src/components/en/ShowcaseEN.tsx)) - sam mockup panelu w ramce urządzenia (cienki bezel, metaliczna krawędź, połysk), zanikający ku dołowi przez `maskImage` linear-gradient. Bez copy/CTA. Hover = lekki zoom (`scale: 1.025`). Umieszczony zaraz po Hero - górny kawałek mockupu widoczny above the fold (Showcase `padding: 76px 0 96px`, Hero zredukowany: bez `minHeight`/flex-center, `padding: 40px 24px 28px`). Mockup `animate` z `delay: 1` - wjeżdża od dołu po 1 s. Screeny: `public/dashboard-preview.png` (EN), `public/dashboard-preview-pl.png` (PL) - oba z usuniętym bannerem TESTING PHASE / FAZA TESTÓW.
+**Showcase** ([Showcase.tsx](src/components/Showcase.tsx) / [en/ShowcaseEN.tsx](src/components/en/ShowcaseEN.tsx)) - mockup panelu w ramce urządzenia (cienki bezel, metaliczna krawędź, połysk), zanikający ku dołowi przez `maskImage`. Bez copy/CTA. Umieszczony zaraz po Hero - górny kawałek mockupu widoczny above the fold (Showcase `padding: 76px 0 96px`, Hero zredukowany: bez `minHeight`/flex-center, `padding: 40px 24px 28px`). Mockup `animate` z `delay: 1` - wjeżdża od dołu po 1 s.
+
+Na ekranie leżą **trzy slajdy** (od 2026-09-04) w kolejności pracy z audytem: Podsumowanie → Rekomendacje → Wdrożenie w treść. Karuzelę trzyma wspólny [ShowcaseDeck.tsx](src/components/ShowcaseDeck.tsx) - `Showcase`/`ShowcaseEN` podają mu tylko slajdy i etykiety (ten sam wzorzec co `DimensionPage` z propem `t`). Przełączanie: pigułki nad urządzeniem, strzałki wychodzące pod kursorem na ekranie (poniżej maski, bo dół mockupu zanika) i swipe/drag. Autoodtwarzanie (5,2 s) gaśnie **na zawsze przy pierwszym ruchu użytkownika** i nie startuje przy `prefers-reduced-motion: reduce`.
+
+- **Pozycję taśmy trzyma `useMotionValue` + własne `animate()`, nigdy prop `animate={{ x }}`.** Przy propie framer po puszczeniu myszy ściąga taśmę do `dragConstraints` i - gdy indeks się NIE zmienił - nic jej stamtąd nie zabiera, bo React nie przerenderował: krótkie szarpnięcie na slajdzie 2 przerzucało widok na slajd 1, zostawiając zapaloną pigułkę „2". Dlatego `onDragEnd` snapuje **zawsze**, także poniżej progu (`else go(index)`).
+- **Przesunięcie liczymy w pikselach, nie w procentach** - szerokość ekranu mierzy `ResizeObserver` (a nie `getBoundingClientRect`, który przy `rotateX(5deg)` zwraca szerokość *rzutowaną*, o ~2% większą). `drag` operuje na pikselach i mieszanie jednostek na tej samej wartości `x` szarpie slajdem.
+- **Slajdy 2+ są `loading="lazy"`, ale dociągane w `requestIdleCallback`** - lazy startuje dopiero, gdy obrazek wjeżdża w widok, więc bez tego pierwsze przełączenie pokazywałoby pusty ekran.
+- **Ekran ma sztywne `aspectRatio: 1900 / 962`** - inaczej zmiana slajdu przesuwałaby sekcje poniżej. Wszystkie zrzuty są przycięte do tego rozmiaru; nowy slajd musi trzymać tę proporcję.
+- Zrzuty: `public/dashboard-preview{,-pl}.png` (Podsumowanie), `dashboard-recommendations{,-pl}.png`, `dashboard-apply{,-pl}.png` - PL i EN osobno, wszystkie 1900×962, PNG z paletą (~150-190 KB; surowy zrzut z Windowsa waży ~500 KB, więc przepuszczaj go przez `sharp({ palette: true })`).
+- Hover-zoom całego urządzenia **zniknął** wraz z karuzelą - zoom pod kursorem kłócił się z klikaniem strzałek na ekranie.
 
 **ReportSection** ([ReportSection.tsx](src/components/ReportSection.tsx) / [en/ReportSectionEN.tsx](src/components/en/ReportSectionEN.tsx)) - "Dane gotowe do wdrożenia". Układ 2-kolumnowy (stack <900px): lewa = label + h2 + opis + 3 punkty (Raport PDF / Audyt Schema / Historia rewizji) + CTA "Zobacz przykładowy raport"/"View sample report" (otwiera udostępniony raport online w nowej karcie, `target="_blank"`); prawa = podgląd raportu w papierowej ramce (cień, połysk, zanikanie ku dołowi przez `maskImage`, perspektywa, hover-zoom), też klikalny → raport. Linki **ustawia admin w aplikacji**, nie kod: `useReportUrl` ([src/lib/useReportUrl.ts](src/lib/useReportUrl.ts)) dociąga je w runtime z `app.citationone.com/api/public/lp-links` (w aplikacji: `/ustawienia` → karta „Strona citationone.com”, klucze `LP_REPORT_URL_PL` / `LP_REPORT_URL_EN`). Stałe `REPORT_URL_FALLBACK` w obu komponentach to wartość domyślna wypalona w HTML — zostaje, gdy aplikacja nie odpowie, pole jest puste albo odpowiedź nie wygląda jak link `…/share/…`. **LP jest statyczne, więc panelu logowania tu nie postawimy** — `citationone.com/admin` to 301 do panelu aplikacji (`public/_redirects`). Podgląd: `public/report-preview.png` (screenshot udostępnionego raportu web - score'y, profil 10 wymiarów, Quick Wins).
 
