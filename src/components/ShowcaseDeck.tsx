@@ -99,8 +99,8 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
-      {/* Adnotacja: nazwa widocznego ekranu + pozycja w talii. Czysto informacyjna — zadnych
-          klikalnych elementow poza strzalkami, wiec kreski to `span`, nie przyciski. */}
+      {/* Adnotacja: nazwa widocznego ekranu + pozycja w talii. Kreski przeskakuja wprost
+          na wybrany slajd — sa przyciskami, wiec maja etykiety i wlasne pole trafienia. */}
       <div className="deck-caption">
         <span className="deck-caption-dot" aria-hidden />
         <span className="deck-caption-text">
@@ -116,9 +116,20 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
             </motion.span>
           </AnimatePresence>
         </span>
-        <span className="deck-caption-steps" aria-hidden>
+        <span className="deck-caption-steps">
           {slides.map((slide, i) => (
-            <span key={slide.src} className={i === index ? 'deck-step deck-step-on' : 'deck-step'} />
+            <button
+              key={slide.src}
+              type="button"
+              className="deck-step-btn"
+              onClick={() => go(i)}
+              onMouseDown={(e) => e.preventDefault()}
+              aria-label={slide.label}
+              aria-current={i === index ? 'true' : undefined}
+            >
+              {/* Kreska ma 3 px, wiec pole trafienia daje `padding` przycisku, nie ona sama. */}
+              <span className={i === index ? 'deck-step deck-step-on' : 'deck-step'} />
+            </button>
           ))}
         </span>
         {/* Licznik czyta glosno to samo, co kreski pokazuja wzrokiem. */}
@@ -283,9 +294,23 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
         .deck-caption-steps {
           display: flex;
           align-items: center;
-          gap: 4px;
           margin-left: 2px;
         }
+        /* Przycisk jest przezroczysta ramka wokol kreski: 19 px wysokosci pola trafienia
+           przy 3 px widocznego paska, bez zmiany wysokosci calej pastylki. */
+        .deck-step-btn {
+          appearance: none;
+          border: none;
+          background: none;
+          padding: 8px 2px;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          line-height: 0;
+        }
+        .deck-step-btn:hover .deck-step { background: #a4acb9; }
+        .deck-step-btn:hover .deck-step-on { background: #097380; }
         .deck-step {
           width: 8px;
           height: 3px;
