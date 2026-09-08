@@ -25,7 +25,7 @@ export default function Showcase() {
   // Tlo (siatka kropek + graf) i gradient daje HeroBand — ta sekcja musi zostac
   // przezroczysta, inaczej zaslonilaby wspolna warstwe tla.
   return (
-    <section style={{ position: 'relative', overflow: 'hidden', padding: '26px 0 96px' }}>
+    <section style={{ position: 'relative', overflow: 'hidden', padding: '76px 0 96px' }}>
 
       {/* miękka poświata akcentu za urządzeniem */}
       <div
@@ -44,8 +44,11 @@ export default function Showcase() {
       />
 
       <div style={{ position: 'relative', maxWidth: 1124, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
+        {/* Wchodzimy od „Rekomendacji” — to ekran, po ktory klient przychodzi; Podsumowanie
+            i Wdrozenie zostaja na wyciagniecie strzalki. */}
         <ShowcaseDeck
           slides={SLIDES}
+          startIndex={1}
           regionLabel="Ekrany panelu CitationOne"
           prevLabel="Poprzedni ekran"
           nextLabel="Następny ekran"

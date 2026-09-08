@@ -136,12 +136,30 @@ export default function Hero() {
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0b7983" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z" />
             </svg>
-            Odbierz 3 darmowe audyty na start. Bez podpinania karty.
+            {/* Nota jest jednoczesnie wejsciem do rejestracji — ten sam ekran `/login`,
+                co CTA w navbarze; audyty przyznaje sie po zalozeniu konta. */}
+            <span>
+              <a href={`${APP_URL}/login?lang=pl`} className="hero-note-link">Odbierz 3 darmowe audyty</a>
+              {' '}po rejestracji. Bez podpinania karty.
+            </span>
           </p>
         </motion.div>
       </div>
 
       <style>{`
+        .hero-note-link {
+          color: #0b7983;
+          font-weight: 600;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+          text-decoration-thickness: 1px;
+          text-decoration-color: rgba(11,121,131,0.35);
+          transition: text-decoration-color 0.16s ease;
+        }
+        .hero-note-link:hover {
+          text-decoration-color: #0b7983;
+          opacity: 1;
+        }
         .hero-input-row {
           display: flex;
         }

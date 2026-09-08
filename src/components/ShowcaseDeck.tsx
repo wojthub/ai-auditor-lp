@@ -14,6 +14,8 @@ export type ShowcaseSlide = {
 
 type Props = {
   slides: ShowcaseSlide[];
+  /** Slajd pokazywany po wejsciu na strone; reszta czeka na ruch uzytkownika. */
+  startIndex?: number;
   /** Etykiety dostepnosci — jedyne miejsce, w ktorym ten komponent rozroznia jezyki. */
   regionLabel: string;
   prevLabel: string;
@@ -21,17 +23,13 @@ type Props = {
 };
 
 /**
- * Ekran mockupu: kilka zrzutow panelu, ktore przelaczaja sie same, a recznie ida strzalkami
- * i swipem. Wspoldzielony przez `Showcase` (PL) i `ShowcaseEN` — same slajdy i etykiety ida
- * propem, tak jak w `DimensionPage`.
+ * Ekran mockupu: kilka zrzutow panelu przewijanych strzalkami, kreskami pozycji i swipem.
+ * Slajd zmienia sie WYLACZNIE na ruch uzytkownika — zadnego autoodtwarzania (decyzja
+ * z 2026-09-08). Wspoldzielony przez `Showcase` (PL) i `ShowcaseEN` — same slajdy
+ * i etykiety ida propem, tak jak w `DimensionPage`.
  */
-export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel }: Props) {
-  const [index, setIndex] = useState(0);
-  // Autoodtwarzanie gasnie tylko przy `prefers-reduced-motion`; recznej zmiany slajdu NIE
-  // konczy na stale — pauzuje je kursor nad karuzela i trwajace przeciagniecie.
-  const [autoplay, setAutoplay] = useState(true);
-  const [hovering, setHovering] = useState(false);
-  const [dragging, setDragging] = useState(false);
+export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prevLabel, nextLabel }: Props) {
+  const [index, setIndex] = useState(startIndex);
   const count = slides.length;
 
   // Tasme przesuwamy w PIKSELACH, nie w procentach: `drag` liczy przesuniecie w px i mieszanie
@@ -55,8 +53,8 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
     setIndex(next);
     animate(x, -next * width, SPRING);
   };
-  // Ostatni slajd wraca na pierwszy tylko w autoodtwarzaniu; strzalki i swipe zatrzymuja sie
-  // na koncach, zeby przeciagniecie nie teleportowalo uzytkownika przez cala talie.
+  // Talia sie nie zapetla: strzalki i swipe zatrzymuja sie na koncach, zeby przeciagniecie
+  // nie teleportowalo uzytkownika z ostatniego ekranu na pierwszy.
   const go = (next: number) => settle(Math.min(count - 1, Math.max(0, next)));
 
   // Zmiana szerokosci (obrot telefonu, resize okna) przelicza pozycje bez animacji —
@@ -68,74 +66,25 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
     x.set(-index * width);
   }, [width, index, x]);
 
+  // Slajdy poza startowym maja `loading="lazy"` (nie blokuja pierwszego renderu), ale
+  // dociagamy je zaraz po bezczynnosci — inaczej pierwsze przelaczenie pokazywaloby pusty
+  // ekran, bo lazy startuje dopiero, gdy obrazek wjezdza w widok.
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) setAutoplay(false);
-  }, []);
-
-  // Slajdy 2+ maja `loading="lazy"` (nie blokuja pierwszego renderu), ale dociagamy je zaraz
-  // po bezczynnosci — inaczej pierwsze przelaczenie pokazywaloby pusty ekran, bo lazy startuje
-  // dopiero, gdy obrazek wjezdza w widok.
-  useEffect(() => {
-    const preload = () => slides.slice(1).forEach((s) => { new Image().src = s.src; });
+    const preload = () => slides.forEach((s, i) => { if (i !== startIndex) new Image().src = s.src; });
     if (typeof window.requestIdleCallback === 'function') {
       const id = window.requestIdleCallback(preload);
       return () => window.cancelIdleCallback(id);
     }
     const id = window.setTimeout(preload, 1500);
     return () => window.clearTimeout(id);
-  }, [slides]);
-
-  useEffect(() => {
-    if (!autoplay || hovering || dragging || count < 2) return;
-    const id = window.setTimeout(() => settle((index + 1) % count), 5200);
-    return () => window.clearTimeout(id);
-  }, [autoplay, hovering, dragging, index, count, width]);
+  }, [slides, startIndex]);
 
   return (
     <div
       role="group"
       aria-roledescription="carousel"
       aria-label={regionLabel}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
     >
-      {/* Adnotacja: nazwa widocznego ekranu + pozycja w talii. Kreski przeskakuja wprost
-          na wybrany slajd — sa przyciskami, wiec maja etykiety i wlasne pole trafienia. */}
-      <div className="deck-caption">
-        <span className="deck-caption-dot" aria-hidden />
-        <span className="deck-caption-text">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={slides[index].label}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.22, ease: 'easeOut' }}
-            >
-              {slides[index].label}
-            </motion.span>
-          </AnimatePresence>
-        </span>
-        <span className="deck-caption-steps">
-          {slides.map((slide, i) => (
-            <button
-              key={slide.src}
-              type="button"
-              className="deck-step-btn"
-              onClick={() => go(i)}
-              onMouseDown={(e) => e.preventDefault()}
-              aria-label={slide.label}
-              aria-current={i === index ? 'true' : undefined}
-            >
-              {/* Kreska ma 3 px, wiec pole trafienia daje `padding` przycisku, nie ona sama. */}
-              <span className={i === index ? 'deck-step deck-step-on' : 'deck-step'} />
-            </button>
-          ))}
-        </span>
-        {/* Licznik czyta glosno to samo, co kreski pokazuja wzrokiem. */}
-        <span className="deck-caption-count">{index + 1}/{count}</span>
-      </div>
-
       <div style={{ perspective: '2000px', marginBottom: 'clamp(-150px, -14vw, -52px)' }}>
         <motion.div
           initial={{ opacity: 0, y: 80, rotateX: 5 }}
@@ -178,9 +127,7 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
                     dragElastic={0.14}
                     dragMomentum={false}
                     whileDrag={{ cursor: 'grabbing' }}
-                    onDragStart={() => setDragging(true)}
                     onDragEnd={(_, info) => {
-                      setDragging(false);
                       // Kazde puszczenie konczy sie snapem — takze ponizej progu, zeby tasma
                       // nie zostawala miedzy slajdami.
                       if (info.offset.x < -60 || info.velocity.x < -420) go(index + 1);
@@ -194,7 +141,7 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
                         src={slide.src}
                         alt={slide.alt}
                         draggable={false}
-                        loading={i === 0 ? 'eager' : 'lazy'}
+                        loading={i === startIndex ? 'eager' : 'lazy'}
                         style={{
                           flex: '0 0 100%',
                           width: '100%',
@@ -248,14 +195,55 @@ export default function ShowcaseDeck({ slides, regionLabel, prevLabel, nextLabel
         </motion.div>
       </div>
 
+      {/* Adnotacja: nazwa widocznego ekranu + pozycja w talii. Kreski przeskakuja wprost
+          na wybrany slajd — sa przyciskami, wiec maja etykiety i wlasne pole trafienia. */}
+      <div className="deck-caption">
+        <span className="deck-caption-dot" aria-hidden />
+        <span className="deck-caption-text">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={slides[index].label}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+            >
+              {slides[index].label}
+            </motion.span>
+          </AnimatePresence>
+        </span>
+        <span className="deck-caption-steps">
+          {slides.map((slide, i) => (
+            <button
+              key={slide.src}
+              type="button"
+              className="deck-step-btn"
+              onClick={() => go(i)}
+              onMouseDown={(e) => e.preventDefault()}
+              aria-label={slide.label}
+              aria-current={i === index ? 'true' : undefined}
+            >
+              {/* Kreska ma 3 px, wiec pole trafienia daje `padding` przycisku, nie ona sama. */}
+              <span className={i === index ? 'deck-step deck-step-on' : 'deck-step'} />
+            </button>
+          ))}
+        </span>
+        {/* Licznik czyta glosno to samo, co kreski pokazuja wzrokiem. */}
+        <span className="deck-caption-count">{index + 1}/{count}</span>
+      </div>
+
       <style>{`
         .deck-caption {
+          /* Urzadzenie ma transform + filter, wiec tworzy kontekst ukladania i maluje sie NAD
+             zwyklymi blokami w przeplywie — bez tego pastylka chowa sie pod mockupem. */
+          position: relative;
+          z-index: 1;
           display: flex;
           align-items: center;
           gap: 10px;
           width: fit-content;
           max-width: 100%;
-          margin: 0 auto 22px;
+          margin: 0 auto;
           padding: 7px 14px 7px 12px;
           border: 1px solid #e4e7ec;
           border-radius: 999px;

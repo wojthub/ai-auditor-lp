@@ -136,12 +136,30 @@ export default function HeroEN() {
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0b7983" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z" />
             </svg>
-            Get 3 free audits to start. No card required.
+            {/* The note doubles as a sign-up entry point — same `/login` screen as the
+                navbar CTA; the audits land once the account exists. */}
+            <span>
+              <a href={`${APP_URL}/login?lang=en`} className="hero-note-link">Get 3 free audits</a>
+              {' '}after signing up. No card required.
+            </span>
           </p>
         </motion.div>
       </div>
 
       <style>{`
+        .hero-note-link {
+          color: #0b7983;
+          font-weight: 600;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+          text-decoration-thickness: 1px;
+          text-decoration-color: rgba(11,121,131,0.35);
+          transition: text-decoration-color 0.16s ease;
+        }
+        .hero-note-link:hover {
+          text-decoration-color: #0b7983;
+          opacity: 1;
+        }
         .hero-input-row { display: flex; }
         .hero-input-row input:focus { border-color: #0b7983; border-right: none; }
         @media (max-width: 580px) {
