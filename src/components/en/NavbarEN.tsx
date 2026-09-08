@@ -100,31 +100,37 @@ export default function NavbarEN() {
           <a href={plHref} className="nav-lang" title="Wersja polska">PL</a>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden flex items-center justify-center nav-burger"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-          style={{
-            width: 44,
-            height: 44,
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            borderRadius: 6,
-            padding: 0,
-          }}
-        >
-          {mobileOpen ? (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d0d12" strokeWidth={2} strokeLinecap="round">
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d0d12" strokeWidth={2} strokeLinecap="round">
-              <path d="M3 12h18M3 6h18M3 18h18" />
-            </svg>
-          )}
-        </button>
+        {/* Mobile bar, right side: a fast way back in for returning users + the burger.
+            A plain TEXT link, not a filled button — the hero CTA above the fold already points
+            at the same `/login`, and a second accent button would blur the hierarchy. */}
+        <div className="md:hidden flex items-center nav-mobile-right">
+          <a href={`${APP_URL}/login?lang=en`} className="nav-mobile-login">Log in</a>
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden flex items-center justify-center nav-burger"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            style={{
+              width: 44,
+              height: 44,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              borderRadius: 6,
+              padding: 0,
+            }}
+          >
+            {mobileOpen ? (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d0d12" strokeWidth={2} strokeLinecap="round">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d0d12" strokeWidth={2} strokeLinecap="round">
+                <path d="M3 12h18M3 6h18M3 18h18" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu panel */}
@@ -386,8 +392,24 @@ export default function NavbarEN() {
           .nav-cta { padding: 11px 13px; font-size: 14px; }
           .nav-lang { margin-left: 6px; }
         }
+        /* Link „zaloguj" przy hamburgerze: bez tla i ramki, 44 px pola trafienia. */
+        .nav-mobile-login {
+          display: inline-flex;
+          align-items: center;
+          height: 44px;
+          padding: 0 10px;
+          font-size: 15px;
+          font-weight: 600;
+          color: #0b7983;
+          text-decoration: none;
+          letter-spacing: -0.015em;
+          white-space: nowrap;
+        }
+        .nav-mobile-login:hover { opacity: 1; color: #097380; }
         @media (max-width: 819px) {
           .nav-desktop { display: none !important; }
+          /* Prog paska jest szerszy niz Tailwindowe md, wiec kontener tez musi go znac. */
+          .nav-mobile-right { display: flex !important; }
           .nav-burger { display: inline-flex !important; }
           .nav-mobile-panel { display: block !important; }
         }

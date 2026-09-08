@@ -186,6 +186,26 @@ Siatka cech na LP odwzorowuje kontrakt z `../ai-auditor/src/lib/api/version.ts` 
 podanej wprost). Numeru wersji celowo NIE ma w copy: LP jest statyczne i zwietrzałoby przy pierwszym
 bumpie; w pasku bloku kodu jest `api/v1`, czyli prefiks ścieżki, który zmienia się tylko przy zmianie łamiącej.
 
+### Navbar — wejścia do aplikacji
+
+| | Desktop | Mobile |
+|-|---------|--------|
+| Pasek | CTA „Zaloguj" / „Log in" (wypełniony) | tekstowy link „Zaloguj" / „Log in" obok hamburgera |
+| Menu | — | „Załóż darmowe konto" (wypełniony) + „Logowanie" (ghost) |
+
+Wszystkie cztery prowadzą pod `APP_URL/login?lang={pl|en}` — aplikacja ma jeden ekran logowania,
+który zakłada konto przy pierwszym wejściu, więc osobnego `/register` nie ma.
+
+- **Link na mobile jest TEKSTOWY, nie wypełnionym przyciskiem** (decyzja z 2026-09-08): nad zgięciem
+  stoi już „Zrób audyt" przy inpucie i prowadzi pod ten sam `/login`; drugi przycisk w akcencie
+  rozmywałby hierarchię. Kupuje jedno: wracający użytkownik nie musi otwierać hamburgera i przewijać
+  pod cztery pozycje menu. Rejestrację obsługują hero i nota pod inputem.
+- **Kontener `.nav-mobile-right` musi mieć własną regułę w `@media (max-width: 819px)`** — próg paska
+  jest szerszy niż Tailwindowe `md` (768 px), więc samo `md:hidden` gasiłoby go w przedziale 768–819 px,
+  dokładnie tak jak wcześniej trzeba było ratować `.nav-burger`.
+- Miejsca starcza: przy 320 px między logo (w szczycie animacji „CitationNone?") a linkiem zostaje
+  ~30 px luzu; link ma `white-space: nowrap` i 44 px pola trafienia.
+
 ### 301 Redirecty (`public/_redirects`)
 
 | Stary URL | Nowy URL | Powód |
