@@ -10,36 +10,44 @@ const ACCENT = '#0b7983';
 
 const FEATURES = [
   {
-    title: 'Klucz API zamiast logowania',
-    body: 'Nagłówek Authorization: Bearer. Klucz tworzysz i cofasz w panelu, pokazywany jest raz - w bazie trzymamy wyłącznie jego hash.',
+    title: 'Dostęp na klucz API',
+    body: 'Zamiast loginu i hasła wysyłasz klucz w nagłówku żądania. Tworzysz go i cofasz w panelu; pokazujemy go jeden raz, a w bazie zostaje wyłącznie jego nieodwracalny skrót.',
   },
   {
-    title: 'Model asynchroniczny',
-    body: 'POST zwraca 202 z identyfikatorem zadania i nie blokuje połączenia. Audyt liczy się w tle, wynik odbierasz przez GET.',
+    title: 'Zakresy kluczy',
+    body: 'Klucz może mieć sam odczyt albo także prawo zlecania audytów. Żądanie poza swoim zakresem dostaje odmowę, więc klucz wpięty w cudzy skrypt nie wyda Twoich kredytów.',
   },
   {
-    title: 'Webhooki zamiast odpytywania',
-    body: 'Podaj webhookUrl, a wynik przyjdzie do Ciebie POST-em - podpisany HMAC-SHA256. Błędy też są wysyłane, a paczka daje osobne zdarzenie per audyt.',
+    title: 'Praca w tle',
+    body: 'Audyt liczy się kilka minut, więc zlecenie kończy się od razu - dostajesz numer zadania i wolne połączenie. Po wynik wracasz osobnym zapytaniem.',
   },
   {
-    title: 'Audyt treści przed publikacją',
-    body: 'Zamiast url wyślij content (50-200 000 znaków) i zaudytuj szkic, przeredagowany tekst albo copy dla strony, której jeszcze nie ma. Te same wymiary, ten sam 1 kredyt.',
+    title: 'Powiadomienie zamiast odpytywania',
+    body: 'Podaj swój adres w polu webhookUrl, a gotowy wynik przyjdzie do Ciebie sam, z podpisem potwierdzającym nadawcę. Błędy też przychodzą, a zlecenie masowe wysyła osobne powiadomienie za każdy audyt.',
   },
   {
-    title: 'Pełny wynik jako JSON',
-    body: 'CQS, 10 wymiarów z problemami, E-E-A-T, rekomendacje Przed i Po, analiza konkurencji (Google i ChatGPT) oraz pokrycie Fan-Out.',
+    title: 'Audyt tekstu przed publikacją',
+    body: 'Zamiast adresu strony możesz wysłać sam tekst i sprawdzić szkic, nową wersję albo copy dla strony, której jeszcze nie ma. Ten sam zestaw wymiarów, ten sam 1 kredyt.',
+  },
+  {
+    title: 'Cały raport jako JSON',
+    body: 'Content Quality Score, dziesięć wymiarów z listą problemów, E-E-A-T, rekomendacje w parach przed i po, porównanie z konkurencją z Google i ChatGPT oraz pokrycie pytań Fan-Out.',
   },
   {
     title: 'Zlecenia masowe',
-    body: 'Do 50 adresów jednym żądaniem. Kolejka po stronie serwera, jedno zbiorcze zapytanie o dane fraz, status i anulowanie paczki.',
+    body: 'Całą listę adresów wysyłasz jednym żądaniem, a serwer ustawia je w kolejkę i liczy po kolei. W trakcie sprawdzasz postęp, a paczkę możesz w każdej chwili zatrzymać.',
   },
   {
-    title: 'Publiczny link do raportu',
-    body: 'Opcjonalnie audyt dostaje adres read-only, który wyślesz klientowi bez zakładania mu konta. Z terminem ważności albo bezterminowo.',
+    title: 'Projekty i historia zleceń',
+    body: 'Przy zleceniu nadajesz audytowi nazwę projektu, a potem filtrujesz po niej listę - obok statusu, domeny i zakresu dat. Osobne zapytanie zwraca same projekty wraz z liczbą audytów.',
+  },
+  {
+    title: 'Raport do wysłania klientowi',
+    body: 'Audyt może dostać publiczny adres tylko do odczytu, który wyślesz klientowi bez zakładania mu konta. Z datą wygaśnięcia albo bezterminowo.',
   },
   {
     title: 'Rozliczenie w kredytach',
-    body: 'Jeden audyt z API kosztuje 1 kredyt - dokładnie tyle samo, co audyt zlecony w panelu. Bez osobnego abonamentu; saldo i historię czytasz z GET /credits/usage.',
+    body: 'Jeden audyt z API kosztuje 1 kredyt - dokładnie tyle samo, co audyt zlecony w panelu. Bez osobnego abonamentu; saldo i historię zużycia czytasz z API.',
   },
 ];
 
@@ -93,8 +101,8 @@ export default function ApiContent() {
             API CitationOne
           </h1>
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.72, maxWidth: 560, margin: '0 auto' }}>
-            Uruchamiaj audyty programatycznie i pobieraj wynik jako JSON. Ten sam silnik,
-            który liczy raporty w panelu - tylko wpięty w Twój workflow, CMS albo dashboard klienta.
+            Zlecaj audyty z własnego kodu i odbieraj wynik jako JSON. Ten sam silnik, który
+            liczy raporty w panelu - wpięty w Twój CMS, skrypt albo dashboard klienta.
           </p>
         </motion.div>
 
@@ -256,8 +264,8 @@ export default function ApiContent() {
             <a href={DOCS_MD_URL} target="_blank" rel="noopener noreferrer" style={{ color: ACCENT, fontWeight: 600 }}>
               /api-docs.md
             </a>
-            . Wskaż ten adres asystentowi (Claude, ChatGPT, Cursor), a dostanie kontrakt API bez
-            zdzierania layoutu ze strony HTML - z zachowanymi tabelami i blokami kodu. Obie wersje
+            . Wskaż ten adres asystentowi (Claude, ChatGPT, Cursor), a dostanie pełny opis API bez
+            przedzierania się przez kod strony - z zachowanymi tabelami i blokami kodu. Obie wersje
             powstają z jednego źródła, więc nie da się ich rozjechać.
           </p>
           <div style={{

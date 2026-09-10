@@ -182,8 +182,19 @@ i przy `output: 'export'` build wywala się na `PageNotFoundError: Cannot find m
 zdanie w sekcji o wersji Markdown; strona EN nie potrzebuje żadnej adnotacji.
 
 Siatka cech na LP odwzorowuje kontrakt z `../ai-auditor/src/lib/api/version.ts` — przy bumpie
-`API_VERSION` **sprawdź, czy nie doszła funkcja warta karty** (v1.2 dołożyła webhooki i audyt treści
-podanej wprost). Numeru wersji celowo NIE ma w copy: LP jest statyczne i zwietrzałoby przy pierwszym
+`API_VERSION` **sprawdź, czy nie doszła funkcja warta karty**. Stan na 2026-09-10 (`v1.2`): dziesięć
+kart pokrywa klucz + zakresy (`403 insufficient_scope`), pracę w tle, webhooki, audyt treści podanej
+wprost, pełne DTO, zlecenia masowe, tag `project` z listą i filtrami (`GET /projects`, `?project`,
+`?status`, `?domain`, `createdAfter`/`createdBefore`), udostępnianie z wygasaniem i rozliczenie
+w kredytach. Świadomie bez karty: `Idempotency-Key`, nagłówki `X-RateLimit-*`, `GET /me` — to
+szczegóły dla kogoś, kto już czyta dokumentację, nie argumenty sprzed decyzji.
+
+**Limitów liczbowych na tej stronie NIE publikujemy** (ta sama zasada co na podstronach narzędzi):
+cap 50 URL-i w paczce i zakres 50–200 000 znaków treści zeszły 2026-09-10. Obie liczby żyją w kodzie
+(`MAX_URLS`, `MIN_CONTENT_LEN`/`MAX_CONTENT_LEN`) i w dokumentacji API, więc LP tylko powtarzała je
+z opóźnieniem — a przed zakupem nikt nie decyduje na ich podstawie.
+
+Numeru wersji celowo NIE ma w copy: LP jest statyczne i zwietrzałoby przy pierwszym
 bumpie; w pasku bloku kodu jest `api/v1`, czyli prefiks ścieżki, który zmienia się tylko przy zmianie łamiącej.
 
 ### Navbar — wejścia do aplikacji

@@ -10,36 +10,44 @@ const ACCENT = '#0b7983';
 
 const FEATURES = [
   {
-    title: 'API key instead of a session',
-    body: 'An Authorization: Bearer header. You create and revoke keys in the app; a key is shown once and only its hash is stored.',
+    title: 'Access by API key',
+    body: 'You send a key in the request header instead of signing in. Keys are created and revoked in the app; each one is shown once, and only an irreversible hash of it is stored.',
   },
   {
-    title: 'Asynchronous by design',
-    body: 'POST returns 202 with a job id and never holds the connection open. The audit runs in the background, you collect it with GET.',
+    title: 'Scoped keys',
+    body: 'A key can be read-only or allowed to start audits as well. A request outside its scope is refused, so a key wired into someone else&apos;s script cannot spend your credits.',
   },
   {
-    title: 'Webhooks instead of polling',
-    body: 'Pass webhookUrl and the result is POSTed to you when it is ready - signed with HMAC-SHA256. Failures are delivered too, and a batch sends one event per audit.',
+    title: 'Runs in the background',
+    body: 'An audit takes minutes, so the request itself returns immediately - you get a job id and your connection back. You collect the result with a separate call.',
   },
   {
-    title: 'Audit content before it is published',
-    body: 'Send content instead of url (50-200,000 characters) to audit a draft, a rewrite or copy for a site that does not exist yet. Same dimensions, same 1 credit.',
+    title: 'Notified instead of polled',
+    body: 'Pass your address in webhookUrl and the finished result comes to you, with a signature that proves the sender. Failures arrive too, and a bulk request sends one notification per audit.',
   },
   {
-    title: 'Full result as JSON',
-    body: 'CQS, 10 dimensions with problems, E-E-A-T, Before/After recommendations, competitor analysis (Google and ChatGPT) and Fan-Out coverage.',
+    title: 'Audit copy before it is published',
+    body: 'Send the text itself instead of a URL and check a draft, a rewrite or copy for a page that does not exist yet. Same dimensions, same 1 credit.',
+  },
+  {
+    title: 'The whole report as JSON',
+    body: 'Content Quality Score, ten dimensions with their problems, E-E-A-T, before/after recommendations, the comparison with competitors from Google and ChatGPT, and Fan-Out question coverage.',
   },
   {
     title: 'Bulk requests',
-    body: 'Up to 50 URLs in a single request. Server-side queue, one batched keyword-data lookup, plus status and cancellation for the batch.',
+    body: 'A whole list of URLs goes in one request, and the server queues them and works through them one by one. You can watch the progress and stop the batch at any point.',
   },
   {
-    title: 'Public report links',
-    body: 'Optionally an audit gets a read-only URL you can send to a client without creating an account for them. With or without an expiry date.',
+    title: 'Projects and request history',
+    body: 'You tag an audit with a project name when you submit it, then filter the list by that name - alongside status, domain and a date range. A separate call returns the projects themselves with an audit count.',
+  },
+  {
+    title: 'Report links for clients',
+    body: 'An audit can get a public read-only address you send to a client without creating an account for them. With an expiry date or without one.',
   },
   {
     title: 'Billed in credits',
-    body: 'One API audit costs 1 credit - exactly the same as an audit ordered in the app. No separate API subscription; balance and history come from GET /credits/usage.',
+    body: 'One API audit costs 1 credit - exactly the same as an audit ordered in the app. No separate API subscription; balance and usage history come from the API.',
   },
 ];
 
