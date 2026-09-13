@@ -55,7 +55,7 @@ export default function HeroEN() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              Check your content for AI Search
+              Improve your content for AI Search
             </span>
             <span style={{
               display: 'block',
@@ -63,7 +63,7 @@ export default function HeroEN() {
               lineHeight: 1.6, color: '#36394a',
               maxWidth: 560, margin: '14px auto 0',
             }}>
-              We analyse the content elements that matter most to AI models. Boost your page&apos;s citation potential in <span className="hero-brand"><img src="/logos/chatgpt.png" alt="" aria-hidden width={16} height={16} />ChatGPT</span>, <span className="hero-brand"><img src="/logos/perplexity.png" alt="" aria-hidden width={16} height={16} />Perplexity</span> and <span className="hero-brand"><img src="/logos/google.png" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview.
+              We analyse the content elements that decide whether AI cites you. Boost your page&apos;s visibility in <span className="hero-brand"><img src="/logos/chatgpt.png" alt="" aria-hidden width={16} height={16} />ChatGPT</span>, <span className="hero-brand"><img src="/logos/perplexity.png" alt="" aria-hidden width={16} height={16} />Perplexity</span> and <span className="hero-brand"><img src="/logos/google.png" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview with Before-and-After recommendations.
             </span>
           </h1>
 
