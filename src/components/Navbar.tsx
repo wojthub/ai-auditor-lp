@@ -25,10 +25,17 @@ const AUDIT_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/pl/api', label: 'API', desc: 'Zlecanie audytów przez REST i JSON' },
 ];
 
+/** Menu „Cennik" — zasady platnosci obok programu polecen, czyli drugiej strony tego samego tematu. */
+const PRICING_MENU: { href: string; label: string; desc: string }[] = [
+  { href: '/pl/cennik', label: 'Cennik', desc: '3 darmowe audyty, potem 2 EUR za audyt' },
+  { href: '/pl/affiliate', label: 'Program poleceń', desc: 'Prowizja 10% od zamówień poleconych osób' },
+];
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [auditOpen, setAuditOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
+  const [pricingOpen, setPricingOpen] = useState(false);
   // Przelacznik prowadzi na ANGIELSKI ODPOWIEDNIK biezacej podstrony, nie na strone glowna.
   const enHref = enCounterpart(usePathname());
 
@@ -95,7 +102,26 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <a href="/pl/cennik" className="nav-link">Cennik</a>
+          {/* Cennik — trigger jest LINKIEM na /pl/cennik, tak jak „Audyt tresci”: sama podstrona
+              cennika zostaje osiagalna jednym klikiem, mimo ze pozycja ma rozwiniecie. */}
+          <div className="nav-dd">
+            <a href="/pl/cennik" className="nav-link nav-dd-trigger" aria-haspopup="true">
+              Cennik
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+            <div className="nav-dd-menu">
+              <div className="nav-dd-card">
+                {PRICING_MENU.map((item) => (
+                  <a key={item.label} href={item.href} className="nav-dd-item">
+                    <span className="nav-dd-label">{item.label}</span>
+                    <span className="nav-dd-desc">{item.desc}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
           <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zaloguj</a>
           <a href={enHref} className="nav-lang" title="English version">EN</a>
         </div>
@@ -194,13 +220,31 @@ export default function Navbar() {
               ))}
             </div>
           )}
-          <a
-            href="/pl/cennik"
-            onClick={() => setMobileOpen(false)}
-            className="nav-mobile-link"
+          {/* Cennik: wiersz rozwijany — pierwsza pozycja to pelna podstrona cennika. */}
+          <button
+            type="button"
+            onClick={() => setPricingOpen(!pricingOpen)}
+            aria-expanded={pricingOpen}
+            className="nav-mobile-link nav-mobile-toggle"
           >
             Cennik
-          </a>
+            <svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden
+              style={{ transform: pricingOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.16s ease' }}
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          {pricingOpen && (
+            <div className="nav-mobile-sub">
+              {PRICING_MENU.map((item) => (
+                <a key={item.label} href={item.href} onClick={() => setMobileOpen(false)} className="nav-mobile-sublink">
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          )}
           <a href={enHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             EN - English version
           </a>

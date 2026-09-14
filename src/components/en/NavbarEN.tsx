@@ -25,10 +25,17 @@ const AUDIT_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/api', label: 'API', desc: 'Run audits over REST and JSON' },
 ];
 
+/** „Pricing" menu — mirror of ../Navbar.tsx. Payment terms next to the referral program. */
+const PRICING_MENU: { href: string; label: string; desc: string }[] = [
+  { href: '/pricing', label: 'Pricing', desc: '3 free audits, then EUR 2 per audit' },
+  { href: '/affiliate', label: 'Referral program', desc: '10% commission on your referrals’ orders' },
+];
+
 export default function NavbarEN() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [auditOpen, setAuditOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
+  const [pricingOpen, setPricingOpen] = useState(false);
   // Przelacznik prowadzi na POLSKI ODPOWIEDNIK biezacej podstrony, nie na strone glowna.
   const plHref = plCounterpart(usePathname());
 
@@ -95,7 +102,26 @@ export default function NavbarEN() {
               </div>
             </div>
           </div>
-          <a href="/pricing" className="nav-link">Pricing</a>
+          {/* Pricing — the trigger is a LINK to /pricing, like „Content audit”: the pricing page
+              itself stays one click away even though the item now has a dropdown. */}
+          <div className="nav-dd">
+            <a href="/pricing" className="nav-link nav-dd-trigger" aria-haspopup="true">
+              Pricing
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+            <div className="nav-dd-menu">
+              <div className="nav-dd-card">
+                {PRICING_MENU.map((item) => (
+                  <a key={item.label} href={item.href} className="nav-dd-item">
+                    <span className="nav-dd-label">{item.label}</span>
+                    <span className="nav-dd-desc">{item.desc}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
           <a href={`${APP_URL}/login?lang=en`} className="nav-cta">Log in</a>
           <a href={plHref} className="nav-lang" title="Wersja polska">PL</a>
         </div>
@@ -193,9 +219,31 @@ export default function NavbarEN() {
               ))}
             </div>
           )}
-          <a href="/pricing" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+          {/* Pricing: collapsible row — the first entry is the full pricing page. */}
+          <button
+            type="button"
+            onClick={() => setPricingOpen(!pricingOpen)}
+            aria-expanded={pricingOpen}
+            className="nav-mobile-link nav-mobile-toggle"
+          >
             Pricing
-          </a>
+            <svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden
+              style={{ transform: pricingOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.16s ease' }}
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          {pricingOpen && (
+            <div className="nav-mobile-sub">
+              {PRICING_MENU.map((item) => (
+                <a key={item.label} href={item.href} onClick={() => setMobileOpen(false)} className="nav-mobile-sublink">
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          )}
           <a href={plHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             PL - Wersja polska
           </a>

@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { href: '/pricing', label: 'Pricing' },
   { href: '/#who-is-it-for', label: 'Who is it for?' },
   { href: '/api', label: 'API' },
+  { href: '/affiliate', label: 'Referral program' },
 ];
 
 const LEGAL_LINKS = [
