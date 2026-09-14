@@ -226,7 +226,7 @@ export default function PricingContentEN() {
         @media (max-width: 640px) {
           .pricing-cards { grid-template-columns: 1fr; }
         }
-        /* Three pills collapse to one column below ~500px — "300 +30%" needs
+        /* Three pills collapse to one column below ~500px - "300 +30%" needs
            roughly 100px on one line, so it breaks awkwardly when narrower. */
         @media (max-width: 500px) {
           .bonus-tiers { grid-template-columns: 1fr; }

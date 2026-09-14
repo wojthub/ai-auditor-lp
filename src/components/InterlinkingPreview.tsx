@@ -1,9 +1,9 @@
 /**
- * Podglad wyniku analizy linkow wewnetrznych — replika zakladki „Propozycje linkow"
+ * Podglad wyniku analizy linkow wewnetrznych - replika zakladki „Propozycje linkow"
  * z aplikacji: pasek statystyk, przelacznik zakladek i tabela zrodlo → anchor → cel.
  *
  * Etykiety odpowiadaja kluczom `interlinking.*` w translations.ts aplikacji.
- * Adresy na example.com (RFC 2606), tematyka generyczna — to format wyniku, nie czyjs audyt.
+ * Adresy na example.com (RFC 2606), tematyka generyczna - to format wyniku, nie czyjs audyt.
  */
 
 const ACCENT = '#0b7983';
@@ -182,7 +182,7 @@ export default function InterlinkingPreview({ lang = 'pl' }: { lang?: 'pl' | 'en
         ))}
       </div>
 
-      {/* Zakladki — scroll w kontenerze, zeby na waskim ekranie nie rozpychaly strony */}
+      {/* Zakladki - scroll w kontenerze, zeby na waskim ekranie nie rozpychaly strony */}
       <div style={{ display: 'flex', gap: 22, borderBottom: '1px solid #dfe1e7', marginBottom: 12, overflowX: 'auto' }}>
         {c.tabs.map((tab, i) => (
           <span key={tab} style={{
@@ -198,12 +198,12 @@ export default function InterlinkingPreview({ lang = 'pl' }: { lang?: 'pl' | 'en
 
       {/* Tabela propozycji */}
       <div style={{ overflowX: 'auto', border: '1px solid #dfe1e7', borderRadius: 12, background: '#ffffff' }}>
-        {/* tableLayout: fixed + procentowe szerokosci — inaczej kolumny rozpychaja tabele
+        {/* tableLayout: fixed + procentowe szerokosci - inaczej kolumny rozpychaja tabele
             ponad kontener i poziomy scroll pojawia sie takze na desktopie. */}
         <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed', minWidth: 560 }}>
           <thead>
             <tr>
-              {/* Naglowki BEZ `whiteSpace: nowrap` — przy `table-layout: fixed` komorka, ktora
+              {/* Naglowki BEZ `whiteSpace: nowrap` - przy `table-layout: fixed` komorka, ktora
                   nie moze zawinac tekstu, nie da sie sciesnic do zadanej szerokosci i rozpycha
                   tabele ponad kontener (stad poziomy scroll takze na desktopie). */}
               {[c.colSource, c.colAnchor, c.colTarget, c.colScore].map((h, i) => (

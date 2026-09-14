@@ -4,7 +4,7 @@ const APP_URL = 'https://app.citationone.com';
  * EN footer. Two rows: LP navigation + legal links.
  *
  * Contact, terms and the privacy policy live IN THE APP (`/contact`, `/terms`,
- * `/privacy-policy`) — the LP links to
+ * `/privacy-policy`) - the LP links to
  * them instead of duplicating, so two diverging versions never appear.
  */
 

@@ -2,11 +2,11 @@
  * Tresc podstron wymiarow (PL).
  *
  * Zrodlo faktow: ../ai-auditor/spec/dimensions.md (kryteria, progi, wzory) + `lib/glossary.ts`
- * i `lib/i18n/translations.ts` w aplikacji (nazwy wymiarow — MUSZA sie zgadzac z tym, co user
+ * i `lib/i18n/translations.ts` w aplikacji (nazwy wymiarow - MUSZA sie zgadzac z tym, co user
  * widzi w raporcie po zakupie). Wag CQS swiadomie NIE publikujemy: profil typu tresci je
  * nadpisuje, wiec kazda liczba tutaj bylaby nieprawdziwa dla czesci audytow.
  *
- * Slugi PL sa POLSKIE (bez znakow diakrytycznych) — wersja EN dostanie wlasne, angielskie
+ * Slugi PL sa POLSKIE (bez znakow diakrytycznych) - wersja EN dostanie wlasne, angielskie
  * w dimensions-en.ts (do dodania). Slug jest tez kluczem rekordu; `related[].slug` musi
  * wskazywac slug z TEJ mapy, inaczej link krzyzowy nie zapali sie po dodaniu strony.
  */

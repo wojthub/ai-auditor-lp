@@ -8,7 +8,7 @@ const ACCENT = '#0b7983';
 
 // Te liczby MUSZA zgadzac sie z ustawieniami programu w aplikacji (`AFFILIATE_COMMISSION_BPS`,
 // okno atrybucji w middleware) ORAZ z polska wersja tej strony. Zmiana stawki w panelu admina
-// NIE aktualizuje LP — po kazdej takiej zmianie popraw recznie OBA pliki AffiliateContent.
+// NIE aktualizuje LP - po kazdej takiej zmianie popraw recznie OBA pliki AffiliateContent.
 const COMMISSION_PCT = 10;
 const COOKIE_DAYS = 30;
 
@@ -16,7 +16,7 @@ const STEPS = [
   {
     n: '01',
     title: 'Grab your link',
-    body: 'Every CitationOne account carries its own referral link — you will find it in the app, in the referral section. It is live from your first sign-in, on every account.',
+    body: 'Every CitationOne account carries its own referral link - you will find it in the app, in the referral section. It is live from your first sign-in, on every account.',
   },
   {
     n: '02',
@@ -33,7 +33,7 @@ const STEPS = [
 const TERMS = [
   {
     title: `${COMMISSION_PCT}% on every order`,
-    body: 'Calculated on the net order value — what remains after tax and after any discount the buyer applied. Commissions are settled in euro.',
+    body: 'Calculated on the net order value - what remains after tax and after any discount the buyer applied. Commissions are settled in euro.',
   },
   {
     title: 'Commission on repeat orders',
@@ -45,7 +45,7 @@ const TERMS = [
   },
   {
     title: 'The attribution stays with you',
-    body: 'Once they sign up, the person is attached to your account — later visits through someone else’s link leave that attribution untouched.',
+    body: 'Once they sign up, the person is attached to your account - later visits through someone else’s link leave that attribution untouched.',
   },
   {
     title: 'Cash out or take credits',
@@ -75,15 +75,15 @@ const AUDIENCE = [
 const FAQ = [
   {
     q: 'Who can join the program?',
-    a: 'Anyone with a CitationOne account. Accounts are free and carry a referral link from day one — taking part in the program starts with creating the account.',
+    a: 'Anyone with a CitationOne account. Accounts are free and carry a referral link from day one - taking part in the program starts with creating the account.',
   },
   {
     q: 'What is the commission calculated on?',
-    a: `The net value of your referral’s order — after tax and after any discount they used at checkout. The rate is ${COMMISSION_PCT}% and settlement runs in euro.`,
+    a: `The net value of your referral’s order - after tax and after any discount they used at checkout. The rate is ${COMMISSION_PCT}% and settlement runs in euro.`,
   },
   {
     q: 'Do I earn on repeat purchases?',
-    a: 'Yes. A commission is calculated on your referral’s later orders, not only the first one — a single successful referral works across many purchases. The accrual period for each referral is limited, and the current terms sit in the app next to your balance.',
+    a: 'Yes. A commission is calculated on your referral’s later orders, not only the first one - a single successful referral works across many purchases. The accrual period for each referral is limited, and the current terms sit in the app next to your balance.',
   },
   {
     q: 'What happens when an order is refunded?',
@@ -95,7 +95,7 @@ const FAQ = [
   },
   {
     q: 'Can I refer myself?',
-    a: 'The program covers referrals of other people — your own account stays outside the settlement, and the system recognises such an attempt automatically.',
+    a: 'The program covers referrals of other people - your own account stays outside the settlement, and the system recognises such an attempt automatically.',
   },
 ];
 
@@ -135,7 +135,7 @@ export default function AffiliateContentEN() {
           </h1>
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.72, maxWidth: 580, margin: '0 auto' }}>
             Recommend CitationOne to clients and readers, and we credit you {COMMISSION_PCT}% of
-            every order they place. Your referral link is waiting in the app — the program is live
+            every order they place. Your referral link is waiting in the app - the program is live
             on every account from day one.
           </p>
         </motion.div>

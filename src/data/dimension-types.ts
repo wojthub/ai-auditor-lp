@@ -1,5 +1,5 @@
 /**
- * Wspolne typy podstron wymiarow — uzywane przez dimensions-pl.ts i dimensions-en.ts.
+ * Wspolne typy podstron wymiarow - uzywane przez dimensions-pl.ts i dimensions-en.ts.
  * Szablon (`DimensionPage.tsx`) importuje WYLACZNIE stad, zeby nie byl zwiazany z jednym jezykiem.
  */
 
@@ -15,9 +15,9 @@ export interface DimFaq {
 }
 
 /**
- * Przykladowa rekomendacja z raportu — dokladnie w formie, jaka user zobaczy w aplikacji:
+ * Przykladowa rekomendacja z raportu - dokladnie w formie, jaka user zobaczy w aplikacji:
  * zdanie o problemie, pod nim karty PRZED (fragment jego tresci) i PO (co z tym zrobic).
- * MAX 2 na wymiar — sekcja stoi wysoko na stronie i ma byc dowodem, nie katalogiem.
+ * MAX 2 na wymiar - sekcja stoi wysoko na stronie i ma byc dowodem, nie katalogiem.
  */
 export interface DimRecommendation {
   problem: string;
@@ -27,24 +27,24 @@ export interface DimRecommendation {
 
 export interface DimensionData {
   slug: string;
-  /** Nazwa wymiaru — dokladnie jak `dim.*` w translations.ts aplikacji. Breadcrumb, karty, linki. */
+  /** Nazwa wymiaru - dokladnie jak `dim.*` w translations.ts aplikacji. Breadcrumb, karty, linki. */
   name: string;
-  /** H1 strony. MUSI byc identyczny z `title` — inaczej SERP obiecuje co innego, niz widzi klikajacy. */
+  /** H1 strony. MUSI byc identyczny z `title` - inaczej SERP obiecuje co innego, niz widzi klikajacy. */
   heading: string;
   /** <title> podstrony = `heading`. Sufiks marki dokleja template z layoutu. */
   title: string;
   description: string;
   lead: string;
   /** Pasek meta pod H1: skala, sposob pomiaru, dane wejsciowe. */
-  /** NIEUZYWANE od 2026-08-21 — chipsy zniknely z hero, pole czeka na decyzje o usunieciu. */
+  /** NIEUZYWANE od 2026-08-21 - chipsy zniknely z hero, pole czeka na decyzje o usunieciu. */
   chips: string[];
   /**
-   * Naglowek sekcji „dlaczego". Pelne zdanie, NIE sklejka z `name` — w PL rodzaj gramatyczny
+   * Naglowek sekcji „dlaczego". Pelne zdanie, NIE sklejka z `name` - w PL rodzaj gramatyczny
    * zalezy od nazwy wymiaru (zgodnosc jest wazna, graf wazny, pokrycie wazne).
    */
   whyHeading: string;
   why: string[];
-  /** Naglowek sekcji „jak liczymy". Tez pelne zdanie — w PL wymaga biernika nazwy wymiaru. */
+  /** Naglowek sekcji „jak liczymy". Tez pelne zdanie - w PL wymaga biernika nazwy wymiaru. */
   howHeading: string;
   how: {
     intro: string[];
@@ -57,17 +57,17 @@ export interface DimensionData {
   swapNote?: string;
   report: string[];
   /**
-   * Przykladowe rekomendacje z raportu — MAX 2. Renderowane w sekcji „W raporcie",
+   * Przykladowe rekomendacje z raportu - MAX 2. Renderowane w sekcji „W raporcie",
    * ktora stoi jako DRUGA na stronie (zaraz po „dlaczego"), bo to najmocniejszy dowod
    * wartosci i ma trafic przed metodologie.
    */
   recommendations?: DimRecommendation[];
-  /** Pytania, ktore ludzie realnie zadaja — zamykaja tez wlasny Fan-Out tej podstrony. */
+  /** Pytania, ktore ludzie realnie zadaja - zamykaja tez wlasny Fan-Out tej podstrony. */
   faq: DimFaq[];
   related: { slug: string; name: string; desc: string }[];
 }
 
-/** Etykiety szablonu — jedyne teksty, ktore nie pochodza z danych wymiaru. */
+/** Etykiety szablonu - jedyne teksty, ktore nie pochodza z danych wymiaru. */
 export interface DimensionStrings {
   /** Prefiks sciezki: '/pl/wymiary' albo '/dimensions'. */
   basePath: string;
@@ -99,7 +99,7 @@ export interface DimensionStrings {
 }
 
 /**
- * Pary slugow PL ↔ EN — jedno zrodlo dla hreflangow po obu stronach.
+ * Pary slugow PL ↔ EN - jedno zrodlo dla hreflangow po obu stronach.
  * Dodajac wymiar, dopisz pare TUTAJ, inaczej strona zostanie bez alternatywnej wersji.
  */
 export const DIMENSION_SLUG_PAIRS: { pl: string; en: string }[] = [
@@ -165,7 +165,7 @@ export const STRINGS_EN: DimensionStrings = {
   breadcrumbRoot: 'Dimensions',
   breadcrumbAria: 'Breadcrumb',
   tocAria: 'On this page',
-  // Kotwice po angielsku — sekcje na stronie biora id wlasnie stad (patrz DimensionPage).
+  // Kotwice po angielsku - sekcje na stronie biora id wlasnie stad (patrz DimensionPage).
   toc: [
     { id: 'why-it-matters', label: 'Why it matters' },
     { id: 'in-the-report', label: 'In the report' },

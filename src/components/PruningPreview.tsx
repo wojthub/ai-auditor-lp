@@ -1,8 +1,8 @@
 /**
- * Podglad wyniku pruningu — replika ekranu z aplikacji: box tematyczny serwisu,
+ * Podglad wyniku pruningu - replika ekranu z aplikacji: box tematyczny serwisu,
  * przelacznik trzech zakladek, lista kandydatow do przyciecia i grupy kanibalizacji.
  *
- * Adresy sa na domenie example.com (RFC 2606), tytuly generyczne — podglad pokazuje
+ * Adresy sa na domenie example.com (RFC 2606), tytuly generyczne - podglad pokazuje
  * format wyniku, nie cudzy audyt.
  */
 
@@ -83,7 +83,7 @@ const COPY: Record<'pl' | 'en', Copy> = {
     sideTopics: 'rental income tax, letting a flat (14) · cost of building a house, emergency fund (10) · overpaying a loan, repayment schedule (7)',
     tabs: ['Content Pruning (20)', 'Cannibalization (14)', 'AI analysis (6)'],
     exportCsv: 'Export CSV',
-    pruningNote: 'These are pruning candidates — pages whose topic drifts away from the main topic of the site. Consider removing them, redirecting with a 301 to a matching article, or rebuilding the content.',
+    pruningNote: 'These are pruning candidates - pages whose topic drifts away from the main topic of the site. Consider removing them, redirecting with a 301 to a matching article, or rebuilding the content.',
     colUrl: 'URL',
     colTitle: 'Title',
     colDeviation: 'Deviation score',
@@ -96,7 +96,7 @@ const COPY: Record<'pl' | 'en', Copy> = {
       { url: 'example.com/blog/flat-ready-to-sell', title: 'How to get a flat ready to sell', score: '0.206' },
     ],
     cannibalHeading: 'Cannibalization',
-    cannibalNote: 'Pages in one group compete for the same intent — a high similarity means the search engine cannot tell which one to show. Pick the strongest, merge the rest, or split them into separate subtopics.',
+    cannibalNote: 'Pages in one group compete for the same intent - a high similarity means the search engine cannot tell which one to show. Pick the strongest, merge the rest, or split them into separate subtopics.',
     groupLabel: (n, pages) => `Group ${n} (${pages} pages)`,
     openGroup: {
       n: 2,

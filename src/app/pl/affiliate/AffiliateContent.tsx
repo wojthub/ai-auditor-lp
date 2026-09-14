@@ -7,7 +7,7 @@ const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
 
 // Liczby MUSZA zgadzac sie z ustawieniami programu w aplikacji (`AFFILIATE_COMMISSION_BPS`,
-// okno atrybucji w middleware). Zmiana stawki w panelu admina NIE aktualizuje tej strony —
+// okno atrybucji w middleware). Zmiana stawki w panelu admina NIE aktualizuje tej strony -
 // po kazdej takiej zmianie popraw tu recznie stawke i przyklady wyliczen.
 const COMMISSION_PCT = 10;
 const COOKIE_DAYS = 30;
@@ -16,7 +16,7 @@ const STEPS = [
   {
     n: '01',
     title: 'Odbierasz swój link',
-    body: 'Każde konto CitationOne ma własny link polecający — znajdziesz go w panelu, w sekcji programu poleceń. Jest aktywny od pierwszego logowania, dla każdego konta.',
+    body: 'Każde konto CitationOne ma własny link polecający - znajdziesz go w panelu, w sekcji programu poleceń. Jest aktywny od pierwszego logowania, dla każdego konta.',
   },
   {
     n: '02',
@@ -45,7 +45,7 @@ const TERMS = [
   },
   {
     title: "Przypisanie zostaje przy Tobie",
-    body: "Po rejestracji polecona osoba jest przypisana do Twojego konta — jej późniejsze wejścia z cudzego linku tego nie zmieniają.",
+    body: "Po rejestracji polecona osoba jest przypisana do Twojego konta - jej późniejsze wejścia z cudzego linku tego nie zmieniają.",
   },
   {
     title: 'Wypłata przelewem albo kredyty',
@@ -75,7 +75,7 @@ const AUDIENCE = [
 const FAQ = [
   {
     q: 'Kto może dołączyć do programu?',
-    a: 'Każda osoba z kontem w CitationOne. Konto zakłada się za darmo i od razu ma własny link polecający — udział w programie zaczyna się razem z założeniem konta.',
+    a: 'Każda osoba z kontem w CitationOne. Konto zakłada się za darmo i od razu ma własny link polecający - udział w programie zaczyna się razem z założeniem konta.',
   },
   {
     q: 'Od jakiej kwoty liczona jest prowizja?',
@@ -83,7 +83,7 @@ const FAQ = [
   },
   {
     q: 'Czy zarabiam też na kolejnych zakupach?',
-    a: 'Tak. Prowizja nalicza się przy kolejnych zamówieniach poleconej osoby, nie tylko przy pierwszym — jedno skuteczne polecenie pracuje przez wiele zakupów. Okres naliczania dla danego polecenia jest ograniczony, a aktualne zasady znajdziesz w panelu, przy swoim saldzie.',
+    a: 'Tak. Prowizja nalicza się przy kolejnych zamówieniach poleconej osoby, nie tylko przy pierwszym - jedno skuteczne polecenie pracuje przez wiele zakupów. Okres naliczania dla danego polecenia jest ograniczony, a aktualne zasady znajdziesz w panelu, przy swoim saldzie.',
   },
   {
     q: 'Co się dzieje przy zwrocie zamówienia?',
@@ -95,7 +95,7 @@ const FAQ = [
   },
   {
     q: 'Czy mogę polecić sam siebie?',
-    a: 'Program obejmuje polecenia dla innych osób — własne konto zostaje poza rozliczeniem, a system rozpoznaje taką próbę automatycznie.',
+    a: 'Program obejmuje polecenia dla innych osób - własne konto zostaje poza rozliczeniem, a system rozpoznaje taką próbę automatycznie.',
   },
 ];
 
@@ -135,7 +135,7 @@ export default function AffiliateContent() {
           </h1>
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.72, maxWidth: 580, margin: '0 auto' }}>
             Polecaj CitationOne klientom i czytelnikom, a przy każdym ich zamówieniu
-            dopisujemy Ci {COMMISSION_PCT}% wartości. Link polecający czeka w Twoim panelu —
+            dopisujemy Ci {COMMISSION_PCT}% wartości. Link polecający czeka w Twoim panelu -
             program działa na każdym koncie od pierwszego dnia.
           </p>
         </motion.div>

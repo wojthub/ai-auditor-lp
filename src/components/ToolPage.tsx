@@ -45,7 +45,7 @@ function Para({ children }: { children: React.ReactNode }) {
   return <p style={{ fontSize: 16.5, color: '#36394a', lineHeight: 1.75, margin: '0 0 16px' }}>{children}</p>;
 }
 
-/** Ta sama tabela co na podstronach wymiarow — scroll wewnatrz, strona sie nie rozjezdza. */
+/** Ta sama tabela co na podstronach wymiarow - scroll wewnatrz, strona sie nie rozjezdza. */
 function DataTable({ table }: { table: DimTable }) {
   return (
     <div style={{ marginTop: 8 }}>
@@ -125,7 +125,7 @@ export default function ToolPage({ tool, all, t }: {
 
             <p style={{ fontSize: 17.5, color: '#36394a', lineHeight: 1.72, margin: '0 0 24px' }}>{tool.lead}</p>
 
-            {/* CTA od razu w hero — intencja na tych stronach jest transakcyjna. */}
+            {/* CTA od razu w hero - intencja na tych stronach jest transakcyjna. */}
             <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 16, marginBottom: 26 }}>
               <motion.a
                 href={ctaHref}
@@ -147,12 +147,12 @@ export default function ToolPage({ tool, all, t }: {
             </div>
 
             {/*
-              Chipsow (koszt / wejscie / wynik) w hero NIE renderujemy — decyzja z 2026-08-21.
+              Chipsow (koszt / wejscie / wynik) w hero NIE renderujemy - decyzja z 2026-08-21.
               Kazda z tych informacji ma nizej wlasna sekcje, a `tool.chips` nadal zywi
               karty na hubie (ToolsHub), wiec pole zostaje w danych.
             */}
 
-            {/* Spis tresci — ten sam wzorzec co na podstronach wymiarow. */}
+            {/* Spis tresci - ten sam wzorzec co na podstronach wymiarow. */}
             <nav aria-label={t.tocAria} style={{
               marginTop: 4, paddingTop: 20, borderTop: '1px solid #eceff3',
               display: 'flex', flexWrap: 'wrap', gap: '8px 18px',
@@ -180,7 +180,7 @@ export default function ToolPage({ tool, all, t }: {
         </div>
       </section>
 
-      {/* WYNIK — druga sekcja: user ma najpierw zobaczyc, co dostaje */}
+      {/* WYNIK - druga sekcja: user ma najpierw zobaczyc, co dostaje */}
       <section id={sectionId(1)} style={{ background: '#f8fafb', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>

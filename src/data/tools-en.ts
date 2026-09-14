@@ -1,8 +1,8 @@
 /**
- * Tool subpage content (EN) — mirror of tools-pl.ts.
+ * Tool subpage content (EN) - mirror of tools-pl.ts.
  *
  * Source of facts: ../ai-auditor/spec/tools.md. Caps (URL and keyword limits) are deliberately
- * NOT published — they are marked TEMPORARY in the spec, so any number here goes stale fast and
+ * NOT published - they are marked TEMPORARY in the spec, so any number here goes stale fast and
  * is not a pre-purchase argument anyway. Credits STAY: 1 per run, refunded on job error.
  */
 

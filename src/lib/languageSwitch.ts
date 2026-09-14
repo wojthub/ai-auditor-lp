@@ -1,4 +1,4 @@
-// Pary odpowiadajacych sobie adresow EN <-> PL — JEDNO ZRODLO dla przelacznika jezyka
+// Pary odpowiadajacych sobie adresow EN <-> PL - JEDNO ZRODLO dla przelacznika jezyka
 // w obu Navbarach. Dodajac nowa STATYCZNA podstrone dopisz tu jedna pare, inaczej przelacznik
 // cicho wyrzuci uzytkownika na strone glowna zamiast na tlumaczenie tej samej tresci.
 //
@@ -6,7 +6,7 @@
 // angielsku w obu jezykach (patrz `/api` i `/pl/api`), wiec dla nich para jest trywialna.
 //
 // Podstrony wymiarow i narzedzi maja rozne slugi w obu jezykach, wiec NIE dopisujemy ich tu
-// recznie — pary generujemy z tych samych tablic, ktore zasilaja hreflangi i sitemape.
+// recznie - pary generujemy z tych samych tablic, ktore zasilaja hreflangi i sitemape.
 // Dzieki temu nowy wymiar/narzedzie dziala w przelaczniku od razu, bez drugiego wpisu.
 import { DIMENSION_SLUG_PAIRS } from '@/data/dimension-types';
 import { TOOL_SLUG_PAIRS } from '@/data/tool-types';
@@ -43,10 +43,10 @@ function abs(path: string): string {
 /**
  * `alternates` do `metadata` podstrony: self-canonical + hreflangi obu wersji.
  *
- * Layouty deklaruja hreflangi STRON GLOWNYCH, a Next dziedziczy metadane w dol drzewa —
+ * Layouty deklaruja hreflangi STRON GLOWNYCH, a Next dziedziczy metadane w dol drzewa -
  * podstrona bez wlasnego `alternates` mowi wiec Google'owi, ze jej odpowiednikiem w drugim
  * jezyku jest HP. Kazda statyczna podstrona musi to nadpisac (rodziny `[slug]` licza pary
- * z wlasnych slownikow). Nieznana sciezka dostaje pare HP — ten sam fallback co przelacznik.
+ * z wlasnych slownikow). Nieznana sciezka dostaje pare HP - ten sam fallback co przelacznik.
  */
 export function alternatesFor(pathname: string) {
   const path = normalize(pathname);

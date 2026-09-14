@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
  * LP jest statyczne (`output: 'export'`), więc link wbudowany w HTML jest wartością domyślną,
  * a właściwą wersję dociągamy w runtime z `app.citationone.com/api/public/lp-links`
  * (klucze ustawień `LP_REPORT_URL_PL` / `LP_REPORT_URL_EN`). Gdy aplikacja nie odpowie,
- * pole jest puste albo odpowiedź wygląda inaczej niż link do udostępnionego raportu —
+ * pole jest puste albo odpowiedź wygląda inaczej niż link do udostępnionego raportu -
  * zostaje `fallback`, czyli przycisk nigdy nie prowadzi donikąd.
  */
 

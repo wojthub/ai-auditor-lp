@@ -1,9 +1,9 @@
 /**
- * Podglad wyniku klasteryzacji — replika listy klastrow z aplikacji (ClusterResults.tsx).
+ * Podglad wyniku klasteryzacji - replika listy klastrow z aplikacji (ClusterResults.tsx).
  *
  * Kolory intencji przepisane z INTENT_COLORS w aplikacji: commercial = warning #CA8A04,
  * transactional = success #16A34A, informational = accent #0b7983, navigational = muted.
- * Dane sa przykladowe i celowo bez nazw marek — pokazuja format, nie czyjs audyt.
+ * Dane sa przykladowe i celowo bez nazw marek - pokazuja format, nie czyjs audyt.
  */
 
 const MUTED = '#64748B';

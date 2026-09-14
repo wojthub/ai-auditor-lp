@@ -18,7 +18,7 @@ function fadeUp(delay = 0) {
 
 const NUM_COLORS = ['#e07a4a', '#0b7983', '#c47a2a'];
 
-// Names and order follow `dim.*` + DIMENSION_ORDER (RadarChart) in the app — after purchase the
+// Names and order follow `dim.*` + DIMENSION_ORDER (RadarChart) in the app - after purchase the
 // user sees exactly these labels in the report. `slug` must exist in src/data/dimensions-en.ts.
 const DIMS = [
   {
@@ -94,7 +94,7 @@ const DIMS = [
 ];
 
 // Outside the ten dimensions: E-E-A-T has its own section below, Information Gain is an
-// informational metric (it does not enter the final score) — hence both sit beside the grid.
+// informational metric (it does not enter the final score) - hence both sit beside the grid.
 const EXTRA = [
   {
     slug: 'e-e-a-t',

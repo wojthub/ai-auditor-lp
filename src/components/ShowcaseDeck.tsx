@@ -8,7 +8,7 @@ const SPRING = { type: 'spring', stiffness: 210, damping: 30, mass: 0.9 } as con
 export type ShowcaseSlide = {
   src: string;
   alt: string;
-  /** Nazwa zakladki panelu widocznej na slajdzie — ida do adnotacji nad urzadzeniem. */
+  /** Nazwa zakladki panelu widocznej na slajdzie - ida do adnotacji nad urzadzeniem. */
   label: string;
 };
 
@@ -16,7 +16,7 @@ type Props = {
   slides: ShowcaseSlide[];
   /** Slajd pokazywany po wejsciu na strone; reszta czeka na ruch uzytkownika. */
   startIndex?: number;
-  /** Etykiety dostepnosci — jedyne miejsce, w ktorym ten komponent rozroznia jezyki. */
+  /** Etykiety dostepnosci - jedyne miejsce, w ktorym ten komponent rozroznia jezyki. */
   regionLabel: string;
   prevLabel: string;
   nextLabel: string;
@@ -24,8 +24,8 @@ type Props = {
 
 /**
  * Ekran mockupu: kilka zrzutow panelu przewijanych strzalkami, kreskami pozycji i swipem.
- * Slajd zmienia sie WYLACZNIE na ruch uzytkownika — zadnego autoodtwarzania (decyzja
- * z 2026-09-08). Wspoldzielony przez `Showcase` (PL) i `ShowcaseEN` — same slajdy
+ * Slajd zmienia sie WYLACZNIE na ruch uzytkownika - zadnego autoodtwarzania (decyzja
+ * z 2026-09-08). Wspoldzielony przez `Showcase` (PL) i `ShowcaseEN` - same slajdy
  * i etykiety ida propem, tak jak w `DimensionPage`.
  */
 export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prevLabel, nextLabel }: Props) {
@@ -45,7 +45,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
   }, []);
 
   // `x` jest wlasna wartoscia ruchu, a nie propem `animate`, bo przy propie framer po
-  // puszczeniu myszy sciaga tasme do `dragConstraints` i — gdy indeks sie NIE zmienil —
+  // puszczeniu myszy sciaga tasme do `dragConstraints` i - gdy indeks sie NIE zmienil -
   // nic juz jej stamtad nie zabiera: krotki drag na slajdzie 2 przerzucal widok na slajd 1.
   // Snap robimy wiec sami, po kazdym przeciagnieciu.
   const x = useMotionValue(0);
@@ -57,7 +57,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
   // nie teleportowalo uzytkownika z ostatniego ekranu na pierwszy.
   const go = (next: number) => settle(Math.min(count - 1, Math.max(0, next)));
 
-  // Zmiana szerokosci (obrot telefonu, resize okna) przelicza pozycje bez animacji —
+  // Zmiana szerokosci (obrot telefonu, resize okna) przelicza pozycje bez animacji -
   // stary offset w px wskazywalby po zmianie na srodek sasiedniego slajdu.
   const lastWidth = useRef(0);
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
   }, [width, index, x]);
 
   // Slajdy poza startowym maja `loading="lazy"` (nie blokuja pierwszego renderu), ale
-  // dociagamy je zaraz po bezczynnosci — inaczej pierwsze przelaczenie pokazywaloby pusty
+  // dociagamy je zaraz po bezczynnosci - inaczej pierwsze przelaczenie pokazywaloby pusty
   // ekran, bo lazy startuje dopiero, gdy obrazek wjezdza w widok.
   useEffect(() => {
     const preload = () => slides.forEach((s, i) => { if (i !== startIndex) new Image().src = s.src; });
@@ -109,7 +109,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
             }}>
               {/* ciemny bezel */}
               <div style={{ background: '#0b0b0d', borderRadius: 26, padding: 12 }}>
-                {/* ekran — sztywna proporcja, zeby zmiana slajdu nie przesuwala sekcji nizej */}
+                {/* ekran - sztywna proporcja, zeby zmiana slajdu nie przesuwala sekcji nizej */}
                 <div ref={screenRef} style={{
                   position: 'relative',
                   borderRadius: 16,
@@ -128,7 +128,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                     dragMomentum={false}
                     whileDrag={{ cursor: 'grabbing' }}
                     onDragEnd={(_, info) => {
-                      // Kazde puszczenie konczy sie snapem — takze ponizej progu, zeby tasma
+                      // Kazde puszczenie konczy sie snapem - takze ponizej progu, zeby tasma
                       // nie zostawala miedzy slajdami.
                       if (info.offset.x < -60 || info.velocity.x < -420) go(index + 1);
                       else if (info.offset.x > 60 || info.velocity.x > 420) go(index - 1);
@@ -163,7 +163,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                     background: 'linear-gradient(118deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 16%, rgba(255,255,255,0) 36%)',
                   }} />
 
-                  {/* Strzalki lezą na ekranie, nie pod nim — dol mockupu zjada maska gradientu. */}
+                  {/* Strzalki lezą na ekranie, nie pod nim - dol mockupu zjada maska gradientu. */}
                   <button
                     type="button"
                     className="deck-arrow deck-arrow-prev"
@@ -196,7 +196,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
       </div>
 
       {/* Adnotacja: nazwa widocznego ekranu + pozycja w talii. Kreski przeskakuja wprost
-          na wybrany slajd — sa przyciskami, wiec maja etykiety i wlasne pole trafienia. */}
+          na wybrany slajd - sa przyciskami, wiec maja etykiety i wlasne pole trafienia. */}
       <div className="deck-caption">
         <span className="deck-caption-dot" aria-hidden />
         <span className="deck-caption-text">
@@ -235,7 +235,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
       <style>{`
         .deck-caption {
           /* Urzadzenie ma transform + filter, wiec tworzy kontekst ukladania i maluje sie NAD
-             zwyklymi blokami w przeplywie — bez tego pastylka chowa sie pod mockupem. */
+             zwyklymi blokami w przeplywie - bez tego pastylka chowa sie pod mockupem. */
           position: relative;
           z-index: 1;
           display: flex;
@@ -262,7 +262,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
           box-shadow: 0 0 0 3px rgba(11,121,131,0.14);
           flex: none;
         }
-        /* Etykieta zmienia sie z crossfade, wiec jej pudelko musi miec stala wysokosc —
+        /* Etykieta zmienia sie z crossfade, wiec jej pudelko musi miec stala wysokosc -
            inaczej pasek podskakuje w trakcie przejscia. */
         .deck-caption-text {
           position: relative;
@@ -335,7 +335,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
           box-shadow: 0 6px 18px rgba(13,13,18,0.12);
           color: #36394a;
           cursor: pointer;
-          /* Strzalki sa jedyna widoczna kontrolka, wiec stoja na ekranie od razu — takze na
+          /* Strzalki sa jedyna widoczna kontrolka, wiec stoja na ekranie od razu - takze na
              dotyku, gdzie sam swipe niczego o sobie nie mowi. Pod kursorem tylko mocnieja. */
           opacity: 0.92;
           transition: opacity 0.18s ease, background 0.16s ease, color 0.16s ease;
@@ -345,7 +345,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
         .deck-arrow:disabled { opacity: 0; pointer-events: none; }
         .deck-arrow-prev { left: 14px; }
         .deck-arrow-next { right: 14px; }
-        /* Wlasne wcisniecie — czysta skala, bez skladowej pionowej. */
+        /* Wlasne wcisniecie - czysta skala, bez skladowej pionowej. */
         .deck-arrow:active { transform: scale(0.94); }
         @media (max-width: 560px) {
           .deck-arrow { width: 32px; height: 32px; margin-top: -16px; }

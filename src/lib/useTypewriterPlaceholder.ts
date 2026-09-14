@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 
 // Efekt maszyny do pisania dla placeholdera inputa w hero (PL + EN).
 // Pisze kolejny przyklad, przytrzymuje go, kasuje TYLKO do wspolnego prefiksu
-// z nastepnym przykladem i pisze dalej — dzieki temu placeholder nigdy nie robi
+// z nastepnym przykladem i pisze dalej - dzieki temu placeholder nigdy nie robi
 // sie pusty i nie miga miedzy tekstem zachety a przykladem.
 //
 // Zwraca pusty string dopoki animacja sie nie zacznie, przy `prefers-reduced-motion: reduce`
-// oraz gdy `enabled === false` (uzytkownik zaczal pisac) — komponent pokazuje wtedy
+// oraz gdy `enabled === false` (uzytkownik zaczal pisac) - komponent pokazuje wtedy
 // statyczny placeholder. Pusty string na starcie chroni tez przed rozjazdem hydracji.
 
 const TYPE_MS = 55;      // pisanie jednego znaku

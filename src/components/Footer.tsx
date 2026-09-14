@@ -4,7 +4,7 @@ const APP_URL = 'https://app.citationone.com';
  * Stopka PL. Dwa rzedy: nawigacja po LP + linki prawne.
  *
  * Kontakt, regulamin i polityka prywatnosci zyja W APLIKACJI (`/kontakt`, `/regulamin`,
- * `/polityka-prywatnosci`) —
+ * `/polityka-prywatnosci`) -
  * LP ich nie duplikuje, tylko linkuje, zeby nie powstaly dwie rozjezdzajace sie wersje.
  */
 

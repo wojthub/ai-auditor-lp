@@ -226,7 +226,7 @@ export default function PricingContent() {
         @media (max-width: 640px) {
           .pricing-cards { grid-template-columns: 1fr; }
         }
-        /* Trzy pigulki obok siebie schodza ponizej ~500px do jednej kolumny —
+        /* Trzy pigulki obok siebie schodza ponizej ~500px do jednej kolumny -
            "300 +30%" w jednej linii potrzebuje ok. 100px, wiec ciasniej sie lamie. */
         @media (max-width: 500px) {
           .bonus-tiers { grid-template-columns: 1fr; }

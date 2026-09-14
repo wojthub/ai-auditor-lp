@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     alternates: {
       canonical: `${SITE}/dimensions/${dim.slug}`,
-      // hreflang dziala tylko wtedy, gdy WSKAZUJE na istniejaca strone — stad para ze slownika.
+      // hreflang dziala tylko wtedy, gdy WSKAZUJE na istniejaca strone - stad para ze slownika.
       languages: pl
         ? { en: `${SITE}/dimensions/${dim.slug}`, pl: `${SITE}/pl/wymiary/${pl}`, 'x-default': `${SITE}/dimensions/${dim.slug}` }
         : undefined,
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 /**
  * JSON-LD: okruszki (breadcrumb mamy tez wizualnie), definicja pojecia i FAQ.
- * Jeden graf zamiast trzech osobnych blokow — mniej szumu w <head>.
+ * Jeden graf zamiast trzech osobnych blokow - mniej szumu w <head>.
  */
 function buildJsonLd(dim: (typeof DIMENSIONS_EN)[string]) {
   const url = `${SITE}/dimensions/${dim.slug}`;

@@ -2,11 +2,11 @@
 
 import { motion } from 'framer-motion';
 
-// Dekoracyjna warstwa tla: wezly polaczone cienkimi liniami — nawiazanie do grafu wiedzy
+// Dekoracyjna warstwa tla: wezly polaczone cienkimi liniami - nawiazanie do grafu wiedzy
 // (encja-atrybut-wartosc), ktory audyt mierzy. Wspolna dla PL i EN, dla hero i podstron.
 //
 // Wnetrze grafu jest STATYCZNE (linie i wezly maja docelowe wartosci w regule bazowej CSS).
-// Jedyna animacja to jednorazowe wejscie calego <svg> przez Framer Motion — patrz komentarz
+// Jedyna animacja to jednorazowe wejscie calego <svg> przez Framer Motion - patrz komentarz
 // nad sekcja `.hero-nodes` w globals.css: keyframes CSS na elementach SVG nie odmalowuja sie.
 //
 // Wezly siedza WYLACZNIE przy krawedziach; srodek (240-1010 w ukladzie viewBox) zostaje pusty
@@ -48,7 +48,7 @@ export default function HeroNodes({ vbHeight = 520, height, band }: { vbHeight?:
   const sy = (y: number) => +(y * vbHeight / 520).toFixed(1);
 
   // Animacja odpala sie RAZ po otwarciu strony (initial/animate, nie whileInView)
-  // i biegnie po liniach z gory na dol — opoznienie kazdej krawedzi zalezy od
+  // i biegnie po liniach z gory na dol - opoznienie kazdej krawedzi zalezy od
   // wysokosci jej punktu poczatkowego, wiec caly graf rysuje sie jak fala.
   // Obie grupy (lewa i prawa) ruszaja rownoczesnie, bo maja te same zakresy Y.
   const Y_TOP = 60;
@@ -71,7 +71,7 @@ export default function HeroNodes({ vbHeight = 520, height, band }: { vbHeight?:
     >
       {/* Kreska wjezdza wzdluz odcinka: skracamy stroke-dashoffset od dlugosci do zera.
           Dlugosc liczymy z geometrii, bo <line> nie ma getTotalLength przy SSR, a Motion
-          ustawia to jako styl inline (patrz komentarz nad `.hero-nodes` w globals.css —
+          ustawia to jako styl inline (patrz komentarz nad `.hero-nodes` w globals.css -
           keyframes CSS na dzieciach SVG w ogole sie nie odmalowuja). */}
       {EDGES.map(([x1, y1, x2, y2], i) => {
         const len = Math.hypot(x2 - x1, sy(y2) - sy(y1));

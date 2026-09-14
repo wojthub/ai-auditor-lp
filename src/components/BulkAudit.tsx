@@ -6,10 +6,10 @@ const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
 
 /**
- * Masowy audyt (Bulk Audit) — sekcja HP.
+ * Masowy audyt (Bulk Audit) - sekcja HP.
  * Fakty wg ../ai-auditor/spec/bulk-audit.md: max 50 URL-i, auto-keyword + CSI,
  * darmowy crawl/podglad, 1 kredyt za potwierdzony URL, kolejka w tle, wynik = folder
- * pojedynczych audytow. Raport ZBIORCZY jest odlozony (Faza 3) — nie obiecujemy go tutaj.
+ * pojedynczych audytow. Raport ZBIORCZY jest odlozony (Faza 3) - nie obiecujemy go tutaj.
  */
 
 const cards = [
@@ -136,7 +136,7 @@ export default function BulkAudit() {
           </motion.a>
         </motion.div>
 
-        {/* Dwie drogi skalowania — panel dla ludzi, API dla systemow. */}
+        {/* Dwie drogi skalowania - panel dla ludzi, API dla systemow. */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

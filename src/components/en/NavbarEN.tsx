@@ -7,7 +7,7 @@ import { plCounterpart } from '@/lib/languageSwitch';
 
 const APP_URL = 'https://app.citationone.com';
 
-/** „Tools" menu — mirror of ../Navbar.tsx. Add-on tools only, separate from the content audit (AUDIT_MENU). */
+/** „Tools" menu - mirror of ../Navbar.tsx. Add-on tools only, separate from the content audit (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/tools/keyword-clustering', label: 'Keyword Clustering', desc: 'Map keywords to their target pages' },
   { href: '/tools/content-pruning', label: 'Content Pruning & Cannibalisation', desc: 'Pages that blur your topic or fight for one query' },
@@ -15,17 +15,17 @@ const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/tools/internal-linking', label: 'Internal Linking', desc: 'See which paragraph should link where' },
 ];
 
-/** „Content audit" menu — mirror of ../Navbar.tsx: one product from three angles. */
+/** „Content audit" menu - mirror of ../Navbar.tsx: one product from three angles. */
 const AUDIT_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/how-it-works', label: 'How the auditor works', desc: 'From a URL to ready-to-paste fixes' },
   { href: '/dimensions', label: 'Scoring dimensions', desc: 'The 10 criteria behind AI citations' },
   { href: '/#bulk-audit', label: 'Bulk audit', desc: 'Your whole site in a single run' },
-  // API v1 covers audits ONLY (/audits, /audits/bulk, /me) — none of the tools has an endpoint,
+  // API v1 covers audits ONLY (/audits, /audits/bulk, /me) - none of the tools has an endpoint,
   // so this is a fourth way into the same product, not a separate top-level entry.
   { href: '/api', label: 'API', desc: 'Run audits over REST and JSON' },
 ];
 
-/** „Pricing" menu — mirror of ../Navbar.tsx. Payment terms next to the referral program. */
+/** „Pricing" menu - mirror of ../Navbar.tsx. Payment terms next to the referral program. */
 const PRICING_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/pricing', label: 'Pricing', desc: '3 free audits, then EUR 2 per audit' },
   { href: '/affiliate', label: 'Referral program', desc: '10% commission on your referrals’ orders' },
@@ -62,7 +62,7 @@ export default function NavbarEN() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center nav-desktop">
-          {/* Content audit — the trigger is a LINK to /how-it-works so the main page does not
+          {/* Content audit - the trigger is a LINK to /how-it-works so the main page does not
               disappear behind the dropdown. „Bulk audit" is a homepage anchor (absolute path: the
               nav also runs on subpages). */}
           <div className="nav-dd">
@@ -83,7 +83,7 @@ export default function NavbarEN() {
               </div>
             </div>
           </div>
-          {/* Tools + dropdown (hover and :focus-within — no JS, works straight after SSR) */}
+          {/* Tools + dropdown (hover and :focus-within - no JS, works straight after SSR) */}
           <div className="nav-dd">
             <button type="button" className="nav-link nav-dd-trigger" aria-haspopup="true">
               Tools
@@ -102,7 +102,7 @@ export default function NavbarEN() {
               </div>
             </div>
           </div>
-          {/* Pricing — the trigger is a LINK to /pricing, like „Content audit”: the pricing page
+          {/* Pricing - the trigger is a LINK to /pricing, like „Content audit”: the pricing page
               itself stays one click away even though the item now has a dropdown. */}
           <div className="nav-dd">
             <a href="/pricing" className="nav-link nav-dd-trigger" aria-haspopup="true">
@@ -127,7 +127,7 @@ export default function NavbarEN() {
         </div>
 
         {/* Mobile bar, right side: a fast way back in for returning users + the burger.
-            A plain TEXT link, not a filled button — the hero CTA above the fold already points
+            A plain TEXT link, not a filled button - the hero CTA above the fold already points
             at the same `/login`, and a second accent button would blur the hierarchy. */}
         <div className="md:hidden flex items-center nav-mobile-right">
           <a href={`${APP_URL}/login?lang=en`} className="nav-mobile-login">Log in</a>
@@ -219,7 +219,7 @@ export default function NavbarEN() {
               ))}
             </div>
           )}
-          {/* Pricing: collapsible row — the first entry is the full pricing page. */}
+          {/* Pricing: collapsible row - the first entry is the full pricing page. */}
           <button
             type="button"
             onClick={() => setPricingOpen(!pricingOpen)}
@@ -247,7 +247,7 @@ export default function NavbarEN() {
           <a href={plHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             PL - Wersja polska
           </a>
-          {/* Sign-up and log-in share one URL — the app has a single `/login` screen (email
+          {/* Sign-up and log-in share one URL - the app has a single `/login` screen (email
               code or Google) that creates the account on first visit. They sit apart on mobile
               because they answer two different visitor intents. */}
           <a href={`${APP_URL}/login?lang=en`} onClick={() => setMobileOpen(false)} className="nav-mobile-cta">
@@ -291,7 +291,7 @@ export default function NavbarEN() {
           line-height: inherit;
           cursor: default;
         }
-        /* The „Content audit" trigger is a link — unlike the tools button it has somewhere to go. */
+        /* The „Content audit" trigger is a link - unlike the tools button it has somewhere to go. */
         a.nav-dd-trigger {
           cursor: pointer;
         }
@@ -344,7 +344,7 @@ export default function NavbarEN() {
           line-height: 1.45;
           margin-top: 2px;
         }
-        /* Podwojna klasa — .nav-mobile-link jest nizej w arkuszu i inaczej nadpisalby display */
+        /* Podwojna klasa - .nav-mobile-link jest nizej w arkuszu i inaczej nadpisalby display */
         .nav-mobile-link.nav-mobile-toggle {
           width: 100%;
           display: flex;

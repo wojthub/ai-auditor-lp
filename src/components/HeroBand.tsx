@@ -5,7 +5,7 @@ import HeroNodes from './HeroNodes';
  *
  * Wczesniej kazda z tych sekcji miala wlasna warstwe tla i linie grafu urywaly sie
  * na granicy miedzy nimi. Tutaj obie sekcje siedza w jednym kontenerze i dostaja
- * JEDNA siatke kropek oraz JEDEN graf rozciagniety na cale pasmo — przejscia nie widac.
+ * JEDNA siatke kropek oraz JEDEN graf rozciagniety na cale pasmo - przejscia nie widac.
  *
  * Gradient tla tez przeniesiony tutaj: `Hero` i `Showcase` musza miec przezroczyste
  * sekcje, inaczej ich wlasne tlo zasloni warstwe grafu.

@@ -6,7 +6,7 @@ import { useTypewriterPlaceholder } from '@/lib/useTypewriterPlaceholder';
 
 const APP_URL = 'https://app.citationone.com';
 
-// Neutralna, przykładowa domena — nie wskazujemy na żadnego realnego klienta.
+// Neutralna, przykładowa domena - nie wskazujemy na żadnego realnego klienta.
 // Wszystkie warianty zaczynają się tak samo, więc maszyna do pisania kasuje tylko końcówkę.
 const URL_EXAMPLES = [
   'twojastrona.pl/blog/poradnik',
@@ -36,7 +36,7 @@ export default function Hero() {
     }
   };
 
-  // Tlo (siatka kropek + graf wezlow) daje HeroBand — wspolnie z sekcja mockupu,
+  // Tlo (siatka kropek + graf wezlow) daje HeroBand - wspolnie z sekcja mockupu,
   // zeby linie nie urywaly sie na granicy sekcji.
   return (
     <section className="relative">
@@ -136,7 +136,7 @@ export default function Hero() {
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0b7983" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z" />
             </svg>
-            {/* Nota jest jednoczesnie wejsciem do rejestracji — ten sam ekran `/login`,
+            {/* Nota jest jednoczesnie wejsciem do rejestracji - ten sam ekran `/login`,
                 co CTA w navbarze; audyty przyznaje sie po zalozeniu konta. */}
             <span>
               <a href={`${APP_URL}/login?lang=pl`} className="hero-note-link">Odbierz 3 darmowe audyty</a>

@@ -4,7 +4,7 @@ import { alternatesFor } from '@/lib/languageSwitch';
 export const metadata: Metadata = {
   title: {
     default: 'Narzędzie GEO - audyt treści pod AI Search - CitationOne',
-    // Marka TYLKO na stronie glownej (w `default`) — patrz nota w src/app/layout.tsx.
+    // Marka TYLKO na stronie glownej (w `default`) - patrz nota w src/app/layout.tsx.
     template: '%s',
   },
   description:

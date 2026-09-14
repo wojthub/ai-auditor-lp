@@ -20,7 +20,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     default: 'GEO & AI Search Content Audit Tool - CitationOne',
-    // Marka TYLKO na stronie glownej (w `default`) — podstrony maja wlasny, pelny tytul
+    // Marka TYLKO na stronie glownej (w `default`) - podstrony maja wlasny, pelny tytul
     // i sufiks tylko zjadalby znaki w SERP.
     template: '%s',
   },

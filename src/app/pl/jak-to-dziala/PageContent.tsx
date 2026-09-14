@@ -6,7 +6,7 @@ import HeroBackdrop from '@/components/HeroBackdrop';
 
 const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
-// Kolory numerow kafelkow — te same co na hubie wymiarow (WymiaryContent / DimensionsContent).
+// Kolory numerow kafelkow - te same co na hubie wymiarow (WymiaryContent / DimensionsContent).
 const NUM_COLORS = ['#e07a4a', '#0b7983', '#c47a2a'];
 
 function fadeUp(delay = 0) {
@@ -29,10 +29,10 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 /* ── Visual: Konkurencja (Google + ChatGPT) ───────────────────────────── */
-// Blok „Konkurencja" z aplikacji w wersji na LP — te same kolumny i ten sam sposob
+// Blok „Konkurencja" z aplikacji w wersji na LP - te same kolumny i ten sam sposob
 // kolorowania wynikow, zeby user rozpoznal ekran, ktory zobaczy po zakupie.
 // Blok niesie DWA zrodla: Top 10 SERP z Google i cytowania z odpowiedzi ChatGPT
-// na te sama fraze — stad naglowek zrodla nad kazda czescia (1:1 z raportem).
+// na te sama fraze - stad naglowek zrodla nad kazda czescia (1:1 z raportem).
 // Domeny neutralne: nie pokazujemy realnych klientow ani realnej konkurencji.
 const SERP_HEAD = { phrase: 'ranking słuchawek bezprzewodowych' };
 const SERP_LABELS = ['POZ.', 'URL', 'SŁOWA', 'CQS'];
@@ -54,7 +54,7 @@ const SERP_ROWS = [
   { pos: '6', url: 'konkurent-d.pl/porady/sluchawki', words: '3029', cqs: 70 },
   { pos: '★', url: 'twojastrona.pl/blog/ranking-2026', words: '5634', cqs: 70, mine: true },
 ];
-// Naglowek zrodla wewnatrz bloku „Konkurencja" — jedno zrodlo, jeden naglowek.
+// Naglowek zrodla wewnatrz bloku „Konkurencja" - jedno zrodlo, jeden naglowek.
 // Ikona 1:1 z Hero i z AIOverviewVisual: plik z public/logos, alt puste + aria-hidden,
 // bo nazwa dostawcy stoi obok w tekscie i czytnik nie ma jej powtarzac.
 function SourceHeading({ logo, children }: { logo: string; children: React.ReactNode }) {
@@ -557,7 +557,7 @@ export default function PageContent() {
             ))}
           </div>
 
-          {/* Wejscie do podstron wymiarow — po usunieciu „Wymiary" z gornej nawigacji to
+          {/* Wejscie do podstron wymiarow - po usunieciu „Wymiary" z gornej nawigacji to
               glowna sciezka do nich z tresci. */}
           <motion.div {...fadeUp(0.1)} style={{ textAlign: 'center', marginTop: 36 }}>
             <a

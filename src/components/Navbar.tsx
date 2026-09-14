@@ -7,7 +7,7 @@ import { enCounterpart } from '@/lib/languageSwitch';
 
 const APP_URL = 'https://app.citationone.com';
 
-/** Menu „Narzedzia" — same narzedzia dodatkowe, osobne od audytu tresci (AUDIT_MENU). */
+/** Menu „Narzedzia" - same narzedzia dodatkowe, osobne od audytu tresci (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/pl/narzedzia/klasteryzacja', label: 'Klasteryzacja słów kluczowych', desc: 'Przypisz słowa kluczowe do stron docelowych' },
   { href: '/pl/narzedzia/pruning', label: 'Content Pruning i kanibalizacja', desc: 'Strony rozmywające temat i walczące o tę samą frazę' },
@@ -15,17 +15,17 @@ const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/pl/narzedzia/linki-wewnetrzne', label: 'Linki wewnętrzne', desc: 'Zobacz, który akapit gdzie podlinkować' },
 ];
 
-/** Menu „Audyt tresci" — jeden produkt z trzech stron: mechanizm, kryteria, skala. */
+/** Menu „Audyt tresci" - jeden produkt z trzech stron: mechanizm, kryteria, skala. */
 const AUDIT_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/pl/jak-to-dziala', label: 'Jak działa audytor?', desc: 'Droga od adresu URL do gotowych poprawek' },
   { href: '/pl/wymiary', label: 'Wymiary oceny', desc: '10 kryteriów, które decydują o cytowaniu przez AI' },
   { href: '/pl#masowy-audyt', label: 'Audyt masowy', desc: 'Cały serwis w jednym przebiegu' },
-  // API v1 obsluguje WYLACZNIE audyty (/audits, /audits/bulk, /me) — zadne z narzedzi nie ma
+  // API v1 obsluguje WYLACZNIE audyty (/audits, /audits/bulk, /me) - zadne z narzedzi nie ma
   // endpointu, wiec to czwarte wejscie do tego samego produktu, nie osobna pozycja paska.
   { href: '/pl/api', label: 'API', desc: 'Zlecanie audytów przez REST i JSON' },
 ];
 
-/** Menu „Cennik" — zasady platnosci obok programu polecen, czyli drugiej strony tego samego tematu. */
+/** Menu „Cennik" - zasady platnosci obok programu polecen, czyli drugiej strony tego samego tematu. */
 const PRICING_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/pl/cennik', label: 'Cennik', desc: '3 darmowe audyty, potem 2 EUR za audyt' },
   { href: '/pl/affiliate', label: 'Program poleceń', desc: 'Prowizja 10% od zamówień poleconych osób' },
@@ -62,7 +62,7 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center nav-desktop">
-          {/* Audyt tresci — trigger jest LINKIEM na /pl/jak-to-dziala, zeby glowna podstrona nie
+          {/* Audyt tresci - trigger jest LINKIEM na /pl/jak-to-dziala, zeby glowna podstrona nie
               zniknela za rozwinieciem. „Audyt masowy" to kotwica na HP (pelna sciezka, bo menu
               jest tez na podstronach). */}
           <div className="nav-dd">
@@ -83,7 +83,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          {/* Narzedzia + rozwijane menu (hover i :focus-within — bez JS, dziala od razu po SSR) */}
+          {/* Narzedzia + rozwijane menu (hover i :focus-within - bez JS, dziala od razu po SSR) */}
           <div className="nav-dd">
             <button type="button" className="nav-link nav-dd-trigger" aria-haspopup="true">
               Narzędzia
@@ -102,7 +102,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          {/* Cennik — trigger jest LINKIEM na /pl/cennik, tak jak „Audyt tresci”: sama podstrona
+          {/* Cennik - trigger jest LINKIEM na /pl/cennik, tak jak „Audyt tresci”: sama podstrona
               cennika zostaje osiagalna jednym klikiem, mimo ze pozycja ma rozwiniecie. */}
           <div className="nav-dd">
             <a href="/pl/cennik" className="nav-link nav-dd-trigger" aria-haspopup="true">
@@ -127,7 +127,7 @@ export default function Navbar() {
         </div>
 
         {/* Prawa strona paska na mobile: szybkie wejscie dla wracajacych + hamburger.
-            Link jest TEKSTOWY, nie wypelnionym przyciskiem — nad zgiecciem stoi juz „Zrob audyt"
+            Link jest TEKSTOWY, nie wypelnionym przyciskiem - nad zgiecciem stoi juz „Zrob audyt"
             przy inpucie i prowadzi pod ten sam `/login`; drugi przycisk w akcencie rozmywalby
             hierarchie. Rejestracje obsluguja hero i nota pod inputem. */}
         <div className="md:hidden flex items-center nav-mobile-right">
@@ -220,7 +220,7 @@ export default function Navbar() {
               ))}
             </div>
           )}
-          {/* Cennik: wiersz rozwijany — pierwsza pozycja to pelna podstrona cennika. */}
+          {/* Cennik: wiersz rozwijany - pierwsza pozycja to pelna podstrona cennika. */}
           <button
             type="button"
             onClick={() => setPricingOpen(!pricingOpen)}
@@ -248,7 +248,7 @@ export default function Navbar() {
           <a href={enHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             EN - English version
           </a>
-          {/* Rejestracja i logowanie prowadza pod ten sam adres — aplikacja ma jeden ekran
+          {/* Rejestracja i logowanie prowadza pod ten sam adres - aplikacja ma jeden ekran
               `/login` (kod na e-mail albo Google), ktory zaklada konto przy pierwszym wejsciu.
               Na mobile stoja osobno, bo to dwie rozne intencje odwiedzajacego. */}
           <a
@@ -299,7 +299,7 @@ export default function Navbar() {
           line-height: inherit;
           cursor: default;
         }
-        /* Trigger „Audytu tresci" jest linkiem — inaczej niz przycisk narzedzi ma dokad prowadzic. */
+        /* Trigger „Audytu tresci" jest linkiem - inaczej niz przycisk narzedzi ma dokad prowadzic. */
         a.nav-dd-trigger {
           cursor: pointer;
         }
@@ -352,7 +352,7 @@ export default function Navbar() {
           line-height: 1.45;
           margin-top: 2px;
         }
-        /* Podwojna klasa — .nav-mobile-link jest nizej w arkuszu i inaczej nadpisalby display */
+        /* Podwojna klasa - .nav-mobile-link jest nizej w arkuszu i inaczej nadpisalby display */
         .nav-mobile-link.nav-mobile-toggle {
           width: 100%;
           display: flex;

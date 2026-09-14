@@ -1,4 +1,4 @@
-// UWAGA: ta strona LEZY w grupie routingu `(en)`, tak samo jak `/api` — grupa nie zmienia URL-a
+// UWAGA: ta strona LEZY w grupie routingu `(en)`, tak samo jak `/api` - grupa nie zmienia URL-a
 // (nadal `/affiliate`), a trzyma strony EN obok siebie zamiast wprost w `src/app/`.
 import type { Metadata } from 'next';
 import { alternatesFor } from '@/lib/languageSwitch';

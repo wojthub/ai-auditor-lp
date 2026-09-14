@@ -2,7 +2,7 @@
  * Tresc podstron narzedzi (PL).
  *
  * Zrodlo faktow: ../ai-auditor/spec/tools.md (cel, pipeline, konfiguracja, limity, koszt).
- * SWIADOMIE NIE publikujemy limitow (capy URL-i i fraz) — decyzja z 2026-08-20. Sa w specyfikacji
+ * SWIADOMIE NIE publikujemy limitow (capy URL-i i fraz) - decyzja z 2026-08-20. Sa w specyfikacji
  * oznaczone jako TYMCZASOWE, wiec kazda liczba tutaj szybko klamie, a przed zakupem i tak nie jest
  * argumentem. Kredyty ZOSTAJA: 1 za analize, zwrot przy bledzie (`failToolJobWithRefund`).
  */

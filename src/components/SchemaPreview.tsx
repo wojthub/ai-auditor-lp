@@ -1,5 +1,5 @@
 /**
- * Podglad wyniku analizy schema.org — replika zakladki „Podsumowanie" z aplikacji:
+ * Podglad wyniku analizy schema.org - replika zakladki „Podsumowanie" z aplikacji:
  * pasek licznikow, kafle pokrycia typow i lista najczestszych problemow.
  *
  * Etykiety odpowiadaja kluczom `schemaGaps.*` w translations.ts aplikacji, zeby user

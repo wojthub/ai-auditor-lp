@@ -6,7 +6,7 @@ import HeroBackdrop from '@/components/HeroBackdrop';
 
 const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
-// Kolory numerow kafelkow — te same co na hubie wymiarow (WymiaryContent / DimensionsContent).
+// Kolory numerow kafelkow - te same co na hubie wymiarow (WymiaryContent / DimensionsContent).
 const NUM_COLORS = ['#e07a4a', '#0b7983', '#c47a2a'];
 
 function fadeUp(delay = 0) {
@@ -29,7 +29,7 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 /* ── Visual: Competition (Google + ChatGPT) ───────────────────────────── */
-// The „Competition" block from the app, trimmed for the LP — it carries TWO sources:
+// The „Competition" block from the app, trimmed for the LP - it carries TWO sources:
 // the Google Top 10 SERP and the citations from ChatGPT's answer to the same phrase,
 // hence a source heading above each part (1:1 with the report). Same columns and the same
 // score coloring, so the user recognizes the screen they get after purchase.
@@ -54,7 +54,7 @@ const SERP_ROWS = [
   { pos: '6', url: 'competitor-d.com/guides/earbuds', words: '3029', cqs: 70 },
   { pos: '★', url: 'yoursite.com/blog/best-earbuds-2026', words: '5634', cqs: 70, mine: true },
 ];
-// Source heading inside the „Competition" block — one source, one heading.
+// Source heading inside the „Competition" block - one source, one heading.
 // Icon 1:1 with the Hero and AIOverviewVisual: a file from public/logos, empty alt +
 // aria-hidden, because the provider name sits right next to it in the text.
 function SourceHeading({ logo, children }: { logo: string; children: React.ReactNode }) {
@@ -535,7 +535,7 @@ export default function PageContentEN() {
             ))}
           </div>
 
-          {/* Entry point to the dimension subpages — with „Dimensions" gone from the top nav,
+          {/* Entry point to the dimension subpages - with „Dimensions" gone from the top nav,
               this is the main path to them from the content. */}
           <motion.div {...fadeUp(0.1)} style={{ textAlign: 'center', marginTop: 36 }}>
             <a

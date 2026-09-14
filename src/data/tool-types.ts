@@ -1,5 +1,5 @@
 /**
- * Wspolne typy podstron narzedzi — analogicznie do dimension-types.ts.
+ * Wspolne typy podstron narzedzi - analogicznie do dimension-types.ts.
  *
  * Narzedzia to NIE wymiary audytu: kazde jest osobnym zadaniem (job) w aplikacji, kosztuje
  * kredyt i ma wlasne wejscie (sitemapa albo lista fraz). Dlatego wlasny szablon: zamiast
@@ -17,11 +17,11 @@ export interface ToolStep {
 
 export interface ToolData {
   slug: string;
-  /** Nazwa narzedzia — jak w sidebarze aplikacji. */
+  /** Nazwa narzedzia - jak w sidebarze aplikacji. */
   name: string;
   /**
    * H1 = title. Ta sama zasada co przy wymiarach, ale TU jest to fraza sprzedazowa
-   * („Narzedzie do ..."), nie pytanie — hero ma zlapac intencje transakcyjna i dac CTA.
+   * („Narzedzie do ..."), nie pytanie - hero ma zlapac intencje transakcyjna i dac CTA.
    * Pytanie definicyjne przenieslismy nizej, do `defHeading` (H2).
    */
   heading: string;
@@ -31,7 +31,7 @@ export interface ToolData {
   lead: string;
   /** Pasek meta pod H1: koszt, wejscie, wynik. */
   chips: string[];
-  /** Pytanie definicyjne — pierwsza sekcja tresci, H2 („Czym jest ...?"). */
+  /** Pytanie definicyjne - pierwsza sekcja tresci, H2 („Czym jest ...?"). */
   defHeading: string;
   def: string[];
   whyHeading: string;
@@ -42,24 +42,24 @@ export interface ToolData {
   configTable?: DimTable;
   outputHeading: string;
   output: string[];
-  /** Limity, koszt, zwroty kredytu — uczciwie, bo to pytania przed zakupem. */
+  /** Limity, koszt, zwroty kredytu - uczciwie, bo to pytania przed zakupem. */
   limitsHeading: string;
   limits: string[];
   faq: DimFaq[];
   related: { slug: string; name: string; desc: string }[];
   /** Sciezka narzedzia w aplikacji (deep link CTA). */
   appPath: string;
-  /** Podglad wyniku renderowany w sekcji „Wynik" — na razie tylko lista klastrow. */
+  /** Podglad wyniku renderowany w sekcji „Wynik" - na razie tylko lista klastrow. */
   preview?: 'clusters' | 'pruning' | 'schema' | 'interlinking';
 }
 
 export interface ToolStrings {
-  /** Jezyk podgladow wyniku — komponenty podgladu maja wlasne teksty dla obu wersji. */
+  /** Jezyk podgladow wyniku - komponenty podgladu maja wlasne teksty dla obu wersji. */
   lang: 'pl' | 'en';
   basePath: string;
   breadcrumbRoot: string;
   breadcrumbAria: string;
-  /** Nota pod CTA w hero — zamiast obietnicy „za darmo", ktorej narzedzia nie maja. */
+  /** Nota pod CTA w hero - zamiast obietnicy „za darmo", ktorej narzedzia nie maja. */
   heroNote: string;
   tocAria: string;
   /** Spis tresci w hero. Kolejnosc MUSI odpowiadac kolejnosci sekcji w ToolPage. */
@@ -79,7 +79,7 @@ export interface ToolStrings {
   appUrl: string;
 }
 
-/** Pary slugow PL ↔ EN — jedyne zrodlo hreflangow i sitemapy dla narzedzi. */
+/** Pary slugow PL ↔ EN - jedyne zrodlo hreflangow i sitemapy dla narzedzi. */
 export const TOOL_SLUG_PAIRS: { pl: string; en: string }[] = [
   { pl: 'klasteryzacja', en: 'keyword-clustering' },
   { pl: 'pruning', en: 'content-pruning' },

@@ -568,6 +568,10 @@ znikają przy skalowaniu zrzutu ekranu i łatwo uznać działający efekt za zep
 - `'use client'` - komponenty z animacjami/state
 - Brak emoji w UI
 - `output: 'export'` - static export, brak middleware/server-side redirects. Redirecty przez `public/_redirects`
+- **Myslnik: ZAWSZE dywiz `-`, NIGDY em dash `—`.** Dotyczy calego repo: copy na stronach, metadane,
+  etykiety menu, komentarze w kodzie. Ujednolicone 2026-09-14 (175 wystapien w ~45 plikach).
+  Kontrola przed commitem: `grep -r "—" src/` ma zwracac pusto. Znaki `–` w zakresach liczbowych
+  (`0–100`, `200–500`) zostaly nietkniete - jesli maja tez pojsc na `-`, to osobna decyzja.
 
 ## RWD / Mobile
 

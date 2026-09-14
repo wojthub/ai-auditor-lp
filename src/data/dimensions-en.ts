@@ -1,5 +1,5 @@
 /**
- * Dimension subpage content (EN) — mirror of dimensions-pl.ts.
+ * Dimension subpage content (EN) - mirror of dimensions-pl.ts.
  *
  * Source of facts: ../ai-auditor/spec/dimensions.md (criteria, formulas) + `lib/glossary.ts`
  * and `lib/i18n/translations.ts` in the app (dimension names MUST match what the user sees in

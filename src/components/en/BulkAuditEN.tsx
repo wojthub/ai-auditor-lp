@@ -6,10 +6,10 @@ const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
 
 /**
- * Bulk Audit — HP section (EN mirror of ../BulkAudit.tsx).
+ * Bulk Audit - HP section (EN mirror of ../BulkAudit.tsx).
  * Facts per ../../ai-auditor/spec/bulk-audit.md: max 50 URLs, auto keyword + CSI,
  * free crawl/preview, 1 credit per confirmed URL, background queue, result = folder of
- * individual audits. The AGGREGATE report is deferred (Phase 3) — not promised here.
+ * individual audits. The AGGREGATE report is deferred (Phase 3) - not promised here.
  */
 
 const cards = [
@@ -136,7 +136,7 @@ export default function BulkAuditEN() {
           </motion.a>
         </motion.div>
 
-        {/* Two ways to scale — the panel for people, the API for systems. */}
+        {/* Two ways to scale - the panel for people, the API for systems. */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

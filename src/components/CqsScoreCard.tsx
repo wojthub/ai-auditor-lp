@@ -3,7 +3,7 @@
  *
  * Kolory i proporcje sa przepisane z ai-auditor: --color-warning #CA8A04,
  * --color-muted-foreground #64748B, tlo warning/5, ramka warning/30, badge warning/15.
- * Zamiast zrzutu ekranu — wektor, wiec zostaje ostry w kazdej rozdzielczosci i wazy zero.
+ * Zamiast zrzutu ekranu - wektor, wiec zostaje ostry w kazdej rozdzielczosci i wazy zero.
  */
 
 const WARNING = '#CA8A04';

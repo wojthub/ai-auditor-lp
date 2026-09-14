@@ -6,13 +6,13 @@ import { toolSlugsPl } from '@/data/tools-pl';
 import { toolEnSlugForPl } from '@/data/tool-types';
 import { STATIC_PAIRS } from '@/lib/languageSwitch';
 
-// Wymagane przy output: 'export' — bez tego build przerywa sie na kolekcji danych trasy.
+// Wymagane przy output: 'export' - bez tego build przerywa sie na kolekcji danych trasy.
 export const dynamic = 'force-static';
 
 const SITE = 'https://citationone.com';
 
 /**
- * Sitemap dla static exportu — Next generuje z tego `out/sitemap.xml` w czasie builda.
+ * Sitemap dla static exportu - Next generuje z tego `out/sitemap.xml` w czasie builda.
  *
  * Podstrony wymiarow ciagniemy z danych, a NIE z recznej listy: dopisanie wymiaru ma
  * automatycznie trafic do mapy. `alternates.languages` dokleja <xhtml:link hreflang>,
@@ -22,7 +22,7 @@ const SITE = 'https://citationone.com';
 /**
  * Strony statyczne: pary bierzemy z `STATIC_PAIRS` (to samo zrodlo co przelacznik jezyka
  * i `alternatesFor`), tu dokladamy tylko priorytet. Wczesniej byla to trzecia kopia tej
- * samej listy adresow — nowa podstrona wypadala z mapy albo z hreflangow zaleznie od tego,
+ * samej listy adresow - nowa podstrona wypadala z mapy albo z hreflangow zaleznie od tego,
  * ktora liste ktos akurat zaktualizowal.
  */
 const PRIORITY: Record<string, number> = { '/': 1, '/api': 0.6 };
@@ -63,7 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
-  // Strona EN bez odpowiednika PL nie istnieje dzisiaj, ale gdyby powstala — nie zgub jej.
+  // Strona EN bez odpowiednika PL nie istnieje dzisiaj, ale gdyby powstala - nie zgub jej.
   const orphanEn: MetadataRoute.Sitemap = dimensionSlugsEn()
     .filter((en) => !dimensionSlugsPl().some((pl) => enSlugForPl(pl) === en))
     .map((en) => ({ url: `${SITE}/dimensions/${en}`, lastModified, priority: 0.7 }));

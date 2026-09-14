@@ -49,7 +49,7 @@ function Para({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Tabela w kontenerze ze scrollem — na waskim ekranie przewija sie sama, strona nie. */
+/** Tabela w kontenerze ze scrollem - na waskim ekranie przewija sie sama, strona nie. */
 function DataTable({ table }: { table: DimTable }) {
   return (
     <div style={{ marginBottom: 22 }}>
@@ -124,7 +124,7 @@ function FactorList({ items, tone }: { items: string[]; tone: 'up' | 'down' }) {
 }
 
 /**
- * Przykladowe rekomendacje — uklad 1:1 z raportem w aplikacji: zdanie o problemie,
+ * Przykladowe rekomendacje - uklad 1:1 z raportem w aplikacji: zdanie o problemie,
  * pod nim karty PRZED (czerwona) i PO (zielona). Zeby user rozpoznal to, co kupuje.
  */
 function Recommendations({ items, t }: { items: DimRecommendation[]; t: DimensionStrings }) {
@@ -173,7 +173,7 @@ export default function DimensionPage({ dim, known, all, t }: {
   all: { slug: string; name: string }[];
   t: DimensionStrings;
 }) {
-  // Kotwice sekcji ida z `t.toc` — dzieki temu strona EN ma angielskie #why-it-matters,
+  // Kotwice sekcji ida z `t.toc` - dzieki temu strona EN ma angielskie #why-it-matters,
   // a nie polskie #dlaczego. Kolejnosc w `toc` MUSI odpowiadac kolejnosci sekcji nizej.
   const sectionId = (i: number) => t.toc[i].id;
 
@@ -208,12 +208,12 @@ export default function DimensionPage({ dim, known, all, t }: {
             </p>
 
             {/*
-              Chipsow (skala / metoda / wejscie) w hero NIE renderujemy — decyzja z 2026-08-21,
+              Chipsow (skala / metoda / wejscie) w hero NIE renderujemy - decyzja z 2026-08-21,
               ta sama co przy narzedziach. Skala i metoda sa opisane w sekcji „Jak liczymy".
               Pole `dim.chips` zostaje w danych, ale nie ma juz zadnego konsumenta.
             */}
 
-            {/* Spis tresci — ten sam zabieg, ktory zalecamy w wymiarze „koszt pozyskania". */}
+            {/* Spis tresci - ten sam zabieg, ktory zalecamy w wymiarze „koszt pozyskania". */}
             <nav aria-label={t.tocAria} style={{
               marginTop: 4, paddingTop: 20, borderTop: '1px solid #eceff3',
               display: 'flex', flexWrap: 'wrap', gap: '8px 18px',
@@ -241,7 +241,7 @@ export default function DimensionPage({ dim, known, all, t }: {
         </div>
       </section>
 
-      {/* W RAPORCIE — stoi jako druga sekcja: dowod przed metodologia */}
+      {/* W RAPORCIE - stoi jako druga sekcja: dowod przed metodologia */}
       <section id={sectionId(1)} style={{ background: '#ffffff', padding: '72px 0' }}>
         <div style={{ maxWidth: 820, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()}>
@@ -348,14 +348,14 @@ export default function DimensionPage({ dim, known, all, t }: {
                   display: 'block',
                   textDecoration: 'none',
                 };
-                // Strony jeszcze nienapisane renderujemy jako karty bez linku — zamiast 404.
+                // Strony jeszcze nienapisane renderujemy jako karty bez linku - zamiast 404.
                 return isLink
                   ? <a key={rel.slug} href={`${t.basePath}/${rel.slug}`} style={boxStyle}>{inner}</a>
                   : <div key={rel.slug} style={boxStyle}>{inner}</div>;
               })}
             </div>
 
-            {/* Pelna nawigacja — bez tego kazda podstrona jest slepym zaulkiem poza trzema sasiadami. */}
+            {/* Pelna nawigacja - bez tego kazda podstrona jest slepym zaulkiem poza trzema sasiadami. */}
             <div style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid #dfe1e7' }}>
               <h3 style={{ fontSize: 13, fontWeight: 700, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 16px' }}>
                 {t.allDimensions}

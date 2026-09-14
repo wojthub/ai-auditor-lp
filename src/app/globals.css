@@ -89,7 +89,7 @@ button:active { transform: scale(0.97); }
 }
 
 /* ── Tło nagłówka: graf węzłów ───────────────────────── */
-/* WAZNE: animacje CSS na DZIECIACH svg (line, circle, path) nie odmalowuja sie —
+/* WAZNE: animacje CSS na DZIECIACH svg (line, circle, path) nie odmalowuja sie -
    getComputedStyle raportuje zmienione wartosci, ale na ekranie zostaje stan bazowy
    z reguly. Dlatego wnetrze grafu jest w pelni statyczne, a animowany jest wylacznie
    sam element <svg>. Nie przenos animacji z powrotem na dzieci: graf zniknie. */
@@ -101,12 +101,12 @@ button:active { transform: scale(0.97); }
   width: 100%;
   height: 100%;
   pointer-events: none;
-  /* preserveAspectRatio="slice" przycina graf na krawedziach sekcji — maska wygasza
+  /* preserveAspectRatio="slice" przycina graf na krawedziach sekcji - maska wygasza
      warstwe zanim dojdzie do ciecia, przy kazdej szerokosci okna. */
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 58%, transparent 88%);
   mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 58%, transparent 88%);
   /* Jednorazowe wejscie robi Framer Motion w HeroNodes.tsx (style inline z JS).
-     Keyframes CSS tu NIE dzialaja — patrz komentarz nad ta sekcja. */
+     Keyframes CSS tu NIE dzialaja - patrz komentarz nad ta sekcja. */
 }
 
 .hero-node-edge {
@@ -133,12 +133,12 @@ button:active { transform: scale(0.97); }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-nodes { opacity: 1 !important; transform: none !important; }
-  /* Motion ustawia stany startowe inline — !important z arkusza je bije. */
+  /* Motion ustawia stany startowe inline - !important z arkusza je bije. */
   .hero-nodes .hero-node-edge { stroke-dashoffset: 0 !important; }
   .hero-nodes .hero-node { transform: none !important; }
 }
 
-/* Hero: nazwa silnika AI z ikoną — ikona i nazwa nigdy się nie rozjeżdżają na osobne wiersze. */
+/* Hero: nazwa silnika AI z ikoną - ikona i nazwa nigdy się nie rozjeżdżają na osobne wiersze. */
 .hero-brand {
   display: inline-flex;
   align-items: center;

@@ -18,7 +18,7 @@ function fadeUp(delay = 0) {
 
 const NUM_COLORS = ['#e07a4a', '#0b7983', '#c47a2a'];
 
-// Nazwy i kolejnosc = `dim.*` + DIMENSION_ORDER (RadarChart) w aplikacji — po zakupie user
+// Nazwy i kolejnosc = `dim.*` + DIMENSION_ORDER (RadarChart) w aplikacji - po zakupie user
 // widzi w raporcie dokladnie te etykiety. `slug` musi istniec w src/data/dimensions-pl.ts.
 const DIMS = [
   {
@@ -94,7 +94,7 @@ const DIMS = [
 ];
 
 // Poza dziesiatka wymiarow: E-E-A-T ma wlasna sekcje nizej, Wartosc dodana jest metryka
-// informacyjna (nie wchodzi do oceny koncowej) — dlatego oba stoja obok gridu, nie w nim.
+// informacyjna (nie wchodzi do oceny koncowej) - dlatego oba stoja obok gridu, nie w nim.
 const EXTRA = [
   {
     slug: 'e-e-a-t',
