@@ -122,16 +122,16 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zaloguj</a>
+          <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zrób audyt</a>
           <a href={enHref} className="nav-lang" title="English version">EN</a>
         </div>
 
-        {/* Prawa strona paska na mobile: szybkie wejscie dla wracajacych + hamburger.
+        {/* Prawa strona paska na mobile: szybkie wejscie do audytu + hamburger.
             Link jest TEKSTOWY, nie wypelnionym przyciskiem - nad zgiecciem stoi juz „Zrob audyt"
             przy inpucie i prowadzi pod ten sam `/login`; drugi przycisk w akcencie rozmywalby
             hierarchie. Rejestracje obsluguja hero i nota pod inputem. */}
         <div className="md:hidden flex items-center nav-mobile-right">
-          <a href={`${APP_URL}/login?lang=pl`} className="nav-mobile-login">Zaloguj</a>
+          <a href={`${APP_URL}/login?lang=pl`} className="nav-mobile-login">Zrób audyt</a>
           {/* Mobile hamburger */}
           <button
             className="md:hidden flex items-center justify-center nav-burger"
@@ -248,25 +248,13 @@ export default function Navbar() {
           <a href={enHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             EN - English version
           </a>
-          {/* Rejestracja i logowanie prowadza pod ten sam adres - aplikacja ma jeden ekran
-              `/login` (kod na e-mail albo Google), ktory zaklada konto przy pierwszym wejsciu.
-              Na mobile stoja osobno, bo to dwie rozne intencje odwiedzajacego. */}
+          {/* Wejscie w audyt - `/login` zaklada konto przy pierwszym wejsciu, wiec obsluguje tez wracajacych. */}
           <a
             href={`${APP_URL}/login?lang=pl`}
             onClick={() => setMobileOpen(false)}
             className="nav-mobile-cta"
           >
-            Załóż darmowe konto
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </a>
-          <a
-            href={`${APP_URL}/login?lang=pl`}
-            onClick={() => setMobileOpen(false)}
-            className="nav-mobile-cta nav-mobile-cta-ghost"
-          >
-            Logowanie
+            Zrób audyt
           </a>
         </div>
       )}
@@ -437,12 +425,6 @@ export default function Navbar() {
           font-weight: 600;
           text-decoration: none;
           letter-spacing: -0.015em;
-        }
-        .nav-mobile-cta-ghost {
-          margin-top: 8px;
-          background: #ffffff;
-          color: #0b7983;
-          border: 1px solid #cfe0e2;
         }
         @media (min-width: 820px) and (max-width: 1023px) {
           .nav-link { padding: 6px 7px; font-size: 14px; }
