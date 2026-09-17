@@ -138,17 +138,17 @@ export default function PricingContent() {
             fontSize: 18, fontWeight: 700, color: '#0d0d12',
             letterSpacing: '-0.02em', margin: '0 0 6px', textAlign: 'center',
           }}>
-            Wydajesz więcej - dorzucamy kredyty
+            Im większe zamówienie, tym więcej kredytów gratis
           </h2>
           <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 20px', textAlign: 'center' }}>
-            Bonus zależy od kwoty zamówienia po rabacie i trafia na saldo automatycznie po zapłacie. 1 kredyt = 1 audyt.
+            Kredyty gratis dopisujemy automatycznie po zapłacie. Próg liczymy od kwoty po rabacie. 1 kredyt = 1 audyt.
           </p>
 
           <div className="bonus-tiers">
             {[
-              { amount: '€200', credits: 100, percent: 10, effective: '€1.82' },
-              { amount: '€400', credits: 200, percent: 20, effective: '€1.67' },
-              { amount: '€600', credits: 300, percent: 30, effective: '€1.54' },
+              { amount: '€200', credits: 100, bonus: 10, total: 110, effective: '€1.82' },
+              { amount: '€400', credits: 200, bonus: 40, total: 240, effective: '€1.67' },
+              { amount: '€600', credits: 300, bonus: 90, total: 390, effective: '€1.54' },
             ].map((tier) => (
               <div
                 key={tier.credits}
@@ -160,17 +160,22 @@ export default function PricingContent() {
                   textAlign: 'center',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 6 }}>
-                  <span style={{ fontSize: 24, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.03em' }}>
-                    od {tier.amount}
-                  </span>
-                  <span style={{ fontSize: 16, fontWeight: 700, color: '#15803d' }}>
-                    +{tier.percent}%
-                  </span>
+                {/* Uklad „placisz → dostajesz": klient widzi kwote i gotowa liczbe kredytow na saldzie,
+                    bez przeliczania procentow. Rozbicie „200 + 40 gratis" pokazuje, skad sie bierze. */}
+                <div style={{ fontSize: 12.5, color: '#818898' }}>Płacisz od</div>
+                <div style={{ fontSize: 24, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.03em', lineHeight: 1.2 }}>
+                  {tier.amount}
                 </div>
-                <div style={{ fontSize: 12.5, color: '#818898', marginTop: 6, lineHeight: 1.5 }}>
-                  czyli {tier.credits} kredytów<br />
-                  <span style={{ color: '#36394a' }}>{tier.effective} / audyt</span>
+                <div style={{ borderTop: '1px solid #eceef2', margin: '10px 16px' }} />
+                <div style={{ fontSize: 12.5, color: '#818898' }}>Dostajesz</div>
+                <div style={{ fontSize: 20, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', lineHeight: 1.25 }}>
+                  {tier.total} kredytów
+                </div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: '#15803d', marginTop: 2 }}>
+                  {tier.credits} + {tier.bonus} gratis
+                </div>
+                <div style={{ fontSize: 12.5, color: '#36394a', marginTop: 8 }}>
+                  {tier.effective} / audyt
                 </div>
               </div>
             ))}
