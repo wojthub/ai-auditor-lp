@@ -2,7 +2,9 @@
 
 ## Opis projektu
 
-Landing page dla narzędzia **CitationOne** (`citationone.com`) - webapp do audytu contentu pod kątem AI Search (ChatGPT, Perplexity, Google AI Overview, Bing Copilot).
+Landing page dla narzędzia **CitationOne** (`citationone.com`) - webapp do audytu contentu pod kątem GEO, czyli widoczności w odpowiedziach AI (ChatGPT, Perplexity, Google AI Overview, Bing Copilot).
+
+**Terminologia w copy (od 2026-09-17):** wszędzie **GEO**, nigdy „AI Search" - zamiana objęła teksty, metadane, `src/data/*` i ilustracje w obu językach. GEO nazywa **sposób optymalizacji** („audyt GEO", „wytyczne dla GEO", „w GEO liczy się…" - tak jak mówi się „w SEO"). Tam, gdzie zdanie wskazuje **miejsce**, w którym zdobywa się ruch albo cytowania, stoi „odpowiedzi AI" / „AI answers" („Pozyskaj ruch z odpowiedzi AI", „Widoczność w odpowiedziach AI"). Nowe copy trzyma ten podział - „ruch z GEO" i „cytowanie w GEO" to błąd.
 
 **Cel LP:** konwersja na logowanie/rejestrację (`/login`) lub zakup pakietu audytów.
 
@@ -103,6 +105,8 @@ ai-auditor-lp/
 │       ├── TechLogos.tsx
 │       ├── Showcase.tsx         # Mockup panelu (sam mockup, bez copy) - na HP
 │       ├── ShowcaseDeck.tsx     # Shared - karuzela 3 ekranow panelu (pigulki + strzalki + swipe)
+│       ├── StatsBand.tsx        # Shared (prop `lang`) - pas 3 liczb social proof, na HP pod Showcase
+│       ├── CqsScoreCard.tsx     # Shared - kafelek CQS (Problem na HP + /pl/wymiary i /dimensions)
 │       ├── Problem.tsx
 │       ├── Solution.tsx         # NIEUŻYWANA na HP
 │       ├── HowItWorks.tsx
@@ -144,25 +148,25 @@ ai-auditor-lp/
 
 | URL | Komponent | Title |
 |-----|-----------|-------|
-| `/` | EN HP (komponenty EN) | GEO & AI Search Content Audit Tool - CitationOne |
+| `/` | EN HP (komponenty EN) | GEO Content Audit Tool - CitationOne |
 | `/how-it-works` | PageContentEN | How does CitationOne work? |
 | `/pricing` | PricingContentEN | Pricing |
 | `/dimensions` | DimensionsContent | 10 content quality dimensions + E-E-A-T |
 | `/dimensions/[slug]` | DimensionPage + dimensions-en.ts | H1 = title, np. `What is BLUF in SEO and GEO?` |
 | `/tools/[slug]` | ToolPage + tools-en.ts | H1 = title, fraza sprzedażowa `… tool for SEO`, np. `Keyword clustering tool for SEO` |
-| `/api` | ApiContentEN | CitationOne API - audyty AI Search przez REST |
+| `/api` | ApiContentEN | CitationOne API - audyty GEO przez REST |
 
 ### PL (katalog /pl)
 
 | URL | Komponent | Title |
 |-----|-----------|-------|
-| `/pl` | PL HP (komponenty PL) | Narzędzie GEO - audyt treści pod AI Search - CitationOne (jedyna strona z marką w title) |
+| `/pl` | PL HP (komponenty PL) | Narzędzie GEO do audytu treści - CitationOne (jedyna strona z marką w title) |
 | `/pl/jak-to-dziala` | PageContent PL | Jak działa CitationOne? |
 | `/pl/cennik` | PricingContent PL | Cennik |
 | `/pl/wymiary` | WymiaryContent PL | 10 wymiarów jakości treści + E-E-A-T |
 | `/pl/wymiary/[slug]` | DimensionPage + dimensions-pl.ts | H1 = title, np. `Czym jest BLUF w SEO i GEO?` |
 | `/pl/narzedzia/[slug]` | ToolPage + tools-pl.ts | H1 = title, fraza sprzedażowa `Narzędzie do … dla SEO`, np. `Narzędzie do klasteryzacji słów kluczowych dla SEO` |
-| `/pl/api` | ApiContent PL | API CitationOne - audyty AI Search przez REST |
+| `/pl/api` | ApiContent PL | API CitationOne - audyty GEO przez REST |
 
 ### Zakładka API (`/api` i `/pl/api`)
 
@@ -201,16 +205,21 @@ bumpie; w pasku bloku kodu jest `api/v1`, czyli prefiks ścieżki, który zmieni
 
 | | Desktop | Mobile |
 |-|---------|--------|
-| Pasek | CTA „Zaloguj" / „Log in" (wypełniony) | tekstowy link „Zaloguj" / „Log in" obok hamburgera |
-| Menu | — | „Załóż darmowe konto" (wypełniony) + „Logowanie" (ghost) |
+| Pasek | CTA „Zrób audyt" / „Run audit" (wypełniony) | tekstowy link „Zrób audyt" / „Run audit" obok hamburgera |
+| Menu | — | „Zrób audyt" / „Run audit" (wypełniony) |
 
-Wszystkie cztery prowadzą pod `APP_URL/login?lang={pl|en}` — aplikacja ma jeden ekran logowania,
+Wszystkie trzy prowadzą pod `APP_URL/login?lang={pl|en}` — aplikacja ma jeden ekran logowania,
 który zakłada konto przy pierwszym wejściu, więc osobnego `/register` nie ma.
+
+- **Etykieta to „Zrób audyt", nie „Zaloguj" (2026-09-16).** Nawigacja nie oferuje osobnego wejścia
+  do logowania: adres jest ten sam, a wracający użytkownik i tak trafia na ekran, który go zaloguje.
+  Wcześniej menu mobile miało dwa przyciski („Załóż darmowe konto" + ghost „Logowanie") — zostały
+  zastąpione jednym wypełnionym CTA, a styl `.nav-mobile-cta-ghost` usunięty jako martwy.
 
 - **Link na mobile jest TEKSTOWY, nie wypełnionym przyciskiem** (decyzja z 2026-09-08): nad zgięciem
   stoi już „Zrób audyt" przy inpucie i prowadzi pod ten sam `/login`; drugi przycisk w akcencie
-  rozmywałby hierarchię. Kupuje jedno: wracający użytkownik nie musi otwierać hamburgera i przewijać
-  pod cztery pozycje menu. Rejestrację obsługują hero i nota pod inputem.
+  rozmywałby hierarchię. Kupuje jedno: użytkownik nie musi otwierać hamburgera i przewijać
+  pod pozycje menu. Rejestrację obsługują hero i nota pod inputem.
 - **Kontener `.nav-mobile-right` musi mieć własną regułę w `@media (max-width: 819px)`** — próg paska
   jest szerszy niż Tailwindowe `md` (768 px), więc samo `md:hidden` gasiłoby go w przedziale 768–819 px,
   dokładnie tak jak wcześniej trzeba było ratować `.nav-burger`.
@@ -235,7 +244,7 @@ który zakłada konto przy pierwszym wejściu, więc osobnego `/register` nie ma
 ### Kolejność sekcji HP (identyczna EN i PL)
 
 ```
-Navbar → Hero → Showcase → Problem → HowItWorks → TechLogos → DimensionsTeaser → ReportSection → ForWho → FAQ → AuthorSection → ClosingCta → Footer
+Navbar → Hero → Showcase → StatsBand → Problem → HowItWorks → TechLogos → DimensionsTeaser → ReportSection → BulkAudit → ForWho → FAQ → AuthorSection → ClosingCta → Footer
 ```
 
 Pliki: PL [page.tsx](src/app/pl/page.tsx), EN [page.tsx](src/app/page.tsx) (komponenty EN w `src/components/en/*EN.tsx`).
@@ -257,6 +266,11 @@ Na ekranie leżą **trzy slajdy** (od 2026-09-04) w kolejności pracy z audytem:
 
 **StatsBand** ([StatsBand.tsx](src/components/StatsBand.tsx), wspólny dla PL i EN przez prop `lang`) - pas trzech liczb social proof zaraz pod `HeroBand` (pokaz 3 ekranów panelu), przed sekcją Problem: użytkownicy / wykonane audyty / przeanalizowane strony. Liczby **ustawia admin w aplikacji** (`/ustawienia` → karta „Strona citationone.com”, klucze `LP_STAT_USERS` / `LP_STAT_AUDITS` / `LP_STAT_PAGES`), LP dociąga je przez `fetchLpSettings`. `FALLBACK` w komponencie to wartości wypalone w HTML. Wartość z panelu to cyfry z opcjonalnym `+`; separatory tysięcy (PL twarda spacja, EN przecinek) i polską formę liczebnika (1 / 2-4 / 5+, przy `+` zawsze dopełniacz) dokłada komponent.
 
+- **Liczby mają gradient** (`#1a3a4a → #0b7983 → #0b9aa6` przez `background-clip: text`), ten sam co „CitationOne" w sekcji Problem. Napis musi być `inline-block`: przy `display: block` tło rozciąga się na całą kolumnę i krótka liczba dostaje wyłącznie ciemny początek gradientu.
+- **Dane idą tym samym zapytaniem co link przykładowego raportu** - `fetchLpSettings` ([src/lib/lpSettings.ts](src/lib/lpSettings.ts)) trzyma obietnicę na poziomie modułu, więc sekcje na jednej stronie nie dublują ruchu. Odpowiedź jest cache'owana przez CDN (`s-maxage=300`), więc zmiana z panelu wchodzi na stronę do 5 minut.
+
+**Problem** ([Problem.tsx](src/components/Problem.tsx) / [en/ProblemEN.tsx](src/components/en/ProblemEN.tsx)) - „Jak AI ocenia Twoje treści?" / „How does AI rate your content?". Układ 2-kolumnowy (stack <768px, kolumny wyśrodkowane w pionie): lewa = label „Problem" + h2 + **kafelek CQS**, prawa = akapit. Nagłówek jest w skali `clamp(1.75rem, 3.4vw, 2.25rem)` - większy rozmiar rozpychał lewą kolumnę i kafelek wypadał poniżej akapitu. Kafelek to [CqsScoreCard.tsx](src/components/CqsScoreCard.tsx) z propem `compact` (niższe paddingi, wynik 30px zamiast 36px) i stopką: `avgLabel` („Średnia TOP 10: 40") + `link` „Zobacz konkurentów" → `/login`, bo listy konkurentów na LP nie ma i widać ją dopiero w raporcie. Bez `avgLabel`/`link` karta renderuje się jak na `/pl/wymiary` i `/dimensions`. Badge to `ŚREDNI` / `AVERAGE` - ta sama skala co `scoreStatus.warn` w aplikacji (dawne „UWAGA" czytało się jak ostrzeżenie systemowe). Niżej osobna sekcja z animacją `WordCycle` („CitatioNone?" → „CitationOne") i CTA.
+
 **ReportSection** ([ReportSection.tsx](src/components/ReportSection.tsx) / [en/ReportSectionEN.tsx](src/components/en/ReportSectionEN.tsx)) - "Dane gotowe do wdrożenia". Układ 2-kolumnowy (stack <900px): lewa = label + h2 + opis + 3 punkty (Raport PDF / Audyt Schema / Historia rewizji) + CTA "Zobacz przykładowy raport"/"View sample report" (otwiera udostępniony raport online w nowej karcie, `target="_blank"`); prawa = podgląd raportu w papierowej ramce (cień, połysk, zanikanie ku dołowi przez `maskImage`, perspektywa, hover-zoom), też klikalny → raport. Linki **ustawia admin w aplikacji**, nie kod: `useReportUrl` ([src/lib/useReportUrl.ts](src/lib/useReportUrl.ts)) dociąga je w runtime z `app.citationone.com/api/public/lp-links` (przez współdzielone `fetchLpSettings` z [src/lib/lpSettings.ts](src/lib/lpSettings.ts) - jedno zapytanie na odsłonę dla wszystkich sekcji) (w aplikacji: `/ustawienia` → karta „Strona citationone.com”, klucze `LP_REPORT_URL_PL` / `LP_REPORT_URL_EN`). Stałe `REPORT_URL_FALLBACK` w obu komponentach to wartość domyślna wypalona w HTML — zostaje, gdy aplikacja nie odpowie, pole jest puste albo odpowiedź nie wygląda jak link `…/share/…`. **LP jest statyczne, więc panelu logowania tu nie postawimy** — `citationone.com/admin` to 301 do panelu aplikacji (`public/_redirects`). Podgląd: `public/report-preview.png` (screenshot udostępnionego raportu web - score'y, profil 10 wymiarów, Quick Wins).
 
 **AuthorSection** ([AuthorSection.tsx](src/components/AuthorSection.tsx) / [en/AuthorSectionEN.tsx](src/components/en/AuthorSectionEN.tsx)) - karta autora: zdjęcie z lewej (kolumna 208px, na mobile pełna szerokość na górze) + treść z prawej (label "O autorze"/"About the author", nazwisko **Wojciech Władziński-Ulatowski**, rola "Twórca CitationOne"/"Creator of CitationOne", bio, przycisk LinkedIn w accentcie). Zdjęcie: `public/author.jpg` (B&W, wyszywane logo usunięte z koszuli).
@@ -277,10 +291,12 @@ Schema.org Audit i Information Gain tylko na podstronach (nie na HP).
 
 | Komponent | Zawartość | Gdzie wstawić |
 |-----------|-----------|---------------|
-| `SocialProof` | Stats bar + testimoniale | Po Features, przed ForWho |
+| `SocialProof` | Stats bar + testimoniale | **NIE włączać w obecnej formie** (patrz niżej) |
 | `ReportExample` | Przykład raportu | Po Features, przed ForWho |
 | `Pricing` | 3 pakiety cenowe | Po ForWho, przed ClosingCta |
 | `FAQ` | Akordeon 5 pytań | Po Pricing, przed ClosingCta |
+
+**`SocialProof` ma wymyślone opinie** („Marcin K., właściciel agencji SEO" i dwie kolejne, z gwiazdkami i liczbami typu „z 6 godzin do 20 minut"). Publikacja nieprawdziwych opinii łamie dyrektywę Omnibus i ustawę o przeciwdziałaniu nieuczciwym praktykom rynkowym (UOKiK karze za to), więc sekcję wolno włączyć dopiero po podmianie cytatów na prawdziwe, za zgodą autorów. Liczbowy dowód bez tego ryzyka daje `StatsBand` na HP.
 
 ---
 

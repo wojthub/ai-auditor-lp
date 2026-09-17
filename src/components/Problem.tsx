@@ -89,8 +89,9 @@ export default function Problem() {
               }}>
                 Jak AI ocenia Twoje treści?
               </h2>
-              <div style={{ marginTop: 32, maxWidth: 440 }}>
+              <div style={{ marginTop: 28, maxWidth: 400 }}>
                 <CqsScoreCard
+                  compact
                   score={51}
                   badge="ŚREDNI"
                   avgLabel="Średnia TOP 10: 40"

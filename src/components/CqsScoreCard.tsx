@@ -21,6 +21,7 @@ export default function CqsScoreCard({
   label = 'Content Quality Score',
   avgLabel,
   link,
+  compact = false,
 }: {
   score?: number;
   maxScore?: number;
@@ -28,6 +29,8 @@ export default function CqsScoreCard({
   label?: string;
   avgLabel?: string;
   link?: { href: string; label: string };
+  /** Niższa wersja na LP, gdzie karta stoi obok akapitu i ma się z nim równać w pionie. */
+  compact?: boolean;
 }) {
   return (
     <div
@@ -35,11 +38,11 @@ export default function CqsScoreCard({
         background: 'rgba(202, 138, 4, 0.05)',
         border: '1px solid rgba(202, 138, 4, 0.3)',
         borderRadius: 12,
-        padding: '20px 22px',
+        padding: compact ? '14px 18px' : '20px 22px',
         minWidth: 232,
       }}
     >
-      <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 500, color: MUTED, marginBottom: 12 }}>
+      <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 500, color: MUTED, marginBottom: compact ? 8 : 12 }}>
         {label}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={MUTED} strokeWidth={2} aria-hidden="true" style={{ flexShrink: 0, opacity: 0.8 }}>
           <circle cx="12" cy="12" r="10" />
@@ -48,7 +51,7 @@ export default function CqsScoreCard({
       </span>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-          <span style={{ fontSize: 36, fontWeight: 700, color: WARNING, lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>{score}</span>
+          <span style={{ fontSize: compact ? 30 : 36, fontWeight: 700, color: WARNING, lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>{score}</span>
           <span style={{ fontSize: 18, color: MUTED }}>/ {maxScore}</span>
         </div>
         <span
@@ -78,8 +81,8 @@ export default function CqsScoreCard({
             justifyContent: 'space-between',
             gap: 8,
             flexWrap: 'wrap',
-            marginTop: 16,
-            paddingTop: 12,
+            marginTop: compact ? 12 : 16,
+            paddingTop: compact ? 10 : 12,
             borderTop: '1px solid rgba(202, 138, 4, 0.15)',
             fontSize: 12,
           }}
