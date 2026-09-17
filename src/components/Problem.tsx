@@ -80,7 +80,7 @@ export default function Problem() {
                 <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
               </div>
               <h2 style={{
-                fontSize: 'clamp(2rem, 4.5vw, 3rem)',
+                fontSize: 'clamp(1.75rem, 3.4vw, 2.25rem)',
                 fontWeight: 700,
                 color: '#0d0d12',
                 letterSpacing: '-0.035em',
