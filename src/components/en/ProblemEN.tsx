@@ -89,6 +89,14 @@ export default function ProblemEN() {
               }}>
                 How does AI rate your content?
               </h2>
+              <div style={{ marginTop: 32, maxWidth: 440 }}>
+                <CqsScoreCard
+                  score={51}
+                  badge="AVERAGE"
+                  avgLabel="TOP 10 average: 40"
+                  link={{ href: `${APP_URL}/login?lang=en`, label: 'See competitors' }}
+                />
+              </div>
             </motion.div>
 
             <motion.div
@@ -96,17 +104,11 @@ export default function ProblemEN() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.55, delay: 0.1 }}
-              style={{ display: 'flex', flexDirection: 'column', gap: 28 }}
+              style={{ display: 'flex', alignItems: 'center' }}
             >
               <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.72, margin: 0 }}>
                 Your search ranking says nothing about the score ChatGPT, Google AI Overview or Perplexity give your text. The model looks passage by passage: does the answer come first, how densely the paragraph is packed with facts, does it add anything beyond the competition. Traditional SEO tools skip that, and doing it by hand takes hours.
               </p>
-              <CqsScoreCard
-                score={51}
-                badge="AVERAGE"
-                avgLabel="TOP 10 average: 40"
-                link={{ href: `${APP_URL}/login?lang=en`, label: 'See competitors' }}
-              />
             </motion.div>
           </div>
         </div>

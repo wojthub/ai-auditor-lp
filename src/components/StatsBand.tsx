@@ -90,12 +90,18 @@ export default function StatsBand({ lang }: { lang: 'pl' | 'en' }) {
             const { value, label } = present(stats[key], lang, LABELS[lang][key]);
             return (
               <li key={key} className="stats-band-item">
+                {/* Ten sam gradient co „CitationOne” w sekcji Problem. `inline-block`, bo przy `block`
+                    tło rozciąga się na całą kolumnę i krótka liczba dostaje tylko ciemny początek. */}
                 <span
                   style={{
-                    display: 'block',
+                    display: 'inline-block',
                     fontSize: 'clamp(2.25rem, 5vw, 3rem)',
                     fontWeight: 700,
-                    color: '#0d0d12',
+                    background: 'linear-gradient(90deg, #1a3a4a 0%, #0b7983 55%, #0b9aa6 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    color: '#0b7983',
                     letterSpacing: '-0.035em',
                     lineHeight: 1,
                     fontVariantNumeric: 'tabular-nums',
