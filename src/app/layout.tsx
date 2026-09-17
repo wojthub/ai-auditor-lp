@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'GEO & AI Search Content Audit Tool - CitationOne',
+    default: 'GEO Content Audit Tool - CitationOne',
     // Marka TYLKO na stronie glownej (w `default`) - podstrony maja wlasny, pelny tytul
     // i sufiks tylko zjadalby znaki w SERP.
     template: '%s',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   description:
     'Check whether ChatGPT, Perplexity and Google AI Overview will cite your content. 10 dimensions, SERP benchmark, Before/After fixes. Report in 5 minutes.',
   openGraph: {
-    title: 'CitationOne - AI Search Content Audit',
+    title: 'CitationOne - GEO Content Audit',
     description: 'Check if AI will cite your content. 10 dimensions, SERP benchmark, Before/After recommendations. Report in 5 minutes.',
     url: 'https://citationone.com',
     siteName: 'CitationOne',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CitationOne - AI Search Content Audit',
+    title: 'CitationOne - GEO Content Audit',
     description: 'Check if AI will cite your content. 10 dimensions, SERP benchmark, Before/After recommendations. Report in 5 minutes.',
   },
   alternates: alternatesFor('/'),

@@ -3,6 +3,7 @@ import HeroBand from '@/components/HeroBand';
 import HeroEN from '@/components/en/HeroEN';
 import ShowcaseEN from '@/components/en/ShowcaseEN';
 import TechLogosEN from '@/components/en/TechLogosEN';
+import StatsBand from '@/components/StatsBand';
 import ProblemEN from '@/components/en/ProblemEN';
 import HowItWorksEN from '@/components/en/HowItWorksEN';
 import DimensionsTeaserEN from '@/components/en/DimensionsTeaserEN';
@@ -22,6 +23,7 @@ export default function LandingPage() {
         <HeroEN />
         <ShowcaseEN />
       </HeroBand>
+      <StatsBand lang="en" />
       <ProblemEN />
       <HowItWorksEN />
       <TechLogosEN />

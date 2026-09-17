@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 const APP_URL = 'https://app.citationone.com';
 
 const included = [
-  'Pełny audyt AI Search',
+  'Pełny audyt GEO',
   'Content Quality Score (CQS 0–100)',
   'Analiza 10 wymiarów jakości',
   'Benchmark top 10 SERP',
@@ -152,7 +152,7 @@ export default function Pricing() {
                 {plan.name}
               </h3>
               <p style={{ fontSize: 13, color: '#818898', marginBottom: 24 }}>
-                {plan.reports} pełnych raportów AI Search
+                {plan.reports} pełnych raportów GEO
               </p>
 
               {/* Price */}

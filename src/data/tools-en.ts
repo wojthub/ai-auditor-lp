@@ -174,7 +174,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
       'Structured data is the markup in your page code that tells a search engine outright what the page is: an article with an author and a date, a product, a recipe, a job posting. A gap is a type of markup that a given kind of page ought to carry and does not.',
       'Not every absence is a problem - only pairing a page with its type shows what is genuinely missing. That is why the analysis first identifies the page profile and only then compares it with the catalogue of expected schema types.',
     ],
-    whyHeading: 'Why does structured data matter for AI Search?',
+    whyHeading: 'Why does structured data matter for GEO?',
     why: [
       'Structured data is the only place where you tell a search engine outright what a page is: a product, a recipe, an article with a date and an author, a job posting. Everything else is inference from the text.',
       'In GEO it carries extra weight around credibility signals - authorship and author profile links are read precisely from structured data. A page without it forces the model to guess who stands behind it.',
@@ -239,7 +239,7 @@ export const TOOLS_EN: Record<string, ToolData> = {
       'By hand you work from the target: you have a new article and you hunt for places worth linking from. An automated pass runs the other way - it reviews every paragraph of every page and checks whether a URL exists that the paragraph substantively points to.',
       'Matching is semantic rather than exact-phrase, so it also catches paragraphs describing the topic in different words. The output is a pair: a specific fragment of text and a specific target URL with a ready anchor.',
     ],
-    whyHeading: 'Why does internal linking matter in AI Search?',
+    whyHeading: 'Why does internal linking matter in GEO?',
     why: [
       'Internal links spread the signal that a topic is covered on your site by more than one page. To a search engine that is information about the structure of your knowledge, not merely navigation.',
       'The practical problem is different: manual linking stops at a few obvious spots, and pages added six months ago end up with no incoming link at all. Those orphans stay invisible until somebody counts them.',

@@ -33,7 +33,7 @@ export default function HeroVisual() {
                   <span style={{ fontSize: 14, color: '#a4acb9', fontWeight: 500 }}>/ 100</span>
                 </div>
                 <div className="score-tooltip">
-                  <strong>Content Quality Score</strong> - zagregowana ocena jakości treści (0-100) obliczana z 10 wymiarów AI Search. Im wyższy wynik, tym większa szansa na cytowanie przez modele językowe.
+                  <strong>Content Quality Score</strong> - zagregowana ocena jakości treści (0-100) obliczana z 10 wymiarów GEO. Im wyższy wynik, tym większa szansa na cytowanie przez modele językowe.
                 </div>
               </div>
             </div>

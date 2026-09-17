@@ -222,8 +222,8 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       },
     ],
     name: 'Pokrycie Fan-Out i AIO',
-    heading: 'Czym jest Query Fan-Out w AI Search?',
-    title: 'Czym jest Query Fan-Out w AI Search?',
+    heading: 'Czym jest Query Fan-Out w GEO?',
+    title: 'Czym jest Query Fan-Out w GEO?',
     description:
       'Jak silniki AI rozbijają jedno pytanie na kilkanaście podzapytań i jak CitationOne mierzy, ile z nich pokrywa Twoja treść - z danymi z AI Overview i pytań z SERP.',
     lead:
@@ -233,7 +233,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     howHeading: 'Jak liczymy pokrycie Fan-Out i AIO?',
     why: [
       'Użytkownik pyta „jak wybrać pompę ciepła”, a model nie szuka tej frazy. Rozkłada ją na pytania składowe: jaka moc do jakiego metrażu, ile kosztuje montaż, jaka jest sprawność przy mrozie, czy potrzebne jest pozwolenie. Każde z nich pobiera osobno i wszystkie te odpowiedzi składa w jedną wypowiedź.',
-      'Stąd bierze się różnica między SEO a GEO. W klasycznym wyszukiwaniu wystarczyło wygrać jedno zapytanie, żeby zdobyć kliknięcie. W AI Search wygrywasz tyle razy, na ile pytań pobocznych masz gotową odpowiedź - strona, która wyczerpuje temat tylko w głównym wątku, zostanie zacytowana raz albo wcale, mimo świetnej pozycji w SERP.',
+      'Stąd bierze się różnica między SEO a GEO. W klasycznym wyszukiwaniu wystarczyło wygrać jedno zapytanie, żeby zdobyć kliknięcie. W GEO wygrywasz tyle razy, na ile pytań pobocznych masz gotową odpowiedź - strona, która wyczerpuje temat tylko w głównym wątku, zostanie zacytowana raz albo wcale, mimo świetnej pozycji w SERP.',
       'To działa też w drugą stronę: pytania poboczne są tańsze do zdobycia niż główna fraza. Konkurencja walczy o nagłówek, a luka najczęściej jest w pytaniu, którego nikt nie opisał.',
     ],
     how: {
@@ -429,7 +429,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     why: [
       'Wyszukiwarka generatywna nie wczytuje całej strony do odpowiedzi. Indeksuje ją pociętą na fragmenty - najczęściej pojedyncze sekcje H2 lub H3 - i przy pytaniu użytkownika pobiera te, które wyglądają na najtrafniejsze. Twój fragment trafia do modelu bez tytułu artykułu, bez poprzedniej sekcji i bez wprowadzenia.',
       'Dlatego zdanie „jak wspomniano wyżej, ten parametr jest kluczowy” jest w GEO stratą - poza kontekstem nie znaczy nic i nie da się go zacytować. To samo dotyczy sekcji, która nigdy nie powtarza tematu, o którym mówi, bo posługuje się zaimkiem odsyłającym do nagłówka sprzed dwóch ekranów.',
-      'Odwrotnie: sekcja napisana jak samodzielna odpowiedź może zostać zacytowana nawet wtedy, gdy reszta strony jest przeciętna. Chunk jest jednostką konkurowania w AI Search - nie strona.',
+      'Odwrotnie: sekcja napisana jak samodzielna odpowiedź może zostać zacytowana nawet wtedy, gdy reszta strony jest przeciętna. Chunk jest jednostką konkurowania w GEO - nie strona.',
     ],
     how: {
       intro: [
@@ -678,7 +678,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     heading: 'Czym są role semantyczne (SRL) w treści?',
     title: 'Czym są role semantyczne (SRL) w treści?',
     description:
-      'Czy główny temat strony jest wykonawcą czynności, czy tylko jej przedmiotem. Jak CitationOne mierzy role semantyczne i dlaczego strona bierna szkodzi w AI Search.',
+      'Czy główny temat strony jest wykonawcą czynności, czy tylko jej przedmiotem. Jak CitationOne mierzy role semantyczne i dlaczego strona bierna szkodzi w GEO.',
     lead:
       'Role semantyczne sprawdzają, czy główny temat strony występuje w zdaniach jako wykonawca czynności, czy tylko jako jej przedmiot. Strona czynna daje modelowi komplet informacji „kto - co robi - z czym”; strona bierna zostawia w tej strukturze lukę.',
     chips: ['Skala 0–10', 'Ocena modelem językowym', 'Wejście: treść + główna encja z CSI'],

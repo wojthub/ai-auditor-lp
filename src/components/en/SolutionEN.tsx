@@ -68,7 +68,7 @@ export default function SolutionEN() {
                   <span style={{ fontSize: 14, color: '#a4acb9', fontWeight: 500 }}>/ 100</span>
                 </div>
                 <div className="sol-score-tooltip">
-                  <strong>Content Quality Score</strong> - aggregated content quality rating (0-100) calculated from 10 AI Search dimensions.
+                  <strong>Content Quality Score</strong> - aggregated content quality rating (0-100) calculated from 10 GEO dimensions.
                 </div>
               </div>
             </div>

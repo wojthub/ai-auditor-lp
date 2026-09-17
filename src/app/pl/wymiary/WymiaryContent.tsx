@@ -162,7 +162,7 @@ export default function WymiaryContent() {
                   Content Quality Score
                 </h3>
                 <p style={{ fontSize: 15, color: '#36394a', lineHeight: 1.7, margin: 0 }}>
-                  CQS w skali 0–100 pokazuje, jak Twoja treść wypada na tle Top 10 pod kątem parametrów istotnych dla AI Search. Każdy z 10 wymiarów wchodzi do wyniku z własną wagą.
+                  CQS w skali 0–100 pokazuje, jak Twoja treść wypada na tle Top 10 pod kątem parametrów istotnych dla GEO. Każdy z 10 wymiarów wchodzi do wyniku z własną wagą.
                 </p>
               </div>
               <CqsScoreCard />
@@ -351,7 +351,7 @@ export default function WymiaryContent() {
               backgroundClip: 'text',
               display: 'inline-block',
             }}>
-              Pozyskaj ruch z AI Search.
+              Pozyskaj ruch z odpowiedzi AI.
             </h2>
             <p style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.45rem)', fontWeight: 500, color: '#36394a', letterSpacing: '-0.01em', lineHeight: 1.4, margin: '0 0 32px' }}>
               Sprawdź swoje teksty już teraz - pierwsze 3 audyty za darmo.

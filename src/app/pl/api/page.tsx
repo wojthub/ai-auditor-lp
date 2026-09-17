@@ -5,11 +5,11 @@ import Footer from '@/components/Footer';
 import ApiContent from './ApiContent';
 
 export const metadata: Metadata = {
-  title: 'API CitationOne - audyty AI Search przez REST',
+  title: 'API CitationOne - audyty GEO przez REST',
   description:
     'Uruchamiaj audyty CitationOne programatycznie i pobieraj wynik jako JSON. Klucze API, model asynchroniczny, zlecenia masowe, dokumentacja także w Markdown.',
   openGraph: {
-    title: 'API CitationOne - audyty AI Search przez REST',
+    title: 'API CitationOne - audyty GEO przez REST',
     description:
       'REST + JSON, klucz API, zlecenia masowe, publiczne linki do raportów. 1 audyt = 1 kredyt. Dokumentacja również jako Markdown dla agentów.',
   },

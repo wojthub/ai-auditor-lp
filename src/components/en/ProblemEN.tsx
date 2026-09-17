@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import CqsScoreCard from '../CqsScoreCard';
 
 const APP_URL = 'https://app.citationone.com';
 
@@ -95,11 +96,17 @@ export default function ProblemEN() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.55, delay: 0.1 }}
-              style={{ display: 'flex', alignItems: 'center' }}
+              style={{ display: 'flex', flexDirection: 'column', gap: 28 }}
             >
               <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.72, margin: 0 }}>
                 Your search ranking says nothing about the score ChatGPT, Google AI Overview or Perplexity give your text. The model looks passage by passage: does the answer come first, how densely the paragraph is packed with facts, does it add anything beyond the competition. Traditional SEO tools skip that, and doing it by hand takes hours.
               </p>
+              <CqsScoreCard
+                score={51}
+                badge="AVERAGE"
+                avgLabel="TOP 10 average: 40"
+                link={{ href: `${APP_URL}/login?lang=en`, label: 'See competitors' }}
+              />
             </motion.div>
           </div>
         </div>
@@ -146,7 +153,7 @@ export default function ProblemEN() {
             transition={{ duration: 0.5 }}
           >
             <p style={{ fontSize: 18, color: '#36394a', lineHeight: 1.72, marginBottom: 36 }}>
-              CitationOne analyzes your content for AI Search, helping you optimize it for answers in LLMs. The tool delivers ready-made recommendations - specific changes that will make AI robots start selecting your page as the source of answers for users.
+              CitationOne analyzes your content for GEO and shows how to raise its chances of being cited in LLM answers. The tool delivers ready-made recommendations - specific changes that will make AI robots start selecting your page as the source of answers for users.
             </p>
             <motion.a
               href={`${APP_URL}/login?lang=en`}

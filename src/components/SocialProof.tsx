@@ -6,7 +6,7 @@ const ACCENT = '#0b7983';
 
 /* ─── Stats ─────────────────────────────────────────── */
 const STATS = [
-  { value: '10', label: 'wymiarów AI Search\nw jednym raporcie' },
+  { value: '10', label: 'wymiarów GEO\nw jednym raporcie' },
   { value: '< 15', label: 'minut od URL\ndo gotowego raportu' },
   { value: '10', label: 'artykułów SERP\nw benchmarku' },
   { value: '2', label: 'formaty eksportu\nPDF i Markdown' },
@@ -15,7 +15,7 @@ const STATS = [
 /* ─── Testimonials ───────────────────────────────────── */
 const TESTIMONIALS = [
   {
-    quote: 'Dodaliśmy audyty AI Search do oferty bez zatrudniania nowego analityka. Raport wychodzi gotowy - wysyłamy klientowi bez edycji. Czas realizacji zlecenia z 6 godzin do 20 minut.',
+    quote: 'Dodaliśmy audyty GEO do oferty bez zatrudniania nowego analityka. Raport wychodzi gotowy - wysyłamy klientowi bez edycji. Czas realizacji zlecenia z 6 godzin do 20 minut.',
     name: 'Marcin K.',
     role: 'Właściciel agencji SEO · Warszawa',
     initials: 'MK',
@@ -27,7 +27,7 @@ const TESTIMONIALS = [
     initials: 'AW',
   },
   {
-    quote: 'Sprzedaję audyty AI Search jako osobną usługę - to konkretna pozycja na fakturze, którą klienci rozumieją i chcą kupować. Bez subskrypcji, pakiet rozliczyłem w 3 tygodnie.',
+    quote: 'Sprzedaję audyty GEO jako osobną usługę - to konkretna pozycja na fakturze, którą klienci rozumieją i chcą kupować. Bez subskrypcji, pakiet rozliczyłem w 3 tygodnie.',
     name: 'Tomasz R.',
     role: 'Freelancer SEO · 12 lat w branży',
     initials: 'TR',

@@ -11,7 +11,7 @@ const steps = [
     numberColor: '#e07a4a',
     title: 'Enter your data',
     description:
-      'Paste a link to an already published article or a draft you plan to add to the site. Type in the keyword you want to win citations for in AI Search.',
+      'Paste a link to an already published article or a draft you plan to add to the site. Type in the keyword you want to win citations for in AI answers.',
   },
   {
     number: '02',

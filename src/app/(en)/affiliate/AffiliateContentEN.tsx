@@ -68,7 +68,7 @@ const AUDIENCE = [
   },
   {
     title: 'Creators and trainers',
-    body: 'An AI Search newsletter, a course, a webinar, a tool comparison post. The link in that material keeps working long after publication.',
+    body: 'A GEO newsletter, a course, a webinar, a tool comparison post. The link in that material keeps working long after publication.',
   },
 ];
 

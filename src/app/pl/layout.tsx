@@ -3,14 +3,14 @@ import { alternatesFor } from '@/lib/languageSwitch';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Narzędzie GEO - audyt treści pod AI Search - CitationOne',
+    default: 'Narzędzie GEO do audytu treści - CitationOne',
     // Marka TYLKO na stronie glownej (w `default`) - patrz nota w src/app/layout.tsx.
     template: '%s',
   },
   description:
     'Sprawdź, czy ChatGPT, Perplexity i Google AI Overview zacytują Twoją treść. 10 wymiarów, benchmark SERP, gotowe poprawki Przed i Po. Raport w 5 minut.',
   openGraph: {
-    title: 'CitationOne - Audyt treści pod AI Search',
+    title: 'CitationOne - Audyt treści pod GEO',
     description: 'Sprawdź, czy AI zacytuje Twoją treść. 10 wymiarów, benchmark SERP, rekomendacje Przed i Po. Raport w 5 minut.',
     url: 'https://citationone.com/pl',
     siteName: 'CitationOne',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CitationOne - Audyt treści pod AI Search',
+    title: 'CitationOne - Audyt treści pod GEO',
     description: 'Sprawdź, czy AI zacytuje Twoją treść. 10 wymiarów, benchmark SERP, rekomendacje Przed i Po. Raport w 5 minut.',
   },
   alternates: alternatesFor('/pl'),

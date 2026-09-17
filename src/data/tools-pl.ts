@@ -175,7 +175,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
       'Dane strukturalne to znaczniki w kodzie strony, którymi mówisz wyszukiwarce wprost, czym ta strona jest: artykułem z autorem i datą, produktem, przepisem, ofertą pracy. Luka to brak znacznika, który dany typ strony powinien mieć.',
       'Nie każdy brak jest problemem - dopiero zestawienie strony z jej typem pokazuje, czego naprawdę brakuje. Dlatego analiza najpierw rozpoznaje profil strony, a dopiero potem porównuje go z katalogiem oczekiwanych typów schema.',
     ],
-    whyHeading: 'Dlaczego dane strukturalne są ważne w AI Search?',
+    whyHeading: 'Dlaczego dane strukturalne są ważne w GEO?',
     why: [
       'Dane strukturalne to jedyne miejsce, w którym mówisz wyszukiwarce wprost, czym jest strona: produktem, przepisem, artykułem z datą i autorem, ofertą pracy. Reszta to domysły z treści.',
       'W GEO ma to dodatkową wagę przy sygnałach wiarygodności - autorstwo i powiązania profilu autora czytane są właśnie z danych strukturalnych. Strona bez nich zmusza model do zgadywania, kto za nią stoi.',
@@ -240,7 +240,7 @@ export const TOOLS_PL: Record<string, ToolData> = {
       'Ręcznie robi się to od strony docelowej: masz nowy tekst i szukasz miejsc, z których warto do niego podlinkować. Automat idzie odwrotnie - przegląda każdy akapit każdej strony i sprawdza, czy istnieje adres, do którego ten akapit merytorycznie pasuje.',
       'Dopasowanie jest semantyczne, a nie po dokładnym wystąpieniu frazy, więc łapie też akapity opisujące temat innymi słowami. Efektem jest para: konkretny fragment tekstu i konkretny adres docelowy z gotowym anchorem.',
     ],
-    whyHeading: 'Dlaczego linkowanie wewnętrzne jest ważne w AI Search?',
+    whyHeading: 'Dlaczego linkowanie wewnętrzne jest ważne w GEO?',
     why: [
       'Linki wewnętrzne rozprowadzają po serwisie sygnał, że temat jest u Ciebie opisany szerzej niż jedną stroną. Dla wyszukiwarki to informacja o strukturze wiedzy, a nie tylko nawigacja.',
       'Praktyczny problem jest inny: ręczne linkowanie kończy się na kilku oczywistych miejscach, a do stron dodanych pół roku temu nie prowadzi ani jeden odnośnik. Takich sierot nie widać, dopóki ktoś ich nie policzy.',

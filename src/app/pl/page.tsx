@@ -3,6 +3,7 @@ import HeroBand from '@/components/HeroBand';
 import Hero from '@/components/Hero';
 import Showcase from '@/components/Showcase';
 import TechLogos from '@/components/TechLogos';
+import StatsBand from '@/components/StatsBand';
 import Problem from '@/components/Problem';
 import HowItWorks from '@/components/HowItWorks';
 import DimensionsTeaser from '@/components/DimensionsTeaser';
@@ -22,6 +23,7 @@ export default function PlLandingPage() {
         <Hero />
         <Showcase />
       </HeroBand>
+      <StatsBand lang="pl" />
       <Problem />
       <HowItWorks />
       <TechLogos />

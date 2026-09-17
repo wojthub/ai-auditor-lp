@@ -66,7 +66,7 @@ export default function ForWhoEN() {
               margin: 0,
             }}
           >
-            AI Search visibility<br />for every team
+            Visibility in AI answers<br />for every team
           </motion.h2>
 
           <motion.p

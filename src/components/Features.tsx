@@ -136,7 +136,7 @@ function BeforeAfterVisual() {
             <span style={{ fontSize: 10, fontWeight: 700, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Po</span>
           </div>
           <p style={{ fontSize: 12.5, color: '#36394a', lineHeight: 1.6, margin: 0 }}>
-            <strong style={{ color: ACCENT }}>Audyt AI Search</strong> mierzy 10 wymiarów cytowania przez modele językowe - każdy z szacowanym wpływem na CQS i konkretną poprawką.
+            <strong style={{ color: ACCENT }}>Audyt GEO</strong> mierzy 10 wymiarów cytowania przez modele językowe - każdy z szacowanym wpływem na CQS i konkretną poprawką.
           </p>
         </div>
       </div>
@@ -159,10 +159,10 @@ function BeforeAfterVisual() {
 
 /* ─── 4. AI Overview ──────────────────────────────── */
 const AIO_SUBQUERIES = [
-  { q: 'co to jest audyt AI Search', covered: true },
+  { q: 'co to jest audyt GEO', covered: true },
   { q: 'jak działa AI Overview Google', covered: true },
   { q: 'jakie metryki mierzy audyt AI', covered: false },
-  { q: 'różnica SEO vs AI Search', covered: false },
+  { q: 'różnica SEO vs GEO', covered: false },
   { q: 'jak poprawić Content Quality Score', covered: true },
 ];
 
@@ -218,7 +218,7 @@ function AIOverviewVisual() {
 
 /* ─── 5. Graf wiedzy ──────────────────────────────── */
 const ENTITIES = [
-  { entity: 'AI Search', attr: 'algorytm', value: 'modele językowe', type: 'Podstawa' },
+  { entity: 'GEO', attr: 'algorytm', value: 'modele językowe', type: 'Podstawa' },
   { entity: 'BLUF', attr: 'definicja', value: 'Bottom Line Up Front', type: 'Wyróżnik' },
   { entity: 'ChatGPT', attr: 'typ', value: 'model językowy', type: 'Podstawa' },
   { entity: 'CQS', attr: 'zakres', value: '0–100', type: 'Wyróżnik' },
@@ -292,7 +292,7 @@ function ExportVisual() {
           </svg>
         </div>
         <div>
-          <p style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', margin: 0 }}>Raport AI Search Audit</p>
+          <p style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', margin: 0 }}>Raport GEO Audit</p>
           <p style={{ fontSize: 11, color: '#a4acb9', margin: 0 }}>example-article.com · słowo kluczowe: audyt SEO</p>
         </div>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 6 }}>
@@ -331,7 +331,7 @@ export default function Features() {
               Uruchom audyt 10 wymiarów AI
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 640, margin: '0 auto', lineHeight: 1.65 }}>
-              CitationOne ocenia jakość treści pod kątem AI Search, wykonując 10 równoległych analiz: od intencji i gęstości informacji, przez graf wiedzy, BLUF i chunki, aż po koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AIO oraz wysiłek redakcyjny. Dzięki temu wiesz dokładnie, który element wymaga poprawy, by podnieść Content Quality Score swojej podstrony.
+              CitationOne ocenia jakość treści pod kątem GEO, wykonując 10 równoległych analiz: od intencji i gęstości informacji, przez graf wiedzy, BLUF i chunki, aż po koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AIO oraz wysiłek redakcyjny. Dzięki temu wiesz dokładnie, który element wymaga poprawy, by podnieść Content Quality Score swojej podstrony.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>
@@ -376,7 +376,7 @@ export default function Features() {
               Konkretne rekomendacje z mierzalnym wpływem na CQS
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, lineHeight: 1.65 }}>
-              Zapomnij o ogólnych wskazówkach. CitationOne wskazuje precyzyjne fragmenty treści wymagające optymalizacji i dostarcza gotowe wersje „Przed i Po". Widzisz szacowany wzrost wyniku dla każdej zmiany, dzięki czemu wdrażasz tylko te poprawki, które najskuteczniej budują Twój autorytet w AI Search.
+              Zapomnij o ogólnych wskazówkach. CitationOne wskazuje precyzyjne fragmenty treści wymagające optymalizacji i dostarcza gotowe wersje „Przed i Po". Widzisz szacowany wzrost wyniku dla każdej zmiany, dzięki czemu wdrażasz tylko te poprawki, które najskuteczniej budują Twój autorytet w odpowiedziach AI.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>

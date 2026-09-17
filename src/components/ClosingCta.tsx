@@ -23,7 +23,7 @@ export default function ClosingCta() {
             lineHeight: 1.15,
             marginBottom: 10,
           }}>
-            Pozyskaj ruch z AI Search.
+            Pozyskaj ruch z odpowiedzi AI.
           </h2>
           <p style={{
             fontSize: 'clamp(1.1rem, 2.5vw, 1.45rem)',
@@ -43,7 +43,7 @@ export default function ClosingCta() {
             maxWidth: 460,
             margin: '0 auto 36px',
           }}>
-            Dołącz do zespołów, które już teraz optymalizują treści pod kątem AI Search
+            Dołącz do zespołów, które już teraz optymalizują treści pod kątem GEO
           </p>
 
           <motion.a

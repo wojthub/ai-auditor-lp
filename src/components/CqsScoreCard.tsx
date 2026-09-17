@@ -4,21 +4,30 @@
  * Kolory i proporcje sa przepisane z ai-auditor: --color-warning #CA8A04,
  * --color-muted-foreground #64748B, tlo warning/5, ramka warning/30, badge warning/15.
  * Zamiast zrzutu ekranu - wektor, wiec zostaje ostry w kazdej rozdzielczosci i wazy zero.
+ *
+ * Stopka (`avgLabel` + `link`) odwzorowuje `CqsCardFooter` z AuditReport.tsx: srednia TOP 10
+ * ustawia wynik w skali, odnosnik prowadzi dalej. Bez tych propsow karta renderuje sie
+ * bez stopki, jak na /wymiary. Badge domyslnie „ŚREDNI" - ta sama skala co `scoreStatus.warn`.
  */
 
 const WARNING = '#CA8A04';
 const MUTED = '#64748B';
+const ACCENT = '#0b7983';
 
 export default function CqsScoreCard({
   score = 56,
   maxScore = 100,
-  badge = 'UWAGA',
+  badge = 'ŚREDNI',
   label = 'Content Quality Score',
+  avgLabel,
+  link,
 }: {
   score?: number;
   maxScore?: number;
   badge?: string;
   label?: string;
+  avgLabel?: string;
+  link?: { href: string; label: string };
 }) {
   return (
     <div
@@ -61,6 +70,29 @@ export default function CqsScoreCard({
           {badge}
         </span>
       </div>
+      {(avgLabel || link) && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 8,
+            flexWrap: 'wrap',
+            marginTop: 16,
+            paddingTop: 12,
+            borderTop: '1px solid rgba(202, 138, 4, 0.15)',
+            fontSize: 12,
+          }}
+        >
+          {avgLabel ? <span style={{ color: MUTED, fontVariantNumeric: 'tabular-nums' }}>{avgLabel}</span> : <span />}
+          {link && (
+            <a href={link.href} style={{ color: ACCENT, fontWeight: 500, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+              {link.label}
+              <span aria-hidden>→</span>
+            </a>
+          )}
+        </div>
+      )}
     </div>
   );
 }

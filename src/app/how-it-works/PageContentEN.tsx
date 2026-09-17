@@ -195,10 +195,10 @@ function BeforeAfterVisual() {
 
 /* ── Visual: AI Overview ──────────────────────────────────────────────── */
 const AIO_ITEMS = [
-  { q: 'what is an AI Search audit', covered: true },
+  { q: 'what is a GEO audit', covered: true },
   { q: 'how does Google AI Overview work', covered: true },
   { q: 'what metrics does an AI audit measure', covered: false },
-  { q: 'SEO vs AI Search difference', covered: false },
+  { q: 'SEO vs GEO difference', covered: false },
   { q: 'how to improve your Content Quality Score', covered: true },
 ];
 function AIOverviewVisual() {
@@ -244,7 +244,7 @@ function AIOverviewVisual() {
 
 /* ── Visual: Knowledge Graph ─────────────────────────────────────────── */
 const EAV_ENTITIES = [
-  { entity: 'AI Search', attr: 'algorithm', value: 'language models', type: 'Root' },
+  { entity: 'GEO', attr: 'algorithm', value: 'language models', type: 'Root' },
   { entity: 'BLUF', attr: 'definition', value: 'Bottom Line Up Front', type: 'Unique' },
   { entity: 'ChatGPT', attr: 'type', value: 'language model', type: 'Root' },
   { entity: 'CQS', attr: 'range', value: '0–100', type: 'Unique' },
@@ -311,7 +311,7 @@ function ExportVisual() {
           </svg>
         </div>
         <div>
-          <p style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', margin: 0 }}>AI Search Audit Report</p>
+          <p style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', margin: 0 }}>GEO Audit Report</p>
           <p style={{ fontSize: 11, color: '#a4acb9', margin: 0 }}>example-article.com · keyword: AI audit</p>
         </div>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 6 }}>
@@ -409,7 +409,7 @@ export default function PageContentEN() {
               backgroundClip: 'text',
               display: 'inline-block',
             }}>
-              Discover the mechanism that opens the door to AI Search
+              Discover the mechanism that opens the door to AI answers
             </h1>
             <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.7, maxWidth: 640, margin: '0 auto 36px' }}>
               See how, in under 5 minutes, CitationOne scans your text and turns complex algorithmic analysis into clear editorial guidelines. No complex integration, no changes to your site&apos;s code.
@@ -449,7 +449,7 @@ export default function PageContentEN() {
               {
                 n: '01', color: '#e07a4a',
                 title: 'Enter your data',
-                body: 'Paste a link to an already published article or a draft you plan to add to the site. Type in the keyword you want to win citations for in AI Search.',
+                body: 'Paste a link to an already published article or a draft you plan to add to the site. Type in the keyword you want to win citations for in AI answers.',
               },
               {
                 n: '02', color: '#0b7983',
@@ -565,7 +565,7 @@ export default function PageContentEN() {
                 See whether - and why - you fall behind the leaders
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>
-                CitationOne queries two independent sources about your phrase. From Google it fetches and analyzes the 10 top-ranking pages; ChatGPT it asks about that same phrase, checking whether your page shows up in the answer. You see the optimization gap against real competition in search and in AI Search at once.
+                CitationOne queries two independent sources about your phrase. From Google it fetches and analyzes the 10 top-ranking pages; ChatGPT it asks about that same phrase, checking whether your page shows up in the answer. You see the optimization gap against real competition in search and in AI answers at once.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {['Tabular CQS comparison for every analyzed page', 'Identify leaders and weak spots in the current SERP', "ChatGPT's answer to your phrase: whether you are cited and mentioned, and which pages the model gave as sources", 'Analysis of structure and format of the top-rated content'].map(item => (
@@ -590,7 +590,7 @@ export default function PageContentEN() {
               Concrete recommendations with measurable CQS impact
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 600, lineHeight: 1.65, margin: '0 0 4px' }}>
-              Forget vague tips. CitationOne points to the exact content fragments that need optimization and provides ready &ldquo;Before / After&rdquo; versions. You see the estimated score uplift for each change, so you only roll out the fixes that build your authority in AI Search the fastest.
+              Forget vague tips. CitationOne points to the exact content fragments that need optimization and provides ready &ldquo;Before / After&rdquo; versions. You see the estimated score uplift for each change, so you only roll out the fixes that build your authority in AI answers the fastest.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}><BeforeAfterVisual /></motion.div>
@@ -770,7 +770,7 @@ export default function PageContentEN() {
               backgroundClip: 'text',
               display: 'inline-block',
             }}>
-              Get traffic from AI Search.
+              Get traffic from AI answers.
             </h2>
             <p style={{
               fontSize: 'clamp(1.1rem, 2.5vw, 1.45rem)',
@@ -783,7 +783,7 @@ export default function PageContentEN() {
               Check your content now.
             </p>
             <p style={{ fontSize: 17, color: '#666d80', lineHeight: 1.68, maxWidth: 480, margin: '0 auto 36px' }}>
-              Join the teams already optimizing content for AI Search.
+              Join the teams already optimizing content for GEO.
             </p>
             <motion.a
               href={`${APP_URL}/login?lang=en`}

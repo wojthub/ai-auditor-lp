@@ -68,7 +68,7 @@ const AUDIENCE = [
   },
   {
     title: 'Twórcy i szkoleniowcy',
-    body: 'Newsletter o AI Search, kurs, webinar, wpis porównujący narzędzia. Link w materiale pracuje długo po publikacji.',
+    body: 'Newsletter o GEO, kurs, webinar, wpis porównujący narzędzia. Link w materiale pracuje długo po publikacji.',
   },
 ];
 

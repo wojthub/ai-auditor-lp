@@ -55,7 +55,7 @@ export default function Hero() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              Popraw swoje treści pod AI Search
+              Popraw swoje treści pod GEO
             </span>
             <span style={{
               display: 'block',

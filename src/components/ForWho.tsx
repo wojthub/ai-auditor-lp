@@ -72,7 +72,7 @@ export default function ForWho() {
               margin: 0,
             }}
           >
-            Widoczność w AI Search<br />w zasięgu każdego zespołu
+            Widoczność w odpowiedziach AI<br />w zasięgu każdego zespołu
           </motion.h2>
 
           <motion.p

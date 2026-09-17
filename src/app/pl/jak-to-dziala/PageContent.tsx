@@ -195,10 +195,10 @@ function BeforeAfterVisual() {
 
 /* ── Visual: AI Overview ──────────────────────────────────────────────── */
 const AIO_ITEMS = [
-  { q: 'co to jest audyt AI Search', covered: true },
+  { q: 'co to jest audyt GEO', covered: true },
   { q: 'jak działa AI Overview Google', covered: true },
   { q: 'jakie metryki mierzy audyt AI', covered: false },
-  { q: 'różnica SEO vs AI Search', covered: false },
+  { q: 'różnica SEO vs GEO', covered: false },
   { q: 'jak poprawić Content Quality Score', covered: true },
 ];
 function AIOverviewVisual() {
@@ -244,7 +244,7 @@ function AIOverviewVisual() {
 
 /* ── Visual: Knowledge Graph ─────────────────────────────────────────── */
 const EAV_ENTITIES = [
-  { entity: 'AI Search', attr: 'algorytm', value: 'modele językowe', type: 'Podstawa' },
+  { entity: 'GEO', attr: 'algorytm', value: 'modele językowe', type: 'Podstawa' },
   { entity: 'BLUF', attr: 'definicja', value: 'Bottom Line Up Front', type: 'Wyróżnik' },
   { entity: 'ChatGPT', attr: 'typ', value: 'model językowy', type: 'Podstawa' },
   { entity: 'CQS', attr: 'zakres', value: '0–100', type: 'Wyróżnik' },
@@ -311,7 +311,7 @@ function ExportVisual() {
           </svg>
         </div>
         <div>
-          <p style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', margin: 0 }}>Raport AI Search Audit</p>
+          <p style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', margin: 0 }}>Raport GEO Audit</p>
           <p style={{ fontSize: 11, color: '#a4acb9', margin: 0 }}>example-article.com · słowo kluczowe: audyt SEO</p>
         </div>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 6 }}>
@@ -431,7 +431,7 @@ export default function PageContent() {
               backgroundClip: 'text',
               display: 'inline-block',
             }}>
-              Poznaj mechanizm, który otwiera drzwi do AI Search
+              Poznaj mechanizm, który otwiera drzwi do odpowiedzi AI
             </h1>
             <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.7, maxWidth: 640, margin: '0 auto 36px' }}>
               Zobacz, jak w mniej niż 5 minut CitationOne prześwietla Twój tekst i zamienia skomplikowaną analizę algorytmiczną w proste wytyczne dla redakcji. Bez skomplikowanej integracji, bez zmian w kodzie Twojej strony.
@@ -471,7 +471,7 @@ export default function PageContent() {
               {
                 n: '01', color: '#e07a4a',
                 title: 'Wprowadzasz dane',
-                body: 'Podajesz link do opublikowanego już artykułu lub wklejasz roboczą wersję tekstu, którą dopiero planujesz dodać na stronę. Wpisujesz słowo kluczowe, na które chcesz zdobyć cytowanie w AI Search.',
+                body: 'Podajesz link do opublikowanego już artykułu lub wklejasz roboczą wersję tekstu, którą dopiero planujesz dodać na stronę. Wpisujesz słowo kluczowe, na które chcesz zdobyć cytowanie w odpowiedziach AI.',
               },
               {
                 n: '02', color: '#0b7983',
@@ -587,7 +587,7 @@ export default function PageContent() {
                 Zobacz, czy i dlaczego odstajesz od liderów
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>
-                CitationOne pyta o Twoją frazę dwa niezależne źródła. Z Google pobiera i analizuje 10 najlepiej rankujących podstron, a ChatGPT pyta wprost o tę samą frazę i sprawdza, czy Twoja strona pojawia się w odpowiedzi. Dzięki temu widzisz lukę optymalizacyjną wobec realnej konkurencji w wyszukiwarce i w AI Search naraz.
+                CitationOne pyta o Twoją frazę dwa niezależne źródła. Z Google pobiera i analizuje 10 najlepiej rankujących podstron, a ChatGPT pyta wprost o tę samą frazę i sprawdza, czy Twoja strona pojawia się w odpowiedzi. Dzięki temu widzisz lukę optymalizacyjną wobec realnej konkurencji w wyszukiwarce i w odpowiedziach AI naraz.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {['Porównanie tabelaryczne CQS dla każdej analizowanej podstrony.', 'Identyfikacja liderów oraz słabych punktów w aktualnym SERP', 'Odpowiedź ChatGPT na Twoją frazę: czy jesteś cytowany i wzmiankowany, oraz jakie strony model podał jako źródła', 'Analiza struktury i formatu najlepiej ocenianych treści.'].map(item => (
@@ -612,7 +612,7 @@ export default function PageContent() {
               Konkretne rekomendacje z mierzalnym wpływem na CQS
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 600, lineHeight: 1.65, margin: '0 0 4px' }}>
-              Zapomnij o ogólnych wskazówkach. CitationOne wskazuje precyzyjne fragmenty treści wymagające optymalizacji i dostarcza gotowe wersje „Przed i Po". Widzisz szacowany wzrost wyniku dla każdej zmiany, dzięki czemu wdrażasz tylko te poprawki, które najskuteczniej budują Twój autorytet w AI Search.
+              Zapomnij o ogólnych wskazówkach. CitationOne wskazuje precyzyjne fragmenty treści wymagające optymalizacji i dostarcza gotowe wersje „Przed i Po". Widzisz szacowany wzrost wyniku dla każdej zmiany, dzięki czemu wdrażasz tylko te poprawki, które najskuteczniej budują Twój autorytet w odpowiedziach AI.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}><BeforeAfterVisual /></motion.div>
@@ -792,7 +792,7 @@ export default function PageContent() {
               backgroundClip: 'text',
               display: 'inline-block',
             }}>
-              Pozyskaj ruch z AI Search.
+              Pozyskaj ruch z odpowiedzi AI.
             </h2>
             <p style={{
               fontSize: 'clamp(1.1rem, 2.5vw, 1.45rem)',
@@ -805,7 +805,7 @@ export default function PageContent() {
               Sprawdź swoje teksty już teraz.
             </p>
             <p style={{ fontSize: 17, color: '#666d80', lineHeight: 1.68, maxWidth: 480, margin: '0 auto 36px' }}>
-              Dołącz do zespołów, które już teraz optymalizują treści pod kątem AI Search.
+              Dołącz do zespołów, które już teraz optymalizują treści pod kątem GEO.
             </p>
             <motion.a
               href={`${APP_URL}/login?lang=pl`}

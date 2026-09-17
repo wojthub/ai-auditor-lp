@@ -11,7 +11,7 @@ const steps = [
     numberColor: '#e07a4a',
     title: 'Wprowadzasz dane',
     description:
-      'Podajesz link do opublikowanego już artykułu lub wklejasz roboczą wersję tekstu, którą dopiero planujesz dodać na stronę. Wpisujesz słowo kluczowe, na które chcesz zdobyć cytowanie w AI Search.',
+      'Podajesz link do opublikowanego już artykułu lub wklejasz roboczą wersję tekstu, którą dopiero planujesz dodać na stronę. Wpisujesz słowo kluczowe, na które chcesz zdobyć cytowanie w odpowiedziach AI.',
   },
   {
     number: '02',

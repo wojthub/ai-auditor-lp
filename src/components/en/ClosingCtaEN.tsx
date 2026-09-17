@@ -23,7 +23,7 @@ export default function ClosingCtaEN() {
             lineHeight: 1.15,
             marginBottom: 10,
           }}>
-            Get traffic from AI Search.
+            Get traffic from AI answers.
           </h2>
           <p style={{
             fontSize: 'clamp(1.1rem, 2.5vw, 1.45rem)',
@@ -43,7 +43,7 @@ export default function ClosingCtaEN() {
             maxWidth: 460,
             margin: '0 auto 36px',
           }}>
-            Join the teams already optimizing content for AI Search
+            Join the teams already optimizing content for GEO
           </p>
 
           <motion.a

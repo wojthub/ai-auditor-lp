@@ -98,7 +98,7 @@ function BeforeAfterVisual() {
         <div style={{ background: 'rgba(11,121,131,0.04)', border: '1px solid rgba(11,121,131,0.2)', borderRadius: 8, padding: '16px' }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 10 }}>After</span>
           <p style={{ fontSize: 12.5, color: '#36394a', lineHeight: 1.6, margin: 0 }}>
-            <strong style={{ color: ACCENT }}>AI Search audit</strong> measures 10 citation dimensions used by language models - each with estimated CQS impact and a specific fix.
+            <strong style={{ color: ACCENT }}>GEO audit</strong> measures 10 citation dimensions used by language models - each with estimated CQS impact and a specific fix.
           </p>
         </div>
       </div>
@@ -134,7 +134,7 @@ function ExportVisual() {
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke={ACCENT} strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
         </div>
         <div>
-          <p style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', margin: 0 }}>AI Search Audit Report</p>
+          <p style={{ fontSize: 13, fontWeight: 600, color: '#0d0d12', margin: 0 }}>GEO Audit Report</p>
           <p style={{ fontSize: 11, color: '#a4acb9', margin: 0 }}>example-article.com · keyword: AI audit</p>
         </div>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 6 }}>
@@ -192,7 +192,7 @@ export default function FeaturesEN() {
           <motion.div {...fadeUp()} style={{ marginBottom: 44 }}>
             <SectionLabel>Recommendations</SectionLabel>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>Actionable recommendations with measurable CQS impact</h2>
-            <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, lineHeight: 1.65 }}>Forget vague advice. CitationOne pinpoints exact content sections that need optimization and delivers ready-made Before & After versions. You see the estimated score increase for each change, so you only implement the fixes that build your AI Search authority most effectively.</p>
+            <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, lineHeight: 1.65 }}>Forget vague advice. CitationOne pinpoints exact content sections that need optimization and delivers ready-made Before & After versions. You see the estimated score increase for each change, so you only implement the fixes that build your authority in AI answers most effectively.</p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}><BeforeAfterVisual /></motion.div>
         </div>

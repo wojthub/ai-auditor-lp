@@ -10,11 +10,11 @@ import FooterEN from '@/components/en/FooterEN';
 import ApiContentEN from './ApiContentEN';
 
 export const metadata: Metadata = {
-  title: 'CitationOne API - audyty AI Search przez REST',
+  title: 'CitationOne API - audyty GEO przez REST',
   description:
     'Run CitationOne audits programmatically and pull results as JSON. API keys, asynchronous jobs, bulk requests, docs also served as Markdown for AI agents.',
   openGraph: {
-    title: 'CitationOne API - AI Search audits over REST',
+    title: 'CitationOne API - GEO audits over REST',
     description:
       'REST + JSON, API key auth, bulk requests, public report links. 1 audit = 1 credit. Docs also served as Markdown for agents.',
   },

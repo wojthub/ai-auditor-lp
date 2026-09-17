@@ -416,7 +416,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     why: [
       'A generative engine does not load the whole page into its answer. It indexes the page in fragments - most often single H2 or H3 sections - and, when a question arrives, retrieves the ones that look most relevant. Your fragment reaches the model without the article title, without the previous section and without the introduction.',
       'That is why “as mentioned above, this parameter is crucial” is a loss in GEO - out of context it means nothing and cannot be quoted. The same goes for a section that never repeats the topic it discusses, relying on a pronoun pointing at a heading two screens up.',
-      'The reverse also holds: a section written as a standalone answer can be cited even when the rest of the page is average. In AI Search the chunk is the unit of competition - not the page.',
+      'The reverse also holds: a section written as a standalone answer can be cited even when the rest of the page is average. In GEO the chunk is the unit of competition - not the page.',
     ],
     howHeading: 'How do we measure chunk optimization?',
     how: {
@@ -666,7 +666,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     heading: 'What are semantic roles (SRL) in content?',
     title: 'What are semantic roles (SRL) in content?',
     description:
-      'Whether the main topic of the page performs actions or merely receives them. How CitationOne measures semantic roles and why the passive voice hurts in AI Search.',
+      'Whether the main topic of the page performs actions or merely receives them. How CitationOne measures semantic roles and why the passive voice hurts in GEO.',
     lead:
       'Semantic Roles check whether the main topic of the page performs the action in your sentences or merely receives it. The active voice gives the model the complete set of information “who - does what - to what”; the passive voice leaves a gap in that structure.',
     chips: ['Score 0-10', 'Assessed by a language model', 'Input: content + central entity from CSI'],
@@ -752,8 +752,8 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
   'query-fan-out': {
     slug: 'query-fan-out',
     name: 'Fan-Out & AIO Coverage',
-    heading: 'What is Query Fan-Out in AI Search?',
-    title: 'What is Query Fan-Out in AI Search?',
+    heading: 'What is Query Fan-Out in GEO?',
+    title: 'What is Query Fan-Out in GEO?',
     description:
       'How AI engines break one question into a dozen sub-queries, and how CitationOne measures the share your content covers - using AI Overview and real SERP questions.',
     lead:
@@ -762,7 +762,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     whyHeading: 'Why does Fan-Out coverage matter to AI models?',
     why: [
       'A user asks “how to choose a heat pump”, and the model does not search for that phrase. It breaks it into component questions: what capacity for what floor area, how much installation costs, what the efficiency is in freezing weather, whether a permit is needed. It retrieves each separately and composes all those answers into a single response.',
-      'This is where SEO and GEO part ways. In classic search, winning one query was enough to earn the click. In AI Search you win as many times as you have ready answers to side questions - a page that exhausts the topic only in the main thread gets cited once, or not at all, despite an excellent SERP position.',
+      'This is where SEO and GEO part ways. In classic search, winning one query was enough to earn the click. In GEO you win as many times as you have ready answers to side questions - a page that exhausts the topic only in the main thread gets cited once, or not at all, despite an excellent SERP position.',
       'It works the other way too: side questions are cheaper to win than the head phrase. Competitors fight over the headline, while the gap is usually in a question nobody has covered.',
     ],
     howHeading: 'How do we measure Fan-Out coverage?',

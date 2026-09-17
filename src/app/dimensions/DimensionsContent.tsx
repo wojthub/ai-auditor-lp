@@ -162,10 +162,10 @@ export default function DimensionsContent() {
                   Content Quality Score
                 </h3>
                 <p style={{ fontSize: 15, color: '#36394a', lineHeight: 1.7, margin: 0 }}>
-                  CQS on a 0–100 scale shows how your content performs against the Top 10 across the parameters that matter for AI Search. Each of the 10 dimensions carries its own weight in the result.
+                  CQS on a 0–100 scale shows how your content performs against the Top 10 across the parameters that matter for GEO. Each of the 10 dimensions carries its own weight in the result.
                 </p>
               </div>
-              <CqsScoreCard badge="WARNING" />
+              <CqsScoreCard badge="AVERAGE" />
             </div>
           </motion.div>
         </div>
@@ -351,7 +351,7 @@ export default function DimensionsContent() {
               backgroundClip: 'text',
               display: 'inline-block',
             }}>
-              Get traffic from AI Search.
+              Get traffic from AI answers.
             </h2>
             <p style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.45rem)', fontWeight: 500, color: '#36394a', letterSpacing: '-0.01em', lineHeight: 1.4, margin: '0 0 32px' }}>
               Check your content now - the first 3 audits are free.

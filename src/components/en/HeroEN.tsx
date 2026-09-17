@@ -55,7 +55,7 @@ export default function HeroEN() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              Improve your content for AI Search
+              Improve your content for GEO
             </span>
             <span style={{
               display: 'block',

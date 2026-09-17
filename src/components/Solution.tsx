@@ -24,7 +24,7 @@ export default function Solution() {
             marginBottom: 20,
           }}>
             Zyskaj jasne wytyczne{' '}
-            <span style={{ color: ACCENT }}>dla AI Search</span>
+            <span style={{ color: ACCENT }}>dla GEO</span>
           </h2>
           <p style={{
             fontSize: 16,
