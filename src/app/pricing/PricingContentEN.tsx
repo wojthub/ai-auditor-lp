@@ -121,7 +121,7 @@ export default function PricingContentEN() {
           </motion.div>
         </div>
 
-        {/* Volume bonus - tiers mirror CREDIT_BONUS_TIERS in the app */}
+        {/* Order value bonus - tiers mirror CREDIT_BONUS_TIERS in the app (value of 100/200/300 cr = €200/400/600 at €2.00 per credit) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -138,17 +138,17 @@ export default function PricingContentEN() {
             fontSize: 18, fontWeight: 700, color: '#0d0d12',
             letterSpacing: '-0.02em', margin: '0 0 6px', textAlign: 'center',
           }}>
-            Buy more, get extra credits
+            Spend more, get extra credits
           </h2>
           <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 20px', textAlign: 'center' }}>
-            The bonus is added automatically at checkout. 1 credit = 1 audit.
+            The bonus is based on the order amount after discount and is added to your balance automatically after payment. 1 credit = 1 audit.
           </p>
 
           <div className="bonus-tiers">
             {[
-              { credits: 100, percent: 10, effective: '€1.82' },
-              { credits: 200, percent: 20, effective: '€1.67' },
-              { credits: 300, percent: 30, effective: '€1.54' },
+              { amount: '€200', credits: 100, percent: 10, effective: '€1.82' },
+              { amount: '€400', credits: 200, percent: 20, effective: '€1.67' },
+              { amount: '€600', credits: 300, percent: 30, effective: '€1.54' },
             ].map((tier) => (
               <div
                 key={tier.credits}
@@ -162,14 +162,14 @@ export default function PricingContentEN() {
               >
                 <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 6 }}>
                   <span style={{ fontSize: 24, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.03em' }}>
-                    {tier.credits}
+                    from {tier.amount}
                   </span>
                   <span style={{ fontSize: 16, fontWeight: 700, color: '#15803d' }}>
                     +{tier.percent}%
                   </span>
                 </div>
                 <div style={{ fontSize: 12.5, color: '#818898', marginTop: 6, lineHeight: 1.5 }}>
-                  credits<br />
+                  that is {tier.credits} credits<br />
                   <span style={{ color: '#36394a' }}>{tier.effective} / audit</span>
                 </div>
               </div>

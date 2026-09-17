@@ -121,7 +121,7 @@ export default function PricingContent() {
           </motion.div>
         </div>
 
-        {/* Bonus ilościowy - progi z CREDIT_BONUS_TIERS w aplikacji */}
+        {/* Bonus od wartości zamówienia - progi z CREDIT_BONUS_TIERS w aplikacji (wartość 100/200/300 kr. = €200/400/600 przy €2.00 za kredyt) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -138,17 +138,17 @@ export default function PricingContent() {
             fontSize: 18, fontWeight: 700, color: '#0d0d12',
             letterSpacing: '-0.02em', margin: '0 0 6px', textAlign: 'center',
           }}>
-            Kupujesz więcej - dorzucamy kredyty
+            Wydajesz więcej - dorzucamy kredyty
           </h2>
           <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 20px', textAlign: 'center' }}>
-            Bonus nalicza się automatycznie przy zakupie. 1 kredyt = 1 audyt.
+            Bonus zależy od kwoty zamówienia po rabacie i trafia na saldo automatycznie po zapłacie. 1 kredyt = 1 audyt.
           </p>
 
           <div className="bonus-tiers">
             {[
-              { credits: 100, percent: 10, effective: '€1.82' },
-              { credits: 200, percent: 20, effective: '€1.67' },
-              { credits: 300, percent: 30, effective: '€1.54' },
+              { amount: '€200', credits: 100, percent: 10, effective: '€1.82' },
+              { amount: '€400', credits: 200, percent: 20, effective: '€1.67' },
+              { amount: '€600', credits: 300, percent: 30, effective: '€1.54' },
             ].map((tier) => (
               <div
                 key={tier.credits}
@@ -162,14 +162,14 @@ export default function PricingContent() {
               >
                 <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 6 }}>
                   <span style={{ fontSize: 24, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.03em' }}>
-                    {tier.credits}
+                    od {tier.amount}
                   </span>
                   <span style={{ fontSize: 16, fontWeight: 700, color: '#15803d' }}>
                     +{tier.percent}%
                   </span>
                 </div>
                 <div style={{ fontSize: 12.5, color: '#818898', marginTop: 6, lineHeight: 1.5 }}>
-                  kredytów<br />
+                  czyli {tier.credits} kredytów<br />
                   <span style={{ color: '#36394a' }}>{tier.effective} / audyt</span>
                 </div>
               </div>
