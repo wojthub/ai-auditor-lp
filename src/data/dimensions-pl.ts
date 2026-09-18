@@ -295,7 +295,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     ],
     related: [
       { slug: 'zgodnosc-z-csi', name: 'Zgodność z CSI', desc: 'Intencja, z której rozkładane są pytania poboczne.' },
-      { slug: 'optymalizacja-chunkow', name: 'Optymalizacja chunków', desc: 'Czy sekcja z odpowiedzią pozostaje zrozumiała w oderwaniu od reszty.' },
+      { slug: 'optymalizacja-chunkow', name: 'Samodzielność sekcji', desc: 'Czy sekcja z odpowiedzią pozostaje zrozumiała w oderwaniu od reszty.' },
       { slug: 'bluf', name: 'BLUF', desc: 'Czy odpowiedź na pytanie poboczne pada od razu.' },
     ],
   },
@@ -416,20 +416,20 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
         a: 'Nie, to metryka uzupełniająca pokazywana obok wyniku. Mówi, które sekcje mają największą szansę zostać wybrane jako źródło, ale nie wchodzi do oceny końcowej.',
       },
     ],
-    name: 'Optymalizacja chunków',
+    name: 'Samodzielność sekcji',
     heading: 'Czym są chunki treści w systemach RAG?',
     title: 'Czym są chunki treści w systemach RAG?',
     description:
-      'Silniki AI tną stronę na fragmenty i oceniają każdy osobno. Jak CitationOne mierzy autonomiczność sekcji, długość chunków dla każdego typu treści i cytowalność fragmentów.',
+      'Silniki AI tną stronę na fragmenty i oceniają każdy osobno. Jak CitationOne mierzy samodzielność sekcji, ich długość dla każdego typu treści i cytowalność fragmentów.',
     lead:
-      'AI wycina z treści samodzielne fragmenty - sekcje, które da się zrozumieć bez kontekstu całego artykułu. Optymalizacja chunków mierzy, ile takich gotowych do cytowania jednostek zawiera Twoja strona i czy mają one długość właściwą dla tego typu treści.',
+      'AI wycina z treści samodzielne fragmenty - sekcje, które da się zrozumieć bez kontekstu całego artykułu. Ten wymiar mierzy, ile takich gotowych do cytowania jednostek zawiera Twoja strona i czy mają one długość właściwą dla tego typu treści.',
     chips: ['Skala 0–10', 'Model językowy + sygnały algorytmiczne', 'Wejście: treść + CSI + profil typu treści'],
-    whyHeading: 'Dlaczego optymalizacja chunków jest ważna dla modeli AI?',
-    howHeading: 'Jak liczymy optymalizację chunków?',
+    whyHeading: 'Dlaczego samodzielność sekcji jest ważna dla modeli AI?',
+    howHeading: 'Jak liczymy samodzielność sekcji?',
     why: [
       'Wyszukiwarka generatywna nie wczytuje całej strony do odpowiedzi. Indeksuje ją pociętą na fragmenty - najczęściej pojedyncze sekcje H2 lub H3 - i przy pytaniu użytkownika pobiera te, które wyglądają na najtrafniejsze. Twój fragment trafia do modelu bez tytułu artykułu, bez poprzedniej sekcji i bez wprowadzenia.',
       'Dlatego zdanie „jak wspomniano wyżej, ten parametr jest kluczowy” jest w GEO stratą - poza kontekstem nie znaczy nic i nie da się go zacytować. To samo dotyczy sekcji, która nigdy nie powtarza tematu, o którym mówi, bo posługuje się zaimkiem odsyłającym do nagłówka sprzed dwóch ekranów.',
-      'Odwrotnie: sekcja napisana jak samodzielna odpowiedź może zostać zacytowana nawet wtedy, gdy reszta strony jest przeciętna. Chunk jest jednostką konkurowania w GEO - nie strona.',
+      'Odwrotnie: sekcja napisana jak samodzielna odpowiedź może zostać zacytowana nawet wtedy, gdy reszta strony jest przeciętna. W GEO o cytowanie konkurują pojedyncze sekcje.',
     ],
     how: {
       intro: [
@@ -570,7 +570,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       },
     ],
     related: [
-      { slug: 'optymalizacja-chunkow', name: 'Optymalizacja chunków', desc: 'Czy sekcje pozostają zrozumiałe samodzielnie.' },
+      { slug: 'optymalizacja-chunkow', name: 'Samodzielność sekcji', desc: 'Czy sekcje pozostają zrozumiałe samodzielnie.' },
       { slug: 'effort-score', name: 'Effort Score', desc: 'Szersza checklista formatów i kompletności strony.' },
       { slug: 'bluf', name: 'BLUF', desc: 'Czy odpowiedź stoi na początku sekcji.' },
     ],
@@ -743,7 +743,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     related: [
       { slug: 'gestosc-informacji', name: 'Gęstość informacji', desc: 'Czy zdanie w ogóle niesie sprawdzalny fakt.' },
       { slug: 'graf-wiedzy', name: 'Graf wiedzy', desc: 'Jak fakty łączą się w encje, atrybuty i wartości.' },
-      { slug: 'optymalizacja-chunkow', name: 'Optymalizacja chunków', desc: 'Czy sekcja pozostaje zrozumiała bez kontekstu.' },
+      { slug: 'optymalizacja-chunkow', name: 'Samodzielność sekcji', desc: 'Czy sekcja pozostaje zrozumiała bez kontekstu.' },
     ],
   },
 
@@ -835,7 +835,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     related: [
       { slug: 'koszt-pozyskania', name: 'Koszt pozyskania', desc: 'Czy struktura ułatwia wyciągnięcie odpowiedzi.' },
       { slug: 'e-e-a-t', name: 'E-E-A-T', desc: 'Czy strona pokazuje autora, źródła i aktualizacje.' },
-      { slug: 'optymalizacja-chunkow', name: 'Optymalizacja chunków', desc: 'Czy sekcje mają właściwą długość.' },
+      { slug: 'optymalizacja-chunkow', name: 'Samodzielność sekcji', desc: 'Czy sekcje mają właściwą długość.' },
     ],
   },
 
@@ -1041,8 +1041,8 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     whyHeading: 'Dlaczego BLUF jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy BLUF?',
     why: [
-      'BLUF to skrót od Bottom Line Up Front: najważniejsza informacja idzie na sam początek. Systemy RAG, które stoją za ChatGPT, Perplexity i AI Overview, czytają stronę fragmentami. Tną ją na chunki po około 200–500 słów i oceniają każdy osobno, bez kontekstu reszty artykułu. Jeśli sekcja zaczyna się od „W dzisiejszych czasach coraz więcej firm...”, model widzi fragment, który nie odpowiada na nic - i sięga po konkurenta, który odpowiedź postawił w pierwszym zdaniu.',
-      'W klasycznym SEO ta sama reguła stała za featured snippetami - do ramki trafiał akapit, który odpowiadał od razu. W GEO stawka jest wyższa, bo silnik generatywny cytuje fragment strony, zamiast do niej linkować: chunk bez odpowiedzi na początku wygląda dla modelu jak chunk bez odpowiedzi w ogóle.',
+      'BLUF to skrót od Bottom Line Up Front: najważniejsza informacja idzie na sam początek. Systemy RAG, które stoją za ChatGPT, Perplexity i AI Overview, czytają stronę fragmentami. Tną ją na fragmenty po około 200–500 słów i oceniają każdy osobno, bez kontekstu reszty artykułu. Jeśli sekcja zaczyna się od „W dzisiejszych czasach coraz więcej firm...”, model widzi fragment, który nie odpowiada na nic - i sięga po konkurenta, który odpowiedź postawił w pierwszym zdaniu.',
+      'W klasycznym SEO ta sama reguła stała za featured snippetami - do ramki trafiał akapit, który odpowiadał od razu. W GEO stawka jest wyższa, bo silnik generatywny cytuje fragment strony, zamiast do niej linkować: fragment bez odpowiedzi na początku wygląda dla modelu jak fragment bez odpowiedzi w ogóle.',
     ],
     how: {
       intro: [
@@ -1108,7 +1108,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       },
     ],
     related: [
-      { slug: 'optymalizacja-chunkow', name: 'Optymalizacja chunków', desc: 'Czy sekcja pozostaje zrozumiała bez kontekstu całości.' },
+      { slug: 'optymalizacja-chunkow', name: 'Samodzielność sekcji', desc: 'Czy sekcja pozostaje zrozumiała bez kontekstu całości.' },
       { slug: 'gestosc-informacji', name: 'Gęstość informacji', desc: 'Ile faktów przypada na akapit.' },
       { slug: 'koszt-pozyskania', name: 'Koszt pozyskania', desc: 'Czy struktura strony ułatwia wycięcie odpowiedzi.' },
     ],

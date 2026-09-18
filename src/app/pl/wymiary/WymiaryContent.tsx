@@ -53,8 +53,8 @@ const DIMS = [
     num: '05',
     id: 'Chunk',
     slug: 'optymalizacja-chunkow',
-    label: 'Optymalizacja chunków',
-    body: 'AI wycina z treści samodzielne fragmenty - sekcje, które da się zrozumieć bez kontekstu całego artykułu. Optymalizacja chunków mierzy, ile takich gotowych do cytowania jednostek zawiera Twoja strona i czy mają one długość właściwą dla tego typu treści.',
+    label: 'Samodzielność sekcji',
+    body: 'AI wycina z treści samodzielne fragmenty - sekcje, które da się zrozumieć bez kontekstu całego artykułu. Ten wymiar mierzy, ile takich gotowych do cytowania jednostek zawiera Twoja strona i czy mają one długość właściwą dla tego typu treści.',
   },
   {
     num: '06',

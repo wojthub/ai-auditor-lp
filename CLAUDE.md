@@ -310,7 +310,7 @@ Schema.org Audit i Information Gain tylko na podstronach (nie na HP).
 | D1 | Gęstość informacji | Gęstość |
 | D2 | Graf wiedzy | Graf |
 | D3 | BLUF | BLUF |
-| D4 | Autonomiczność sekcji | Chunki |
+| D4 | Samodzielność sekcji | Sekcje |
 | D5 | Koszt ekstrakcji | Ekstrakcja |
 | D6 | TF-IDF | TF-IDF |
 | D7 | Role semantyczne | Role |
@@ -346,7 +346,7 @@ Każdy kafel linkuje do własnej podstrony.
 | 02 | Information Density | Gęstość informacji | `information-density` | `gestosc-informacji` |
 | 03 | Knowledge Graph (EAV) | Graf wiedzy (EAV) | `knowledge-graph-eav` | `graf-wiedzy` |
 | 04 | BLUF | BLUF | `bluf` | `bluf` |
-| 05 | Chunk Optimization | Optymalizacja chunków | `chunk-optimization` | `optymalizacja-chunkow` |
+| 05 | Chunk Optimization | Samodzielność sekcji | `chunk-optimization` | `optymalizacja-chunkow` (slug historyczny, zostaje - zmiana nazwy 2026-09-18 bez przekierowan) |
 | 06 | Cost of Retrieval | Koszt pozyskania | `cost-of-retrieval` | `koszt-pozyskania` |
 | 07 | TF-IDF | TF-IDF | `tf-idf` | `tf-idf` |
 | 08 | Semantic Roles | Role semantyczne | `semantic-roles` | `role-semantyczne` |

@@ -28,7 +28,7 @@ const DIMS = [
   { name: 'Gęstość informacji', score: 7.4, desc: 'Stosunek konkretnych faktów i liczb do „puchu". Im więcej weryfikowalnych twierdzeń, tym wyższy wynik.' },
   { name: 'BLUF', score: 9.0, desc: 'Odpowiedź na początku - czy kluczowa informacja pojawia się w pierwszych zdaniach każdej sekcji. Systemy RAG preferują treści z odpowiedzią na starcie.' },
   { name: 'Graf wiedzy', score: 6.8, desc: 'Kompletność struktury encja-atrybut-wartość (EAV). Mierzy, jak dokładnie artykuł opisuje kluczowe obiekty i ich cechy.' },
-  { name: 'Chunki', score: 7.9, desc: 'Autonomiczność sekcji - każdy rozdział powinien być zrozumiały bez kontekstu reszty artykułu (optimum: 200–500 słów).' },
+  { name: 'Sekcje', score: 7.9, desc: 'Samodzielność sekcji - każdy rozdział powinien być zrozumiały bez kontekstu reszty artykułu (optimum: 200–500 słów).' },
   { name: 'Koszt ekstrakcji', score: 3.8, desc: 'Łatwość pobrania informacji przez AI. Ocenia strukturę nagłówków, tabele, listy i pogrubienia ułatwiające AI pobieranie faktów.' },
   { name: 'TF-IDF', score: 7.2, desc: 'Nasycenie terminologią branżową. Porównuje słownictwo artykułu z top 10 SERP - im więcej specjalistycznych fraz, tym wyższy wynik.' },
   { name: 'Pokrycie AIO', score: 8.3, desc: 'Sprawdza, czy artykuł odpowiada na wszystkie pod-pytania generowane przez AI wokół głównego tematu.' },
@@ -331,7 +331,7 @@ export default function Features() {
               Uruchom audyt 10 wymiarów AI
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 640, margin: '0 auto', lineHeight: 1.65 }}>
-              CitationOne ocenia jakość treści pod kątem GEO, wykonując 10 równoległych analiz: od intencji i gęstości informacji, przez graf wiedzy, BLUF i chunki, aż po koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AIO oraz wysiłek redakcyjny. Dzięki temu wiesz dokładnie, który element wymaga poprawy, by podnieść Content Quality Score swojej podstrony.
+              CitationOne ocenia jakość treści pod kątem GEO, wykonując 10 równoległych analiz: od intencji i gęstości informacji, przez graf wiedzy, BLUF i samodzielność sekcji, aż po koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AIO oraz wysiłek redakcyjny. Dzięki temu wiesz dokładnie, który element wymaga poprawy, by podnieść Content Quality Score swojej podstrony.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>

@@ -340,7 +340,7 @@ const DIMS = [
   {
     num: '01', id: 'CSI Alignment', slug: 'zgodnosc-z-csi', label: 'Zgodność z CSI',
     medium: 'Sprawdza czy artykuł odpowiada na dokładnie to pytanie, które zadał użytkownik - nie podobne, lecz dokładnie to.',
-    expert: 'Walidacja Central Entity, Search Context, Predicate. BLUF check w lead, EAV coverage, chunk validation per H2 (200-500 słów, autonomia, CE min 2×). W trybie Full: gap analysis P1-P4 vs benchmark SERP.',
+    expert: 'Walidacja Central Entity, Search Context, Predicate. BLUF check w lead, EAV coverage, walidacja samodzielności sekcji H2 (200-500 słów, autonomia, CE min 2×). W trybie Full: gap analysis P1-P4 vs benchmark SERP.',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" /></svg>,
   },
   {
@@ -358,11 +358,11 @@ const DIMS = [
   {
     num: '04', id: 'BLUF', slug: 'bluf', label: 'BLUF',
     medium: 'Modele AI faworyzują artykuły, które podają odpowiedź na początku każdej sekcji. Nie na końcu, nie po wstępie - na samym początku.',
-    expert: 'Bottom Line Up Front: odpowiedź w pierwszych 50 słowach każdej H2. Struktura: Odpowiedź - Dowód - Kontekst. Chunki z BLUF cytowane ~62% jako główne źródło w badaniach RAG.',
+    expert: 'Bottom Line Up Front: odpowiedź w pierwszych 50 słowach każdej H2. Struktura: Odpowiedź - Dowód - Kontekst. Sekcje z BLUF cytowane ~62% jako główne źródło w badaniach RAG.',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><path d="M4 6h16M4 10h10M4 14h12M4 18h7" /><path d="M20 14v6M17 17l3-3 3 3" /></svg>,
   },
   {
-    num: '05', id: 'Chunk', slug: 'optymalizacja-chunkow', label: 'Optymalizacja chunków',
+    num: '05', id: 'Chunk', slug: 'optymalizacja-chunkow', label: 'Samodzielność sekcji',
     medium: 'Systemy AI dzielą artykuły na kawałki przed analizą. Każdy kawałek powinien mieć sens bez czytania całości - być autonomiczny.',
     expert: 'Autonomiczność sekcji dla RAG (Retrieval-Augmented Generation). Optymalna długość 200-500 słów per H2. Kryteria: brak zaimków odsyłających, CE min 2× per sekcja, brak "jak wspomniano wyżej".',
     icon: <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="8" height="8" rx="1" /><rect x="13" y="3" width="8" height="8" rx="1" /><rect x="3" y="13" width="8" height="8" rx="1" /><rect x="13" y="13" width="8" height="8" rx="1" /></svg>,

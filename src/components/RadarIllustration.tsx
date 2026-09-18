@@ -28,8 +28,8 @@ const LABELS = [
     def: 'Odpowiedź na początku - czy kluczowa informacja pojawia się w pierwszych zdaniach każdej sekcji. Systemy RAG preferują treści z odpowiedzią na starcie.',
   },
   {
-    short: 'Chunki',
-    def: 'Autonomiczność sekcji - każdy rozdział powinien być zrozumiały bez kontekstu reszty artykułu (optimum: 200-500 słów).',
+    short: 'Sekcje',
+    def: 'Samodzielność sekcji - każdy rozdział powinien być zrozumiały bez kontekstu reszty artykułu (optimum: 200-500 słów).',
   },
   {
     short: 'Ekstrakcja',
