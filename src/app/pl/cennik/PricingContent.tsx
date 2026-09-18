@@ -146,9 +146,9 @@ export default function PricingContent() {
 
           <div className="bonus-tiers">
             {[
-              { amount: '€200', credits: 100, bonus: 10, total: 110, effective: '€1.82' },
-              { amount: '€400', credits: 200, bonus: 40, total: 240, effective: '€1.67' },
-              { amount: '€600', credits: 300, bonus: 90, total: 390, effective: '€1.54' },
+              { amount: '€200', credits: 100, percent: 10, bonus: 10, total: 110, effective: '€1.82' },
+              { amount: '€400', credits: 200, percent: 20, bonus: 40, total: 240, effective: '€1.67' },
+              { amount: '€600', credits: 300, percent: 30, bonus: 90, total: 390, effective: '€1.54' },
             ].map((tier) => (
               <div
                 key={tier.credits}
@@ -160,19 +160,20 @@ export default function PricingContent() {
                   textAlign: 'center',
                 }}
               >
-                {/* Uklad „placisz → dostajesz": klient widzi kwote i gotowa liczbe kredytow na saldzie,
-                    bez przeliczania procentow. Rozbicie „200 + 40 gratis" pokazuje, skad sie bierze. */}
+                {/* Uklad „placisz → dostajesz": kwota progu i procent bonusu jako glowna liczba — ten
+                    sam jezyk co pigulki w koszyku aplikacji („100 kr. / +10%"). Rozbicie „100 + 10 = 110
+                    kredytów" pod spodem pokazuje, ile to realnie wchodzi na saldo. */}
                 <div style={{ fontSize: 12.5, color: '#818898' }}>Płacisz od</div>
                 <div style={{ fontSize: 24, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.03em', lineHeight: 1.2 }}>
                   {tier.amount}
                 </div>
                 <div style={{ borderTop: '1px solid #eceef2', margin: '10px 16px' }} />
                 <div style={{ fontSize: 12.5, color: '#818898' }}>Dostajesz</div>
-                <div style={{ fontSize: 20, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', lineHeight: 1.25 }}>
-                  {tier.total} kredytów
+                <div style={{ fontSize: 20, fontWeight: 700, color: '#15803d', letterSpacing: '-0.02em', lineHeight: 1.25 }}>
+                  +{tier.percent}% gratis
                 </div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: '#15803d', marginTop: 2 }}>
-                  {tier.credits} + {tier.bonus} gratis
+                <div style={{ fontSize: 13, color: '#36394a', marginTop: 2 }}>
+                  {tier.credits} + {tier.bonus} = {tier.total} kredytów
                 </div>
                 <div style={{ fontSize: 12.5, color: '#36394a', marginTop: 8 }}>
                   {tier.effective} / audyt
