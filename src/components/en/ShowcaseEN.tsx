@@ -6,16 +6,19 @@ import ShowcaseDeck, { type ShowcaseSlide } from '../ShowcaseDeck';
 const SLIDES: ShowcaseSlide[] = [
   {
     src: '/dashboard-preview.png',
+    mobileSrc: '/dashboard-preview-mobile.png',
     alt: 'CitationOne dashboard - Content Quality Score and the 10-dimension profile',
     label: 'Summary',
   },
   {
     src: '/dashboard-recommendations.png',
+    mobileSrc: '/dashboard-recommendations-mobile.png',
     alt: 'CitationOne dashboard - recommendation list with before and after comparison',
     label: 'Recommendations',
   },
   {
     src: '/dashboard-apply.png',
+    mobileSrc: '/dashboard-apply-mobile.png',
     alt: 'CitationOne dashboard - content with applied recommendations and tag changes',
     label: 'Apply to content',
   },

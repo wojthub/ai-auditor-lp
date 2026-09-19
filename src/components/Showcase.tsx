@@ -6,16 +6,19 @@ import ShowcaseDeck, { type ShowcaseSlide } from './ShowcaseDeck';
 const SLIDES: ShowcaseSlide[] = [
   {
     src: '/dashboard-preview-pl.png',
+    mobileSrc: '/dashboard-preview-pl-mobile.png',
     alt: 'Panel CitationOne - Content Quality Score i profil 10 wymiarów',
     label: 'Podsumowanie',
   },
   {
     src: '/dashboard-recommendations-pl.png',
+    mobileSrc: '/dashboard-recommendations-pl-mobile.png',
     alt: 'Panel CitationOne - lista zaleceń z porównaniem przed i po',
     label: 'Rekomendacje',
   },
   {
     src: '/dashboard-apply-pl.png',
+    mobileSrc: '/dashboard-apply-pl-mobile.png',
     alt: 'Panel CitationOne - treść z wdrożonymi zaleceniami i zmianami tagów',
     label: 'Wdrożenie w treść',
   },

@@ -10,7 +10,16 @@ export type ShowcaseSlide = {
   alt: string;
   /** Nazwa zakladki panelu widocznej na slajdzie - ida do adnotacji nad urzadzeniem. */
   label: string;
+  /**
+   * Pionowy zrzut tej samej zakladki w szerokosci telefonu (780x1440, czyli 390x720 @2x),
+   * podawany do MOBILE_QUERY. Desktopowy zrzut 1900 px zmniejszony do ~300 px dawal tekst
+   * wielkosci 2 px - nieczytelny. Zrzuty mobilne robione z publicznego raportu /share/.
+   */
+  mobileSrc: string;
 };
+
+/** Ten sam prog w <source media> i w CSS ekranu - rozjazd dalby pionowy zrzut w poziomej ramce. */
+const MOBILE_QUERY = '(max-width: 640px)';
 
 type Props = {
   slides: ShowcaseSlide[];
@@ -31,6 +40,19 @@ type Props = {
 export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prevLabel, nextLabel }: Props) {
   const [index, setIndex] = useState(startIndex);
   const count = slides.length;
+
+  // Na telefonie bez przechylenia 3D: rotateX rasteryzuje zrzut pod katem i rozmywa drobny
+  // tekst, ktory na waskim ekranie i tak jest na granicy czytelnosci. SSR renderuje wariant
+  // desktopowy, telefon przelacza sie po mount.
+  const [flat, setFlat] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_QUERY);
+    const sync = () => setFlat(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
+  const tilt = flat ? 0 : 5;
 
   // Tasme przesuwamy w PIKSELACH, nie w procentach: `drag` liczy przesuniecie w px i mieszanie
   // jednostek na tej samej wartosci `x` potrafi szarpnac slajdem przy puszczeniu palca.
@@ -70,7 +92,11 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
   // dociagamy je zaraz po bezczynnosci - inaczej pierwsze przelaczenie pokazywaloby pusty
   // ekran, bo lazy startuje dopiero, gdy obrazek wjezdza w widok.
   useEffect(() => {
-    const preload = () => slides.forEach((s, i) => { if (i !== startIndex) new Image().src = s.src; });
+    // Dociagamy wariant, ktory <picture> faktycznie pokaze - inaczej telefon pobieralby desktopowe PNG na darmo.
+    const preload = () => {
+      const mobile = window.matchMedia(MOBILE_QUERY).matches;
+      slides.forEach((s, i) => { if (i !== startIndex) new Image().src = mobile ? s.mobileSrc : s.src; });
+    };
     if (typeof window.requestIdleCallback === 'function') {
       const id = window.requestIdleCallback(preload);
       return () => window.cancelIdleCallback(id);
@@ -85,37 +111,38 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
       aria-roledescription="carousel"
       aria-label={regionLabel}
     >
-      <div style={{ perspective: '2000px', marginBottom: 'clamp(-150px, -14vw, -52px)' }}>
+      {/* Pod urzadzeniem stoi adnotacja, juz nie nachodzi na ekran: od 2026-09-19 ekran jest widoczny
+          w calosci (wygaszanie tylko na ostatnich ~8%), wiec pastylka zaslanialaby tresc zrzutu. */}
+      <div style={{ perspective: '2000px', marginBottom: 18 }}>
         <motion.div
-          initial={{ opacity: 0, y: 80, rotateX: 5 }}
-          animate={{ opacity: 1, y: 0, rotateX: 5 }}
+          className="deck-device"
+          initial={{ opacity: 0, y: 80, rotateX: tilt }}
+          animate={{ opacity: 1, y: 0, rotateX: tilt }}
           transition={{ duration: 0.9, delay: 1, ease: [0.16, 1, 0.3, 1] }}
           style={{
             transformOrigin: '50% 0%',
-            maxWidth: 980,
             margin: '0 auto',
             filter: 'drop-shadow(-18px 26px 44px rgba(13,13,18,0.2))',
           }}
         >
+          {/* Wygaszenie tylko na samym dole - wczesniej (40% → 76%) zjadalo polowe zrzutu. */}
           <div style={{
-            WebkitMaskImage: 'linear-gradient(to bottom, #000 0%, #000 40%, transparent 76%)',
-            maskImage: 'linear-gradient(to bottom, #000 0%, #000 40%, transparent 76%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, #000 0%, #000 92%, transparent 100%)',
+            maskImage: 'linear-gradient(to bottom, #000 0%, #000 92%, transparent 100%)',
           }}>
             {/* metaliczna krawędź */}
-            <div style={{
+            <div className="deck-edge" style={{
               background: 'linear-gradient(135deg, #edeff2 0%, #b4b7bd 40%, #d6d8dc 68%, #a6a9af 100%)',
-              borderRadius: 30,
               padding: 4,
             }}>
               {/* ciemny bezel */}
-              <div style={{ background: '#0b0b0d', borderRadius: 26, padding: 12 }}>
-                {/* ekran - sztywna proporcja, zeby zmiana slajdu nie przesuwala sekcji nizej */}
-                <div ref={screenRef} style={{
+              <div className="deck-bezel" style={{ background: '#0b0b0d' }}>
+                {/* ekran - sztywna proporcja (w CSS nizej, osobna dla mobile), zeby zmiana slajdu
+                    nie przesuwala sekcji nizej */}
+                <div ref={screenRef} className="deck-screen" style={{
                   position: 'relative',
-                  borderRadius: 16,
                   overflow: 'hidden',
                   background: '#f7f8fa',
-                  aspectRatio: '1900 / 962',
                   boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.05)',
                 }}>
                   {/* Tasma slajdow: przesuwana o -index*szerokosc ekranu, przeciagana palcem/myszka.
@@ -136,22 +163,23 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                     }}
                   >
                     {slides.map((slide, i) => (
-                      <img
-                        key={slide.src}
-                        src={slide.src}
-                        alt={slide.alt}
-                        draggable={false}
-                        loading={i === startIndex ? 'eager' : 'lazy'}
-                        style={{
-                          flex: '0 0 100%',
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          objectPosition: 'top center',
-                          display: 'block',
-                          userSelect: 'none',
-                        }}
-                      />
+                      <picture key={slide.src} style={{ flex: '0 0 100%', width: '100%', height: '100%', display: 'block' }}>
+                        <source media={MOBILE_QUERY} srcSet={slide.mobileSrc} />
+                        <img
+                          src={slide.src}
+                          alt={slide.alt}
+                          draggable={false}
+                          loading={i === startIndex ? 'eager' : 'lazy'}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'top center',
+                            display: 'block',
+                            userSelect: 'none',
+                          }}
+                        />
+                      </picture>
                     ))}
                   </motion.div>
 
@@ -198,6 +226,19 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
       {/* Adnotacja: nazwa widocznego ekranu + pozycja w talii. Kreski przeskakuja wprost
           na wybrany slajd - sa przyciskami, wiec maja etykiety i wlasne pole trafienia. */}
       <div className="deck-caption">
+        {/* Na telefonie strzalki siedza tutaj, a nie na ekranie - na waskim zrzucie zaslanialy tresc. */}
+        <button
+          type="button"
+          className="deck-caption-arrow"
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => go(index - 1)}
+          disabled={index === 0}
+          aria-label={prevLabel}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
         <span className="deck-caption-dot" aria-hidden />
         <span className="deck-caption-text">
           <AnimatePresence mode="wait" initial={false}>
@@ -230,9 +271,33 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
         </span>
         {/* Licznik czyta glosno to samo, co kreski pokazuja wzrokiem. */}
         <span className="deck-caption-count">{index + 1}/{count}</span>
+        <button
+          type="button"
+          className="deck-caption-arrow"
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => go(index + 1)}
+          disabled={index === count - 1}
+          aria-label={nextLabel}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
       </div>
 
       <style>{`
+        /* Desktop: laptopowy ekran z poziomym zrzutem. Mobile: waska ramka telefonu z pionowym
+           zrzutem - proporcja ekranu MUSI zgadzac sie z plikiem, inaczej object-fit przytnie tekst. */
+        .deck-device { max-width: 980px; }
+        .deck-edge { border-radius: 30px; }
+        .deck-bezel { border-radius: 26px; padding: 12px; }
+        .deck-screen { border-radius: 16px; aspect-ratio: 1900 / 962; }
+        @media ${MOBILE_QUERY} {
+          .deck-device { max-width: 300px; }
+          .deck-edge { border-radius: 40px; }
+          .deck-bezel { border-radius: 36px; padding: 8px; }
+          .deck-screen { border-radius: 29px; aspect-ratio: 390 / 720; }
+        }
         .deck-caption {
           /* Urzadzenie ma transform + filter, wiec tworzy kontekst ukladania i maluje sie NAD
              zwyklymi blokami w przeplywie - bez tego pastylka chowa sie pod mockupem. */
@@ -320,7 +385,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
           /* Wysrodkowanie idzie przez margin-top, NIE translateY(-50%): globalne
              button:active { transform: scale(0.97) } z globals.css nadpisalo transform
              i strzalka na czas kliku zjezdzala o pol swojej wysokosci w dol. */
-          top: 34%;
+          top: 50%;
           margin-top: -19px;
           width: 38px;
           height: 38px;
@@ -347,10 +412,29 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
         .deck-arrow-next { right: 14px; }
         /* Wlasne wcisniecie - czysta skala, bez skladowej pionowej. */
         .deck-arrow:active { transform: scale(0.94); }
-        @media (max-width: 560px) {
-          .deck-arrow { width: 32px; height: 32px; margin-top: -16px; }
-          .deck-arrow-prev { left: 8px; }
-          .deck-arrow-next { right: 8px; }
+        /* Strzalki w pastylce: tylko na telefonie. Wylaczona strzalka zostaje w ukladzie
+           (visibility), zeby pastylka nie zmieniala szerokosci na krancach talii. */
+        .deck-caption-arrow { display: none; }
+        @media ${MOBILE_QUERY} {
+          .deck-arrow { display: none; }
+          .deck-caption { gap: 8px; padding: 4px 6px; }
+          .deck-caption-arrow {
+            appearance: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: 999px;
+            background: transparent;
+            color: #36394a;
+            cursor: pointer;
+          }
+          .deck-caption-arrow:active { background: rgba(11,121,131,0.1); color: #0b7983; }
+          .deck-caption-arrow:disabled { visibility: hidden; }
         }
       `}</style>
     </div>
