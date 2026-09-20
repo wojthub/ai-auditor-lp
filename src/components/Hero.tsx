@@ -55,7 +55,7 @@ export default function Hero() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              Popraw treści pod GEO
+              Zautomatyzuj audyty treści pod GEO
             </span>
             <span style={{
               display: 'block',
@@ -63,7 +63,7 @@ export default function Hero() {
               lineHeight: 1.6, color: '#36394a',
               maxWidth: 560, margin: '14px auto 0',
             }}>
-              Badamy elementy treści, które decydują o cytowaniu przez AI. Zwiększ widoczność Twojej strony w <span className="hero-brand"><img src="/logos/chatgpt.png" alt="" aria-hidden width={16} height={16} />ChatGPT</span>, <span className="hero-brand"><img src="/logos/perplexity.png" alt="" aria-hidden width={16} height={16} />Perplexity</span> i <span className="hero-brand"><img src="/logos/google.png" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview dzięki rekomendacjom Przed i Po.
+              Wklej link, listę URL-i albo sitemapę. Dostajesz gotowe rekomendacje „Przed i Po”. Konkretne wytyczne, co zmienić w treści, żeby cytował ją <span className="hero-brand"><img src="/logos/chatgpt.png" alt="" aria-hidden width={16} height={16} />ChatGPT</span>, <span className="hero-brand"><img src="/logos/perplexity.png" alt="" aria-hidden width={16} height={16} />Perplexity</span> i <span className="hero-brand"><img src="/logos/google.png" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview.
             </span>
           </h1>
 

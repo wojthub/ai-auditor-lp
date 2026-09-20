@@ -11,7 +11,7 @@ const steps = [
     numberColor: '#e07a4a',
     title: 'Enter your data',
     description:
-      'Paste a link to an already published article or a draft you plan to add to the site. Type in the keyword you want to win citations for in AI answers.',
+      'Paste a link, a list of URLs or a sitemap - a bulk audit takes the whole site in one run. Instead of an address you can paste a draft that is not on the site yet. Type in the keyword you want to win citations for in AI answers, and you can send jobs over the API too.',
   },
   {
     number: '02',

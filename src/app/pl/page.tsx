@@ -26,10 +26,10 @@ export default function PlLandingPage() {
       <StatsBand lang="pl" />
       <Problem />
       <HowItWorks />
+      <BulkAudit />
       <TechLogos />
       <DimensionsTeaser />
       <ReportSection />
-      <BulkAudit />
       <ForWho />
       <FAQ />
       <AuthorSection />

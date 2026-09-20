@@ -244,7 +244,9 @@ który zakłada konto przy pierwszym wejściu, więc osobnego `/register` nie ma
 ### Kolejność sekcji HP (identyczna EN i PL)
 
 ```
-Navbar → Hero → Showcase → StatsBand → Problem → HowItWorks → TechLogos → DimensionsTeaser → ReportSection → BulkAudit → ForWho → FAQ → AuthorSection → ClosingCta → Footer
+Navbar → Hero → Showcase → StatsBand → Problem → HowItWorks → BulkAudit → TechLogos → DimensionsTeaser → ReportSection → ForWho → FAQ → AuthorSection → ClosingCta → Footer
+
+**BulkAudit stoi zaraz po HowItWorks** (przeniesiony z pozycji 8 dnia 2026-09-20): skala jest częścią odpowiedzi na „jak to działa", a nie dodatkiem na końcu strony. Hero i krok 01 obiecują trzy wejścia (link, lista URL-i, sitemapa) plus API, więc sekcja o audycie masowym musi stać tam, gdzie czytelnik o nie pyta.
 ```
 
 Pliki: PL [page.tsx](src/app/pl/page.tsx), EN [page.tsx](src/app/page.tsx) (komponenty EN w `src/components/en/*EN.tsx`).

@@ -26,10 +26,10 @@ export default function LandingPage() {
       <StatsBand lang="en" />
       <ProblemEN />
       <HowItWorksEN />
+      <BulkAuditEN />
       <TechLogosEN />
       <DimensionsTeaserEN />
       <ReportSectionEN />
-      <BulkAuditEN />
       <ForWhoEN />
       <FAQEN />
       <AuthorSectionEN />
