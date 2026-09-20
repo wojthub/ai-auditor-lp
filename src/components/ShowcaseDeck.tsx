@@ -95,7 +95,11 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
     // Dociagamy wariant, ktory <picture> faktycznie pokaze - inaczej telefon pobieralby desktopowe PNG na darmo.
     const preload = () => {
       const mobile = window.matchMedia(MOBILE_QUERY).matches;
-      slides.forEach((s, i) => { if (i !== startIndex) new Image().src = mobile ? s.mobileSrc : s.src; });
+      const webp = document.createElement('canvas').toDataURL('image/webp').startsWith('data:image/webp');
+      slides.forEach((s, i) => {
+        if (i === startIndex) return;
+        new Image().src = mobile ? s.mobileSrc : (webp ? s.src.replace(/.png$/, '.webp') : s.src);
+      });
     };
     if (typeof window.requestIdleCallback === 'function') {
       const id = window.requestIdleCallback(preload);
@@ -164,11 +168,16 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                   >
                     {slides.map((slide, i) => (
                       <picture key={slide.src} style={{ flex: '0 0 100%', width: '100%', height: '100%', display: 'block' }}>
+                        {/* Kolejnosc jest znaczaca: najpierw wariant mobilny (media), potem WebP dla
+                            desktopu, a <img> zostaje fallbackiem PNG. Zrzuty mobilne sa PNG z paleta -
+                            WebP wychodzil na nich CIEZSZY (plaskie kolory), wiec go tam nie ma. */}
                         <source media={MOBILE_QUERY} srcSet={slide.mobileSrc} />
+                        <source type="image/webp" srcSet={slide.src.replace(/.png$/, '.webp')} />
                         <img
                           src={slide.src}
                           alt={slide.alt}
                           draggable={false}
+                          decoding="async"
                           loading={i === startIndex ? 'eager' : 'lazy'}
                           style={{
                             width: '100%',
