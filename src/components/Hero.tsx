@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { useTypewriterPlaceholder } from '@/lib/useTypewriterPlaceholder';
 import { APP_URL } from '@/lib/appUrl';
 
-
 // Neutralna, przykładowa domena - nie wskazujemy na żadnego realnego klienta.
 // Wszystkie warianty zaczynają się tak samo, więc maszyna do pisania kasuje tylko końcówkę.
 const URL_EXAMPLES = [

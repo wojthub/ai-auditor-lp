@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { useTypewriterPlaceholder } from '@/lib/useTypewriterPlaceholder';
 import { APP_URL } from '@/lib/appUrl';
 
-
 // Neutral placeholder domain - we never point at a real client.
 // All variants share the same start, so the typewriter only erases the tail.
 const URL_EXAMPLES = [

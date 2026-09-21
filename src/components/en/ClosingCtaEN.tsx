@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { APP_URL } from '@/lib/appUrl';
 
-
 export default function ClosingCtaEN() {
   return (
     <section style={{ background: '#ffffff', padding: '58px 0', borderTop: '1px solid #eceff3' }}>

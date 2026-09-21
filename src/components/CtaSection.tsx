@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { APP_URL } from '@/lib/appUrl';
 
-
 export default function CtaSection() {
   return (
     <section style={{ padding: '64px 0', background: '#F8FAFC' }}>

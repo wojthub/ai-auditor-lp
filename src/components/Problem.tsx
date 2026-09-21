@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import CqsScoreCard from './CqsScoreCard';
 import { APP_URL } from '@/lib/appUrl';
 
-
 const STAGES = [
   { none: true },
   { none: false },

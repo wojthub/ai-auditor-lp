@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { APP_URL } from '@/lib/appUrl';
 
-
 export default function ReportExample() {
   return (
     <section

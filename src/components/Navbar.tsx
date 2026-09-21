@@ -6,7 +6,6 @@ import BrandMorph from './BrandMorph';
 import { enCounterpart } from '@/lib/languageSwitch';
 import { APP_URL } from '@/lib/appUrl';
 
-
 /** Menu „Narzedzia" - same narzedzia dodatkowe, osobne od audytu tresci (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/pl/narzedzia/klasteryzacja', label: 'Klasteryzacja słów kluczowych', desc: 'Przypisz słowa kluczowe do stron docelowych' },

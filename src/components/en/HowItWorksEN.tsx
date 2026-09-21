@@ -4,7 +4,6 @@ import { Fragment } from 'react';
 import { motion } from 'framer-motion';
 import { APP_URL } from '@/lib/appUrl';
 
-
 const steps = [
   {
     number: '01',

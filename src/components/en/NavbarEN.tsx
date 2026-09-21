@@ -6,7 +6,6 @@ import BrandMorph from '../BrandMorph';
 import { plCounterpart } from '@/lib/languageSwitch';
 import { APP_URL } from '@/lib/appUrl';
 
-
 /** „Tools" menu - mirror of ../Navbar.tsx. Add-on tools only, separate from the content audit (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/tools/keyword-clustering', label: 'Keyword Clustering', desc: 'Map keywords to their target pages' },

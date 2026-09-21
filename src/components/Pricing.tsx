@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { APP_URL } from '@/lib/appUrl';
 
-
 const included = [
   'Pełny audyt GEO',
   'Content Quality Score (CQS 0–100)',
