@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import BrandMorph from './BrandMorph';
 import { enCounterpart } from '@/lib/languageSwitch';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 
 /** Menu „Narzedzia" - same narzedzia dodatkowe, osobne od audytu tresci (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
@@ -52,11 +52,11 @@ export default function Navbar() {
       }}
     >
       <div
-        className="flex items-center justify-between"
+        className="flex items-center justify-between nav-row"
         style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, height: 64 }}
       >
         {/* Logo */}
-        <a href="/pl" className="flex items-center" style={{ textDecoration: 'none', fontSize: 22 }}>
+        <a href="/pl" className="flex items-center nav-logo" style={{ textDecoration: 'none', fontSize: 22 }}>
           <BrandMorph />
         </a>
 
@@ -122,16 +122,22 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <a href={`${APP_URL}/login?lang=pl`} className="nav-cta">Zrób audyt</a>
+          {/* DWA wejscia zamiast jednego „Zrob audyt": wracajacy uzytkownik szukal logowania i
+              nie mial gdzie kliknac, a nowy nie widzial, ze start jest darmowy. Kreska oddziela
+              nawigacje po tresci od akcji konta. „Zrob audyt" znika stad swiadomie - prowadzil
+              pod ten sam adres co rejestracja, a glowne CTA zostaje w hero, przy polu z URL-em. */}
+          <span aria-hidden className="nav-sep" />
+          <a href={`${APP_URL}/login?lang=pl`} className="nav-login">Zaloguj się</a>
+          <a href={`${APP_URL}/register?lang=pl`} className="nav-cta">Wypróbuj za darmo</a>
           <a href={enHref} className="nav-lang" title="English version">EN</a>
         </div>
 
         {/* Prawa strona paska na mobile: szybkie wejscie do audytu + hamburger.
-            Link jest TEKSTOWY, nie wypelnionym przyciskiem - nad zgiecciem stoi juz „Zrob audyt"
-            przy inpucie i prowadzi pod ten sam `/login`; drugi przycisk w akcencie rozmywalby
-            hierarchie. Rejestracje obsluguja hero i nota pod inputem. */}
+            Link jest TEKSTOWY, nie wypelnionym przyciskiem - nad zgiecciem stoi juz CTA przy
+            inpucie hero i prowadzi pod ten sam `/register`; drugi przycisk w akcencie
+            rozmywalby hierarchie. Logowanie siedzi w rozwinietym menu. */}
         <div className="md:hidden flex items-center nav-mobile-right">
-          <a href={`${APP_URL}/login?lang=pl`} className="nav-mobile-login">Zrób audyt</a>
+          <a href={`${APP_URL}/register?lang=pl`} className="nav-mobile-login">Wypróbuj za darmo</a>
           {/* Mobile hamburger */}
           <button
             className="md:hidden flex items-center justify-center nav-burger"
@@ -248,13 +254,20 @@ export default function Navbar() {
           <a href={enHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             EN - English version
           </a>
-          {/* Wejscie w audyt - `/login` zaklada konto przy pierwszym wejsciu, wiec obsluguje tez wracajacych. */}
+          {/* Oba wejscia na DOLE menu, w zasiegu kciuka: najpierw to dla nowych, pod nim logowanie. */}
           <a
-            href={`${APP_URL}/login?lang=pl`}
+            href={`${APP_URL}/register?lang=pl`}
             onClick={() => setMobileOpen(false)}
             className="nav-mobile-cta"
           >
-            Zrób audyt
+            Wypróbuj za darmo
+          </a>
+          <a
+            href={`${APP_URL}/login?lang=pl`}
+            onClick={() => setMobileOpen(false)}
+            className="nav-mobile-secondary"
+          >
+            Zaloguj się
           </a>
         </div>
       )}
@@ -384,6 +397,34 @@ export default function Navbar() {
           background: #097380;
           opacity: 1;
         }
+        /* Kreska miedzy nawigacja po tresci a akcjami konta - bez niej piec pozycji w rzedzie
+           czyta sie jak jedno menu, a „Zaloguj sie" gubi sie miedzy „Cennik" a przyciskiem. */
+        .nav-sep {
+          width: 1px;
+          height: 24px;
+          background: #dfe1e7;
+          margin: 0 10px 0 14px;
+        }
+        /* Drugorzedne wejscie: ta sama wysokosc co CTA, ale obrys zamiast wypelnienia. */
+        .nav-login {
+          display: inline-flex;
+          align-items: center;
+          padding: 10px 18px;
+          min-height: 44px;
+          border-radius: 6px;
+          border: 1px solid #0b7983;
+          background: #ffffff;
+          color: #0b7983;
+          font-size: 15px;
+          font-weight: 600;
+          text-decoration: none;
+          letter-spacing: -0.015em;
+          transition: background 0.14s ease;
+        }
+        .nav-login:hover {
+          background: #eaf4f5;
+          opacity: 1;
+        }
         .nav-lang {
           font-size: 13px;
           font-weight: 600;
@@ -426,9 +467,29 @@ export default function Navbar() {
           text-decoration: none;
           letter-spacing: -0.015em;
         }
+        /* Logowanie pod CTA: obrys, ta sama wysokosc - wracajacy uzytkownik ma je znalezc
+           w menu, a nie tylko na pasku. */
+        .nav-mobile-secondary {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          margin-top: 10px;
+          padding: 14px 20px;
+          border-radius: 8px;
+          border: 1px solid #0b7983;
+          background: #ffffff;
+          color: #0b7983;
+          font-size: 16px;
+          font-weight: 600;
+          text-decoration: none;
+          letter-spacing: -0.015em;
+        }
         @media (min-width: 820px) and (max-width: 1023px) {
           .nav-link { padding: 6px 7px; font-size: 14px; }
           .nav-cta { padding: 11px 13px; font-size: 14px; }
+          .nav-login { padding: 10px 12px; font-size: 14px; }
+          .nav-sep { margin: 0 6px 0 10px; }
           .nav-lang { margin-left: 6px; }
         }
         /* Link „zaloguj" przy hamburgerze: bez tla i ramki, 44 px pola trafienia. */
@@ -451,6 +512,20 @@ export default function Navbar() {
           .nav-mobile-right { display: flex !important; }
           .nav-burger { display: inline-flex !important; }
           .nav-mobile-panel { display: block !important; }
+        }
+        /* Na waskim ekranie trzy elementy nie mieszcza sie w 64 px wysokosci paska: logo ma
+           STALA szerokosc (rezerwacja pod animacje pisania), a CTA urioslo z „Zrob audyt" do
+           „Wyprobuj za darmo". Bez tego hamburger byl wypychany poza krawedz i znikal.
+           Hamburger nigdy sie nie kurczy - to jedyne wejscie do menu. */
+        .nav-burger { flex-shrink: 0; }
+        @media (max-width: 480px) {
+          .nav-row { padding-left: 16px !important; padding-right: 16px !important; }
+          .nav-logo { font-size: 18px !important; }
+          .nav-mobile-login { font-size: 13px; padding: 0 6px; }
+        }
+        @media (max-width: 360px) {
+          .nav-logo { font-size: 16px !important; }
+          .nav-mobile-login { font-size: 12px; padding: 0 4px; }
         }
       `}</style>
     </nav>

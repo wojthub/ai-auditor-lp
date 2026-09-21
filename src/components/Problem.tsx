@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CqsScoreCard from './CqsScoreCard';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 
 const STAGES = [
   { none: true },
@@ -95,7 +95,7 @@ export default function Problem() {
                   score={51}
                   badge="ŚREDNI"
                   avgLabel="Średnia TOP 10: 40"
-                  link={{ href: `${APP_URL}/login?lang=pl`, label: 'Zobacz konkurentów' }}
+                  link={{ href: `${APP_URL}/register?lang=pl`, label: 'Zobacz konkurentów' }}
                 />
               </div>
             </motion.div>
@@ -159,7 +159,7 @@ export default function Problem() {
               CitationOne przeanalizuje Twoją treść pod kątem GEO i pokaże, jak zwiększyć jej szanse na cytowanie w odpowiedziach LLM-ów. Narzędzie przygotowuje gotowe rekomendacje. Konkretne zmiany, dzięki którym roboty AI zaczną wybierać Twoją stronę jako źródło odpowiedzi dla użytkowników.
             </p>
             <motion.a
-              href={`${APP_URL}/login?lang=pl`}
+              href={`${APP_URL}/register?lang=pl`}
               whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
               whileTap={{ scale: 0.97 }}
               style={{

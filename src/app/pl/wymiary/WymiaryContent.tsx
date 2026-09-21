@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import CqsScoreCard from '@/components/CqsScoreCard';
 import HeroBackdrop from '@/components/HeroBackdrop';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
 
 function fadeUp(delay = 0) {
@@ -357,7 +357,7 @@ export default function WymiaryContent() {
               Sprawdź swoje teksty już teraz - pierwsze 3 audyty za darmo.
             </p>
             <motion.a
-              href={`${APP_URL}/login?lang=pl`}
+              href={`${APP_URL}/register?lang=pl`}
               whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
               whileTap={{ scale: 0.97 }}
               style={{

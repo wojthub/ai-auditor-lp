@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 
 export default function CtaSection() {
   return (

@@ -9,7 +9,7 @@ const STATS = [
   { value: '10', label: 'wymiarów GEO\nw jednym raporcie' },
   { value: '< 15', label: 'minut od URL\ndo gotowego raportu' },
   { value: '10', label: 'artykułów SERP\nw benchmarku' },
-  { value: '2', label: 'formaty eksportu\nPDF i Markdown' },
+  { value: '2', label: 'formaty eksportu\nlink i Markdown' },
 ];
 
 /* ─── Testimonials ───────────────────────────────────── */

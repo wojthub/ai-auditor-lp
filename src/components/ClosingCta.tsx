@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 
 export default function ClosingCta() {
   return (
@@ -47,7 +47,7 @@ export default function ClosingCta() {
           </p>
 
           <motion.a
-            href={`${APP_URL}/login?lang=pl`}
+            href={`${APP_URL}/register?lang=pl`}
             whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
             whileTap={{ scale: 0.97 }}
             style={{

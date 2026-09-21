@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import BrandMorph from '../BrandMorph';
 import { plCounterpart } from '@/lib/languageSwitch';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 
 /** „Tools" menu - mirror of ../Navbar.tsx. Add-on tools only, separate from the content audit (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
@@ -52,11 +52,11 @@ export default function NavbarEN() {
       }}
     >
       <div
-        className="flex items-center justify-between"
+        className="flex items-center justify-between nav-row"
         style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24, height: 64 }}
       >
         {/* Logo */}
-        <a href="/" className="flex items-center" style={{ textDecoration: 'none', fontSize: 22 }}>
+        <a href="/" className="flex items-center nav-logo" style={{ textDecoration: 'none', fontSize: 22 }}>
           <BrandMorph />
         </a>
 
@@ -122,15 +122,21 @@ export default function NavbarEN() {
               </div>
             </div>
           </div>
-          <a href={`${APP_URL}/login?lang=en`} className="nav-cta">Run audit</a>
+          {/* TWO entries instead of one "Run audit": a returning user had nowhere to click,
+              and a new one could not see that the start is free. The rule separates content
+              navigation from account actions. The main CTA stays in the hero, by the URL field. */}
+          <span aria-hidden className="nav-sep" />
+          <a href={`${APP_URL}/login?lang=en`} className="nav-login">Log in</a>
+          <a href={`${APP_URL}/register?lang=en`} className="nav-cta">Try for free</a>
           <a href={plHref} className="nav-lang" title="Wersja polska">PL</a>
         </div>
 
         {/* Mobile bar, right side: a fast way into an audit + the burger.
             A plain TEXT link, not a filled button - the hero CTA above the fold already points
-            at the same `/login`, and a second accent button would blur the hierarchy. */}
+            at the same `/register`, and a second accent button would blur the hierarchy.
+            Logging in lives in the expanded menu. */}
         <div className="md:hidden flex items-center nav-mobile-right">
-          <a href={`${APP_URL}/login?lang=en`} className="nav-mobile-login">Run audit</a>
+          <a href={`${APP_URL}/register?lang=en`} className="nav-mobile-login">Try for free</a>
           {/* Mobile hamburger */}
           <button
             className="md:hidden flex items-center justify-center nav-burger"
@@ -247,9 +253,12 @@ export default function NavbarEN() {
           <a href={plHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             PL - Wersja polska
           </a>
-          {/* Audit entry - `/login` creates the account on first visit, so it also serves returning users. */}
-          <a href={`${APP_URL}/login?lang=en`} onClick={() => setMobileOpen(false)} className="nav-mobile-cta">
-            Run audit
+          {/* Both entries at the BOTTOM of the menu, within thumb reach. */}
+          <a href={`${APP_URL}/register?lang=en`} onClick={() => setMobileOpen(false)} className="nav-mobile-cta">
+            Try for free
+          </a>
+          <a href={`${APP_URL}/login?lang=en`} onClick={() => setMobileOpen(false)} className="nav-mobile-secondary">
+            Log in
           </a>
         </div>
       )}
@@ -380,6 +389,34 @@ export default function NavbarEN() {
           background: #097380;
           opacity: 1;
         }
+        /* Kreska miedzy nawigacja po tresci a akcjami konta - bez niej piec pozycji w rzedzie
+           czyta sie jak jedno menu, a „Zaloguj sie" gubi sie miedzy „Cennik" a przyciskiem. */
+        .nav-sep {
+          width: 1px;
+          height: 24px;
+          background: #dfe1e7;
+          margin: 0 10px 0 14px;
+        }
+        /* Drugorzedne wejscie: ta sama wysokosc co CTA, ale obrys zamiast wypelnienia. */
+        .nav-login {
+          display: inline-flex;
+          align-items: center;
+          padding: 10px 18px;
+          min-height: 44px;
+          border-radius: 6px;
+          border: 1px solid #0b7983;
+          background: #ffffff;
+          color: #0b7983;
+          font-size: 15px;
+          font-weight: 600;
+          text-decoration: none;
+          letter-spacing: -0.015em;
+          transition: background 0.14s ease;
+        }
+        .nav-login:hover {
+          background: #eaf4f5;
+          opacity: 1;
+        }
         .nav-lang {
           font-size: 13px;
           font-weight: 600;
@@ -421,9 +458,29 @@ export default function NavbarEN() {
           text-decoration: none;
           letter-spacing: -0.01em;
         }
+        /* Log in under the CTA: outlined, same height - a returning user should find it in the
+           menu, not only in the bar. */
+        .nav-mobile-secondary {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          margin-top: 10px;
+          padding: 14px 20px;
+          border-radius: 8px;
+          border: 1px solid #0b7983;
+          background: #ffffff;
+          color: #0b7983;
+          font-size: 16px;
+          font-weight: 600;
+          text-decoration: none;
+          letter-spacing: -0.015em;
+        }
         @media (min-width: 820px) and (max-width: 1023px) {
           .nav-link { padding: 6px 7px; font-size: 14px; }
           .nav-cta { padding: 11px 13px; font-size: 14px; }
+          .nav-login { padding: 10px 12px; font-size: 14px; }
+          .nav-sep { margin: 0 6px 0 10px; }
           .nav-lang { margin-left: 6px; }
         }
         /* Link „zaloguj" przy hamburgerze: bez tla i ramki, 44 px pola trafienia. */
@@ -446,6 +503,20 @@ export default function NavbarEN() {
           .nav-mobile-right { display: flex !important; }
           .nav-burger { display: inline-flex !important; }
           .nav-mobile-panel { display: block !important; }
+        }
+        /* On a narrow screen the three items do not fit the 64 px bar: the logo has a FIXED
+           width (reserved for the typing animation) and the CTA grew from "Run audit" to
+           "Try for free". Without this the burger was pushed past the edge and disappeared.
+           The burger never shrinks - it is the only way into the menu. */
+        .nav-burger { flex-shrink: 0; }
+        @media (max-width: 480px) {
+          .nav-row { padding-left: 16px !important; padding-right: 16px !important; }
+          .nav-logo { font-size: 18px !important; }
+          .nav-mobile-login { font-size: 13px; padding: 0 6px; }
+        }
+        @media (max-width: 360px) {
+          .nav-logo { font-size: 16px !important; }
+          .nav-mobile-login { font-size: 12px; padding: 0 4px; }
         }
       `}</style>
     </nav>

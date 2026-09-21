@@ -2,8 +2,8 @@
 
 import { Fragment } from 'react';
 import { motion } from 'framer-motion';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 
 const steps = [
   {
@@ -133,7 +133,7 @@ export default function HowItWorksEN() {
 
         <div style={{ textAlign: 'center', marginTop: 56 }}>
           <motion.a
-            href={`${APP_URL}/login?lang=en`}
+            href={`${APP_URL}/register?lang=en`}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

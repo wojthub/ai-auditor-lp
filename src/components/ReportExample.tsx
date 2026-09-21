@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 
 export default function ReportExample() {
   return (
@@ -49,7 +49,7 @@ export default function ReportExample() {
           </p>
 
           <motion.a
-            href={`${APP_URL}/login?lang=pl`}
+            href={`${APP_URL}/register?lang=pl`}
             className="inline-flex items-center justify-center gap-2"
             whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
             whileTap={{ scale: 0.97 }}

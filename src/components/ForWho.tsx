@@ -24,7 +24,6 @@ const audiences = [
     blobFill: '#0b7983',
     blobPath: 'M 40 18 C 92 -10 188 15 195 78 C 202 141 148 190 85 188 C 22 186 -12 128 8 68 C 28 8 -12 46 40 18 Z',
     highlights: [
-      'Czytelne raporty PDF, które możesz natychmiast przekazać redaktorom i copywriterom.',
       'Raporty w formacie Markdown gotowe do przekazania redaktorom i copywriterom.',
       'Jasny plan działania i pewność, że budżet na content przynosi zwrot.',
     ],

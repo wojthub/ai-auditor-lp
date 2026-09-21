@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import HeroBackdrop from '@/components/HeroBackdrop';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
 
 export default function PricingContent() {
@@ -191,7 +191,7 @@ export default function PricingContent() {
           style={{ textAlign: 'center', marginTop: 32 }}
         >
           <motion.a
-            href={`${APP_URL}/login?lang=pl`}
+            href={`${APP_URL}/register?lang=pl`}
             whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
             whileTap={{ scale: 0.97 }}
             style={{

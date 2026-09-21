@@ -20,7 +20,6 @@ const audiences = [
     color: '#0b7983',
     colorBg: 'rgba(11,121,131,0.10)',
     highlights: [
-      'Clear PDF reports you can hand straight to editors and copywriters.',
       'Markdown reports ready to share with editors and copywriters.',
       'A clear action plan and confidence that your content budget delivers ROI.',
     ],

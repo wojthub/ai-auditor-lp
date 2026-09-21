@@ -1,4 +1,4 @@
-const APP_URL = 'https://app.citationone.com';
+import { APP_URL } from '@/lib/appUrl';
 
 /**
  * EN footer. Two rows: LP navigation + legal links.

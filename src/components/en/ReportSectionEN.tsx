@@ -56,7 +56,7 @@ export default function ReportSectionEN() {
             Data ready to implement
           </h2>
           <p style={{ fontSize: 16, color: '#666d80', lineHeight: 1.7, margin: '0 0 32px' }}>
-            As an outcome of the audit you receive an interactive online report plus PDF and Markdown files you can hand straight to your team, manager or client.
+            As an outcome of the audit you receive an interactive online report plus a public link and a Markdown file you can hand straight to your team, manager or client.
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 36 }}>

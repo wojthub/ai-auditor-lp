@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTypewriterPlaceholder } from '@/lib/useTypewriterPlaceholder';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 
 // Neutral placeholder domain - we never point at a real client.
 // All variants share the same start, so the typewriter only erases the tail.
@@ -80,7 +80,7 @@ export default function HeroEN() {
               }
               const normalized = normalizeUrl(url);
               const encoded = encodeURIComponent(normalized).replace(/%3A/gi, ':').replace(/%2F/gi, '/');
-              window.location.href = `${APP_URL}/login?lang=en&audit-url=${encoded}`;
+              window.location.href = `${APP_URL}/register?lang=en&audit-url=${encoded}`;
             }}
             style={{ maxWidth: 580, margin: '0 auto' }}
             noValidate
@@ -139,7 +139,7 @@ export default function HeroEN() {
             {/* The note doubles as a sign-up entry point - same `/login` screen as the
                 navbar CTA; the audits land once the account exists. */}
             <span>
-              <a href={`${APP_URL}/login?lang=en`} className="hero-note-link">Get 3 free audits</a>
+              <a href={`${APP_URL}/register?lang=en`} className="hero-note-link">Get 3 free audits</a>
               {' '}after signing up. No card required.
             </span>
           </p>

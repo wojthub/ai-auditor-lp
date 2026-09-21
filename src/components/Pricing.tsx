@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 
 const included = [
   'Pełny audyt GEO',
@@ -12,7 +12,7 @@ const included = [
   'Rekomendacje Przed i Po z priorytetami',
   'AI Overview Coverage',
   'Graf wiedzy i encje (EAV)',
-  'Eksport PDF i Markdown',
+  'Eksport: publiczny link i Markdown',
   'Faktura VAT · Płatność przelewem',
 ];
 
@@ -176,7 +176,7 @@ export default function Pricing() {
 
               {/* CTA */}
               <a
-                href={`${APP_URL}/login?lang=pl`}
+                href={`${APP_URL}/register?lang=pl`}
                 style={{
                   display: 'flex',
                   alignItems: 'center',

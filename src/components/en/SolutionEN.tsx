@@ -2,9 +2,9 @@
 
 import { motion } from 'framer-motion';
 import RadarIllustrationEN from './RadarIllustrationEN';
+import { APP_URL } from '@/lib/appUrl';
 
 const ACCENT = '#0b7983';
-const APP_URL = 'https://app.citationone.com';
 
 export default function SolutionEN() {
   return (
@@ -32,7 +32,7 @@ export default function SolutionEN() {
           </p>
 
           <motion.a
-            href={`${APP_URL}/login?lang=en`}
+            href={`${APP_URL}/register?lang=en`}
             whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
             whileTap={{ scale: 0.97 }}
             style={{

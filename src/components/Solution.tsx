@@ -1,9 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { APP_URL } from '@/lib/appUrl';
 
 const ACCENT = '#0b7983';
-const APP_URL = 'https://app.citationone.com';
 
 export default function Solution() {
   return (
@@ -35,7 +35,7 @@ export default function Solution() {
             Otrzymujesz gotowe rekomendacje - konkretne i proste zmiany, dzięki którym roboty AI zaczną wybierać Twoją stronę jako źródło odpowiedzi dla użytkowników.
           </p>
           <motion.a
-            href={`${APP_URL}/login?lang=pl`}
+            href={`${APP_URL}/register?lang=pl`}
             whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
             whileTap={{ scale: 0.97 }}
             style={{

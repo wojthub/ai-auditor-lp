@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import HeroBackdrop from '@/components/HeroBackdrop';
+import { APP_URL } from '@/lib/appUrl';
 
-const APP_URL = 'https://app.citationone.com';
 const ACCENT = '#0b7983';
 
 // Liczby MUSZA zgadzac sie z ustawieniami programu w aplikacji (`AFFILIATE_COMMISSION_BPS`,
@@ -148,7 +148,7 @@ export default function AffiliateContent() {
           className="aff-cta-row"
         >
           <motion.a
-            href={`${APP_URL}/login?lang=pl`}
+            href={`${APP_URL}/register?lang=pl`}
             whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
             whileTap={{ scale: 0.97 }}
             style={{
@@ -452,7 +452,7 @@ export default function AffiliateContent() {
             Konto zakładasz za darmo, a pierwsze 3 audyty są bez opłat.
           </p>
           <motion.a
-            href={`${APP_URL}/login?lang=pl`}
+            href={`${APP_URL}/register?lang=pl`}
             whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
             whileTap={{ scale: 0.97 }}
             style={{

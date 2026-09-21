@@ -129,19 +129,30 @@ export default function BrandMorph() {
   // Determine if we're in "One" state (suffix starts with "O", vs "N" for "None?")
   const isOneState = suffix.length > 0 && suffix[0] === 'O';
 
+  const font = {
+    fontSize: 'inherit',
+    fontWeight: 400,
+    letterSpacing: '-0.02em',
+    lineHeight: 1,
+    fontFamily: 'Inter, system-ui, sans-serif',
+  } as const;
+
   return (
-    <span
-      style={{
-        fontSize: 'inherit',
-        fontWeight: 400,
-        letterSpacing: '-0.02em',
-        lineHeight: 1,
-        display: 'inline-flex',
-        alignItems: 'baseline',
-        fontFamily: 'Inter, system-ui, sans-serif',
-      }}
-      aria-label="CitationOne"
-    >
+    // Animacja pisania zmienia dlugosc napisu od zera do „CitationNone?", wiec bez rezerwacji
+    // miejsca caly pasek przesuwal sie przy kazdej literze - CTA i hamburger jezdzily w lewo
+    // i w prawo przez cala petle. Niewidoczna kopia najdluzszego stanu trzyma szerokosc, a
+    // animowany napis lezy nad nia pozycjonowany absolutnie.
+    <span style={{ ...font, position: 'relative', display: 'inline-block', whiteSpace: 'nowrap' }} aria-label="CitationOne">
+      <span aria-hidden style={{ visibility: 'hidden' }}>{FULL_NONE}|</span>
+      <span
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          display: 'inline-flex',
+          alignItems: 'baseline',
+        }}
+      >
       {isOneState ? (
         <span style={{
           background: 'linear-gradient(90deg, #1a3a4a 0%, #0b7983 45%, #0b9aa6 100%)',
@@ -162,6 +173,7 @@ export default function BrandMorph() {
         marginLeft: 1,
         fontWeight: 300,
       }}>|</span>
+      </span>
     </span>
   );
 }
