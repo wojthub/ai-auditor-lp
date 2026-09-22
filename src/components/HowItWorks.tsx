@@ -17,7 +17,7 @@ const steps = [
     numberColor: '#0b7983',
     title: 'Algorytm analizuje konkurencję z Top 10 SERP',
     description:
-      'W mniej niż 5 minut system CitationOne pobiera i analizuje Twoją treść. W tym samym czasie bada 10 najlepiej rankujących stron konkurencji. Narzędzie porównuje Twój materiał z liderami rynku pod kątem 10 wymiarów jakości oraz sygnałów E-E-A-T.',
+      'W mniej niż 5 minut system CitationOne pobiera i analizuje Twoją treść. W tym samym czasie bada 10 najlepiej rankujących stron konkurencji. Narzędzie porównuje Twój materiał z liderami rynku pod kątem 11 wymiarów jakości, wraz z sygnałami E-E-A-T.',
   },
   {
     number: '03',

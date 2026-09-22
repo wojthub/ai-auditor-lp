@@ -118,7 +118,7 @@ function BeforeAfterVisual() {
 
 const REPORT_ITEMS = [
   'Content Quality Score (0-100) with dimension breakdown',
-  'Radar chart of 10 dimensions',
+  'Radar chart of 11 dimensions',
   'Top 10 SERP benchmark - comparison table',
   'Before/After recommendations with priorities',
   'Knowledge graph and EAV entity table',
@@ -162,7 +162,7 @@ export default function FeaturesEN() {
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 52 }}>
             <SectionLabel>10 analysis dimensions</SectionLabel>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>10 dimensions - each measured separately</h2>
+            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>11 dimensions - each measured separately</h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 560, margin: '0 auto', lineHeight: 1.65 }}>10 AI citation criteria - each with a separate score 0-10. Only their combination gives the full picture: which content AI likes to cite and which it ignores - and why.</p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}><DimensionsVisual /></motion.div>

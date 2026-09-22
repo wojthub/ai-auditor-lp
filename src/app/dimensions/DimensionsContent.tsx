@@ -93,7 +93,7 @@ const DIMS = [
   },
 ];
 
-// Outside the ten dimensions: E-E-A-T has its own section below, Information Gain is an
+// E-E-A-T is the eleventh dimension and has its own section below; Information Gain is an
 // informational metric (it does not enter the final score) - hence both sit beside the grid.
 const EXTRA = [
   {
@@ -125,7 +125,7 @@ export default function DimensionsContent() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 18 }}>
               <div style={{ width: 20, height: 2, background: ACCENT, borderRadius: 1 }} />
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>10 dimensions</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>11 dimensions</span>
               <div style={{ width: 20, height: 2, background: ACCENT, borderRadius: 1 }} />
             </div>
             <h1 style={{
@@ -137,7 +137,7 @@ export default function DimensionsContent() {
               backgroundClip: 'text',
               display: 'inline-block',
             }}>
-              10 Content Quality Dimensions + E-E-A-T
+              11 Content Quality Dimensions
             </h1>
             <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.7, maxWidth: 680, margin: '0 auto 36px' }}>
               The models behind ChatGPT and Google AI Overview evaluate content algorithmically. CitationOne translates those processes into 10 measurable dimensions that make up your Content Quality Score (CQS).
@@ -236,13 +236,13 @@ export default function DimensionsContent() {
             ))}
           </div>
 
-          {/* Outside the ten: E-E-A-T + Information Gain */}
+          {/* Obok gridu: E-E-A-T (wymiar jedenasty) + Information Gain */}
           <motion.div {...fadeUp(0.1)} style={{ marginTop: 44 }}>
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: '0 0 6px' }}>
-              Beyond the ten dimensions
+              E-E-A-T and information gain
             </h3>
             <p style={{ fontSize: 14.5, color: '#666d80', lineHeight: 1.65, margin: '0 0 18px', maxWidth: 640 }}>
-              Two analyses reported separately - E-E-A-T as the foundation of credibility, information gain as the measure of what you add over the Top 10.
+              Two analyses reported separately - E-E-A-T as the eleventh dimension and the foundation of credibility, information gain as the measure of what you add over the Top 10 (it stays outside the final score).
             </p>
             <div className="dims-extra-grid">
               {EXTRA.map((item) => (

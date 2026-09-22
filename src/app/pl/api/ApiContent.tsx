@@ -31,7 +31,7 @@ const FEATURES = [
   },
   {
     title: 'Cały raport jako JSON',
-    body: 'Content Quality Score, dziesięć wymiarów z listą problemów, E-E-A-T, rekomendacje w parach przed i po, porównanie z konkurencją z Google i ChatGPT oraz pokrycie pytań Fan-Out.',
+    body: 'Content Quality Score, jedenaście wymiarów z listą problemów i E-E-A-T w komplecie, rekomendacje w parach przed i po, porównanie z konkurencją z Google i ChatGPT oraz pokrycie pytań Fan-Out.',
   },
   {
     title: 'Zlecenia masowe',

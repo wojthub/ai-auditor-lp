@@ -6,7 +6,7 @@ import { APP_URL } from '@/lib/appUrl';
 const included = [
   'Pełny audyt GEO',
   'Content Quality Score (CQS 0–100)',
-  'Analiza 10 wymiarów jakości',
+  'Analiza 11 wymiarów jakości',
   'Benchmark top 10 SERP',
   'Rekomendacje Przed i Po z priorytetami',
   'AI Overview Coverage',

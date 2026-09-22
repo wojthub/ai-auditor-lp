@@ -294,7 +294,7 @@ function KnowledgeGraphVisual() {
 /* ── Visual: Export ───────────────────────────────────────────────────── */
 const REPORT_ITEMS = [
   'Content Quality Score (0–100) with dimension breakdown',
-  'Radar chart of 10 dimensions',
+  'Radar chart of 11 dimensions',
   'Competitor analysis - Google Top 10 SERP and ChatGPT citations',
   'Before/After recommendations with priorities',
   'Knowledge graph and EAV entity table',
@@ -417,7 +417,7 @@ export default function PageContentEN() {
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               {[
                 { text: 'Full report in ~5 minutes' },
-                { text: '10 dimensions + E-E-A-T' },
+                { text: '11 dimensions incl. E-E-A-T' },
                 { text: 'Competitor analysis' },
                 { text: 'Before/After with ready fixes' },
               ].map((item) => (
@@ -454,7 +454,7 @@ export default function PageContentEN() {
               {
                 n: '02', color: '#0b7983',
                 title: 'The algorithm analyzes your competition in Google and ChatGPT',
-                body: 'In under 5 minutes CitationOne fetches and analyzes your content. At the same time it inspects the 10 top-ranking competitor pages and asks ChatGPT about the same phrase to see which sources the model names. The tool compares your material with the market leaders across 10 quality dimensions and E-E-A-T signals.',
+                body: 'In under 5 minutes CitationOne fetches and analyzes your content. At the same time it inspects the 10 top-ranking competitor pages and asks ChatGPT about the same phrase to see which sources the model names. The tool compares your material with the market leaders across 11 quality dimensions, E-E-A-T signals included.',
               },
               {
                 n: '03', color: '#c47a2a',
@@ -494,7 +494,7 @@ export default function PageContentEN() {
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 48 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 18 }}>
               <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>10 dimensions + E-E-A-T</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>11 dimensions incl. E-E-A-T</span>
               <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
             </div>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>

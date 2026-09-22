@@ -7,7 +7,7 @@ import DimensionsContent from './DimensionsContent';
 export const metadata: Metadata = {
   title: '10 content quality dimensions + E-E-A-T',
   description:
-    'The 10 dimensions CitationOne scores in every report - what AI models weigh in your content and what actually drives citations in ChatGPT and AI Overview.',
+    'The 11 dimensions CitationOne scores in every report - what AI models weigh in your content and what actually drives citations in ChatGPT and AI Overview.',
   openGraph: {
     title: '10 content quality dimensions + E-E-A-T | CitationOne',
     description: 'See the CitationOne scoring standard - 10 citability dimensions for AI answers + E-E-A-T that translate LLM algorithms into simple editorial guidelines.',

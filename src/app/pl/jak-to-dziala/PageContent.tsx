@@ -175,7 +175,7 @@ function BeforeAfterVisual() {
         <div style={{ background: 'rgba(21,128,61,0.04)', border: '1px solid #dfe1e7', borderRadius: 8, padding: '16px' }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: '#15803d', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 10 }}>Po</span>
           <p style={{ fontSize: 12.5, color: '#36394a', lineHeight: 1.6, margin: 0 }}>
-            <strong style={{ color: ACCENT }}>CitationOne</strong> mierzy <Link href="/pl/wymiary" style={{ color: ACCENT, textDecoration: 'underline', textUnderlineOffset: 2 }}>10 wymiarów cytowania przez AI</Link> - z szacowanym wpływem każdego na CQS i konkretną poprawką do wklejenia.
+            <strong style={{ color: ACCENT }}>CitationOne</strong> mierzy <Link href="/pl/wymiary" style={{ color: ACCENT, textDecoration: 'underline', textUnderlineOffset: 2 }}>11 wymiarów cytowania przez AI</Link> - z szacowanym wpływem każdego na CQS i konkretną poprawką do wklejenia.
           </p>
         </div>
       </div>
@@ -294,7 +294,7 @@ function KnowledgeGraphVisual() {
 /* ── Visual: Export ───────────────────────────────────────────────────── */
 const REPORT_ITEMS = [
   'Content Quality Score (0–100) z rozbiciem na wymiary',
-  'Wykres radarowy 10 wymiarów',
+  'Wykres radarowy 11 wymiarów',
   'Analiza konkurencji - Top 10 SERP z Google i cytowania z ChatGPT',
   'Rekomendacje Przed i Po z priorytetami',
   'Graf wiedzy i tabela encji EAV',
@@ -439,7 +439,7 @@ export default function PageContent() {
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               {[
                 { text: 'Pełny raport w ~5 minut' },
-                { text: '10 wymiarów + E-E-A-T' },
+                { text: '11 wymiarów z E-E-A-T' },
                 { text: 'Analiza konkurencji' },
                 { text: 'Przed i Po z gotowymi poprawkami' },
               ].map((item) => (
@@ -476,7 +476,7 @@ export default function PageContent() {
               {
                 n: '02', color: '#0b7983',
                 title: 'Algorytm analizuje konkurencję w Google i ChatGPT',
-                body: 'W mniej niż 5 minut system CitationOne pobiera i analizuje Twoją treść. W tym samym czasie bada 10 najlepiej rankujących stron konkurencji i pyta ChatGPT o tę samą frazę, żeby sprawdzić, kogo model podaje jako źródło. Narzędzie porównuje Twój materiał z liderami rynku pod kątem 10 wymiarów jakości oraz sygnałów E-E-A-T.',
+                body: 'W mniej niż 5 minut system CitationOne pobiera i analizuje Twoją treść. W tym samym czasie bada 10 najlepiej rankujących stron konkurencji i pyta ChatGPT o tę samą frazę, żeby sprawdzić, kogo model podaje jako źródło. Narzędzie porównuje Twój materiał z liderami rynku pod kątem 11 wymiarów jakości, wraz z sygnałami E-E-A-T.',
               },
               {
                 n: '03', color: '#c47a2a',
@@ -516,7 +516,7 @@ export default function PageContent() {
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 48 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 18 }}>
               <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>10 wymiarów + E-E-A-T</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>11 wymiarów z E-E-A-T</span>
               <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
             </div>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>

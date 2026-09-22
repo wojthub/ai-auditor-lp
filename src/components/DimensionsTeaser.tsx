@@ -45,7 +45,7 @@ export default function DimensionsTeaser() {
           style={{ marginBottom: 20 }}
         >
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.75, margin: 0 }}>
-            CitationOne analizuje treść przez pryzmat 10 wymiarów jakości - tych samych parametrów, które modele językowe biorą pod uwagę wybierając źródła odpowiedzi. Każdy wymiar jest mierzony osobno i porównywany z bezpośrednią konkurencją z Top 10 SERP.
+            CitationOne analizuje treść przez pryzmat 11 wymiarów jakości - tych samych parametrów, które modele językowe biorą pod uwagę wybierając źródła odpowiedzi. Każdy wymiar jest mierzony osobno i porównywany z bezpośrednią konkurencją z Top 10 SERP.
           </p>
 
           <div style={{

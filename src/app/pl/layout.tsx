@@ -8,10 +8,10 @@ export const metadata: Metadata = {
     template: '%s',
   },
   description:
-    'Sprawdź, czy ChatGPT, Perplexity i Google AI Overview zacytują Twoją treść. 10 wymiarów, benchmark SERP, gotowe poprawki Przed i Po. Raport w 5 minut.',
+    'Sprawdź, czy ChatGPT, Perplexity i Google AI Overview zacytują Twoją treść. 11 wymiarów, benchmark SERP, gotowe poprawki Przed i Po. Raport w 5 minut.',
   openGraph: {
     title: 'CitationOne - Audyt treści pod GEO',
-    description: 'Sprawdź, czy AI zacytuje Twoją treść. 10 wymiarów, benchmark SERP, rekomendacje Przed i Po. Raport w 5 minut.',
+    description: 'Sprawdź, czy AI zacytuje Twoją treść. 11 wymiarów, benchmark SERP, rekomendacje Przed i Po. Raport w 5 minut.',
     url: 'https://citationone.com/pl',
     siteName: 'CitationOne',
     locale: 'pl_PL',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'CitationOne - Audyt treści pod GEO',
-    description: 'Sprawdź, czy AI zacytuje Twoją treść. 10 wymiarów, benchmark SERP, rekomendacje Przed i Po. Raport w 5 minut.',
+    description: 'Sprawdź, czy AI zacytuje Twoją treść. 11 wymiarów, benchmark SERP, rekomendacje Przed i Po. Raport w 5 minut.',
   },
   alternates: alternatesFor('/pl'),
 };

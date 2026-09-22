@@ -25,10 +25,10 @@ export const metadata: Metadata = {
     template: '%s',
   },
   description:
-    'Check whether ChatGPT, Perplexity and Google AI Overview will cite your content. 10 dimensions, SERP benchmark, Before/After fixes. Report in 5 minutes.',
+    'Check whether ChatGPT, Perplexity and Google AI Overview will cite your content. 11 dimensions, SERP benchmark, Before/After fixes. Report in 5 minutes.',
   openGraph: {
     title: 'CitationOne - GEO Content Audit',
-    description: 'Check if AI will cite your content. 10 dimensions, SERP benchmark, Before/After recommendations. Report in 5 minutes.',
+    description: 'Check if AI will cite your content. 11 dimensions, SERP benchmark, Before/After recommendations. Report in 5 minutes.',
     url: 'https://citationone.com',
     siteName: 'CitationOne',
     locale: 'en_US',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'CitationOne - GEO Content Audit',
-    description: 'Check if AI will cite your content. 10 dimensions, SERP benchmark, Before/After recommendations. Report in 5 minutes.',
+    description: 'Check if AI will cite your content. 11 dimensions, SERP benchmark, Before/After recommendations. Report in 5 minutes.',
   },
   alternates: alternatesFor('/'),
 };

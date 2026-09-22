@@ -45,7 +45,7 @@ export default function DimensionsTeaserEN() {
           style={{ marginBottom: 20 }}
         >
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.75, margin: 0 }}>
-            CitationOne analyzes content across 10 quality dimensions - the same parameters language models use when selecting answer sources. Each dimension is measured separately and compared with direct competitors from the SERP Top 10.
+            CitationOne analyzes content across 11 quality dimensions - the same parameters language models use when selecting answer sources. Each dimension is measured separately and compared with direct competitors from the SERP Top 10.
           </p>
 
           <div style={{

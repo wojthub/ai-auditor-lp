@@ -17,7 +17,7 @@ const steps = [
     numberColor: '#0b7983',
     title: 'The algorithm analyzes your Top 10 SERP competitors',
     description:
-      'In under 5 minutes CitationOne fetches and analyzes your content. At the same time it inspects the 10 top-ranking competitor pages. The tool compares your material with the market leaders across 10 quality dimensions and E-E-A-T signals.',
+      'In under 5 minutes CitationOne fetches and analyzes your content. At the same time it inspects the 10 top-ranking competitor pages. The tool compares your material with the market leaders across 11 quality dimensions, E-E-A-T signals included.',
   },
   {
     number: '03',

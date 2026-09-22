@@ -22,7 +22,7 @@ function fadeUp(delay = 0) {
   };
 }
 
-/* ─── 1. 10 wymiarów ───────────────────────────────── */
+/* ─── 1. 11 wymiarów ───────────────────────────────── */
 const DIMS = [
   { name: 'Zgodność z intencją', score: 8.1, desc: 'Czy treść odpowiada dokładnie na to, czego szuka użytkownik. Ocenia dopasowanie do centralnego zapytania wyszukiwania.' },
   { name: 'Gęstość informacji', score: 7.4, desc: 'Stosunek konkretnych faktów i liczb do „puchu". Im więcej weryfikowalnych twierdzeń, tym wyższy wynik.' },
@@ -136,7 +136,7 @@ function BeforeAfterVisual() {
             <span style={{ fontSize: 10, fontWeight: 700, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Po</span>
           </div>
           <p style={{ fontSize: 12.5, color: '#36394a', lineHeight: 1.6, margin: 0 }}>
-            <strong style={{ color: ACCENT }}>Audyt GEO</strong> mierzy 10 wymiarów cytowania przez modele językowe - każdy z szacowanym wpływem na CQS i konkretną poprawką.
+            <strong style={{ color: ACCENT }}>Audyt GEO</strong> mierzy 11 wymiarów cytowania przez modele językowe - każdy z szacowanym wpływem na CQS i konkretną poprawką.
           </p>
         </div>
       </div>
@@ -273,7 +273,7 @@ function KnowledgeGraphVisual() {
 /* ─── 6. Eksport ──────────────────────────────────── */
 const REPORT_ITEMS = [
   'Content Quality Score (0–100) z rozbiciem na wymiary',
-  'Wykres radarowy 10 wymiarów',
+  'Wykres radarowy 11 wymiarów',
   'Benchmark top 10 SERP - tabela porównawcza',
   'Rekomendacje Przed i Po z priorytetami',
   'Graf wiedzy i tabela encji EAV',
@@ -328,7 +328,7 @@ export default function Features() {
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 52 }}>
             <SectionLabel>Narzędzie, które mierzy to, co AI naprawdę ocenia</SectionLabel>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 600, color: '#0d0d12', letterSpacing: '-0.025em', marginBottom: 14 }}>
-              Uruchom audyt 10 wymiarów AI
+              Uruchom audyt 11 wymiarów AI
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 640, margin: '0 auto', lineHeight: 1.65 }}>
               CitationOne ocenia jakość treści pod kątem GEO, wykonując 10 równoległych analiz: od intencji i gęstości informacji, przez graf wiedzy, BLUF i samodzielność sekcji, aż po koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AIO oraz wysiłek redakcyjny. Dzięki temu wiesz dokładnie, który element wymaga poprawy, by podnieść Content Quality Score swojej podstrony.

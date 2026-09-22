@@ -93,7 +93,7 @@ const DIMS = [
   },
 ];
 
-// Poza dziesiatka wymiarow: E-E-A-T ma wlasna sekcje nizej, Wartosc dodana jest metryka
+// E-E-A-T to wymiar jedenasty i ma wlasna sekcje nizej, Wartosc dodana jest metryka
 // informacyjna (nie wchodzi do oceny koncowej) - dlatego oba stoja obok gridu, nie w nim.
 const EXTRA = [
   {
@@ -125,7 +125,7 @@ export default function WymiaryContent() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 18 }}>
               <div style={{ width: 20, height: 2, background: ACCENT, borderRadius: 1 }} />
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>10 wymiarów</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>11 wymiarów</span>
               <div style={{ width: 20, height: 2, background: ACCENT, borderRadius: 1 }} />
             </div>
             <h1 style={{
@@ -137,7 +137,7 @@ export default function WymiaryContent() {
               backgroundClip: 'text',
               display: 'inline-block',
             }}>
-              10 wymiarów jakości treści + E-E-A-T
+              11 wymiarów jakości treści
             </h1>
             <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.7, maxWidth: 680, margin: '0 auto 36px' }}>
               Modele stojące za ChatGPT i Google AI Overview oceniają treść algorytmicznie. CitationOne przekłada te procesy na 10 mierzalnych wymiarów, które składają się na Twój Content Quality Score (CQS).
@@ -236,13 +236,13 @@ export default function WymiaryContent() {
             ))}
           </div>
 
-          {/* Poza dziesiatka: E-E-A-T + Wartosc dodana */}
+          {/* Obok gridu: E-E-A-T (wymiar jedenasty) + Wartosc dodana */}
           <motion.div {...fadeUp(0.1)} style={{ marginTop: 44 }}>
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#0d0d12', letterSpacing: '-0.02em', margin: '0 0 6px' }}>
-              Poza dziesiątką wymiarów
+              E-E-A-T i wartość dodana
             </h3>
             <p style={{ fontSize: 14.5, color: '#666d80', lineHeight: 1.65, margin: '0 0 18px', maxWidth: 640 }}>
-              Dwie analizy raportowane osobno - E-E-A-T jako fundament wiarygodności, wartość dodana jako miara tego, co wnosisz ponad Top 10.
+              Dwie analizy raportowane osobno - E-E-A-T jako jedenasty wymiar i fundament wiarygodności, wartość dodana jako miara tego, co wnosisz ponad Top 10 (zostaje poza oceną końcową).
             </p>
             <div className="dims-extra-grid">
               {EXTRA.map((item) => (
