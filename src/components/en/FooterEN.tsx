@@ -1,4 +1,5 @@
 import { APP_URL } from '@/lib/appUrl';
+import SocialLinks from '../SocialLinks';
 
 /**
  * EN footer. Two rows: LP navigation + legal links.
@@ -50,7 +51,8 @@ export default function FooterEN() {
             &copy; {new Date().getFullYear()} CitationOne
           </span>
 
-          <div className="flex items-center gap-1">
+          <div className="flex flex-wrap items-center justify-center gap-1">
+            <SocialLinks lang="en" />
             {LEGAL_LINKS.map((l) => (
               <a key={l.href} href={l.href} style={{ fontSize: 12.5, color: '#a4acb9', textDecoration: 'none', padding: '8px 10px' }}>
                 {l.label}
