@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTypewriterPlaceholder } from '@/lib/useTypewriterPlaceholder';
 import { APP_URL } from '@/lib/appUrl';
+import { trackThenNavigate } from '@/lib/track';
 
 // Neutralna, przykładowa domena - nie wskazujemy na żadnego realnego klienta.
 // Wszystkie warianty zaczynają się tak samo, więc maszyna do pisania kasuje tylko końcówkę.
@@ -79,7 +80,7 @@ export default function Hero() {
               }
               const normalized = normalizeUrl(url);
               const encoded = encodeURIComponent(normalized).replace(/%3A/gi, ':').replace(/%2F/gi, '/');
-              window.location.href = `${APP_URL}/register?lang=pl&audit-url=${encoded}`;
+              trackThenNavigate('hero_audit_submit', { lang: 'pl' }, `${APP_URL}/register?lang=pl&audit-url=${encoded}`);
             }}
             style={{ maxWidth: 580, margin: '0 auto' }}
             noValidate
