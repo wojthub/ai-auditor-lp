@@ -55,7 +55,7 @@ export default function HeroEN() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              Automate your GEO content audits
+              Automate content optimization for GEO
             </span>
             <span style={{
               display: 'block',
@@ -139,8 +139,8 @@ export default function HeroEN() {
             {/* The note doubles as a sign-up entry point - same `/login` screen as the
                 navbar CTA; the audits land once the account exists. */}
             <span>
-              <a href={`${APP_URL}/register?lang=en`} className="hero-note-link">Get 3 free audits</a>
-              {' '}after signing up. No card required.
+              <a href={`${APP_URL}/register?lang=en`} className="hero-note-link">Get 3 free audits to start</a>
+              . No card required.
             </span>
           </p>
         </motion.div>

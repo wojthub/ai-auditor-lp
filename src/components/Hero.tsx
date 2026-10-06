@@ -55,7 +55,7 @@ export default function Hero() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              Zautomatyzuj audyty treści pod GEO
+              Zautomatyzuj optymalizację treści pod GEO
             </span>
             <span style={{
               display: 'block',
@@ -139,8 +139,8 @@ export default function Hero() {
             {/* Nota jest jednoczesnie wejsciem do rejestracji - ten sam ekran `/login`,
                 co CTA w navbarze; audyty przyznaje sie po zalozeniu konta. */}
             <span>
-              <a href={`${APP_URL}/register?lang=pl`} className="hero-note-link">Odbierz 3 darmowe audyty</a>
-              {' '}po rejestracji. Bez podpinania karty.
+              <a href={`${APP_URL}/register?lang=pl`} className="hero-note-link">Odbierz 3 darmowe audyty na start</a>
+              . Bez podpinania karty.
             </span>
           </p>
         </motion.div>
