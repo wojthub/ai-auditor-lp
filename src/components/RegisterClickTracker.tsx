@@ -16,7 +16,7 @@ export default function RegisterClickTracker() {
     const onClick = (e: MouseEvent) => {
       const link = (e.target as Element | null)?.closest?.('a[href]') as HTMLAnchorElement | null;
       if (!link || !link.href.startsWith(REGISTER_PREFIX)) return;
-      trackEvent('register_click', {
+      trackEvent('click_register', {
         link_text: link.textContent?.trim() ?? '',
         link_classes: link.className,
         page_path: window.location.pathname,
