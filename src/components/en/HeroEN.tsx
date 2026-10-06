@@ -46,7 +46,7 @@ export default function HeroEN() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <h1 style={{ marginBottom: 32 }}>
-            <span style={{
+            <span className="hero-title" style={{
               display: 'block',
               fontSize: 'clamp(2.4rem, 4.56vw, 3.6rem)', fontWeight: 700,
               lineHeight: 1.1, letterSpacing: '-0.03em',
@@ -147,6 +147,12 @@ export default function HeroEN() {
       </div>
 
       <style>{`
+        /* Naglowek dzieli sie na rowne wiersze zamiast zostawiac samotne ostatnie slowo. Od 960px
+           wychodzi poza kolumne 720px, zeby przy pelnym rozmiarze fontu miescil sie w dwoch wierszach. */
+        .hero-title { text-wrap: balance; }
+        @media (min-width: 960px) {
+          .hero-title { margin-inline: -90px; }
+        }
         .hero-note-link {
           color: #0b7983;
           font-weight: 600;
