@@ -144,7 +144,12 @@ export default function BrandMorph() {
     // animowany napis lezy nad nia pozycjonowany absolutnie.
     <span style={{ ...font, position: 'relative', display: 'inline-block', whiteSpace: 'nowrap' }} aria-label="CitationOne">
       <span aria-hidden style={{ visibility: 'hidden' }}>{FULL_NONE}|</span>
+      {/* Bez JS animacja pisania nie rusza i logo byloby puste - noscript daje gotowy napis. */}
+      <noscript>
+        <span style={{ position: 'absolute', left: 0, top: 0 }}>CitationOne</span>
+      </noscript>
       <span
+        className="brand-morph-live"
         style={{
           position: 'absolute',
           left: 0,

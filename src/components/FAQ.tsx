@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const faqs = [
   {
@@ -93,22 +93,18 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         </span>
       </button>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            key="answer"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.22, ease: 'easeInOut' }}
-            style={{ overflow: 'hidden' }}
-          >
-            <div style={{ padding: '0 20px 18px', fontSize: 14, color: '#36394a', lineHeight: 1.7 }}>
-              {answer}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Odpowiedz jest w HTML-u zawsze (takze zwinieta): czytaja ja roboty bez JS, a <noscript> w layoucie ja rozwija. */}
+      <motion.div
+        className="faq-answer"
+        initial={false}
+        animate={{ height: open ? 'auto' : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.22, ease: 'easeInOut' }}
+        style={{ overflow: 'hidden' }}
+      >
+        <div style={{ padding: '0 20px 18px', fontSize: 14, color: '#36394a', lineHeight: 1.7 }}>
+          {answer}
+        </div>
+      </motion.div>
     </div>
   );
 }

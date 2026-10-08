@@ -202,6 +202,12 @@ export default function RadarIllustration({ maxWidth = 220 }: { maxWidth?: numbe
           </div>
         );
       })()}
+
+      {/* Definicje z dymkow sa tez w HTML-u: dymek pokazuje sie tylko po najechaniu mysza, wiec czytnik
+          ekranu, klawiatura i roboty bez JS inaczej by ich nie dostaly. */}
+      <ul className="sr-only">
+        {LABELS.map((label) => (<li key={label.short}>{label.def}</li>))}
+      </ul>
     </div>
   );
 }
