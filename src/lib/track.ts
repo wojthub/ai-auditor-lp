@@ -1,3 +1,5 @@
+import { withAttribution } from '@/lib/attribution';
+
 /**
  * Zdarzenia landinga wysylane do GTM przez `dataLayer`. Tagi (GA4, Meta) podpina sie w GTM
  * pod nazwe zdarzenia - kod nie zna dostawcow.
@@ -13,13 +15,15 @@ export function trackEvent(event: string, params: Record<string, unknown> = {}) 
  * zeby tagi zdazyly wyjsc, zanim przegladarka porzuci strone. Gdy GTM sie nie zaladowal
  * (adblock, brak zgody na skrypt), callback nigdy nie przyjdzie - wtedy przechodzimy od razu,
  * a timeout pilnuje przypadku, w ktorym GTM jest, ale tag sie zawiesil.
+ *
+ * Adres do aplikacji dostaje parametry kampanii z wejscia na landing (`lib/attribution.ts`).
  */
 export function trackThenNavigate(event: string, params: Record<string, unknown>, href: string) {
   let done = false;
   const go = () => {
     if (done) return;
     done = true;
-    window.location.href = href;
+    window.location.href = withAttribution(href);
   };
   const gtmLoaded = 'google_tag_manager' in window;
   trackEvent(event, gtmLoaded ? { ...params, eventCallback: go, eventTimeout: 800 } : params);

@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import { alternatesFor } from '@/lib/languageSwitch';
 import RegisterClickTracker from '@/components/RegisterClickTracker';
+import AttributionCarrier from '@/components/AttributionCarrier';
 import './globals.css';
 
 const GTM_ID = 'GTM-M64KFHFS';
@@ -88,6 +89,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
+        <AttributionCarrier />
         <RegisterClickTracker />
         {children}
       </body>
