@@ -460,6 +460,7 @@ Wejście z reklamy niesie `fbclid` i UTM-y, a linki do aplikacji były gołe, wi
 - **Adres poprawiamy przy `pointerdown`, nie dopiero na `click`** - inaczej otwarcie w nowej karcie środkowym przyciskiem albo z menu kontekstowego szłoby bez parametrów.
 - **Doklejamy tekstem, nie przez `URL.searchParams.set`** - ten przepisuje całe query i zakodowałby `:` i `/` w `audit-url`.
 - W statycznym HTML linki zostają gołe; parametry pojawiają się dopiero po interakcji, więc roboty i podgląd źródła ich nie widzą.
+- **Znacznik `lp_rc=1` (od 2026-10-14, TYMCZASOWE - do końca bieżącej kampanii Meta optymalizowanej na `register_click`).** Tag Meta na landingu czeka na zgodę marketingową w Cookiebot, więc bez niej `register_click` nie docierał do Mety. Link do `/register` dostaje wtedy `lp_rc=1` (`LANDING_REGISTER_FLAG`, stan zgody z `window.Cookiebot.consent.marketing`), a aplikacja wysyła `register_click` sama (`../ai-auditor/src/components/auth/LandingRegisterClick.tsx`) i usuwa znacznik z adresu. Przy zgodzie znacznika nie ma - każde kliknięcie trafia do Mety raz. Świadoma decyzja właściciela. Po kampanii usunąć w obu repo.
 
 ### Hero - input URL → audyt
 

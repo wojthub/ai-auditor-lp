@@ -24,6 +24,24 @@ export const ATTRIBUTION_PARAMS = [
   'msclkid',
 ] as const;
 
+/**
+ * Znacznik "landing nie wyslal `register_click` do Mety". Dostaje go link do rejestracji, gdy
+ * odwiedzajacy nie ma zgody marketingowej w Cookiebot: tag Meta na landingu czeka na te zgode,
+ * wiec klikniecie z reklamy przepadalo w atrybucji kampanii. Aplikacja na `/register` widzi
+ * znacznik, wysyla `register_click` sama (`../ai-auditor/src/lib/landing-register-click.ts`)
+ * i usuwa go z adresu. Przy zgodzie znacznika nie ma - zdarzenie idzie z landingu, wiec kazde
+ * klikniecie trafia do Mety dokladnie raz.
+ *
+ * Swiadoma decyzja z 2026-10-14: zdarzenie od osoby bez zgody marketingowej wychodzi do Mety
+ * z aplikacji, razem z `fbc` z przeniesionego `fbclid`.
+ *
+ * TYMCZASOWE - na czas biezacej kampanii Meta optymalizowanej na `register_click`. Po jej
+ * zakonczeniu do usuniecia razem z `LandingRegisterClick` w aplikacji.
+ */
+export const LANDING_REGISTER_FLAG = 'lp_rc';
+const REGISTER_PREFIX = `${APP_URL}/register`;
+const FLAG_PATTERN = new RegExp(`([?&])${LANDING_REGISTER_FLAG}=1(?:&|(?=#|$))`);
+
 const STORAGE_KEY = 'co_attribution';
 const MAX_VALUE_LENGTH = 500;
 
@@ -78,9 +96,18 @@ function currentAttribution(): Attribution {
  * Dokleja TEKSTEM, nie przez `URL.searchParams.set`: ten przepisuje cale query od nowa
  * i zakodowalby `:` oraz `/` w `audit-url`, ktore formularz w hero celowo zostawia czytelne.
  * Parametr obecny juz w adresie zostaje nietkniety, wiec wywolanie mozna powtarzac.
+ *
+ * Link do rejestracji dostaje tez `LANDING_REGISTER_FLAG`, gdy nie ma zgody marketingowej.
+ * Znacznik jest liczony od nowa przy kazdym wywolaniu: kto zaakceptuje ciasteczka po pierwszym
+ * nacisnieciu, kliknie juz link bez niego.
  */
-export function withAttribution(href: string, attribution: Attribution = currentAttribution()): string {
+export function withAttribution(
+  href: string,
+  attribution: Attribution = currentAttribution(),
+  marketingConsent: boolean = hasMarketingConsent(),
+): string {
   if (!href.startsWith(APP_URL)) return href;
+  href = withoutRegisterFlag(href);
   let existing: URLSearchParams;
   try {
     existing = new URL(href).searchParams;
@@ -90,9 +117,26 @@ export function withAttribution(href: string, attribution: Attribution = current
   const extra = ATTRIBUTION_PARAMS.filter((name) => attribution[name] && !existing.has(name)).map(
     (name) => `${name}=${encodeURIComponent(attribution[name] as string)}`,
   );
+  if (href.startsWith(REGISTER_PREFIX) && !marketingConsent) extra.push(`${LANDING_REGISTER_FLAG}=1`);
   if (extra.length === 0) return href;
   const hashAt = href.indexOf('#');
   const base = hashAt === -1 ? href : href.slice(0, hashAt);
   const hash = hashAt === -1 ? '' : href.slice(hashAt);
   return `${base}${base.includes('?') ? '&' : '?'}${extra.join('&')}${hash}`;
+}
+
+/**
+ * Zgoda marketingowa wedlug Cookiebot - ta sama, na ktora czeka tag Meta w GTM. Brak obiektu
+ * (baner jeszcze sie nie zaladowal, adblock) liczy sie jak brak zgody: tag i tak nie strzelil.
+ */
+function hasMarketingConsent(): boolean {
+  if (typeof window === 'undefined') return false;
+  const cookiebot = (window as { Cookiebot?: { consent?: { marketing?: boolean } } }).Cookiebot;
+  return cookiebot?.consent?.marketing === true;
+}
+
+/** Adres bez `LANDING_REGISTER_FLAG`. Tekstowo, z tego samego powodu co doklejanie wyzej. */
+function withoutRegisterFlag(href: string): string {
+  if (!FLAG_PATTERN.test(href)) return href;
+  return href.replace(FLAG_PATTERN, '$1').replace(/[?&](?=#|$)/, '');
 }
