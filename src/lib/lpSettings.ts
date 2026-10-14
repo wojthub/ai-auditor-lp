@@ -1,5 +1,5 @@
 /**
- * Wartości LP edytowalne z panelu admina aplikacji (`/ustawienia` → „Strona citationone.com”).
+ * Wartości LP edytowalne z panelu admina aplikacji (zakładka `/admin/lp`).
  *
  * LP jest statyczne (`output: 'export'`), więc wszystko, co ma się zmieniać bez przebudowy,
  * przychodzi w runtime z `app.citationone.com/api/public/lp-links`. Obietnica jest współdzielona
