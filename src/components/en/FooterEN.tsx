@@ -31,7 +31,7 @@ export default function FooterEN() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://app.citationone.com/logo.png" alt="CitationOne" style={{ height: 28 }} />
+            <img src="/logo-footer.webp" alt="CitationOne" loading="lazy" decoding="async" style={{ height: 28 }} />
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-1">

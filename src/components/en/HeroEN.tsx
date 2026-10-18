@@ -41,10 +41,9 @@ export default function HeroEN() {
   return (
     <section className="relative">
       <div className="relative" style={{ maxWidth: 720, margin: '0 auto', padding: '40px 24px 28px', textAlign: 'center', width: '100%' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        >
+        {/* Wjazd robi CSS (`.hero-rise` w globals.css): animacja z framer-motion startowala dopiero
+            po hydracji i do tego czasu naglowek byl w HTML-u, ale niewidoczny. */}
+        <div className="hero-rise">
           <h1 style={{ marginBottom: 32 }}>
             <span className="hero-title" style={{
               display: 'block',
@@ -145,7 +144,7 @@ export default function HeroEN() {
               . No card required.
             </span>
           </p>
-        </motion.div>
+        </div>
       </div>
 
       <style>{`

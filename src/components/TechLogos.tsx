@@ -3,9 +3,9 @@
 import { motion } from 'framer-motion';
 
 const logos = [
-  { src: '/logos/Gemini_language_model_logo.png', alt: 'Google Gemini', height: 24 },
-  { src: '/logos/Bright_Data.svg.png', alt: 'Bright Data', height: 38 },
-  { src: '/logos/jina.png', alt: 'Jina AI', height: 22 },
+  { src: '/logos/gemini.webp', alt: 'Google Gemini', height: 24 },
+  { src: '/logos/bright-data.webp', alt: 'Bright Data', height: 38 },
+  { src: '/logos/jina.webp', alt: 'Jina AI', height: 22 },
   { src: '/logos/dataforseo-logo.png', alt: 'DataForSEO', height: 22 },
 ];
 
@@ -27,6 +27,8 @@ export default function TechLogos() {
               key={logo.alt}
               src={logo.src}
               alt={logo.alt}
+              loading="lazy"
+              decoding="async"
               style={{
                 height: logo.height,
                 width: 'auto',

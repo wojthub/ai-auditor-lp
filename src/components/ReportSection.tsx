@@ -159,7 +159,9 @@ export default function ReportSection() {
               }}>
                 <div style={{ position: 'relative', borderRadius: 8, overflow: 'hidden', boxShadow: 'inset 0 0 0 1px rgba(13,13,18,0.04)' }}>
                   <img
-                    src="/report-preview.png"
+                    src="/report-preview.webp"
+                    loading="lazy"
+                    decoding="async"
                     alt="Przykładowy raport CitationOne - Content Quality Score, profil 11 wymiarów i Quick Wins"
                     style={{ display: 'block', width: '100%', height: 'auto' }}
                   />

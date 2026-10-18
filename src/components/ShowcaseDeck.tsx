@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, animate, motion, useMotionValue } from 'framer-motion';
 
 const SPRING = { type: 'spring', stiffness: 210, damping: 30, mass: 0.9 } as const;
@@ -41,19 +41,6 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
   const [index, setIndex] = useState(startIndex);
   const count = slides.length;
 
-  // Na telefonie bez przechylenia 3D: rotateX rasteryzuje zrzut pod katem i rozmywa drobny
-  // tekst, ktory na waskim ekranie i tak jest na granicy czytelnosci. SSR renderuje wariant
-  // desktopowy, telefon przelacza sie po mount.
-  const [flat, setFlat] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia(MOBILE_QUERY);
-    const sync = () => setFlat(mq.matches);
-    sync();
-    mq.addEventListener('change', sync);
-    return () => mq.removeEventListener('change', sync);
-  }, []);
-  const tilt = flat ? 0 : 5;
-
   // Tasme przesuwamy w PIKSELACH, nie w procentach: `drag` liczy przesuniecie w px i mieszanie
   // jednostek na tej samej wartosci `x` potrafi szarpnac slajdem przy puszczeniu palca.
   const screenRef = useRef<HTMLDivElement>(null);
@@ -81,8 +68,10 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
 
   // Zmiana szerokosci (obrot telefonu, resize okna) przelicza pozycje bez animacji -
   // stary offset w px wskazywalby po zmianie na srodek sasiedniego slajdu.
+  // Layout effect, bo pierwszy pomiar zdejmuje pozycje startowa z CSS (`translate` nizej) -
+  // `x` musi ja przejac przed malowaniem, inaczej mignalby slajd pierwszy.
   const lastWidth = useRef(0);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (width === lastWidth.current) return;
     lastWidth.current = width;
     x.set(-index * width);
@@ -98,7 +87,8 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
       const webp = document.createElement('canvas').toDataURL('image/webp').startsWith('data:image/webp');
       slides.forEach((s, i) => {
         if (i === startIndex) return;
-        new Image().src = mobile ? s.mobileSrc : (webp ? s.src.replace(/.png$/, '.webp') : s.src);
+        const src = mobile ? s.mobileSrc : s.src;
+        new Image().src = webp ? src.replace(/.png$/, '.webp') : src;
       });
     };
     if (typeof window.requestIdleCallback === 'function') {
@@ -118,11 +108,11 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
       {/* Pod urzadzeniem stoi adnotacja, juz nie nachodzi na ekran: od 2026-09-19 ekran jest widoczny
           w calosci (wygaszanie tylko na ostatnich ~8%), wiec pastylka zaslanialaby tresc zrzutu. */}
       <div style={{ perspective: '2000px', marginBottom: 18 }}>
-        <motion.div
+        {/* Wjazd od dolu po 1 s robi CSS (`deck-rise` nizej), nie framer-motion: animacja z JS
+            startowala dopiero po hydracji, a zrzut na ekranie jest najwiekszym elementem strony
+            (LCP) - na telefonie czekal przez to ~4 s na pobrany juz plik. */}
+        <div
           className="deck-device"
-          initial={{ opacity: 0, y: 80, rotateX: tilt }}
-          animate={{ opacity: 1, y: 0, rotateX: tilt }}
-          transition={{ duration: 0.9, delay: 1, ease: [0.16, 1, 0.3, 1] }}
           style={{
             transformOrigin: '50% 0%',
             margin: '0 auto',
@@ -152,7 +142,16 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                   {/* Tasma slajdow: przesuwana o -index*szerokosc ekranu, przeciagana palcem/myszka.
                       Wszystkie zrzuty siedza w DOM, wiec przejscie nie czeka na pobranie pliku. */}
                   <motion.div
-                    style={{ display: 'flex', height: '100%', cursor: 'grab', x }}
+                    // Do pierwszego pomiaru szerokosci slajd startowy ustawia CSS w procentach. Bez tego
+                    // HTML pokazywal slajd pierwszy, a startowy - element LCP - wjezdzal dopiero po
+                    // hydracji. `translate` jest osobna wlasciwoscia, wiec nie gryzie sie z `x`.
+                    style={{
+                      display: 'flex',
+                      height: '100%',
+                      cursor: 'grab',
+                      x,
+                      translate: width === 0 ? `${-startIndex * 100}% 0` : 'none',
+                    }}
                     drag={count > 1 ? 'x' : false}
                     dragConstraints={{ left: -(count - 1) * width, right: 0 }}
                     dragElastic={0.14}
@@ -168,9 +167,11 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                   >
                     {slides.map((slide, i) => (
                       <picture key={slide.src} style={{ flex: '0 0 100%', width: '100%', height: '100%', display: 'block' }}>
-                        {/* Kolejnosc jest znaczaca: najpierw wariant mobilny (media), potem WebP dla
+                        {/* Kolejnosc jest znaczaca: najpierw warianty mobilne (media), potem WebP dla
                             desktopu, a <img> zostaje fallbackiem PNG. Zrzuty mobilne sa PNG z paleta -
-                            WebP wychodzil na nich CIEZSZY (plaskie kolory), wiec go tam nie ma. */}
+                            zwykly WebP wychodzil na nich CIEZSZY (plaskie kolory), wiec ich WebP jest
+                            near-lossless (piksel w piksel jak PNG, 10-40% lzejszy, od 2026-10-18). */}
+                        <source media={MOBILE_QUERY} type="image/webp" srcSet={slide.mobileSrc.replace(/.png$/, '.webp')} />
                         <source media={MOBILE_QUERY} srcSet={slide.mobileSrc} />
                         <source type="image/webp" srcSet={slide.src.replace(/.png$/, '.webp')} />
                         <img
@@ -179,6 +180,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                           draggable={false}
                           decoding="async"
                           loading={i === startIndex ? 'eager' : 'lazy'}
+                          fetchPriority={i === startIndex ? 'high' : 'auto'}
                           style={{
                             width: '100%',
                             height: '100%',
@@ -229,7 +231,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Adnotacja: nazwa widocznego ekranu + pozycja w talii. Kreski przeskakuja wprost
@@ -297,12 +299,25 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
       <style>{`
         /* Desktop: laptopowy ekran z poziomym zrzutem. Mobile: waska ramka telefonu z pionowym
            zrzutem - proporcja ekranu MUSI zgadzac sie z plikiem, inaczej object-fit przytnie tekst. */
-        .deck-device { max-width: 980px; }
+        .deck-device {
+          max-width: 980px;
+          --deck-tilt: 5deg;
+          transform: rotateX(var(--deck-tilt));
+          animation: deck-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1s backwards;
+        }
+        @keyframes deck-rise {
+          from { opacity: 0; transform: translateY(80px) rotateX(var(--deck-tilt)); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .deck-device { animation: none; }
+        }
         .deck-edge { border-radius: 30px; }
         .deck-bezel { border-radius: 26px; padding: 12px; }
         .deck-screen { border-radius: 16px; aspect-ratio: 1900 / 962; }
         @media ${MOBILE_QUERY} {
-          .deck-device { max-width: 300px; }
+          /* Na telefonie bez przechylenia 3D: rotateX rasteryzuje zrzut pod katem i rozmywa drobny
+             tekst, ktory na waskim ekranie i tak jest na granicy czytelnosci. */
+          .deck-device { max-width: 300px; --deck-tilt: 0deg; }
           .deck-edge { border-radius: 40px; }
           .deck-bezel { border-radius: 36px; padding: 8px; }
           .deck-screen { border-radius: 29px; aspect-ratio: 390 / 720; }
