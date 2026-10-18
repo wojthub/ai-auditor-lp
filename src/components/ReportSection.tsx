@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { revealStyle } from '@/lib/reveal';
 import { useReportUrl } from '@/lib/useReportUrl';
 
 /** Wartość domyślna - właściwy adres przychodzi z panelu admina przez useReportUrl. */
@@ -34,11 +34,7 @@ export default function ReportSection() {
       <div className="report-grid" style={{ maxWidth: 1124, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 1 }}>
 
         {/* Lewa kolumna - treść */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.55 }}
+        <div className="reveal" style={revealStyle({ y: 24, duration: 0.55 })}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
             <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
@@ -80,12 +76,10 @@ export default function ReportSection() {
             ))}
           </div>
 
-          <motion.a
+          <a className="btn-pop"
             href={reportUrl}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
-            whileTap={{ scale: 0.97 }}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -105,8 +99,8 @@ export default function ReportSection() {
               <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
             Zobacz przykładowy raport
-          </motion.a>
-        </motion.div>
+          </a>
+        </div>
 
         {/* Prawa kolumna - podgląd raportu */}
         <div className="report-preview-col" style={{ perspective: '2000px' }}>
@@ -125,16 +119,12 @@ export default function ReportSection() {
               zIndex: 0,
             }}
           />
-          <motion.a
+          <a
+            className="reveal report-preview-tilt"
             href={reportUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Otwórz przykładowy raport"
-            initial={{ opacity: 0, y: 40, rotateX: 8 }}
-            whileInView={{ opacity: 1, y: 0, rotateX: 4 }}
-            whileHover={{ scale: 1.025 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             style={{
               display: 'block',
               position: 'relative',
@@ -175,7 +165,7 @@ export default function ReportSection() {
                 </div>
               </div>
             </div>
-          </motion.a>
+          </a>
         </div>
 
       </div>
@@ -188,6 +178,15 @@ export default function ReportSection() {
           align-items: center;
         }
         .report-preview-col { position: relative; }
+        /* Podglad raportu: wjazd z przechyleniem 8 -> 4 st. Przechylenie idzie przez transform, wiec
+           dostaje czas wjazdu 0,8 s zamiast 0,25 s z .reveal; powiekszenie przy najechaniu - scale. */
+        .report-preview-tilt {
+          --reveal-y: 40px;
+          transform: rotateX(4deg);
+          transition-duration: 0.8s, 0.8s, 0.3s, 0.8s, 0.25s;
+        }
+        .report-preview-tilt:not(.is-visible) { transform: rotateX(8deg); }
+        .report-preview-tilt.is-visible:hover { scale: 1.025; }
         @media (max-width: 900px) {
           .report-grid {
             grid-template-columns: 1fr;

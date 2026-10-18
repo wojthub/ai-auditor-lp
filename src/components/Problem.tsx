@@ -1,64 +1,7 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import WordCycle from './WordCycle';
+import { revealStyle } from '@/lib/reveal';
 import CqsScoreCard from './CqsScoreCard';
 import { APP_URL } from '@/lib/appUrl';
-
-const STAGES = [
-  { none: true },
-  { none: false },
-];
-const PAUSES = [1800, 3000];
-
-function WordCycle() {
-  const [idx, setIdx] = useState(0);
-
-  useEffect(() => {
-    const t = setTimeout(() => setIdx(i => (i + 1) % STAGES.length), PAUSES[idx]);
-    return () => clearTimeout(t);
-  }, [idx]);
-
-  const stage = STAGES[idx];
-
-  return (
-    <div style={{
-      position: 'relative',
-      height: '1.15em',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-    }}>
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={idx}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-          style={{ display: 'inline-block' }}
-        >
-          {stage.none ? (
-            <>
-              <span style={{ color: '#0d0d12' }}>Citatio</span>
-              <span style={{ color: '#a4acb9' }}>None?</span>
-            </>
-          ) : (
-            <span style={{
-              background: 'linear-gradient(90deg, #1a3a4a 0%, #0b7983 55%, #0b9aa6 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              CitationOne
-            </span>
-          )}
-        </motion.span>
-      </AnimatePresence>
-    </div>
-  );
-}
 
 export default function Problem() {
   return (
@@ -67,11 +10,7 @@ export default function Problem() {
       <section style={{ background: '#ffffff', padding: '90px 0', position: 'relative', overflow: 'hidden' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <div className="problem-header-grid">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.55 }}
+            <div className="reveal" style={revealStyle({ y: 24, duration: 0.55 })}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
                 <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
@@ -97,19 +36,15 @@ export default function Problem() {
                   link={{ href: `${APP_URL}/register?lang=pl`, label: 'Zobacz konkurentów' }}
                 />
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-              style={{ display: 'flex', alignItems: 'center' }}
+            <div className="reveal"
+              style={{ ...revealStyle({ y: 24, duration: 0.55, delay: 0.1 }), display: 'flex', alignItems: 'center' }}
             >
               <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.72, margin: 0 }}>
                 Pozycja w wyszukiwarce nie mówi nic o ocenie, jaką Twojemu tekstowi wystawia ChatGPT, Google AI Overview czy Perplexity. Model patrzy fragment po fragmencie: czy odpowiedź pada od razu, jak gęsto akapit jest nasycony faktami, czy wnosi coś ponad konkurencję. Klasyczne narzędzia SEO tego nie liczą, a ręczna ocena zajmuje godziny.
               </p>
-            </motion.div>
+            </div>
           </div>
         </div>
 
@@ -128,12 +63,8 @@ export default function Problem() {
 
       {/* WordCycle standalone - centered, 3× size */}
       <section style={{ background: '#ffffff', padding: '48px 24px 56px', textAlign: 'center' }}>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          style={{
+        <div className="reveal"
+          style={{ ...revealStyle({ y: 0, scale: 0.96, duration: 0.6 }),
             fontSize: 'clamp(2.88rem, 7.2vw, 5.4rem)',
             fontWeight: 700,
             letterSpacing: '-0.04em',
@@ -142,25 +73,19 @@ export default function Problem() {
           }}
         >
           <WordCycle />
-        </motion.div>
+        </div>
       </section>
 
       {/* Section 2 - solution, centered single column */}
       <section style={{ background: '#ffffff', padding: '56px 0 90px', overflow: 'hidden' }}>
         <div style={{ maxWidth: 680, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5 }}
+          <div className="reveal" style={revealStyle({ y: 20, duration: 0.5 })}
           >
             <p style={{ fontSize: 18, color: '#36394a', lineHeight: 1.72, marginBottom: 36 }}>
               CitationOne przeanalizuje Twoją treść pod kątem GEO i pokaże, jak zwiększyć jej szanse na cytowanie w odpowiedziach LLM-ów. Narzędzie przygotowuje gotowe rekomendacje. Konkretne zmiany, dzięki którym roboty AI zaczną wybierać Twoją stronę jako źródło odpowiedzi dla użytkowników.
             </p>
-            <motion.a
+            <a className="btn-pop"
               href={`${APP_URL}/register?lang=pl`}
-              whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
-              whileTap={{ scale: 0.97 }}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -180,8 +105,8 @@ export default function Problem() {
               <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-            </motion.a>
-          </motion.div>
+            </a>
+          </div>
         </div>
       </section>
     </>

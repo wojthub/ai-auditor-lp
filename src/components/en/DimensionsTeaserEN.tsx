@@ -1,6 +1,4 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import { revealStyle } from '@/lib/reveal';
 import RadarIllustrationEN from './RadarIllustrationEN';
 
 
@@ -11,12 +9,8 @@ export default function DimensionsTeaserEN() {
       <div style={{ maxWidth: 1124, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
 
         {/* Section label + h2 */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.5 }}
-          style={{ marginBottom: 40 }}
+        <div className="reveal"
+          style={{ ...revealStyle({ y: 20, duration: 0.5 }), marginBottom: 40 }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 18 }}>
             <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
@@ -33,16 +27,12 @@ export default function DimensionsTeaserEN() {
           }}>
             How does AI evaluate your content?
           </h2>
-        </motion.div>
+        </div>
 
         {/* Row 1: paragraph + radar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.55 }}
-          className="dims-top-grid"
-          style={{ marginBottom: 20 }}
+        <div
+          className="dims-top-grid reveal"
+          style={{ ...revealStyle({ y: 20, duration: 0.55 }), marginBottom: 20 }}
         >
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.75, margin: 0 }}>
             CitationOne analyzes content across 11 quality dimensions - the same parameters language models use when selecting answer sources. Each dimension is measured separately and compared with direct competitors from the SERP Top 10.
@@ -59,15 +49,11 @@ export default function DimensionsTeaserEN() {
           }}>
             <RadarIllustrationEN maxWidth={320} />
           </div>
-        </motion.div>
+        </div>
 
         {/* Link */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          style={{ marginBottom: 56 }}
+        <div className="reveal"
+          style={{ ...revealStyle({ y: 0, duration: 0.4 }), marginBottom: 56 }}
         >
           <a href="/dimensions" style={{
             fontSize: 14,
@@ -78,7 +64,7 @@ export default function DimensionsTeaserEN() {
           }}>
             See the full breakdown of all content quality dimensions →
           </a>
-        </motion.div>
+        </div>
 
       </div>
 

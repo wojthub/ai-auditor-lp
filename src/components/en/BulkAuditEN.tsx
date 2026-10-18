@@ -1,6 +1,4 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import { revealStyle } from '@/lib/reveal';
 import { APP_URL } from '@/lib/appUrl';
 
 const ACCENT = '#0b7983';
@@ -37,12 +35,8 @@ export default function BulkAuditEN() {
       <div style={{ maxWidth: 1124, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
 
         {/* Section label + h2 */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.5 }}
-          style={{ marginBottom: 32 }}
+        <div className="reveal"
+          style={{ ...revealStyle({ y: 20, duration: 0.5 }), marginBottom: 32 }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 18 }}>
             <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
@@ -63,18 +57,14 @@ export default function BulkAuditEN() {
             Bulk audit analyses a whole list of addresses in one job. Every address gets a full report
             with the Top 10 SERP benchmark, so a single run shows you an entire section of the site.
           </p>
-        </motion.div>
+        </div>
 
         {/* Cards */}
         <div className="bulk-cards-grid">
           {cards.map((card, i) => (
-            <motion.div
+            <div className="reveal"
               key={card.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: i * 0.08 }}
-              style={{
+              style={{ ...revealStyle({ y: 16, duration: 0.45, delay: i * 0.08 }),
                 background: '#ffffff',
                 border: '1px solid #dfe1e7',
                 borderRadius: 14,
@@ -98,22 +88,16 @@ export default function BulkAuditEN() {
               <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.65, margin: 0 }}>
                 {card.desc}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* CTA + API note */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          style={{ marginTop: 28, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 18 }}
+        <div className="reveal"
+          style={{ ...revealStyle({ y: 0, duration: 0.4 }), marginTop: 28, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 18 }}
         >
-          <motion.a
+          <a className="btn-pop"
             href={`${APP_URL}/bulk-audit?new=1`}
-            whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
-            whileTap={{ scale: 0.97 }}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -133,16 +117,12 @@ export default function BulkAuditEN() {
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
-          </motion.a>
-        </motion.div>
+          </a>
+        </div>
 
         {/* Two ways to scale - the panel for people, the API for systems. */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5 }}
-          style={{ marginTop: 44, paddingTop: 36, borderTop: '1px solid #dfe1e7' }}
+        <div className="reveal"
+          style={{ ...revealStyle({ y: 16, duration: 0.5 }), marginTop: 44, paddingTop: 36, borderTop: '1px solid #dfe1e7' }}
         >
           <h3 style={{
             fontSize: 'clamp(1.3rem, 2.5vw, 1.7rem)', fontWeight: 700, color: '#0d0d12',
@@ -194,7 +174,7 @@ export default function BulkAuditEN() {
               </a>
             </div>
           </div>
-        </motion.div>
+        </div>
 
       </div>
 

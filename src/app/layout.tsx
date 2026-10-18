@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { alternatesFor } from '@/lib/languageSwitch';
 import RegisterClickTracker from '@/components/RegisterClickTracker';
 import AttributionCarrier from '@/components/AttributionCarrier';
+import RevealObserver from '@/components/RevealObserver';
 import './globals.css';
 
 const GTM_ID = 'GTM-M64KFHFS';
@@ -75,9 +76,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
         {/* Bez JS animacje wejscia (framer-motion) zostaja na stanie poczatkowym opacity:0 i strona jest pusta,
             choc tresc jest w HTML-u. Regula lapie tylko dokladne opacity:0 (nie 0.4) rozwija odpowiedzi FAQ
-            i chowa migajacy kursor logo (napis daje wtedy noscript w BrandMorph). */}
+            i chowa migajacy kursor logo (napis daje wtedy noscript w BrandMorph). `.reveal` - pojawianie przy
+            przewijaniu z `lib/reveal.ts`, ktore bez JS nigdy nie dostaje `is-visible`. */}
         <noscript>
-          <style>{`[style*="opacity:0;"],[style$="opacity:0"]{opacity:1!important;transform:none!important}.faq-answer{height:auto!important;opacity:1!important}.brand-morph-live{display:none!important}`}</style>
+          <style>{`[style*="opacity:0;"],[style$="opacity:0"]{opacity:1!important;transform:none!important}.reveal{opacity:1!important;translate:none!important;scale:none!important}.faq-answer{height:auto!important;opacity:1!important}.brand-morph-live{display:none!important}`}</style>
         </noscript>
       </head>
       <body className="min-h-screen overflow-x-hidden" suppressHydrationWarning>
@@ -91,6 +93,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </noscript>
         <AttributionCarrier />
         <RegisterClickTracker />
+        <RevealObserver />
         {children}
       </body>
     </html>

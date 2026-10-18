@@ -160,3 +160,49 @@ button:active { transform: scale(0.97); }
 @media (prefers-reduced-motion: reduce) {
   .hero-rise { animation: none; }
 }
+
+/* Pojawianie przy przewijaniu (`lib/reveal.ts` + `RevealObserver`). Przesuniecie i skala ida przez
+   osobne wlasciwosci `translate` i `scale`, a nie `transform` - dzieki temu `.card-lift:hover`
+   (transform) nie dziedziczy opoznienia wjazdu i nie gryzie sie z nim. */
+.reveal {
+  opacity: 0;
+  translate: 0 var(--reveal-y, 20px);
+  scale: var(--reveal-scale, 1);
+  transition-property: opacity, translate, scale, transform, box-shadow;
+  transition-duration: var(--reveal-duration, 0.6s), var(--reveal-duration, 0.6s), var(--reveal-duration, 0.6s), 0.25s, 0.25s;
+  transition-delay: var(--reveal-delay, 0s), var(--reveal-delay, 0s), var(--reveal-delay, 0s), 0s, 0s;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  translate: none;
+  scale: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; translate: none; scale: none; transition: none; }
+}
+
+/* Karta unoszona przy najechaniu (dawniej `whileHover` framer-motion ze sprezyna). */
+.card-lift:not(.reveal) { /* `.reveal` ma juz przejscia transform i box-shadow - skrot by je nadpisal */
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Przycisk-link powiekszany przy najechaniu i wciskany przy kliknieciu (dawniej `whileHover`/`whileTap`).
+   `scale`, nie `transform`, zeby nie nadpisac transformacji ustawionych w stylu przycisku. */
+.btn-pop {
+  transition: scale 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.btn-pop:hover { scale: 1.03; }
+.btn-pop:active { scale: 0.97; }
+
+/* Logotypy "Zbudowane z": szare, kolor po najechaniu (dawniej onMouseEnter/Leave w JS). */
+.tech-logo {
+  filter: grayscale(100%);
+  opacity: 0.4;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+.tech-logo:hover { filter: none; opacity: 0.85; }

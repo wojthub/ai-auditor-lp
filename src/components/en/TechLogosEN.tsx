@@ -1,6 +1,4 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import { revealStyle } from '@/lib/reveal';
 
 const logos = [
   { src: '/logos/gemini.webp', alt: 'Google Gemini', height: 24 },
@@ -13,11 +11,8 @@ export default function TechLogosEN() {
   return (
     <section style={{ background: '#ffffff', padding: '28px 0 36px', borderBottom: '1px solid #eceff3' }}>
       <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 48, flexWrap: 'wrap' }}
+        <div className="reveal"
+          style={{ ...revealStyle({ y: 0, delay: 0.2 }), display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 48, flexWrap: 'wrap' }}
         >
           <span style={{ fontSize: 11, fontWeight: 500, color: '#a4acb9', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
             Built with
@@ -29,16 +24,11 @@ export default function TechLogosEN() {
               alt={logo.alt}
               loading="lazy"
               decoding="async"
-              style={{
-                height: logo.height, width: 'auto', objectFit: 'contain',
-                filter: 'grayscale(100%)', opacity: 0.4,
-                transition: 'filter 0.2s ease, opacity 0.2s ease',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.filter = 'grayscale(0%)'; e.currentTarget.style.opacity = '0.85'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.filter = 'grayscale(100%)'; e.currentTarget.style.opacity = '0.4'; }}
+              className="tech-logo"
+              style={{ height: logo.height, width: 'auto', objectFit: 'contain' }}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

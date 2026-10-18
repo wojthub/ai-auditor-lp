@@ -1,7 +1,5 @@
-'use client';
-
 import { Fragment } from 'react';
-import { motion } from 'framer-motion';
+import { revealStyle } from '@/lib/reveal';
 import { APP_URL } from '@/lib/appUrl';
 
 const steps = [
@@ -44,12 +42,8 @@ export default function HowItWorks() {
     <section id="jak-dziala" style={{ background: '#ffffff', padding: '90px 0' }}>
       <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-          style={{ textAlign: 'center', marginBottom: 56 }}
+        <div className="reveal"
+          style={{ ...revealStyle({ y: 20, duration: 0.6 }), textAlign: 'center', marginBottom: 56 }}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 20 }}>
             <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
@@ -68,18 +62,13 @@ export default function HowItWorks() {
           <p style={{ fontSize: 16, color: '#666d80', lineHeight: 1.65, margin: '0 auto', maxWidth: 520 }}>
             Zobacz, jak CitationOne zmienia skomplikowaną analizę algorytmiczną w gotowe wytyczne:
           </p>
-        </motion.div>
+        </div>
 
         <div className="howitworks-grid">
           {steps.map((step, i) => (
             <Fragment key={step.number}>
-              <motion.div
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(0,0,0,0.07)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: i * 0.13 }}
-                style={{
+              <div className="reveal card-lift"
+                style={{ ...revealStyle({ y: 28, duration: 0.5, delay: i * 0.13 }),
                   background: '#ffffff',
                   border: '1px solid #dfe1e7',
                   borderRadius: 12,
@@ -113,32 +102,24 @@ export default function HowItWorks() {
                 <p style={{ fontSize: 14, color: '#36394a', lineHeight: 1.65, margin: 0 }}>
                   {step.description}
                 </p>
-              </motion.div>
+              </div>
 
               {i < steps.length - 1 && (
-                <motion.div
+                <div className="reveal"
                   key={`connector-${i}`}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.13 + 0.2 }}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  style={{ ...revealStyle({ y: 0, duration: 0.4, delay: i * 0.13 + 0.2 }), display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
                   <StepConnector />
-                </motion.div>
+                </div>
               )}
             </Fragment>
           ))}
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: 56 }}>
-          <motion.a
+        <div className="reveal" style={{ ...revealStyle({ y: 16, duration: 0.5 }), textAlign: 'center', marginTop: 56 }}>
+          <a
+            className="btn-pop"
             href={`${APP_URL}/register?lang=pl`}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
-            whileTap={{ scale: 0.97 }}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               padding: '15px 36px', borderRadius: 8,
@@ -152,7 +133,7 @@ export default function HowItWorks() {
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
-          </motion.a>
+          </a>
         </div>
       </div>
 

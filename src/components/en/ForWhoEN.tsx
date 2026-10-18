@@ -1,6 +1,4 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import { revealStyle } from '@/lib/reveal';
 
 const audiences = [
   {
@@ -51,12 +49,8 @@ export default function ForWhoEN() {
 
         {/* 2-col header */}
         <div className="forwho-header-grid" style={{ marginBottom: 56 }}>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.55 }}
-            style={{
+          <h2 className="reveal"
+            style={{ ...revealStyle({ y: 20, duration: 0.55 }),
               fontSize: 'clamp(2rem, 4.5vw, 3rem)',
               fontWeight: 700,
               color: '#0d0d12',
@@ -66,14 +60,10 @@ export default function ForWhoEN() {
             }}
           >
             Visibility in AI answers<br />for every team
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.55, delay: 0.1 }}
-            style={{
+          <p className="reveal"
+            style={{ ...revealStyle({ y: 20, duration: 0.55, delay: 0.1 }),
               fontSize: 17,
               color: '#36394a',
               lineHeight: 1.72,
@@ -83,20 +73,15 @@ export default function ForWhoEN() {
             }}
           >
             Whether you plan strategy, write content or serve clients - CitationOne gives you a hard benchmark to act on.
-          </motion.p>
+          </p>
         </div>
 
         {/* Cards */}
         <div className="forwho-grid">
           {audiences.map((a, i) => (
-            <motion.div
+            <div className="reveal card-lift"
               key={a.title}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(0,0,0,0.08)', transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              style={{
+              style={{ ...revealStyle({ y: 28, duration: 0.5, delay: i * 0.1 }),
                 background: '#ffffff',
                 border: '1px solid #dfe1e7',
                 borderRadius: 12,
@@ -142,7 +127,7 @@ export default function ForWhoEN() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

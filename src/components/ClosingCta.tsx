@@ -1,6 +1,4 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import { revealStyle } from '@/lib/reveal';
 import { APP_URL } from '@/lib/appUrl';
 
 export default function ClosingCta() {
@@ -8,11 +6,7 @@ export default function ClosingCta() {
     <section style={{ background: '#ffffff', padding: '58px 0', borderTop: '1px solid #eceff3' }}>
       <div style={{ maxWidth: 640, margin: '0 auto', paddingLeft: 24, paddingRight: 24, textAlign: 'center' }}>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        <div className="reveal" style={revealStyle({ y: 24, duration: 0.6 })}
         >
           <h2 style={{
             fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
@@ -45,10 +39,8 @@ export default function ClosingCta() {
             Dołącz do zespołów, które już teraz optymalizują treści pod kątem GEO
           </p>
 
-          <motion.a
+          <a className="btn-pop"
             href={`${APP_URL}/register?lang=pl`}
-            whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
-            whileTap={{ scale: 0.97 }}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -67,13 +59,13 @@ export default function ClosingCta() {
             <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
-          </motion.a>
+          </a>
 
           <p style={{ fontSize: 13, color: '#a4acb9', marginTop: 16 }}>
             Pierwsze 3 audyty są całkowicie darmowe. Rejestracja zajmie Ci mniej niż minutę.
           </p>
 
-        </motion.div>
+        </div>
 
       </div>
     </section>

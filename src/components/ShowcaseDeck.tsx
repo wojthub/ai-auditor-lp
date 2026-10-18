@@ -108,7 +108,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
       {/* Pod urzadzeniem stoi adnotacja, juz nie nachodzi na ekran: od 2026-09-19 ekran jest widoczny
           w calosci (wygaszanie tylko na ostatnich ~8%), wiec pastylka zaslanialaby tresc zrzutu. */}
       <div style={{ perspective: '2000px', marginBottom: 18 }}>
-        {/* Wjazd od dolu po 1 s robi CSS (`deck-rise` nizej), nie framer-motion: animacja z JS
+        {/* Wjazd od dolu po 0,3 s robi CSS (`deck-rise` nizej), nie framer-motion: animacja z JS
             startowala dopiero po hydracji, a zrzut na ekranie jest najwiekszym elementem strony
             (LCP) - na telefonie czekal przez to ~4 s na pobrany juz plik. */}
         <div
@@ -303,7 +303,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
           max-width: 980px;
           --deck-tilt: 5deg;
           transform: rotateX(var(--deck-tilt));
-          animation: deck-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1s backwards;
+          animation: deck-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
         }
         @keyframes deck-rise {
           from { opacity: 0; transform: translateY(80px) rotateX(var(--deck-tilt)); }

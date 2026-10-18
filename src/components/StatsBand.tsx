@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { revealStyle } from '@/lib/reveal';
 import { fetchLpSettings } from '@/lib/lpSettings';
 
 /**
@@ -79,12 +79,8 @@ export default function StatsBand({ lang }: { lang: 'pl' | 'en' }) {
   return (
     <section style={{ background: '#ffffff', padding: '56px 0', borderBottom: '1px solid #eceff3' }}>
       <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-        <motion.ul
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5 }}
-          className="stats-band"
+        <ul
+          className="stats-band reveal" style={revealStyle({ y: 16, duration: 0.5 })}
         >
           {ORDER.map((key) => {
             const { value, label } = present(stats[key], lang, LABELS[lang][key]);
@@ -115,7 +111,7 @@ export default function StatsBand({ lang }: { lang: 'pl' | 'en' }) {
               </li>
             );
           })}
-        </motion.ul>
+        </ul>
       </div>
 
       <style>{`
