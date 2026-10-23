@@ -181,6 +181,15 @@ export default function PricingContent() {
               </div>
             ))}
           </div>
+
+          {/* Zamowienia powyzej najwyzszego progu (€600) - rabat ustalany indywidualnie przez kontakt (od 2026-10-23). */}
+          <p style={{ fontSize: 14, color: '#36394a', lineHeight: 1.6, margin: '18px 0 0', textAlign: 'center' }}>
+            Planujesz większe zamówienie niż €600?{' '}
+            <a href={`${APP_URL}/kontakt`} style={{ color: ACCENT, fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: 3 }}>
+              Napisz do nas
+            </a>{' '}
+            - przygotujemy indywidualny rabat.
+          </p>
         </motion.div>
 
         {/* CTA */}
