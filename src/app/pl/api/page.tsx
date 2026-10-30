@@ -3,16 +3,18 @@ import { alternatesFor } from '@/lib/languageSwitch';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ApiContent from './ApiContent';
+import { socialMeta } from '@/lib/socialMeta';
 
 export const metadata: Metadata = {
   title: 'API CitationOne - audyty GEO przez REST',
   description:
     'Uruchamiaj audyty CitationOne programatycznie i pobieraj wynik jako JSON. Klucze API, model asynchroniczny, zlecenia masowe, dokumentacja także w Markdown.',
-  openGraph: {
+  ...socialMeta({
+    lang: 'pl',
+    path: '/pl/api',
     title: 'API CitationOne - audyty GEO przez REST',
-    description:
-      'REST + JSON, klucz API, zlecenia masowe, publiczne linki do raportów. 1 audyt = 1 kredyt. Dokumentacja również jako Markdown dla agentów.',
-  },
+    description: 'REST + JSON, klucz API, zlecenia masowe, publiczne linki do raportów. 1 audyt = 1 kredyt. Dokumentacja również jako Markdown dla agentów.',
+  }),
   alternates: alternatesFor('/pl/api'),
 };
 

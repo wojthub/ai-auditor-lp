@@ -853,7 +853,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       'An algorithmic completeness checklist: length against competitors, images, video, tables, lists, heading hierarchy, table of contents and a visible update date.',
     lead:
       'Effort Score is an algorithmic checklist of page completeness: length against competitors, visual material, tables, lists, heading hierarchy, table of contents and a visible update date.',
-    chips: ['Score 0-10', '100% algorithmic - repeatable score', 'Input: content + HTML structure + Top 10 average'],
+    chips: ['Score 0-10', '100% algorithmic - repeatable score', 'Input: content + HTML structure + Top 10 median'],
     whyHeading: 'Why does Effort Score matter to AI models?',
     why: [
       'Completeness signals are the oldest quality proxy search engines rely on: a page with a table, visual material and a current date more often results from thorough work on the topic than a page made of five paragraphs. Search engines treat it as a strong hint of quality.',
@@ -861,7 +861,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     howHeading: 'How do we measure Effort Score?',
     how: {
       intro: [
-        'The checklist covers up to eleven criteria and an algorithm alone computes it, with no language model involved. Some are absolute, some are relative to competitors - the length threshold is the Top 10 average for your phrase, not a fixed word count.',
+        'The checklist covers up to eleven criteria and an algorithm alone computes it, with no language model involved. Some are absolute, some are relative to competitors - the length threshold is the median length of the Top 10 pages for your phrase, not a fixed word count.',
         'The criteria adapt to the page type: a table of contents is only checked for articles and encyclopedia entries, and a visible date is skipped on landing pages.',
       ],
       tables: [
@@ -870,7 +870,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
           head: ['Criterion', 'What it covers'],
           rows: [
             ['Absolute length', 'Content over 700 words'],
-            ['Length against competitors', 'Content above the Top 10 average for this phrase'],
+            ['Length against competitors', 'Content above the Top 10 median length for this phrase'],
             ['Visual material', 'At least four images'],
             ['Video', 'An embedded video'],
             ['Lists', 'Bulleted or numbered enumerations'],
@@ -885,7 +885,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
       ],
     },
     raises: [
-      'Content longer than the Top 10 average for the phrase',
+      'Content longer than the Top 10 median for the phrase',
       'Four or more pieces of visual material',
       'Data presented as tables and processes as lists',
       'A visible publication and update date in the page code',
@@ -906,7 +906,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     faq: [
       {
         q: 'Does longer text always raise the score?',
-        a: 'No - the threshold is the Top 10 average for your phrase, not a fixed word count. On phrases where competitors write concisely, expanding the text does not raise the score and lowers it on the other dimensions.',
+        a: 'No - the threshold is the median length of the Top 10 pages for your phrase, not a fixed word count. On phrases where competitors write concisely, expanding the text does not raise the score and lowers it on the other dimensions.',
       },
       {
         q: 'Why does the audit not see my images and video?',
@@ -919,9 +919,9 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     ],
     recommendations: [
       {
-        problem: 'The content is clearly shorter than the Top 10 average for this query (1,460 words) - competitors cover the topic more widely.',
+        problem: 'The content is clearly shorter than the Top 10 median for this query (1,460 words) - competitors cover the topic more widely.',
         before: 'Four short descriptive sections under the product list.',
-        after: 'Add the missing threads - a wired versus wireless comparison and a model ranking - until the length of the content reaches the competitor average.',
+        after: 'Add the missing threads - a wired versus wireless comparison and a model ranking - until the length of the content reaches the competitor median.',
       },
       {
         problem: 'The page shows neither a publication nor an update date, the simplest freshness signal there is.',

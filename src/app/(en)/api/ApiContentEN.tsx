@@ -15,7 +15,7 @@ const FEATURES = [
   },
   {
     title: 'Scoped keys',
-    body: 'A key can be read-only or allowed to start audits as well. A request outside its scope is refused, so a key wired into someone else&apos;s script cannot spend your credits.',
+    body: 'A key can be read-only or allowed to start audits as well. A request outside its scope is refused, so a key wired into someone else’s script cannot spend your credits.',
   },
   {
     title: 'Runs in the background',
@@ -31,7 +31,7 @@ const FEATURES = [
   },
   {
     title: 'The whole report as JSON',
-    body: 'Content Quality Score, ten dimensions with their problems, E-E-A-T, before/after recommendations, the comparison with competitors from Google and ChatGPT, and Fan-Out question coverage.',
+    body: 'Content Quality Score, eleven dimensions with their problems, E-E-A-T, before/after recommendations, the comparison with competitors from Google, ChatGPT and Google AI Mode, and Fan-Out question coverage.',
   },
   {
     title: 'Bulk requests',
@@ -43,7 +43,15 @@ const FEATURES = [
   },
   {
     title: 'Report links for clients',
-    body: 'An audit can get a public read-only address you send to a client without creating an account for them. With an expiry date or without one.',
+    body: 'An audit can get a public read-only address you send to a client without creating an account for them. With an expiry date or without one. On request we switch on a white-label version - a report with no trace of CitationOne.',
+  },
+  {
+    title: 'Recommendations applied to your content',
+    body: 'One request writes the recommendations you pick into the text and returns the finished version in Markdown, together with a new title and description. Same engine and same price as "Apply to content" in the app.',
+  },
+  {
+    title: 'Keyword before the audit',
+    body: 'Before you order an audit you can ask for a keyword for the page: you get a suggestion with search volume and a list of alternatives. No credit used.',
   },
   {
     title: 'Billed in credits',

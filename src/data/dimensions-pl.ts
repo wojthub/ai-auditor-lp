@@ -752,7 +752,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     faq: [
       {
         q: 'Czy dłuższy tekst zawsze podnosi wynik?',
-        a: 'Nie, progiem jest średnia z Top 10 dla Twojej frazy, a nie konkretna liczba słów. Na frazach, przy których konkurencja pisze zwięźle, rozbudowywanie tekstu nie podnosi wyniku, a obniża go na pozostałych wymiarach.',
+        a: 'Nie, progiem jest mediana długości stron z Top 10 dla Twojej frazy, a nie konkretna liczba słów. Na frazach, przy których konkurencja pisze zwięźle, rozbudowywanie tekstu nie podnosi wyniku, a obniża go na pozostałych wymiarach.',
       },
       {
         q: 'Dlaczego audyt nie widzi moich obrazów i wideo?',
@@ -770,7 +770,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       'Algorytmiczna checklista kompletności strony: długość względem konkurencji, obrazy, wideo, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji.',
     lead:
       'Effort Score to algorytmiczna checklista kompletności strony: długość względem konkurencji, materiały wizualne, tabele, listy, hierarchia nagłówków, spis treści i widoczna data aktualizacji.',
-    chips: ['Skala 0–10', 'W 100% algorytmiczny - wynik powtarzalny', 'Wejście: treść + struktura HTML + średnia Top 10'],
+    chips: ['Skala 0–10', 'W 100% algorytmiczny - wynik powtarzalny', 'Wejście: treść + struktura HTML + mediana Top 10'],
     whyHeading: 'Dlaczego Effort Score jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy Effort Score?',
     why: [
@@ -778,7 +778,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     ],
     how: {
       intro: [
-        'Checklista obejmuje do jedenastu kryteriów i liczy ją wyłącznie algorytm, bez udziału modelu językowego. Część jest bezwzględna, część odnosi się do konkurencji - próg długości to średnia z Top 10 dla Twojej frazy, a nie konkretna liczba słów.',
+        'Checklista obejmuje do jedenastu kryteriów i liczy ją wyłącznie algorytm, bez udziału modelu językowego. Część jest bezwzględna, część odnosi się do konkurencji - próg długości to mediana stron z Top 10 dla Twojej frazy, a nie konkretna liczba słów.',
         'Zestaw kryteriów dopasowuje się do typu strony: spis treści sprawdzamy tylko dla artykułów i haseł encyklopedycznych, a widoczną datę pomijamy na landingach.',
       ],
       tables: [
@@ -787,7 +787,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
           head: ['Kryterium', 'Czego dotyczy'],
           rows: [
             ['Długość bezwzględna', 'Treść powyżej 700 słów'],
-            ['Długość względem konkurencji', 'Treść powyżej średniej z Top 10 dla tej frazy'],
+            ['Długość względem konkurencji', 'Treść powyżej mediany długości Top 10 dla tej frazy'],
             ['Materiały wizualne', 'Co najmniej cztery obrazy'],
             ['Wideo', 'Osadzony materiał wideo'],
             ['Listy', 'Wyliczenia punktowane lub numerowane'],
@@ -802,7 +802,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
       ],
     },
     raises: [
-      'Treść dłuższa niż średnia Top 10 dla tej frazy',
+      'Treść dłuższa niż mediana Top 10 dla tej frazy',
       'Cztery lub więcej materiałów wizualnych',
       'Dane podane tabelą, a procesy listą',
       'Widoczna data publikacji i aktualizacji w kodzie strony',
@@ -822,9 +822,9 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     ],
     recommendations: [
       {
-        problem: 'Treść jest wyraźnie krótsza niż średnia Top 10 dla tej frazy (1460 słów) - konkurencja tłumaczy temat szerzej.',
+        problem: 'Treść jest wyraźnie krótsza niż mediana Top 10 dla tej frazy (1460 słów) - konkurencja tłumaczy temat szerzej.',
         before: 'Cztery krótkie sekcje opisowe pod listą produktów.',
-        after: 'Dopisz brakujące wątki - porównanie przewodowe/bezprzewodowe i ranking modeli - aż objętość treści osiągnie średnią konkurencji.',
+        after: 'Dopisz brakujące wątki - porównanie przewodowe/bezprzewodowe i ranking modeli - aż objętość treści osiągnie medianę konkurencji.',
       },
       {
         problem: 'Strona nie pokazuje daty publikacji ani aktualizacji, czyli najprostszego sygnału świeżości.',

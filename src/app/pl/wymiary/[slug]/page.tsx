@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import DimensionPage from '@/components/DimensionPage';
 import { DIMENSIONS_PL, dimensionSlugsPl } from '@/data/dimensions-pl';
 import { STRINGS_PL, enSlugForPl } from '@/data/dimension-types';
+import { socialMeta } from '@/lib/socialMeta';
 
 // Static export: generujemy wylacznie slugi z danych, nic poza lista nie istnieje.
 export const dynamicParams = false;
@@ -24,11 +25,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: dim.title,
     description: dim.description,
-    openGraph: {
+    ...socialMeta({
+      lang: 'pl',
+      path: `${SITE}/pl/wymiary/${dim.slug}`,
       title: `${dim.title} | CitationOne`,
       description: dim.description,
-      url: `${SITE}/pl/wymiary/${dim.slug}`,
-    },
+    }),
     alternates: {
       canonical: `${SITE}/pl/wymiary/${dim.slug}`,
       // hreflang dziala tylko wtedy, gdy WSKAZUJE na istniejaca strone - stad para ze slownika.

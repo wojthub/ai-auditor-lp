@@ -5,6 +5,7 @@ import { alternatesFor } from '@/lib/languageSwitch';
 import RegisterClickTracker from '@/components/RegisterClickTracker';
 import AttributionCarrier from '@/components/AttributionCarrier';
 import RevealObserver from '@/components/RevealObserver';
+import { SITE_URL, socialMeta } from '@/lib/socialMeta';
 import './globals.css';
 
 const GTM_ID = 'GTM-M64KFHFS';
@@ -22,6 +23,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  // Pelne adresy w og:url / og:image ze sciezek wzglednych (`socialMeta`).
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'GEO Content Optimization Tool - CitationOne',
     // Marka TYLKO na stronie glownej (w `default`) - podstrony maja wlasny, pelny tytul
@@ -30,19 +33,12 @@ export const metadata: Metadata = {
   },
   description:
     'Check whether ChatGPT, Perplexity and Google AI Overview will cite your content. 11 dimensions, SERP benchmark, Before/After fixes. Report in 5 minutes.',
-  openGraph: {
+  ...socialMeta({
+    lang: 'en',
+    path: 'https://citationone.com',
     title: 'CitationOne - GEO Content Optimization',
     description: 'Check if AI will cite your content. 11 dimensions, SERP benchmark, Before/After recommendations. Report in 5 minutes.',
-    url: 'https://citationone.com',
-    siteName: 'CitationOne',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'CitationOne - GEO Content Optimization',
-    description: 'Check if AI will cite your content. 11 dimensions, SERP benchmark, Before/After recommendations. Report in 5 minutes.',
-  },
+  }),
   alternates: alternatesFor('/'),
   icons: {
     icon: [

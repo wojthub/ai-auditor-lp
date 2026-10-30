@@ -8,7 +8,7 @@ const steps = [
     numberColor: '#e07a4a',
     title: 'Wprowadzasz dane',
     description:
-      'Wklejasz link, listę URL-i albo sitemapę - w audycie masowym cały serwis idzie jednym przebiegiem. Zamiast adresu możesz wkleić roboczą wersję tekstu, którego jeszcze nie ma na stronie. Wpisujesz słowo kluczowe, na które chcesz zdobyć cytowanie w odpowiedziach AI, a zlecenia możesz też wysyłać przez API.',
+      'Wklejasz link, listę URL-i, plik CSV albo sitemapę - w audycie masowym cały serwis idzie jednym przebiegiem. Zamiast adresu możesz wkleić roboczą wersję tekstu, którego jeszcze nie ma na stronie. Wpisujesz słowo kluczowe, na które chcesz zdobyć cytowanie w odpowiedziach AI, a zlecenia możesz też wysyłać przez API.',
   },
   {
     number: '02',

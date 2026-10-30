@@ -10,7 +10,7 @@ const items = [
   {
     number: '01',
     label: 'Before / After fixes',
-    desc: 'the rewritten text itself, not advice - each with an estimated Content Quality Score (CQS) gain.',
+    desc: 'the rewritten text itself, not advice - each with an estimated Content Quality Score (CQS) gain. The "Preview changes" button shows the section with the recommendations applied - 10 free previews in every audit.',
     color: '#e07a4a',
   },
   {
@@ -152,7 +152,7 @@ export default function ReportSectionEN() {
                     src="/report-preview-en.webp"
                     loading="lazy"
                     decoding="async"
-                    alt="Sample CitationOne report - Content Quality Score, 10-dimension profile and Quick Wins"
+                    alt="Sample CitationOne report - Content Quality Score, 11-dimension profile and Quick Wins"
                     style={{ display: 'block', width: '100%', height: 'auto' }}
                   />
                   {/* gloss */}

@@ -240,6 +240,7 @@ który zakłada konto przy pierwszym wejściu, więc osobnego `/register` nie ma
 - **Root layout** (`layout.tsx`): `<html lang="en">`, `title.template: '%s - CitationOne'`
 - **PL layout** (`pl/layout.tsx`): `<div lang="pl">`, własne `title.template`, OG `locale: pl_PL`
 - **hreflang** w obu layoutach: `en` → `citationone.com`, `pl` → `citationone.com/pl`
+- **Udostępnienia (OG/Twitter) - ZAWSZE przez `socialMeta()`** z [lib/socialMeta.ts](src/lib/socialMeta.ts) (od 2026-10-30): `...socialMeta({ lang, path, title, description })` w `metadata`/`generateMetadata` każdej strony z własnym tytułem do udostępnień. Next **zastępuje** obiekt `openGraph` z layoutu zamiast go uzupełniać - goły `openGraph: { title, description }` na podstronie gubił `og:url`, `og:site_name`, `og:locale`, `og:type` i grafikę, a `twitter:title` pokazywał tytuł strony głównej. Grafiki 1200×630: `public/og/og-pl.png` i `og-en.png` (logo z aplikacji, nagłówek z hero, linijka o produkcie; wyrenderowane z HTML Puppeteerem). `metadataBase` w root layoucie zamienia ścieżki względne w pełne adresy. Po zmianie grafiki odśwież podgląd w Facebook Sharing Debugger (cache Facebooka trzyma starą miniaturę).
 
 ### Kolejność sekcji HP (identyczna EN i PL)
 
@@ -647,7 +648,7 @@ Pomiar: Lighthouse mobile (dławienie 4G + 4× CPU) na zbudowanym eksporcie, zew
 - **Navbar — menu „Audyt treści":** `AUDIT_MENU` w `Navbar.tsx` / `en/NavbarEN.tsx` — „Jak działa
   audytor?" (`/pl/jak-to-dziala`), „Wymiary oceny" (`/pl/wymiary`), „Audyt masowy", **API**.
   API siedzi tu, a nie na pasku, bo publiczne API v1 obsługuje **wyłącznie audyty**
-  (`/audits`, `/audits/bulk`, `/audits/{id}/share`, `/me`, `/projects`, `/credits/usage`) — żadne
+  (`/audits`, `/audits/bulk`, `/audits/{id}/share`, `/audits/{id}/apply`, `/keywords/detect`, `/me`, `/projects`, `/credits/usage`) — żadne
   z czterech narzędzi nie ma endpointu. To czwarty sposób dostępu do tego samego produktu.
   Gdyby API kiedyś objęło narzędzia, ta pozycja wraca na pasek. Trigger to
   **`<a href>` na `/pl/jak-to-dziala`**, nie `<button>`: najważniejsza podstrona nie może zniknąć za

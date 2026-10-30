@@ -28,9 +28,10 @@ function SectionLabel({ children }: { children: string }) {
   );
 }
 
-/* ── Visual: Competition (Google + ChatGPT) ───────────────────────────── */
-// The „Competition" block from the app, trimmed for the LP - it carries TWO sources:
-// the Google Top 10 SERP and the citations from ChatGPT's answer to the same phrase,
+/* ── Visual: Competition (Google + AI answers) ─────────────────────────── */
+// The „Competition" block from the app, trimmed for the LP - it carries THREE sources:
+// the Google Top 10 SERP and the citations from the ChatGPT and Google AI Mode answers
+// to the same phrase (AI Mode in the report since 2026-10-28),
 // hence a source heading above each part (1:1 with the report). Same columns and the same
 // score coloring, so the user recognizes the screen they get after purchase.
 // Neutral domains: we never show real clients or real competitors.
@@ -38,15 +39,32 @@ const SERP_HEAD = { phrase: 'best wireless earbuds' };
 const SERP_LABELS = ['POS.', 'URL', 'WORDS', 'CQS'];
 const SERP_STATS = [
   { value: '47', label: 'Avg. SERP CQS' },
-  { value: '2091', label: 'Avg. words' },
+  { value: '2091', label: 'Median words' },
 ];
-// ChatGPT section: status on one line + the pages the model cited. A citation (a link
-// in the answer) and a mention (the brand name in the text) are TWO independent signals.
-const LLM_STATUS = [
-  { label: 'Your page', value: 'cited', ok: true },
-  { label: 'Brand mention', value: 'present', ok: true },
+// AI answer sections (ChatGPT, Google AI Mode): status on one line + the pages in the
+// answer. A citation (a link in the answer) and a mention (the brand name in the text) are
+// TWO independent signals - AI Mode shows the case of a mention without a citation.
+const MY_DOMAIN = 'yoursite.com';
+const LLM_BLOCKS = [
+  {
+    logo: '/logos/chatgpt.png',
+    name: 'ChatGPT',
+    status: [
+      { label: 'Your page', value: 'cited', ok: true },
+      { label: 'Brand mention', value: 'present', ok: true },
+    ],
+    sources: ['competitor-a.com/best-earbuds', 'yoursite.com/blog/best-earbuds-2026', 'competitor-e.com/earbuds-test'],
+  },
+  {
+    logo: '/logos/google.png',
+    name: 'Google AI Mode',
+    status: [
+      { label: 'Your page', value: 'not cited', ok: false },
+      { label: 'Brand mention', value: 'present', ok: true },
+    ],
+    sources: ['competitor-b.com/wireless-earbuds', 'competitor-a.com/best-earbuds', 'competitor-f.com/running-earbuds'],
+  },
 ];
-const LLM_SOURCES = ['competitor-a.com/best-earbuds', 'yoursite.com/blog/best-earbuds-2026', 'competitor-e.com/earbuds-test'];
 const SERP_ROWS = [
   { pos: '1', url: 'competitor-a.com/best-earbuds', words: '2708', cqs: 73 },
   { pos: '2', url: 'competitor-b.com/wireless-earbuds', words: '3792', cqs: 69 },
@@ -121,42 +139,44 @@ function BenchmarkVisual() {
         </motion.div>
       ))}
 
-      <div style={{ marginTop: 20, paddingTop: 18, borderTop: '1px solid #eceff3' }}>
-        <SourceHeading logo="/logos/chatgpt.png">ChatGPT</SourceHeading>
+      {LLM_BLOCKS.map((block) => (
+        <div key={block.name} style={{ marginTop: 20, paddingTop: 18, borderTop: '1px solid #eceff3' }}>
+          <SourceHeading logo={block.logo}>{block.name}</SourceHeading>
 
-        <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', marginBottom: 14 }}>
-          {LLM_STATUS.map((s) => (
-            <div key={s.label}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: s.ok ? ACCENT : '#DC2626', lineHeight: 1.2 }}>{s.value}</div>
-              <div style={{ fontSize: 11, color: '#818898', marginTop: 2 }}>{s.label}</div>
-            </div>
-          ))}
+          <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', marginBottom: 14 }}>
+            {block.status.map((s) => (
+              <div key={s.label}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: s.ok ? ACCENT : '#DC2626', lineHeight: 1.2 }}>{s.value}</div>
+                <div style={{ fontSize: 11, color: '#818898', marginTop: 2 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ fontSize: 10, fontWeight: 600, color: '#a4acb9', letterSpacing: '0.06em', marginBottom: 6 }}>SOURCES IN THE ANSWER</div>
+          {block.sources.map((src, i) => {
+            const mine = src.startsWith(MY_DOMAIN);
+            return (
+              <motion.div
+                key={src}
+                initial={{ opacity: 0, y: 6 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.07, ease: 'easeOut' }}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 8, padding: '7px 0',
+                  borderBottom: i === block.sources.length - 1 ? 'none' : '1px solid #f4f6f8',
+                }}
+              >
+                <span style={{ width: 5, height: 5, borderRadius: '50%', background: mine ? ACCENT : '#a4acb9', flexShrink: 0 }} />
+                <span style={{
+                  fontSize: 12, color: mine ? ACCENT : '#36394a', fontWeight: mine ? 600 : 400,
+                  overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                }}>{src}</span>
+              </motion.div>
+            );
+          })}
         </div>
-
-        <div style={{ fontSize: 10, fontWeight: 600, color: '#a4acb9', letterSpacing: '0.06em', marginBottom: 6 }}>SOURCES IN THE ANSWER</div>
-        {LLM_SOURCES.map((src, i) => {
-          const mine = src.startsWith('yoursite.com');
-          return (
-            <motion.div
-              key={src}
-              initial={{ opacity: 0, y: 6 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.07, ease: 'easeOut' }}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 8, padding: '7px 0',
-                borderBottom: i === LLM_SOURCES.length - 1 ? 'none' : '1px solid #f4f6f8',
-              }}
-            >
-              <span style={{ width: 5, height: 5, borderRadius: '50%', background: mine ? ACCENT : '#a4acb9', flexShrink: 0 }} />
-              <span style={{
-                fontSize: 12, color: mine ? ACCENT : '#36394a', fontWeight: mine ? 600 : 400,
-                overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-              }}>{src}</span>
-            </motion.div>
-          );
-        })}
-      </div>
+      ))}
     </div>
   );
 }
@@ -295,7 +315,7 @@ function KnowledgeGraphVisual() {
 const REPORT_ITEMS = [
   'Content Quality Score (0–100) with dimension breakdown',
   'Radar chart of 11 dimensions',
-  'Competitor analysis - Google Top 10 SERP and ChatGPT citations',
+  'Competitor analysis - Google Top 10 SERP plus ChatGPT and Google AI Mode citations',
   'Before/After recommendations with priorities',
   'Knowledge graph and EAV entity table',
   'AI Overview Coverage and sub-query analysis',
@@ -453,8 +473,8 @@ export default function PageContentEN() {
               },
               {
                 n: '02', color: '#0b7983',
-                title: 'The algorithm analyzes your competition in Google and ChatGPT',
-                body: 'In under 5 minutes CitationOne fetches and analyzes your content. At the same time it inspects the 10 top-ranking competitor pages and asks ChatGPT about the same phrase to see which sources the model names. The tool compares your material with the market leaders across 11 quality dimensions, E-E-A-T signals included.',
+                title: 'The algorithm analyzes your competition in Google and AI answers',
+                body: 'In under 5 minutes CitationOne fetches and analyzes your content. At the same time it inspects the 10 top-ranking competitor pages and asks ChatGPT and Google AI Mode about the same phrase to see which sources these models name. The tool compares your material with the market leaders across 11 quality dimensions, E-E-A-T signals included.',
               },
               {
                 n: '03', color: '#c47a2a',
@@ -565,10 +585,10 @@ export default function PageContentEN() {
                 See whether - and why - you fall behind the leaders
               </h2>
               <p style={{ fontSize: 15.5, color: '#36394a', lineHeight: 1.7, margin: '0 0 4px' }}>
-                CitationOne queries two independent sources about your phrase. From Google it fetches and analyzes the 10 top-ranking pages; ChatGPT it asks about that same phrase, checking whether your page shows up in the answer. You see the optimization gap against real competition in search and in AI answers at once.
+                CitationOne checks your phrase in three independent sources. From Google it fetches and analyzes the 10 top-ranking pages; ChatGPT and Google AI Mode it asks about that same phrase, checking whether your page shows up in their answers. You see the optimization gap against real competition in search and in AI answers at once.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {['Tabular CQS comparison for every analyzed page', 'Identify leaders and weak spots in the current SERP', "ChatGPT's answer to your phrase: whether you are cited and mentioned, and which pages the model gave as sources", 'Analysis of structure and format of the top-rated content'].map(item => (
+                {['Tabular CQS comparison for every analyzed page', 'Identify leaders and weak spots in the current SERP', 'ChatGPT and Google AI Mode answers to your phrase: whether you are cited and mentioned, and which pages they gave as sources', 'Pages ChatGPT viewed but did not cite - when yours is among them, the model knows your content while the citation goes to a competitor', 'Analysis of structure and format of the top-rated content'].map(item => (
                   <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#36394a', lineHeight: 1.65 }}>
                     <span style={{ width: 14, height: 2, background: ACCENT, flexShrink: 0, marginTop: 9, borderRadius: 1 }} />
                     <span>{item}</span>

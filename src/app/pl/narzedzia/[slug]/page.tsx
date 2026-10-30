@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import ToolPage from '@/components/ToolPage';
 import { TOOLS_PL, toolSlugsPl } from '@/data/tools-pl';
 import { TOOL_STRINGS_PL, toolEnSlugForPl } from '@/data/tool-types';
+import { socialMeta } from '@/lib/socialMeta';
 
 // Static export: generujemy wylacznie slugi z danych.
 export const dynamicParams = false;
@@ -24,11 +25,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: tool.title,
     description: tool.description,
-    openGraph: {
+    ...socialMeta({
+      lang: 'pl',
+      path: `${SITE}/pl/narzedzia/${tool.slug}`,
       title: `${tool.title} | CitationOne`,
       description: tool.description,
-      url: `${SITE}/pl/narzedzia/${tool.slug}`,
-    },
+    }),
     alternates: {
       canonical: `${SITE}/pl/narzedzia/${tool.slug}`,
       languages: en

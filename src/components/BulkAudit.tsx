@@ -12,8 +12,8 @@ const ACCENT = '#0b7983';
 
 const cards = [
   {
-    title: 'Lista URL-i albo sitemapa',
-    desc: 'Wklejasz adresy w jednym zleceniu lub podajesz sitemapę - system sam pobierze z niej strony.',
+    title: 'Lista URL-i, plik CSV albo sitemapa',
+    desc: 'Wklejasz adresy w jednym zleceniu, wgrywasz plik CSV z adresami i frazami albo podajesz sitemapę - system sam pobierze z niej strony.',
   },
   {
     title: 'Słowa kluczowe bez ręcznej pracy',
@@ -147,7 +147,7 @@ export default function BulkAudit() {
                 Masowy audyt
               </h4>
               <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 14px' }}>
-                Wklejasz listę adresów albo sitemapę i zamykasz kartę. Audyty wykonują się w tle, a w
+                Wklejasz listę adresów, wgrywasz plik CSV albo podajesz sitemapę i zamykasz kartę. Audyty wykonują się w tle, a w
                 panelu czeka osobny raport dla każdej strony. Bez integracji i bez pisania kodu.
               </p>
               <span style={{ fontSize: 13.5, color: '#666d80', lineHeight: 1.6 }}>

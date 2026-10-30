@@ -8,16 +8,18 @@ import { alternatesFor } from '@/lib/languageSwitch';
 import NavbarEN from '@/components/en/NavbarEN';
 import FooterEN from '@/components/en/FooterEN';
 import ApiContentEN from './ApiContentEN';
+import { socialMeta } from '@/lib/socialMeta';
 
 export const metadata: Metadata = {
   title: 'CitationOne API - audyty GEO przez REST',
   description:
     'Run CitationOne audits programmatically and pull results as JSON. API keys, asynchronous jobs, bulk requests, docs also served as Markdown for AI agents.',
-  openGraph: {
+  ...socialMeta({
+    lang: 'en',
+    path: '/api',
     title: 'CitationOne API - GEO audits over REST',
-    description:
-      'REST + JSON, API key auth, bulk requests, public report links. 1 audit = 1 credit. Docs also served as Markdown for agents.',
-  },
+    description: 'REST + JSON, API key auth, bulk requests, public report links. 1 audit = 1 credit. Docs also served as Markdown for agents.',
+  }),
   alternates: alternatesFor('/api'),
 };
 

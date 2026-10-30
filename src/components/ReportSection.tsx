@@ -10,7 +10,7 @@ const items = [
   {
     number: '01',
     label: 'Rekomendacje Przed / Po',
-    desc: 'gotowy tekst zamiast wskazówki - z szacowanym przyrostem Content Quality Score (CQS) przy każdej poprawce.',
+    desc: 'gotowy tekst zamiast wskazówki - z szacowanym przyrostem Content Quality Score (CQS) przy każdej poprawce. Przycisk „Podgląd zmian" pokazuje sekcję z naniesionymi zaleceniami - 10 podglądów w każdym audycie bez opłat.',
     color: '#e07a4a',
   },
   {

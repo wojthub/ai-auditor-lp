@@ -31,7 +31,7 @@ const FEATURES = [
   },
   {
     title: 'Cały raport jako JSON',
-    body: 'Content Quality Score, jedenaście wymiarów z listą problemów i E-E-A-T w komplecie, rekomendacje w parach przed i po, porównanie z konkurencją z Google i ChatGPT oraz pokrycie pytań Fan-Out.',
+    body: 'Content Quality Score, jedenaście wymiarów z listą problemów i E-E-A-T w komplecie, rekomendacje w parach przed i po, porównanie z konkurencją z Google, ChatGPT i Google AI Mode oraz pokrycie pytań Fan-Out.',
   },
   {
     title: 'Zlecenia masowe',
@@ -43,7 +43,15 @@ const FEATURES = [
   },
   {
     title: 'Raport do wysłania klientowi',
-    body: 'Audyt może dostać publiczny adres tylko do odczytu, który wyślesz klientowi bez zakładania mu konta. Z datą wygaśnięcia albo bezterminowo.',
+    body: 'Audyt może dostać publiczny adres tylko do odczytu, który wyślesz klientowi bez zakładania mu konta. Z datą wygaśnięcia albo bezterminowo. Na życzenie włączamy wersję white-label - raport bez śladu CitationOne.',
+  },
+  {
+    title: 'Wdrożenie rekomendacji w treść',
+    body: 'Wybrane zalecenia z audytu wpisujesz w tekst jednym żądaniem i odbierasz gotową wersję w Markdown razem z nowym title i description. Ten sam mechanizm i ta sama cena co „Wdrożenie w treść" w panelu.',
+  },
+  {
+    title: 'Fraza przed audytem',
+    body: 'Zanim zlecisz audyt, możesz poprosić o frazę dla strony: dostajesz propozycję z wolumenem i listą alternatyw. Bez kredytu.',
   },
   {
     title: 'Rozliczenie w kredytach',

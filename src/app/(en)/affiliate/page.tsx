@@ -5,16 +5,18 @@ import { alternatesFor } from '@/lib/languageSwitch';
 import NavbarEN from '@/components/en/NavbarEN';
 import FooterEN from '@/components/en/FooterEN';
 import AffiliateContentEN from './AffiliateContentEN';
+import { socialMeta } from '@/lib/socialMeta';
 
 export const metadata: Metadata = {
   title: 'CitationOne referral program - 10% on every order',
   description:
     'Refer CitationOne and earn 10% of every order your referrals place. A referral link on every account, clicks remembered for 30 days, payout in cash or audit credits.',
-  openGraph: {
+  ...socialMeta({
+    lang: 'en',
+    path: '/affiliate',
     title: 'CitationOne referral program - 10% on every order',
-    description:
-      'A 10% commission on the net order value, repeating on later purchases too. The link is already in your account, live from the first sign-in.',
-  },
+    description: 'A 10% commission on the net order value, repeating on later purchases too. The link is already in your account, live from the first sign-in.',
+  }),
   alternates: alternatesFor('/affiliate'),
 };
 

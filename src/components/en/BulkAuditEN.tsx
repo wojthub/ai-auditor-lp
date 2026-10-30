@@ -12,8 +12,8 @@ const ACCENT = '#0b7983';
 
 const cards = [
   {
-    title: 'A URL list or a sitemap',
-    desc: 'Paste your addresses in a single job, or point us at your sitemap and we will pull the pages from it.',
+    title: 'A URL list, a CSV file or a sitemap',
+    desc: 'Paste your addresses in a single job, upload a CSV file with URLs and keywords, or point us at your sitemap and we will pull the pages from it.',
   },
   {
     title: 'Keywords without the manual work',
@@ -147,7 +147,7 @@ export default function BulkAuditEN() {
                 Bulk audit
               </h4>
               <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.65, margin: '0 0 14px' }}>
-                Paste a list of URLs or a sitemap and close the tab. Audits run in the background, and the
+                Paste a list of URLs, upload a CSV file or point us at a sitemap and close the tab. Audits run in the background, and the
                 panel holds a separate report for every page. No integration, no code.
               </p>
               <span style={{ fontSize: 13.5, color: '#666d80', lineHeight: 1.6 }}>

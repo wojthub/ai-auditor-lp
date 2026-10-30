@@ -3,15 +3,18 @@ import { alternatesFor } from '@/lib/languageSwitch';
 import NavbarEN from '@/components/en/NavbarEN';
 import FooterEN from '@/components/en/FooterEN';
 import DimensionsContent from './DimensionsContent';
+import { socialMeta } from '@/lib/socialMeta';
 
 export const metadata: Metadata = {
   title: '10 content quality dimensions + E-E-A-T',
   description:
     'The 11 dimensions CitationOne scores in every report - what AI models weigh in your content and what actually drives citations in ChatGPT and AI Overview.',
-  openGraph: {
+  ...socialMeta({
+    lang: 'en',
+    path: '/dimensions',
     title: '10 content quality dimensions + E-E-A-T | CitationOne',
     description: 'See the CitationOne scoring standard - 10 citability dimensions for AI answers + E-E-A-T that translate LLM algorithms into simple editorial guidelines.',
-  },
+  }),
   alternates: alternatesFor('/dimensions'),
 };
 

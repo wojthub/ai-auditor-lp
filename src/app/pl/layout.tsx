@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { alternatesFor } from '@/lib/languageSwitch';
+import { socialMeta } from '@/lib/socialMeta';
 
 export const metadata: Metadata = {
   title: {
@@ -9,19 +10,12 @@ export const metadata: Metadata = {
   },
   description:
     'Sprawdź, czy ChatGPT, Perplexity i Google AI Overview zacytują Twoją treść. 11 wymiarów, benchmark SERP, gotowe poprawki Przed i Po. Raport w 5 minut.',
-  openGraph: {
+  ...socialMeta({
+    lang: 'pl',
+    path: 'https://citationone.com/pl',
     title: 'CitationOne - Optymalizacja treści pod GEO',
     description: 'Sprawdź, czy AI zacytuje Twoją treść. 11 wymiarów, benchmark SERP, rekomendacje Przed i Po. Raport w 5 minut.',
-    url: 'https://citationone.com/pl',
-    siteName: 'CitationOne',
-    locale: 'pl_PL',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'CitationOne - Optymalizacja treści pod GEO',
-    description: 'Sprawdź, czy AI zacytuje Twoją treść. 11 wymiarów, benchmark SERP, rekomendacje Przed i Po. Raport w 5 minut.',
-  },
+  }),
   alternates: alternatesFor('/pl'),
 };
 

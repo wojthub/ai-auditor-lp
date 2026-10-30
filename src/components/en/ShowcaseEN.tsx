@@ -7,7 +7,7 @@ const SLIDES: ShowcaseSlide[] = [
   {
     src: '/dashboard-preview.png',
     mobileSrc: '/dashboard-preview-mobile.png',
-    alt: 'CitationOne dashboard - Content Quality Score and the 10-dimension profile',
+    alt: 'CitationOne dashboard - Content Quality Score and the 11-dimension profile',
     label: 'Summary',
   },
   {
