@@ -18,11 +18,13 @@ import { APP_URL } from '@/lib/appUrl';
 const COPY = {
   pl: {
     text: 'Problem z pobieraniem pełnych SERP-ów i zatruwaniem wyników Google został rozwiązany.',
+    short: 'Problem z SERP-ami i zatruciem wyników rozwiązany',
     cta: 'Zrób darmowy audyt',
     close: 'Zamknij komunikat',
   },
   en: {
     text: 'The issue with fetching full SERPs and poisoned Google results has been fixed.',
+    short: 'SERP fetching and poisoning issue fixed',
     cta: 'Run a free audit',
     close: 'Close notice',
   },
@@ -48,12 +50,23 @@ export default function NoticeBar({ lang }: { lang: 'pl' | 'en' }) {
           textAlign: 'center',
         }}
       >
-        <span>{c.text}</span>{' '}
+        {/* Desktop: pelny tekst + CTA. Mobile: krotki tekst, caly jako link - bez osobnej linijki
+            z CTA, bo „Wyprobuj za darmo” stoi tuz pod paskiem w navbarze. */}
+        <span className="hidden md:inline">
+          {c.text}{' '}
+          <a
+            href={`${APP_URL}/register?lang=${lang}`}
+            style={{ color: '#ffffff', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: 2, whiteSpace: 'nowrap' }}
+          >
+            {c.cta} →
+          </a>
+        </span>
         <a
           href={`${APP_URL}/register?lang=${lang}`}
-          style={{ color: '#ffffff', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: 2, whiteSpace: 'nowrap' }}
+          className="md:hidden"
+          style={{ color: '#ffffff', textDecoration: 'none' }}
         >
-          {c.cta} →
+          {c.short}
         </a>
         <button
           type="button"
