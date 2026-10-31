@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import BrandMorph from './BrandMorph';
 import { enCounterpart } from '@/lib/languageSwitch';
 import { APP_URL } from '@/lib/appUrl';
+import NoticeBar from './NoticeBar';
 
 /** Menu „Narzedzia" - same narzedzia dodatkowe, osobne od audytu tresci (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
@@ -39,6 +40,8 @@ export default function Navbar() {
   const enHref = enCounterpart(usePathname());
 
   return (
+    <>
+    <NoticeBar lang="pl" />
     <nav
       style={{
         position: 'sticky',
@@ -528,5 +531,6 @@ export default function Navbar() {
         }
       `}</style>
     </nav>
+    </>
   );
 }

@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import BrandMorph from '../BrandMorph';
 import { plCounterpart } from '@/lib/languageSwitch';
 import { APP_URL } from '@/lib/appUrl';
+import NoticeBar from '../NoticeBar';
 
 /** „Tools" menu - mirror of ../Navbar.tsx. Add-on tools only, separate from the content audit (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
@@ -39,6 +40,8 @@ export default function NavbarEN() {
   const plHref = plCounterpart(usePathname());
 
   return (
+    <>
+    <NoticeBar lang="en" />
     <nav
       style={{
         position: 'sticky',
@@ -519,5 +522,6 @@ export default function NavbarEN() {
         }
       `}</style>
     </nav>
+    </>
   );
 }
