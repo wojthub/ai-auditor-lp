@@ -62,7 +62,7 @@ export default function HeroEN() {
               lineHeight: 1.6, color: '#36394a',
               maxWidth: 560, margin: '14px auto 0',
             }}>
-              Paste a link, a list of URLs or a sitemap. You get ready „Before and After” recommendations - specific guidance on what to change in the content so that <span className="hero-brand"><img src="/logos/chatgpt.png" alt="" aria-hidden width={16} height={16} />ChatGPT</span>, <span className="hero-brand"><img src="/logos/perplexity.png" alt="" aria-hidden width={16} height={16} />Perplexity</span> and <span className="hero-brand"><img src="/logos/google.png" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview cite it.
+              Paste a link, a list of URLs or a sitemap. You get ready „Before and After” recommendations - specific guidance on what to change in the content so that <span className="hero-brand"><img src="/logos/chatgpt.webp" alt="" aria-hidden width={16} height={16} />ChatGPT</span>, <span className="hero-brand"><img src="/logos/perplexity.webp" alt="" aria-hidden width={16} height={16} />Perplexity</span> and <span className="hero-brand"><img src="/logos/google.webp" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview cite it.
             </span>
           </h1>
 

@@ -47,7 +47,7 @@ const SERP_STATS = [
 const MY_DOMAIN = 'twojastrona.pl';
 const LLM_BLOCKS = [
   {
-    logo: '/logos/chatgpt.png',
+    logo: '/logos/chatgpt.webp',
     name: 'ChatGPT',
     status: [
       { label: 'Twoja strona', value: 'cytowana', ok: true },
@@ -56,7 +56,7 @@ const LLM_BLOCKS = [
     sources: ['konkurent-a.pl/ranking-sluchawek', 'twojastrona.pl/blog/ranking-2026', 'konkurent-e.pl/test-sluchawek'],
   },
   {
-    logo: '/logos/google.png',
+    logo: '/logos/google.webp',
     name: 'Google AI Mode',
     status: [
       { label: 'Twoja strona', value: 'nie cytowana', ok: false },
@@ -97,7 +97,7 @@ function BenchmarkVisual() {
         <span style={{ fontSize: 12, color: '#818898' }}>dla frazy &bdquo;{SERP_HEAD.phrase}&rdquo;</span>
       </div>
 
-      <SourceHeading logo="/logos/google.png">Google &middot; Top 10 SERP</SourceHeading>
+      <SourceHeading logo="/logos/google.webp">Google &middot; Top 10 SERP</SourceHeading>
 
       <div style={{ display: 'flex', gap: 22, marginBottom: 18, flexWrap: 'wrap' }}>
         {SERP_STATS.map((s) => (
@@ -226,7 +226,7 @@ function AIOverviewVisual() {
     <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 10, overflow: 'hidden' }}>
       <div style={{ padding: '14px 18px', borderBottom: '1px solid #dfe1e7', display: 'flex', alignItems: 'center', gap: 8 }}>
         <img
-          src="/logos/google.png"
+          src="/logos/google.webp"
           alt=""
           aria-hidden
           width={18}
