@@ -3,7 +3,7 @@ import { revealStyle } from '@/lib/reveal';
 const logos = [
   { src: '/logos/gemini.webp', alt: 'Google Gemini', height: 24 },
   { src: '/logos/bright-data.webp', alt: 'Bright Data', height: 38 },
-  { src: '/logos/cloro.svg', alt: 'cloro', height: 24 },
+  { src: '/logos/cloro.webp', alt: 'cloro', height: 24 },
   { src: '/logos/dataforseo-logo.png', alt: 'DataForSEO', height: 22 },
 ];
 
