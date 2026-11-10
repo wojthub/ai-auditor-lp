@@ -1,44 +1,91 @@
 'use client';
 
-import { useState } from 'react';
-import { APP_URL } from '@/lib/appUrl';
+import { useEffect, useState } from 'react';
+import { fetchLpSettings } from '@/lib/lpSettings';
 
 /**
- * TYMCZASOWY pasek nad navbarem (od 2026-10-31): komunikat po naprawie danych SERP w aplikacji.
- * - wrzesien-pazdziernik 2026: Google zatruwal SERP-y dostawcom, audyt porownywal tresc z czolowka
- *   inna niz u uzytkownika - od 28.10 nowe zrodlo wynikow;
- * - 30.10: Google podmienil adresy w wynikach na posrednikow `google.com/goto`, audyty mialy 1-3
- *   konkurentow zamiast 8-10 - naprawione 30-31.10 (changelog aplikacji, wpis 2026-10-31).
- * Usunac po kilku tygodniach: wywolanie w Navbar.tsx i NavbarEN.tsx plus ten plik.
+ * Pasek komunikatu nad navbarem. Treść wpisuje się w panelu admina aplikacji (`/admin/lp`, karta
+ * „Pasek komunikatu na citationone.com”), a strona czyta ją w runtime z `/api/public/lp-links`
+ * (pole `notice`, osobno PL i EN). Pusty tekst w panelu = brak paska w danym języku.
  *
- * Zamkniecie dziala tylko do przeladowania strony. Zapamietanie w localStorage chowaloby pasek
- * dopiero po hydratacji, czyli skok ukladu u kazdego, kto go wczesniej zamknal.
- * Pasek NIE jest sticky - przewija sie z trescia, a sticky navbar zostaje u gory jak dotad.
+ * Pasek NIE ma fallbacku w kodzie: komunikat jest z natury tymczasowy, więc przy błędzie albo
+ * przekroczeniu czasu odpowiedzi lepiej nie pokazać nic niż nieaktualną treść. Koszt: pasek pojawia się
+ * dopiero po odpowiedzi i przesuwa stronę w dół o swoją wysokość (endpoint jest w cache CDN,
+ * więc zwykle to ułamek sekundy). Wywołanie siedzi w Navbar.tsx i NavbarEN.tsx.
+ *
+ * Link jest opcjonalny. Desktop: tekst + podkreślony link. Mobile: sam tekst, a przy linku cały
+ * pasek jest linkiem (osobna etykieta zajmowałaby drugą linijkę). Adres spoza citationone.com
+ * otwiera się w nowej karcie.
+ *
+ * Zamknięcie działa tylko do przeładowania strony. Zapamiętanie w localStorage chowałoby pasek
+ * dopiero po hydratacji, czyli skok układu u każdego, kto go wcześniej zamknął.
+ * Pasek NIE jest sticky - przewija się z treścią, a sticky navbar zostaje u góry jak dotąd.
  */
 const COPY = {
-  pl: {
-    text: 'Wyniki Google w audycie są znowu pełne i wiarygodne.',
-    short: 'Wyniki Google znowu pełne i wiarygodne',
-    cta: 'Zrób darmowy audyt',
-    close: 'Zamknij komunikat',
-  },
-  en: {
-    text: 'Google results in your audit are complete and reliable again.',
-    short: 'Google results complete and reliable again',
-    cta: 'Run a free audit',
-    close: 'Close notice',
-  },
+  pl: { defaultLabel: 'Sprawdź', close: 'Zamknij komunikat', region: 'Komunikat' },
+  en: { defaultLabel: 'Learn more', close: 'Close notice', region: 'Notice' },
 } as const;
 
+interface Notice {
+  text: string;
+  linkUrl: string | null;
+  linkLabel: string | null;
+}
+
+/** Odpowiedź endpointu jest niezaufana - przyjmujemy tylko poprawny kształt i bezpieczny adres. */
+function parseNotice(raw: unknown): Notice | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const { text, linkUrl, linkLabel } = raw as Record<string, unknown>;
+  if (typeof text !== 'string' || !text.trim()) return null;
+  const url = typeof linkUrl === 'string' && isSafeHref(linkUrl) ? linkUrl : null;
+  const label = typeof linkLabel === 'string' && linkLabel.trim() ? linkLabel.trim() : null;
+  return { text: text.trim(), linkUrl: url, linkLabel: label };
+}
+
+/** Ta sama reguła co przy zapisie w panelu: `/\host` i `/<tab>/host` przeglądarka czyta jak `//host`. */
+function isSafeHref(href: string): boolean {
+  if (/[\s\\\u0000-\u001f\u007f]/.test(href)) return false;
+  if (href.startsWith('/') && !href.startsWith('//')) return true;
+  try {
+    return new URL(href).protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
+function isExternal(href: string): boolean {
+  if (href.startsWith('/')) return false;
+  try {
+    const host = new URL(href).hostname;
+    return host !== 'citationone.com' && !host.endsWith('.citationone.com');
+  } catch {
+    return false;
+  }
+}
+
 export default function NoticeBar({ lang }: { lang: 'pl' | 'en' }) {
+  const [notice, setNotice] = useState<Notice | null>(null);
   const [open, setOpen] = useState(true);
-  if (!open) return null;
+
+  useEffect(() => {
+    let alive = true;
+    fetchLpSettings().then((s) => {
+      if (alive) setNotice(parseNotice(s?.notice?.[lang]));
+    });
+    return () => {
+      alive = false;
+    };
+  }, [lang]);
+
+  if (!notice || !open) return null;
   const c = COPY[lang];
+  const href = notice.linkUrl;
+  const newTab = href && isExternal(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 
   return (
     <div
       role="region"
-      aria-label={lang === 'pl' ? 'Komunikat' : 'Notice'}
+      aria-label={c.region}
       style={{ background: '#085C62', color: '#ffffff', fontSize: 13, lineHeight: 1.45 }}
     >
       <div
@@ -50,24 +97,25 @@ export default function NoticeBar({ lang }: { lang: 'pl' | 'en' }) {
           textAlign: 'center',
         }}
       >
-        {/* Desktop: pelny tekst + CTA. Mobile: krotki tekst, caly jako link - bez osobnej linijki
-            z CTA, bo „Wyprobuj za darmo” stoi tuz pod paskiem w navbarze. */}
-        <span className="hidden md:inline">
-          {c.text}{' '}
-          <a
-            href={`${APP_URL}/register?lang=${lang}`}
-            style={{ color: '#ffffff', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: 2, whiteSpace: 'nowrap' }}
-          >
-            {c.cta} →
-          </a>
-        </span>
-        <a
-          href={`${APP_URL}/register?lang=${lang}`}
-          className="md:hidden"
-          style={{ color: '#ffffff', textDecoration: 'none' }}
-        >
-          {c.short}
-        </a>
+        {href ? (
+          <>
+            <span className="hidden md:inline">
+              {notice.text}{' '}
+              <a
+                href={href}
+                {...newTab}
+                style={{ color: '#ffffff', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: 2, whiteSpace: 'nowrap' }}
+              >
+                {notice.linkLabel ?? c.defaultLabel} →
+              </a>
+            </span>
+            <a href={href} {...newTab} className="md:hidden" style={{ color: '#ffffff', textDecoration: 'none' }}>
+              {notice.text}
+            </a>
+          </>
+        ) : (
+          <span>{notice.text}</span>
+        )}
         <button
           type="button"
           onClick={() => setOpen(false)}

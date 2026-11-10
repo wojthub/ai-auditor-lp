@@ -4,7 +4,8 @@
  * LP jest statyczne (`output: 'export'`), więc wszystko, co ma się zmieniać bez przebudowy,
  * przychodzi w runtime z `app.citationone.com/api/public/lp-links`. Obietnica jest współdzielona
  * na poziomie modułu: kilka sekcji na jednej stronie (przykładowy raport, liczby social proof)
- * robi razem jedno zapytanie. Błąd, timeout albo CORS dają `null` - każdy konsument ma własny
+ * robi razem jedno zapytanie (pasek komunikatu jest w navbarze, więc zapytanie idzie na każdej
+ * podstronie). Błąd, timeout albo CORS dają `null` - każdy konsument ma własny
  * fallback wypalony w HTML.
  */
 
@@ -15,6 +16,8 @@ export interface LpSettings {
   reportUrlPl?: unknown;
   reportUrlEn?: unknown;
   stats?: { users?: unknown; audits?: unknown; pages?: unknown };
+  /** Pasek nad navbarem, osobno per język; `null` = brak paska. */
+  notice?: { pl?: unknown; en?: unknown };
 }
 
 let pending: Promise<LpSettings | null> | null = null;
