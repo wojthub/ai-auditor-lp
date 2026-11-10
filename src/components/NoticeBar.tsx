@@ -17,14 +17,14 @@ import { APP_URL } from '@/lib/appUrl';
  */
 const COPY = {
   pl: {
-    text: 'Problem z pobieraniem pełnych SERP-ów i zatruwaniem wyników Google został rozwiązany.',
-    short: 'Problem z SERP-ami i zatruciem wyników rozwiązany',
+    text: 'Wyniki Google w audycie są znowu pełne i wiarygodne.',
+    short: 'Wyniki Google znowu pełne i wiarygodne',
     cta: 'Zrób darmowy audyt',
     close: 'Zamknij komunikat',
   },
   en: {
-    text: 'The issue with fetching full SERPs and poisoned Google results has been fixed.',
-    short: 'SERP fetching and poisoning issue fixed',
+    text: 'Google results in your audit are complete and reliable again.',
+    short: 'Google results complete and reliable again',
     cta: 'Run a free audit',
     close: 'Close notice',
   },
