@@ -37,6 +37,11 @@ npm run start      # Serwuj build
 **Brak testów i lintu** — `package.json` definiuje wyłącznie te trzy skrypty. Nie ma tu Vitest ani ESLint;
 weryfikacja zmiany = `npm run build` (static export wyłapie błędy typów i nieobsłużone dynamiczne API).
 
+**Build pobiera changelog z aplikacji** (od 2026-11-10): `/changelog`, `/pl/changelog` i `/knowledge/log.md`
+czytają `https://app.citationone.com/api/public/changelog` w czasie builda, a błąd pobrania **przerywa build**.
+Bez sieci albo przed wdrożeniem endpointu podmień adres: `CHANGELOG_ENDPOINT=http://localhost:3000/api/public/changelog npm run build`
+(lokalna aplikacja) albo dowolny serwer zwracający `{ "entries": [...] }`.
+
 ---
 
 ## Struktura projektu
@@ -67,12 +72,16 @@ ai-auditor-lp/
 │   │   │   ├── page.tsx
 │   │   │   ├── DimensionsContent.tsx
 │   │   │   └── [slug]/page.tsx  # 12 podstron EN (/dimensions/bluf itd.) — patrz nota niżej
-│   │   ├── sitemap.ts           # out/sitemap.xml (42 URL-e + hreflangi); wymaga dynamic='force-static'
+│   │   ├── sitemap.ts           # out/sitemap.xml (46 URL-i + hreflangi); wymaga dynamic='force-static'
 │   │   ├── robots.ts            # out/robots.txt — wskazuje sitemapę
+│   │   ├── llms.txt/route.ts    # out/llms.txt (llmstxt.org) - treść z lib/knowledge.ts
+│   │   ├── knowledge/[...path]/route.ts # out/knowledge/**.md - paczka Open Knowledge Format v0.2
 │   │   ├── tools/[slug]/        # 4 podstrony narzędzi EN — hub /tools usunięty 2026-08-24
 │   │   ├── (en)/api/            # EN "API" (/api) — grupa routingu, NIE `src/app/api/`
 │   │   │   ├── page.tsx         #   (patrz nota "Zakladka API" nizej)
 │   │   │   └── ApiContentEN.tsx
+│   │   ├── (en)/affiliate/      # EN "Referral program" (/affiliate)
+│   │   ├── (en)/changelog/      # EN "Changelog" (/changelog) - ChangelogPage + lib/changelog.ts
 │   │   └── pl/                  # Wersja PL
 │   │       ├── layout.tsx       # PL layout (lang="pl", metadata PL, hreflang)
 │   │       ├── page.tsx         # PL homepage (/pl)
@@ -87,9 +96,18 @@ ai-auditor-lp/
 │   │       │   ├── WymiaryContent.tsx
 │   │       │   └── [slug]/page.tsx  # 12 podstron PL (/pl/wymiary/bluf itd.)
 │   │       ├── narzedzia/[slug]/ # 4 podstrony narzędzi PL — hub /pl/narzedzia usunięty 2026-08-24
+│   │       ├── affiliate/       # PL "Program poleceń" (/pl/affiliate)
+│   │       ├── changelog/       # PL "Nowości" (/pl/changelog)
 │   │       └── api/             # PL "API" (/pl/api)
 │   │           ├── page.tsx
 │   │           └── ApiContent.tsx
+│   ├── lib/
+│   │   ├── languageSwitch.ts    # STATIC_PAIRS: pary EN<->PL dla przełącznika, hreflangów i sitemapy
+│   │   ├── lpSettings.ts        # fetchLpSettings - runtime z app /api/public/lp-links (raport, liczby, pasek)
+│   │   ├── changelog.ts         # getChangelog - build-time z app /api/public/changelog
+│   │   ├── knowledge.ts         # llms.txt + paczka OKF (/knowledge) z src/data/* i changelogu
+│   │   ├── socialMeta.ts        # OG/Twitter dla każdej strony
+│   │   └── appUrl.ts, attribution.ts, track.ts, reveal.ts, useReportUrl.ts, useTypewriterPlaceholder.ts
 │   ├── data/                    # Treść podstron (czyste dane, zero JSX)
 │   │   ├── dimension-types.ts   # Typy + STRINGS_PL/STRINGS_EN + DIMENSION_SLUG_PAIRS (hreflang)
 │   │   ├── dimensions-pl.ts     # 12 wymiarów PL
@@ -98,13 +116,15 @@ ai-auditor-lp/
 │   │   ├── tools-pl.ts          # 4 narzędzia PL
 │   │   └── tools-en.ts          # 4 narzędzia EN (lustro)
 │   └── components/
+│       ├── NoticeBar.tsx        # Shared - pasek komunikatu nad navbarem, treść z panelu /admin/lp
+│       ├── ChangelogPage.tsx    # Shared - lista zmian (/changelog i /pl/changelog)
 │       ├── DimensionPage.tsx    # Shared - szablon podstrony wymiaru (PL i EN przez prop `t`)
 │       ├── ToolPage.tsx         # Shared - szablon podstrony narzędzia
 │       ├── Navbar.tsx           # PL Navbar - switcher EN → /
 │       ├── Hero.tsx
 │       ├── TechLogos.tsx
 │       ├── Showcase.tsx         # Mockup panelu (sam mockup, bez copy) - na HP
-│       ├── ShowcaseDeck.tsx     # Shared - karuzela 3 ekranow panelu (pigulki + strzalki + swipe)
+│       ├── ShowcaseDeck.tsx     # Shared - karuzela 3 ekranow panelu (strzalki + kreski + swipe + powiekszenie po kliku)
 │       ├── StatsBand.tsx        # Shared (prop `lang`) - pas 3 liczb social proof, na HP pod Showcase
 │       ├── CqsScoreCard.tsx     # Shared - kafelek CQS (Problem na HP + /pl/wymiary i /dimensions)
 │       ├── Problem.tsx
@@ -155,6 +175,10 @@ ai-auditor-lp/
 | `/dimensions/[slug]` | DimensionPage + dimensions-en.ts | H1 = title, np. `What is BLUF in SEO and GEO?` |
 | `/tools/[slug]` | ToolPage + tools-en.ts | H1 = title, fraza sprzedażowa `… tool for SEO`, np. `Keyword clustering tool for SEO` |
 | `/api` | ApiContentEN | CitationOne API - audyty GEO przez REST |
+| `/affiliate` | AffiliateContentEN | CitationOne referral program - 10% on every order |
+| `/changelog` | ChangelogPage (`lang="en"`) | CitationOne changelog - what is new in the GEO audit |
+| `/llms.txt` | route handler + lib/knowledge.ts | - (plik tekstowy dla agentów AI) |
+| `/knowledge/*.md` | route handler + lib/knowledge.ts | - (paczka OKF, 22 pliki) |
 
 ### PL (katalog /pl)
 
@@ -167,6 +191,11 @@ ai-auditor-lp/
 | `/pl/wymiary/[slug]` | DimensionPage + dimensions-pl.ts | H1 = title, np. `Czym jest BLUF w SEO i GEO?` |
 | `/pl/narzedzia/[slug]` | ToolPage + tools-pl.ts | H1 = title, fraza sprzedażowa `Narzędzie do … dla SEO`, np. `Narzędzie do klasteryzacji słów kluczowych dla SEO` |
 | `/pl/api` | ApiContent PL | API CitationOne - audyty GEO przez REST |
+| `/pl/affiliate` | AffiliateContent PL | Program poleceń CitationOne - 10% prowizji od każdego zamówienia |
+| `/pl/changelog` | ChangelogPage (`lang="pl"`) | Nowości w CitationOne - changelog audytu GEO |
+
+Nowa statyczna podstrona = para w `STATIC_PAIRS` ([src/lib/languageSwitch.ts](src/lib/languageSwitch.ts)):
+z niej biorą się przełącznik języka, hreflangi (`alternatesFor`) i wpis w sitemapie.
 
 ### Zakładka API (`/api` i `/pl/api`)
 
@@ -203,13 +232,20 @@ bumpie; w pasku bloku kodu jest `api/v1`, czyli prefiks ścieżki, który zmieni
 
 ### Navbar — wejścia do aplikacji
 
+**Stan obecny (sprawdzony w kodzie 2026-11-10)** - dwa wejścia zamiast jednego „Zrób audyt":
+
 | | Desktop | Mobile |
 |-|---------|--------|
-| Pasek | CTA „Zrób audyt" / „Run audit" (wypełniony) | tekstowy link „Zrób audyt" / „Run audit" obok hamburgera |
-| Menu | — | „Zrób audyt" / „Run audit" (wypełniony) |
+| Pasek | „Zaloguj się" / „Log in" (`/login`) + wypełniony „Wypróbuj za darmo" / „Try for free" (`/register`) | tekstowy link „Wypróbuj za darmo" / „Try for free" (`/register`) obok hamburgera |
+| Menu | — | na dole: wypełniony „Wypróbuj za darmo" (`/register`), pod nim „Zaloguj się" (`/login`) |
 
-Wszystkie trzy prowadzą pod `APP_URL/login?lang={pl|en}` — aplikacja ma jeden ekran logowania,
-który zakłada konto przy pierwszym wejściu, więc osobnego `/register` nie ma.
+Adresy: `APP_URL/login?lang={pl|en}` i `APP_URL/register?lang={pl|en}`. Powód zmiany jest w komentarzu
+w `Navbar.tsx`: wracający użytkownik nie miał gdzie kliknąć, a nowy nie widział, że start jest darmowy.
+
+Rozwijane menu „Audyt treści" (`AUDIT_MENU`, desktop i mobile): Jak działa audytor?, Wymiary oceny,
+Audyt masowy, API, **Nowości / Changelog** (od 2026-11-10). Stopka ma te same podstrony.
+
+Notatki poniżej opisują wcześniejszy etap („Zrób audyt" → `/login`) i zostają jako historia decyzji.
 
 - **Etykieta to „Zrób audyt", nie „Zaloguj" (2026-09-16).** Nawigacja nie oferuje osobnego wejścia
   do logowania: adres jest ten sam, a wracający użytkownik i tak trafia na ekran, który go zaloguje.
@@ -285,6 +321,8 @@ Na ekranie leżą **trzy slajdy** (od 2026-09-04) w kolejności pracy z audytem:
 **NoticeBar** ([NoticeBar.tsx](src/components/NoticeBar.tsx)) - pasek komunikatu nad navbarem PL i EN (wywołanie w `Navbar.tsx` i `en/NavbarEN.tsx`). Treść **ustawia admin w aplikacji** (`/admin/lp`, karta „Pasek komunikatu na citationone.com”, klucze `LP_NOTICE_TEXT_PL/EN`, opcjonalnie `LP_NOTICE_LINK_PL/EN` i `LP_NOTICE_LINK_LABEL_PL/EN`), strona czyta ją z pola `notice` w `lp-links` przez `fetchLpSettings`. Pasek idzie na stronę tylko przy zaznaczonym checkboxie „Pokazuj pasek na stronie” (`LP_NOTICE_ENABLED`; odznaczenie zostawia treść). Pusty tekst = brak paska w tym języku. **Celowo bez fallbacku w kodzie** - przy błędzie endpointu pasek się nie pokazuje, zamiast pokazać nieaktualny komunikat. Pasek pojawia się po odpowiedzi i przesuwa stronę w dół o swoją wysokość. Komponent zostaje w kodzie na stałe; wyłączenie paska = odznaczenie checkboxa w panelu.
 
 **Changelog** (`/changelog` i `/pl/changelog`, wspólny komponent [ChangelogPage.tsx](src/components/ChangelogPage.tsx), dane z [src/lib/changelog.ts](src/lib/changelog.ts)) - lista zmian produktu pogrupowana po miesiącach, z kotwicą na każdy wpis. Wpisy pochodzą z changelogu aplikacji przez `app.citationone.com/api/public/changelog` i są pobierane **w czasie builda**, więc lądują w statycznym HTML. Nowy wpis w aplikacji pojawia się na LP dopiero po deployu aplikacji i **ponownym buildzie LP**. Błąd pobrania przerywa build, żeby nie opublikować pustej strony. Zakres wpisów (od 2026-06-01) wyznacza aplikacja. Pauzy „—” ze starszych wpisów zamieniamy przy pobraniu na dywiz. Lokalnie adres podmienia `CHANGELOG_ENDPOINT`. Link w menu „Audyt treści” i w stopce, para w `STATIC_PAIRS`.
+
+**llms.txt i paczka wiedzy OKF** ([src/lib/knowledge.ts](src/lib/knowledge.ts), route handlery `src/app/llms.txt/route.ts` i `src/app/knowledge/[...path]/route.ts`, od 2026-11-10) - `/llms.txt` w formacie llmstxt.org i paczka w Open Knowledge Format v0.2 pod `/knowledge/` (`index.md` z `okf_version`, `product.md`, `api.md`, `dimensions/*.md`, `tools/*.md`, `log.md` z changelogu). Oba generują się **przy buildzie** z `src/data/*` i changelogu aplikacji, więc nowy wymiar, narzędzie albo wpis changelogu trafia do nich sam. Paczka jest po angielsku; `llms.txt` wskazuje też wersję PL. Fakty produktu (opis, cennik, przykładowy raport) siedzą w stałej `PRODUCT` w `knowledge.ts` - przy zmianie cennika popraw je tam. Nagłówki `Content-Type` z `charset=utf-8` ustawia `vercel.json`. OKF nie definiuje sposobu odkrywania paczki na stronie, dlatego prowadzi do niej `llms.txt`. **Zweryfikowane z kodem aplikacji (2026-11-10), trzymaj się tego w tekstach dla agentów:** CQS to średnia ważona 10 wymiarów **plus E-E-A-T (waga 0,05) i metadanych** (title + meta description) - `calculateCQS` w `../ai-auditor/src/lib/scoring.ts`, wagi zależne od profilu typu treści. Information Gain jest poza wynikiem. Na żywo audyt sprawdza cytowania w AI Overviews, ChatGPT i AI Mode - **Perplexity nie jest odpytywane**, więc pisz „szacuje szansę cytowania”, a nie „sprawdza, czy Perplexity cytuje”. Każde narzędzie i każde „Wdrożenie w treść” kosztuje 1 kredyt (`decrementAuditCredits`), nowe konto ma 3 kredyty. Znaczniki HTML w opisach changelogu (`<script>`) `codeTags` owija w kod inline, inaczej renderer Markdowna by je ukrył.
 
 **AuthorSection** ([AuthorSection.tsx](src/components/AuthorSection.tsx) / [en/AuthorSectionEN.tsx](src/components/en/AuthorSectionEN.tsx)) - karta autora: zdjęcie z lewej (kolumna 208px, na mobile pełna szerokość na górze) + treść z prawej (label "O autorze"/"About the author", nazwisko **Wojciech Władziński-Ulatowski**, rola "Twórca CitationOne"/"Creator of CitationOne", bio, przycisk LinkedIn w accentcie). Zdjęcie: `public/author.jpg` (B&W, wyszywane logo usunięte z koszuli).
 
