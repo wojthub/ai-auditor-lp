@@ -47,14 +47,16 @@ export default function Showcase() {
       />
 
       <div style={{ position: 'relative', maxWidth: 1124, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-        {/* Wchodzimy od „Rekomendacji” - to ekran, po ktory klient przychodzi; Podsumowanie
-            i Wdrozenie zostaja na wyciagniecie strzalki. */}
+        {/* Wchodzimy od „Podsumowania” (od 2026-11-10, wczesniej od „Rekomendacji”) - pierwszy ekran
+            w kolejnosci pracy; Rekomendacje i Wdrozenie zostaja na wyciagniecie strzalki. */}
         <ShowcaseDeck
           slides={SLIDES}
-          startIndex={1}
+          startIndex={0}
           regionLabel="Ekrany panelu CitationOne"
           prevLabel="Poprzedni ekran"
           nextLabel="Następny ekran"
+          zoomLabel="Powiększ ekran"
+          closeLabel="Zamknij powiększenie"
         />
       </div>
     </section>

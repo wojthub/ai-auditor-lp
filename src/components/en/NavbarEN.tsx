@@ -23,6 +23,7 @@ const AUDIT_MENU: { href: string; label: string; desc: string }[] = [
   // API v1 covers audits ONLY (/audits, /audits/bulk, /me) - none of the tools has an endpoint,
   // so this is a fourth way into the same product, not a separate top-level entry.
   { href: '/api', label: 'API', desc: 'Run audits over REST and JSON' },
+  { href: '/changelog', label: 'Changelog', desc: 'The latest features, improvements and fixes' },
 ];
 
 /** „Pricing" menu - mirror of ../Navbar.tsx. Payment terms next to the referral program. */

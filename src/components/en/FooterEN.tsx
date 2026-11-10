@@ -16,6 +16,7 @@ const NAV_LINKS = [
   { href: '/#who-is-it-for', label: 'Who is it for?' },
   { href: '/api', label: 'API' },
   { href: '/affiliate', label: 'Referral program' },
+  { href: '/changelog', label: 'Changelog' },
 ];
 
 const LEGAL_LINKS = [

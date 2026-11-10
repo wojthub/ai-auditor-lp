@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, animate, motion, useMotionValue } from 'framer-motion';
 
 const SPRING = { type: 'spring', stiffness: 210, damping: 30, mass: 0.9 } as const;
@@ -29,7 +30,22 @@ type Props = {
   regionLabel: string;
   prevLabel: string;
   nextLabel: string;
+  /** Przycisk lupy na ekranie i etykieta okna powiekszenia. */
+  zoomLabel: string;
+  closeLabel: string;
 };
+
+/** Zrzut slajdu w <picture>: wariant mobilny (media), WebP dla desktopu, PNG jako fallback. */
+function SlidePicture({ slide, imgProps }: { slide: ShowcaseSlide; imgProps: React.ImgHTMLAttributes<HTMLImageElement> }) {
+  return (
+    <>
+      <source media={MOBILE_QUERY} type="image/webp" srcSet={slide.mobileSrc.replace(/.png$/, '.webp')} />
+      <source media={MOBILE_QUERY} srcSet={slide.mobileSrc} />
+      <source type="image/webp" srcSet={slide.src.replace(/.png$/, '.webp')} />
+      <img src={slide.src} alt={slide.alt} {...imgProps} />
+    </>
+  );
+}
 
 /**
  * Ekran mockupu: kilka zrzutow panelu przewijanych strzalkami, kreskami pozycji i swipem.
@@ -37,9 +53,24 @@ type Props = {
  * z 2026-09-08). Wspoldzielony przez `Showcase` (PL) i `ShowcaseEN` - same slajdy
  * i etykiety ida propem, tak jak w `DimensionPage`.
  */
-export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prevLabel, nextLabel }: Props) {
+export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prevLabel, nextLabel, zoomLabel, closeLabel }: Props) {
   const [index, setIndex] = useState(startIndex);
   const count = slides.length;
+
+  // Powiekszenie: klik w zrzut otwiera okno z pelnym zrzutem biezacego slajdu. Klik po
+  // przeciagnieciu NIE otwiera - przegladarka wysyla `click` takze po dragu tasmy.
+  const [zoomed, setZoomed] = useState(false);
+  const dragged = useRef(false);
+  const zoomTrigger = useRef<HTMLElement | null>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const openZoom = (trigger: HTMLElement) => {
+    zoomTrigger.current = trigger;
+    setZoomed(true);
+  };
+  const closeZoom = () => {
+    setZoomed(false);
+    zoomTrigger.current?.focus({ preventScroll: true });
+  };
 
   // Tasme przesuwamy w PIKSELACH, nie w procentach: `drag` liczy przesuniecie w px i mieszanie
   // jednostek na tej samej wartosci `x` potrafi szarpnac slajdem przy puszczeniu palca.
@@ -99,6 +130,40 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
     return () => window.clearTimeout(id);
   }, [slides, startIndex]);
 
+  // Okno powiekszenia: Esc zamyka, strzalki klawiatury przelaczaja slajd, strona pod spodem
+  // sie nie przewija.
+  useEffect(() => {
+    if (!zoomed) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeZoom();
+      else if (e.key === 'ArrowLeft') go(index - 1);
+      else if (e.key === 'ArrowRight') go(index + 1);
+      else if (e.key === 'Tab') {
+        // Fokus zostaje w oknie (aria-modal) - Tab nie ucieka do strony pod spodem.
+        const items = [...(overlayRef.current?.querySelectorAll<HTMLButtonElement>('button:not([disabled])') ?? [])];
+        if (items.length === 0) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        const active = document.activeElement;
+        if (e.shiftKey && (active === first || !items.includes(active as HTMLButtonElement))) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && (active === last || !items.includes(active as HTMLButtonElement))) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+    // `go` i `closeZoom` sa tworzone na nowo co render; wystarczy aktualny `index`.
+  }, [zoomed, index]);
+
   return (
     <div
       role="group"
@@ -148,7 +213,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                     style={{
                       display: 'flex',
                       height: '100%',
-                      cursor: 'grab',
+                      cursor: 'zoom-in',
                       x,
                       translate: width === 0 ? `${-startIndex * 100}% 0` : 'none',
                     }}
@@ -157,6 +222,12 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                     dragElastic={0.14}
                     dragMomentum={false}
                     whileDrag={{ cursor: 'grabbing' }}
+                    onPointerDown={() => { dragged.current = false; }}
+                    onDragStart={() => { dragged.current = true; }}
+                    onClick={(e) => {
+                      if (dragged.current) return;
+                      openZoom(e.currentTarget);
+                    }}
                     onDragEnd={(_, info) => {
                       // Kazde puszczenie konczy sie snapem - takze ponizej progu, zeby tasma
                       // nie zostawala miedzy slajdami.
@@ -171,23 +242,21 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                             desktopu, a <img> zostaje fallbackiem PNG. Zrzuty mobilne sa PNG z paleta -
                             zwykly WebP wychodzil na nich CIEZSZY (plaskie kolory), wiec ich WebP jest
                             near-lossless (piksel w piksel jak PNG, 10-40% lzejszy, od 2026-10-18). */}
-                        <source media={MOBILE_QUERY} type="image/webp" srcSet={slide.mobileSrc.replace(/.png$/, '.webp')} />
-                        <source media={MOBILE_QUERY} srcSet={slide.mobileSrc} />
-                        <source type="image/webp" srcSet={slide.src.replace(/.png$/, '.webp')} />
-                        <img
-                          src={slide.src}
-                          alt={slide.alt}
-                          draggable={false}
-                          decoding="async"
-                          loading={i === startIndex ? 'eager' : 'lazy'}
-                          fetchPriority={i === startIndex ? 'high' : 'auto'}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            objectPosition: 'top center',
-                            display: 'block',
-                            userSelect: 'none',
+                        <SlidePicture
+                          slide={slide}
+                          imgProps={{
+                            draggable: false,
+                            decoding: 'async',
+                            loading: i === startIndex ? 'eager' : 'lazy',
+                            fetchPriority: i === startIndex ? 'high' : 'auto',
+                            style: {
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              objectPosition: 'top center',
+                              display: 'block',
+                              userSelect: 'none',
+                            },
                           }}
                         />
                       </picture>
@@ -201,6 +270,22 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                     pointerEvents: 'none',
                     background: 'linear-gradient(118deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 16%, rgba(255,255,255,0) 36%)',
                   }} />
+
+                  {/* Lupa: klawiaturowe (i widoczne) wejscie do powiekszenia - sam klik w zrzut
+                      niczego o sobie nie mowi. */}
+                  <button
+                    type="button"
+                    className="deck-zoom"
+                    onMouseDown={(e) => e.preventDefault()}
+                    onClick={(e) => openZoom(e.currentTarget)}
+                    aria-label={zoomLabel}
+                    aria-haspopup="dialog"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      <circle cx="11" cy="11" r="7" />
+                      <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
+                    </svg>
+                  </button>
 
                   {/* Strzalki lezą na ekranie, nie pod nim - dol mockupu zjada maska gradientu. */}
                   <button
@@ -296,7 +381,155 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
         </button>
       </div>
 
+      {/* Portal do <body>: urzadzenie ma `transform`, a pod nim `position: fixed` liczyloby sie
+          od mockupu zamiast od okna. */}
+      {zoomed && typeof document !== 'undefined' && createPortal(
+        <div
+          ref={overlayRef}
+          className="deck-zoom-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${zoomLabel}: ${slides[index].label}`}
+          onClick={(e) => { if (e.target === e.currentTarget) closeZoom(); }}
+        >
+          <button type="button" className="deck-zoom-close" onClick={closeZoom} aria-label={closeLabel} autoFocus>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" aria-hidden>
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+          <picture className="deck-zoom-picture" onClick={(e) => { if (e.target === e.currentTarget) closeZoom(); }}>
+            <SlidePicture slide={slides[index]} imgProps={{ className: 'deck-zoom-img', decoding: 'async' }} />
+          </picture>
+          <div className="deck-zoom-bar">
+            <button type="button" className="deck-zoom-nav" onClick={() => go(index - 1)} disabled={index === 0} aria-label={prevLabel}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <span className="deck-zoom-label">{slides[index].label} <span className="deck-zoom-count">{index + 1}/{count}</span></span>
+            <button type="button" className="deck-zoom-nav" onClick={() => go(index + 1)} disabled={index === count - 1} aria-label={nextLabel}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+        </div>,
+        document.body
+      )}
+
       <style>{`
+        /* Lupa w prawym gornym rogu ekranu; na telefonie tez widoczna (strzalki ekranu sa tam ukryte). */
+        .deck-zoom {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          width: 34px;
+          height: 34px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(13,13,18,0.08);
+          border-radius: 999px;
+          background: rgba(255,255,255,0.86);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+          box-shadow: 0 6px 18px rgba(13,13,18,0.12);
+          color: #36394a;
+          cursor: zoom-in;
+          opacity: 0.92;
+          transition: opacity 0.18s ease, background 0.16s ease, color 0.16s ease;
+        }
+        .deck-zoom:hover { opacity: 1; background: #ffffff; color: #0b7983; }
+        .deck-zoom-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 1000;
+          background: rgba(13,13,18,0.88);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 14px;
+          padding: 56px 16px 16px;
+          animation: deck-zoom-in 0.18s ease-out;
+        }
+        @keyframes deck-zoom-in { from { opacity: 0; } }
+        @media (prefers-reduced-motion: reduce) { .deck-zoom-overlay { animation: none; } }
+        .deck-zoom-picture {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 0;
+          max-width: 100%;
+          flex: 1 1 auto;
+        }
+        .deck-zoom-img {
+          display: block;
+          /* Nie wiecej niz naturalna szerokosc zrzutu (1520 px) - rozciagniety obraz znow by sie rozmyl. */
+          max-width: min(1520px, 100%);
+          max-height: calc(100vh - 140px);
+          max-height: calc(100dvh - 140px);
+          width: auto;
+          height: auto;
+          border-radius: 10px;
+          box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+          background: #f7f8fa;
+        }
+        .deck-zoom-close {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          border-radius: 999px;
+          background: rgba(255,255,255,0.12);
+          color: #ffffff;
+          cursor: pointer;
+        }
+        .deck-zoom-close:hover { background: rgba(255,255,255,0.22); }
+        .deck-zoom-bar {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          color: #ffffff;
+          font-size: 14px;
+          font-weight: 600;
+        }
+        .deck-zoom-count { font-weight: 400; color: rgba(255,255,255,0.6); font-variant-numeric: tabular-nums; margin-left: 4px; }
+        .deck-zoom-nav {
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          border-radius: 999px;
+          background: rgba(255,255,255,0.12);
+          color: #ffffff;
+          cursor: pointer;
+        }
+        .deck-zoom-nav:hover { background: rgba(255,255,255,0.22); }
+        .deck-zoom-nav:disabled { visibility: hidden; }
+        /* Telefon: zrzut dopasowany do wysokosci bylby tej samej wielkosci co w mockupie. Dajemy
+           pelna szerokosc i przewijanie w pionie - pasek ze strzalkami zostaje na dole okna. */
+        @media ${MOBILE_QUERY} {
+          .deck-zoom-overlay { justify-content: flex-start; overflow-y: auto; padding: 56px 12px 12px; }
+          .deck-zoom-picture { flex: none; width: 100%; }
+          .deck-zoom-img { width: 100%; max-width: 480px; max-height: none; }
+          .deck-zoom-bar {
+            position: sticky;
+            bottom: 0;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(13,13,18,0.82);
+          }
+          .deck-zoom-close { position: fixed; }
+        }
+
         /* Desktop: laptopowy ekran z poziomym zrzutem. Mobile: waska ramka telefonu z pionowym
            zrzutem - proporcja ekranu MUSI zgadzac sie z plikiem, inaczej object-fit przytnie tekst. */
         .deck-device {

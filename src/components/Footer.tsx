@@ -16,6 +16,7 @@ const NAV_LINKS = [
   { href: '/pl#dla-kogo', label: 'Dla kogo?' },
   { href: '/pl/api', label: 'API' },
   { href: '/pl/affiliate', label: 'Program poleceń' },
+  { href: '/pl/changelog', label: 'Nowości' },
 ];
 
 const LEGAL_LINKS = [

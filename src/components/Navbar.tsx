@@ -23,6 +23,7 @@ const AUDIT_MENU: { href: string; label: string; desc: string }[] = [
   // API v1 obsluguje WYLACZNIE audyty (/audits, /audits/bulk, /me) - zadne z narzedzi nie ma
   // endpointu, wiec to czwarte wejscie do tego samego produktu, nie osobna pozycja paska.
   { href: '/pl/api', label: 'API', desc: 'Zlecanie audytów przez REST i JSON' },
+  { href: '/pl/changelog', label: 'Nowości', desc: 'Najnowsze funkcje, ulepszenia i poprawki' },
 ];
 
 /** Menu „Cennik" - zasady platnosci obok programu polecen, czyli drugiej strony tego samego tematu. */

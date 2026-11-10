@@ -47,13 +47,15 @@ export default function ShowcaseEN() {
       />
 
       <div style={{ position: 'relative', maxWidth: 1124, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
-        {/* Opens on “Recommendations” - the screen people come for. */}
+        {/* Opens on “Summary” (since 2026-11-10, previously “Recommendations”) - first screen in the work order. */}
         <ShowcaseDeck
           slides={SLIDES}
-          startIndex={1}
+          startIndex={0}
           regionLabel="CitationOne panel screens"
           prevLabel="Previous screen"
           nextLabel="Next screen"
+          zoomLabel="Enlarge screen"
+          closeLabel="Close enlarged view"
         />
       </div>
     </section>
