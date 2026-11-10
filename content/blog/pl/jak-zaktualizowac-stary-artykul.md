@@ -9,7 +9,7 @@ Najważniejsze informacje w skrócie:
 - adres URL zostaje bez zmian, bo zachowuje historię strony i linki prowadzące do niej,
 - w CitationOne nową datę publikacji dostaje tekst z **ponad 50% nowej treści**, datę aktualizacji tekst z 20-50% zmian, a poniżej 20% daty zostają bez zmian.
 
-Aktualizacja starego artykułu, nazywana też odświeżaniem treści (content refresh), to praca z SEO i content marketingu, w której poprawiasz opublikowany tekst zamiast pisać nowy - uzupełniasz fakty, strukturę i odpowiedzi na pytania, żeby strona wróciła wyżej w Google i trafiała do odpowiedzi AI. Poradnik jest dla osób, które prowadzą blog lub sekcję poradników z dziesiątkami starszych wpisów i chcą zdecydować, które poprawić i jak. Jeśli piszesz nowy tekst, zajrzyj do artykułu [Jak pisać treści, które cytuje AI](/pl/blog/jak-pisac-tresci-pod-ai).
+Aktualizacja starego artykułu, nazywana też odświeżaniem treści (content refresh), to praca z SEO i content marketingu, w której poprawiasz opublikowany tekst zamiast pisać nowy - uzupełniasz fakty, strukturę i odpowiedzi na pytania, żeby strona wróciła wyżej w Google i trafiała do odpowiedzi AI. Taki tekst ma już historię i linki, więc aktualizacja zwykle kosztuje mniej pracy niż nowy wpis od zera. Poradnik jest dla osób, które prowadzą blog lub sekcję poradników z dziesiątkami starszych wpisów i chcą zdecydować, które poprawić i jak. Jeśli piszesz nowy tekst, zajrzyj do artykułu [Jak pisać treści, które cytuje AI](/pl/blog/jak-pisac-tresci-pod-ai).
 
 ## Kiedy odświeżać, kiedy pisać od nowa, a kiedy usunąć
 
@@ -27,7 +27,7 @@ Przy większej liczbie wpisów decyzje przyspiesza analiza całego serwisu, jak 
 
 ## Jak wybrać artykuły do odświeżenia
 
-Najlepsi kandydaci to teksty, które Google już zna, ale które nie są w czołówce. Szukaj ich w Search Console, w raporcie skuteczności z widokiem stron:
+Najlepsi kandydaci do aktualizacji to stare artykuły, które Google już zna, ale które nie są w czołówce. Szukaj ich w Google Search Console, w raporcie skuteczności z widokiem stron:
 
 - teksty ze średnią pozycją 4-15 dla fraz o sensownym wolumenie,
 - teksty, które w porównaniu ostatnich 3 miesięcy z poprzednimi straciły kliknięcia,
