@@ -9,11 +9,17 @@ Najważniejsze informacje w skrócie:
 - OpenAI ustala kolejność wyników na podstawie wielu czynników i zaznacza, że **miejsce w odpowiedzi nie jest gwarantowane**,
 - zmiana w robots.txt zaczyna działać w ChatGPT po **około 24 godzinach**.
 
-Poradnik jest dla właścicieli firm, marketerów i specjalistów SEO, którzy widzą, że ChatGPT poleca konkurencję, i chcą wiedzieć, co zrobić po swojej stronie. Jeśli dopiero poznajesz temat, zacznij od artykułu [Co to jest GEO](/pl/blog/co-to-jest-geo).
+Widoczność w ChatGPT to obecność Twojej marki w treści odpowiedzi i Twojej strony wśród źródeł, które ChatGPT podaje pod odpowiedzią. Poradnik jest dla właścicieli firm, marketerów i specjalistów SEO, którzy widzą, że ChatGPT poleca konkurencję, i chcą wiedzieć, co zrobić po swojej stronie. Jeśli dopiero poznajesz temat, zacznij od artykułu [Co to jest GEO](/pl/blog/co-to-jest-geo).
 
 ## Skąd ChatGPT bierze informacje o firmach
 
-ChatGPT korzysta z dwóch źródeł wiedzy o firmach i każde z nich wymaga innych działań.
+ChatGPT czerpie wiedzę o firmach z dwóch źródeł - z danych treningowych modelu, które zbiera robot GPTBot, i z wyszukiwania w sieci, do którego strony dostarcza robot OAI-SearchBot. Każde z tych źródeł wymaga innych działań.
+
+| Robot OpenAI | Do czego służy | Czy blokada usuwa stronę z wyszukiwania ChatGPT |
+|---|---|---|
+| OAI-SearchBot | Zbiera strony do wyników wyszukiwania w ChatGPT | Tak |
+| GPTBot | Zbiera dane do trenowania modeli | Nie |
+| ChatGPT-User | Odwiedza stronę w trakcie rozmowy na potrzeby użytkownika | Nie |
 
 Pierwsze to **wiedza modelu**. Model uczy się na danych zebranych do określonej daty i odpowiada z tej wiedzy, gdy nie szuka w sieci. Za zbieranie stron do trenowania odpowiada robot GPTBot. Zablokowanie go w robots.txt oznacza według OpenAI, że treść strony nie powinna trafiać do trenowania modeli.
 
@@ -36,7 +42,7 @@ Z tego wynikają trzy wnioski dla Twojej strony. Strona musi być w indeksach, z
 
 ## 7 kroków do widoczności w ChatGPT
 
-Poniższe kroki ułożyłem od warunków technicznych do treści i reputacji, bo każdy kolejny ma sens dopiero po spełnieniu poprzedniego.
+Widoczność w ChatGPT budujesz w trzech obszarach. Kroki 1-3 to dostęp techniczny (robots.txt, CDN i indeks Google oraz Bing), kroki 4-6 to treść, która odpowiada wprost i podaje fakty ze źródłami, a krok 7 to wzmianki o marce na innych stronach. Kolejność ma znaczenie, bo każdy krok ma sens dopiero po spełnieniu poprzedniego.
 
 ### 1. Dopuść robota OAI-SearchBot w robots.txt
 
@@ -50,7 +56,7 @@ OpenAI wymaga, żeby hosting lub CDN przepuszczał ruch z opublikowanych adresó
 
 ### 3. Zadbaj o indeks Google i Bing
 
-ChatGPT korzysta z partnerów wyszukiwania, więc strona spoza indeksu ma małe szanse na cytowanie. Zgłoś mapę witryny w Google Search Console i w Bing Webmaster Tools, a potem sprawdź, czy najważniejsze podstrony są zaindeksowane.
+ChatGPT korzysta z partnerów wyszukiwania, więc strona spoza indeksu ma małe szanse na cytowanie. Zgłoś mapę witryny w Google Search Console i w Bing Webmaster Tools, a potem sprawdź, czy najważniejsze podstrony są zaindeksowane. W tym kroku klasyczne SEO przekłada się wprost na widoczność w ChatGPT, bo strona wysoko w wynikach wyszukiwania częściej trafia do zestawu stron, które ChatGPT przegląda.
 
 ### 4. Odpowiadaj na pytania klientów wprost
 
@@ -64,9 +70,11 @@ W badaniu „GEO - Generative Engine Optimization” zespołu z Princeton Univer
 
 Strona główna, oferta, „O nas”, realizacje i kontakt powinny podawać te same dane - nazwę firmy, zakres usług, lokalizację, ceny lub widełki, przykłady realizacji. Gdy ChatGPT trafi na Twoją stronę przy pytaniu o dostawcę usługi, znajdzie tam konkretne odpowiedzi zamiast ogólnych haseł. Autor, doświadczenie i data aktualizacji wzmacniają [E-E-A-T](/pl/wymiary/e-e-a-t).
 
+Te same dane możesz opisać danymi strukturalnymi schema.org, na przykład typem Organization dla firmy i Article dla wpisów. Porządkują one informacje dla wyszukiwarek, z których korzysta ChatGPT, choć OpenAI nie opisuje ich wpływu na wybór źródeł. Braki w danych strukturalnych całego serwisu pokaże [analiza schema.org](/pl/narzedzia/analiza-schema).
+
 ### 7. Buduj wzmianki poza własną stroną
 
-Przy pytaniach typu „jaka firma od…” wśród wyników wyszukiwania często pojawiają się zestawienia, rankingi, katalogi i opinie na innych stronach. Obecność w nich zwiększa szansę, że ChatGPT trafi na Twoją markę także wtedy, gdy nie cytuje Twojej strony.
+Przy pytaniach typu „jaka firma od…” wśród wyników wyszukiwania często pojawiają się zestawienia, rankingi, katalogi i opinie na innych stronach. Obecność w nich zwiększa szansę, że ChatGPT trafi na Twoją markę także wtedy, gdy nie cytuje Twojej strony. Liczą się też fora i serwisy społecznościowe. W [naszej analizie polskich SERP-ów](/pl/blog/jak-pojawic-sie-w-ai-overviews) najczęstszymi źródłami AI Overviews spoza TOP 10 były Facebook, YouTube i Reddit. To dane z Google, a nie z ChatGPT, ale pokazują, że systemy AI chętnie sięgają po dyskusje użytkowników.
 
 Moim zdaniem to krok, który najczęściej przesądza o tym, kogo ChatGPT poleca, i jednocześnie ten, o którym OpenAI mówi najmniej. Dokumentacja nie opisuje, jak ChatGPT waży wzmianki na innych stronach, więc traktuj ten krok jako wniosek z tego, jak działa wyszukiwanie, a nie udokumentowany czynnik.
 
@@ -106,7 +114,7 @@ Widoczność w ChatGPT zaczyna się od technicznego dostępu - robots.txt, CDN i
 
 ### Skąd ChatGPT bierze informacje?
 
-ChatGPT odpowiada z wiedzy modelu zdobytej podczas trenowania albo z wyszukiwania w sieci. Wyszukiwanie uruchamia sam, gdy pytanie wymaga aktualnych informacji, albo na prośbę użytkownika. Wtedy przepisuje pytanie na zapytania do partnerów wyszukiwania i cytuje strony, z których skorzystał.
+ChatGPT odpowiada z wiedzy modelu zdobytej podczas trenowania, do którego dane zbiera robot GPTBot, albo z wyszukiwania w sieci, do którego strony dostarcza robot OAI-SearchBot. Wyszukiwanie uruchamia sam, gdy pytanie wymaga aktualnych informacji, albo na prośbę użytkownika. Wtedy przepisuje pytanie na zapytania do partnerów wyszukiwania i cytuje strony, z których skorzystał.
 
 ### Czy zablokowanie GPTBot usuwa stronę z ChatGPT?
 
@@ -122,7 +130,7 @@ Nie da się tego zagwarantować. OpenAI pisze, że kolejność wyników zależy 
 
 ### Czy pozycjonowanie w ChatGPT to to samo co GEO?
 
-Pozycjonowanie w ChatGPT to potoczna nazwa części GEO, czyli optymalizacji treści pod odpowiedzi AI. GEO obejmuje też Google AI Overviews, AI Mode, Perplexity i Copilot. Podstawy są wspólne, a różnią się szczegóły techniczne, na przykład roboty, które trzeba dopuścić.
+Pozycjonowanie w ChatGPT to potoczna nazwa części GEO, czyli optymalizacji treści pod odpowiedzi AI. GEO obejmuje też Google AI Overviews, AI Mode, Gemini, Perplexity i Copilot. Podstawy są wspólne, a różnią się szczegóły techniczne. ChatGPT potrzebuje dostępu dla OAI-SearchBot, a AI Overviews i AI Mode biorą źródła z indeksu Google, więc tam liczy się dostęp dla Googlebota.
 
 ## Źródła
 

@@ -35,18 +35,18 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    id: 'jak-odswiezyc-stary-artykul',
-    date: '2026-11-10',
+    id: 'jak-zaktualizowac-stary-artykul',
+    date: '2026-11-09',
     pl: {
-      slug: 'jak-odswiezyc-stary-artykul',
-      title: 'Jak odświeżyć stary artykuł pod AI? Krok po kroku',
+      slug: 'jak-zaktualizowac-stary-artykul',
+      title: 'Jak zaktualizować stary artykuł pod SEO i AI?',
       description:
-        'Jak zaktualizować stary artykuł, żeby wrócił do Google i trafił do odpowiedzi AI? 9 kroków, zasada zmiany daty i przykład odświeżenia fragmentu.',
+        'Jak zaktualizować stary artykuł na blogu, żeby wrócił do Google i trafił do odpowiedzi AI? 9 kroków, zasada zmiany daty i przykład przed i po.',
     },
   },
   {
     id: 'jak-pisac-tresci-pod-ai',
-    date: '2026-11-10',
+    date: '2026-11-06',
     pl: {
       slug: 'jak-pisac-tresci-pod-ai',
       title: 'Jak pisać treści, które cytuje AI? 10 zasad',
@@ -66,7 +66,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     id: 'jak-byc-widocznym-w-chatgpt',
-    date: '2026-11-10',
+    date: '2026-11-04',
     pl: {
       slug: 'jak-byc-widocznym-w-chatgpt',
       title: 'Jak być widocznym w ChatGPT? Poradnik krok po kroku',
@@ -76,7 +76,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     id: 'co-to-jest-geo',
-    date: '2026-11-10',
+    date: '2026-11-02',
     pl: {
       slug: 'co-to-jest-geo',
       title: 'Co to jest GEO? Definicja i różnice względem SEO',

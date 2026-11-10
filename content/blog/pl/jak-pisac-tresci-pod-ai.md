@@ -8,7 +8,7 @@ Najważniejsze informacje w skrócie:
 - według Google treść tworzona z pomocą AI nie łamie wytycznych, o ile nie służy głównie manipulowaniu wynikami,
 - 10 zasad poniżej odpowiada wymiarom, w których audyt CitationOne ocenia tekst, więc każdą da się sprawdzić na własnej stronie.
 
-Poradnik jest dla copywriterów, redaktorów i specjalistów SEO, którzy mają gotowy tekst albo brief i chcą wiedzieć, co zmienić w zdaniach i sekcjach. Przykłady „przed i po” dotyczą pomp ciepła, a liczby w nich są przykładowe.
+Pisanie treści pod AI to tworzenie i redagowanie tekstów tak, żeby systemy sztucznej inteligencji, takie jak ChatGPT czy Google AI Overviews, mogły łatwo znaleźć w nich odpowiedź, sprawdzić ją i zacytować z linkiem do strony. To część GEO, czyli optymalizacji pod odpowiedzi AI. Poradnik jest dla copywriterów, redaktorów i specjalistów SEO, którzy mają gotowy tekst albo brief i chcą wiedzieć, co zmienić w zdaniach i sekcjach. Przykłady „przed i po” dotyczą pomp ciepła, a liczby w nich są przykładowe.
 
 ## Jak AI wybiera fragment do cytowania
 
@@ -20,7 +20,20 @@ Szerzej o mechanizmie piszemy w artykułach [Co to jest GEO](/pl/blog/co-to-jest
 
 ## 10 zasad pisania treści, które cytuje AI
 
-Zasady ułożyłem od poziomu sekcji do poziomu zdania. Pierwsze trzy porządkują strukturę, kolejne pięć dotyczą treści zdań, a dwie ostatnie słownictwa i składni.
+Treści cytowane przez AI spełniają 10 zasad w trzech grupach - zasady 1-3 porządkują strukturę sekcji, zasady 4-8 dotyczą faktów w zdaniach, a zasady 9-10 słownictwa i składni. Tabela zestawia je z wymiarem audytu, który sprawdza każdą z nich.
+
+| Zasada | Cel | Wymiar audytu |
+|---|---|---|
+| 1. Zaczynaj od odpowiedzi | Odpowiedź w 1-2 pierwszych zdaniach sekcji | BLUF |
+| 2. Sekcje zrozumiałe bez reszty tekstu | Fragment ma sens po wycięciu | Samodzielność sekcji |
+| 3. Nagłówki mówiące, co jest w sekcji | Szybkie znalezienie odpowiedzi | Koszt pozyskania |
+| 4. Jedno zdanie, jeden fakt | Więcej sprawdzalnych informacji | Gęstość informacji |
+| 5. Pełne nazwy i konkretne cechy | Rzecz, cecha i wartość w jednym zdaniu | Graf wiedzy |
+| 6. Liczby z jednostką, datą i źródłem | Wiarygodne dane | Gęstość informacji |
+| 7. Cytaty ekspertów | Dowód z zewnątrz | E-E-A-T |
+| 8. Pytania poboczne | Więcej fragmentów do zacytowania | Pokrycie Fan-Out i AIO |
+| 9. Słownictwo tematu | Pełne pokrycie terminologii | TF-IDF |
+| 10. Kto co robi | Jasny wykonawca czynności | Role semantyczne |
 
 ### 1. Zaczynaj od odpowiedzi
 
@@ -48,7 +61,7 @@ Sekcja nazywa temat wprost i nie odwołuje się do tego, co było wcześniej. Zd
 
 ### 3. Pisz nagłówki, które mówią, co jest w sekcji
 
-Nagłówek H2 lub H3 opisuje treść sekcji na tyle konkretnie, że czytelnik i system AI wiedzą, czy znajdą w niej odpowiedź. Dobrze działają realne pytania z wyników Google i rzeczowe tezy. Ogólne etykiety typu „Kwestie finansowe” zmuszają do czytania całej sekcji, co podnosi [koszt pozyskania](/pl/wymiary/koszt-pozyskania) informacji.
+Nagłówek H2 lub H3 opisuje treść sekcji na tyle konkretnie, że czytelnik i system AI wiedzą, czy znajdą w niej odpowiedź. Dobrze działają realne pytania z wyników Google i rzeczowe tezy. Ogólne etykiety typu „Kwestie finansowe” zmuszają do czytania całej sekcji, co podnosi [koszt pozyskania](/pl/wymiary/koszt-pozyskania) informacji. Trzymaj też prostą hierarchię - jeden H1 z tematem strony, H2 dla głównych pytań lub etapów i H3 dla szczegółów wewnątrz nich.
 
 **Przed**
 
@@ -60,7 +73,7 @@ Nagłówek H2 lub H3 opisuje treść sekcji na tyle konkretnie, że czytelnik i 
 
 ### 4. Jedno zdanie, jeden sprawdzalny fakt
 
-Zdanie, które da się sprawdzić, niesie więcej niż trzy zdania ogólnych zapewnień. Zdania bez faktu obniżają [gęstość informacji](/pl/wymiary/gestosc-informacji) i zmniejszają szansę, że system wybierze akurat ten fragment.
+Zdanie, które da się sprawdzić, niesie więcej niż trzy zdania ogólnych zapewnień. Zdania bez faktu obniżają [gęstość informacji](/pl/wymiary/gestosc-informacji) i zmniejszają szansę, że system wybierze akurat ten fragment. Gdy porównujesz kilka rzeczy według tych samych cech, użyj tabeli. Kroki podawaj w liście numerowanej, a równorzędne elementy w liście punktowanej, bo taki format łatwo wyciąć jako gotową odpowiedź.
 
 **Przed**
 
@@ -187,7 +200,7 @@ Tak, bo Google ocenia jakość treści, a nie sposób jej powstania. W wytycznyc
 
 ### Jaka długość tekstu jest najlepsza pod AI?
 
-Nie ma jednej najlepszej długości. Google pisze w wytycznych o pomocnych treściach, że nie ma preferowanej liczby słów, a w poradniku o funkcjach AI, że nie istnieje idealna długość strony. Tekst powinien być na tyle długi, żeby odpowiedzieć na pytanie główne i pytania poboczne.
+Najlepsza długość to taka, która wystarcza na odpowiedź na pytanie główne i pytania poboczne. Google pisze w wytycznych o pomocnych treściach, że nie ma preferowanej liczby słów, a w poradniku o funkcjach AI, że nie istnieje idealna długość strony. Liczy się kompletność odpowiedzi, a nie liczba słów.
 
 ### Czy nagłówki muszą być pytaniami?
 
@@ -199,7 +212,7 @@ Zasada 40-60 słów to praktyka branżowa wywodząca się z optymalizacji pod fr
 
 ### Czym pisanie pod AI różni się od pisania pod SEO?
 
-Pisanie pod AI opiera się na tych samych podstawach co SEO - intencji, jakości i dopasowaniu do pytania. Różni się większym naciskiem na samodzielne sekcje, sprawdzalne fakty ze źródłami i odpowiedzi na pytania poboczne, bo systemy AI cytują pojedyncze fragmenty zamiast całych stron.
+Pisanie pod AI opiera się na tych samych podstawach co klasyczne SEO - intencji, jakości i dopasowaniu do pytania. Różni się większym naciskiem na samodzielne sekcje, sprawdzalne fakty ze źródłami i odpowiedzi na pytania poboczne, bo systemy AI cytują pojedyncze fragmenty zamiast całych stron.
 
 ## Źródła
 

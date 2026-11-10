@@ -15,7 +15,9 @@ Poradnik jest dla specjalistów SEO, marketerów i właścicieli stron, którzy 
 
 AI Overviews, po polsku Przegląd od AI, to podsumowanie wygenerowane przez AI na górze wyników Google, z linkami do stron, z których skorzystało. Funkcja działa w Polsce i po polsku.
 
-Google pokazuje AI Overview tylko wtedy, gdy uzna, że coś wnosi do zwykłych wyników. Dlatego część zapytań ma podsumowanie AI, a część nie, nawet w obrębie jednego tematu.
+AI Overview pojawia się tylko wtedy, gdy Google uzna, że podsumowanie wnosi coś do zwykłych wyników. Dlatego część zapytań ma podsumowanie AI, a część nie, nawet w obrębie jednego tematu.
+
+Dla wydawców oznacza to zmianę w ruchu. Część użytkowników dostaje odpowiedź bez kliknięcia, a Google podaje, że kliknięcia z wyników z AI Overviews są wyższej jakości, bo użytkownicy częściej zostają dłużej na stronie. Search Console nie wydziela ruchu z AI Overviews, więc wpływ na CTR własnej strony najlepiej sprawdzić, porównując kliknięcia i wyświetlenia fraz z podsumowaniem AI przed i po jego pojawieniu się.
 
 Użytkownik nie może wyłączyć tej funkcji. Może za to wybrać po wyszukaniu filtr „Internet”, który pokazuje same linki tekstowe.
 
@@ -44,7 +46,7 @@ Moim zdaniem to najważniejszy wniosek dla planowania prac. Wejście do pierwsze
 
 ## 7 kroków do cytowania w AI Overviews
 
-Kroki ułożyłem od warunków, bez których strona w ogóle nie bierze udziału, do zmian w treści, które zwiększają szansę na wybór.
+Cytowanie w AI Overviews zależy od dwóch grup warunków. Kroki 1-2 sprawdzają, czy Google w ogóle może użyć strony (indeks, fragment opisu i ustawienie w Search Console), a kroki 3-7 zwiększają szansę na wybór - pozycja w pierwszej piątce, odpowiedź na początku sekcji, pytania poboczne, fakty ze źródłami i widoczny autor.
 
 ### 1. Sprawdź indeks i fragment opisu
 
@@ -74,11 +76,13 @@ Zbierz pytania z sekcji „Podobne pytania” i z wyszukiwań powiązanych dla s
 
 ### 6. Dawaj fakty, źródła i własne dane
 
-Google w poradniku o funkcjach generatywnej AI zachęca do treści opartej na własnej wiedzy i doświadczeniu, której nie da się znaleźć wszędzie indziej. Liczby z jednostkami, daty, wyniki własnych testów i odwołania do źródeł zwiększają [gęstość informacji](/pl/wymiary/gestosc-informacji) i [wartość dodaną](/pl/wymiary/wartosc-dodana) tekstu.
+Google w poradniku o funkcjach generatywnej AI zachęca do treści opartej na własnej wiedzy i doświadczeniu, której nie da się znaleźć wszędzie indziej. Liczby z jednostkami, daty, wyniki własnych testów i odwołania do źródeł zwiększają [gęstość informacji](/pl/wymiary/gestosc-informacji) i [wartość dodaną](/pl/wymiary/wartosc-dodana) tekstu. Krótkie definicje, listy kroków i tabele porównawcze łatwo wyciąć ze strony jako gotowy fragment odpowiedzi.
+
+W sklepie internetowym te same zasady dotyczą stron kategorii i produktów. Opis kategorii zacznij od odpowiedzi na pytanie, które klient zadaje przed zakupem („jaki rower do miasta”), a na karcie produktu podaj parametry w tabeli i odpowiedz na pytania o dostawę, zwroty i dobór rozmiaru.
 
 ### 7. Pokaż autora i aktualność
 
-Widoczny autor z doświadczeniem w temacie, data aktualizacji i spójne informacje o firmie budują wiarygodność strony. Opisuje to wymiar [E-E-A-T](/pl/wymiary/e-e-a-t).
+Widoczny autor z doświadczeniem w temacie, data aktualizacji i spójne informacje o firmie budują wiarygodność strony, także tej cytowanej w AI Overviews. W praktyce oznacza to podpis autora z krótkim opisem jego doświadczenia, link do strony autora, widoczną datę publikacji i aktualizacji oraz te same daty w danych strukturalnych Article (`datePublished`, `dateModified`). Opisuje to wymiar [E-E-A-T](/pl/wymiary/e-e-a-t).
 
 ## Czego nie trzeba robić
 

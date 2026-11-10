@@ -1,4 +1,4 @@
-**GEO (Generative Engine Optimization) to przygotowanie treści i strony tak, żeby systemy AI - ChatGPT, Google AI Overviews i AI Mode, Perplexity czy Microsoft Copilot - wybrały ją jako źródło i zacytowały w swojej odpowiedzi. W SEO walczysz o pozycję na liście wyników, w GEO o miejsce w odpowiedzi, którą AI pisze za użytkownika.**
+**GEO (Generative Engine Optimization) to przygotowanie treści i strony tak, żeby systemy AI - ChatGPT, Google AI Overviews i AI Mode, Perplexity czy Microsoft Copilot - wybrały ją jako źródło i zacytowały w swojej odpowiedzi. W SEO walczysz o pozycję w wynikach wyszukiwania, w GEO o miejsce w odpowiedzi, którą AI pisze za użytkownika.**
 
 Najważniejsze informacje w skrócie:
 
@@ -33,7 +33,7 @@ Moim zdaniem to najczęściej pomijany wniosek z całego badania. GEO daje realn
 
 ## Jak systemy AI wybierają źródła
 
-Asystent AI, który odpowiada na pytanie z dostępem do internetu, przechodzi zwykle przez trzy etapy:
+Systemy AI wybierają źródła w trzech etapach. Najpierw wyszukują strony w indeksie wyszukiwarki, potem wybierają z nich fragmenty pasujące do pytania, a na końcu piszą z tych fragmentów odpowiedź z linkami. Asystent AI z dostępem do internetu przechodzi te etapy tak:
 
 1. **Wyszukiwanie.** System wysyła do indeksu wyszukiwarki jedno lub kilka zapytań. Google opisuje, że AI Overviews i AI Mode potrafią wykonać query fan-out (rozbicie pytania na wiele powiązanych wyszukiwań w podtematach), żeby zebrać szerszy zestaw źródeł niż zwykłe wyniki.
 2. **Wybór fragmentów.** Ze znalezionych stron system wybiera fragmenty, które najlepiej odpowiadają na pytanie lub jego część, na przykład akapit z definicją, tabelę albo listę kroków.
@@ -79,7 +79,7 @@ Pierwsze zdania strony i każdej sekcji odpowiadają na pytanie wprost. System A
 
 ### 2. Sekcje zrozumiałe samodzielnie
 
-Każda sekcja nazywa temat wprost i nie odwołuje się do „tego, co powyżej”. Fragment wycięty z artykułu nadal ma sens.
+Każda sekcja nazywa temat wprost i nie odwołuje się do „tego, co powyżej”. System AI cytuje fragment, a nie cały artykuł, więc akapit wycięty z tekstu musi nadal mieć sens. W praktyce oznacza to powtórzenie nazwy tematu w pierwszym zdaniu sekcji zamiast zaimków typu „to” czy „ten sposób”.
 
 ### 3. Konkretne fakty
 
@@ -87,11 +87,11 @@ Liczby z jednostkami, daty, nazwy i porównania. W badaniu GEO dodanie statystyk
 
 ### 4. Źródła i cytaty
 
-Odwołania do badań, dokumentacji i ekspertów z podaniem nazwy i daty. To dwie pozostałe zmiany z czołówki badania.
+Odwołania do badań, dokumentacji i ekspertów z podaniem nazwy i daty. W badaniu GEO dodanie cytatów podniosło wynik widoczności z 19,5 do **27,8**, a dodanie odwołań do źródeł do **24,9**, co daje te zmiany obok statystyk w czołówce wszystkich testowanych metod.
 
 ### 5. Pytania poboczne
 
-Odpowiedzi na pytania, które ludzie zadają wokół głównego tematu, z sekcji „Podobne pytania” w Google i z wyszukiwań powiązanych. Systemy AI rozbijają pytanie na podtematy, więc strona, która je pokrywa, ma więcej fragmentów do zacytowania.
+Odpowiedzi na pytania, które ludzie zadają wokół głównego tematu, z sekcji „Podobne pytania” w Google i z wyszukiwań powiązanych. Systemy AI rozbijają pytanie na podtematy (query fan-out) i szukają odpowiedzi na każdy z nich osobno, więc strona, która je pokrywa, ma więcej fragmentów do zacytowania.
 
 ### 6. Autor i własna wiedza
 
@@ -108,7 +108,7 @@ Zanim zaczniesz przerabiać treści, sprawdź te punkty:
 - [ ] tekst zawiera kilka konkretnych liczb ze źródłami,
 - [ ] strona odpowiada na 3-5 pytań pobocznych z wyników Google,
 - [ ] autor i data aktualizacji są widoczne,
-- [ ] tekst zawiera coś, czego nie ma na stronach z TOP 10.
+- [ ] tekst zawiera własne dane, przykład z praktyki albo wniosek, których nie ma na stronach z TOP 10.
 
 ## Jak mierzyć efekty GEO
 
@@ -162,7 +162,7 @@ Skrót GEO bywa używany dla pozycjonowania lokalnego, czyli widoczności firmy 
 
 ### Od czego zacząć GEO?
 
-Zacznij od sprawdzenia, czy Twoje najważniejsze strony są zaindeksowane i nie blokują robotów AI. Potem wybierz kilka stron z największym ruchem i przebuduj je, dodając odpowiedź na początku, fakty ze źródłami i odpowiedzi na pytania poboczne. Na koniec zmierz, czy AI zaczyna je cytować.
+Zacznij od sprawdzenia, czy Twoje najważniejsze strony są zaindeksowane w Google i Bing, a robots.txt nie blokuje robotów OAI-SearchBot i Googlebot. Potem wybierz kilka stron z największym ruchem i przebuduj je, dodając odpowiedź na początku, fakty ze źródłami i odpowiedzi na pytania poboczne. Na koniec zmierz, czy AI zaczyna je cytować.
 
 ## Źródła
 

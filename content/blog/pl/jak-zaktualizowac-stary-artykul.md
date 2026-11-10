@@ -6,9 +6,10 @@ Najważniejsze informacje w skrócie:
 - w naszej analizie 996 polskich SERP-ów strona z 1. pozycji była cytowana w AI Overview w **59,9% przypadków**, a z 5. pozycji w 35,3%, więc awans o kilka miejsc wyraźnie zwiększa szansę na cytowanie,
 - Google w wytycznych o pomocnych treściach pyta wprost, czy zmieniasz datę strony, żeby wyglądała na świeżą, **mimo że treść się istotnie nie zmieniła**,
 - przy odświeżaniu pod AI najważniejsze są odpowiedź na początku każdej sekcji, aktualne liczby ze źródłami i pytania poboczne, których dziś brakuje,
-- adres URL zostaje bez zmian, bo zachowuje historię strony i linki prowadzące do niej.
+- adres URL zostaje bez zmian, bo zachowuje historię strony i linki prowadzące do niej,
+- w CitationOne nową datę publikacji dostaje tekst z **ponad 50% nowej treści**, datę aktualizacji tekst z 20-50% zmian, a poniżej 20% daty zostają bez zmian.
 
-Poradnik jest dla osób, które prowadzą blog lub sekcję poradników z dziesiątkami starszych wpisów i chcą zdecydować, które poprawić i jak. Jeśli piszesz nowy tekst, zajrzyj do artykułu [Jak pisać treści, które cytuje AI](/pl/blog/jak-pisac-tresci-pod-ai).
+Aktualizacja starego artykułu, nazywana też odświeżaniem treści (content refresh), to praca z SEO i content marketingu, w której poprawiasz opublikowany tekst zamiast pisać nowy - uzupełniasz fakty, strukturę i odpowiedzi na pytania, żeby strona wróciła wyżej w Google i trafiała do odpowiedzi AI. Poradnik jest dla osób, które prowadzą blog lub sekcję poradników z dziesiątkami starszych wpisów i chcą zdecydować, które poprawić i jak. Jeśli piszesz nowy tekst, zajrzyj do artykułu [Jak pisać treści, które cytuje AI](/pl/blog/jak-pisac-tresci-pod-ai).
 
 ## Kiedy odświeżać, kiedy pisać od nowa, a kiedy usunąć
 
@@ -37,7 +38,7 @@ Dlaczego akurat pozycje 4-15? Bo w naszej analizie polskich wyników szansa na c
 
 ## Proces odświeżania krok po kroku
 
-Proces ma dziewięć kroków. Pierwsze dwa to diagnoza, kolejne pięć to zmiany w treści, a dwa ostatnie to publikacja i pomiar.
+Aktualizacja artykułu pod SEO i AI to dziewięć kroków w trzech fazach. Kroki 1-2 to diagnoza, czyli sprawdzenie, co dla frazy cytują dziś AI Overviews i ChatGPT, i lista braków. Kroki 3-7 to zmiany w treści - odpowiedź na początku sekcji, aktualne fakty ze źródłami, pytania poboczne, własne dane i linki wewnętrzne. Kroki 8-9 to publikacja z właściwą datą i pomiar po 2-4 tygodniach.
 
 ### 1. Sprawdź, co dziś pokazują Google i AI
 
@@ -53,7 +54,7 @@ Pierwszy akapit ma odpowiadać na pytanie z tytułu w 1-2 zdaniach, a każda sek
 
 ### 4. Zaktualizuj liczby, nazwy i źródła
 
-Sprawdź każdą liczbę, cenę, datę, nazwę produktu i nazwę funkcji. Nazwy usług AI i funkcji wyszukiwarek zmieniają się szczególnie często. Przy każdej liczbie podaj źródło i datę, na którą jest aktualna, a martwe linki zamień na aktualne źródła pierwotne.
+Sprawdź każdą liczbę, cenę, datę, nazwę produktu i nazwę funkcji. Nazwy usług AI i funkcji wyszukiwarek zmieniają się szczególnie często. Przy każdej liczbie podaj źródło i datę, na którą jest aktualna, a martwe linki zamień na aktualne źródła pierwotne. Przejrzyj też zrzuty ekranu i grafiki, bo stary wygląd panelu albo nieaktualny wykres podważa zaufanie do całego tekstu.
 
 ### 5. Dopisz pytania poboczne
 
@@ -125,7 +126,7 @@ Nie ma jednego terminu dla wszystkich tekstów. Teksty o cenach, przepisach, nar
 
 ### Czy zmiana daty bez zmian w treści pomaga?
 
-Zmiana samej daty nie poprawia jakości tekstu, a Google wymienia ją w wytycznych o pomocnych treściach jako sygnał ostrzegawczy. Datę aktualizacji warto zmienić wtedy, gdy treść istotnie się zmieniła, na przykład przy nowych danych, nowych sekcjach albo przebudowie struktury.
+Zmiana samej daty nie poprawia jakości tekstu, a Google wymienia ją w wytycznych o pomocnych treściach jako sygnał ostrzegawczy. Datę aktualizacji warto zmienić wtedy, gdy treść istotnie się zmieniła, na przykład przy nowych danych, nowych sekcjach albo przebudowie struktury. W CitationOne przyjmujemy, że taka zmiana obejmuje co najmniej 20% treści.
 
 ### Czy przy odświeżeniu zmieniać adres URL?
 
@@ -137,7 +138,7 @@ Google nie podaje stałego terminu, dlatego pierwszy pomiar warto zaplanować po
 
 ### Czy lepiej odświeżyć stary tekst, czy napisać nowy?
 
-Odśwież stary tekst, jeśli intencja frazy się nie zmieniła, a strona ma już widoczność lub linki. Napisz nowy, jeśli intencja w wynikach Google jest inna niż w Twoim tekście albo większość treści jest nieaktualna. Nowy tekst możesz opublikować pod starym adresem, żeby zachować jego historię.
+Odśwież stary tekst, jeśli intencja frazy się nie zmieniła, a strona ma już widoczność lub linki. Napisz nowy, jeśli intencja w wynikach Google jest inna niż w Twoim tekście albo ponad połowa treści jest nieaktualna. Nowy tekst możesz opublikować pod starym adresem, żeby zachować jego historię.
 
 ## Źródła
 
@@ -145,4 +146,4 @@ Odśwież stary tekst, jeśli intencja frazy się nie zmieniła, a strona ma ju�
 - Google Search Central, [Add a Byline Date to Google Search Results](https://developers.google.com/search/docs/appearance/publication-dates), dostęp 2026-11-10,
 - Google Search Central, [AI features and your website](https://developers.google.com/search/docs/appearance/ai-features), dostęp 2026-11-10,
 - OpenAI Help Center, [Publishers and developers FAQ](https://help.openai.com/en/articles/12627856), dostęp 2026-11-10,
-- CitationOne, analiza 996 polskich SERP-ów z AI Overview z audytów w CitationOne, stan na 2026-11-10.
+- CitationOne, analiza 996 polskich SERP-ów z AI Overview z audytów w CitationOne, szczegóły w artykule [Jak pojawić się w AI Overviews](/pl/blog/jak-pojawic-sie-w-ai-overviews).

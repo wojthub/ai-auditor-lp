@@ -111,7 +111,23 @@ Gotowe artykuły przechodzą audyt w CitationOne. Gdy user wklei wyniki (raport,
 4. Pokaż tabelę: rekomendacja → sekcja → co zmieniono (albo dlaczego pominięto). Rekomendację sprzeczną z intencją tekstu albo z faktami zgłoś userowi zamiast wdrażać.
 5. Jeśli wpis był już opublikowany, ustaw `updated` w rejestrze według zasad z sekcji o odświeżaniu.
 
-Nie uruchamiaj audytu sam - robi to user w aplikacji.
+Audyt uruchamiaj tylko na prośbę usera. Jeśli wpis nie jest jeszcze opublikowany, użyj API v1 w wariancie z treścią (`POST https://app.citationone.com/api/v1/audits` z `content`, `title`, `keyword`, `language: "pl"`, `project: "Blog LP"`, potem polling `GET /api/v1/audits/{id}`). Klucz `co_live_…` daje user. Nie szukaj go w plikach innych projektów. Konto ma domyślnie limit 3 audytów naraz, więc kolejne zlecenia ponawiaj po zwolnieniu miejsca. Wynik zawiera `scores.cqs`, `summary.top10AvgCqs`, `dimensions[].problems` i `recommendations[]` (z `before`/`after`).
+
+**Rekomendacje, które pomijamy świadomie** (powtarzają się w każdym audycie, a łamią zasady stylu albo wynikają z trybu `content`):
+- usunięcie „Moim zdaniem” i zarzutu czytelnika w cudzysłowie - to elementy głosu, jeden akapit opinii zostaje,
+- dopisanie n-gramów z TF-IDF, które nie brzmią po polsku („optimization geo”, „overviews google”) - wplataj tylko frazy naturalne („wynikach wyszukiwania”, „klasyczne SEO”),
+- placeholdery typu „[X] słów”, „[wstaw liczbę]” i liczby bez źródła (długość chunków, czynniki rankingowe OpenAI) - Google wprost odradza dzielenie treści na kawałki,
+- obrazki, wideo, brak meta description, daty i schematu - w trybie `content` audyt nie widzi layoutu, a byline, daty i JSON-LD dokłada szablon bloga,
+- mediana długości TOP 10 - nie dopychaj słów pod liczbę.
+
+**Najpierw sprawdź `csiAlignment` i encję SERP-u.** Gdy audyt mówi, że SERP dotyczy innej encji (np. „jak odświeżyć stary artykuł” dało wyniki o renowacji obrazów i antyków, bo „artykuł” znaczy też „przedmiot”), problemem jest fraza, a nie tekst. Zmień frazę główną, tytuł i slug na wariant, którego TOP 10 ma właściwą intencję, i powtórz audyt. Reszty rekomendacji z takiego audytu nie wdrażaj. Przy wyborze frazy w kroku researchu sprawdzaj więc zawsze, czy TOP 10 dla dokładnej frazy z tytułu dotyczy tego samego tematu.
+
+**Rekomendacje, które zwykle warto wdrożyć:**
+- zdanie-zapowiedź pod H2 („Kroki ułożyłem…”) zamień na BLUF streszczający całą sekcję,
+- brakująca definicja głównego pojęcia w intro,
+- anafory w krótkich sekcjach („To dwie pozostałe zmiany…”) zastąp nazwą i liczbą,
+- tabela zamiast opisu porównania kilku bytów (np. robotów),
+- brakujący podtemat z konsensusu SERP, jeśli da się go opisać faktami ze źródeł.
 
 ## Styl
 
