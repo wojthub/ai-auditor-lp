@@ -20,6 +20,7 @@ import { plSlugForEn } from '@/data/dimension-types';
 import { toolPlSlugForEn } from '@/data/tool-types';
 import type { DimTable } from '@/data/dimension-types';
 import { getChangelog } from '@/lib/changelog';
+import { BLOG_POSTS, blogPostsFor } from '@/data/blog';
 
 const SITE = 'https://citationone.com';
 const APP = 'https://app.citationone.com';
@@ -305,6 +306,11 @@ export function llmsTxt(): string {
     '',
     `- [API overview](${SITE}/api): REST + JSON, API key auth, bulk requests, 1 audit = 1 credit`,
     `- [API reference (Markdown)](${APP}/api-docs.md): full endpoint reference for agents`,
+    '',
+    '## Blog',
+    '',
+    ...blogPostsFor('en').map((p) => `- [${p.t.title}](${SITE}/blog/${p.t.slug}): ${p.t.description}`),
+    ...BLOG_POSTS.filter((p) => p.pl && !p.en).map((p) => `- [${p.pl!.title}](${SITE}/pl/blog/${p.pl!.slug}) (Polish): ${p.pl!.description}`),
     '',
     '## Optional',
     '',

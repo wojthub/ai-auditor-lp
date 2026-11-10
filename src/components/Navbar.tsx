@@ -6,6 +6,7 @@ import BrandMorph from './BrandMorph';
 import { enCounterpart } from '@/lib/languageSwitch';
 import { APP_URL } from '@/lib/appUrl';
 import NoticeBar from './NoticeBar';
+import { HAS_BLOG_POSTS } from '@/data/blog';
 
 /** Menu „Narzedzia" - same narzedzia dodatkowe, osobne od audytu tresci (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
@@ -125,6 +126,8 @@ export default function Navbar() {
               </div>
             </div>
           </div>
+          {/* Blog tylko gdy jezyk ma wpis - regula w HAS_BLOG_POSTS (src/data/blog.ts). */}
+          {HAS_BLOG_POSTS.pl && <a href="/pl/blog" className="nav-link nav-blog">Blog</a>}
           {/* DWA wejscia zamiast jednego „Zrob audyt": wracajacy uzytkownik szukal logowania i
               nie mial gdzie kliknac, a nowy nie widzial, ze start jest darmowy. Kreska oddziela
               nawigacje po tresci od akcji konta. „Zrob audyt" znika stad swiadomie - prowadzil
@@ -253,6 +256,11 @@ export default function Navbar() {
                 </a>
               ))}
             </div>
+          )}
+          {HAS_BLOG_POSTS.pl && (
+            <a href="/pl/blog" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+              Blog
+            </a>
           )}
           <a href={enHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             EN - English version
@@ -494,6 +502,11 @@ export default function Navbar() {
           .nav-login { padding: 10px 12px; font-size: 14px; }
           .nav-sep { margin: 0 6px 0 10px; }
           .nav-lang { margin-left: 6px; }
+        }
+        /* „Blog” na pasku zawijal przyciski konta do dwoch linii miedzy 820 a 849 px (PL) - tam
+           chowamy go; zostaje w stopce. Zmierzone 2026-11-10 po ustabilizowaniu logo. */
+        @media (min-width: 820px) and (max-width: 869px) {
+          .nav-blog { display: none !important; }
         }
         /* Link „zaloguj" przy hamburgerze: bez tla i ramki, 44 px pola trafienia. */
         .nav-mobile-login {

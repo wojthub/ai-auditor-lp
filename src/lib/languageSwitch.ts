@@ -10,6 +10,7 @@
 // Dzieki temu nowy wymiar/narzedzie dziala w przelaczniku od razu, bez drugiego wpisu.
 import { DIMENSION_SLUG_PAIRS } from '@/data/dimension-types';
 import { TOOL_SLUG_PAIRS } from '@/data/tool-types';
+import { BLOG_SLUG_PAIRS } from '@/data/blog';
 
 export const SITE = 'https://citationone.com';
 
@@ -21,12 +22,14 @@ export const STATIC_PAIRS: ReadonlyArray<readonly [en: string, pl: string]> = [
   ['/api', '/pl/api'],
   ['/affiliate', '/pl/affiliate'],
   ['/changelog', '/pl/changelog'],
+  ['/blog', '/pl/blog'],
 ];
 
 const PAIRS: ReadonlyArray<readonly [en: string, pl: string]> = [
   ...STATIC_PAIRS,
   ...DIMENSION_SLUG_PAIRS.map(({ en, pl }) => [`/dimensions/${en}`, `/pl/wymiary/${pl}`] as const),
   ...TOOL_SLUG_PAIRS.map(({ en, pl }) => [`/tools/${en}`, `/pl/narzedzia/${pl}`] as const),
+  ...BLOG_SLUG_PAIRS.map(({ en, pl }) => [`/blog/${en}`, `/pl/blog/${pl}`] as const),
 ];
 
 /** `/pricing` → `/pricing`, `/pricing/` → `/pricing`, `` → `/`. */
@@ -67,11 +70,12 @@ export function alternatesFor(pathname: string) {
 /** Adres PL odpowiadajacy biezacej stronie EN. Nieznana sciezka → `/pl`. */
 export function plCounterpart(pathname: string): string {
   const path = normalize(pathname);
-  return PAIRS.find(([en]) => en === path)?.[1] ?? '/pl';
+  // Wpis bloga bez tlumaczenia prowadzi na liste wpisow w drugim jezyku, a nie na HP.
+  return PAIRS.find(([en]) => en === path)?.[1] ?? (path.startsWith('/blog/') ? '/pl/blog' : '/pl');
 }
 
 /** Adres EN odpowiadajacy biezacej stronie PL. Nieznana sciezka → `/`. */
 export function enCounterpart(pathname: string): string {
   const path = normalize(pathname);
-  return PAIRS.find(([, pl]) => pl === path)?.[0] ?? '/';
+  return PAIRS.find(([, pl]) => pl === path)?.[0] ?? (path.startsWith('/pl/blog/') ? '/blog' : '/');
 }

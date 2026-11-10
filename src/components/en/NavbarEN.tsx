@@ -6,6 +6,7 @@ import BrandMorph from '../BrandMorph';
 import { plCounterpart } from '@/lib/languageSwitch';
 import { APP_URL } from '@/lib/appUrl';
 import NoticeBar from '../NoticeBar';
+import { HAS_BLOG_POSTS } from '@/data/blog';
 
 /** „Tools" menu - mirror of ../Navbar.tsx. Add-on tools only, separate from the content audit (AUDIT_MENU). */
 const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
@@ -125,6 +126,8 @@ export default function NavbarEN() {
               </div>
             </div>
           </div>
+          {/* Blog tylko gdy jezyk ma wpis - regula w HAS_BLOG_POSTS (src/data/blog.ts). */}
+          {HAS_BLOG_POSTS.en && <a href="/blog" className="nav-link nav-blog">Blog</a>}
           {/* TWO entries instead of one "Run audit": a returning user had nowhere to click,
               and a new one could not see that the start is free. The rule separates content
               navigation from account actions. The main CTA stays in the hero, by the URL field. */}
@@ -252,6 +255,11 @@ export default function NavbarEN() {
                 </a>
               ))}
             </div>
+          )}
+          {HAS_BLOG_POSTS.en && (
+            <a href="/blog" onClick={() => setMobileOpen(false)} className="nav-mobile-link">
+              Blog
+            </a>
           )}
           <a href={plHref} onClick={() => setMobileOpen(false)} className="nav-mobile-link">
             PL - Wersja polska
@@ -485,6 +493,11 @@ export default function NavbarEN() {
           .nav-login { padding: 10px 12px; font-size: 14px; }
           .nav-sep { margin: 0 6px 0 10px; }
           .nav-lang { margin-left: 6px; }
+        }
+        /* „Blog” na pasku zawijal przyciski konta do dwoch linii miedzy 820 a 849 px (PL) - tam
+           chowamy go; zostaje w stopce. Zmierzone 2026-11-10 po ustabilizowaniu logo. */
+        @media (min-width: 820px) and (max-width: 869px) {
+          .nav-blog { display: none !important; }
         }
         /* Link „zaloguj" przy hamburgerze: bez tla i ramki, 44 px pola trafienia. */
         .nav-mobile-login {

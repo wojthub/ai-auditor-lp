@@ -72,7 +72,7 @@ ai-auditor-lp/
 │   │   │   ├── page.tsx
 │   │   │   ├── DimensionsContent.tsx
 │   │   │   └── [slug]/page.tsx  # 12 podstron EN (/dimensions/bluf itd.) — patrz nota niżej
-│   │   ├── sitemap.ts           # out/sitemap.xml (46 URL-i + hreflangi); wymaga dynamic='force-static'
+│   │   ├── sitemap.ts           # out/sitemap.xml (48 URL-i bez wpisów bloga + hreflangi); wymaga dynamic='force-static'
 │   │   ├── robots.ts            # out/robots.txt — wskazuje sitemapę
 │   │   ├── llms.txt/route.ts    # out/llms.txt (llmstxt.org) - treść z lib/knowledge.ts
 │   │   ├── knowledge/[...path]/route.ts # out/knowledge/**.md - paczka Open Knowledge Format v0.2
@@ -82,6 +82,7 @@ ai-auditor-lp/
 │   │   │   └── ApiContentEN.tsx
 │   │   ├── (en)/affiliate/      # EN "Referral program" (/affiliate)
 │   │   ├── (en)/changelog/      # EN "Changelog" (/changelog) - ChangelogPage + lib/changelog.ts
+│   │   ├── blog/                # EN blog: page.tsx (/blog) + [slug]/page.tsx (/blog/<slug>)
 │   │   └── pl/                  # Wersja PL
 │   │       ├── layout.tsx       # PL layout (lang="pl", metadata PL, hreflang)
 │   │       ├── page.tsx         # PL homepage (/pl)
@@ -98,6 +99,7 @@ ai-auditor-lp/
 │   │       ├── narzedzia/[slug]/ # 4 podstrony narzędzi PL — hub /pl/narzedzia usunięty 2026-08-24
 │   │       ├── affiliate/       # PL "Program poleceń" (/pl/affiliate)
 │   │       ├── changelog/       # PL "Nowości" (/pl/changelog)
+│   │       ├── blog/            # PL blog: /pl/blog + /pl/blog/<slug>
 │   │       └── api/             # PL "API" (/pl/api)
 │   │           ├── page.tsx
 │   │           └── ApiContent.tsx
@@ -106,6 +108,8 @@ ai-auditor-lp/
 │   │   ├── lpSettings.ts        # fetchLpSettings - runtime z app /api/public/lp-links (raport, liczby, pasek)
 │   │   ├── changelog.ts         # getChangelog - build-time z app /api/public/changelog
 │   │   ├── knowledge.ts         # llms.txt + paczka OKF (/knowledge) z src/data/* i changelogu
+│   │   ├── blog.ts              # Markdown wpisu -> HTML przy buildzie (marked), spis treści, czas czytania
+│   │   ├── blogSeo.ts           # metadane, JSON-LD, generateStaticParams stron bloga (oba języki)
 │   │   ├── socialMeta.ts        # OG/Twitter dla każdej strony
 │   │   └── appUrl.ts, attribution.ts, track.ts, reveal.ts, useReportUrl.ts, useTypewriterPlaceholder.ts
 │   ├── data/                    # Treść podstron (czyste dane, zero JSX)
@@ -114,10 +118,15 @@ ai-auditor-lp/
 │   │   ├── dimensions-en.ts     # 12 wymiarów EN (lustro)
 │   │   ├── tool-types.ts        # Typy narzędzi + TOOL_STRINGS_* + TOOL_SLUG_PAIRS
 │   │   ├── tools-pl.ts          # 4 narzędzia PL
-│   │   └── tools-en.ts          # 4 narzędzia EN (lustro)
+│   │   ├── tools-en.ts          # 4 narzędzia EN (lustro)
+│   │   └── blog.ts              # Rejestr wpisów bloga: daty, slugi i tytuły PL/EN, BLOG_SLUG_PAIRS
 │   └── components/
 │       ├── NoticeBar.tsx        # Shared - pasek komunikatu nad navbarem, treść z panelu /admin/lp
 │       ├── ChangelogPage.tsx    # Shared - lista zmian (/changelog i /pl/changelog)
+│       ├── BlogIndex.tsx        # Shared - lista wpisów bloga
+│       ├── BlogPostView.tsx     # Shared - wpis bloga + style treści (.blog-prose)
+│       ├── BlogCopy.ts          # Etykiety szablonów bloga PL/EN, autor, formatDate
+│       ├── BlogStickyCta.tsx    # CTA podążające: karta sticky (≥1180 px) i belka na dole (<1180 px)
 │       ├── DimensionPage.tsx    # Shared - szablon podstrony wymiaru (PL i EN przez prop `t`)
 │       ├── ToolPage.tsx         # Shared - szablon podstrony narzędzia
 │       ├── Navbar.tsx           # PL Navbar - switcher EN → /
@@ -177,6 +186,8 @@ ai-auditor-lp/
 | `/api` | ApiContentEN | CitationOne API - audyty GEO przez REST |
 | `/affiliate` | AffiliateContentEN | CitationOne referral program - 10% on every order |
 | `/changelog` | ChangelogPage (`lang="en"`) | CitationOne changelog - what is new in the GEO audit |
+| `/blog` | BlogIndex (`lang="en"`) | Blog - GEO and SEO guides |
+| `/blog/[slug]` | BlogPostView + data/blog.ts + content/blog/en/*.md | H1 = `title` z rejestru |
 | `/llms.txt` | route handler + lib/knowledge.ts | - (plik tekstowy dla agentów AI) |
 | `/knowledge/*.md` | route handler + lib/knowledge.ts | - (paczka OKF, 22 pliki) |
 
@@ -193,6 +204,8 @@ ai-auditor-lp/
 | `/pl/api` | ApiContent PL | API CitationOne - audyty GEO przez REST |
 | `/pl/affiliate` | AffiliateContent PL | Program poleceń CitationOne - 10% prowizji od każdego zamówienia |
 | `/pl/changelog` | ChangelogPage (`lang="pl"`) | Nowości w CitationOne - changelog audytu GEO |
+| `/pl/blog` | BlogIndex (`lang="pl"`) | Blog - poradniki GEO i SEO |
+| `/pl/blog/[slug]` | BlogPostView + data/blog.ts + content/blog/pl/*.md | H1 = `title` z rejestru |
 
 Nowa statyczna podstrona = para w `STATIC_PAIRS` ([src/lib/languageSwitch.ts](src/lib/languageSwitch.ts)):
 z niej biorą się przełącznik języka, hreflangi (`alternatesFor`) i wpis w sitemapie.
@@ -243,7 +256,10 @@ Adresy: `APP_URL/login?lang={pl|en}` i `APP_URL/register?lang={pl|en}`. Powód z
 w `Navbar.tsx`: wracający użytkownik nie miał gdzie kliknąć, a nowy nie widział, że start jest darmowy.
 
 Rozwijane menu „Audyt treści" (`AUDIT_MENU`, desktop i mobile): Jak działa audytor?, Wymiary oceny,
-Audyt masowy, API, **Nowości / Changelog** (od 2026-11-10). Stopka ma te same podstrony.
+Audyt masowy, API, **Nowości / Changelog** (od 2026-11-10). Za menu „Cennik” stoi zwykły link **„Blog”** (desktop i mobile).
+Stopka linkuje te same podstrony oprócz changelogu (zdjęty ze stopki 2026-11-10 na prośbę usera) i ma „Blog”.
+**Reguła: bez wpisów w danym języku NIE ma linku „Blog”** - ani w menu (desktop i mobile), ani w stopce, a lista tego języka wypada z sitemapy. Steruje tym `HAS_BLOG_POSTS` w [src/data/blog.ts](src/data/blog.ts), więc link pojawia się sam po dodaniu pierwszego wpisu (stan 2026-11-10: PL ma wpisy, EN jeszcze nie).
+**Link „Blog” na pasku znika między 820 a 869 px** (`.nav-blog`): w PL zawijał przyciski konta do dwóch linii (64 px) od 820 do 849 px.
 
 Notatki poniżej opisują wcześniejszy etap („Zrób audyt" → `/login`) i zostają jako historia decyzji.
 
@@ -320,7 +336,19 @@ Na ekranie leżą **trzy slajdy** (od 2026-09-04) w kolejności pracy z audytem:
 
 **NoticeBar** ([NoticeBar.tsx](src/components/NoticeBar.tsx)) - pasek komunikatu nad navbarem PL i EN (wywołanie w `Navbar.tsx` i `en/NavbarEN.tsx`). Treść **ustawia admin w aplikacji** (`/admin/lp`, karta „Pasek komunikatu na citationone.com”, klucze `LP_NOTICE_TEXT_PL/EN`, opcjonalnie `LP_NOTICE_LINK_PL/EN` i `LP_NOTICE_LINK_LABEL_PL/EN`), strona czyta ją z pola `notice` w `lp-links` przez `fetchLpSettings`. Pasek idzie na stronę tylko przy zaznaczonym checkboxie „Pokazuj pasek na stronie” (`LP_NOTICE_ENABLED`; odznaczenie zostawia treść). Pusty tekst = brak paska w tym języku. **Celowo bez fallbacku w kodzie** - przy błędzie endpointu pasek się nie pokazuje, zamiast pokazać nieaktualny komunikat. Pasek pojawia się po odpowiedzi i przesuwa stronę w dół o swoją wysokość. Komponent zostaje w kodzie na stałe; wyłączenie paska = odznaczenie checkboxa w panelu.
 
-**Changelog** (`/changelog` i `/pl/changelog`, wspólny komponent [ChangelogPage.tsx](src/components/ChangelogPage.tsx), dane z [src/lib/changelog.ts](src/lib/changelog.ts)) - lista zmian produktu pogrupowana po miesiącach, z kotwicą na każdy wpis. Wpisy pochodzą z changelogu aplikacji przez `app.citationone.com/api/public/changelog` i są pobierane **w czasie builda**, więc lądują w statycznym HTML. Nowy wpis w aplikacji pojawia się na LP dopiero po deployu aplikacji i **ponownym buildzie LP**. Błąd pobrania przerywa build, żeby nie opublikować pustej strony. Zakres wpisów (od 2026-06-01) wyznacza aplikacja. Pauzy „—” ze starszych wpisów zamieniamy przy pobraniu na dywiz. Lokalnie adres podmienia `CHANGELOG_ENDPOINT`. Link w menu „Audyt treści” i w stopce, para w `STATIC_PAIRS`.
+**Changelog** (`/changelog` i `/pl/changelog`, wspólny komponent [ChangelogPage.tsx](src/components/ChangelogPage.tsx), dane z [src/lib/changelog.ts](src/lib/changelog.ts)) - lista zmian produktu pogrupowana po miesiącach, z kotwicą na każdy wpis. Wpisy pochodzą z changelogu aplikacji przez `app.citationone.com/api/public/changelog` i są pobierane **w czasie builda**, więc lądują w statycznym HTML. Nowy wpis w aplikacji pojawia się na LP dopiero po deployu aplikacji i **ponownym buildzie LP**. Błąd pobrania przerywa build, żeby nie opublikować pustej strony. Zakres wpisów (od 2026-06-01) wyznacza aplikacja. Pauzy „—” ze starszych wpisów zamieniamy przy pobraniu na dywiz. Lokalnie adres podmienia `CHANGELOG_ENDPOINT`. Link w menu „Audyt treści” (w stopce już go nie ma), para w `STATIC_PAIRS`.
+
+**Blog** (`/blog`, `/pl/blog`, od 2026-11-10) - poradniki pisane w Markdownie w repo i renderowane **przy buildzie**, więc cała treść jest w statycznym HTML.
+- **Nowy wpis = dwa kroki:** obiekt w rejestrze [src/data/blog.ts](src/data/blog.ts) (`id`, `date`, opcjonalnie `updated`, a dla każdego języka `slug`, `title`, `description`) + plik `content/blog/<pl|en>/<slug>.md` dla każdego języka. Sam plik .md bez wpisu w rejestrze nie trafi na stronę. Metadane siedzą w TS, a nie we frontmatterze, bo pary slugów potrzebuje przełącznik języka w kliencie.
+- **Plik .md zaczyna się od leadu, bez `#` H1** - H1 i opis pod nim daje szablon z rejestru (`#` w treści i tak schodzi do H2). H2 dostają kotwice bez polskich znaków (duplikaty: `-2`), a od 3 H2 pojawia się spis treści - **zwinięty domyślnie** (`<details class="blog-toc">`, bez JS, licznik sekcji w nagłówku).
+- **Ramka „najważniejsze informacje” z żarówką** (`.blog-key`) powstaje sama z akapitu kończącego się dwukropkiem i zaczynającego od „Najważniejsze…”, „Kluczowe…”, „W skrócie…”, „Key takeaways…”, „Key points…” itp. (`KEY_LEAD` w `lib/blog.ts`), jeśli zaraz pod nim stoi lista. Tak pisze skill `lp-article`, więc artykuły nie potrzebują składni. Ramka w dowolnym innym miejscu: `> [!KEY] Opcjonalny tytuł` + treść cytatu (bez tytułu: „Najważniejsze informacje” / „Key takeaways”).
+- **Obsługiwane formaty (GFM, `marked`):** nagłówki H2-H4, listy (zagnieżdżone, numerowane, zadania `- [x]`), cytaty, tabele z wyrównaniem, kod inline i bloki, obrazy (`loading=lazy`, pliki w `public/`), przekreślenie, linia pozioma, a jako surowy HTML `<figure>`/`<figcaption>`, `<iframe>`/`<video>` (zawsze 16:9 na szerokość kolumny), `<details>`, `<mark>`, `<kbd>`. Linki zewnętrzne dostają `target=_blank` + `noopener`. HTML z Markdowna **nie jest sanitizowany** - treść pisze zespół w repo.
+- **Responsywność (zmierzona 320/375/820/1440 px):** brak przewijania strony w poziomie. Szeroka tabela przewija się we własnym pudełku `.blog-table`, długie adresy łamią się (`overflow-wrap: anywhere` w akapitach, `break-word` w komórkach - `anywhere` w tabeli rwał nagłówki w pół słowa). Na telefonie blok kodu idzie od krawędzi do krawędzi.
+- **Build pilnuje:** brak pliku .md dla wpisu z rejestru, em dash w treści albo metadanych, zła data, zdublowany lub niepoprawny slug - każdy z tych błędów przerywa build z komunikatem.
+- **CTA podążające na każdym wpisie** ([BlogStickyCta.tsx](src/components/BlogStickyCta.tsx)): od 1180 px układ dwukolumnowy (treść 740 px + karta 260 px z `position: sticky`, top 96 px), poniżej belka przyklejona do dołu ekranu (safe-area iOS, przycisk 44 px). Belka wjeżdża po przewinięciu nagłówka wpisu (`#blog-article-head`) i chowa się, gdy na ekran wchodzi końcowe CTA (`#blog-end-cta`), więc nie dubluje go i nie zasłania stopki. Kliknięcia liczy globalny `RegisterClickTracker` jako `register_click` - w `link_classes` widać `blog-side-cta` albo `blog-bar-cta`. **Pułapka:** `overflow-x: hidden` na html/body (globals.css) wyłącza `sticky`, dlatego strona wpisu nadpisuje go na `overflow-x: clip` (tylko tam; reszta LP bez zmian).
+- **Wpis tylko w jednym języku** jest dozwolony: nie emituje hreflanga, a przełącznik języka prowadzi na listę wpisów drugiego języka (`plCounterpart`/`enCounterpart`). Pary obu wersji (`BLOG_SLUG_PAIRS`) zasilają przełącznik, hreflangi i sitemapę. Slugi po angielsku także w PL (zasada nowych route'ów).
+- **Pusty język:** static export odrzuca `[slug]` bez ścieżek, więc `blogStaticParams` generuje wtedy zaślepkę `__empty` (404 z `noindex`, poza sitemapą i listą). Znika sama przy pierwszym wpisie.
+- **Schema (jeden `@graph`, `lib/blogSeo.ts`):** `Organization` (`/#organization`, logo, `sameAs` LinkedIn + Facebook firmy), `WebSite`, `Person` autora (`/#wojciech-wladzinski-ulatowski`, zdjęcie, `worksFor`, **`sameAs` = LinkedIn**), `Blog`, a na wpisie `WebPage` + `BreadcrumbList` + `BlogPosting` (`wordCount`, `timeRequired`, daty, `workTranslation` do drugiej wersji językowej). Lista to `CollectionPage` + `Blog` z `blogPost`. Węzły wskazują się przez `@id`. JSON-LD idzie przez `jsonLdHtml` (`<` → `<`). Do tego `og:type=article` z datami i autor w nagłówku wpisu. Wpisy trafiają do sitemapy (`lastModified` = `updated` albo `date`) i do sekcji „Blog” w `llms.txt` (EN + wpisy tylko po polsku). Na końcu wpisu stoi CTA rejestracji i do 3 innych wpisów.
 
 **llms.txt i paczka wiedzy OKF** ([src/lib/knowledge.ts](src/lib/knowledge.ts), route handlery `src/app/llms.txt/route.ts` i `src/app/knowledge/[...path]/route.ts`, od 2026-11-10) - `/llms.txt` w formacie llmstxt.org i paczka w Open Knowledge Format v0.2 pod `/knowledge/` (`index.md` z `okf_version`, `product.md`, `api.md`, `dimensions/*.md`, `tools/*.md`, `log.md` z changelogu). Oba generują się **przy buildzie** z `src/data/*` i changelogu aplikacji, więc nowy wymiar, narzędzie albo wpis changelogu trafia do nich sam. Paczka jest po angielsku; `llms.txt` wskazuje też wersję PL. Fakty produktu (opis, cennik, przykładowy raport) siedzą w stałej `PRODUCT` w `knowledge.ts` - przy zmianie cennika popraw je tam. Nagłówki `Content-Type` z `charset=utf-8` ustawia `vercel.json`. OKF nie definiuje sposobu odkrywania paczki na stronie, dlatego prowadzi do niej `llms.txt`. **Zweryfikowane z kodem aplikacji (2026-11-10), trzymaj się tego w tekstach dla agentów:** CQS to średnia ważona 10 wymiarów **plus E-E-A-T (waga 0,05) i metadanych** (title + meta description) - `calculateCQS` w `../ai-auditor/src/lib/scoring.ts`, wagi zależne od profilu typu treści. Information Gain jest poza wynikiem. Na żywo audyt sprawdza cytowania w AI Overviews, ChatGPT i AI Mode - **Perplexity nie jest odpytywane**, więc pisz „szacuje szansę cytowania”, a nie „sprawdza, czy Perplexity cytuje”. Każde narzędzie i każde „Wdrożenie w treść” kosztuje 1 kredyt (`decrementAuditCredits`), nowe konto ma 3 kredyty. Znaczniki HTML w opisach changelogu (`<script>`) `codeTags` owija w kod inline, inaczej renderer Markdowna by je ukrył.
 

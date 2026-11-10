@@ -1,4 +1,5 @@
 import { APP_URL } from '@/lib/appUrl';
+import { HAS_BLOG_POSTS } from '@/data/blog';
 import SocialLinks from '../SocialLinks';
 
 /**
@@ -16,8 +17,10 @@ const NAV_LINKS = [
   { href: '/#who-is-it-for', label: 'Who is it for?' },
   { href: '/api', label: 'API' },
   { href: '/affiliate', label: 'Referral program' },
-  { href: '/changelog', label: 'Changelog' },
 ];
+
+// Blog tylko gdy jezyk ma wpis - regula w HAS_BLOG_POSTS (src/data/blog.ts).
+const NAV = HAS_BLOG_POSTS.en ? [...NAV_LINKS, { href: '/blog', label: 'Blog' }] : NAV_LINKS;
 
 const LEGAL_LINKS = [
   { href: `${APP_URL}/contact`, label: 'Contact' },
@@ -36,7 +39,7 @@ export default function FooterEN() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-1">
-            {NAV_LINKS.map((l) => (
+            {NAV.map((l) => (
               <a key={l.href} href={l.href} style={{ fontSize: 14, color: '#818898', textDecoration: 'none', padding: '12px 14px', borderRadius: 5 }}>
                 {l.label}
               </a>

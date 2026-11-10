@@ -5,6 +5,7 @@ import { enSlugForPl } from '@/data/dimension-types';
 import { toolSlugsPl } from '@/data/tools-pl';
 import { toolEnSlugForPl } from '@/data/tool-types';
 import { STATIC_PAIRS } from '@/lib/languageSwitch';
+import { BLOG_POSTS, HAS_BLOG_POSTS } from '@/data/blog';
 
 // Wymagane przy output: 'export' - bez tego build przerywa sie na kolekcji danych trasy.
 export const dynamic = 'force-static';
@@ -68,5 +69,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((en) => !dimensionSlugsPl().some((pl) => enSlugForPl(pl) === en))
     .map((en) => ({ url: `${SITE}/dimensions/${en}`, lastModified, priority: 0.7 }));
 
-  return [...staticEntries, ...dimensionEntries, ...toolEntries, ...orphanEn];
+  // Wpisy bloga: lastModified = data aktualizacji tresci, a nie data builda. Hreflang tylko dla par.
+  const blogEntries: MetadataRoute.Sitemap = BLOG_POSTS.flatMap((p) => {
+    const modified = new Date(`${p.updated ?? p.date}T00:00:00Z`);
+    const en = p.en && `${SITE}/blog/${p.en.slug}`;
+    const pl = p.pl && `${SITE}/pl/blog/${p.pl.slug}`;
+    const alternates = en && pl ? { languages: { en, pl } } : undefined;
+    return [en, pl].filter((u): u is string => !!u).map((url) => ({ url, lastModified: modified, priority: 0.6, alternates }));
+  });
+
+  // Lista bloga w jezyku bez wpisow nie ma linku w menu, wiec nie zglaszamy jej tez w mapie.
+  const emptyBlog = new Set([!HAS_BLOG_POSTS.en && `${SITE}/blog`, !HAS_BLOG_POSTS.pl && `${SITE}/pl/blog`].filter(Boolean));
+  const visibleStatic = staticEntries.filter((e) => !emptyBlog.has(e.url));
+
+  return [...visibleStatic, ...dimensionEntries, ...toolEntries, ...orphanEn, ...blogEntries];
 }
