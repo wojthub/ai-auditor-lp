@@ -288,6 +288,10 @@ export default function ApiContentEN() {
           }}>
             {DOCS_MD_URL}
           </div>
+          <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.6, marginTop: 14, marginBottom: 0 }}>
+            Prefer to run audits in a chat with an assistant?{' '}
+            <a href="/mcp" style={{ color: ACCENT, fontWeight: 600 }}>MCP server →</a>
+          </p>
         </motion.div>
 
         {/* Closing CTA */}

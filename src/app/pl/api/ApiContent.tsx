@@ -291,6 +291,10 @@ export default function ApiContent() {
           <p style={{ fontSize: 13, color: '#818898', lineHeight: 1.6, marginTop: 14, marginBottom: 0 }}>
             Dokumentacja jest po angielsku - razem z opisami pól i przykładami.
           </p>
+          <p style={{ fontSize: 14.5, color: '#36394a', lineHeight: 1.6, marginTop: 14, marginBottom: 0 }}>
+            Wolisz zlecać audyty w rozmowie z asystentem?{' '}
+            <a href="/pl/mcp" style={{ color: ACCENT, fontWeight: 600 }}>Serwer MCP →</a>
+          </p>
         </motion.div>
 
         {/* Closing CTA */}

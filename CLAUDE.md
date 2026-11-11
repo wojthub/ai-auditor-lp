@@ -123,6 +123,7 @@ ai-auditor-lp/
 │   └── components/
 │       ├── NoticeBar.tsx        # Shared - pasek komunikatu nad navbarem, treść z panelu /admin/lp
 │       ├── ChangelogPage.tsx    # Shared - lista zmian (/changelog i /pl/changelog)
+│       ├── McpContent.tsx       # Shared - podstrona serwera MCP (/mcp i /pl/mcp), komponent serwerowy
 │       ├── BlogIndex.tsx        # Shared - lista wpisów bloga
 │       ├── BlogPostView.tsx     # Shared - wpis bloga + style treści (.blog-prose)
 │       ├── BlogCopy.ts          # Etykiety szablonów bloga PL/EN, autor, formatDate
@@ -186,6 +187,7 @@ ai-auditor-lp/
 | `/api` | ApiContentEN | CitationOne API - audyty GEO przez REST |
 | `/affiliate` | AffiliateContentEN | CitationOne referral program - 10% on every order |
 | `/changelog` | ChangelogPage (`lang="en"`) | CitationOne changelog - what is new in the GEO audit |
+| `/mcp` | McpContent (`lang="en"`) | CitationOne MCP server - GEO audits in Claude and Cursor |
 | `/blog` | BlogIndex (`lang="en"`) | Blog - GEO and SEO guides |
 | `/blog/[slug]` | BlogPostView + data/blog.ts + content/blog/en/*.md | H1 = `title` z rejestru |
 | `/llms.txt` | route handler + lib/knowledge.ts | - (plik tekstowy dla agentów AI) |
@@ -204,6 +206,7 @@ ai-auditor-lp/
 | `/pl/api` | ApiContent PL | API CitationOne - audyty GEO przez REST |
 | `/pl/affiliate` | AffiliateContent PL | Program poleceń CitationOne - 10% prowizji od każdego zamówienia |
 | `/pl/changelog` | ChangelogPage (`lang="pl"`) | Nowości w CitationOne - changelog audytu GEO |
+| `/pl/mcp` | McpContent (`lang="pl"`) | Serwer MCP CitationOne - audyty GEO w Claude i Cursorze |
 | `/pl/blog` | BlogIndex (`lang="pl"`) | Blog - poradniki GEO i SEO |
 | `/pl/blog/[slug]` | BlogPostView + data/blog.ts + content/blog/pl/*.md | H1 = `title` z rejestru |
 
@@ -243,6 +246,10 @@ z opóźnieniem — a przed zakupem nikt nie decyduje na ich podstawie.
 Numeru wersji celowo NIE ma w copy: LP jest statyczne i zwietrzałoby przy pierwszym
 bumpie; w pasku bloku kodu jest `api/v1`, czyli prefiks ścieżki, który zmienia się tylko przy zmianie łamiącej.
 
+### Zakładka MCP (`/mcp` i `/pl/mcp`, od 2026-11-11)
+
+Podstrona serwera MCP aplikacji (`app.citationone.com/api/mcp`, Streamable HTTP, ten sam klucz API i kredyty) - [McpContent.tsx](src/components/McpContent.tsx), jeden komponent serwerowy dla obu języków, bez framer-motion (pojawianie przez `reveal`). Sekcje: hero z CTA (instrukcja `/api-docs#mcp` + rejestracja), przykładowa rozmowa z wywołaniami narzędzi, konfiguracja dla Claude Code / Cursor / Claude Desktop, tabela 4 narzędzi (`start_audit`, `get_audit`, `list_audits`, `get_credits`) z odpowiednikami w REST, karty zasad, CTA i link do `/api`. **Fakty z `../ai-auditor/spec/public-api.md` §17 i sekcji `mcp` w `lib/api/docs-content.ts`** - nowe narzędzie po stronie aplikacji (etap 5: `apply_recommendations`, `share_audit`, `detect_keyword`, OAuth) = aktualizacja `TOOLS`/`SETUP` w komponencie. **Sekcja skilla** (`#skill`, link w hero): skill Claude z aplikacji (`../ai-auditor/public/skills/citationone/SKILL.md`, publiczny pod `app.citationone.com/skills/citationone/SKILL.md` dzięki `/skills` w `PUBLIC_PATHS` middleware) - lista tego, co robi (streszczenie pliku: potwierdzenie kosztu, kontrola niedawnego audytu, wynik na tle top 10 z progiem 5 pkt, lista priorytetów dla klienta, przed/po, szablon podsumowania), polecenie instalacji `curl`, instrukcja dla claude.ai i przycisk pobrania. Zmiana treści skilla = aktualizacja `skillItems`. **Przykładowa rozmowa jest animowana** ([McpChatDemo.tsx](src/components/McpChatDemo.tsx), jedyny kliencki kawałek strony): start po wjechaniu w widok, wiadomość użytkownika pisze się znak po znaku, chipy narzędzi ze spinnerem przechodzą w ptaszek, a potem pojawia się odpowiedź. Cała treść jest w HTML od początku i chowa się przez `opacity`/`visibility`, więc wysokość pudełka jest stała (zmierzone: ±2 px). Bez JS (`<noscript>`) i przy `prefers-reduced-motion` widać całość od razu. **Nie obiecywać na LP (stan 2026-11-11):** logowania kontem bez kopiowania klucza (OAuth), wpisu w katalogu konektorów Claude/ChatGPT, „Wdrożenia w treść” ani linków publicznych przez MCP. Limitów liczbowych (3 audyty naraz, 20 startów/min) nie publikujemy - ta sama zasada co na `/api`. Skill nie działa w Cursorze (tam sam MCP). Klucz API: w panelu **Ustawienia → API** (`/developers`). Linki: menu „Audyt treści” (pod API), stopka („MCP”), wzajemne linki `/api` ↔ `/mcp`, `llms.txt` (sekcja API). Skill jest też w `llms.txt`. Slug `mcp` jest taki sam w obu językach (nazwa własna).
+
 ### Navbar — wejścia do aplikacji
 
 **Stan obecny (sprawdzony w kodzie 2026-11-10)** - dwa wejścia zamiast jednego „Zrób audyt":
@@ -256,7 +263,7 @@ Adresy: `APP_URL/login?lang={pl|en}` i `APP_URL/register?lang={pl|en}`. Powód z
 w `Navbar.tsx`: wracający użytkownik nie miał gdzie kliknąć, a nowy nie widział, że start jest darmowy.
 
 Rozwijane menu „Audyt treści" (`AUDIT_MENU`, desktop i mobile): Jak działa audytor?, Wymiary oceny,
-Audyt masowy, API, **Nowości / Changelog** (od 2026-11-10). Za menu „Cennik” stoi zwykły link **„Blog”** (desktop i mobile).
+Audyt masowy, API, **Serwer MCP** (od 2026-11-11), **Nowości / Changelog** (od 2026-11-10). Za menu „Cennik” stoi zwykły link **„Blog”** (desktop i mobile).
 Stopka linkuje te same podstrony oprócz changelogu (zdjęty ze stopki 2026-11-10 na prośbę usera) i ma „Blog”.
 **Reguła: bez wpisów w danym języku NIE ma linku „Blog”** - ani w menu (desktop i mobile), ani w stopce, a lista tego języka wypada z sitemapy. Steruje tym `HAS_BLOG_POSTS` w [src/data/blog.ts](src/data/blog.ts), więc link pojawia się sam po dodaniu pierwszego wpisu (stan 2026-11-10: PL ma wpisy, EN jeszcze nie).
 **Link „Blog” na pasku znika między 820 a 869 px** (`.nav-blog`): w PL zawijał przyciski konta do dwóch linii (64 px) od 820 do 849 px.
@@ -564,7 +571,7 @@ Wejście z reklamy niesie `fbclid` i UTM-y, a linki do aplikacji były gołe, wi
 
 ### SEO - title template i FAQ schema
 
-- Root layout: `title.template: '%s - CitationOne'` (EN); PL layout ma własny template. **Strony `metadata.title` NIE dopisują " - CitationOne"** - template robi to automatycznie. Wyjątek: `openGraph.title` jest standalone i może zawierać brand.
+- Root layout i PL layout mają `title.template: '%s'` (sprawdzone 2026-11-11) - **marki NIE dokleja nic**. Strona, która chce mieć „CitationOne” w `<title>`, wpisuje ją sama (np. `/pl/api`, `/mcp`); tytuły wpisów bloga i podstron wymiarów są bez marki. `openGraph.title` jest standalone.
 - `FAQPage` JSON-LD schema renderowana w [FAQ.tsx](src/components/FAQ.tsx) i [FAQEN.tsx](src/components/en/FAQEN.tsx) - generowana z tablicy `faqs` (UI i structured data zawsze zsync).
 
 ### Language switcher

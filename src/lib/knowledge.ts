@@ -306,6 +306,8 @@ export function llmsTxt(): string {
     '',
     `- [API overview](${SITE}/api): REST + JSON, API key auth, bulk requests, 1 audit = 1 credit`,
     `- [API reference (Markdown)](${APP}/api-docs.md): full endpoint reference for agents`,
+    `- [MCP server](${SITE}/mcp): run audits and read results from Claude Code, Claude Desktop, Cursor and other MCP clients (Streamable HTTP at ${APP}/api/mcp, same API key and credits); setup in ${APP}/api-docs#mcp`,
+    `- [Claude skill for CitationOne](${APP}/skills/citationone/SKILL.md): teaches Claude to use the MCP tools in agency work (cost confirmation, reading scores against the top 10, multi-page priority lists, before/after comparisons, client summary template)`,
     '',
     '## Blog',
     '',

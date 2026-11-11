@@ -24,6 +24,7 @@ const AUDIT_MENU: { href: string; label: string; desc: string }[] = [
   // API v1 covers audits ONLY (/audits, /audits/bulk, /me) - none of the tools has an endpoint,
   // so this is a fourth way into the same product, not a separate top-level entry.
   { href: '/api', label: 'API', desc: 'Run audits over REST and JSON' },
+  { href: '/mcp', label: 'MCP server', desc: 'Audits in a chat with Claude and Cursor' },
   { href: '/changelog', label: 'Changelog', desc: 'The latest features, improvements and fixes' },
 ];
 

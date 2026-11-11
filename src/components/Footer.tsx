@@ -16,6 +16,7 @@ const NAV_LINKS = [
   { href: '/pl/cennik', label: 'Cennik' },
   { href: '/pl#dla-kogo', label: 'Dla kogo?' },
   { href: '/pl/api', label: 'API' },
+  { href: '/pl/mcp', label: 'MCP' },
   { href: '/pl/affiliate', label: 'Program poleceń' },
 ];
 

@@ -23,6 +23,7 @@ export const STATIC_PAIRS: ReadonlyArray<readonly [en: string, pl: string]> = [
   ['/affiliate', '/pl/affiliate'],
   ['/changelog', '/pl/changelog'],
   ['/blog', '/pl/blog'],
+  ['/mcp', '/pl/mcp'],
 ];
 
 const PAIRS: ReadonlyArray<readonly [en: string, pl: string]> = [
