@@ -162,7 +162,7 @@ function productDoc(): string {
         'Tools',
         bullets(toolSlugsEn().map((s) => `[${TOOLS_EN[s].name}](/tools/${s}.md) - ${TOOLS_EN[s].description}`))
       ),
-      section('API', 'Audits can be run programmatically - see [API](/api.md).'),
+      section('API', 'Audits can be run programmatically - see [API](/api.md) - and from AI assistants over [MCP](/mcp.md).'),
       section('Languages', `The site is available in English (${SITE}) and Polish (${SITE}/pl).`),
     ]
   );
@@ -182,7 +182,45 @@ function apiDoc(): string {
         'Summary',
         `The API runs the same audit as the web app and returns the same report data. Full reference as HTML: ${APP}/api-docs, as Markdown for agents: ${APP}/api-docs.md. Overview page: ${SITE}/api.`
       ),
-      section('Related', bullets(['[CitationOne](/product.md) - the product the API exposes'])),
+      section('Related', bullets([
+        '[CitationOne](/product.md) - the product the API exposes',
+        '[MCP server](/mcp.md) - the same API for AI assistants',
+      ])),
+    ]
+  );
+}
+
+function mcpDoc(): string {
+  return doc(
+    frontmatter({
+      type: 'API',
+      title: 'CitationOne MCP server',
+      description: 'MCP (Model Context Protocol) server for running CitationOne audits and reading the results from Claude Code, Claude Desktop, Cursor and other MCP clients. Same API key and credits as the REST API.',
+      resource: `${APP}/api/mcp`,
+      tags: ['api', 'mcp', 'ai-assistants'],
+    }),
+    [
+      section(
+        'Summary',
+        `Streamable HTTP endpoint at ${APP}/api/mcp, authenticated with an API key from the app settings (header "Authorization: Bearer co_live_..."). It runs the same audit as the web app and the REST API: 1 audit = 1 credit, reading results is free, and the same rate and concurrency limits apply. Setup for each client: ${APP}/api-docs#mcp. Overview page: ${SITE}/mcp.`
+      ),
+      section(
+        'Tools',
+        bullets([
+          'start_audit - audit a public URL or pasted text (e.g. a draft before publishing), with an optional keyword, language, project and idempotency key; returns a job id. An audit takes about 3-8 minutes.',
+          'get_audit - status while running; when completed, a summary with the Content Quality Score, the top 10 average, the dimensions, the 10 most important recommendations and a report link. With detail "full" it returns every recommendation with before/after text.',
+          'list_audits - recent audits with scores, filtered by project, domain or status.',
+          'get_credits - the credit balance and the most recent credit events.',
+        ])
+      ),
+      section(
+        'Claude skill',
+        `An optional skill (${APP}/skills/citationone/SKILL.md) teaches Claude to use these tools in agency work: confirming the cost before an audit, reading scores against the top 10, merging several pages of one client into one priority list, comparing audits before and after changes, and a client summary template. Skills work in Claude Code, Claude Desktop and claude.ai.`
+      ),
+      section('Related', bullets([
+        '[API](/api.md) - the REST API behind the MCP tools',
+        '[CitationOne](/product.md) - what an audit returns',
+      ])),
     ]
   );
 }
@@ -200,6 +238,7 @@ function rootIndex(): string {
     '',
     `- [CitationOne](/product.md) - what the audit does, what it returns, pricing`,
     `- [API](/api.md) - running audits over REST and JSON`,
+    `- [MCP server](/mcp.md) - running audits from Claude, Cursor and other AI assistants`,
     '',
     '# Scoring dimensions',
     '',
@@ -265,6 +304,7 @@ export async function knowledgeFiles(): Promise<Record<string, string>> {
     'index.md': rootIndex(),
     'product.md': productDoc(),
     'api.md': apiDoc(),
+    'mcp.md': mcpDoc(),
     'dimensions/index.md': dimensionsIndex(),
     'tools/index.md': toolsIndex(),
     'log.md': await changeLog(),
@@ -306,7 +346,7 @@ export function llmsTxt(): string {
     '',
     `- [API overview](${SITE}/api): REST + JSON, API key auth, bulk requests, 1 audit = 1 credit`,
     `- [API reference (Markdown)](${APP}/api-docs.md): full endpoint reference for agents`,
-    `- [MCP server](${SITE}/mcp): run audits and read results from Claude Code, Claude Desktop, Cursor and other MCP clients (Streamable HTTP at ${APP}/api/mcp, same API key and credits); setup in ${APP}/api-docs#mcp`,
+    `- [MCP server](${SITE}/mcp): run audits and read results from Claude Code, Claude Desktop, Cursor and other MCP clients (Streamable HTTP at ${APP}/api/mcp, same API key and credits); setup in ${APP}/api-docs#mcp. Markdown: ${k('mcp.md')}`,
     `- [Claude skill for CitationOne](${APP}/skills/citationone/SKILL.md): teaches Claude to use the MCP tools in agency work (cost confirmation, reading scores against the top 10, multi-page priority lists, before/after comparisons, client summary template)`,
     '',
     '## Blog',
