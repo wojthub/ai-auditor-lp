@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTypewriterPlaceholder } from '@/lib/useTypewriterPlaceholder';
 import { APP_URL } from '@/lib/appUrl';
-import HeroSources from '@/components/HeroSources';
+import HeroChecks from '@/components/HeroChecks';
 import { trackEvent, trackThenNavigate } from '@/lib/track';
 
 // Neutralna, przykładowa domena - nie wskazujemy na żadnego realnego klienta.
@@ -45,10 +45,10 @@ export default function Hero() {
         {/* Wjazd robi CSS (`.hero-rise` w globals.css): animacja z framer-motion startowala dopiero
             po hydracji i do tego czasu naglowek byl w HTML-u, ale niewidoczny. */}
         <div className="hero-rise">
-          <h1 className="hero-h1" style={{ marginBottom: 32 }}>
+          <h1 className="hero-h1" style={{ marginBottom: 28 }}>
             <span className="hero-title" style={{
               display: 'block',
-              fontSize: 'clamp(2.4rem, 4.56vw, 3.6rem)', fontWeight: 700,
+              fontSize: 'clamp(2.2rem, 3.8vw, 3rem)', fontWeight: 700,
               lineHeight: 1.1, letterSpacing: '-0.03em',
               background: 'linear-gradient(90deg, #1a3a4a 0%, #0b7983 55%, #0b9aa6 100%)',
               WebkitBackgroundClip: 'text',
@@ -61,9 +61,9 @@ export default function Hero() {
               display: 'block',
               fontSize: 17, fontWeight: 400,
               lineHeight: 1.6, color: '#36394a',
-              maxWidth: 560, margin: '14px auto 0',
+              maxWidth: 640, margin: '14px auto 0',
             }}>
-              Wklej link, listę URL-i albo sitemapę. Dostajesz gotowe rekomendacje „Przed i Po”. Konkretne wytyczne, co zmienić w treści, żeby cytował ją <span className="hero-brand"><img src="/logos/chatgpt.webp" alt="" aria-hidden width={16} height={16} />ChatGPT</span>, <span className="hero-brand"><img src="/logos/perplexity.webp" alt="" aria-hidden width={16} height={16} />Perplexity</span> i <span className="hero-brand"><img src="/logos/google.webp" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview.
+              Wklej link, listę URL-i albo sitemapę i dostań rekomendacje „Przed i Po”, żeby treść cytował <span className="hero-brand"><img src="/logos/chatgpt.webp" alt="" aria-hidden width={16} height={16} />ChatGPT,</span> <span className="hero-brand"><img src="/logos/perplexity.webp" alt="" aria-hidden width={16} height={16} />Perplexity</span> i <span className="hero-brand"><img src="/logos/google.webp" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview.
             </span>
           </h1>
 
@@ -134,21 +134,7 @@ export default function Hero() {
             )}
           </form>
 
-          <p className="hero-note" style={{ fontSize: 13, color: '#818898', margin: '14px auto 0', lineHeight: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0b7983" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-              <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z" />
-            </svg>
-            {/* Nota jest jednoczesnie wejsciem do rejestracji - ten sam ekran `/login`,
-                co CTA w navbarze; audyty przyznaje sie po zalozeniu konta. */}
-            <span>
-              <a href={`${APP_URL}/register?lang=pl`} className="hero-note-link">Odbierz 3 darmowe audyty na start</a>
-              . Bez podpinania karty.
-            </span>
-          </p>
-          {/* Tuz nad ekranem panelu (Showcase), zamyka hero. */}
-          <div className="hero-sources-wrap" style={{ marginTop: 26 }}>
-            <HeroSources lang="pl" />
-          </div>
+          <HeroChecks lang="pl" />
         </div>
       </div>
 
@@ -159,19 +145,6 @@ export default function Hero() {
         @media (min-width: 960px) {
           .hero-title { margin-inline: -90px; }
         }
-        .hero-note-link {
-          color: #0b7983;
-          font-weight: 600;
-          text-decoration: underline;
-          text-underline-offset: 2px;
-          text-decoration-thickness: 1px;
-          text-decoration-color: rgba(11,121,131,0.35);
-          transition: text-decoration-color 0.16s ease;
-        }
-        .hero-note-link:hover {
-          text-decoration-color: #0b7983;
-          opacity: 1;
-        }
         .hero-input-row {
           display: flex;
         }
@@ -181,18 +154,14 @@ export default function Hero() {
         }
         /* Telefon (2026-11-13): mniejszy H1 i podtytul, ciasniejsze odstepy - ekran panelu ma wejsc
            blizej zgiecia. Pole i przycisk maja 16 px, bo przy mniejszym foncie iOS Safari
-           przybliza strone po kliknieciu w pole. Ikonka prezentu idzie w linii z tekstem noty
-           (przy flexie odklejala sie na lewo od dwuwierszowego tekstu). */
+           przybliza strone po kliknieciu w pole. */
         @media (max-width: 580px) {
           .hero-inner { padding: 24px 20px 12px !important; }
-          .hero-h1 { margin-bottom: 20px !important; }
-          .hero-title { font-size: clamp(1.95rem, 9.2vw, 2.4rem) !important; }
+          .hero-h1 { margin-bottom: 18px !important; }
+          .hero-title { font-size: clamp(1.8rem, 8.2vw, 2.15rem) !important; }
           .hero-sub { font-size: 15.5px !important; line-height: 1.55 !important; margin-top: 10px !important; }
           .hero-input-row input, .hero-input-row button { font-size: 16px !important; }
           .hero-input-row input { padding-left: 14px !important; padding-right: 14px !important; }
-          .hero-note { display: block !important; text-align: center; margin-top: 12px !important; }
-          .hero-note svg { display: inline-block; vertical-align: -2px; margin-right: 5px; }
-          .hero-sources-wrap { margin-top: 16px !important; }
         }
         @media (max-width: 580px) {
           .hero-input-row { flex-direction: column; gap: 8px; }
