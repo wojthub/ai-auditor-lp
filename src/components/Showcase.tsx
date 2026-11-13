@@ -28,7 +28,7 @@ export default function Showcase() {
   // Tlo (siatka kropek + graf) i gradient daje HeroBand - ta sekcja musi zostac
   // przezroczysta, inaczej zaslonilaby wspolna warstwe tla.
   return (
-    <section style={{ position: 'relative', overflow: 'hidden', padding: '76px 0 96px' }}>
+    <section className="showcase-section" style={{ position: 'relative', overflow: 'hidden', padding: '76px 0 96px' }}>
 
       {/* miękka poświata akcentu za urządzeniem */}
       <div

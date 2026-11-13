@@ -568,6 +568,8 @@ Wejście z reklamy niesie `fbclid` i UTM-y, a linki do aplikacji były gołe, wi
   — ten sam ekran co CTA w navbarze, bo aplikacja nie ma osobnego `/register`; konto powstaje przy
   pierwszym logowaniu kodem albo Google. Poprzednie „Pełny raport w 5 minut" zeszło: brak karty
   i moment przyznania audytów to realne pytania sprzed rejestracji.
+- **Pigułka źródeł danych** ([HeroSources.tsx](src/components/HeroSources.tsx), od 2026-11-13) - ostatni element hero, tuż nad ekranem panelu: „Na podstawie realnych danych konkurencji w Google, AIO / AI Mode i ChatGPT” / „Based on real competitor data from…”. Kolejność (ChatGPT na końcu), skrót „AIO” i brak logotypów to decyzje usera. Na telefonie bez kropki, wyśrodkowana, 2 linie przy 375 px.
+- **Hero na telefonie (≤580 px, 2026-11-13):** H1 `clamp(1.95rem, 9.2vw, 2.4rem)`, podtytuł 15,5 px, ciaśniejsze odstępy, a Showcase ma na ≤640 px `padding-top: 36px` (`.showcase-section` w globals.css, desktop 76 px). Efekt: przy 375×760 górna krawędź mockupu wchodzi nad zgięcie (~635 px). **Pole i przycisk mają tam 16 px** - przy mniejszym foncie iOS Safari przybliża stronę po kliknięciu w pole. Ikonka prezentu w nocie jest `inline` (przy flexie odklejała się od dwuwierszowego tekstu).
 - **Ikony silników AI** w podtytule: `public/logos/{chatgpt,perplexity,google}.webp` (48px, ~1-2 KB),
   serwowane lokalnie — **nie hotlinkujemy** faviconów (`chatgpt.com/favicon.ico` zwraca 403 dla nie-przeglądarki,
   a każdy odwiedzający wysyłałby request do OpenAI/Perplexity/Google). Klasa `.hero-brand` (inline-flex +

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTypewriterPlaceholder } from '@/lib/useTypewriterPlaceholder';
 import { APP_URL } from '@/lib/appUrl';
+import HeroSources from '@/components/HeroSources';
 import { trackEvent, trackThenNavigate } from '@/lib/track';
 
 // Neutral placeholder domain - we never point at a real client.
@@ -40,11 +41,11 @@ export default function HeroEN() {
   // zeby linie nie urywaly sie na granicy sekcji.
   return (
     <section className="relative">
-      <div className="relative" style={{ maxWidth: 720, margin: '0 auto', padding: '40px 24px 28px', textAlign: 'center', width: '100%' }}>
+      <div className="relative hero-inner" style={{ maxWidth: 720, margin: '0 auto', padding: '40px 24px 28px', textAlign: 'center', width: '100%' }}>
         {/* Wjazd robi CSS (`.hero-rise` w globals.css): animacja z framer-motion startowala dopiero
             po hydracji i do tego czasu naglowek byl w HTML-u, ale niewidoczny. */}
         <div className="hero-rise">
-          <h1 style={{ marginBottom: 32 }}>
+          <h1 className="hero-h1" style={{ marginBottom: 32 }}>
             <span className="hero-title" style={{
               display: 'block',
               fontSize: 'clamp(2.4rem, 4.56vw, 3.6rem)', fontWeight: 700,
@@ -56,7 +57,7 @@ export default function HeroEN() {
             }}>
               Automate content optimization for GEO
             </span>
-            <span style={{
+            <span className="hero-sub" style={{
               display: 'block',
               fontSize: 17, fontWeight: 400,
               lineHeight: 1.6, color: '#36394a',
@@ -133,7 +134,7 @@ export default function HeroEN() {
             )}
           </form>
 
-          <p style={{ fontSize: 13, color: '#818898', margin: '14px auto 0', lineHeight: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+          <p className="hero-note" style={{ fontSize: 13, color: '#818898', margin: '14px auto 0', lineHeight: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#0b7983" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z" />
             </svg>
@@ -144,6 +145,10 @@ export default function HeroEN() {
               . No card required.
             </span>
           </p>
+          {/* Tuz nad ekranem panelu (Showcase), zamyka hero. */}
+          <div className="hero-sources-wrap" style={{ marginTop: 26 }}>
+            <HeroSources lang="en" />
+          </div>
         </div>
       </div>
 
@@ -169,6 +174,21 @@ export default function HeroEN() {
         }
         .hero-input-row { display: flex; }
         .hero-input-row input:focus { border-color: #0b7983; border-right: none; }
+        /* Telefon (2026-11-13): mniejszy H1 i podtytul, ciasniejsze odstepy - ekran panelu ma wejsc
+           blizej zgiecia. Pole i przycisk maja 16 px, bo przy mniejszym foncie iOS Safari
+           przybliza strone po kliknieciu w pole. Ikonka prezentu idzie w linii z tekstem noty
+           (przy flexie odklejala sie na lewo od dwuwierszowego tekstu). */
+        @media (max-width: 580px) {
+          .hero-inner { padding: 24px 20px 12px !important; }
+          .hero-h1 { margin-bottom: 20px !important; }
+          .hero-title { font-size: clamp(1.95rem, 9.2vw, 2.4rem) !important; }
+          .hero-sub { font-size: 15.5px !important; line-height: 1.55 !important; margin-top: 10px !important; }
+          .hero-input-row input, .hero-input-row button { font-size: 16px !important; }
+          .hero-input-row input { padding-left: 14px !important; padding-right: 14px !important; }
+          .hero-note { display: block !important; text-align: center; margin-top: 12px !important; }
+          .hero-note svg { display: inline-block; vertical-align: -2px; margin-right: 5px; }
+          .hero-sources-wrap { margin-top: 16px !important; }
+        }
         @media (max-width: 580px) {
           .hero-input-row { flex-direction: column; gap: 8px; }
           .hero-input-row input { border-radius: 8px !important; border-right: 1.5px solid #dfe1e7 !important; }

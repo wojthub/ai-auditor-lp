@@ -206,3 +206,8 @@ button:active { transform: scale(0.97); }
   transition: filter 0.2s ease, opacity 0.2s ease;
 }
 .tech-logo:hover { filter: none; opacity: 0.85; }
+
+/* Telefon: mniejsza luka miedzy hero a mockupem panelu (desktop zostaje przy 76 px). */
+@media (max-width: 640px) {
+  .showcase-section { padding-top: 36px !important; }
+}
