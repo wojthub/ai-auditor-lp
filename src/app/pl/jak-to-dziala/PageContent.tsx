@@ -530,7 +530,7 @@ export default function PageContent() {
         </div>
       </section>
 
-      {/* 10 WYMIARÓW */}
+      {/* 11 WYMIARÓW */}
       <section style={{ background: '#ffffff', padding: '90px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 48 }}>

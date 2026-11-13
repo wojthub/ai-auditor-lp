@@ -63,7 +63,7 @@ export default function Hero() {
               lineHeight: 1.6, color: '#36394a',
               maxWidth: 640, margin: '14px auto 0',
             }}>
-              Wklej link, listę URL-i albo sitemapę i dostań rekomendacje „Przed i Po”, żeby treść cytował <span className="hero-brand"><img src="/logos/chatgpt.webp" alt="" aria-hidden width={16} height={16} />ChatGPT,</span> <span className="hero-brand"><img src="/logos/perplexity.webp" alt="" aria-hidden width={16} height={16} />Perplexity</span> i <span className="hero-brand"><img src="/logos/google.webp" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview.
+              Wklej link, listę URL-i albo sitemapę i dostań rekomendacje „Przed i Po”, żeby treść cytował <span className="hero-brand"><img src="/logos/chatgpt.webp" alt="" aria-hidden width={16} height={16} />ChatGPT,</span> <span className="hero-brand"><img src="/logos/claude.svg" alt="" aria-hidden width={16} height={16} />Claude</span> i <span className="hero-brand"><img src="/logos/google.webp" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview.
             </span>
           </h1>
 

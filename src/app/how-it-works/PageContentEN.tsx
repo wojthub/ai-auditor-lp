@@ -195,7 +195,7 @@ function BeforeAfterVisual() {
         <div style={{ background: 'rgba(21,128,61,0.04)', border: '1px solid #dfe1e7', borderRadius: 8, padding: '16px' }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: '#15803d', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 10 }}>After</span>
           <p style={{ fontSize: 12.5, color: '#36394a', lineHeight: 1.6, margin: 0 }}>
-            <strong style={{ color: ACCENT }}>CitationOne</strong> measures <Link href="/dimensions" style={{ color: ACCENT, textDecoration: 'underline', textUnderlineOffset: 2 }}>10 AI citation dimensions</Link> - each with estimated CQS impact and a specific fix ready to paste.
+            <strong style={{ color: ACCENT }}>CitationOne</strong> measures <Link href="/dimensions" style={{ color: ACCENT, textDecoration: 'underline', textUnderlineOffset: 2 }}>11 AI citation dimensions</Link> - each with estimated CQS impact and a specific fix ready to paste.
           </p>
         </div>
       </div>
@@ -508,7 +508,7 @@ export default function PageContentEN() {
         </div>
       </section>
 
-      {/* 10 DIMENSIONS */}
+      {/* 11 DIMENSIONS */}
       <section style={{ background: '#ffffff', padding: '90px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 48 }}>

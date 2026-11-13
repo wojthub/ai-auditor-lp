@@ -5,7 +5,7 @@ const faqs = [
   {
     question: 'Does CitationOne replace traditional SEO tools?',
     answer:
-      'No. Traditional SEO tools measure your rankings in classic Google search. CitationOne checks whether your content is noticed and cited by the algorithms behind ChatGPT, Perplexity and Google AI Overview.',
+      'No. Traditional SEO tools measure your rankings in classic Google search. CitationOne checks whether your content is noticed and cited by the algorithms behind ChatGPT, Claude and Google AI Overview.',
   },
   {
     question: 'How quickly do I get the audit result?',

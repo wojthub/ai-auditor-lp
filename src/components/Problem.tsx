@@ -42,7 +42,7 @@ export default function Problem() {
               style={{ ...revealStyle({ y: 24, duration: 0.55, delay: 0.1 }), display: 'flex', alignItems: 'center' }}
             >
               <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.72, margin: 0 }}>
-                Pozycja w wyszukiwarce nie mówi nic o ocenie, jaką Twojemu tekstowi wystawia ChatGPT, Google AI Overview czy Perplexity. Model patrzy fragment po fragmencie: czy odpowiedź pada od razu, jak gęsto akapit jest nasycony faktami, czy wnosi coś ponad konkurencję. Klasyczne narzędzia SEO tego nie liczą, a ręczna ocena zajmuje godziny.
+                Pozycja w wyszukiwarce nie mówi nic o ocenie, jaką Twojemu tekstowi wystawia ChatGPT, Google AI Overview czy Claude. Model patrzy fragment po fragmencie: czy odpowiedź pada od razu, jak gęsto akapit jest nasycony faktami, czy wnosi coś ponad konkurencję. Klasyczne narzędzia SEO tego nie liczą, a ręczna ocena zajmuje godziny.
               </p>
             </div>
           </div>

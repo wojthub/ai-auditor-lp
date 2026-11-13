@@ -31,7 +31,7 @@ const OKF_VERSION = '0.2';
 const PRODUCT = {
   name: 'CitationOne',
   summary:
-    'CitationOne is a GEO (generative engine optimization) content audit tool. It scores how likely AI answers (ChatGPT, Perplexity, Google AI Overviews, Google AI Mode) are to cite a page, compares the page with the current Google top 10 for its keyword, checks which pages Google AI Overviews, ChatGPT and Google AI Mode actually cite, and returns before/after fixes ready to apply.',
+    'CitationOne is a GEO (generative engine optimization) content audit tool. It scores how likely AI answers (ChatGPT, Claude, Google AI Overviews, Google AI Mode) are to cite a page, compares the page with the current Google top 10 for its keyword, checks which pages Google AI Overviews, ChatGPT and Google AI Mode actually cite, and returns before/after fixes ready to apply.',
   pricing: '3 free audits to start, then EUR 2 per audit (1 audit = 1 credit), credit packages, no subscription.',
   sampleReport: `${APP}/share/BDBhqK8ZvffG9-rKXPNCeUTW?lang=en`,
 };
@@ -242,7 +242,7 @@ function rootIndex(): string {
     '',
     '# Scoring dimensions',
     '',
-    `- [All dimensions](/dimensions/index.md) - ${dims.length} analyses: 11 count toward the Content Quality Score, Information Gain is reported outside it`,
+    `- [All dimensions](/dimensions/index.md) - 11 dimensions that count toward the Content Quality Score, plus Information Gain reported outside it`,
     '',
     '# Tools',
     '',
@@ -259,7 +259,7 @@ function dimensionsIndex(): string {
   return [
     '# Scoring dimensions',
     '',
-    'The audit compares the page with the Google top 10 for its keyword. The Content Quality Score is a weighted average of the first 11 analyses below (10 dimensions plus E-E-A-T) and the page title and meta description. Information Gain is reported outside the score.',
+    'The audit compares the page with the Google top 10 for its keyword. The Content Quality Score is a weighted average of the 11 dimensions below (10 content dimensions plus E-E-A-T) and the page title and meta description. Information Gain is reported outside the score.',
     '',
     ...dimensionSlugsEn().map((s) => `- [${DIMENSIONS_EN[s].name}](/dimensions/${s}.md) - ${DIMENSIONS_EN[s].description}`),
     '',
@@ -328,7 +328,7 @@ export function llmsTxt(): string {
     '## Product',
     '',
     `- [How the auditor works](${SITE}/how-it-works): from a URL to before/after fixes, step by step`,
-    `- [Scoring dimensions](${SITE}/dimensions): the 10 dimensions and E-E-A-T behind the Content Quality Score, plus Information Gain`,
+    `- [Scoring dimensions](${SITE}/dimensions): the 11 dimensions (10 content dimensions plus E-E-A-T) behind the Content Quality Score, plus Information Gain`,
     `- [Pricing](${SITE}/pricing): free audits, price per audit, credit packages`,
     `- [Product overview (Markdown)](${k('product.md')}): what an audit returns, pricing, tools`,
     `- [Sample report](${PRODUCT.sampleReport}): a real shared audit report`,

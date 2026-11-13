@@ -19,7 +19,7 @@ const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
 /** „Content audit" menu - mirror of ../Navbar.tsx: one product from three angles. */
 const AUDIT_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/how-it-works', label: 'How the auditor works', desc: 'From a URL to ready-to-paste fixes' },
-  { href: '/dimensions', label: 'Scoring dimensions', desc: 'The 10 criteria behind AI citations' },
+  { href: '/dimensions', label: 'Scoring dimensions', desc: 'The 11 dimensions behind AI citations' },
   { href: '/#bulk-audit', label: 'Bulk audit', desc: 'Your whole site in a single run' },
   // API v1 covers audits ONLY (/audits, /audits/bulk, /me) - none of the tools has an endpoint,
   // so this is a fourth way into the same product, not a separate top-level entry.

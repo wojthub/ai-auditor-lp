@@ -10,7 +10,7 @@ const COPY = {
   pl: {
     free: '3 darmowe audyty na start',
     card: 'Bez podpinania karty',
-    data: <>Dane konkurencji z <b>Google</b>, <b>AIO</b> i <b>ChatGPT</b></>,
+    data: <>Na bazie konkurencji z <b>Google</b>, <b>AIO</b> i <b>ChatGPT</b></>,
     api: 'Dostęp przez',
     and: 'i',
     apiHref: '/pl/api',
@@ -19,7 +19,7 @@ const COPY = {
   en: {
     free: '3 free audits to start',
     card: 'No card required',
-    data: <>Competitor data from <b>Google</b>, <b>AIO</b> and <b>ChatGPT</b></>,
+    data: <>Based on competitors in <b>Google</b>, <b>AIO</b> and <b>ChatGPT</b></>,
     api: 'Access via',
     and: 'and',
     apiHref: '/api',

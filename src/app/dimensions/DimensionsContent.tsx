@@ -162,7 +162,7 @@ export default function DimensionsContent() {
                   Content Quality Score
                 </h3>
                 <p style={{ fontSize: 15, color: '#36394a', lineHeight: 1.7, margin: 0 }}>
-                  CQS on a 0–100 scale shows how your content performs against the Top 10 across the parameters that matter for GEO. Each of the 10 dimensions carries its own weight in the result.
+                  CQS on a 0–100 scale shows how your content performs against the Top 10 across the parameters that matter for GEO. Each of the 11 dimensions carries its own weight in the result.
                 </p>
               </div>
               <CqsScoreCard badge="AVERAGE" />

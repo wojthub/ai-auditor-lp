@@ -322,7 +322,7 @@ export default function Features() {
   return (
     <div id="features">
 
-      {/* 1 - 9 wymiarów */}
+      {/* 1 - 11 wymiarów */}
       <section style={{ background: '#f8fafb', padding: '58px 0' }}>
         <div style={{ maxWidth: 1024, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
           <motion.div {...fadeUp()} style={{ textAlign: 'center', marginBottom: 52 }}>
@@ -331,7 +331,7 @@ export default function Features() {
               Uruchom audyt 11 wymiarów AI
             </h2>
             <p style={{ fontSize: 16, color: '#666d80', maxWidth: 640, margin: '0 auto', lineHeight: 1.65 }}>
-              CitationOne ocenia jakość treści pod kątem GEO, wykonując 10 równoległych analiz: od intencji i gęstości informacji, przez graf wiedzy, BLUF i samodzielność sekcji, aż po koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AIO oraz wysiłek redakcyjny. Dzięki temu wiesz dokładnie, który element wymaga poprawy, by podnieść Content Quality Score swojej podstrony.
+              CitationOne ocenia jakość treści pod kątem GEO, wykonując 11 równoległych analiz: od intencji i gęstości informacji, przez graf wiedzy, BLUF i samodzielność sekcji, aż po koszt ekstrakcji, TF-IDF, role semantyczne, pokrycie AIO, wysiłek redakcyjny oraz E-E-A-T. Dzięki temu wiesz dokładnie, który element wymaga poprawy, by podnieść Content Quality Score swojej podstrony.
             </p>
           </motion.div>
           <motion.div {...fadeUp(0.1)}>

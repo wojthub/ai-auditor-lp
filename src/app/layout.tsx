@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: '%s',
   },
   description:
-    'Check whether ChatGPT, Perplexity and Google AI Overview will cite your content. 11 dimensions, SERP benchmark, Before/After fixes. Report in 5 minutes.',
+    'Check whether ChatGPT, Claude and Google AI Overview will cite your content. 11 dimensions, SERP benchmark, Before/After fixes. Report in 5 minutes.',
   ...socialMeta({
     lang: 'en',
     path: 'https://citationone.com',

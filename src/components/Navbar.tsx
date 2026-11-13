@@ -19,7 +19,7 @@ const TOOLS_MENU: { href: string; label: string; desc: string }[] = [
 /** Menu „Audyt tresci" - jeden produkt z trzech stron: mechanizm, kryteria, skala. */
 const AUDIT_MENU: { href: string; label: string; desc: string }[] = [
   { href: '/pl/jak-to-dziala', label: 'Jak działa audytor?', desc: 'Droga od adresu URL do gotowych poprawek' },
-  { href: '/pl/wymiary', label: 'Wymiary oceny', desc: '10 kryteriów, które decydują o cytowaniu przez AI' },
+  { href: '/pl/wymiary', label: 'Wymiary oceny', desc: '11 wymiarów, które decydują o cytowaniu przez AI' },
   { href: '/pl#masowy-audyt', label: 'Audyt masowy', desc: 'Cały serwis w jednym przebiegu' },
   // API v1 obsluguje WYLACZNIE audyty (/audits, /audits/bulk, /me) - zadne z narzedzi nie ma
   // endpointu, wiec to czwarte wejscie do tego samego produktu, nie osobna pozycja paska.

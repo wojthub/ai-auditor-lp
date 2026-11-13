@@ -42,7 +42,7 @@ export default function ProblemEN() {
               style={{ ...revealStyle({ y: 24, duration: 0.55, delay: 0.1 }), display: 'flex', alignItems: 'center' }}
             >
               <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.72, margin: 0 }}>
-                Your search ranking says nothing about the score ChatGPT, Google AI Overview or Perplexity give your text. The model looks passage by passage: does the answer come first, how densely the paragraph is packed with facts, does it add anything beyond the competition. Traditional SEO tools skip that, and doing it by hand takes hours.
+                Your search ranking says nothing about the score ChatGPT, Google AI Overview or Claude give your text. The model looks passage by passage: does the answer come first, how densely the paragraph is packed with facts, does it add anything beyond the competition. Traditional SEO tools skip that, and doing it by hand takes hours.
               </p>
             </div>
           </div>

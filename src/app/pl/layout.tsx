@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: '%s',
   },
   description:
-    'Sprawdź, czy ChatGPT, Perplexity i Google AI Overview zacytują Twoją treść. 11 wymiarów, benchmark SERP, gotowe poprawki Przed i Po. Raport w 5 minut.',
+    'Sprawdź, czy ChatGPT, Claude i Google AI Overview zacytują Twoją treść. 11 wymiarów, benchmark SERP, gotowe poprawki Przed i Po. Raport w 5 minut.',
   ...socialMeta({
     lang: 'pl',
     path: 'https://citationone.com/pl',

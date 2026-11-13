@@ -314,7 +314,7 @@ export const DIMENSIONS_EN: Record<string, DimensionData> = {
     chips: ['Score 0-10', 'Assessed by a language model', 'Input: content + CSI + content-type profile'],
     whyHeading: 'Why does BLUF matter to AI models?',
     why: [
-      'BLUF stands for Bottom Line Up Front: the most important information goes first. The RAG systems behind ChatGPT, Perplexity and AI Overview read a page in fragments. They cut it into chunks of roughly 200-500 words and score each one separately, without the context of the rest of the article. If a section opens with “In today’s world, more and more companies...”, the model sees a fragment that answers nothing - and reaches for the competitor who put the answer in the first sentence.',
+      'BLUF stands for Bottom Line Up Front: the most important information goes first. The RAG systems behind ChatGPT, Claude and AI Overview read a page in fragments. They cut it into chunks of roughly 200-500 words and score each one separately, without the context of the rest of the article. If a section opens with “In today’s world, more and more companies...”, the model sees a fragment that answers nothing - and reaches for the competitor who put the answer in the first sentence.',
       'In classic SEO the same rule powered featured snippets - the box went to the paragraph that answered immediately. In GEO the stakes are higher, because a generative engine quotes a fragment of the page instead of linking to it: a chunk without an answer up front looks to the model like a chunk with no answer at all.',
     ],
     howHeading: 'How do we measure BLUF?',

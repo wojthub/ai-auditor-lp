@@ -85,7 +85,7 @@ export default function CtaSection() {
                 }}
               >
                 Wklejasz URL, dostajesz raport - co zmienić w treści, żeby cytowały Cię
-                Google AI Overview, ChatGPT i Perplexity.
+                Google AI Overview, ChatGPT i Claude.
               </p>
               <div className="flex flex-col sm:flex-row gap-3" style={{ justifyContent: 'center' }}>
                 <a

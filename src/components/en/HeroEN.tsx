@@ -63,7 +63,7 @@ export default function HeroEN() {
               lineHeight: 1.6, color: '#36394a',
               maxWidth: 640, margin: '14px auto 0',
             }}>
-              Paste a link, a list of URLs or a sitemap and get “Before and After” recommendations so that <span className="hero-brand"><img src="/logos/chatgpt.webp" alt="" aria-hidden width={16} height={16} />ChatGPT,</span> <span className="hero-brand"><img src="/logos/perplexity.webp" alt="" aria-hidden width={16} height={16} />Perplexity</span> and <span className="hero-brand"><img src="/logos/google.webp" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview cite your content.
+              Paste a link, a list of URLs or a sitemap and get “Before and After” recommendations so that <span className="hero-brand"><img src="/logos/chatgpt.webp" alt="" aria-hidden width={16} height={16} />ChatGPT,</span> <span className="hero-brand"><img src="/logos/claude.svg" alt="" aria-hidden width={16} height={16} />Claude</span> and <span className="hero-brand"><img src="/logos/google.webp" alt="" aria-hidden width={16} height={16} />Google</span> AI Overview cite your content.
             </span>
           </h1>
 

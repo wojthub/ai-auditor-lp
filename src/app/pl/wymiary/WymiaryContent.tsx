@@ -162,7 +162,7 @@ export default function WymiaryContent() {
                   Content Quality Score
                 </h3>
                 <p style={{ fontSize: 15, color: '#36394a', lineHeight: 1.7, margin: 0 }}>
-                  CQS w skali 0–100 pokazuje, jak Twoja treść wypada na tle Top 10 pod kątem parametrów istotnych dla GEO. Każdy z 10 wymiarów wchodzi do wyniku z własną wagą.
+                  CQS w skali 0–100 pokazuje, jak Twoja treść wypada na tle Top 10 pod kątem parametrów istotnych dla GEO. Każdy z 11 wymiarów wchodzi do wyniku z własną wagą.
                 </p>
               </div>
               <CqsScoreCard />

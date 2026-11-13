@@ -5,7 +5,7 @@ const faqs = [
   {
     question: 'Czy CitationOne zastępuje tradycyjne narzędzia SEO?',
     answer:
-      'Nie. Tradycyjne narzędzia SEO służą do badania pozycji w klasycznym Google. CitationOne sprawdza, czy Twoje treści są zauważane i cytowane przez algorytmy ChatGPT, Perplexity czy Google AI Overview.',
+      'Nie. Tradycyjne narzędzia SEO służą do badania pozycji w klasycznym Google. CitationOne sprawdza, czy Twoje treści są zauważane i cytowane przez algorytmy ChatGPT, Claude czy Google AI Overview.',
   },
   {
     question: 'Jak szybko otrzymam wynik audytu?',

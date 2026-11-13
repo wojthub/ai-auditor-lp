@@ -1041,7 +1041,7 @@ export const DIMENSIONS_PL: Record<string, DimensionData> = {
     whyHeading: 'Dlaczego BLUF jest ważny dla modeli AI?',
     howHeading: 'Jak liczymy BLUF?',
     why: [
-      'BLUF to skrót od Bottom Line Up Front: najważniejsza informacja idzie na sam początek. Systemy RAG, które stoją za ChatGPT, Perplexity i AI Overview, czytają stronę fragmentami. Tną ją na fragmenty po około 200–500 słów i oceniają każdy osobno, bez kontekstu reszty artykułu. Jeśli sekcja zaczyna się od „W dzisiejszych czasach coraz więcej firm...”, model widzi fragment, który nie odpowiada na nic - i sięga po konkurenta, który odpowiedź postawił w pierwszym zdaniu.',
+      'BLUF to skrót od Bottom Line Up Front: najważniejsza informacja idzie na sam początek. Systemy RAG, które stoją za ChatGPT, Claude i AI Overview, czytają stronę fragmentami. Tną ją na fragmenty po około 200–500 słów i oceniają każdy osobno, bez kontekstu reszty artykułu. Jeśli sekcja zaczyna się od „W dzisiejszych czasach coraz więcej firm...”, model widzi fragment, który nie odpowiada na nic - i sięga po konkurenta, który odpowiedź postawił w pierwszym zdaniu.',
       'W klasycznym SEO ta sama reguła stała za featured snippetami - do ramki trafiał akapit, który odpowiadał od razu. W GEO stawka jest wyższa, bo silnik generatywny cytuje fragment strony, zamiast do niej linkować: fragment bez odpowiedzi na początku wygląda dla modelu jak fragment bez odpowiedzi w ogóle.',
     ],
     how: {
