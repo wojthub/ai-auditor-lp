@@ -25,7 +25,10 @@ export interface Testimonial {
   name: string;
   role: string;
   text: string;
+  /** Profil autora (LinkedIn) - ikona obok nazwiska. */
   url: string | null;
+  /** Strona firmy - link na linijce ze stanowiskiem i firmą. */
+  siteUrl: string | null;
   /** Adres obrazka z endpointu aplikacji albo `null` (wtedy inicjały). */
   photo: string | null;
 }
@@ -65,6 +68,7 @@ export function parseTestimonialsPayload(raw: unknown, endpoint: string = PROD_E
       role: typeof t.role === 'string' ? t.role.trim() : '',
       text: t.text.trim(),
       url: typeof t.url === 'string' && isHttps(t.url) ? t.url : null,
+      siteUrl: typeof t.siteUrl === 'string' && isHttps(t.siteUrl) ? t.siteUrl : null,
       photo: typeof t.photo === 'string' && t.photo.startsWith(photoPrefix) ? t.photo : null,
     });
   }
@@ -86,7 +90,8 @@ const DEV_SAMPLES: Testimonial[] = [
     name: 'Anna Przykładowa',
     role: 'Head of SEO, Agencja Przykład',
     text: 'Raport pokazał dokładnie, których faktów brakuje w naszych opisach kategorii. Po wdrożeniu zmian strona zaczęła pojawiać się w odpowiedziach AI.\n\nNajbardziej cenię porównanie z top 10 - od razu widać, co mają konkurenci, a czego nie mamy my.',
-    url: 'https://example.org/',
+    url: 'https://www.linkedin.com/in/example',
+    siteUrl: 'https://example.org/',
     photo: null,
   },
   {
@@ -96,6 +101,7 @@ const DEV_SAMPLES: Testimonial[] = [
     role: 'Właściciel, Sklep Testowy',
     text: 'Szybko i konkretnie. Lista rekomendacji od razu poszła do copywritera.',
     url: null,
+    siteUrl: 'https://example.com/',
     photo: null,
   },
   {
@@ -105,6 +111,7 @@ const DEV_SAMPLES: Testimonial[] = [
     role: 'Content Lead',
     text: 'Sprawdzamy w CitationOne każdy nowy artykuł przed publikacją. Wynik CQS daje zespołowi jasny cel, a rekomendacje są gotowe do przekazania bez tłumaczenia.',
     url: null,
+    siteUrl: null,
     photo: null,
   },
   {
@@ -114,6 +121,7 @@ const DEV_SAMPLES: Testimonial[] = [
     role: 'SEO Consultant',
     text: 'Clear, actionable recommendations. My clients finally understand why AI assistants skip their pages.',
     url: null,
+    siteUrl: null,
     photo: null,
   },
   {
@@ -123,6 +131,7 @@ const DEV_SAMPLES: Testimonial[] = [
     role: 'Specjalista SEO',
     text: 'Audyt pokazał, że nasze teksty odpowiadały na pytania dopiero w trzecim akapicie. Po przebudowie wstępów i dodaniu konkretnych danych liczbowych strona weszła do cytowań w AI Overviews dla kilku kluczowych fraz. Raport PDF przekazaliśmy klientowi bez żadnych poprawek, a historia rewizji pozwoliła pokazać postęp z miesiąca na miesiąc.',
     url: null,
+    siteUrl: null,
     photo: null,
   },
 ];

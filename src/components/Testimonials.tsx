@@ -54,6 +54,25 @@ function initials(name: string): string {
     .join('');
 }
 
+/** Profil z LinkedIna dostaje jego ikonę, każdy inny adres - ogólną ikonę linku zewnętrznego. */
+function isLinkedIn(url: string): boolean {
+  try {
+    const h = new URL(url).hostname.toLowerCase();
+    return h === 'linkedin.com' || h.endsWith('.linkedin.com');
+  } catch {
+    return false;
+  }
+}
+
+/** Gdy opinia ma stronę firmy, ale nie ma stanowiska - linkiem jest sama domena. */
+function hostLabel(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
+
 /**
  * Zdjęcie autora w kółku. Panel zapisuje kwadrat 240 px, ale `object-fit: cover` i stały rozmiar
  * trzymają kółko także dla zdjęcia w innych proporcjach. Gdy obrazek się nie wczyta (błąd
@@ -277,13 +296,25 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
                 <Avatar src={t.photo} name={t.name} />
                 <span className="tst-who">
                   <span className="tst-name">{t.name}</span>
-                  {t.role && <span className="tst-role">{t.role}</span>}
+                  {t.siteUrl ? (
+                    <a href={t.siteUrl} target="_blank" rel="noopener noreferrer nofollow" className="tst-role tst-role-link">
+                      {t.role || hostLabel(t.siteUrl)}
+                    </a>
+                  ) : (
+                    t.role && <span className="tst-role">{t.role}</span>
+                  )}
                 </span>
                 {t.url && (
                   <a href={t.url} target="_blank" rel="noopener noreferrer nofollow" className="tst-profile" aria-label={c.profile(t.name)}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                      <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5" />
-                    </svg>
+                    {isLinkedIn(t.url) ? (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+                      </svg>
+                    ) : (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                        <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5" />
+                      </svg>
+                    )}
                   </a>
                 )}
               </figcaption>
@@ -356,6 +387,9 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
         .tst-who { display: flex; flex-direction: column; min-width: 0; flex: 1; }
         .tst-name { font-size: 14px; font-weight: 700; color: #0d0d12; line-height: 1.3; overflow-wrap: anywhere; }
         .tst-role { font-size: 12.5px; color: #666d80; line-height: 1.35; margin-top: 1px; overflow-wrap: anywhere; }
+        .tst-role-link { color: ${ACCENT}; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: rgba(11,121,131,0.35); align-self: flex-start; }
+        .tst-role-link { padding: 4px 0; margin: -3px 0 -4px; }
+        .tst-role-link:hover { text-decoration-color: ${ACCENT}; opacity: 1; }
         .tst-profile { flex-shrink: 0; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; color: #818898; }
         .tst-profile:hover { color: ${ACCENT}; background: #f0f8f9; }
         .tst-dots { display: flex; justify-content: center; gap: 4px; margin-top: 8px; }

@@ -64,6 +64,9 @@ export default function HeroChecks({ lang }: { lang: 'pl' | 'en' }) {
           text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px;
           text-decoration-color: rgba(11,121,131,0.35); transition: text-decoration-color 0.16s ease;
         }
+        /* Pole dotyku: krotkie linki (API, MCP) mialy 16 px wysokosci. Padding z ujemnym marginesem
+           powieksza obszar klikniecia bez zmiany ukladu. */
+        .hc-link { padding: 5px 2px; margin: -5px -2px; }
         .hc-link:hover { text-decoration-color: #0b7983; opacity: 1; }
         @media (max-width: 580px) {
           .hero-checks { grid-template-columns: auto; width: fit-content; max-width: 100%; gap: 7px; margin-top: 14px; }
