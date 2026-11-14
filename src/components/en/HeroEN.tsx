@@ -11,6 +11,8 @@ import { trackEvent, trackThenNavigate } from '@/lib/track';
 // All variants share the same start, so the typewriter only erases the tail.
 const URL_EXAMPLES = [
   'yoursite.com/blog/guide',
+  // A sitemap (.xml) leads to the bulk audit in the app - the example shows it can be pasted too.
+  'yoursite.com/sitemap.xml',
   'yoursite.com/services/content-audit',
   'yoursite.com/product/product-name',
   'yoursite.com/category/rankings',

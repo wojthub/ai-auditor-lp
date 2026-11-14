@@ -11,6 +11,8 @@ import { trackEvent, trackThenNavigate } from '@/lib/track';
 // Wszystkie warianty zaczynają się tak samo, więc maszyna do pisania kasuje tylko końcówkę.
 const URL_EXAMPLES = [
   'twojastrona.pl/blog/poradnik',
+  // Sitemapa (.xml) prowadzi w aplikacji do masowego audytu - przyklad mowi, ze tez ja mozna wkleic.
+  'twojastrona.pl/sitemap.xml',
   'twojastrona.pl/uslugi/audyt-tresci',
   'twojastrona.pl/produkt/nazwa-produktu',
   'twojastrona.pl/kategoria/rankingi',
