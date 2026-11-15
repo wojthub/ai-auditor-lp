@@ -17,9 +17,9 @@ AI Overviews, po polsku Przegląd od AI, to podsumowanie wygenerowane przez AI n
 
 AI Overview pojawia się tylko wtedy, gdy Google uzna, że podsumowanie wnosi coś do zwykłych wyników. Dlatego część zapytań ma podsumowanie AI, a część nie, nawet w obrębie jednego tematu.
 
-Dla wydawców oznacza to zmianę w ruchu. Część użytkowników dostaje odpowiedź bez kliknięcia, a Google podaje, że kliknięcia z wyników z AI Overviews są wyższej jakości, bo użytkownicy częściej zostają dłużej na stronie. Search Console nie wydziela ruchu z AI Overviews, więc wpływ na CTR własnej strony najlepiej sprawdzić, porównując kliknięcia i wyświetlenia fraz z podsumowaniem AI przed i po jego pojawieniu się.
+Dla wydawców oznacza to zmianę w ruchu. Część użytkowników dostaje odpowiedź bez kliknięcia, a Google podaje, że kliknięcia z wyników z AI Overviews są wyższej jakości, bo użytkownicy częściej zostają dłużej na stronie. **Search Console nie wydziela ruchu z AI Overviews**, więc wpływ na CTR własnej strony najlepiej sprawdzić, porównując kliknięcia i wyświetlenia fraz z podsumowaniem AI przed i po jego pojawieniu się.
 
-Użytkownik nie może wyłączyć tej funkcji. Może za to wybrać po wyszukaniu filtr „Internet”, który pokazuje same linki tekstowe.
+**Użytkownik nie może wyłączyć tej funkcji.** Może za to wybrać po wyszukaniu filtr „Internet”, który pokazuje same linki tekstowe.
 
 ## Skąd AI Overviews bierze źródła
 
@@ -40,9 +40,14 @@ Jak bardzo liczy się pozycja? Sprawdziliśmy to na danych z audytów w Citation
 | 9 | 27,8% |
 | 10 | 28,9% |
 
-Wydaje się proste - im wyżej, tym lepiej. Tyle że ciekawszy jest kształt tej krzywej. Między 1. a 5. pozycją szansa spada o prawie 25 punktów procentowych, a na pozycjach 6-10 zmienia się już niewiele. Mało tego, **w 13,4% SERP-ów AI Overview nie cytowało żadnej domeny z TOP 10**, a najczęstszymi źródłami spoza dziesiątki były Facebook, YouTube i Reddit.
+<figure><img src="/blog/pl/aio-pozycja-a-cytowanie.svg" alt="Wykres słupkowy: odsetek SERP-ów, w których strona z danej pozycji była cytowana w AI Overview. Pozycja 1 - 59,9%, 2 - 52,9%, 3 - 46,8%, 4 - 40,8%, 5 - 35,3%, a pozycje 6-10 w paśmie około 28-33%." width="640" height="430" loading="lazy" decoding="async"><figcaption>Szansa na cytowanie spada najszybciej w pierwszej piątce. Źródło: analiza 996 polskich SERP-ów z audytów CitationOne, stan na 10.11.2026.</figcaption></figure>
+
+Wydaje się proste - im wyżej, tym lepiej. Tyle że ciekawszy jest kształt tej krzywej. **Między 1. a 5. pozycją szansa spada o prawie 25 punktów procentowych**, a na pozycjach 6-10 zmienia się już niewiele. Mało tego, **w 13,4% SERP-ów AI Overview nie cytowało żadnej domeny z TOP 10**, a najczęstszymi źródłami spoza dziesiątki były Facebook, YouTube i Reddit.
 
 Moim zdaniem to najważniejszy wniosek dla planowania prac. Wejście do pierwszej piątki realnie zwiększa szansę na cytowanie, ale strona z drugiej połowy dziesiątki nadal jest cytowana mniej więcej w co trzecim przypadku. Pamiętajcie, że to korelacja, a nie dowód przyczyny, a frazy pochodzą z audytów w CitationOne, więc próba odzwierciedla tematy naszych użytkowników.
+
+> [!ZAPAMIETAJ]
+> Awans do pierwszej piątki najmocniej zwiększa szansę na cytowanie w AI Overview. Na pozycjach 6-10 strona jest nadal cytowana mniej więcej w co trzecim SERP-ie.
 
 ## 7 kroków do cytowania w AI Overviews
 
@@ -50,7 +55,7 @@ Cytowanie w AI Overviews zależy od dwóch grup warunków. Kroki 1-2 sprawdzają
 
 ### 1. Sprawdź indeks i fragment opisu
 
-Strona musi być zaindeksowana i kwalifikować się do pokazania z fragmentem opisu. Sprawdź w Search Console stan indeksowania najważniejszych podstron. Przejrzyj też kod strony pod kątem znaczników `nosnippet`, `data-nosnippet` i `max-snippet`, bo według Google ograniczają one to, co wyszukiwarka może pokazać ze strony, także w funkcjach AI.
+**Strona musi być zaindeksowana i kwalifikować się do pokazania z fragmentem opisu.** Sprawdź w Search Console stan indeksowania najważniejszych podstron. Przejrzyj też kod strony pod kątem znaczników `nosnippet`, `data-nosnippet` i `max-snippet`, bo według Google ograniczają one to, co wyszukiwarka może pokazać ze strony, także w funkcjach AI.
 
 ### 2. Sprawdź ustawienie „Search generative AI” w Search Console
 
@@ -60,19 +65,19 @@ W Search Console wejdź w Ustawienia, a potem w „Search generative AI”. Usta
 - wykluczenie witryny, po którym jej linki i treść nie pojawiają się w AI Overviews, AI Mode i Discover,
 - dziedziczenie ustawienia z usługi nadrzędnej, domyślne dla usług podrzędnych.
 
-Wykluczenie według Google działa zwykle po 1-2 dniach i nie wpływa na zwykłe wyniki ani na trenowanie modeli AI. Do zablokowania trenowania służy osobny mechanizm, Google-Extended.
+Wykluczenie według Google działa zwykle po 1-2 dniach i **nie wpływa na zwykłe wyniki ani na trenowanie modeli AI**. Do zablokowania trenowania służy osobny mechanizm, Google-Extended.
 
 ### 3. Walcz o pierwszą piątkę
 
-Klasyczne SEO dalej decyduje o tym, czy strona trafi do puli źródeł. W naszych danych największy skok szansy na cytowanie przypada na pozycje 1-5, więc frazy z pozycji 6-15 to dobry kandydat do poprawy w pierwszej kolejności.
+Klasyczne SEO dalej decyduje o tym, czy strona trafi do puli źródeł. W naszych danych **największy skok szansy na cytowanie przypada na pozycje 1-5**, więc frazy z pozycji 6-15 to dobry kandydat do poprawy w pierwszej kolejności.
 
 ### 4. Zaczynaj każdą sekcję od odpowiedzi
 
-Pierwsze zdania strony i każdej sekcji H2 odpowiadają na pytanie wprost, w 1-2 zdaniach. AI Overview składa odpowiedź z fragmentów, więc sekcja, która dopiero po trzech akapitach przechodzi do sedna, przegrywa z konkurencją. Tę zasadę opisuje wymiar [BLUF](/pl/wymiary/bluf).
+Pierwsze zdania strony i każdej sekcji H2 odpowiadają na pytanie wprost, w 1-2 zdaniach. **AI Overview składa odpowiedź z fragmentów**, więc sekcja, która dopiero po trzech akapitach przechodzi do sedna, przegrywa z konkurencją. Tę zasadę opisuje wymiar [BLUF](/pl/wymiary/bluf).
 
 ### 5. Odpowiadaj na pytania poboczne
 
-Zbierz pytania z sekcji „Podobne pytania” i z wyszukiwań powiązanych dla swojej frazy i odpowiedz na nie w osobnych sekcjach. Query fan-out sprawia, że AI Overview szuka odpowiedzi także na te pytania. To, ile z nich pokrywa Twoja strona, mierzy wymiar [pokrycie Fan-Out i AIO](/pl/wymiary/pokrycie-fan-out).
+Zbierz pytania z sekcji „Podobne pytania” i z wyszukiwań powiązanych dla swojej frazy i odpowiedz na nie w osobnych sekcjach. **Query fan-out sprawia, że AI Overview szuka odpowiedzi także na te pytania.** To, ile z nich pokrywa Twoja strona, mierzy wymiar [pokrycie Fan-Out i AIO](/pl/wymiary/pokrycie-fan-out).
 
 ### 6. Dawaj fakty, źródła i własne dane
 
@@ -95,6 +100,9 @@ Google wprost wymienia kilka działań, które nie są potrzebne do pojawienia s
 „To skoro wystarczy SEO, po co osobny poradnik?”
 
 Bo AI Overviews nagradza strony inaczej niż ranking. Z dwóch stron na podobnej pozycji wygrywa ta, która ma gotowy fragment z odpowiedzią i pokrywa pytania poboczne. Google ostrzega też przed masowym tworzeniem stron i sztucznym zdobywaniem wzmianek.
+
+> [!ZAPAMIETAJ]
+> Do AI Overviews wystarczą indeks, możliwość pokazania fragmentu opisu i treść, która odpowiada wprost. Plik llms.txt i specjalne znaczniki są zbędne.
 
 ## Jak mierzyć efekty w AI Overviews
 

@@ -35,6 +35,46 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    id: 'audyt-tresci',
+    date: '2026-11-05',
+    pl: {
+      slug: 'audyt-tresci',
+      title: 'Audyt treści SEO i GEO - jak go zrobić krok po kroku',
+      description:
+        'Jak zrobić audyt treści pod Google i odpowiedzi AI? 7 kroków, checklista 10 obszarów i dane z 4540 polskich audytów o najczęstszych słabościach tekstów.',
+    },
+  },
+  {
+    id: 'content-pruning',
+    date: '2026-11-03',
+    pl: {
+      slug: 'content-pruning',
+      title: 'Content pruning - jak zrobić porządek w treściach',
+      description:
+        'Content pruning krok po kroku. Kiedy stronę zostawić, zaktualizować, połączyć albo usunąć, co Google mówi o budżecie indeksowania i jak wdrożyć 301 lub 410.',
+    },
+  },
+  {
+    id: 'kanibalizacja-slow-kluczowych',
+    date: '2026-11-12',
+    pl: {
+      slug: 'kanibalizacja-slow-kluczowych',
+      title: 'Kanibalizacja słów kluczowych - co to i jak ją naprawić',
+      description:
+        'Kanibalizacja słów kluczowych krok po kroku. Jak sprawdzić ją w Search Console, odróżnić od zdrowych wyników i wybrać naprawę - 301, scalenie albo canonical.',
+    },
+  },
+  {
+    id: 'klasteryzacja-slow-kluczowych',
+    date: '2026-11-13',
+    pl: {
+      slug: 'klasteryzacja-slow-kluczowych',
+      title: 'Klasteryzacja słów kluczowych - jak zrobić plan treści',
+      description:
+        'Klasteryzacja słów kluczowych krok po kroku. Jak grupować frazy po wynikach Google, ustalić intencję i zamienić klastry w plan treści bez kanibalizacji.',
+    },
+  },
+  {
     id: 'jak-zaktualizowac-stary-artykul',
     date: '2026-11-09',
     pl: {

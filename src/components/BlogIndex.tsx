@@ -4,7 +4,7 @@ import { BLOG_COPY, formatDate } from '@/components/BlogCopy';
 
 // Shared - lista wpisow bloga PL (/pl/blog) i EN (/blog). Komponent serwerowy, cala lista w HTML.
 
-export type BlogListItem = BlogPost & { t: BlogPostLang; readingMinutes: number };
+export type BlogListItem = BlogPost & { t: BlogPostLang; readingMinutes: number; cover?: string };
 
 export default function BlogIndex({ posts, lang }: { posts: BlogListItem[]; lang: BlogLang }) {
   const c = BLOG_COPY[lang];
@@ -45,6 +45,18 @@ export default function BlogIndex({ posts, lang }: { posts: BlogListItem[]; lang
                 className="card-lift"
                 style={{ position: 'relative', background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 16, padding: '24px 26px' }}
               >
+                {p.cover && (
+                  // Alt pusty: tytul okladki powtarza naglowek karty tuz pod nia.
+                  <img
+                    src={p.cover}
+                    alt=""
+                    width={1200}
+                    height={400}
+                    loading="lazy"
+                    decoding="async"
+                    style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 10, border: '1px solid #eceff3', marginBottom: 18 }}
+                  />
+                )}
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', fontSize: 13, color: '#666d80', marginBottom: 10 }}>
                   <time dateTime={p.date}>{formatDate(p.date, lang)}</time>
                   <span aria-hidden>·</span>

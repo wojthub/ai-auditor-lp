@@ -25,13 +25,18 @@ export function socialMeta({
   path,
   title,
   description,
+  image: custom,
 }: {
   lang: 'pl' | 'en';
   path: string;
   title: string;
   description: string;
+  /** Wlasna grafika 1200x630 (np. okladka wpisu bloga) zamiast ogolnej grafiki serwisu. */
+  image?: { url: string; alt: string; type?: string };
 }): Pick<Metadata, 'openGraph' | 'twitter'> {
-  const image = { ...OG_IMAGES[lang], width: 1200, height: 630, type: 'image/png' };
+  const image = custom
+    ? { type: 'image/jpeg', ...custom, width: 1200, height: 630 }
+    : { ...OG_IMAGES[lang], width: 1200, height: 630, type: 'image/png' };
   return {
     openGraph: {
       title,

@@ -13,7 +13,7 @@ Aktualizacja starego artykułu, nazywana też odświeżaniem treści (content re
 
 ## Kiedy odświeżać, kiedy pisać od nowa, a kiedy usunąć
 
-Odświeżenie ma sens, gdy temat i intencja tekstu są aktualne, a zestarzały się fakty, przykłady albo struktura. W innych sytuacjach lepszy jest nowy tekst albo usunięcie strony.
+**Odświeżenie ma sens, gdy temat i intencja tekstu są aktualne**, a zestarzały się fakty, przykłady albo struktura. W innych sytuacjach lepszy jest nowy tekst albo usunięcie strony.
 
 | Sytuacja | Decyzja |
 |---|---|
@@ -25,11 +25,14 @@ Odświeżenie ma sens, gdy temat i intencja tekstu są aktualne, a zestarzały s
 
 Przy większej liczbie wpisów decyzje przyspiesza analiza całego serwisu, jak w narzędziu [Content Pruning](/pl/narzedzia/pruning), które wskazuje strony kanibalizujące się nawzajem.
 
+> [!ZAPAMIETAJ]
+> Aktualizuj tekst pod tym samym adresem, dopóki intencja frazy jest ta sama. Nowy adres ma sens tylko przy łączeniu tekstów albo zmianie tematu strony.
+
 ## Jak wybrać artykuły do odświeżenia
 
 Najlepsi kandydaci do aktualizacji to stare artykuły, które Google już zna, ale które nie są w czołówce. Szukaj ich w Google Search Console, w raporcie skuteczności z widokiem stron:
 
-- teksty ze średnią pozycją 4-15 dla fraz o sensownym wolumenie,
+- **teksty ze średnią pozycją 4-15** dla fraz o sensownym wolumenie,
 - teksty, które w porównaniu ostatnich 3 miesięcy z poprzednimi straciły kliknięcia,
 - teksty z dużą liczbą wyświetleń i niskim CTR,
 - teksty na tematy, które często pojawiają się w pytaniach do AI, takie jak „jak…”, „ile kosztuje…”, „czym się różni…”.
@@ -42,7 +45,7 @@ Aktualizacja artykułu pod SEO i AI to dziewięć kroków w trzech fazach. Kroki
 
 ### 1. Sprawdź, co dziś pokazują Google i AI
 
-Wpisz frazę tekstu w Google i zapisz, czy jest AI Overview, które strony cytuje i jakie pytania widać w sekcji „Podobne pytania”. Zadaj to samo pytanie w ChatGPT z włączonym wyszukiwaniem i zanotuj cytowane źródła. Sprawdź też, czy dominujący format wyników się nie zmienił, na przykład z poradnika na listę lub porównanie.
+Wpisz frazę tekstu w Google i zapisz, czy jest AI Overview, które strony cytuje i jakie pytania widać w sekcji „Podobne pytania”. Zadaj to samo pytanie w ChatGPT z włączonym wyszukiwaniem i zanotuj cytowane źródła. Sprawdź też, **czy dominujący format wyników się nie zmienił**, na przykład z poradnika na listę lub porównanie.
 
 ### 2. Zrób listę braków
 
@@ -50,15 +53,15 @@ Porównaj swój tekst z cytowanymi stronami i zapisz, czego mu brakuje. Najczę�
 
 ### 3. Przebuduj początek tekstu i sekcji
 
-Pierwszy akapit ma odpowiadać na pytanie z tytułu w 1-2 zdaniach, a każda sekcja H2 zaczynać się od odpowiedzi na swoje pytanie. Stare teksty często zaczynają się od wstępu o historii tematu, który można skrócić do jednego zdania albo przenieść niżej. Tę zasadę opisuje wymiar [BLUF](/pl/wymiary/bluf).
+**Pierwszy akapit ma odpowiadać na pytanie z tytułu w 1-2 zdaniach**, a każda sekcja H2 zaczynać się od odpowiedzi na swoje pytanie. Stare teksty często zaczynają się od wstępu o historii tematu, który można skrócić do jednego zdania albo przenieść niżej. Tę zasadę opisuje wymiar [BLUF](/pl/wymiary/bluf).
 
 ### 4. Zaktualizuj liczby, nazwy i źródła
 
-Sprawdź każdą liczbę, cenę, datę, nazwę produktu i nazwę funkcji. Nazwy usług AI i funkcji wyszukiwarek zmieniają się szczególnie często. Przy każdej liczbie podaj źródło i datę, na którą jest aktualna, a martwe linki zamień na aktualne źródła pierwotne. Przejrzyj też zrzuty ekranu i grafiki, bo stary wygląd panelu albo nieaktualny wykres podważa zaufanie do całego tekstu.
+**Sprawdź każdą liczbę, cenę, datę, nazwę produktu i nazwę funkcji.** Nazwy usług AI i funkcji wyszukiwarek zmieniają się szczególnie często. Przy każdej liczbie podaj źródło i datę, na którą jest aktualna, a martwe linki zamień na aktualne źródła pierwotne. Przejrzyj też zrzuty ekranu i grafiki, bo stary wygląd panelu albo nieaktualny wykres podważa zaufanie do całego tekstu.
 
 ### 5. Dopisz pytania poboczne
 
-Dla każdego brakującego pytania z listy dodaj sekcję albo akapit, który odpowiada na nie wprost. Systemy AI rozbijają pytanie na podtematy, więc każde pokryte pytanie to kolejna okazja do cytowania. Ile pytań pobocznych pokrywa tekst, mierzy wymiar [pokrycie Fan-Out i AIO](/pl/wymiary/pokrycie-fan-out).
+Dla każdego brakującego pytania z listy dodaj sekcję albo akapit, który odpowiada na nie wprost. Systemy AI rozbijają pytanie na podtematy, więc **każde pokryte pytanie to kolejna okazja do cytowania**. Ile pytań pobocznych pokrywa tekst, mierzy wymiar [pokrycie Fan-Out i AIO](/pl/wymiary/pokrycie-fan-out).
 
 ### 6. Dodaj coś, czego nie ma u konkurencji
 
@@ -74,11 +77,11 @@ Widoczna data aktualizacji i pola `datePublished` oraz `dateModified` w danych s
 
 ### 9. Zmierz efekt
 
-Pierwszy pomiar zaplanuj po 2-4 tygodniach, żeby Google zdążył ponownie przetworzyć stronę, a pozycje się ustabilizowały. Sposoby pomiaru opisujemy w osobnej sekcji.
+**Pierwszy pomiar zaplanuj po 2-4 tygodniach**, żeby Google zdążył ponownie przetworzyć stronę, a pozycje się ustabilizowały. Sposoby pomiaru opisujemy w osobnej sekcji.
 
 ## Kiedy zmieniać datę publikacji
 
-Datę zmieniaj tylko wtedy, gdy treść istotnie się zmieniła. Google w wytycznych o pomocnych treściach umieszcza wśród sygnałów ostrzegawczych pytanie „Are you changing the date of pages to make them seem fresh when the content has not substantially changed?”.
+**Datę zmieniaj tylko wtedy, gdy treść istotnie się zmieniła.** Google w wytycznych o pomocnych treściach umieszcza wśród sygnałów ostrzegawczych pytanie „Are you changing the date of pages to make them seem fresh when the content has not substantially changed?”.
 
 Google nie podaje progu, od którego zmiana jest „istotna”. W CitationOne stosujemy prostą regułę praktyczną:
 
@@ -86,9 +89,14 @@ Google nie podaje progu, od którego zmiana jest „istotna”. W CitationOne st
 - 20-50% zmian oznacza datę aktualizacji obok oryginalnej daty publikacji,
 - poniżej 20% zmian, czyli poprawki literówek, linków i pojedynczych liczb, nie wymaga zmiany żadnej daty.
 
+<figure><img src="/blog/pl/zasada-zmiany-daty.svg" alt="Skala odsetka nowej lub przepisanej treści: poniżej 20% daty zostają bez zmian, 20-50% oznacza datę aktualizacji, ponad 50% oznacza nową datę publikacji." width="640" height="285" loading="lazy" decoding="async"><figcaption>Reguła praktyczna CitationOne. Google nie podaje progu, od którego zmiana treści jest istotna.</figcaption></figure>
+
 „A jeśli zmiana daty i tak podnosi CTR?”
 
 Może podnieść, dopóki czytelnik nie zobaczy, że w tekście nic się nie zmieniło. Data, która obiecuje nowość bez pokrycia, kosztuje zaufanie czytelnika i Google wprost wymienia ją wśród sygnałów ostrzegawczych. Moim zdaniem to najdroższa oszczędność w całym procesie - lepiej odświeżyć mniej tekstów, ale tak, żeby zmiana daty była uczciwa.
+
+> [!ZAPAMIETAJ]
+> Nowa data musi mieć pokrycie w treści. Google wymienia zmianę samej daty wśród sygnałów ostrzegawczych w wytycznych o pomocnych treściach.
 
 ## Przykład odświeżenia fragmentu
 
@@ -130,7 +138,7 @@ Zmiana samej daty nie poprawia jakości tekstu, a Google wymienia ją w wytyczny
 
 ### Czy przy odświeżeniu zmieniać adres URL?
 
-Adres URL zostaw bez zmian. Stary adres ma historię w Google i linki z innych stron, które przy zmianie trzeba by przenosić przekierowaniem. Nowy adres ma sens tylko wtedy, gdy łączysz kilka tekstów w jeden albo całkowicie zmieniasz temat strony.
+**Adres URL zostaw bez zmian.** Stary adres ma historię w Google i linki z innych stron, które przy zmianie trzeba by przenosić przekierowaniem. Nowy adres ma sens tylko wtedy, gdy łączysz kilka tekstów w jeden albo całkowicie zmieniasz temat strony.
 
 ### Po jakim czasie widać efekty odświeżenia?
 

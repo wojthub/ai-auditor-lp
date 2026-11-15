@@ -15,12 +15,15 @@ export default function BlogPostView({
   rendered,
   more,
   lang,
+  cover,
 }: {
   post: BlogPost;
   t: BlogPostLang;
   rendered: RenderedPost;
   more: { slug: string; title: string }[];
   lang: BlogLang;
+  /** Baner 1200x400 z `blogBannerUrl` - grafika wiodaca pod naglowkiem. */
+  cover?: string;
 }) {
   const c = BLOG_COPY[lang];
   const showToc = rendered.toc.length >= 3;
@@ -61,6 +64,19 @@ export default function BlogPostView({
             <span>{c.minutes(rendered.readingMinutes)}</span>
           </div>
         </header>
+
+        {cover && (
+          // Grafika wiodaca = element LCP, wiec bez lazy loadingu i z wysokim priorytetem pobrania.
+          <img
+            src={cover}
+            alt={t.title}
+            width={1200}
+            height={400}
+            fetchPriority="high"
+            decoding="async"
+            style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 14, border: '1px solid #eceff3', margin: '0 0 32px' }}
+          />
+        )}
 
         {showToc && (
           // Zwiniety domyslnie (<details> bez JS): lead i ramka z najwazniejszymi informacjami zostaja
@@ -184,6 +200,13 @@ export default function BlogPostView({
         .blog-prose .blog-key-body > * + * { margin-top: 0.7em; }
         .blog-prose .blog-key-body ul, .blog-prose .blog-key-body ol { margin: 0; }
         .blog-prose .blog-key-body li { line-height: 1.65; }
+        /* Box „Zapamiętaj!” ([!ZAPAMIETAJ] w Markdownie) - jedna zasada sekcji, akcent marki z lewej. */
+        .blog-prose .blog-remember { border: 1px solid #dfe1e7; border-left: 4px solid ${ACCENT}; background: #f8fafb; border-radius: 4px 12px 12px 4px; padding: 16px 22px 18px; margin-top: 1.6em; margin-bottom: 1.6em; }
+        .blog-prose .blog-remember-title { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: ${ACCENT}; }
+        .blog-prose .blog-remember-icon { display: inline-flex; color: ${ACCENT}; }
+        .blog-prose .blog-remember-body { color: #0d0d12; font-weight: 500; }
+        .blog-prose .blog-remember-body > * { margin: 0; }
+        .blog-prose .blog-remember-body > * + * { margin-top: 0.6em; }
         .blog-prose code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88em; background: #f1f3f6; padding: 0.12em 0.38em; border-radius: 5px; }
         .blog-prose pre { background: #0f1720; color: #e6edf3; padding: 16px 18px; border-radius: 10px; overflow-x: auto; font-size: 14px; line-height: 1.6; }
         .blog-prose pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
@@ -200,12 +223,18 @@ export default function BlogPostView({
         .blog-prose th { background: #f8fafb; text-align: left; font-weight: 650; color: #0d0d12; }
         .blog-prose th, .blog-prose td { padding: 10px 14px; border-bottom: 1px solid #eceff3; vertical-align: top; }
         .blog-prose tr:last-child td { border-bottom: 0; }
+        /* FAQ (wrapper z src/lib/blog.ts) - pytania i odpowiedzi mniejsza czcionka niz glowna tresc. */
+        .blog-prose .blog-faq { font-size: 15.5px; line-height: 1.7; }
+        .blog-prose .blog-faq h3 { font-size: 1.08rem; margin-top: 1.5em; margin-bottom: 0.4em; }
         @media (max-width: 640px) {
           .blog-prose { font-size: 16px; }
+          .blog-prose .blog-faq { font-size: 15px; }
+          .blog-prose .blog-faq h3 { font-size: 1.04rem; }
           .blog-meta-sep { display: none; }
           .blog-prose h2 { font-size: 1.38rem; }
           .blog-prose h3 { font-size: 1.12rem; }
           .blog-prose .blog-key { padding: 16px 16px 18px; }
+          .blog-prose .blog-remember { padding: 14px 16px 16px; }
           .blog-prose table { font-size: 14px; }
           .blog-prose th, .blog-prose td { padding: 8px 10px; min-width: 120px; }
           .blog-prose pre { font-size: 13px; margin-left: -16px; margin-right: -16px; border-radius: 0; }

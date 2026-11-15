@@ -95,6 +95,10 @@ Blog LP ma dwa miejsca - przed zapisem przeczytaj komentarze w `src/data/blog.ts
 
 Byline autora, daty, JSON-LD (`BlogPosting`, breadcrumbs), spis treści, czas czytania, hreflangi i wpis w sitemapie generują się same z rejestru - nie dopisuj ich do treści. Wpis tylko w jednym języku jest w porządku (bez hreflanga). Em dash w treści albo metadanych **przerywa build**.
 
+3. **Grafika**: każdy artykuł ma jedną grafikę informacyjną - wykres, schemat albo skalę - pokazującą najważniejsze dane lub mechanizm tekstu (własne dane, wyniki badania, proces krok po kroku, reguła decyzyjna). Grafika uzupełnia tabelę lub listę z tekstu, a nie ją zastępuje, bo AI czyta tekst, a nie obrazek. Format to SVG w `public/blog/<lang>/<nazwa>.svg`, 640 px szerokości, paleta i krój jak we wzorze `scripts/grafiki-svg.mjs` (turkus marki na dane, szary na punkt odniesienia, pomarańcz na wynik ujemny, podpis „CitationOne” w rogu, `<title>` i `<desc>` w pliku), czcionka co najmniej 13 px, bo na telefonie obraz skaluje się o połowę. Przed wstawieniem wyrenderuj PNG headless Chrome i obejrzyj. W treści wstaw blok `<figure><img src="/blog/pl/<nazwa>.svg" alt="<opis z liczbami>" width="640" height="<wysokość>" loading="lazy" decoding="async"><figcaption><wniosek + źródło></figcaption></figure>` zaraz pod akapitem lub tabelą, której dotyczy.
+
+4. **Okładka**: po wpisaniu do rejestru uruchom `node scripts/blog-covers.mjs <slug>` z katalogu `ai-auditor-lp`. Skrypt robi z tytułu dwie grafiki w jednym szablonie - `public/blog/<lang>/okladki/<slug>.jpg` (1200x630, og:image) i `<slug>-baner.jpg` (1200x400, grafika wiodąca na stronie i na liście). Kod podpina je sam po nazwie pliku (`src/lib/blogCover.ts`). Po zmianie tytułu wygeneruj okładki ponownie.
+
 Wersja EN to osobne zadanie: po akceptacji PL napisz ją pod angielski SERP z angielskimi frazami (nie tłumacz zdanie w zdanie), zapisz w `content/blog/en/<slug>.md` i dodaj `en: {...}` do tego samego obiektu w rejestrze - wtedy para dostaje hreflangi i przełącznik języka.
 
 Na koniec uruchom `npm run build`, jeśli user się zgodzi - to jedyna weryfikacja w tym repo (brak testów i lintu). Builda nie odpalaj sam przy braku sieci: pobiera changelog z aplikacji (szczegóły w `CLAUDE.md`).
@@ -154,7 +158,8 @@ Przeniesione ze skilla `linkedin-post` - to te same reguły, którymi Wojciech p
 - **dwukropek tylko na końcu zdania, które bezpośrednio wprowadza listę**; w pozostałym tekście, w punktach list i w komórkach tabel zakończ zdanie kropką albo użyj dywizu,
 - po dwukropku i w nawiasach mała litera, chyba że to nazwa własna,
 - listy numerowane z krokami mogą mieć pełne zdania od wielkiej litery,
-- **pogrubiaj** najważniejsze liczby i wnioski, kilka razy na sekcję, bez pogrubiania całych akapitów (wyjątek to pogrubiony w całości akapit otwierający z odpowiedzią),
+- **pogrubiaj hojnie** najważniejsze frazy, liczby i wnioski - w każdej sekcji 2-4 pogrubienia, w tym zdania-tezy (pogrubione w całości, jeśli to jedno zdanie), kluczowe pojęcia przy pierwszym użyciu i najważniejsze elementy list; czytelnik, który przegląda tekst samymi pogrubieniami, ma złapać sens artykułu; bez pogrubiania całych akapitów (wyjątek to pogrubiony w całości akapit otwierający z odpowiedzią),
+- **box „Zapamiętaj!”** - w każdym artykule 2-3 boxy z najważniejszą zasadą sekcji, zapis `> [!ZAPAMIETAJ]` i pod nim `> treść` (1-2 zdania, twierdząco, bez pogrubień w środku, bo box ma własny styl); stawiaj go pod akapitem, który ta zasada podsumowuje, najlepiej przy wniosku z danych, przy regule do wdrożenia albo przy częstym błędzie; box nie powtarza słowo w słowo zdania tuż nad nim,
 - przeplataj krótkie, mocne zdania z dłuższymi, żeby tekst miał rytm.
 
 **Słowa i konstrukcje zakazane**

@@ -3,6 +3,7 @@ import { blogPostBySlug, blogPostsFor, type BlogLang, type BlogPost, type BlogPo
 import { BLOG_COPY, AUTHOR_URL } from '@/components/BlogCopy';
 import { alternatesFor, SITE } from '@/lib/languageSwitch';
 import { socialMeta } from '@/lib/socialMeta';
+import { blogCoverUrl, blogBannerUrl } from '@/lib/blogCover';
 import { renderPost, assertBlogRegistry, type RenderedPost } from '@/lib/blog';
 import type { BlogListItem } from '@/components/BlogIndex';
 
@@ -36,7 +37,11 @@ export function blogIndexMetadata(lang: BlogLang): Metadata {
 export async function blogListItems(lang: BlogLang): Promise<BlogListItem[]> {
   assertBlogRegistry();
   return Promise.all(
-    blogPostsFor(lang).map(async (p) => ({ ...p, readingMinutes: (await renderPost(lang, p.t.slug)).readingMinutes })),
+    blogPostsFor(lang).map(async (p) => ({
+      ...p,
+      readingMinutes: (await renderPost(lang, p.t.slug)).readingMinutes,
+      cover: blogBannerUrl(lang, p.t.slug),
+    })),
   );
 }
 
@@ -62,7 +67,14 @@ export function blogPostMetadata(lang: BlogLang, slug: string): Metadata {
   const other: BlogLang = lang === 'pl' ? 'en' : 'pl';
   const url = postUrl(lang, slug);
   const pair = post[other];
-  const social = socialMeta({ lang, path: url, title: `${t.title} | CitationOne`, description: t.description });
+  const cover = blogCoverUrl(lang, slug);
+  const social = socialMeta({
+    lang,
+    path: url,
+    title: `${t.title} | CitationOne`,
+    description: t.description,
+    image: cover ? { url: cover, alt: t.title } : undefined,
+  });
   const enUrl = lang === 'en' ? url : pair ? postUrl('en', pair.slug) : undefined;
   return {
     title: t.title,
@@ -176,7 +188,8 @@ function blogNode(lang: BlogLang) {
 export function blogPostJsonLd(lang: BlogLang, post: BlogPost, t: BlogPostLang, rendered: RenderedPost) {
   const c = BLOG_COPY[lang];
   const url = postUrl(lang, t.slug);
-  const image = { '@type': 'ImageObject', url: `${SITE}/og/og-${lang}.png`, width: 1200, height: 630 };
+  const cover = blogCoverUrl(lang, t.slug);
+  const image = { '@type': 'ImageObject', url: `${SITE}${cover ?? `/og/og-${lang}.png`}`, width: 1200, height: 630 };
   const modified = post.updated ?? post.date;
   const other: BlogLang = lang === 'pl' ? 'en' : 'pl';
   const pair = post[other];

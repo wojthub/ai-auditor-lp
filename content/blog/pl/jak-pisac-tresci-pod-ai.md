@@ -14,7 +14,7 @@ Pisanie treści pod AI to tworzenie i redagowanie tekstów tak, żeby systemy sz
 
 System AI z dostępem do wyszukiwarki wysyła zapytania, wybiera ze znalezionych stron fragmenty najlepiej odpowiadające na pytanie i pisze z nich odpowiedź z linkami do źródeł. Google opisuje, że AI Overviews i AI Mode potrafią przy tym rozbić pytanie na wiele powiązanych wyszukiwań w podtematach.
 
-Z perspektywy autora oznacza to jedno. Czytelnik Twojego tekstu często dostaje tylko jeden akapit, wycięty i wklejony w cudzą odpowiedź. Ten akapit musi bronić się sam.
+Z perspektywy autora oznacza to jedno. Czytelnik Twojego tekstu często dostaje tylko jeden akapit, wycięty i wklejony w cudzą odpowiedź. **Ten akapit musi bronić się sam.**
 
 Szerzej o mechanizmie piszemy w artykułach [Co to jest GEO](/pl/blog/co-to-jest-geo), [Jak być widocznym w ChatGPT](/pl/blog/jak-byc-widocznym-w-chatgpt) i [Jak pojawić się w AI Overviews](/pl/blog/jak-pojawic-sie-w-ai-overviews).
 
@@ -49,7 +49,7 @@ Pierwsze 1-2 zdania strony i każdej sekcji odpowiadają na jej pytanie. Konteks
 
 ### 2. Pisz sekcje zrozumiałe bez reszty tekstu
 
-Sekcja nazywa temat wprost i nie odwołuje się do tego, co było wcześniej. Zdania w rodzaju „jak wspomnieliśmy wyżej” albo „to rozwiązanie” tracą sens po wycięciu. Sprawdza to wymiar [samodzielność sekcji](/pl/wymiary/optymalizacja-chunkow).
+Sekcja nazywa temat wprost i nie odwołuje się do tego, co było wcześniej. Zdania w rodzaju „jak wspomnieliśmy wyżej” albo „to rozwiązanie” **tracą sens po wycięciu**. Sprawdza to wymiar [samodzielność sekcji](/pl/wymiary/optymalizacja-chunkow).
 
 **Przed**
 
@@ -111,6 +111,11 @@ Liczba bez jednostki i daty niewiele mówi, a liczba bez źródła budzi wątpli
 
 Krótki cytat z nazwiskiem i rolą osoby daje tekstowi dowód i głos z zewnątrz. W badaniu z Princeton **dodanie cytatów** dało najwyższy wynik ze wszystkich testowanych zmian - 27,8 punktu wobec 19,5 dla tekstu bez zmian.
 
+<figure><img src="/blog/pl/badanie-geo-wyniki.svg" alt="Wykres słupkowy z badania GEO: wynik widoczności w odpowiedzi AI po dodaniu cytatów 27,8, statystyk 25,9 i odwołań do źródeł 24,9, wobec 19,5 dla tekstu bez zmian i 17,8 po upychaniu słów kluczowych." width="640" height="380" loading="lazy" decoding="async"><figcaption>Cytaty, statystyki i źródła podnoszą widoczność, a upychanie słów kluczowych ją obniża. Źródło: Aggarwal i in., GEO - Generative Engine Optimization, KDD 2024.</figcaption></figure>
+
+> [!ZAPAMIETAJ]
+> Cytaty, statystyki i źródła to trzy zmiany, które w badaniu GEO najbardziej podniosły widoczność. Upychanie słów kluczowych ją obniżyło.
+
 **Przed**
 
 > Eksperci podkreślają, że montaż ma duże znaczenie.
@@ -129,7 +134,7 @@ Przykład dla frazy „pompa ciepła do domu” to pytania o koszt montażu, zu�
 
 Każdy temat ma swoje terminy, które pojawiają się na większości dobrych stron w wynikach. Brak takich terminów sygnalizuje płytkie potraktowanie tematu. W tekście o pompach ciepła będą to między innymi SCOP, temperatura zasilania, bufor, punkt biwalentny i jednostka zewnętrzna. Luki w słownictwie względem konkurencji pokazuje wymiar [TF-IDF](/pl/wymiary/tf-idf).
 
-Terminy wplataj tam, gdzie naturalnie opisują to, o czym piszesz. Powtarzanie ich na siłę działa jak upychanie słów kluczowych i obniża widoczność.
+Terminy wplataj tam, gdzie naturalnie opisują to, o czym piszesz. **Powtarzanie ich na siłę działa jak upychanie słów kluczowych** i obniża widoczność.
 
 ### 10. Pisz, kto co robi
 
@@ -152,6 +157,9 @@ Część poradników zaleca dzielenie tekstu na krótkie bloki pod AI. Google pi
 Pisz pełne sekcje, z których każda zaczyna się od odpowiedzi i nazywa temat wprost. Samodzielna sekcja to sekcja kompletna, z kontekstem, przykładem i źródłem, a nie dwa zdania pod nagłówkiem. Tekst poszatkowany na mikroakapity traci argumentację, a zyskuje tylko pozór porządku.
 
 Moim zdaniem większość tekstów przegrywa w AI przez brak treści, którą warto zacytować, a struktura jest problemem drugiego rzędu. Dlatego najwięcej daje dodanie czegoś, czego nie ma u konkurencji - własnych danych, przykładu z praktyki, wyniku testu. Google pyta w wytycznych o pomocnych treściach wprost, czy treść daje „oryginalne informacje, badania lub analizę”, a wymiar [wartość dodana](/pl/wymiary/wartosc-dodana) mierzy, ile tekst wnosi ponad TOP 10.
+
+> [!ZAPAMIETAJ]
+> Najwięcej daje treść, której nie ma u konkurencji - własne dane, przykład z praktyki, wynik testu. Struktura pomaga dopiero wtedy, gdy w tekście jest co cytować.
 
 ## Czego unikać
 

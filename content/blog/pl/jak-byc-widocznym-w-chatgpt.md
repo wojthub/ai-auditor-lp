@@ -44,23 +44,28 @@ Z tego wynikają trzy wnioski dla Twojej strony. Strona musi być w indeksach, z
 
 Widoczność w ChatGPT budujesz w trzech obszarach. Kroki 1-3 to dostęp techniczny (robots.txt, CDN i indeks Google oraz Bing), kroki 4-6 to treść, która odpowiada wprost i podaje fakty ze źródłami, a krok 7 to wzmianki o marce na innych stronach. Kolejność ma znaczenie, bo każdy krok ma sens dopiero po spełnieniu poprzedniego.
 
+<figure><img src="/blog/pl/chatgpt-warunki-cytowania.svg" alt="Schemat czterech warunków cytowania w ChatGPT: robots.txt dopuszcza OAI-SearchBot, CDN i firewall przepuszczają adresy IP robota OpenAI, strona jest w indeksie Google i Bing, sekcje odpowiadają wprost z faktami i źródłami. Po spełnieniu warunków strona może zostać zacytowana, ale OpenAI nie gwarantuje miejsca." width="640" height="640" loading="lazy" decoding="async"><figcaption>Pierwsze dwa warunki decydują, czy ChatGPT w ogóle widzi stronę, kolejne dwa, czy wybierze ją do odpowiedzi. Źródło: dokumentacja OpenAI i badanie GEO.</figcaption></figure>
+
 ### 1. Dopuść robota OAI-SearchBot w robots.txt
 
-Sprawdź plik `robots.txt` pod adresem `twojadomena.pl/robots.txt`. Jeśli zawiera regułę `Disallow` dla `OAI-SearchBot` albo dla wszystkich robotów, ChatGPT nie pokaże strony w odpowiedziach wyszukiwania. Strona może się wtedy pojawić co najwyżej jako zwykły link nawigacyjny.
+Sprawdź plik `robots.txt` pod adresem `twojadomena.pl/robots.txt`. Jeśli zawiera regułę `Disallow` dla `OAI-SearchBot` albo dla wszystkich robotów, **ChatGPT nie pokaże strony w odpowiedziach wyszukiwania**. Strona może się wtedy pojawić co najwyżej jako zwykły link nawigacyjny.
 
 GPTBot to osobna decyzja. Możesz zablokować trenowanie i jednocześnie zostać w wyszukiwaniu ChatGPT, bo OpenAI traktuje te dwa roboty niezależnie.
 
+> [!ZAPAMIETAJ]
+> Za widoczność w wyszukiwaniu ChatGPT odpowiada OAI-SearchBot. Blokada GPTBot wyłącza tylko trenowanie modeli i zostawia stronę w wynikach.
+
 ### 2. Sprawdź CDN i firewall
 
-OpenAI wymaga, żeby hosting lub CDN przepuszczał ruch z opublikowanych adresów IP robota OAI-SearchBot. Usługi typu Cloudflare mają osobne ustawienia dla robotów AI, więc strona może być otwarta w robots.txt i nadal niedostępna dla ChatGPT. Sprawdź w panelu CDN, czy roboty wyszukiwania AI mają dostęp, a w logach serwera, czy OAI-SearchBot dostaje odpowiedzi 200.
+**OpenAI wymaga, żeby hosting lub CDN przepuszczał ruch z opublikowanych adresów IP robota OAI-SearchBot.** Usługi typu Cloudflare mają osobne ustawienia dla robotów AI, więc **strona może być otwarta w robots.txt i nadal niedostępna dla ChatGPT**. Sprawdź w panelu CDN, czy roboty wyszukiwania AI mają dostęp, a w logach serwera, czy OAI-SearchBot dostaje odpowiedzi 200.
 
 ### 3. Zadbaj o indeks Google i Bing
 
-ChatGPT korzysta z partnerów wyszukiwania, więc strona spoza indeksu ma małe szanse na cytowanie. Zgłoś mapę witryny w Google Search Console i w Bing Webmaster Tools, a potem sprawdź, czy najważniejsze podstrony są zaindeksowane. W tym kroku klasyczne SEO przekłada się wprost na widoczność w ChatGPT, bo strona wysoko w wynikach wyszukiwania częściej trafia do zestawu stron, które ChatGPT przegląda.
+ChatGPT korzysta z partnerów wyszukiwania, więc **strona spoza indeksu ma małe szanse na cytowanie**. Zgłoś mapę witryny w Google Search Console i w Bing Webmaster Tools, a potem sprawdź, czy najważniejsze podstrony są zaindeksowane. W tym kroku klasyczne SEO przekłada się wprost na widoczność w ChatGPT, bo strona wysoko w wynikach wyszukiwania częściej trafia do zestawu stron, które ChatGPT przegląda.
 
 ### 4. Odpowiadaj na pytania klientów wprost
 
-Zbierz pytania, które klienci zadają przed zakupem, i odpowiedz na nie na stronie. Każda sekcja powinna zaczynać się od odpowiedzi w 1-2 zdaniach i być zrozumiała po wycięciu z reszty tekstu, bo do odpowiedzi trafiają fragmenty stron. Jak to sprawdzać, opisują wymiary [BLUF](/pl/wymiary/bluf) i [samodzielność sekcji](/pl/wymiary/optymalizacja-chunkow).
+Zbierz pytania, które klienci zadają przed zakupem, i odpowiedz na nie na stronie. **Każda sekcja powinna zaczynać się od odpowiedzi w 1-2 zdaniach** i być zrozumiała po wycięciu z reszty tekstu, bo do odpowiedzi trafiają fragmenty stron. Jak to sprawdzać, opisują wymiary [BLUF](/pl/wymiary/bluf) i [samodzielność sekcji](/pl/wymiary/optymalizacja-chunkow).
 
 ### 5. Podawaj fakty, źródła i cytaty
 
@@ -68,7 +73,7 @@ W badaniu „GEO - Generative Engine Optimization” zespołu z Princeton Univer
 
 ### 6. Opisz firmę spójnie na stronach o sobie
 
-Strona główna, oferta, „O nas”, realizacje i kontakt powinny podawać te same dane - nazwę firmy, zakres usług, lokalizację, ceny lub widełki, przykłady realizacji. Gdy ChatGPT trafi na Twoją stronę przy pytaniu o dostawcę usługi, znajdzie tam konkretne odpowiedzi zamiast ogólnych haseł. Autor, doświadczenie i data aktualizacji wzmacniają [E-E-A-T](/pl/wymiary/e-e-a-t).
+Strona główna, oferta, „O nas”, realizacje i kontakt **powinny podawać te same dane** - nazwę firmy, zakres usług, lokalizację, ceny lub widełki, przykłady realizacji. Gdy ChatGPT trafi na Twoją stronę przy pytaniu o dostawcę usługi, znajdzie tam konkretne odpowiedzi zamiast ogólnych haseł. Autor, doświadczenie i data aktualizacji wzmacniają [E-E-A-T](/pl/wymiary/e-e-a-t).
 
 Te same dane możesz opisać danymi strukturalnymi schema.org, na przykład typem Organization dla firmy i Article dla wpisów. Porządkują one informacje dla wyszukiwarek, z których korzysta ChatGPT, choć OpenAI nie opisuje ich wpływu na wybór źródeł. Braki w danych strukturalnych całego serwisu pokaże [analiza schema.org](/pl/narzedzia/analiza-schema).
 
@@ -90,6 +95,9 @@ Kilka działań szkodzi widoczności w ChatGPT albo tylko pozornie pomaga:
 „Skoro nic nie jest gwarantowane, to po co się starać?”
 
 Bo da się zwiększyć szansę. Kroki 1-3 decydują o tym, czy ChatGPT w ogóle może zobaczyć stronę, a kroki 4-7 o tym, czy uzna ją za warte cytowania.
+
+> [!ZAPAMIETAJ]
+> Kroki 1-3 decydują, czy ChatGPT w ogóle widzi stronę. Bez nich praca nad treścią nie przełoży się na cytowania.
 
 ## Jak sprawdzić widoczność w ChatGPT
 

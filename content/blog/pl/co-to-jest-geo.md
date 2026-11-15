@@ -31,6 +31,9 @@ Tyle że ciekawsze są wyniki według pozycji. Strona z 5. miejsca w wynikach po
 
 Moim zdaniem to najczęściej pomijany wniosek z całego badania. GEO daje realną szansę stronom, które w klasycznym rankingu przegrywają z liderem, pod warunkiem że wnoszą do tematu fakty i źródła. Pamiętajcie przy tym, że to wynik eksperymentu na zbiorze testowym, a nie opis działania konkretnej wyszukiwarki.
 
+> [!ZAPAMIETAJ]
+> W badaniu GEO najwięcej zyskiwały strony z niższych pozycji, które dodały fakty i źródła. Upychanie słów kluczowych obniżało widoczność.
+
 ## Jak systemy AI wybierają źródła
 
 Systemy AI wybierają źródła w trzech etapach. Najpierw wyszukują strony w indeksie wyszukiwarki, potem wybierają z nich fragmenty pasujące do pytania, a na końcu piszą z tych fragmentów odpowiedź z linkami. Asystent AI z dostępem do internetu przechodzi te etapy tak:
@@ -39,13 +42,18 @@ Systemy AI wybierają źródła w trzech etapach. Najpierw wyszukują strony w i
 2. **Wybór fragmentów.** Ze znalezionych stron system wybiera fragmenty, które najlepiej odpowiadają na pytanie lub jego część, na przykład akapit z definicją, tabelę albo listę kroków.
 3. **Synteza.** Model pisze odpowiedź z wybranych fragmentów i dołącza linki do stron, z których skorzystał.
 
-Wynikają z tego dwie praktyczne konsekwencje. Strona musi być w indeksie i dostępna dla robota danego systemu, bo bez tego nie bierze udziału w pierwszym etapie. Do odpowiedzi trafia też fragment, więc sekcja z odpowiedzią powinna być zrozumiała po wycięciu z artykułu.
+<figure><img src="/blog/pl/jak-ai-wybiera-zrodla.svg" alt="Schemat trzech etapów wyboru źródeł przez AI: wyszukiwanie w indeksie, także na pytania poboczne, wybór fragmentów odpowiadających na pytanie i synteza odpowiedzi z linkami. Warunki to strona w indeksie dostępna dla robota i sekcja zrozumiała po wycięciu z tekstu." width="640" height="560" loading="lazy" decoding="async"><figcaption>Do odpowiedzi AI trafia fragment, więc każdy etap ma swój warunek po stronie Twojej strony.</figcaption></figure>
+
+Wynikają z tego dwie praktyczne konsekwencje. **Strona musi być w indeksie i dostępna dla robota danego systemu**, bo bez tego nie bierze udziału w pierwszym etapie. Do odpowiedzi trafia też fragment, więc sekcja z odpowiedzią powinna być zrozumiała po wycięciu z artykułu.
 
 Warto przy tym dodać, że Google wprost pisze, że nie trzeba dzielić treści na drobne kawałki. Wystarczy, że każda sekcja zaczyna się od odpowiedzi i nazywa temat wprost. Jak sprawdzać te cechy tekstu, opisujemy w wymiarach [samodzielność sekcji](/pl/wymiary/optymalizacja-chunkow) i [pokrycie Fan-Out i AIO](/pl/wymiary/pokrycie-fan-out).
 
+> [!ZAPAMIETAJ]
+> Do odpowiedzi AI trafia fragment, a nie cała strona. Każda sekcja musi zaczynać się od odpowiedzi i być zrozumiała po wycięciu z tekstu.
+
 ## GEO a SEO - co zostaje, co dochodzi
 
-GEO rozszerza SEO o nowy cel, czyli cytowanie w odpowiedzi AI. Fundament zostaje ten sam, bo systemy AI korzystają z indeksów wyszukiwarek.
+GEO rozszerza SEO o nowy cel, czyli **cytowanie w odpowiedzi AI**. Fundament zostaje ten sam, bo systemy AI korzystają z indeksów wyszukiwarek.
 
 | Obszar | SEO | GEO |
 |---|---|---|
@@ -65,7 +73,7 @@ Mało tego, ten sam poradnik Google zachęca do treści, której nie da się zna
 
 ## Czy GEO zastąpi SEO
 
-GEO nie zastąpi SEO, bo z niego korzysta. Systemy AI szukają źródeł w indeksach wyszukiwarek, więc strona słaba w SEO rzadko trafia do odpowiedzi AI. Zmienia się sposób mierzenia sukcesu, bo obok pozycji i kliknięć liczy się obecność marki w odpowiedziach, które użytkownik czyta bez wchodzenia na stronę.
+**GEO nie zastąpi SEO, bo z niego korzysta.** Systemy AI szukają źródeł w indeksach wyszukiwarek, więc strona słaba w SEO rzadko trafia do odpowiedzi AI. Zmienia się sposób mierzenia sukcesu, bo obok pozycji i kliknięć liczy się obecność marki w odpowiedziach, które użytkownik czyta bez wchodzenia na stronę.
 
 W praktyce oba podejścia prowadzą do tych samych prac. Treść, która jasno odpowiada na pytanie, podaje fakty ze źródłami i pokrywa pytania poboczne, lepiej radzi sobie i w wynikach Google, i w odpowiedziach AI.
 

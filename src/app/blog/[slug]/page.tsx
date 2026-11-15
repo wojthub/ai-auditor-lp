@@ -4,6 +4,7 @@ import NavbarEN from '@/components/en/NavbarEN';
 import FooterEN from '@/components/en/FooterEN';
 import BlogPostView from '@/components/BlogPostView';
 import { renderPost } from '@/lib/blog';
+import { blogBannerUrl } from '@/lib/blogCover';
 import { blogPostData, blogPostJsonLd, jsonLdHtml, blogPostMetadata, blogStaticParams, moreBlogPosts } from '@/lib/blogSeo';
 
 // Static export: istnieja wylacznie slugi z rejestru src/data/blog.ts.
@@ -27,7 +28,7 @@ export default async function BlogPostEn({ params }: { params: Promise<{ slug: s
     <main className="min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(blogPostJsonLd('en', data.post, data.t, rendered)) }} />
       <NavbarEN />
-      <BlogPostView post={data.post} t={data.t} rendered={rendered} more={moreBlogPosts('en', slug)} lang="en" />
+      <BlogPostView post={data.post} t={data.t} rendered={rendered} more={moreBlogPosts('en', slug)} lang="en" cover={blogBannerUrl('en', slug)} />
       <FooterEN />
     </main>
   );

@@ -77,6 +77,26 @@ function keyBox(titleHtml: string, bodyHtml: string): string {
   );
 }
 
+/**
+ * Box „Zapamiętaj!” - jedna, najważniejsza zasada sekcji w osobnej ramce. Zapis w Markdownie:
+ * `> [!ZAPAMIETAJ] Opcjonalny tytul` + tresc cytatu (alias `[!REMEMBER]` dla EN).
+ */
+const REMEMBER_RE = /^\[!(?:ZAPAMIETAJ|ZAPAMIĘTAJ|REMEMBER)\][ \t]*([^\n]*)\n?([\s\S]*)$/i;
+const REMEMBER_TITLE: Record<BlogLang, string> = { pl: 'Zapamiętaj!', en: 'Remember!' };
+const PIN =
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+  '<path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
+
+function rememberBox(titleHtml: string, bodyHtml: string): string {
+  return (
+    '<aside class="blog-remember" role="note">' +
+    `<p class="blog-remember-title"><span class="blog-remember-icon">${PIN}</span>${titleHtml}</p>` +
+    `<div class="blog-remember-body">${bodyHtml}</div></aside>\n`
+  );
+}
+
+const FAQ_HEADING = /^(najczęstsze pytania|najczestsze pytania|faq|frequently asked questions|common questions)\b/i;
+
 function htmlToken(html: string): Token {
   return { type: 'html', raw: html, text: html, block: true, pre: false } as Token;
 }
@@ -122,8 +142,15 @@ function render(markdown: string, lang: BlogLang): { html: string; toc: TocItem[
   });
   const tokens = marked.lexer(markdown);
   const out: Token[] = [];
+  let inFaq = false;
   for (let i = 0; i < tokens.length; i++) {
     const tok = tokens[i];
+    // Sekcja FAQ (od H2 „Najczęstsze pytania” do kolejnego H2) dostaje wrapper `.blog-faq` - mniejsza czcionka.
+    if (tok.type === 'heading' && tok.depth <= 2) {
+      if (inFaq) out.push(htmlToken('</section>\n'));
+      inFaq = FAQ_HEADING.test(tok.text.trim());
+      if (inFaq) out.push(htmlToken('<section class="blog-faq">\n'));
+    }
     // Zapis 1: akapit-zapowiedz z dwukropkiem + lista bezposrednio pod nim.
     if (tok.type === 'paragraph' && KEY_LEAD.test(tok.text.trim())) {
       let j = i + 1;
@@ -138,6 +165,12 @@ function render(markdown: string, lang: BlogLang): { html: string; toc: TocItem[
     }
     // Zapis 2: > [!KEY] Tytul
     if (tok.type === 'blockquote') {
+      const r = tok.text.match(REMEMBER_RE);
+      if (r) {
+        const title = r[1].trim() ? (marked.parseInline(r[1].trim()) as string) : REMEMBER_TITLE[lang];
+        out.push(htmlToken(rememberBox(title, marked.parse(r[2], { async: false }) as string)));
+        continue;
+      }
       const m = tok.text.match(/^\[!KEY\][ \t]*([^\n]*)\n?([\s\S]*)$/i);
       if (m) {
         const title = m[1].trim() ? (marked.parseInline(m[1].trim()) as string) : KEY_TITLE[lang];
@@ -147,6 +180,7 @@ function render(markdown: string, lang: BlogLang): { html: string; toc: TocItem[
     }
     out.push(tok);
   }
+  if (inFaq) out.push(htmlToken('</section>\n'));
   const html = marked.parser(out);
   return { html, toc };
 }

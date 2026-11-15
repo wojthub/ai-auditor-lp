@@ -31,7 +31,7 @@ Lista pochodzi z metody CORE-EEAT (seo-content-writer v9.9.12) i jest dostosowan
 | Samodzielne sekcje | Każda sekcja H2 jest zrozumiała po wycięciu z artykułu (bez „jak wspomnieliśmy”, temat nazwany wprost) |
 | Uczciwe CTA | CTA stoi po dowodzie, produkt opisany zgodnie z `src/data/*` i `spec/` |
 | Styl | Dywiz zamiast myślnika, zero definicji przez zaprzeczenie, rzeczownikowe etykiety, GEO vs odpowiedzi AI, bez informacji z zaplecza |
-| Zasady pisania Wojciecha | Listy małą literą z przecinkami i kropką na końcu, dwukropek tylko przed listą, pogrubione kluczowe liczby, zero słów zakazanych i kalek, jeden akapit opinii, zarzut czytelnika z odpowiedzią |
+| Zasady pisania Wojciecha | Listy małą literą z przecinkami i kropką na końcu, dwukropek tylko przed listą, 2-4 pogrubienia kluczowych fraz, liczb i tez w każdej sekcji, 2-3 boxy `> [!ZAPAMIETAJ]` w artykule, zero słów zakazanych i kalek, jeden akapit opinii, zarzut czytelnika z odpowiedzią |
 
 ## Kontrola SEO
 
