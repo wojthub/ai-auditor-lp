@@ -239,6 +239,23 @@ export function blogPostJsonLd(lang: BlogLang, post: BlogPost, t: BlogPostLang, 
         // Druga wersja jezykowa tego samego wpisu (para z rejestru).
         ...(pair ? { workTranslation: { '@id': `${postUrl(other, pair.slug)}#article` } } : {}),
       },
+      // FAQPage z sekcji „Najczęstsze pytania” - tylko gdy wpis ja ma.
+      ...(rendered.faq.length > 0
+        ? [
+            {
+              '@type': 'FAQPage',
+              '@id': `${url}#faq`,
+              url,
+              inLanguage: inLanguage(lang),
+              isPartOf: { '@id': url },
+              mainEntity: rendered.faq.map((f) => ({
+                '@type': 'Question',
+                name: f.q,
+                acceptedAnswer: { '@type': 'Answer', text: f.a },
+              })),
+            },
+          ]
+        : []),
     ],
   };
 }

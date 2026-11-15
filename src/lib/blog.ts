@@ -22,6 +22,13 @@ export interface RenderedPost {
   readingMinutes: number;
   /** Liczba slow tresci - `wordCount` w schema BlogPosting. */
   wordCount: number;
+  /** Pytania z sekcji „Najczęstsze pytania” (H3 + tresc pod nim) - do schema FAQPage. */
+  faq: FaqItem[];
+}
+
+export interface FaqItem {
+  q: string;
+  a: string;
 }
 
 /** `Jak zacząć?` -> `jak-zaczac` - kotwice H2 bez polskich znakow i interpunkcji. */
@@ -101,7 +108,7 @@ function htmlToken(html: string): Token {
   return { type: 'html', raw: html, text: html, block: true, pre: false } as Token;
 }
 
-function render(markdown: string, lang: BlogLang): { html: string; toc: TocItem[] } {
+function render(markdown: string, lang: BlogLang): { html: string; toc: TocItem[]; faq: FaqItem[] } {
   const toc: TocItem[] = [];
   const used = new Map<string, number>();
   const marked = new Marked({ gfm: true });
@@ -143,14 +150,30 @@ function render(markdown: string, lang: BlogLang): { html: string; toc: TocItem[
   const tokens = marked.lexer(markdown);
   const out: Token[] = [];
   let inFaq = false;
+  // FAQ do schema: H3 w sekcji FAQ = pytanie, tokeny do kolejnego naglowka = odpowiedz (czysty tekst).
+  const faq: FaqItem[] = [];
+  let faqQ: string | null = null;
+  let faqA: Token[] = [];
+  const plain = (h: string) => decodeEntities(h.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+  const flushFaq = () => {
+    if (faqQ) {
+      const a = plain(marked.parser(faqA));
+      if (a) faq.push({ q: faqQ, a });
+    }
+    faqQ = null;
+    faqA = [];
+  };
   for (let i = 0; i < tokens.length; i++) {
     const tok = tokens[i];
+    if (tok.type === 'heading') flushFaq();
     // Sekcja FAQ (od H2 „Najczęstsze pytania” do kolejnego H2) dostaje wrapper `.blog-faq` - mniejsza czcionka.
     if (tok.type === 'heading' && tok.depth <= 2) {
       if (inFaq) out.push(htmlToken('</section>\n'));
       inFaq = FAQ_HEADING.test(tok.text.trim());
       if (inFaq) out.push(htmlToken('<section class="blog-faq">\n'));
     }
+    if (inFaq && tok.type === 'heading' && tok.depth === 3) faqQ = plain(marked.parseInline(tok.text) as string);
+    else if (inFaq && faqQ && tok.type !== 'space') faqA.push(tok);
     // Zapis 1: akapit-zapowiedz z dwukropkiem + lista bezposrednio pod nim.
     if (tok.type === 'paragraph' && KEY_LEAD.test(tok.text.trim())) {
       let j = i + 1;
@@ -180,9 +203,10 @@ function render(markdown: string, lang: BlogLang): { html: string; toc: TocItem[
     }
     out.push(tok);
   }
+  flushFaq();
   if (inFaq) out.push(htmlToken('</section>\n'));
   const html = marked.parser(out);
-  return { html, toc };
+  return { html, toc, faq };
 }
 
 function countWords(markdown: string): number {
@@ -213,9 +237,9 @@ export function renderPost(lang: BlogLang, slug: string): Promise<RenderedPost> 
         throw new Error(`Blog: brak pliku ${path.relative(process.cwd(), file)} dla wpisu z rejestru src/data/blog.ts`);
       }
       if (md.includes(EM_DASH)) throw new Error(`Blog: em dash w ${key}.md - uzyj dywizu "-"`);
-      const { html, toc } = render(md, lang);
+      const { html, toc, faq } = render(md, lang);
       const wordCount = countWords(md);
-      return { html, toc, readingMinutes: readingMinutes(wordCount), wordCount };
+      return { html, toc, readingMinutes: readingMinutes(wordCount), wordCount, faq };
     })();
     cache.set(key, p);
   }
