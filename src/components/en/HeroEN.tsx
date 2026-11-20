@@ -95,6 +95,7 @@ export default function HeroEN() {
                 value={url}
                 onChange={(e) => { setUrl(e.target.value); if (error) setError(''); }}
                 placeholder={typed ? `Paste a link, e.g. ${typed}` : 'Paste your page URL...'}
+                aria-label="Page URL to audit"
                 aria-invalid={!!error}
                 style={{
                   flex: 1,

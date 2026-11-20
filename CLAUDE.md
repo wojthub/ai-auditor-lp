@@ -30,12 +30,14 @@ Landing page dla narzędzia **CitationOne** (`citationone.com`) - webapp do audy
 
 ```bash
 npm run dev        # Dev server
-npm run build      # Static export → katalog out/ (output: 'export')
+npm run build      # Static export → katalog out/ (output: 'export') + scripts/set-html-lang.mjs
 npm run start      # Serwuj build
 ```
 
 **Brak testów i lintu** — `package.json` definiuje wyłącznie te trzy skrypty. Nie ma tu Vitest ani ESLint;
 weryfikacja zmiany = `npm run build` (static export wyłapie błędy typów i nieobsłużone dynamiczne API).
+
+**`<html lang>` na stronach /pl (od 2026-11-19):** root layout jest jeden i ma `lang="en"`, a layout /pl mógł dać polski tylko elementowi w `<body>` - wyszukiwarki i czytniki ekranu brały /pl za stronę angielską (audyt SiteLint). `npm run build` po `next build` uruchamia `scripts/set-html-lang.mjs`, który w eksporcie (`out/` albo `NEXT_DIST_DIR`) podmienia `<html lang="en"` na `pl` we wszystkich plikach /pl i **przerywa build**, gdy nie zmieni żadnego (znak, że zmienił się root layout). Przejścia bez przeładowania obsługuje `HtmlLang` w `src/app/pl/layout.tsx`. Build przez samo `npx next build` tego kroku NIE robi.
 
 **Build pobiera changelog z aplikacji** (od 2026-11-10): `/changelog`, `/pl/changelog` i `/knowledge/log.md`
 czytają `https://app.citationone.com/api/public/changelog` w czasie builda, a błąd pobrania **przerywa build**.
@@ -84,7 +86,7 @@ ai-auditor-lp/
 │   │   ├── (en)/changelog/      # EN "Changelog" (/changelog) - ChangelogPage + lib/changelog.ts
 │   │   ├── blog/                # EN blog: page.tsx (/blog) + [slug]/page.tsx (/blog/<slug>)
 │   │   └── pl/                  # Wersja PL
-│   │       ├── layout.tsx       # PL layout (lang="pl", metadata PL, hreflang)
+│   │       ├── layout.tsx       # PL layout (lang="pl", metadata PL, hreflang, <HtmlLang>)
 │   │       ├── page.tsx         # PL homepage (/pl)
 │   │       ├── jak-to-dziala/   # PL "Jak to działa?" (/pl/jak-to-dziala)
 │   │       │   ├── page.tsx

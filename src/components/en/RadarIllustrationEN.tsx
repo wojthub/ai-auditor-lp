@@ -63,9 +63,9 @@ export default function RadarIllustrationEN({ maxWidth = 220 }: { maxWidth?: num
           const p = getPoint(i, 10);
           return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="#eceff3" strokeWidth="1" />;
         })}
-        <motion.path d={dataPath} fill="rgba(11,121,131,0.08)" stroke="#0b7983" strokeWidth="1.5" animate={{ d: dataPath }} transition={{ duration: 0.9, ease: 'easeInOut' }} />
+        <motion.path d={dataPath} fill="rgba(11,121,131,0.08)" stroke="#0b7983" strokeWidth="1.5" initial={false} animate={{ d: dataPath }} transition={{ duration: 0.9, ease: 'easeInOut' }} />
         {dataPoints.map((p, i) => (
-          <motion.circle key={i} r="3" fill="#0b7983" animate={{ cx: p.x, cy: p.y }} transition={{ duration: 0.9, ease: 'easeInOut' }} />
+          <motion.circle key={i} r="3" fill="#0b7983" cx={p.x} cy={p.y} initial={false} animate={{ cx: p.x, cy: p.y }} transition={{ duration: 0.9, ease: 'easeInOut' }} />
         ))}
         {LABELS.map((label, i) => {
           const p = getPoint(i, 13);

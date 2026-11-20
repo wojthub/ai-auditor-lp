@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { alternatesFor } from '@/lib/languageSwitch';
 import { socialMeta } from '@/lib/socialMeta';
+import HtmlLang from '@/components/HtmlLang';
 
 export const metadata: Metadata = {
   title: {
@@ -24,5 +25,11 @@ export default function PlLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div lang="pl">{children}</div>;
+  return (
+    <div lang="pl">
+      {/* <html lang="pl"> w gotowym HTML ustawia scripts/set-html-lang.mjs po buildzie; to dla przejść bez przeładowania. */}
+      <HtmlLang lang="pl" />
+      {children}
+    </div>
+  );
 }

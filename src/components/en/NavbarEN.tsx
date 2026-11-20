@@ -432,7 +432,8 @@ export default function NavbarEN() {
         .nav-lang {
           font-size: 13px;
           font-weight: 600;
-          color: #a4acb9;
+          /* #666d80 = kontrast 5,3:1 na bieli (WCAG AA); #a4acb9 mial 2,3:1. */
+          color: #666d80;
           text-decoration: none;
           padding: 6px 10px;
           margin-left: 4px;

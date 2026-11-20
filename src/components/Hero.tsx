@@ -95,6 +95,7 @@ export default function Hero() {
                 value={url}
                 onChange={(e) => { setUrl(e.target.value); if (error) setError(''); }}
                 placeholder={typed ? `Wklej link, np. ${typed}` : 'Wklej link do strony...'}
+                aria-label="Adres strony do audytu"
                 aria-invalid={!!error}
                 style={{
                   flex: 1,

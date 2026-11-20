@@ -102,6 +102,7 @@ export default function RadarIllustration({ maxWidth = 220 }: { maxWidth?: numbe
           fill="rgba(11,121,131,0.08)"
           stroke="#0b7983"
           strokeWidth="1.5"
+          initial={false}
           animate={{ d: dataPath }}
           transition={{ duration: 0.9, ease: 'easeInOut' }}
         />
@@ -109,6 +110,9 @@ export default function RadarIllustration({ maxWidth = 220 }: { maxWidth?: numbe
         {dataPoints.map((p, i) => (
           <motion.circle
             key={i} r="3" fill="#0b7983"
+            // Start z wartości docelowych - bez tego przy montowaniu leciało `cx: undefined` w konsoli.
+            cx={p.x} cy={p.y}
+            initial={false}
             animate={{ cx: p.x, cy: p.y }}
             transition={{ duration: 0.9, ease: 'easeInOut' }}
           />
