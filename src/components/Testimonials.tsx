@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { fetchTestimonials, testimonialsFor, type Testimonial } from '@/lib/testimonials';
+import { fetchTestimonials, testimonialsFor, testimonialsJsonLd, type Testimonial } from '@/lib/testimonials';
 
 /**
  * Karuzela opinii zaraz pod hero strony głównej (PL i EN - jeden komponent, różni się tylko copy).
@@ -258,6 +258,11 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
         if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) stop();
       }}
     >
+      {/* Opinie w danych strukturalnych - tylko te, które są widoczne na stronie. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(testimonialsJsonLd(items, lang)).replace(/</g, '\\u003c') }}
+      />
       <div className="tst-wrap">
         <div className="tst-head">
           <div>

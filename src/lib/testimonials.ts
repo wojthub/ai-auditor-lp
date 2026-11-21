@@ -136,3 +136,40 @@ export function fetchTestimonials(): Promise<TestimonialsPayload | null> {
   }
   return pending;
 }
+
+const SITE = 'https://citationone.com';
+
+/**
+ * JSON-LD opinii widocznych na stronie: `Service` „CitationOne” z listą `review` (od 2026-11-21).
+ *
+ * Czemu `Service`, a nie `SoftwareApplication`/`Product`/`Organization`: dla tych typów Google
+ * waliduje fragmenty z opiniami i wymaga oceny (`reviewRating`), a w aplikacjach także `offers` lub
+ * `aggregateRating`. Opinie nie mają gwiazdek, więc tamte typy dawałyby błędy w Search Console,
+ * a gwiazdek i tak by nie było (Google nie pokazuje opinii wystawionych firmie na jej własnej
+ * stronie). `Service` Google nie waliduje, a treść opinii i autorzy są czytelni dla robotów i modeli AI.
+ * Oceny NIE dopisujemy - byłaby zmyślona.
+ */
+export function testimonialsJsonLd(items: readonly ShownTestimonial[], lang: 'pl' | 'en'): object | null {
+  if (items.length === 0) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${SITE}/#service`,
+    name: 'CitationOne',
+    url: lang === 'pl' ? `${SITE}/pl` : `${SITE}/`,
+    serviceType: lang === 'pl' ? 'Audyt treści pod GEO' : 'GEO content audit',
+    provider: { '@type': 'Organization', '@id': `${SITE}/#organization`, name: 'CitationOne', url: SITE },
+    review: items.map((t) => ({
+      '@type': 'Review',
+      reviewBody: t.text,
+      inLanguage: lang,
+      author: {
+        '@type': 'Person',
+        name: t.name,
+        ...(t.role ? { jobTitle: t.role } : {}),
+        ...(t.url ? { url: t.url, sameAs: [t.url] } : {}),
+        ...(t.siteUrl ? { worksFor: { '@type': 'Organization', url: t.siteUrl } } : {}),
+      },
+    })),
+  };
+}
