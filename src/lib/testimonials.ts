@@ -140,30 +140,35 @@ export function fetchTestimonials(): Promise<TestimonialsPayload | null> {
 const SITE = 'https://citationone.com';
 
 /**
- * JSON-LD opinii widocznych na stronie: `Service` „CitationOne” z listą `review` (od 2026-11-21).
+ * JSON-LD opinii widocznych na stronie: `Service` „CitationOne” z opiniami jako cytatami
+ * (`subjectOf: Quotation[]`, od 2026-11-21).
  *
- * Czemu `Service`, a nie `SoftwareApplication`/`Product`/`Organization`: dla tych typów Google
- * waliduje fragmenty z opiniami i wymaga oceny (`reviewRating`), a w aplikacjach także `offers` lub
- * `aggregateRating`. Opinie nie mają gwiazdek, więc tamte typy dawałyby błędy w Search Console,
- * a gwiazdek i tak by nie było (Google nie pokazuje opinii wystawionych firmie na jej własnej
- * stronie). `Service` Google nie waliduje, a treść opinii i autorzy są czytelni dla robotów i modeli AI.
- * Oceny NIE dopisujemy - byłaby zmyślona.
+ * Czemu `Quotation`, a NIE `Review`: Google waliduje KAŻDY obiekt `Review` jako fragment z opinią,
+ * niezależnie od typu, w którym siedzi. Sprawdzone w teście wyników rozszerzonych na pierwszej wersji
+ * (`Service.review`): „Nieprawidłowy typ obiektu w polu <parent_node>” (Service nie jest dozwolonym
+ * `itemReviewed`) i „Wiele weryfikacji bez obiektu aggregateRating”. Typy dozwolone
+ * (`SoftwareApplication`/`Product`) wymagają ocen, a opinie ich nie mają - oceny NIE dopisujemy,
+ * byłaby zmyślona. Gwiazdek i tak by nie było (Google nie pokazuje opinii wystawionych firmie na jej
+ * własnej stronie). `Quotation` nie ma wyników rozszerzonych, więc Google go nie waliduje, a treść
+ * i autorzy zostają czytelni dla robotów i modeli AI.
  */
 export function testimonialsJsonLd(items: readonly ShownTestimonial[], lang: 'pl' | 'en'): object | null {
   if (items.length === 0) return null;
+  const serviceId = `${SITE}/#service`;
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': `${SITE}/#service`,
+    '@id': serviceId,
     name: 'CitationOne',
     url: lang === 'pl' ? `${SITE}/pl` : `${SITE}/`,
     serviceType: lang === 'pl' ? 'Audyt treści pod GEO' : 'GEO content audit',
     provider: { '@type': 'Organization', '@id': `${SITE}/#organization`, name: 'CitationOne', url: SITE },
-    review: items.map((t) => ({
-      '@type': 'Review',
-      reviewBody: t.text,
+    subjectOf: items.map((t) => ({
+      '@type': 'Quotation',
+      text: t.text,
       inLanguage: lang,
-      author: {
+      about: { '@id': serviceId },
+      creator: {
         '@type': 'Person',
         name: t.name,
         ...(t.role ? { jobTitle: t.role } : {}),
