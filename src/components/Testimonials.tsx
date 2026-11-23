@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { fetchTestimonials, testimonialsFor, testimonialsJsonLd, type Testimonial } from '@/lib/testimonials';
 
 /**
@@ -152,6 +152,19 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
       alive = false;
     };
   }, [lang]);
+
+  // Nowa lista z przeglądarki (np. inna kolejność niż w HTML z builda) = pas wraca na początek.
+  // Bez tego `scroll-snap` po zmianie treści dociąga pas do karty, która była przyciągnięta wcześniej,
+  // a ta po przestawieniu stoi dalej - strona otwierała się na środku albo końcu listy.
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (!track || stopped.current) return;
+    track.scrollLeft = 0;
+    const frame = requestAnimationFrame(() => {
+      if (!stopped.current) track.scrollLeft = 0;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [items]);
 
   /** Szerokość kroku = karta + odstęp. Liczona z DOM, bo zależy od progu szerokości ekranu. */
   const step = useCallback(() => {
