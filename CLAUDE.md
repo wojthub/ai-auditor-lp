@@ -268,7 +268,7 @@ w `Navbar.tsx`: wracający użytkownik nie miał gdzie kliknąć, a nowy nie wid
 Rozwijane menu „Audyt treści" (`AUDIT_MENU`, desktop i mobile): Jak działa audytor?, Wymiary oceny,
 Audyt masowy, API, **Serwer MCP** (od 2026-11-11), **Nowości / Changelog** (od 2026-11-10). Za menu „Cennik” stoi zwykły link **„Blog”** (desktop i mobile).
 Stopka linkuje te same podstrony oprócz changelogu (zdjęty ze stopki 2026-11-10 na prośbę usera) i ma „Blog”.
-**Reguła: bez wpisów w danym języku NIE ma linku „Blog”** - ani w menu (desktop i mobile), ani w stopce, a lista tego języka wypada z sitemapy. Steruje tym `HAS_BLOG_POSTS` w [src/data/blog.ts](src/data/blog.ts), więc link pojawia się sam po dodaniu pierwszego wpisu (stan 2026-11-10: PL ma wpisy, EN jeszcze nie).
+**Reguła: bez wpisów w danym języku NIE ma linku „Blog”** - ani w menu (desktop i mobile), ani w stopce, a lista tego języka wypada z sitemapy. Steruje tym `HAS_BLOG_POSTS` w [src/data/blog.ts](src/data/blog.ts), więc link pojawia się sam po dodaniu pierwszego wpisu (stan 2026-11-23: oba języki mają po 9 wpisów; wszystkie wpisy są parami PL/EN, grafiki EN w `public/blog/en/`).
 **Link „Blog” na pasku znika między 820 a 869 px** (`.nav-blog`): w PL zawijał przyciski konta do dwóch linii (64 px) od 820 do 849 px.
 
 Notatki poniżej opisują wcześniejszy etap („Zrób audyt" → `/login`) i zostają jako historia decyzji.

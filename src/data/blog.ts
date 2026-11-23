@@ -43,6 +43,12 @@ export const BLOG_POSTS: BlogPost[] = [
       description:
         'Jak zrobić audyt treści pod Google i odpowiedzi AI? 7 kroków, checklista 10 obszarów i dane z 4540 polskich audytów o najczęstszych słabościach tekstów.',
     },
+    en: {
+      slug: 'content-audit',
+      title: 'How to Do a Content Audit for SEO and AI Search?',
+      description:
+        'How to do a content audit for Google and AI answers. 7 steps, a 10-area checklist and data from 4,540 audits on the most common weaknesses of web content.',
+    },
   },
   {
     id: 'content-pruning',
@@ -52,6 +58,12 @@ export const BLOG_POSTS: BlogPost[] = [
       title: 'Content pruning - jak zrobić porządek w treściach',
       description:
         'Content pruning krok po kroku. Kiedy stronę zostawić, zaktualizować, połączyć albo usunąć, co Google mówi o budżecie indeksowania i jak wdrożyć 301 lub 410.',
+    },
+    en: {
+      slug: 'content-pruning',
+      title: 'Content Pruning - How to Clean Up Your Content',
+      description:
+        'Content pruning step by step. When to keep, update, merge or delete a page, what Google says about crawl budget and how to roll out a 301 redirect or a 410.',
     },
   },
   {
@@ -63,6 +75,12 @@ export const BLOG_POSTS: BlogPost[] = [
       description:
         'Kanibalizacja słów kluczowych krok po kroku. Jak sprawdzić ją w Search Console, odróżnić od zdrowych wyników i wybrać naprawę - 301, scalenie albo canonical.',
     },
+    en: {
+      slug: 'keyword-cannibalization',
+      title: 'Keyword Cannibalization - What It Is and How to Fix It',
+      description:
+        'Keyword cannibalization step by step. How to find it in Search Console, tell it apart from healthy results and choose a fix, like a 301, a merge or canonical.',
+    },
   },
   {
     id: 'klasteryzacja-slow-kluczowych',
@@ -72,6 +90,12 @@ export const BLOG_POSTS: BlogPost[] = [
       title: 'Klasteryzacja słów kluczowych - jak zrobić plan treści',
       description:
         'Klasteryzacja słów kluczowych krok po kroku. Jak grupować frazy po wynikach Google, ustalić intencję i zamienić klastry w plan treści bez kanibalizacji.',
+    },
+    en: {
+      slug: 'keyword-clustering',
+      title: 'What Is Keyword Clustering and How to Do It?',
+      description:
+        'Keyword clustering step by step. How to group keywords by Google results, define search intent and turn clusters into a content plan without cannibalization.',
     },
   },
   {
@@ -83,6 +107,12 @@ export const BLOG_POSTS: BlogPost[] = [
       description:
         'Jak zaktualizować stary artykuł na blogu, żeby wrócił do Google i trafił do odpowiedzi AI? 9 kroków, zasada zmiany daty i przykład przed i po.',
     },
+    en: {
+      slug: 'how-to-update-old-blog-posts',
+      title: 'How to Update Old Blog Posts for SEO and AI?',
+      description:
+        'How to update old blog posts so they climb back in Google and get cited in AI answers. 9 steps, a rule for changing the date and a before and after example.',
+    },
   },
   {
     id: 'jak-pisac-tresci-pod-ai',
@@ -92,6 +122,12 @@ export const BLOG_POSTS: BlogPost[] = [
       title: 'Jak pisać treści, które cytuje AI? 10 zasad',
       description:
         'Jak pisać treści pod AI, żeby ChatGPT i AI Overviews je cytowały? 10 zasad z przykładami przed i po, oparte na badaniu GEO i wytycznych Google.',
+    },
+    en: {
+      slug: 'how-to-write-content-for-ai-search',
+      title: 'How to Write Content for AI Search? 10 Rules',
+      description:
+        'How to write content for AI search that ChatGPT and AI Overviews cite. 10 rules with before and after examples, based on the GEO study and Google guidelines.',
     },
   },
   {
@@ -103,6 +139,12 @@ export const BLOG_POSTS: BlogPost[] = [
       description:
         'Jak trafić do AI Overviews w Google? 7 kroków, nowe ustawienie w Search Console i dane z 996 polskich SERP-ów o tym, jak pozycja wpływa na cytowania.',
     },
+    en: {
+      slug: 'how-to-appear-in-ai-overviews',
+      title: 'How to Appear in AI Overviews? A Guide for Websites',
+      description:
+        'How to appear in Google AI Overviews. 7 steps, the new Search Console setting and data from 996 results pages on how your ranking affects AI Overview citations.',
+    },
   },
   {
     id: 'jak-byc-widocznym-w-chatgpt',
@@ -113,6 +155,12 @@ export const BLOG_POSTS: BlogPost[] = [
       description:
         'Jak sprawić, żeby ChatGPT cytował Twoją stronę i polecał firmę? 7 kroków opartych na dokumentacji OpenAI - roboty, indeks, treść, wzmianki i pomiar.',
     },
+    en: {
+      slug: 'how-to-rank-in-chatgpt',
+      title: 'How to Rank in ChatGPT? A Step-by-Step Guide',
+      description:
+        'How to rank in ChatGPT and get your business recommended. 7 steps based on OpenAI documentation, covering crawlers, indexing, content, mentions and tracking.',
+    },
   },
   {
     id: 'co-to-jest-geo',
@@ -122,6 +170,12 @@ export const BLOG_POSTS: BlogPost[] = [
       title: 'Co to jest GEO? Definicja i różnice względem SEO',
       description:
         'GEO to optymalizacja treści pod cytowania w odpowiedziach AI. Zobacz, skąd wziął się termin, czym GEO różni się od SEO i od czego zacząć w praktyce.',
+    },
+    en: {
+      slug: 'what-is-geo',
+      title: 'What Is GEO? Generative Engine Optimization Explained',
+      description:
+        'GEO is optimizing content to get cited in AI answers. Learn where the term comes from, how GEO differs from SEO and what to do first, with data from the study.',
     },
   },
 ];
