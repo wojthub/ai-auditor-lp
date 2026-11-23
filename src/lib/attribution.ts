@@ -22,6 +22,10 @@ export const ATTRIBUTION_PARAMS = [
   'gbraid',
   'wbraid',
   'msclkid',
+  // Host strony, z ktorej odwiedzajacy wszedl na landing (bez sciezki, bez `www.`). Aplikacja
+  // klasyfikuje po nim zrodlo rejestracji bez UTM-ow: wyszukiwarka, LinkedIn, ChatGPT...
+  // (`../ai-auditor/src/lib/signup-source.ts`). Sam host, wiec zadnych danych osobowych.
+  'lp_ref',
 ] as const;
 
 /**
@@ -68,12 +72,26 @@ export function readAttribution(search: string): Attribution {
 export function captureAttribution(): void {
   if (typeof window === 'undefined') return;
   const found = readAttribution(window.location.search);
+  const referrerHost = externalReferrerHost(document.referrer);
+  if (referrerHost && !found.lp_ref) found.lp_ref = referrerHost;
   if (Object.keys(found).length === 0) return;
   try {
     window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(found));
   } catch {
     // Tryb prywatny albo zablokowane dane witryny - link z biezacej strony i tak dostanie
     // parametry z adresu (patrz `currentAttribution`).
+  }
+}
+
+/** Host strony odsylajacej spoza naszych domen albo `undefined` (wejscie bezposrednie, nawigacja wewnetrzna). */
+export function externalReferrerHost(referrer: string): string | undefined {
+  if (!referrer) return undefined;
+  try {
+    const host = new URL(referrer).hostname.toLowerCase().replace(/^www\./, '');
+    if (!host || host === 'citationone.com' || host.endsWith('.citationone.com') || host === 'localhost') return undefined;
+    return host.slice(0, 120);
+  } catch {
+    return undefined;
   }
 }
 

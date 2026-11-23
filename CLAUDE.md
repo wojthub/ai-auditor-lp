@@ -548,7 +548,8 @@ const APP_URL = 'https://app.citationone.com';
 
 Wejście z reklamy niesie `fbclid` i UTM-y, a linki do aplikacji były gołe, więc atrybucja urywała się na granicy domen. [attribution.ts](src/lib/attribution.ts) zapamiętuje parametry wejścia w `sessionStorage` (przeżywają przejścia między podstronami LP), a [AttributionCarrier.tsx](src/components/AttributionCarrier.tsx) w root layoucie dokleja je do każdego linku zaczynającego się od `APP_URL` - jeden nasłuch na dokument, tak jak `RegisterClickTracker`. Formularz w hero dokleja je w `trackThenNavigate`.
 
-- **Lista parametrów jest zamknięta** (`ATTRIBUTION_PARAMS`): UTM-y, `fbclid`, `gclid`, `gbraid`, `wbraid`, `msclkid`. Nic innego z adresu nie przechodzi dalej - w szczególności żadne dane osobowe.
+- **Lista parametrów jest zamknięta** (`ATTRIBUTION_PARAMS`): UTM-y, `fbclid`, `gclid`, `gbraid`, `wbraid`, `msclkid` i `lp_ref`. Nic innego z adresu nie przechodzi dalej - w szczególności żadne dane osobowe.
+- **`lp_ref` (od 2026-11-23)** = sam host strony, z której odwiedzający wszedł na landing (`document.referrer`, bez `www.`, bez naszych domen). Aplikacja klasyfikuje po nim źródło rejestracji wejść bez UTM-ów (Google, LinkedIn, ChatGPT...) - badge na liście „Zarejestrowani” w adminie (`../ai-auditor/src/lib/signup-source.ts`).
 - **Przenosimy zawsze, niezależnie od zgody na cookies** (decyzja z 2026-10-12). Aplikacja zapisuje `fbclid` w ciasteczku `_fbc` (`../ai-auditor/src/lib/meta-click.ts`).
 - **Adres poprawiamy przy `pointerdown`, nie dopiero na `click`** - inaczej otwarcie w nowej karcie środkowym przyciskiem albo z menu kontekstowego szłoby bez parametrów.
 - **Doklejamy tekstem, nie przez `URL.searchParams.set`** - ten przepisuje całe query i zakodowałby `:` i `/` w `audit-url`.
