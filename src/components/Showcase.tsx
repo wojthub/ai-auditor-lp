@@ -68,6 +68,9 @@ export default function Showcase() {
             caption: 'Przykładowy raport - przełączaj zakładki i przewijaj',
             openLabel: 'Otwórz w nowej karcie',
             tapLabel: 'Dotknij, aby przeglądać',
+            pending: !report.settled,
+            badge: 'Interaktywny raport',
+            loadingLabel: 'Wczytywanie raportu…',
           }}
         />
       </div>

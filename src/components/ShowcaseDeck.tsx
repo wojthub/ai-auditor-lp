@@ -49,6 +49,12 @@ type Props = {
     openLabel: string;
     /** Telefon: napis na zablokowanej ramce („Dotknij, aby przegladac”). */
     tapLabel: string;
+    /** Odpowiedz panelu jeszcze nie przyszla (adres ramki nieznany). */
+    pending: boolean;
+    /** Plakietka nad urzadzeniem, gdy raport dziala („Interaktywny raport”). */
+    badge: string;
+    /** Napis na szkielecie, zanim raport sie wczyta (desktop). */
+    loadingLabel: string;
   };
 };
 
@@ -56,6 +62,8 @@ type Props = {
 const EMBED_READY = 'citationone:embed-ready';
 /** Szerokosc, w ktorej raport renderuje sie w mockupie telefonu (uklad mobilny panelu). */
 const PHONE_FRAME_WIDTH = 390;
+/** Brak sygnalu z ramki po tym czasie = wracaja zrzuty (desktop pokazuje do tego czasu szkielet). */
+const LIVE_TIMEOUT_MS = 15000;
 
 /** Zrzut slajdu w <picture>: wariant mobilny (media), WebP dla desktopu, PNG jako fallback. */
 function SlidePicture({ slide, imgProps }: { slide: ShowcaseSlide; imgProps: React.ImgHTMLAttributes<HTMLImageElement> }) {
@@ -91,6 +99,10 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
   // przewijanie strony utykaloby w raporcie. Po wyjezdzie sekcji z widoku blokada wraca.
   const [isMobile, setIsMobile] = useState(false);
   const [touchActive, setTouchActive] = useState(false);
+  // Desktop: od pierwszego malowania stoi SZKIELET raportu zamiast zrzutu (zrzut, a po chwili inny
+  // raport, wygladal jak podmiana ekranu). Zrzuty wracaja tylko, gdy raport sie nie wczyta.
+  // Telefon zostaje przy zrzutach do czasu sygnalu - tam zrzut jest elementem LCP.
+  const [liveFailed, setLiveFailed] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia(MOBILE_QUERY);
     const sync = () => setIsMobile(mq.matches);
@@ -102,6 +114,12 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
     setLiveReady(false);
     setFrameMounted(false);
     if (!embedUrl) return;
+    // Desktop: ramka startuje od razu - uzytkownik i tak patrzy na szkielet, wiec kazda sekunda
+    // czekania na `load` strony to sekunda dluzej przed raportem.
+    if (!window.matchMedia(MOBILE_QUERY).matches) {
+      setFrameMounted(true);
+      return;
+    }
     const el = screenRef.current;
     if (!el) return;
     // `cancelled` zamyka tez sciezke przez `load`: nasluch dopiety po sprzataniu efektu
@@ -150,7 +168,18 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
     io.observe(el);
     return () => io.disconnect();
   }, [touchActive]);
+  const livePending = live?.pending ?? false;
+  const hasLive = !!live;
+  useEffect(() => {
+    if (hasLive && !livePending && !embedUrl) setLiveFailed(true);
+  }, [hasLive, livePending, embedUrl]);
+  useEffect(() => {
+    if (!frameMounted || liveReady) return;
+    const t = window.setTimeout(() => setLiveFailed(true), LIVE_TIMEOUT_MS);
+    return () => window.clearTimeout(t);
+  }, [frameMounted, liveReady]);
   const frameLocked = isMobile && !touchActive;
+  const waitingLive = hasLive && !liveReady && !liveFailed;
 
   // Powiekszenie: klik w zrzut otwiera okno z pelnym zrzutem biezacego slajdu. Klik po
   // przeciagnieciu NIE otwiera - przegladarka wysyla `click` takze po dragu tasmy.
@@ -261,13 +290,22 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
 
   return (
     <div
+      className={[hasLive && 'deck-has-live', waitingLive && 'deck-waiting-live'].filter(Boolean).join(' ') || undefined}
       role="group"
+      aria-busy={waitingLive || undefined}
       aria-roledescription={liveReady ? undefined : 'carousel'}
       aria-label={liveReady && live ? live.title : regionLabel}
     >
       {/* Pod urzadzeniem stoi adnotacja, juz nie nachodzi na ekran: od 2026-09-19 ekran jest widoczny
           w calosci (wygaszanie tylko na ostatnich ~8%), wiec pastylka zaslanialaby tresc zrzutu. */}
-      <div style={{ perspective: '2000px', marginBottom: 18 }}>
+      <div style={{ position: 'relative', perspective: '2000px', marginBottom: 18 }}>
+        {/* Informacja, ze ekran jest prawdziwym raportem, a nie obrazkiem - dopiero gdy raport dziala. */}
+        {liveReady && live && (
+          <div className="deck-live-badge">
+            <span className="deck-live-badge-dot" aria-hidden />
+            {live.badge}
+          </div>
+        )}
         {/* Wjazd od dolu po 0,3 s robi CSS (`deck-rise` nizej), nie framer-motion: animacja z JS
             startowala dopiero po hydracji, a zrzut na ekranie jest najwiekszym elementem strony
             (LCP) - na telefonie czekal przez to ~4 s na pobrany juz plik. */}
@@ -302,6 +340,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                   {/* Tasma slajdow: przesuwana o -index*szerokosc ekranu, przeciagana palcem/myszka.
                       Wszystkie zrzuty siedza w DOM, wiec przejscie nie czeka na pobranie pliku. */}
                   <motion.div
+                    className="deck-shots"
                     // Do pierwszego pomiaru szerokosci slajd startowy ustawia CSS w procentach. Bez tego
                     // HTML pokazywal slajd pierwszy, a startowy - element LCP - wjezdzal dopiero po
                     // hydracji. `translate` jest osobna wlasciwoscia, wiec nie gryzie sie z `x`.
@@ -357,6 +396,20 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                       </picture>
                     ))}
                   </motion.div>
+
+                  {live && (
+                    <div className="deck-skeleton" aria-hidden>
+                      <span className="sk sk-title" />
+                      <span className="sk sk-url" />
+                      <div className="sk-row">
+                        <span className="sk sk-tab" /><span className="sk sk-tab" /><span className="sk sk-tab" /><span className="sk sk-tab" />
+                      </div>
+                      <div className="sk-cards">
+                        <span className="sk sk-card" /><span className="sk sk-card" />
+                      </div>
+                      <div className="sk-status"><span className="sk-spinner" />{live.loadingLabel}</div>
+                    </div>
+                  )}
 
                   {frameMounted && embedUrl && live && (
                     <iframe
@@ -682,6 +735,100 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
         }
         /* Raport na zywo: bez przechylenia 3D (rotateX rozmywa tekst i przesuwa pola klikniec). */
         .deck-device-live { --deck-tilt: 0deg; }
+        /* Desktop z raportem na zywo: bez przechylenia od poczatku (szkielet -> raport bez ruchu
+           urzadzenia), a do sygnalu z ramki zamiast zrzutow i kontrolek talii stoi szkielet. */
+        .deck-skeleton { display: none; }
+        @media (min-width: 641px) {
+          .deck-has-live .deck-device { --deck-tilt: 0deg; }
+          .deck-waiting-live .deck-shots,
+          .deck-waiting-live .deck-zoom,
+          .deck-waiting-live .deck-arrow,
+          .deck-waiting-live .deck-caption { visibility: hidden; }
+          .deck-waiting-live .deck-skeleton {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 26px 9% 0;
+            background: #f7f8fa;
+          }
+        }
+        .deck-skeleton .sk {
+          display: block;
+          border-radius: 8px;
+          background: linear-gradient(90deg, #e9ecf1 0%, #f3f5f8 40%, #e9ecf1 80%) 0 0 / 300% 100%;
+          animation: deck-sk 1.4s ease-in-out infinite;
+        }
+        @keyframes deck-sk { from { background-position: 100% 0; } to { background-position: 0 0; } }
+        .deck-skeleton .sk-title { width: 46%; height: 18px; }
+        .deck-skeleton .sk-url { width: 30%; height: 10px; }
+        .deck-skeleton .sk-row { display: flex; gap: 8px; margin-top: 10px; }
+        .deck-skeleton .sk-tab { width: 13%; height: 30px; }
+        .deck-skeleton .sk-cards { display: flex; gap: 14px; margin-top: 6px; flex: 1; min-height: 0; }
+        .deck-skeleton .sk-card { flex: 1; height: 100%; border-radius: 12px; }
+        .deck-skeleton .sk-status {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          translate: -50% -50%;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 9px 16px;
+          border-radius: 999px;
+          background: rgba(255,255,255,0.92);
+          box-shadow: 0 6px 18px rgba(13,13,18,0.1);
+          font-size: 14px;
+          font-weight: 600;
+          color: #36394a;
+          white-space: nowrap;
+        }
+        .deck-skeleton .sk-spinner {
+          width: 16px;
+          height: 16px;
+          border-radius: 999px;
+          border: 2px solid rgba(11,121,131,0.2);
+          border-top-color: #0b7983;
+          animation: deck-spin 0.8s linear infinite;
+        }
+        @keyframes deck-spin { to { transform: rotate(360deg); } }
+        /* Plakietka na gornej krawedzi urzadzenia. */
+        .deck-live-badge {
+          position: absolute;
+          top: -15px;
+          left: 50%;
+          z-index: 2;
+          translate: -50% 0;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 6px 14px;
+          border-radius: 999px;
+          background: #0b7983;
+          color: #ffffff;
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+          white-space: nowrap;
+          box-shadow: 0 8px 20px rgba(11,121,131,0.28);
+          animation: deck-badge-in 0.35s ease-out;
+        }
+        @keyframes deck-badge-in { from { opacity: 0; translate: -50% 6px; } }
+        .deck-live-badge-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 999px;
+          background: #7ff0c4;
+          animation: deck-pulse 1.8s ease-out infinite;
+        }
+        @keyframes deck-pulse {
+          from { box-shadow: 0 0 0 0 rgba(127,240,196,0.7); }
+          to { box-shadow: 0 0 0 7px rgba(127,240,196,0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .deck-skeleton .sk, .deck-skeleton .sk-spinner, .deck-live-badge, .deck-live-badge-dot { animation: none; }
+        }
         /* Ramka renderuje raport w 125% szerokosci ekranu i zmniejsza go do 80% - panel widzi
            szerszy uklad (desktopowy), a na ekranie miesci sie wiecej tresci niz w skali 1:1. */
         .deck-live-frame {

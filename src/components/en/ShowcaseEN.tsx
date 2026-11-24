@@ -67,6 +67,9 @@ export default function ShowcaseEN() {
             caption: 'Sample report - switch tabs and scroll',
             openLabel: 'Open in a new tab',
             tapLabel: 'Tap to explore',
+            pending: !report.settled,
+            badge: 'Interactive report',
+            loadingLabel: 'Loading report…',
           }}
         />
       </div>
