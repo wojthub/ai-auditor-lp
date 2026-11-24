@@ -1,10 +1,7 @@
 'use client';
 
 import { revealStyle } from '@/lib/reveal';
-import { useReportUrl } from '@/lib/useReportUrl';
-
-/** Default - the live value comes from the admin panel through useReportUrl. */
-const REPORT_URL_FALLBACK = 'https://app.citationone.com/share/BDBhqK8ZvffG9-rKXPNCeUTW?lang=en';
+import { REPORT_URL_FALLBACK, useReportUrl } from '@/lib/useReportUrl';
 
 const items = [
   {
@@ -28,7 +25,7 @@ const items = [
 ];
 
 export default function ReportSectionEN() {
-  const reportUrl = useReportUrl(REPORT_URL_FALLBACK, 'en');
+  const reportUrl = useReportUrl(REPORT_URL_FALLBACK.en, 'en');
   return (
     <section style={{ background: '#ffffff', padding: '90px 0', position: 'relative', overflow: 'hidden' }}>
       <div className="report-grid" style={{ maxWidth: 1124, margin: '0 auto', paddingLeft: 24, paddingRight: 24, position: 'relative', zIndex: 1 }}>

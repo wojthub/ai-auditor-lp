@@ -1,6 +1,7 @@
 'use client';
 
 import ShowcaseDeck, { type ShowcaseSlide } from './ShowcaseDeck';
+import { REPORT_URL_FALLBACK, toEmbedUrl, useReportUrlState } from '@/lib/useReportUrl';
 
 /** Trzy ekrany panelu w kolejnosci pracy: wynik → zalecenia → gotowa tresc. */
 const SLIDES: ShowcaseSlide[] = [
@@ -25,6 +26,9 @@ const SLIDES: ShowcaseSlide[] = [
 ];
 
 export default function Showcase() {
+  // Raport z linku w /admin/lp (ten sam co „Zobacz przykładowy raport”). Ramke ladujemy dopiero po odpowiedzi
+  // panelu - inaczej najpierw ladowalby sie raport z wartosci domyslnej, a zaraz potem drugi.
+  const report = useReportUrlState(REPORT_URL_FALLBACK.pl, 'pl');
   // Tlo (siatka kropek + graf) i gradient daje HeroBand - ta sekcja musi zostac
   // przezroczysta, inaczej zaslonilaby wspolna warstwe tla.
   return (
@@ -57,6 +61,14 @@ export default function Showcase() {
           nextLabel="Następny ekran"
           zoomLabel="Powiększ ekran"
           closeLabel="Zamknij powiększenie"
+          live={{
+            embedUrl: report.settled ? toEmbedUrl(report.url) : null,
+            reportUrl: report.url,
+            title: 'Przykładowy raport CitationOne',
+            caption: 'Przykładowy raport - przełączaj zakładki i przewijaj',
+            openLabel: 'Otwórz w nowej karcie',
+            tapLabel: 'Dotknij, aby przeglądać',
+          }}
         />
       </div>
     </section>

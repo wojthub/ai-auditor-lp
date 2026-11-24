@@ -33,7 +33,29 @@ type Props = {
   /** Przycisk lupy na ekranie i etykieta okna powiekszenia. */
   zoomLabel: string;
   closeLabel: string;
+  /**
+   * Interaktywny raport zamiast zrzutow (od 2026-11-24): ramka z `/share/<token>/embed`
+   * (raport z linku w `/admin/lp`). Zrzuty zostaja pod spodem jako pierwszy obraz strony (LCP)
+   * i jako zapas: ramka wchodzi dopiero po sygnale `EMBED_READY` z aplikacji. Na telefonie
+   * ramka jest zablokowana do pierwszego dotkniecia (`touchActive`), zeby nie lapala przewijania strony.
+   */
+  live?: {
+    /** Adres ramki; `null` = jeszcze nie znamy linku z panelu albo link nie jest `/share/…`. */
+    embedUrl: string | null;
+    /** Zwykly link publiczny - „Otworz w nowej karcie”. */
+    reportUrl: string;
+    title: string;
+    caption: string;
+    openLabel: string;
+    /** Telefon: napis na zablokowanej ramce („Dotknij, aby przegladac”). */
+    tapLabel: string;
+  };
 };
+
+/** Ta sama wartosc co w aplikacji: `src/app/share/[token]/EmbedReady.tsx`. */
+const EMBED_READY = 'citationone:embed-ready';
+/** Szerokosc, w ktorej raport renderuje sie w mockupie telefonu (uklad mobilny panelu). */
+const PHONE_FRAME_WIDTH = 390;
 
 /** Zrzut slajdu w <picture>: wariant mobilny (media), WebP dla desktopu, PNG jako fallback. */
 function SlidePicture({ slide, imgProps }: { slide: ShowcaseSlide; imgProps: React.ImgHTMLAttributes<HTMLImageElement> }) {
@@ -53,9 +75,82 @@ function SlidePicture({ slide, imgProps }: { slide: ShowcaseSlide; imgProps: Rea
  * z 2026-09-08). Wspoldzielony przez `Showcase` (PL) i `ShowcaseEN` - same slajdy
  * i etykiety ida propem, tak jak w `DimensionPage`.
  */
-export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prevLabel, nextLabel, zoomLabel, closeLabel }: Props) {
+export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prevLabel, nextLabel, zoomLabel, closeLabel, live }: Props) {
   const [index, setIndex] = useState(startIndex);
   const count = slides.length;
+
+  // Ramka z raportem: montowana po zaladowaniu strony i w bezczynnosci, gdy sekcja jest blisko
+  // widoku (nie konkuruje z hydracja LP), widoczna dopiero po sygnale z aplikacji. Do tego czasu
+  // stoi talia zrzutow - ona jest elementem LCP.
+  const embedUrl = live?.embedUrl ?? null;
+  const [frameMounted, setFrameMounted] = useState(false);
+  const [liveReady, setLiveReady] = useState(false);
+  const frameRef = useRef<HTMLIFrameElement>(null);
+  // Telefon: ramka renderuje raport w szerokosci telefonu (`PHONE_FRAME_WIDTH`) przeskalowany do
+  // ekranu mockupu i NIE lapie palca, dopoki ktos jej nie dotknie (`touchActive`) - inaczej
+  // przewijanie strony utykaloby w raporcie. Po wyjezdzie sekcji z widoku blokada wraca.
+  const [isMobile, setIsMobile] = useState(false);
+  const [touchActive, setTouchActive] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_QUERY);
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
+  useEffect(() => {
+    setLiveReady(false);
+    setFrameMounted(false);
+    if (!embedUrl) return;
+    const el = screenRef.current;
+    if (!el) return;
+    // `cancelled` zamyka tez sciezke przez `load`: nasluch dopiety po sprzataniu efektu
+    // (zmiana adresu, odmontowanie) zamontowalby ramke ze starym adresem.
+    let cancelled = false;
+    let idleId: number | undefined;
+    let timerId: number | undefined;
+    const mount = () => {
+      if (cancelled) return;
+      const run = () => { if (!cancelled) setFrameMounted(true); };
+      if (typeof window.requestIdleCallback === 'function') idleId = window.requestIdleCallback(run, { timeout: 3000 });
+      else timerId = window.setTimeout(run, 1200);
+    };
+    const io = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      io.disconnect();
+      if (document.readyState === 'complete') mount();
+      else window.addEventListener('load', mount, { once: true });
+    }, { rootMargin: '600px 0px' });
+    io.observe(el);
+    return () => {
+      cancelled = true;
+      io.disconnect();
+      window.removeEventListener('load', mount);
+      if (idleId !== undefined && typeof window.cancelIdleCallback === 'function') window.cancelIdleCallback(idleId);
+      if (timerId !== undefined) window.clearTimeout(timerId);
+    };
+  }, [embedUrl]);
+  useEffect(() => {
+    if (!embedUrl || !frameMounted) return;
+    const origin = new URL(embedUrl).origin;
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== origin || e.source !== frameRef.current?.contentWindow) return;
+      if ((e.data as { type?: unknown } | null)?.type === EMBED_READY) setLiveReady(true);
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, [embedUrl, frameMounted]);
+  useEffect(() => {
+    if (!touchActive) return;
+    const el = screenRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver((entries) => {
+      if (entries.every((e) => !e.isIntersecting)) setTouchActive(false);
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [touchActive]);
+  const frameLocked = isMobile && !touchActive;
 
   // Powiekszenie: klik w zrzut otwiera okno z pelnym zrzutem biezacego slajdu. Klik po
   // przeciagnieciu NIE otwiera - przegladarka wysyla `click` takze po dragu tasmy.
@@ -167,8 +262,8 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
   return (
     <div
       role="group"
-      aria-roledescription="carousel"
-      aria-label={regionLabel}
+      aria-roledescription={liveReady ? undefined : 'carousel'}
+      aria-label={liveReady && live ? live.title : regionLabel}
     >
       {/* Pod urzadzeniem stoi adnotacja, juz nie nachodzi na ekran: od 2026-09-19 ekran jest widoczny
           w calosci (wygaszanie tylko na ostatnich ~8%), wiec pastylka zaslanialaby tresc zrzutu. */}
@@ -177,7 +272,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
             startowala dopiero po hydracji, a zrzut na ekranie jest najwiekszym elementem strony
             (LCP) - na telefonie czekal przez to ~4 s na pobrany juz plik. */}
         <div
-          className="deck-device"
+          className={liveReady ? 'deck-device deck-device-live' : 'deck-device'}
           style={{
             transformOrigin: '50% 0%',
             margin: '0 auto',
@@ -185,7 +280,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
           }}
         >
           {/* Wygaszenie tylko na samym dole - wczesniej (40% → 76%) zjadalo polowe zrzutu. */}
-          <div style={{
+          <div style={liveReady ? undefined : {
             WebkitMaskImage: 'linear-gradient(to bottom, #000 0%, #000 92%, transparent 100%)',
             maskImage: 'linear-gradient(to bottom, #000 0%, #000 92%, transparent 100%)',
           }}>
@@ -263,6 +358,32 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                     ))}
                   </motion.div>
 
+                  {frameMounted && embedUrl && live && (
+                    <iframe
+                      ref={frameRef}
+                      src={embedUrl}
+                      title={live.title}
+                      className={liveReady ? (frameLocked ? 'deck-live-frame deck-live-frame-on deck-live-frame-locked' : 'deck-live-frame deck-live-frame-on') : 'deck-live-frame'}
+                      style={isMobile && width > 0 ? {
+                        width: PHONE_FRAME_WIDTH,
+                        height: `${100 * PHONE_FRAME_WIDTH / width}%`,
+                        transform: `scale(${width / PHONE_FRAME_WIDTH})`,
+                      } : undefined}
+                      aria-hidden={liveReady ? undefined : true}
+                      tabIndex={liveReady ? undefined : -1}
+                      // Bez allow-top-navigation: klik w ramce nie wyprowadzi z LP; linki zewnetrzne
+                      // otwieraja sie w nowej karcie (popups).
+                      sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                    />
+                  )}
+
+                  {liveReady && live && frameLocked && (
+                    <button type="button" className="deck-live-tap" onClick={() => setTouchActive(true)}>
+                      <span className="deck-live-tap-pill">{live.tapLabel}</span>
+                    </button>
+                  )}
+
                   {/* połysk ekranu */}
                   <div aria-hidden style={{
                     position: 'absolute',
@@ -271,6 +392,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                     background: 'linear-gradient(118deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 16%, rgba(255,255,255,0) 36%)',
                   }} />
 
+                  {!liveReady && (<>
                   {/* Lupa: klawiaturowe (i widoczne) wejscie do powiekszenia - sam klik w zrzut
                       niczego o sobie nie mowi. */}
                   <button
@@ -312,6 +434,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
                       <path d="M9 18l6-6-6-6" />
                     </svg>
                   </button>
+                  </>)}
                 </div>
               </div>
             </div>
@@ -321,6 +444,18 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
 
       {/* Adnotacja: nazwa widocznego ekranu + pozycja w talii. Kreski przeskakuja wprost
           na wybrany slajd - sa przyciskami, wiec maja etykiety i wlasne pole trafienia. */}
+      {liveReady && live ? (
+        <div className="deck-caption deck-caption-live">
+          <span className="deck-caption-dot" aria-hidden />
+          <span className="deck-caption-live-text">{live.caption}</span>
+          <a className="deck-caption-open" href={live.reportUrl} target="_blank" rel="noopener">
+            {live.openLabel}
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M7 17L17 7M8 7h9v9" />
+            </svg>
+          </a>
+        </div>
+      ) : (
       <div className="deck-caption">
         {/* Na telefonie strzalki siedza tutaj, a nie na ekranie - na waskim zrzucie zaslanialy tresc. */}
         <button
@@ -380,6 +515,7 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
           </svg>
         </button>
       </div>
+      )}
 
       {/* Portal do <body>: urzadzenie ma `transform`, a pod nim `position: fixed` liczyloby sie
           od mockupu zamiast od okna. */}
@@ -543,6 +679,67 @@ export default function ShowcaseDeck({ slides, startIndex = 0, regionLabel, prev
         }
         @media (prefers-reduced-motion: reduce) {
           .deck-device { animation: none; }
+        }
+        /* Raport na zywo: bez przechylenia 3D (rotateX rozmywa tekst i przesuwa pola klikniec). */
+        .deck-device-live { --deck-tilt: 0deg; }
+        /* Ramka renderuje raport w 125% szerokosci ekranu i zmniejsza go do 80% - panel widzi
+           szerszy uklad (desktopowy), a na ekranie miesci sie wiecej tresci niz w skali 1:1. */
+        .deck-live-frame {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 125%;
+          height: 125%;
+          border: 0;
+          transform: scale(0.8);
+          transform-origin: 0 0;
+          background: #f7f8fa;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.35s ease;
+        }
+        .deck-live-frame-on { opacity: 1; pointer-events: auto; }
+        .deck-live-frame-locked { pointer-events: none; }
+        /* Zablokowana ramka na telefonie: przezroczysta warstwa przepuszcza przewijanie strony
+           (touch-action), a dotkniecie odblokowuje raport. */
+        .deck-live-tap {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          border: 0;
+          background: transparent;
+          cursor: pointer;
+          touch-action: pan-y;
+        }
+        .deck-live-tap:active { transform: none; }
+        .deck-live-tap-pill {
+          padding: 9px 16px;
+          border-radius: 999px;
+          background: rgba(11,121,131,0.94);
+          color: #ffffff;
+          font-size: 14px;
+          font-weight: 600;
+          box-shadow: 0 8px 22px rgba(13,13,18,0.22);
+        }
+        .deck-caption-live { flex-wrap: wrap; justify-content: center; row-gap: 2px; }
+        .deck-caption-live-text { font-weight: 600; }
+        .deck-caption-open {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          color: #0b7983;
+          font-weight: 600;
+          text-decoration: none;
+          white-space: nowrap;
+        }
+        .deck-caption-open:hover { text-decoration: underline; }
+        /* Telefon: o interakcji mowi pastylka na ekranie, wiec pod urzadzeniem zostaje sam link. */
+        @media ${MOBILE_QUERY} {
+          .deck-caption-live { padding: 8px 14px 8px 12px; }
+          .deck-caption-live-text { display: none; }
         }
         .deck-edge { border-radius: 30px; }
         .deck-bezel { border-radius: 26px; padding: 12px; }
