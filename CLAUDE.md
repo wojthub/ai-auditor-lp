@@ -149,7 +149,7 @@ ai-auditor-lp/
 │       ├── AuthorSection.tsx    # Karta autora (foto + bio + LinkedIn) - na HP, po FAQ
 │       ├── ClosingCta.tsx
 │       ├── RadarIllustration.tsx # PL etykiety
-│       ├── Footer.tsx           # PL Footer - linki /pl/*
+│       ├── Footer.tsx           # PL Footer - linki /pl/* + dane firmy pod ©, te same co w regulaminie aplikacji (EN: FooterEN)
 │       ├── CtaSection.tsx
 │       ├── SocialProof.tsx      # UKRYTA
 │       ├── Pricing.tsx          # UKRYTA

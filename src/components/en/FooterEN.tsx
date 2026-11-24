@@ -52,9 +52,13 @@ export default function FooterEN() {
           className="flex flex-col sm:flex-row items-center justify-between gap-3"
           style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid #eceff3' }}
         >
-          <span style={{ fontSize: 12.5, color: '#a4acb9' }}>
-            &copy; {new Date().getFullYear()} CitationOne
-          </span>
+          <div className="ftr-company" style={{ fontSize: 12.5, lineHeight: 1.6, color: '#818898' }}>
+            <div>&copy; {new Date().getFullYear()} CitationOne</div>
+            {/* Dane firmy - te same co w regulaminie i polityce prywatnosci aplikacji. */}
+            <address aria-label="Company details" style={{ fontStyle: 'normal' }}>
+              <span style={{ whiteSpace: 'nowrap' }}>Seowp Wojciech Władziński,</span> <span style={{ whiteSpace: 'nowrap' }}>ul. Nieborowska 36,</span> <span style={{ whiteSpace: 'nowrap' }}>80-034 Gdańsk, Poland,</span> <span style={{ whiteSpace: 'nowrap' }}>NIP (VAT ID): 9840163453</span>
+            </address>
+          </div>
 
           <div className="flex flex-wrap items-center justify-center gap-1">
             <SocialLinks lang="en" />
@@ -66,6 +70,10 @@ export default function FooterEN() {
           </div>
         </div>
       </div>
+      <style>{`
+        .ftr-company { text-align: left; }
+        @media (max-width: 639px) { .ftr-company { text-align: center; } }
+      `}</style>
     </footer>
   );
 }
