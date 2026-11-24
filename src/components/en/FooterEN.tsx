@@ -56,7 +56,7 @@ export default function FooterEN() {
             <div>&copy; {new Date().getFullYear()} CitationOne</div>
             {/* Dane firmy - te same co w regulaminie i polityce prywatnosci aplikacji. */}
             <address aria-label="Company details" style={{ fontStyle: 'normal' }}>
-              <span style={{ whiteSpace: 'nowrap' }}>Seowp Wojciech Władziński,</span> <span style={{ whiteSpace: 'nowrap' }}>ul. Nieborowska 36,</span> <span style={{ whiteSpace: 'nowrap' }}>80-034 Gdańsk, Poland,</span> <span style={{ whiteSpace: 'nowrap' }}>NIP (VAT ID): 9840163453</span>
+              <span style={{ whiteSpace: 'nowrap' }}>SEOWP Wojciech Władziński,</span> <span style={{ whiteSpace: 'nowrap' }}>ul. Nieborowska 36,</span> <span style={{ whiteSpace: 'nowrap' }}>80-034 Gdańsk, Poland,</span> <span style={{ whiteSpace: 'nowrap' }}>NIP (VAT ID): 9840163453</span>
             </address>
           </div>
 
