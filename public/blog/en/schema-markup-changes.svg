@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420" role="img" aria-labelledby="t d" font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+<title id="t">How Google cut back rich results</title>
+<desc id="d">Timeline of changes to Google rich results. August 2023, FAQ rich results limited to government and health sites. September 2023, HowTo rich results deprecated. June 2025, phase-out of 7 types announced, including Course Info and Claim Review. September 2025, 6 of them removed from Search Console reports and the Rich Results Test.</desc>
+<rect width="640" height="420" fill="#ffffff"/>
+<text x="24" y="40" font-size="21" font-weight="700" fill="#0d0d12">How Google cut back rich results</text>
+<text x="24" y="66" font-size="14" fill="#666d80">Changes announced on the Google Search Central Blog</text>
+<line x1="60" y1="104" x2="60" y2="372" stroke="#dfe1e7" stroke-width="3"/>
+<circle cx="60" cy="116" r="9" fill="#e07a4a"/>
+<text x="88" y="112" font-size="13" font-weight="700" fill="#818898">AUGUST 2023</text>
+<text x="88" y="134" font-size="16" font-weight="700" fill="#0d0d12">FAQPage - rich result only for</text>
+<text x="88" y="154" font-size="16" font-weight="700" fill="#0d0d12">government and health sites</text>
+<circle cx="60" cy="190" r="9" fill="#e07a4a"/>
+<text x="88" y="186" font-size="13" font-weight="700" fill="#818898">SEPTEMBER 2023</text>
+<text x="88" y="208" font-size="16" font-weight="700" fill="#0d0d12">HowTo - rich result fully deprecated</text>
+<circle cx="60" cy="252" r="9" fill="#e07a4a"/>
+<text x="88" y="248" font-size="13" font-weight="700" fill="#818898">JUNE 2025</text>
+<text x="88" y="270" font-size="16" font-weight="700" fill="#0d0d12">Phase-out of 7 types announced</text>
+<text x="88" y="290" font-size="14" fill="#36394a">Book Actions, Course Info, Claim Review, Estimated Salary,</text>
+<text x="88" y="308" font-size="14" fill="#36394a">Learning Video, Special Announcement, Vehicle Listing</text>
+<circle cx="60" cy="344" r="9" fill="#8b93a3"/>
+<text x="88" y="340" font-size="13" font-weight="700" fill="#818898">SEPTEMBER 2025</text>
+<text x="88" y="362" font-size="16" font-weight="700" fill="#0d0d12">6 of them removed from Search Console reports</text>
+<text x="88" y="382" font-size="14" fill="#36394a">and from the Rich Results Test</text>
+<text x="616" y="408" text-anchor="end" font-size="13" font-weight="700" fill="#0b7983">CitationOne</text>
+</svg>

@@ -73,7 +73,7 @@ The primary keyword is usually the one with the highest search volume or the one
 
 This example shows clustering on real Google results. We pulled the results for 8 heat pump keywords (United States, English, November 2026) and counted the shared URLs in the top 5. Google returned 6 to 9 organic results on the first page for these keywords.
 
-<figure><img src="/blog/en/keyword-clustering-matrix.svg" alt="Matrix of shared top 5 results for 8 heat pump keywords. Price and how much does it cost share 3 results, price and installation cost 3, how much does it cost and installation cost 2, is it worth it and reviews 2, is it worth it and for old house 1, reviews and for old house 1, and all other pairs 0." width="640" height="640" loading="lazy" decoding="async"><figcaption>Three cost keywords form a cluster, while the other five need separate articles. Source: US Google results pulled in November 2026, CitationOne analysis.</figcaption></figure>
+<figure data-chart="klasteryzacja-en"></figure>
 
 | Keyword pair | Shared in top 5 | Shared in top 10 |
 |---|---|---|
@@ -105,7 +105,7 @@ A content plan assigns one article to each cluster, so **one cluster means one a
 - **The total search volume of all keywords** in the cluster, and not only the primary keyword.
 - **How close the cluster is to your offer**, because the "how much does a heat pump cost" cluster attracts people closer to buying than "how does a heat pump work".
 
-When several clusters belong to one broad topic, plan them as a topic cluster. The broad topic gets a pillar page that answers in general terms and links to the detailed articles, and every detailed article links back to the pillar. The [internal linking](/tools/internal-linking) tool prepares suggestions for such links on an existing site.
+When several clusters belong to one broad topic, plan them as a topic cluster. The broad topic gets a pillar page that answers in general terms and links to the detailed articles, and every detailed article links back to the pillar. We explain how to set link directions and choose anchors in [How to build an internal linking strategy](/blog/internal-linking-strategy). The [internal linking](/tools/internal-linking) tool prepares suggestions for such links on an existing site.
 
 Before you write a new article, check whether your site already has a page for that cluster. If it does, it is better to update it than to create a second one. We explain how in [How to update old blog posts for SEO and AI](/blog/how-to-update-old-blog-posts).
 

@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { Marked, type Token, type Tokens } from 'marked';
 import { BLOG_POSTS, type BlogLang } from '@/data/blog';
+import { renderChart } from '@/lib/blogCharts';
 
 // Tresc wpisow bloga: `content/blog/<lang>/<slug>.md` -> HTML w czasie builda (static export).
 // Pliki pisze zespol w repo, wiec HTML z Markdowna jest zaufany i nie przechodzi sanitizacji.
@@ -198,6 +199,14 @@ function render(markdown: string, lang: BlogLang): { html: string; toc: TocItem[
       if (m) {
         const title = m[1].trim() ? (marked.parseInline(m[1].trim()) as string) : KEY_TITLE[lang];
         out.push(htmlToken(keyBox(title, marked.parse(m[2], { async: false }) as string)));
+        continue;
+      }
+    }
+    // Wykres z danymi: `<figure data-chart="id"></figure>` -> inline SVG z src/data/blogCharts.ts.
+    if (tok.type === 'html') {
+      const ch = tok.raw.trim().match(/^<figure data-chart="([a-z0-9-]+)"><\/figure>$/);
+      if (ch) {
+        out.push(htmlToken(renderChart(ch[1], lang)));
         continue;
       }
     }

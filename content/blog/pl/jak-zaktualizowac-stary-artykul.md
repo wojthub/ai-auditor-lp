@@ -3,7 +3,7 @@
 Najważniejsze informacje w skrócie:
 
 - odświeżanie najwięcej daje przy tekstach z pozycji 4-15, które Google już zna i które są blisko pierwszej piątki,
-- w naszej analizie 996 polskich SERP-ów strona z 1. pozycji była cytowana w AI Overview w **59,9% przypadków**, a z 5. pozycji w 35,3%, więc awans o kilka miejsc wyraźnie zwiększa szansę na cytowanie,
+- w naszej analizie 1131 polskich SERP-ów strona z 1. pozycji była cytowana w AI Overview w **62,0% przypadków**, a z 5. pozycji w 36,8%, więc awans o kilka miejsc wyraźnie zwiększa szansę na cytowanie,
 - Google w wytycznych o pomocnych treściach pyta wprost, czy zmieniasz datę strony, żeby wyglądała na świeżą, **mimo że treść się istotnie nie zmieniła**,
 - przy odświeżaniu pod AI najważniejsze są odpowiedź na początku każdej sekcji, aktualne liczby ze źródłami i pytania poboczne, których dziś brakuje,
 - adres URL zostaje bez zmian, bo zachowuje historię strony i linki prowadzące do niej,
@@ -37,7 +37,7 @@ Najlepsi kandydaci do aktualizacji to stare artykuły, które Google już zna, a
 - teksty z dużą liczbą wyświetleń i niskim CTR,
 - teksty na tematy, które często pojawiają się w pytaniach do AI, takie jak „jak…”, „ile kosztuje…”, „czym się różni…”.
 
-Dlaczego akurat pozycje 4-15? Bo w naszej analizie polskich wyników szansa na cytowanie w AI Overview spada najszybciej w pierwszej piątce - z 59,9% na 1. pozycji do 35,3% na 5. Przesunięcie tekstu z 8. na 3. miejsce zmienia więc nie tylko ruch z wyników, ale też szansę na obecność w Przeglądzie od AI. To korelacja z danych z audytów w CitationOne, a nie dowód przyczyny.
+Dlaczego akurat pozycje 4-15? Bo w naszej analizie polskich wyników szansa na cytowanie w AI Overview spada najszybciej w pierwszej piątce - z 62,0% na 1. pozycji do 36,8% na 5. Przesunięcie tekstu z 8. na 3. miejsce zmienia więc nie tylko ruch z wyników, ale też szansę na obecność w Przeglądzie od AI. To korelacja z danych z audytów w CitationOne, a nie dowód przyczyny.
 
 ## Proces odświeżania krok po kroku
 
@@ -154,4 +154,4 @@ Odśwież stary tekst, jeśli intencja frazy się nie zmieniła, a strona ma ju�
 - Google Search Central, [Add a Byline Date to Google Search Results](https://developers.google.com/search/docs/appearance/publication-dates), dostęp 2026-11-10,
 - Google Search Central, [AI features and your website](https://developers.google.com/search/docs/appearance/ai-features), dostęp 2026-11-10,
 - OpenAI Help Center, [Publishers and developers FAQ](https://help.openai.com/en/articles/12627856), dostęp 2026-11-10,
-- CitationOne, analiza 996 polskich SERP-ów z AI Overview z audytów w CitationOne, szczegóły w artykule [Jak pojawić się w AI Overviews](/pl/blog/jak-pojawic-sie-w-ai-overviews).
+- CitationOne, analiza 1131 polskich SERP-ów z AI Overview z audytów w CitationOne, szczegóły w artykule [Jak pojawić się w AI Overviews](/pl/blog/jak-pojawic-sie-w-ai-overviews).

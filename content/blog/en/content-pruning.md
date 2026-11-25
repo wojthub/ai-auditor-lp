@@ -112,7 +112,7 @@ Each decision in the matrix has its own technical implementation, described in G
 - **Noindex** in the robots meta tag or the X-Robots-Tag HTTP header keeps a page out of the results while it stays available to users. Google has to be able to fetch the page, though, so do not block it in robots.txt at the same time.
 - **A redirect to the homepage** in place of a page on a similar topic does not answer the question the user came with, so always choose the closest related URL.
 
-After rolling out, remove the deleted URLs from your sitemap and fix internal links. The [internal linking](/tools/internal-linking) tool prepares suggestions for new links between the pages that remain.
+After rolling out, remove the deleted URLs from your sitemap and fix internal links so they point straight to the final URLs, as described in our guide to [building an internal linking strategy](/blog/internal-linking-strategy). The [internal linking](/tools/internal-linking) tool prepares suggestions for new links between the pages that remain.
 
 ## Content pruning and AI answers
 

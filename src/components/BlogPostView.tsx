@@ -1,8 +1,9 @@
 import { APP_URL } from '@/lib/appUrl';
-import type { BlogLang, BlogPost, BlogPostLang } from '@/data/blog';
+import { featuredBlogPosts, type BlogLang, type BlogPost, type BlogPostLang } from '@/data/blog';
 import type { RenderedPost } from '@/lib/blog';
 import { BLOG_COPY, AUTHOR_URL, formatDate } from '@/components/BlogCopy';
 import { BlogSideCta, BlogBottomBar } from '@/components/BlogStickyCta';
+import BlogChartTips from '@/components/BlogChartTips';
 
 // Shared - pojedynczy wpis bloga PL (/pl/blog/[slug]) i EN (/blog/[slug]). Komponent serwerowy:
 // HTML tresci powstaje z Markdowna w czasie builda (src/lib/blog.ts).
@@ -132,9 +133,10 @@ export default function BlogPostView({
           <a href={c.base} style={{ fontSize: 14.5, fontWeight: 600, color: ACCENT, textDecoration: 'none' }}>← {c.back}</a>
         </p>
       </div>
-      <BlogSideCta lang={lang} />
+      <BlogSideCta lang={lang} featured={featuredBlogPosts(lang, t.slug)} />
       </div>
       <BlogBottomBar lang={lang} />
+      {rendered.html.includes('class="blog-chart"') && <BlogChartTips />}
 
       <style>{`
         /* globals.css daje html/body overflow-x: hidden - to robi z body kontener przewijania i wylacza
@@ -212,6 +214,20 @@ export default function BlogPostView({
         .blog-prose pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
         .blog-prose img { max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #eceff3; }
         .blog-prose figure { margin-left: 0; margin-right: 0; }
+        /* Wykresy z danymi (src/lib/blogCharts.ts): uklad szeroki do 560 px kolumny, ponizej waski. */
+        .blog-prose .blog-chart { margin-left: 0; margin-right: 0; }
+        .blog-prose .bc-svg { display: block; width: 100%; height: auto; border: 1px solid #eceff3; border-radius: 12px; background: #fff; }
+        .blog-prose .bc-svg.bc-narrow { display: none; }
+        @media (max-width: 560px) {
+          .blog-prose .bc-svg.bc-wide { display: none; }
+          .blog-prose .bc-svg.bc-narrow { display: block; }
+        }
+        .blog-prose .bc-mark { cursor: default; outline: none; }
+        .blog-prose .bc-mark .bc-fill { transition: opacity 0.12s ease; }
+        .blog-prose .bc-svg:has(.bc-mark.is-active) .bc-mark:not(.is-active) .bc-fill { opacity: 0.45; }
+        .blog-prose .bc-mark:focus-visible .bc-fill { stroke: #0d0d12; stroke-width: 2; }
+        .bc-tip { position: fixed; left: 0; top: 0; z-index: 60; pointer-events: none; opacity: 0; transition: opacity 0.12s ease; background: #0d0d12; color: #fff; font-size: 13.5px; font-weight: 600; line-height: 1.35; padding: 7px 11px; border-radius: 8px; max-width: 260px; box-shadow: 0 6px 18px -8px rgba(13,13,18,0.5); }
+        @media (prefers-reduced-motion: reduce) { .bc-tip, .blog-prose .bc-mark .bc-fill { transition: none; } }
         .blog-prose figcaption { font-size: 14px; color: #666d80; text-align: center; margin-top: 8px; line-height: 1.5; }
         /* Osadzenia wklejone jako HTML (YouTube, Loom, wideo) - zawsze pelna szerokosc kolumny, proporcja 16:9. */
         .blog-prose iframe, .blog-prose video { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; border-radius: 12px; background: #0f1720; }

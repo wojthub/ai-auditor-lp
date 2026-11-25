@@ -14,7 +14,7 @@ import { BLOG_COPY } from '@/components/BlogCopy';
 
 const ACCENT = '#0b7983';
 
-export function BlogSideCta({ lang }: { lang: BlogLang }) {
+export function BlogSideCta({ lang, featured = [] }: { lang: BlogLang; featured?: { slug: string; title: string }[] }) {
   const c = BLOG_COPY[lang];
   return (
     <aside className="blog-side" aria-label={c.ctaTitle}>
@@ -25,7 +25,25 @@ export function BlogSideCta({ lang }: { lang: BlogLang }) {
           {c.cta} →
         </a>
       </div>
+      {featured.length > 0 && (
+        <nav className="blog-side-featured" aria-label={c.featured}>
+          <p className="blog-side-featured-title">{c.featured}</p>
+          <ul>
+            {featured.map((f) => (
+              <li key={f.slug}>
+                <a href={`${c.base}/${f.slug}`}>{f.title}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
       <style>{`
+        .blog-side-featured { margin-top: 24px; padding: 0 4px; }
+        .blog-side-featured-title { font-size: 12px; font-weight: 700; color: #818898; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 10px; }
+        .blog-side-featured ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+        .blog-side-featured li + li { border-top: 1px solid #eceff3; }
+        .blog-side-featured a { display: block; padding: 10px 0; font-size: 14.5px; font-weight: 600; line-height: 1.4; color: #1a1d29; text-decoration: none; }
+        .blog-side-featured a:hover { color: ${ACCENT}; }
         .blog-side { display: none; }
         @media (min-width: 1180px) {
           .blog-side { display: block; position: sticky; top: 96px; align-self: start; }

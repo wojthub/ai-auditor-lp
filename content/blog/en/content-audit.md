@@ -3,7 +3,7 @@
 Key takeaways:
 
 - **A content audit differs from an SEO audit**, because the SEO audit checks the technical side of the site, while the content audit checks the quality and completeness of the text itself.
-- Across 4,540 Polish audits in CitationOne, **the median content quality score (CQS) was 56.7 out of 100**, and only **0.9% of pages** passed the 75-point threshold.
+- Across 4,740 Polish audits in CitationOne, **the median content quality score (CQS) was 56.7 out of 100**, and only **0.9% of pages** passed the 75-point threshold.
 - The weakest areas are **chunk optimization, knowledge graph, cost of retrieval and BLUF**, the qualities that decide whether AI can lift a passage from the text.
 - An audit for AI answers extends the classic content audit, because AI systems cite individual sections and not whole pages.
 - The output of an audit is a list of specific fixes for sections, not a general score for the page.
@@ -46,11 +46,11 @@ Check **information gain** as a separate factor, meaning what unique data or per
 
 ## The most common content weaknesses in our audits
 
-We counted the most common problems across **4,540 audits of Polish pages in CitationOne**. Each dimension is scored on a 0-10 scale, and CQS (Content Quality Score) combines them into a 0-100 score. The median CQS was **56.7**, and 23.8% of pages scored below 50. CitationOne treats 75 points as the threshold for content ready to compete for citations, and 0.9% of pages passed it. The sample comes from the Polish market, but the weaknesses it shows are about structure, not language.
+We counted the most common problems across **4,740 audits of Polish pages in CitationOne**. Each dimension is scored on a 0-10 scale, and CQS (Content Quality Score) combines them into a 0-100 score. The median CQS was **56.7**, and 23.9% of pages scored below 50. CitationOne treats 75 points as the threshold for content ready to compete for citations, and 0.9% of pages passed it. The sample comes from the Polish market, but the weaknesses it shows are about structure, not language.
 
-<figure><img src="/blog/en/content-audit-weak-dimensions.svg" alt="Bar chart of average dimension scores in 4,540 Polish audits, on a 0-10 scale. Chunk optimization 5.13, knowledge graph 5.18, cost of retrieval 5.40, BLUF 5.48, information density 5.82, fan-out coverage 5.83, effort score 5.92, TF-IDF 6.15, semantic roles 6.21, CSI alignment 6.47." width="640" height="524" loading="lazy" decoding="async"><figcaption>The weakest qualities are the ones that decide whether AI cites a passage. Source: 4,540 audits of Polish pages in CitationOne.</figcaption></figure>
+<figure data-chart="audyt-wymiary"></figure>
 
-The order is the interesting part. **Intent alignment scores best (6.47 on average)**, while chunk optimization (5.13) and knowledge graph (5.18) score worst. Most pages hit the topic but write about it in a way that makes it hard to lift a self-contained passage with a specific fact. Almost one page in three scores below 5 on these two dimensions.
+The order is the interesting part. **Intent alignment scores best (6.45 on average)**, while chunk optimization (5.13) and knowledge graph (5.21) score worst. Most pages hit the topic but write about it in a way that makes it hard to lift a self-contained passage with a specific fact. Almost one page in three scores below 5 on these two dimensions.
 
 In my view, this is the most important lesson for anyone auditing content for AI. Classic SEO taught us to match intent, but not to write sections that stand on their own. That is exactly the gap the data shows, and it is where your fixes should start.
 
@@ -182,4 +182,4 @@ At CitationOne, a CQS of 75 or more means content ready to compete for citations
 - Google Search Central, [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content), accessed 2026-11-15.
 - Google Search Central, [AI features and your website](https://developers.google.com/search/docs/appearance/ai-features), accessed 2026-11-15.
 - Search Console Help, [Performance report](https://support.google.com/webmasters/answer/7576553?hl=en), accessed 2026-11-15.
-- CitationOne, analysis of 4,540 audits of Polish pages in CitationOne (CQS scores and dimension scores).
+- CitationOne, analysis of 4,740 audits of Polish pages in CitationOne (CQS scores and dimension scores).

@@ -44,7 +44,7 @@ Systemy AI wybierają źródła w trzech etapach. Najpierw wyszukują strony w i
 
 <figure><img src="/blog/pl/jak-ai-wybiera-zrodla.svg" alt="Schemat trzech etapów wyboru źródeł przez AI: wyszukiwanie w indeksie, także na pytania poboczne, wybór fragmentów odpowiadających na pytanie i synteza odpowiedzi z linkami. Warunki to strona w indeksie dostępna dla robota i sekcja zrozumiała po wycięciu z tekstu." width="640" height="560" loading="lazy" decoding="async"><figcaption>Do odpowiedzi AI trafia fragment, więc każdy etap ma swój warunek po stronie Twojej strony.</figcaption></figure>
 
-Wynikają z tego dwie praktyczne konsekwencje. **Strona musi być w indeksie i dostępna dla robota danego systemu**, bo bez tego nie bierze udziału w pierwszym etapie. Do odpowiedzi trafia też fragment, więc sekcja z odpowiedzią powinna być zrozumiała po wycięciu z artykułu.
+Wynikają z tego dwie praktyczne konsekwencje. **Strona musi być w indeksie i dostępna dla robota danego systemu**, bo bez tego nie bierze udziału w pierwszym etapie. Do indeksu strony trafiają głównie po linkach, dlatego podstawą jest przemyślane [linkowanie wewnętrzne](/pl/blog/linkowanie-wewnetrzne). Do odpowiedzi trafia też fragment, więc sekcja z odpowiedzią powinna być zrozumiała po wycięciu z artykułu.
 
 Warto przy tym dodać, że Google wprost pisze, że nie trzeba dzielić treści na drobne kawałki. Wystarczy, że każda sekcja zaczyna się od odpowiedzi i nazywa temat wprost. Jak sprawdzać te cechy tekstu, opisujemy w wymiarach [samodzielność sekcji](/pl/wymiary/optymalizacja-chunkow) i [pokrycie Fan-Out i AIO](/pl/wymiary/pokrycie-fan-out).
 
@@ -63,11 +63,11 @@ GEO rozszerza SEO o nowy cel, czyli **cytowanie w odpowiedzi AI**. Fundament zos
 | Co działa | Dopasowanie do intencji, linki, technika, jakość treści | To samo plus fakty, źródła, cytaty i odpowiedzi na pytania poboczne |
 | Pomiar | Pozycje, ruch, CTR | Cytowania i wzmianki w odpowiedziach AI, ruch z odpowiedzi AI |
 
-Google stawia sprawę jasno. W poradniku o optymalizacji pod funkcje generatywnej AI pisze, że z perspektywy wyszukiwarki taka optymalizacja **„to nadal SEO”**. Do pojawienia się w AI Overviews i AI Mode nie są potrzebne dodatkowe wymagania techniczne. Strona musi być zaindeksowana i kwalifikować się do wyświetlenia z fragmentem opisu, a pliki typu llms.txt i specjalne znaczniki schema.org nie są do tego potrzebne.
+Google stawia sprawę jasno. W poradniku o optymalizacji pod funkcje generatywnej AI pisze, że z perspektywy wyszukiwarki taka optymalizacja **„to nadal SEO”**. Do pojawienia się w AI Overviews i AI Mode nie są potrzebne dodatkowe wymagania techniczne. Strona musi być zaindeksowana i kwalifikować się do wyświetlenia z fragmentem opisu, a pliki typu llms.txt i specjalne znaczniki schema.org nie są do tego potrzebne. Co z tego wynika w praktyce, opisujemy w poradniku [jak pojawić się w AI Overviews](/pl/blog/jak-pojawic-sie-w-ai-overviews).
 
 „Skoro Google mówi, że to nadal SEO, po co osobna nazwa?”
 
-Bo Google mówi o swoich funkcjach. ChatGPT, Perplexity i Copilot mają własne roboty i własne sposoby wyboru źródeł. OpenAI pisze w dokumentacji, że strony blokujące robota OAI-SearchBot **nie są pokazywane w odpowiedziach wyszukiwania ChatGPT**, a robot GPTBot zbiera dane do trenowania modeli i nie wpływa na widoczność w wyszukiwaniu.
+Bo Google mówi o swoich funkcjach. ChatGPT, Perplexity i Copilot mają własne roboty i własne sposoby wyboru źródeł. OpenAI pisze w dokumentacji, że strony blokujące robota OAI-SearchBot **nie są pokazywane w odpowiedziach wyszukiwania ChatGPT**, a robot GPTBot zbiera dane do trenowania modeli i nie wpływa na widoczność w wyszukiwaniu. Pozostałe warunki opisujemy w artykule [jak być widocznym w ChatGPT](/pl/blog/jak-byc-widocznym-w-chatgpt).
 
 Mało tego, ten sam poradnik Google zachęca do treści, której nie da się znaleźć wszędzie indziej - opartej na własnej wiedzy, doświadczeniu i danych. Badanie z Princeton prowadzi do podobnego wniosku z drugiej strony, bo najlepiej wypadały teksty z faktami i źródłami.
 
@@ -87,7 +87,7 @@ Pierwsze zdania strony i każdej sekcji odpowiadają na pytanie wprost. System A
 
 ### 2. Sekcje zrozumiałe samodzielnie
 
-Każda sekcja nazywa temat wprost i nie odwołuje się do „tego, co powyżej”. System AI cytuje fragment, a nie cały artykuł, więc akapit wycięty z tekstu musi nadal mieć sens. W praktyce oznacza to powtórzenie nazwy tematu w pierwszym zdaniu sekcji zamiast zaimków typu „to” czy „ten sposób”.
+Każda sekcja nazywa temat wprost i nie odwołuje się do „tego, co powyżej”. System AI cytuje fragment, a nie cały artykuł, więc akapit wycięty z tekstu musi nadal mieć sens. W praktyce oznacza to powtórzenie nazwy tematu w pierwszym zdaniu sekcji zamiast zaimków typu „to” czy „ten sposób”. Przykłady takich zmian w tekście są w poradniku [jak pisać treści pod AI](/pl/blog/jak-pisac-tresci-pod-ai).
 
 ### 3. Konkretne fakty
 
@@ -127,7 +127,7 @@ Efekty GEO mierzy się częstotliwością cytowań i wzmianek w odpowiedziach AI
 3. Zapisz, czy Twoja strona lub marka pojawia się w odpowiedzi i w źródłach.
 4. Powtarzaj pomiar co kilka tygodni.
 
-Ta metoda ma ograniczenia. Odpowiedzi AI bywają różne przy kolejnych pytaniach, zależą od lokalizacji i historii użytkownika, a ręczne sprawdzanie kilkudziesięciu fraz zajmuje godziny. Ruch z AI Overviews i AI Mode Google wlicza do raportu skuteczności w Search Console, w typie wyszukiwania „Internet”.
+Ta metoda ma ograniczenia. Odpowiedzi AI bywają różne przy kolejnych pytaniach, zależą od lokalizacji i historii użytkownika, a ręczne sprawdzanie kilkudziesięciu fraz zajmuje godziny. Ruch z AI Overviews i AI Mode Google wlicza do raportu skuteczności w Search Console, w typie wyszukiwania „Internet”. Wszystkie metody pomiaru, od GA4 po logi serwera, opisujemy w poradniku [jak sprawdzić widoczność strony w AI](/pl/blog/widocznosc-w-ai).
 
 Warto też pamiętać o zastrzeżeniu Google, że **żadne zewnętrzne narzędzie nie ma dostępu do wewnętrznych systemów rankingowych** wyszukiwarki. Narzędzia do GEO pokazują to, co da się zmierzyć z zewnątrz - co AI faktycznie cytuje i czym Twoja treść różni się od cytowanych stron.
 

@@ -108,7 +108,7 @@ Widoczność w ChatGPT sprawdzisz, zadając mu pytania, które zadają Twoi klie
 3. Zapisz, czy Twoja strona jest w źródłach, czy marka pada w tekście i kto pojawia się zamiast Ciebie.
 4. Powtórz test po kilku tygodniach i po każdej większej zmianie na stronie.
 
-Ten test ma ograniczenia. Wynik zależy od lokalizacji, pamięci i historii rozmowy, a ta sama prośba potrafi dać różne źródła przy kolejnych próbach. Przy kilkudziesięciu frazach ręczne sprawdzanie zajmuje też godziny.
+Ten test ma ograniczenia. Wynik zależy od lokalizacji, pamięci i historii rozmowy, a ta sama prośba potrafi dać różne źródła przy kolejnych próbach. Przy kilkudziesięciu frazach ręczne sprawdzanie zajmuje też godziny. Pozostałe metody - ruch w GA4, logi serwera i raport w Bing - opisujemy w poradniku [jak sprawdzić widoczność strony w AI](/pl/blog/widocznosc-w-ai).
 
 [Audyt CitationOne](/pl/jak-to-dziala) sprawdza, czy odpowiedź ChatGPT dla wybranej frazy cytuje Twoją stronę, i porównuje Twój tekst z TOP 10 w [10 wymiarach jakości treści i E-E-A-T](/pl/wymiary). Dostajesz listę poprawek do konkretnych sekcji, w tym do pytań pobocznych, które warto pokryć według [pokrycia Fan-Out i AIO](/pl/wymiary/pokrycie-fan-out).
 

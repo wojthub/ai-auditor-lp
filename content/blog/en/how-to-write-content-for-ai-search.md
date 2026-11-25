@@ -111,7 +111,7 @@ A number without a unit or date says little, and a number without a source raise
 
 A short quotation with the person's name and role gives your text evidence and an outside voice. In the Princeton study, **adding quotations** gave the highest score of all the changes tested, 27.8 points against 19.5 for the unchanged text.
 
-<figure><img src="/blog/en/geo-study-results.svg" alt="Bar chart from the GEO study. Visibility score in the AI answer after adding quotations 27.8, statistics 25.9 and source citations 24.9, against 19.5 for unchanged text and 17.8 after keyword stuffing." width="640" height="380" loading="lazy" decoding="async"><figcaption>Quotations, statistics and sources raise visibility, while keyword stuffing lowers it. Source: Aggarwal et al., GEO - Generative Engine Optimization, KDD 2024.</figcaption></figure>
+<figure data-chart="badanie-geo"></figure>
 
 > [!REMEMBER]
 > In the GEO study, quotations, statistics and sources raised visibility the most. Keyword stuffing lowered it.

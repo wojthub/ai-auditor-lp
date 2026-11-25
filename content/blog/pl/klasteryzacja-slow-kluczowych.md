@@ -70,7 +70,7 @@ Frazą główną zostaje zwykle fraza o największym wolumenie albo najlepiej op
 
 Przykład pokazuje klasteryzację na prawdziwych wynikach Google. Pobraliśmy wyniki dla 8 fraz o pompach ciepła (Polska, język polski, listopad 2026) i policzyliśmy wspólne adresy w TOP 5. Google zwrócił dla tych fraz od 6 do 9 wyników organicznych na pierwszej stronie.
 
-<figure><img src="/blog/pl/klasteryzacja-macierz-wynikow.svg" alt="Macierz wspólnych wyników w TOP 5 dla 8 fraz o pompach ciepła. Pompa ciepła cena i ile kosztuje pompa ciepła mają 3 wspólne wyniki, ile kosztuje pompa ciepła i koszt montażu 4, cena i koszt montażu 2, czy pompa ciepła się opłaca i opinie 1, pozostałe pary 0." width="640" height="640" loading="lazy" decoding="async"><figcaption>Trzy frazy o koszcie tworzą klaster, a pozostałe pięć wymaga osobnych tekstów. Źródło: wyniki Google dla Polski pobrane w listopadzie 2026, analiza CitationOne.</figcaption></figure>
+<figure data-chart="klasteryzacja-pl"></figure>
 
 | Para fraz | Wspólne w TOP 5 | Wspólne w TOP 10 |
 |---|---|---|
@@ -99,7 +99,7 @@ Plan treści przypisuje do każdego klastra jeden tekst - **jeden klaster to jed
 - **suma wolumenu wszystkich fraz** w klastrze, a nie samej frazy głównej,
 - **bliskość klastra do oferty**, bo klaster „ile kosztuje pompa ciepła” przyciąga osoby bliżej zakupu niż „jak działa pompa ciepła”.
 
-Gdy kilka klastrów dotyczy jednego szerokiego tematu, zaplanuj je jako klaster tematyczny. Szeroki temat dostaje stronę filarową, która odpowiada ogólnie i linkuje do tekstów szczegółowych, a każdy tekst szczegółowy linkuje z powrotem do filaru. Propozycje takich połączeń w istniejącym serwisie przygotuje narzędzie [linki wewnętrzne](/pl/narzedzia/linki-wewnetrzne).
+Gdy kilka klastrów dotyczy jednego szerokiego tematu, zaplanuj je jako klaster tematyczny. Szeroki temat dostaje stronę filarową, która odpowiada ogólnie i linkuje do tekstów szczegółowych, a każdy tekst szczegółowy linkuje z powrotem do filaru. Jak ustalić kierunki linków i dobrać anchory, opisujemy w poradniku [Linkowanie wewnętrzne - jak je zaplanować](/pl/blog/linkowanie-wewnetrzne). Propozycje takich połączeń w istniejącym serwisie przygotuje narzędzie [linki wewnętrzne](/pl/narzedzia/linki-wewnetrzne).
 
 Przed napisaniem nowego tekstu sprawdź, czy serwis nie ma już strony na ten klaster. Jeśli ma, lepiej ją zaktualizować, niż tworzyć drugą - jak to zrobić, opisujemy w artykule [Jak zaktualizować stary artykuł pod SEO i AI](/pl/blog/jak-zaktualizowac-stary-artykul).
 

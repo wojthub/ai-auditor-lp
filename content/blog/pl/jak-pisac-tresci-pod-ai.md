@@ -111,7 +111,7 @@ Liczba bez jednostki i daty niewiele mówi, a liczba bez źródła budzi wątpli
 
 Krótki cytat z nazwiskiem i rolą osoby daje tekstowi dowód i głos z zewnątrz. W badaniu z Princeton **dodanie cytatów** dało najwyższy wynik ze wszystkich testowanych zmian - 27,8 punktu wobec 19,5 dla tekstu bez zmian.
 
-<figure><img src="/blog/pl/badanie-geo-wyniki.svg" alt="Wykres słupkowy z badania GEO: wynik widoczności w odpowiedzi AI po dodaniu cytatów 27,8, statystyk 25,9 i odwołań do źródeł 24,9, wobec 19,5 dla tekstu bez zmian i 17,8 po upychaniu słów kluczowych." width="640" height="380" loading="lazy" decoding="async"><figcaption>Cytaty, statystyki i źródła podnoszą widoczność, a upychanie słów kluczowych ją obniża. Źródło: Aggarwal i in., GEO - Generative Engine Optimization, KDD 2024.</figcaption></figure>
+<figure data-chart="badanie-geo"></figure>
 
 > [!ZAPAMIETAJ]
 > Cytaty, statystyki i źródła to trzy zmiany, które w badaniu GEO najbardziej podniosły widoczność. Upychanie słów kluczowych ją obniżyło.

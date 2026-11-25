@@ -117,7 +117,7 @@ You check your visibility in ChatGPT by asking it the questions your customers a
 4. Ask each question 2-3 times, because answers vary between attempts, and record how many attempts cite you.
 5. Repeat the test after a few weeks and after every major change to your site.
 
-This test has limits. The result depends on location, memory and conversation history, and the same prompt can return different sources on different attempts. Checking dozens of queries by hand also takes hours.
+This test has limits. The result depends on location, memory and conversation history, and the same prompt can return different sources on different attempts. Checking dozens of queries by hand also takes hours. We cover the other methods, from GA4 traffic to server logs and the Bing report, in [how to track AI visibility](/blog/how-to-track-ai-visibility).
 
 The [CitationOne audit](/how-it-works) checks whether ChatGPT's answer for a chosen keyword cites your page and compares your text with the top 10 on [10 content quality dimensions plus E-E-A-T](/dimensions). You get a list of fixes for specific sections, including follow-up questions worth covering according to [fan-out and AIO coverage](/dimensions/query-fan-out).
 

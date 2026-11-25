@@ -4,8 +4,8 @@ Key takeaways:
 
 - Google says that AI Overviews and AI Mode have **no additional technical requirements** beyond being indexed and eligible for a snippet.
 - Since August 31, 2026, Search Console has offered a worldwide "Search generative AI" setting that lets you exclude your site from AI Overviews, AI Mode and Discover.
-- In our analysis of 996 Polish search results pages, the page in 1st place was cited in the AI Overview **59.9% of the time**, against an average of 40.7% across the top 10.
-- The chance of being cited drops fastest within the top 5, and in positions 6-10 it holds at **about 28-33%**.
+- In our analysis of 1,131 Polish search results pages, the page in 1st place was cited in the AI Overview **62.0% of the time**, against an average of 42.6% across the top 10.
+- The chance of being cited drops fastest within the top 5, and in positions 6-10 it holds at **about 27-36%**.
 - AI Overviews and AI Mode use query fan-out (splitting a question into many related searches), so a page can reach the answer through a follow-up question.
 - According to Google, clicks from results pages with AI Overviews are of higher quality, because users are more likely to spend more time on the site.
 
@@ -25,24 +25,24 @@ For publishers, this means a shift in traffic. Some users get their answer witho
 
 AI Overviews take their sources from Google's index, and Google says that the same SEO fundamentals apply to AI features as to regular results. It also describes how AI Overviews and AI Mode may issue multiple related searches across subtopics and data sources to gather a wider set of links than classic results.
 
-How much does ranking matter? We checked this with data from CitationOne audits, covering **996 unique Polish search results pages with an AI Overview**, as of November 10, 2026. The table shows how often the page in a given position was cited in the AI Overview (matched by exact URL). The data comes from the Polish market, so treat it as a reference point and not as a figure for US results.
+How much does ranking matter? We checked this with data from CitationOne audits, covering **1,131 unique Polish search results pages with an AI Overview**, as of November 25, 2026. The table shows how often the page in a given position was cited in the AI Overview (matched by exact URL). The data comes from the Polish market, so treat it as a reference point and not as a figure for US results.
 
 | Position in the top 10 | Cited in the AI Overview |
 |---|---|
-| 1 | **59.9%** |
-| 2 | 52.9% |
-| 3 | 46.8% |
-| 4 | 40.8% |
-| 5 | 35.3% |
-| 6 | 33.2% |
-| 7 | 32.9% |
-| 8 | 28.6% |
-| 9 | 27.8% |
-| 10 | 28.9% |
+| 1 | **62.0%** |
+| 2 | 55.9% |
+| 3 | 49.0% |
+| 4 | 43.9% |
+| 5 | 36.8% |
+| 6 | 35.7% |
+| 7 | 33.9% |
+| 8 | 29.7% |
+| 9 | 28.4% |
+| 10 | 27.0% |
 
-<figure><img src="/blog/en/aio-position-vs-citation.svg" alt="Bar chart of the share of search results pages in which the page in a given position was cited in the AI Overview. Position 1 59.9%, 2 52.9%, 3 46.8%, 4 40.8%, 5 35.3%, and positions 6-10 at about 28-33%." width="640" height="430" loading="lazy" decoding="async"><figcaption>The chance of being cited drops fastest within the top 5. Source: analysis of 996 Polish search results pages from CitationOne audits, as of 2026-11-10.</figcaption></figure>
+<figure data-chart="aio-pozycja"></figure>
 
-It seems simple, the higher the better. The shape of the curve is more interesting, though. **Between positions 1 and 5, the chance drops by almost 25 percentage points**, and in positions 6-10 it barely changes. What is more, **AI Overviews cited no domain from the top 10 in 13.4% of results pages**, drawing most often on Facebook, YouTube and Reddit. Genuine answers from your experts in community discussions on such platforms can therefore also bring your brand into AI Overviews.
+It seems simple, the higher the better. The shape of the curve is more interesting, though. **Between positions 1 and 5, the chance drops by about 25 percentage points**, and in positions 6-10 it barely changes. What is more, **AI Overviews cited no domain from the top 10 in 12.2% of results pages**, drawing most often on Facebook, YouTube and Reddit. Genuine answers from your experts in community discussions on such platforms can therefore also bring your brand into AI Overviews.
 
 In my view, this is the most important takeaway for planning your work. Pages that rank in the top 5 are clearly more likely to be cited, but a page in the second half of the top 10 is still cited in roughly one in three cases. Keep in mind that this is a correlation and does not prove cause, and the queries come from CitationOne audits, so the sample reflects our users' topics.
 
@@ -69,7 +69,7 @@ According to Google, an exclusion usually takes effect within 1-2 days and **doe
 
 ### 3. Aim for the top 5
 
-Classic organic rankings still decide whether your page enters the pool of sources for AI Overviews. In our data, the citation rate falls by almost 25 percentage points between positions 1 and 5, and **the biggest gain in the chance of being cited comes from reaching positions 1-5**, so queries where you rank 6-15 are good candidates to improve first.
+Classic organic rankings still decide whether your page enters the pool of sources for AI Overviews. In our data, the citation rate falls by about 25 percentage points between positions 1 and 5, and **the biggest gain in the chance of being cited comes from reaching positions 1-5**, so queries where you rank 6-15 are good candidates to improve first.
 
 ### 4. Open every section with the answer
 
@@ -108,7 +108,7 @@ Because AI Overviews reward pages differently from rankings. Of two pages in sim
 
 Google includes traffic from AI Overviews and AI Mode in the Search Console performance report, under the "Web" search type, together with traffic from other results. That report shows the combined effect without isolating citations.
 
-You can check citations manually by searching for your queries and noting whether your page is among the links in the AI Overview. The result depends on location, though, and can vary between searches, and checking dozens of queries by hand takes hours.
+You can check citations manually by searching for your queries and noting whether your page is among the links in the AI Overview. The result depends on location, though, and can vary between searches, and checking dozens of queries by hand takes hours. To track AI visibility beyond Google as well, see [how to track AI visibility](/blog/how-to-track-ai-visibility).
 
 The [CitationOne audit](/how-it-works) checks whether there is an AI Overview for a chosen keyword and whether it cites your page. It also compares your text with the top 10 on [10 content quality dimensions plus E-E-A-T](/dimensions) and shows which follow-up questions are missing.
 
@@ -146,4 +146,4 @@ You do not need an llms.txt file. Google says its search engine does not use suc
 - Google Search Central, [Optimizing your website for generative AI features on Google Search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide), accessed 2026-11-10.
 - Search Console Help, [Search generative AI control](https://support.google.com/webmasters/answer/16908024), accessed 2026-11-10.
 - Google Search Help, [Find information in faster and easier ways with AI Overviews](https://support.google.com/websearch/answer/14901683?hl=en), accessed 2026-11-10.
-- CitationOne, analysis of 996 Polish search results pages with an AI Overview from CitationOne audits, as of 2026-11-10.
+- CitationOne, analysis of 1,131 Polish search results pages with an AI Overview from CitationOne audits, as of 2026-11-25.

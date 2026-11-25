@@ -4,8 +4,8 @@ Najważniejsze informacje w skrócie:
 
 - Google pisze, że do AI Overviews i AI Mode **nie ma dodatkowych wymagań technicznych** poza indeksem i możliwością pokazania fragmentu opisu,
 - od 31 sierpnia 2026 roku Search Console ma na całym świecie ustawienie „Search generative AI”, które pozwala wykluczyć witrynę z AI Overviews, AI Mode i Discover,
-- w naszej analizie 996 polskich SERP-ów strona z 1. pozycji była cytowana w AI Overview w **59,9% przypadków**, a średnio w TOP 10 w 40,7%,
-- szansa na cytowanie spada najszybciej w pierwszej piątce, a na pozycjach 6-10 utrzymuje się w paśmie **około 28-33%**,
+- w naszej analizie 1131 polskich SERP-ów strona z 1. pozycji była cytowana w AI Overview w **62,0% przypadków**, a średnio w TOP 10 w 42,6%,
+- szansa na cytowanie spada najszybciej w pierwszej piątce, a na pozycjach 6-10 utrzymuje się w paśmie **około 27-36%**,
 - AI Overviews i AI Mode stosują query fan-out (rozbicie pytania na wiele powiązanych wyszukiwań), więc strona może trafić do odpowiedzi przez pytanie poboczne,
 - według Google kliknięcia z wyników z AI Overviews są wyższej jakości, bo użytkownicy częściej zostają dłużej na stronie.
 
@@ -25,24 +25,24 @@ Dla wydawców oznacza to zmianę w ruchu. Część użytkowników dostaje odpowi
 
 AI Overviews bierze źródła z indeksu Google, a Google pisze, że przy funkcjach AI obowiązują te same podstawowe zasady SEO co przy zwykłych wynikach. Opisuje też, że AI Overviews i AI Mode mogą wysłać wiele powiązanych wyszukiwań w podtematach i źródłach danych, żeby zebrać szerszy zestaw linków niż klasyczne wyniki.
 
-Jak bardzo liczy się pozycja? Sprawdziliśmy to na danych z audytów w CitationOne - **996 unikalnych polskich SERP-ów z AI Overview**, stan na 10 listopada 2026 roku. Tabela pokazuje, jak często strona z danej pozycji była cytowana w AI Overview (dopasowanie po dokładnym adresie URL).
+Jak bardzo liczy się pozycja? Sprawdziliśmy to na danych z audytów w CitationOne - **1131 unikalnych polskich SERP-ów z AI Overview**, stan na 25 listopada 2026 roku. Tabela pokazuje, jak często strona z danej pozycji była cytowana w AI Overview (dopasowanie po dokładnym adresie URL).
 
 | Pozycja w TOP 10 | Cytowana w AI Overview |
 |---|---|
-| 1 | **59,9%** |
-| 2 | 52,9% |
-| 3 | 46,8% |
-| 4 | 40,8% |
-| 5 | 35,3% |
-| 6 | 33,2% |
-| 7 | 32,9% |
-| 8 | 28,6% |
-| 9 | 27,8% |
-| 10 | 28,9% |
+| 1 | **62,0%** |
+| 2 | 55,9% |
+| 3 | 49,0% |
+| 4 | 43,9% |
+| 5 | 36,8% |
+| 6 | 35,7% |
+| 7 | 33,9% |
+| 8 | 29,7% |
+| 9 | 28,4% |
+| 10 | 27,0% |
 
-<figure><img src="/blog/pl/aio-pozycja-a-cytowanie.svg" alt="Wykres słupkowy: odsetek SERP-ów, w których strona z danej pozycji była cytowana w AI Overview. Pozycja 1 - 59,9%, 2 - 52,9%, 3 - 46,8%, 4 - 40,8%, 5 - 35,3%, a pozycje 6-10 w paśmie około 28-33%." width="640" height="430" loading="lazy" decoding="async"><figcaption>Szansa na cytowanie spada najszybciej w pierwszej piątce. Źródło: analiza 996 polskich SERP-ów z audytów CitationOne, stan na 10.11.2026.</figcaption></figure>
+<figure data-chart="aio-pozycja"></figure>
 
-Wydaje się proste - im wyżej, tym lepiej. Tyle że ciekawszy jest kształt tej krzywej. **Między 1. a 5. pozycją szansa spada o prawie 25 punktów procentowych**, a na pozycjach 6-10 zmienia się już niewiele. Mało tego, **w 13,4% SERP-ów AI Overview nie cytowało żadnej domeny z TOP 10**, a najczęstszymi źródłami spoza dziesiątki były Facebook, YouTube i Reddit.
+Wydaje się proste - im wyżej, tym lepiej. Tyle że ciekawszy jest kształt tej krzywej. **Między 1. a 5. pozycją szansa spada o około 25 punktów procentowych**, a na pozycjach 6-10 zmienia się już niewiele. Mało tego, **w 12,2% SERP-ów AI Overview nie cytowało żadnej domeny z TOP 10**, a najczęstszymi źródłami spoza dziesiątki były Facebook, YouTube i Reddit.
 
 Moim zdaniem to najważniejszy wniosek dla planowania prac. Wejście do pierwszej piątki realnie zwiększa szansę na cytowanie, ale strona z drugiej połowy dziesiątki nadal jest cytowana mniej więcej w co trzecim przypadku. Pamiętajcie, że to korelacja, a nie dowód przyczyny, a frazy pochodzą z audytów w CitationOne, więc próba odzwierciedla tematy naszych użytkowników.
 
@@ -108,7 +108,7 @@ Bo AI Overviews nagradza strony inaczej niż ranking. Z dwóch stron na podobnej
 
 Ruch z AI Overviews i AI Mode Google wlicza do raportu skuteczności w Search Console, w typie wyszukiwania „Internet”, razem z ruchem z innych wyników. Ten raport pokazuje więc łączny efekt bez wydzielenia samych cytowań.
 
-Cytowania sprawdzisz ręcznie, wyszukując swoje frazy i zapisując, czy strona jest wśród linków w AI Overview. Wynik zależy jednak od lokalizacji i bywa różny przy kolejnych wyszukiwaniach, a przy kilkudziesięciu frazach ręczne sprawdzanie zajmuje godziny.
+Cytowania sprawdzisz ręcznie, wyszukując swoje frazy i zapisując, czy strona jest wśród linków w AI Overview. Wynik zależy jednak od lokalizacji i bywa różny przy kolejnych wyszukiwaniach, a przy kilkudziesięciu frazach ręczne sprawdzanie zajmuje godziny. Jak mierzyć widoczność w AI także poza Google, opisujemy w poradniku [jak sprawdzić widoczność strony w AI](/pl/blog/widocznosc-w-ai).
 
 [Audyt CitationOne](/pl/jak-to-dziala) sprawdza, czy dla wybranej frazy jest AI Overview i czy cytuje Twoją stronę. Porównuje też Twój tekst z TOP 10 w [10 wymiarach jakości treści i E-E-A-T](/pl/wymiary) i pokazuje, których pytań pobocznych brakuje.
 
@@ -138,7 +138,7 @@ Plik llms.txt nie jest potrzebny. Google pisze, że wyszukiwarka nie korzysta z 
 
 ### Czy AI Overviews działa w Polsce?
 
-AI Overviews działa w Polsce i po polsku. Polska jest na liście krajów, a polski na liście języków, w których Google udostępnia Przegląd od AI. W naszej analizie polskich wyników strona z 1. pozycji była cytowana w 59,9% SERP-ów z AI Overview.
+AI Overviews działa w Polsce i po polsku. Polska jest na liście krajów, a polski na liście języków, w których Google udostępnia Przegląd od AI. W naszej analizie polskich wyników strona z 1. pozycji była cytowana w 62,0% SERP-ów z AI Overview.
 
 ## Źródła
 
@@ -146,4 +146,4 @@ AI Overviews działa w Polsce i po polsku. Polska jest na liście krajów, a pol
 - Google Search Central, [Optimizing your website for generative AI features on Google Search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide), dostęp 2026-11-10,
 - pomoc Search Console, [Search generative AI control](https://support.google.com/webmasters/answer/16908024), dostęp 2026-11-10,
 - pomoc wyszukiwarki Google, [Przegląd od AI w wynikach wyszukiwania](https://support.google.com/websearch/answer/14901683?hl=pl), dostęp 2026-11-10,
-- CitationOne, analiza 996 polskich SERP-ów z AI Overview z audytów w CitationOne, stan na 2026-11-10.
+- CitationOne, analiza 1131 polskich SERP-ów z AI Overview z audytów w CitationOne, stan na 2026-11-25.

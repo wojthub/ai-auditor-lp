@@ -35,19 +35,67 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    id: 'dane-strukturalne',
+    date: '2026-10-30',
+    pl: {
+      slug: 'dane-strukturalne',
+      title: 'Dane strukturalne - które wdrożyć i co dają w AI',
+      description:
+        'Które dane strukturalne schema.org wdrożyć i co dają w AI? Typy dla każdego rodzaju strony, zmiany w wynikach rozszerzonych i jak znaleźć braki.',
+    },
+    en: {
+      slug: 'schema-markup',
+      title: 'Which Schema Markup to Use for SEO and AI Search',
+      description:
+        'Which schema markup to use for SEO and AI search, which rich results Google has phased out, and how to add JSON-LD and find gaps across your whole site.',
+    },
+  },
+  {
+    id: 'widocznosc-w-ai',
+    date: '2026-11-17',
+    pl: {
+      slug: 'widocznosc-w-ai',
+      title: 'Jak sprawdzić widoczność strony w AI?',
+      description:
+        'Jak sprawdzić widoczność w AI? Ręczne testy pytań, ruch z ChatGPT w GA4, raport AI Performance w Bing i logi serwera - co mierzy każda z tych metod.',
+    },
+    en: {
+      slug: 'how-to-track-ai-visibility',
+      title: 'How to Track AI Visibility Across Platforms',
+      description:
+        'How to track AI visibility with prompt tests, ChatGPT traffic in GA4, the AI Performance report in Bing and server logs, and what each method measures.',
+    },
+  },
+  {
+    id: 'linkowanie-wewnetrzne',
+    date: '2026-11-16',
+    pl: {
+      slug: 'linkowanie-wewnetrzne',
+      title: 'Linkowanie wewnętrzne - jak je zaplanować',
+      description:
+        'Jak zaplanować linkowanie wewnętrzne od klastra tematów, dobrać anchory zgodnie z wytycznymi Google i znaleźć strony, do których nie prowadzi link.',
+    },
+    en: {
+      slug: 'internal-linking-strategy',
+      title: 'How to Build an Internal Linking Strategy',
+      description:
+        'How to build an internal linking strategy from topic clusters, choose anchor text that follows Google guidelines and find orphan pages that no link reaches.',
+    },
+  },
+  {
     id: 'audyt-tresci',
     date: '2026-11-05',
     pl: {
       slug: 'audyt-tresci',
       title: 'Audyt treści SEO i GEO - jak go zrobić krok po kroku',
       description:
-        'Jak zrobić audyt treści pod Google i odpowiedzi AI? 7 kroków, checklista 10 obszarów i dane z 4540 polskich audytów o najczęstszych słabościach tekstów.',
+        'Jak zrobić audyt treści pod Google i odpowiedzi AI? 7 kroków, checklista 10 obszarów i dane z 4740 polskich audytów o najczęstszych słabościach tekstów.',
     },
     en: {
       slug: 'content-audit',
       title: 'How to Do a Content Audit for SEO and AI Search?',
       description:
-        'How to do a content audit for Google and AI answers. 7 steps, a 10-area checklist and data from 4,540 audits on the most common weaknesses of web content.',
+        'How to do a content audit for Google and AI answers. 7 steps, a 10-area checklist and data from 4,740 audits on the most common weaknesses of web content.',
     },
   },
   {
@@ -137,13 +185,13 @@ export const BLOG_POSTS: BlogPost[] = [
       slug: 'jak-pojawic-sie-w-ai-overviews',
       title: 'Jak pojawić się w AI Overviews? Poradnik dla stron',
       description:
-        'Jak trafić do AI Overviews w Google? 7 kroków, nowe ustawienie w Search Console i dane z 996 polskich SERP-ów o tym, jak pozycja wpływa na cytowania.',
+        'Jak trafić do AI Overviews w Google? 7 kroków, nowe ustawienie w Search Console i dane z 1131 polskich SERP-ów o tym, jak pozycja wpływa na cytowania.',
     },
     en: {
       slug: 'how-to-appear-in-ai-overviews',
       title: 'How to Appear in AI Overviews? A Guide for Websites',
       description:
-        'How to appear in Google AI Overviews. 7 steps, the new Search Console setting and data from 996 results pages on how your ranking affects AI Overview citations.',
+        'How to appear in Google AI Overviews. 7 steps, the new Search Console setting and data from 1,131 results pages on how ranking affects AI Overview citations.',
     },
   },
   {
@@ -180,11 +228,25 @@ export const BLOG_POSTS: BlogPost[] = [
   },
 ];
 
+/**
+ * „Najważniejsze artykuły” w panelu bocznym wpisu (pod karta CTA, od 1180 px). Kolejnosc = kolejnosc
+ * na liscie. Id pary, wiec ta sama lista dziala w PL i EN; wpis bez wersji w danym jezyku i wpis
+ * aktualnie czytany sa pomijane.
+ */
+export const FEATURED_POST_IDS: string[] = ['jak-pojawic-sie-w-ai-overviews', 'jak-byc-widocznym-w-chatgpt', 'jak-pisac-tresci-pod-ai'];
+
 /** Wpisy danego jezyka, od najnowszego. */
 export function blogPostsFor(lang: BlogLang): (BlogPost & { t: BlogPostLang })[] {
   return BLOG_POSTS.filter((p) => p[lang])
     .map((p) => ({ ...p, t: p[lang] as BlogPostLang }))
     .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+}
+
+/** Lista „Najważniejsze artykuły” dla danego jezyka, bez wpisu `excludeSlug`. */
+export function featuredBlogPosts(lang: BlogLang, excludeSlug: string): { slug: string; title: string }[] {
+  return FEATURED_POST_IDS.map((id) => BLOG_POSTS.find((p) => p.id === id)?.[lang])
+    .filter((t): t is BlogPostLang => !!t && t.slug !== excludeSlug)
+    .map((t) => ({ slug: t.slug, title: t.title }));
 }
 
 export function blogPostBySlug(lang: BlogLang, slug: string): BlogPost | undefined {

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" width="640" height="520" role="img" aria-labelledby="t d" font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+<title id="t">Jak linkować strony w klastrze tematycznym?</title>
+<desc id="d">Schemat linkowania w klastrze tematycznym. Strona główna tematu w środku linkuje do czterech stron szczegółowych, a każda strona szczegółowa linkuje z powrotem do strony głównej. Dwie strony szczegółowe, które rozwijają ten sam wątek, linkują też do siebie. Jeden link z klastra prowadzi do strony oferty.</desc>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0b7983"/></marker>
+<marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#818898"/></marker>
+</defs>
+<rect width="640" height="520" fill="#ffffff"/>
+<text x="24" y="40" font-size="21" font-weight="700" fill="#0d0d12">Jak linkować strony w klastrze tematycznym?</text>
+<text x="24" y="66" font-size="14" fill="#666d80">Strona główna tematu, strony szczegółowe i kierunki linków</text>
+<line x1="206" y1="136" x2="434" y2="136" stroke="#818898" stroke-width="2" stroke-dasharray="6 5" marker-start="url(#g)" marker-end="url(#g)"/>
+<text x="320" y="126" text-anchor="middle" font-size="13" fill="#666d80">gdy treść się łączy</text>
+<line x1="180" y1="170" x2="248" y2="228" stroke="#0b7983" stroke-width="2" marker-start="url(#a)" marker-end="url(#a)"/>
+<line x1="460" y1="170" x2="392" y2="228" stroke="#0b7983" stroke-width="2" marker-start="url(#a)" marker-end="url(#a)"/>
+<line x1="180" y1="378" x2="248" y2="308" stroke="#0b7983" stroke-width="2" marker-start="url(#a)" marker-end="url(#a)"/>
+<line x1="460" y1="378" x2="392" y2="308" stroke="#0b7983" stroke-width="2" marker-start="url(#a)" marker-end="url(#a)"/>
+<line x1="320" y1="308" x2="320" y2="452" stroke="#0b7983" stroke-width="2" marker-end="url(#a)"/>
+<text x="332" y="386" font-size="13" fill="#666d80">link do konwersji</text>
+<text x="24" y="214" font-size="13" fill="#666d80">linki w obie strony</text>
+<rect x="24" y="104" width="180" height="64" rx="12" fill="#e6f4f5"/>
+<text x="40" y="132" font-size="15" font-weight="700" fill="#0d0d12">Koszt montażu</text>
+<text x="40" y="153" font-size="13" fill="#36394a">strona szczegółowa</text>
+<rect x="436" y="104" width="180" height="64" rx="12" fill="#e6f4f5"/>
+<text x="452" y="132" font-size="15" font-weight="700" fill="#0d0d12">Dofinansowanie</text>
+<text x="452" y="153" font-size="13" fill="#36394a">strona szczegółowa</text>
+<rect x="24" y="380" width="180" height="64" rx="12" fill="#e6f4f5"/>
+<text x="40" y="408" font-size="15" font-weight="700" fill="#0d0d12">Opłacalność</text>
+<text x="40" y="429" font-size="13" fill="#36394a">strona szczegółowa</text>
+<rect x="436" y="380" width="180" height="64" rx="12" fill="#e6f4f5"/>
+<text x="452" y="408" font-size="15" font-weight="700" fill="#0d0d12">Opinie</text>
+<text x="452" y="429" font-size="13" fill="#36394a">strona szczegółowa</text>
+<rect x="210" y="230" width="220" height="76" rx="14" fill="#0b7983"/>
+<text x="320" y="263" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">Strona główna tematu</text>
+<text x="320" y="286" text-anchor="middle" font-size="13.5" fill="#e6f4f5">np. pompa ciepła</text>
+<rect x="220" y="454" width="200" height="44" rx="12" fill="#f4f7f8" stroke="#dfe1e7"/>
+<text x="320" y="482" text-anchor="middle" font-size="15" font-weight="700" fill="#0d0d12">Strona oferty</text>
+<text x="616" y="508" text-anchor="end" font-size="13" font-weight="700" fill="#0b7983">CitationOne</text>
+</svg>

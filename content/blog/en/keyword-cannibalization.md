@@ -2,13 +2,13 @@
 
 Key takeaways:
 
-- **Two URLs from one domain in the results are often a healthy sign**, because in our analysis of 3,485 Polish search results pages, one domain held 2 or more spots in the top 10 **19.7% of the time**.
+- **Two URLs from one domain in the results are often a healthy sign**, because in our analysis of 3,665 Polish search results pages, one domain held 2 or more spots in the top 10 **19.9% of the time**.
 - What makes it cannibalization is **the same search intent**, and shared words in titles alone do not.
 - The most reliable symptom is **URLs swapping places** for one query in the Search Console performance report, with ranking fluctuations for both pages.
 - Google describes redirects and `rel="canonical"` as **strong signals** for choosing a canonical URL, but canonical fits only very similar pages.
 - Cannibalization also hurts in AI answers, because the system cites one passage, and split content gives it two weaker candidates.
 
-Keyword cannibalization is also less common than it looks, because in 687 of 3,485 search results pages in our data one domain held 2 or more top 10 spots without any problem. It most often shows up on sites with a large blog and in online stores, where a category, a guide and a comparison post answer similar questions. This guide is for SEO specialists and editors who see ranking fluctuations and want to check whether their own pages are the cause.
+Keyword cannibalization is also less common than it looks, because in 730 of 3,665 search results pages in our data one domain held 2 or more top 10 spots without any problem. It most often shows up on sites with a large blog and in online stores, where a category, a guide and a comparison post answer similar questions. This guide is for SEO specialists and editors who see ranking fluctuations and want to check whether their own pages are the cause.
 
 ## What keyword cannibalization is
 
@@ -41,7 +41,7 @@ Cannibalization almost always comes from the lack of a plan that maps keywords t
 
 ## When two URLs in the results are not cannibalization
 
-Two URLs from one domain in the top 10 do not automatically mean a problem. We counted this using CitationOne audit data. **In 687 of 3,485 Polish search results pages (19.7%), one domain held 2 or more spots in the top 10**, and in 4.1% even 3 or more. This is a lower bound, because the count excludes the page the audit was run for. We also excluded keywords from one client's niche, which inflated the result. The data comes from the Polish market, so treat it as a reference point.
+Two URLs from one domain in the top 10 do not automatically mean a problem. We counted this using CitationOne audit data. **In 730 of 3,665 Polish search results pages (19.9%), one domain held 2 or more spots in the top 10**, and in 4.1% even 3 or more. This is a lower bound, because the count excludes the page the audit was run for. We also excluded keywords from one client's niche, which inflated the result. The data comes from the Polish market, so treat it as a reference point.
 
 Large sites such as marketplaces do this most often, but so do specialist stores with several categories for one keyword. Google shows two pages because each answers a different part of the question, for example a category and a buying guide.
 
@@ -120,7 +120,7 @@ Cannibalization is easiest to prevent at the content planning stage. Three habit
 - **Keyword mapping**, a "keyword to URL" map in a spreadsheet that the editorial team checks before every new post. Each URL should target one primary keyword cluster with its close variants.
 - **Updating in place of a new post**, when the site already has a page on the topic.
 
-We explain how to update an existing post so that it takes over new keywords in [How to update old blog posts for SEO and AI](/blog/how-to-update-old-blog-posts). After merging pages, also update your internal links. The [internal linking](/tools/internal-linking) tool prepares link suggestions.
+We explain how to update an existing post so that it takes over new keywords in [How to update old blog posts for SEO and AI](/blog/how-to-update-old-blog-posts). After merging pages, also update your [internal linking strategy](/blog/internal-linking-strategy). The [internal linking](/tools/internal-linking) tool prepares link suggestions.
 
 > [!REMEMBER]
 > Before you write a new post, check your "keyword to URL" map to see whether the site already has a page for that intent. Updating an existing page is the cheapest protection against cannibalization.
@@ -143,7 +143,7 @@ Keyword cannibalization is not a penalty imposed on your site. It results from G
 
 ### Are two results from one domain always cannibalization?
 
-Two results from one domain are a common sight, appearing in 19.7% of the Polish search results pages in our analysis. Cannibalization starts when both pages answer the same question and their URLs swap places in the results. Two stable pages answering different questions are a benefit.
+Two results from one domain are a common sight, appearing in 19.9% of the Polish search results pages in our analysis. Cannibalization starts when both pages answer the same question and their URLs swap places in the results. Two stable pages answering different questions are a benefit.
 
 ### Is a 301 redirect or a canonical tag better?
 
@@ -158,4 +158,4 @@ Google has to reprocess both URLs and the redirect, so the first effects usually
 - Google Search Central, [Redirects and Google Search](https://developers.google.com/search/docs/crawling-indexing/301-redirects), accessed 2026-11-15.
 - Google Search Central, [How to specify a canonical URL with rel="canonical" and other methods](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls), accessed 2026-11-15.
 - Search Console Help, [Performance report](https://support.google.com/webmasters/answer/7576553?hl=en), accessed 2026-11-15.
-- CitationOne, analysis of 3,485 Polish search results pages from CitationOne audits (domains with 2 or more URLs in the top 10), and US Google results for 8 heat pump keywords, November 2026.
+- CitationOne, analysis of 3,665 Polish search results pages from CitationOne audits (domains with 2 or more URLs in the top 10), and US Google results for 8 heat pump keywords, November 2026.

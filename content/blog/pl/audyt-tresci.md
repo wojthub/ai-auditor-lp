@@ -3,7 +3,7 @@
 Najważniejsze informacje w skrócie:
 
 - **audyt treści różni się od audytu SEO** - ten drugi sprawdza technikę serwisu, a audyt treści jakość i kompletność samego tekstu,
-- w 4540 polskich audytach w CitationOne **mediana wyniku jakości treści (CQS) wyniosła 56,7 na 100**, a próg 75 punktów przekroczyło tylko **0,9% stron**,
+- w 4740 polskich audytach w CitationOne **mediana wyniku jakości treści (CQS) wyniosła 56,7 na 100**, a próg 75 punktów przekroczyło tylko **0,9% stron**,
 - najsłabiej wypadają **samodzielność sekcji, graf wiedzy, koszt pozyskania informacji i BLUF**, czyli cechy, które decydują o tym, czy AI wytnie fragment z tekstu,
 - audyt pod odpowiedzi AI dochodzi do klasycznego audytu treści, bo systemy AI cytują pojedyncze sekcje, a nie całe strony,
 - wynik audytu to lista konkretnych poprawek do sekcji, a nie ogólna ocena strony.
@@ -44,11 +44,11 @@ Mało tego, osobno warto sprawdzić **wartość dodaną**, czyli to, co tekst wn
 
 ## Najczęstsze słabości treści w polskich audytach
 
-Najczęstsze problemy policzyliśmy na **4540 audytach polskich stron w CitationOne**. Każdy wymiar jest oceniany w skali 0-10, a CQS (Content Quality Score) zbiera je w wynik 0-100. Mediana CQS wyniosła **56,7**, a 23,8% stron miało wynik poniżej 50. CitationOne uznaje 75 punktów za próg treści gotowej do konkurowania o cytowania - przekroczyło go 0,9% stron.
+Najczęstsze problemy policzyliśmy na **4740 audytach polskich stron w CitationOne**. Każdy wymiar jest oceniany w skali 0-10, a CQS (Content Quality Score) zbiera je w wynik 0-100. Mediana CQS wyniosła **56,7**, a 23,9% stron miało wynik poniżej 50. CitationOne uznaje 75 punktów za próg treści gotowej do konkurowania o cytowania - przekroczyło go 0,9% stron.
 
-<figure><img src="/blog/pl/audyt-tresci-slabe-wymiary.svg" alt="Wykres słupkowy średnich ocen wymiarów w 4540 polskich audytach, skala 0-10. Samodzielność sekcji 5,13, graf wiedzy 5,18, koszt pozyskania 5,40, BLUF 5,48, gęstość informacji 5,82, pokrycie Fan-Out 5,83, Effort Score 5,92, TF-IDF 6,15, role semantyczne 6,21, zgodność z CSI 6,47." width="640" height="524" loading="lazy" decoding="async"><figcaption>Najsłabiej wypadają cechy, które decydują o cytowaniu fragmentu przez AI. Źródło: 4540 audytów polskich stron w CitationOne.</figcaption></figure>
+<figure data-chart="audyt-wymiary"></figure>
 
-Tyle że ciekawsza jest kolejność. **Najlepiej wypada zgodność z intencją (średnio 6,47)**, a najsłabiej samodzielność sekcji (5,13) i graf wiedzy (5,18). Większość stron trafia więc w temat, ale pisze o nim tak, że trudno wyciąć z tekstu samodzielny fragment z konkretnym faktem. Prawie co trzecia strona ma te dwa wymiary poniżej 5 punktów.
+Tyle że ciekawsza jest kolejność. **Najlepiej wypada zgodność z intencją (średnio 6,45)**, a najsłabiej samodzielność sekcji (5,13) i graf wiedzy (5,21). Większość stron trafia więc w temat, ale pisze o nim tak, że trudno wyciąć z tekstu samodzielny fragment z konkretnym faktem. Prawie co trzecia strona ma te dwa wymiary poniżej 5 punktów.
 
 Moim zdaniem to najważniejszy wniosek dla każdego, kto robi audyt treści pod AI. Klasyczne SEO nauczyło nas trafiać w intencję, ale nie pisać sekcji, które bronią się same. Właśnie tę lukę widać w danych i właśnie od niej warto zaczynać poprawki.
 
@@ -159,4 +159,4 @@ W CitationOne wynik CQS od 75 punktów oznacza treść gotową do konkurowania o
 - Google Search Central, [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content), dostęp 2026-11-15,
 - Google Search Central, [AI features and your website](https://developers.google.com/search/docs/appearance/ai-features), dostęp 2026-11-15,
 - pomoc Search Console, [Raport skuteczności](https://support.google.com/webmasters/answer/7576553?hl=pl), dostęp 2026-11-15,
-- CitationOne, analiza 4540 audytów polskich stron w CitationOne (wyniki CQS i oceny wymiarów).
+- CitationOne, analiza 4740 audytów polskich stron w CitationOne (wyniki CQS i oceny wymiarów).

@@ -46,7 +46,7 @@ AI systems that write direct answers choose their sources in three stages. They 
 
 <figure><img src="/blog/en/how-ai-chooses-sources.svg" alt="Diagram of the three stages AI uses to choose sources, which are retrieval from the index, including follow-up questions, selection of passages that answer the question, and synthesis of an answer with links. The conditions are a page that is indexed and open to the crawler and a section that makes sense when cut out of the text." width="640" height="560" loading="lazy" decoding="async"><figcaption>AI answers quote passages, so every stage sets a condition your page has to meet.</figcaption></figure>
 
-This has two practical consequences. **Your page has to be indexed and open to the crawler of a given system**, because without that it never enters the first stage. The answer also quotes a passage, so the section with your answer should make sense when cut out of the article.
+This has two practical consequences. **Your page has to be indexed and open to the crawler of a given system**, because without that it never enters the first stage. Pages reach the index mostly through links, which is why a planned [internal linking strategy](/blog/internal-linking-strategy) is the foundation. The answer also quotes a passage, so the section with your answer should make sense when cut out of the article.
 
 Google also states plainly that you do not need to break your content into tiny chunks. It is enough that each section opens with the answer and names its topic directly. We describe how to check these qualities in the [chunk optimization](/dimensions/chunk-optimization) and [fan-out and AIO coverage](/dimensions/query-fan-out) dimensions.
 
@@ -66,11 +66,11 @@ GEO extends SEO with a new goal, which is **being cited in an AI answer**. The f
 | Measurement | Rankings, traffic, CTR | Citations and mentions in AI answers, traffic from AI answers |
 | Typical query | Short keyword searches | Longer, conversational questions with follow-ups |
 
-Google is clear about this. In its guide to optimizing for generative AI features it says that, from the search engine's point of view, this kind of optimization **"is still SEO"**. Appearing in AI Overviews and AI Mode has no additional technical requirements. The page has to be indexed and eligible to be shown with a snippet, and files such as llms.txt or special schema.org markup are not needed for it.
+Google is clear about this. In its guide to optimizing for generative AI features it says that, from the search engine's point of view, this kind of optimization **"is still SEO"**. Appearing in AI Overviews and AI Mode has no additional technical requirements. The page has to be indexed and eligible to be shown with a snippet, and files such as llms.txt or special schema.org markup are not needed for it. We cover what this means in practice in [how to appear in AI Overviews](/blog/how-to-appear-in-ai-overviews).
 
 "If Google says it is still SEO, why use a separate name?"
 
-Because Google is talking about its own features. ChatGPT, Perplexity and Copilot have their own crawlers and their own ways of choosing sources. OpenAI's documentation states that sites that block the OAI-SearchBot crawler **will not be shown in ChatGPT search answers**, while GPTBot collects data for training models and has no effect on search visibility.
+Because Google is talking about its own features. ChatGPT, Perplexity and Copilot have their own crawlers and their own ways of choosing sources. OpenAI's documentation states that sites that block the OAI-SearchBot crawler **will not be shown in ChatGPT search answers**, while GPTBot collects data for training models and has no effect on search visibility. The remaining conditions are covered in [how to rank in ChatGPT](/blog/how-to-rank-in-chatgpt).
 
 The same Google guide also encourages content that cannot be found everywhere else, based on your own knowledge, experience and data. The Princeton study reaches a similar conclusion from the other side, because texts with facts and sources performed best.
 
@@ -92,7 +92,7 @@ The first sentences of the page and of every section answer the question directl
 
 ### 2. Make every section self-contained
 
-Each section names its topic directly and does not refer back to "the above". AI systems quote a passage, not the whole article, so a paragraph cut out of the text still has to make sense. In practice, this means repeating the name of the topic in the first sentence of a section in place of pronouns such as "this" or "that approach".
+Each section names its topic directly and does not refer back to "the above". AI systems quote a passage, not the whole article, so a paragraph cut out of the text still has to make sense. In practice, this means repeating the name of the topic in the first sentence of a section in place of pronouns such as "this" or "that approach". You will find examples of such edits in [how to write content for AI search](/blog/how-to-write-content-for-ai-search).
 
 ### 3. Use specific facts
 
@@ -132,7 +132,7 @@ GEO results are measured by how often AI answers cite your pages and mention you
 3. Note whether your page or brand appears in the answer and in its sources.
 4. Repeat the check every few weeks.
 
-This method has limits. AI answers vary from one attempt to the next, they depend on location and user history, and checking dozens of queries by hand takes hours. Google includes traffic from AI Overviews and AI Mode in the Search Console performance report, under the "Web" search type.
+This method has limits. AI answers vary from one attempt to the next, they depend on location and user history, and checking dozens of queries by hand takes hours. Google includes traffic from AI Overviews and AI Mode in the Search Console performance report, under the "Web" search type. We describe all tracking methods, from GA4 to server logs, in [how to track AI visibility](/blog/how-to-track-ai-visibility).
 
 Also keep in mind Google's caveat that **no third-party tool has access to the search engine's internal ranking systems**. GEO tools show what can be measured from the outside, meaning what AI actually cites and how your content differs from the cited pages.
 

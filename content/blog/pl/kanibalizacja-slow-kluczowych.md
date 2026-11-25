@@ -2,7 +2,7 @@
 
 Najważniejsze informacje w skrócie:
 
-- **dwa adresy jednej domeny w wynikach to często zdrowy widok**, bo w naszej analizie 3485 polskich SERP-ów jedna domena miała 2 lub więcej miejsc w TOP 10 w **19,7% przypadków**,
+- **dwa adresy jednej domeny w wynikach to często zdrowy widok**, bo w naszej analizie 3665 polskich SERP-ów jedna domena miała 2 lub więcej miejsc w TOP 10 w **19,9% przypadków**,
 - o kanibalizacji decyduje **ta sama intencja**, a nie wspólne słowa w tytułach,
 - najpewniejszy objaw to **wymiana adresów** na jedną frazę w raporcie skuteczności Search Console i wahania pozycji obu stron,
 - przekierowanie i `rel="canonical"` Google opisuje jako **mocne sygnały** wyboru adresu kanonicznego, ale canonical pasuje tylko do stron bardzo podobnych,
@@ -41,7 +41,7 @@ Kanibalizacja prawie zawsze wynika z braku planu, który przypisuje frazy do adr
 
 ## Kiedy dwa adresy w wynikach to nie kanibalizacja
 
-Dwa adresy jednej domeny w TOP 10 nie oznaczają automatycznie problemu. Policzyliśmy to na danych z audytów w CitationOne - **w 687 z 3485 polskich SERP-ów (19,7%) jedna domena zajmowała 2 lub więcej miejsc w TOP 10**, a w 4,1% nawet 3 lub więcej. To dolna granica, bo zestawienie nie obejmuje strony, dla której zlecono audyt. Z obliczeń wyłączyliśmy frazy z niszy jednego klienta, która zawyżała wynik.
+Dwa adresy jednej domeny w TOP 10 nie oznaczają automatycznie problemu. Policzyliśmy to na danych z audytów w CitationOne - **w 730 z 3665 polskich SERP-ów (19,9%) jedna domena zajmowała 2 lub więcej miejsc w TOP 10**, a w 4,1% nawet 3 lub więcej. To dolna granica, bo zestawienie nie obejmuje strony, dla której zlecono audyt. Z obliczeń wyłączyliśmy frazy z niszy jednego klienta, która zawyżała wynik.
 
 Najczęściej robią tak duże serwisy, takie jak OLX czy Allegro, ale też sklepy specjalistyczne z kilkoma kategoriami na jedną frazę. Google pokazuje wtedy dwie strony, bo każda odpowiada na inną część pytania - na przykład kategoria i poradnik zakupowy.
 
@@ -120,7 +120,7 @@ Kanibalizacji najłatwiej zapobiec na etapie planu treści. Trzy nawyki wystarcz
 - **mapa „fraza → adres”** w arkuszu, którą redakcja sprawdza przed każdym nowym tekstem,
 - **aktualizacja zamiast nowego wpisu**, gdy serwis ma już stronę na dany temat.
 
-Jak zaktualizować istniejący tekst, żeby przejął nowe frazy, opisujemy w artykule [Jak zaktualizować stary artykuł pod SEO i AI](/pl/blog/jak-zaktualizowac-stary-artykul). Po scaleniu stron zaktualizuj też linkowanie wewnętrzne - propozycje linków przygotuje narzędzie [linki wewnętrzne](/pl/narzedzia/linki-wewnetrzne).
+Jak zaktualizować istniejący tekst, żeby przejął nowe frazy, opisujemy w artykule [Jak zaktualizować stary artykuł pod SEO i AI](/pl/blog/jak-zaktualizowac-stary-artykul). Po scaleniu stron zaktualizuj też [linkowanie wewnętrzne](/pl/blog/linkowanie-wewnetrzne) - propozycje linków przygotuje narzędzie [linki wewnętrzne](/pl/narzedzia/linki-wewnetrzne).
 
 > [!ZAPAMIETAJ]
 > Zanim napiszesz nowy tekst, sprawdź w mapie „fraza → adres”, czy serwis nie ma już strony na tę intencję. Aktualizacja istniejącej strony to najtańsza ochrona przed kanibalizacją.
@@ -139,7 +139,7 @@ Kanibalizacja to skutek tego, że Google wybiera dla zapytania jeden adres i prz
 
 ### Czy dwa wyniki z jednej domeny to zawsze kanibalizacja?
 
-Dwa wyniki z jednej domeny to częsty widok - w naszej analizie występowały w 19,7% polskich SERP-ów. Kanibalizacja zaczyna się wtedy, gdy obie strony odpowiadają na to samo pytanie, a ich adresy wymieniają się w wynikach. Dwie stabilne strony na różne pytania to korzyść.
+Dwa wyniki z jednej domeny to częsty widok - w naszej analizie występowały w 19,9% polskich SERP-ów. Kanibalizacja zaczyna się wtedy, gdy obie strony odpowiadają na to samo pytanie, a ich adresy wymieniają się w wynikach. Dwie stabilne strony na różne pytania to korzyść.
 
 ### Lepiej przekierowanie 301 czy canonical?
 
@@ -158,4 +158,4 @@ Google musi ponownie przetworzyć oba adresy i przekierowanie, więc pierwsze ef
 - Google Search Central, [Redirects and Google Search](https://developers.google.com/search/docs/crawling-indexing/301-redirects), dostęp 2026-11-15,
 - Google Search Central, [How to specify a canonical URL with rel="canonical" and other methods](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls), dostęp 2026-11-15,
 - pomoc Search Console, [Raport skuteczności](https://support.google.com/webmasters/answer/7576553?hl=pl), dostęp 2026-11-15,
-- CitationOne, analiza 3485 polskich SERP-ów z audytów CitationOne (domeny z 2 lub więcej adresami w TOP 10).
+- CitationOne, analiza 3665 polskich SERP-ów z audytów CitationOne (domeny z 2 lub więcej adresami w TOP 10).

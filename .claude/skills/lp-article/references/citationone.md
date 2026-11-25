@@ -53,10 +53,10 @@ Inne wpisy bloga linkuj jako `/pl/blog/<slug>` (`/blog/<slug>`) i tylko te, któ
 
 ## Dane własne do wykorzystania
 
-**Analiza „pozycja w TOP 10 a cytowanie w AI Overview”** (stan 2026-11-10, 996 SERP-ów PL z 1167 audytów, dopasowanie po dokładnym URL):
-- strona z 1. pozycji jest cytowana w AI Overview w 59,9% przypadków, średnio w TOP 10 w 40,7%,
-- spadek jest najmocniejszy na pozycjach 1-5 (do 35,3%), na 6-10 słabnie i trzyma się w paśmie ~28-33%,
-- w 13,4% SERP-ów AI Overview nie cytuje żadnej domeny z TOP 10; najczęstsze źródła spoza dziesiątki to Facebook, YouTube i Reddit.
+**Analiza „pozycja w TOP 10 a cytowanie w AI Overview”** (stan 2026-11-25, 1131 SERP-ów PL z 1333 audytów, dopasowanie po dokładnym URL):
+- strona z 1. pozycji jest cytowana w AI Overview w 62,0% przypadków, średnio w TOP 10 w 42,6%,
+- spadek jest najmocniejszy na pozycjach 1-5 (do 36,8%), na 6-10 słabnie i trzyma się w paśmie ~27-36%,
+- w 12,2% SERP-ów AI Overview nie cytuje żadnej domeny z TOP 10; najczęstsze źródła spoza dziesiątki to Facebook, YouTube i Reddit.
 
 Liczby się starzeją wraz z przyrostem audytów. Przed użyciem w nowym tekście przelicz je skryptem `../ai-auditor/scripts/aio-position-stats.mjs` (tylko odczyt bazy, 0 kredytów; `set -a; . ./.env.local; set +a; LANG_FILTER=pl node scripts/aio-position-stats.mjs` z katalogu `ai-auditor`) i zaproponuj to userowi. Opisuj wnioski pasmami i kierunkiem, bez zbieżności pojedynczych pozycji. Zawsze podaj datę, wielkość próby i zastrzeżenia - korelacja, frazy z audytów w CitationOne. Już wykorzystane w `/pl/blog/jak-pojawic-sie-w-ai-overviews`.
 

@@ -95,7 +95,7 @@ Każda decyzja z macierzy ma swoje wdrożenie techniczne, opisane w dokumentacji
 - **noindex** w metatagu robots albo nagłówku HTTP wyklucza stronę z wyników, a strona zostaje dostępna dla użytkowników - Google musi jednak móc ją pobrać, więc nie blokuj jej jednocześnie w robots.txt,
 - **przekierowanie na stronę główną** zamiast na stronę o podobnym temacie nie odpowiada na pytanie, z którym przyszedł użytkownik, więc wybieraj zawsze najbliższy tematycznie adres.
 
-Po wdrożeniu usuń usunięte adresy z mapy witryny i popraw linki wewnętrzne. Propozycje nowych połączeń między stronami, które zostały, przygotuje narzędzie [linki wewnętrzne](/pl/narzedzia/linki-wewnetrzne).
+Po wdrożeniu usuń usunięte adresy z mapy witryny i popraw linki wewnętrzne, tak żeby prowadziły prosto do adresów docelowych - jak to zaplanować, opisujemy w poradniku o [planowaniu linkowania wewnętrznego](/pl/blog/linkowanie-wewnetrzne). Propozycje nowych połączeń między stronami, które zostały, przygotuje narzędzie [linki wewnętrzne](/pl/narzedzia/linki-wewnetrzne).
 
 ## Content pruning a odpowiedzi AI
 

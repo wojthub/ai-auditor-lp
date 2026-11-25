@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420" role="img" aria-labelledby="t d" font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+<title id="t">Jak Google ograniczał wyniki rozszerzone?</title>
+<desc id="d">Oś czasu zmian w wynikach rozszerzonych Google. Sierpień 2023 - wyniki FAQ tylko dla serwisów rządowych i medycznych. Wrzesień 2023 - wycofanie wyników HowTo. Czerwiec 2025 - ogłoszenie wycofania 7 typów, w tym Course Info i Claim Review. Wrzesień 2025 - usunięcie 6 z nich z raportów Search Console i testu wyników rozszerzonych.</desc>
+<rect width="640" height="420" fill="#ffffff"/>
+<text x="24" y="40" font-size="21" font-weight="700" fill="#0d0d12">Jak Google ograniczał wyniki rozszerzone?</text>
+<text x="24" y="66" font-size="14" fill="#666d80">Zmiany ogłoszone na blogu Google Search Central</text>
+<line x1="60" y1="104" x2="60" y2="372" stroke="#dfe1e7" stroke-width="3"/>
+<circle cx="60" cy="116" r="9" fill="#e07a4a"/>
+<text x="88" y="112" font-size="13" font-weight="700" fill="#818898">SIERPIEŃ 2023</text>
+<text x="88" y="134" font-size="16" font-weight="700" fill="#0d0d12">FAQPage - wynik tylko dla serwisów</text>
+<text x="88" y="154" font-size="16" font-weight="700" fill="#0d0d12">rządowych i medycznych</text>
+<circle cx="60" cy="190" r="9" fill="#e07a4a"/>
+<text x="88" y="186" font-size="13" font-weight="700" fill="#818898">WRZESIEŃ 2023</text>
+<text x="88" y="208" font-size="16" font-weight="700" fill="#0d0d12">HowTo - wynik wycofany całkowicie</text>
+<circle cx="60" cy="252" r="9" fill="#e07a4a"/>
+<text x="88" y="248" font-size="13" font-weight="700" fill="#818898">CZERWIEC 2025</text>
+<text x="88" y="270" font-size="16" font-weight="700" fill="#0d0d12">Ogłoszone wycofanie 7 typów</text>
+<text x="88" y="290" font-size="14" fill="#36394a">Book Actions, Course Info, Claim Review, Estimated Salary,</text>
+<text x="88" y="308" font-size="14" fill="#36394a">Learning Video, Special Announcement, Vehicle Listing</text>
+<circle cx="60" cy="344" r="9" fill="#8b93a3"/>
+<text x="88" y="340" font-size="13" font-weight="700" fill="#818898">WRZESIEŃ 2025</text>
+<text x="88" y="362" font-size="16" font-weight="700" fill="#0d0d12">6 z nich znika z raportów Search Console</text>
+<text x="88" y="382" font-size="14" fill="#36394a">i z testu wyników z elementami rozszerzonymi</text>
+<text x="616" y="408" text-anchor="end" font-size="13" font-weight="700" fill="#0b7983">CitationOne</text>
+</svg>

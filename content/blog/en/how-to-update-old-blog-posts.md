@@ -3,7 +3,7 @@
 Key takeaways:
 
 - Refreshing pays off most for posts in positions 4-15, which Google already knows and which are close to the top 5.
-- In our analysis of 996 Polish search results pages, the page in 1st place was cited in the AI Overview **59.9% of the time** and the page in 5th place 35.3% of the time, so moving up a few spots clearly raises the chance of being cited.
+- In our analysis of 1,131 Polish search results pages, the page in 1st place was cited in the AI Overview **62.0% of the time** and the page in 5th place 36.8% of the time, so moving up a few spots clearly raises the chance of being cited.
 - Google's helpful content guidance asks directly whether you change the date of pages to make them seem fresh **when the content has not substantially changed**.
 - When refreshing for AI, the most important parts are an answer at the start of every section, current numbers with sources and the follow-up questions that are missing today.
 - The URL stays the same, because it keeps the page's history and the links pointing to it.
@@ -37,7 +37,7 @@ The best candidates for an update are old posts that Google already knows but th
 - Posts with many impressions and a low CTR.
 - Posts on topics that often come up in questions to AI, such as "how to…", "how much does… cost" and "what is the difference between…".
 
-Why positions 4-15? Because in our analysis of Polish search results, the chance of being cited in an AI Overview drops fastest within the top 5, from 59.9% in 1st place to 35.3% in 5th place. Moving a post from 8th to 3rd place changes not only organic traffic from search results but also its chance of appearing in the AI Overview. This is a correlation from CitationOne audit data and does not prove cause.
+Why positions 4-15? Because in our analysis of Polish search results, the chance of being cited in an AI Overview drops fastest within the top 5, from 62.0% in 1st place to 36.8% in 5th place. Moving a post from 8th to 3rd place changes not only organic traffic from search results but also its chance of appearing in the AI Overview. This is a correlation from CitationOne audit data and does not prove cause.
 
 ## The refresh process step by step
 
@@ -166,4 +166,4 @@ Refresh the old post if the intent of the keyword has not changed and the page a
 - Google Search Central, [Add a Byline Date to Google Search Results](https://developers.google.com/search/docs/appearance/publication-dates), accessed 2026-11-10.
 - Google Search Central, [AI features and your website](https://developers.google.com/search/docs/appearance/ai-features), accessed 2026-11-10.
 - OpenAI Help Center, [Publishers and developers FAQ](https://help.openai.com/en/articles/12627856), accessed 2026-11-10.
-- CitationOne, analysis of 996 Polish search results pages with an AI Overview from CitationOne audits, details in [How to appear in AI Overviews](/blog/how-to-appear-in-ai-overviews).
+- CitationOne, analysis of 1,131 Polish search results pages with an AI Overview from CitationOne audits, details in [How to appear in AI Overviews](/blog/how-to-appear-in-ai-overviews).
