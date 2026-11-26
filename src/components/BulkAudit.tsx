@@ -51,11 +51,12 @@ export default function BulkAudit() {
             lineHeight: 1.15,
             margin: '0 0 16px',
           }}>
-            Sprawdź cały serwis, nie jedną stronę
+            Sprawdź cały serwis - w panelu albo przez API
           </h2>
           <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.75, margin: 0, maxWidth: 720 }}>
-            Masowy audyt analizuje całą listę adresów w jednym zleceniu. Każdy adres dostaje pełny
-            raport z benchmarkiem Top 10 SERP, więc w jednym przebiegu widzisz obraz całej sekcji serwisu.
+            Przy migracji serwisu, przeglądzie całego bloga albo obsłudze kilku klientów naraz zlecasz całą
+            listę adresów w jednym zleceniu. Każdy adres dostaje pełny raport z benchmarkiem Top 10 SERP -
+            z panelu albo z Twojego systemu przez API.
           </p>
         </div>
 
@@ -120,21 +121,10 @@ export default function BulkAudit() {
           </a>
         </div>
 
-        {/* Dwie drogi skalowania - panel dla ludzi, API dla systemow. */}
+        {/* Dwie drogi skalowania - panel dla ludzi, API dla systemow. Ta sama sekcja co masowy audyt, bez osobnego nagłówka. */}
         <div className="reveal"
-          style={{ ...revealStyle({ y: 16, duration: 0.5 }), marginTop: 44, paddingTop: 36, borderTop: '1px solid #dfe1e7' }}
+          style={{ ...revealStyle({ y: 16, duration: 0.5 }), marginTop: 36 }}
         >
-          <h3 style={{
-            fontSize: 'clamp(1.3rem, 2.5vw, 1.7rem)', fontWeight: 700, color: '#0d0d12',
-            letterSpacing: '-0.025em', lineHeight: 1.25, margin: '0 0 12px',
-          }}>
-            Audyt masowy albo API
-          </h3>
-          <p style={{ fontSize: 16, color: '#36394a', lineHeight: 1.72, margin: '0 0 24px', maxWidth: 720 }}>
-            Przy setkach adresów - migracji serwisu, przeglądzie całego bloga, obsłudze kilku klientów
-            naraz - potrzebny jest tryb, w którym audyt przestaje być czynnością, a staje się procesem.
-          </p>
-
           <div className="bulk-scale-grid">
             <div style={{ background: '#ffffff', border: '1px solid #dfe1e7', borderRadius: 14, padding: '24px 26px' }}>
               <span style={{

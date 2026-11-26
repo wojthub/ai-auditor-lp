@@ -52,7 +52,7 @@ export default function ReportSection() {
             Jako efekt audytu otrzymujesz interaktywny raport online oraz publiczny link i plik Markdown, które możesz natychmiast przekazać zespołowi, managerowi lub klientowi.
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 36 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             {items.map((item) => (
               <div key={item.number} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
                 <span style={{
@@ -72,31 +72,6 @@ export default function ReportSection() {
               </div>
             ))}
           </div>
-
-          <a className="btn-pop"
-            href={reportUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 9,
-              padding: '13px 22px',
-              borderRadius: 9,
-              background: '#0b7983',
-              color: '#ffffff',
-              fontWeight: 600,
-              fontSize: 15,
-              textDecoration: 'none',
-              letterSpacing: '-0.01em',
-            }}
-          >
-            <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            Zobacz przykładowy raport
-          </a>
         </div>
 
         {/* Prawa kolumna - podgląd raportu */}
@@ -163,6 +138,33 @@ export default function ReportSection() {
               </div>
             </div>
           </a>
+          {/* CTA pod podglądem, w prawej kolumnie. */}
+          <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'center', marginTop: 8 }}>
+            <a className="btn-pop"
+              href={reportUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 9,
+                padding: '13px 22px',
+                borderRadius: 9,
+                background: '#0b7983',
+                color: '#ffffff',
+                fontWeight: 600,
+                fontSize: 15,
+                textDecoration: 'none',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Zobacz przykładowy raport
+            </a>
+          </div>
         </div>
 
       </div>

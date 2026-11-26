@@ -12,13 +12,8 @@ export default function Problem() {
           <div className="problem-header-grid">
             <div className="reveal" style={revealStyle({ y: 24, duration: 0.55 })}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
-                <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
-                <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Problem</span>
-                <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
-              </div>
               <h2 style={{
-                fontSize: 'clamp(1.75rem, 3.4vw, 2.25rem)',
+                fontSize: 'clamp(1.45rem, 2.6vw, 1.8rem)',
                 fontWeight: 700,
                 color: '#0d0d12',
                 letterSpacing: '-0.035em',

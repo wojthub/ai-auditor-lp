@@ -34,9 +34,9 @@ const audiences = [
     blobFill: '#c47a2a',
     blobPath: 'M 50 10 C 100 -18 190 8 198 72 C 206 136 152 188 88 186 C 24 184 -14 126 6 66 C 26 6 0 38 50 10 Z',
     highlights: [
-      'Nowa usługa w Twoim portfolio, która wyróżni Cię na tle konkurencji.',
-      'Gotowy, profesjonalny raport dla klienta generowany jednym kliknięciem.',
-      'Elastyczność budżetowa - wykupujesz audyty pojedynczo. Pierwsze 3 audyty są darmowe.',
+      'Nowa usługa, która wyróżni Cię na tle konkurencji.',
+      'Profesjonalny raport dla klienta jednym kliknięciem.',
+      'Płacisz za pojedyncze audyty - pierwsze 3 są darmowe.',
     ],
   },
 ];

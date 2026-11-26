@@ -8,35 +8,45 @@ export default function DimensionsTeaser() {
     <section style={{ background: '#f8fafb', padding: '90px 0' }}>
       <div style={{ maxWidth: 1124, margin: '0 auto', paddingLeft: 24, paddingRight: 24 }}>
 
-        {/* Section label + h2 */}
-        <div className="reveal"
-          style={{ ...revealStyle({ y: 20, duration: 0.5 }), marginBottom: 40 }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 18 }}>
-            <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
-            <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Wymiary</span>
-            <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
-          </div>
-          <h2 style={{
-            fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)',
-            fontWeight: 700,
-            color: '#0d0d12',
-            letterSpacing: '-0.03em',
-            lineHeight: 1.15,
-            margin: 0,
-          }}>
-            Jak AI ocenia Twój content?
-          </h2>
-        </div>
-
-        {/* Row 1: paragraph + radar */}
+        {/* Lewa kolumna z tekstem, prawa z diagramem */}
         <div
           className="dims-top-grid reveal"
-          style={{ ...revealStyle({ y: 20, duration: 0.55 }), marginBottom: 20 }}
+          style={{ ...revealStyle({ y: 20, duration: 0.55 }), marginBottom: 56 }}
         >
-          <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.75, margin: 0 }}>
-            CitationOne analizuje treść przez pryzmat 11 wymiarów jakości - tych samych parametrów, które modele językowe biorą pod uwagę wybierając źródła odpowiedzi. Każdy wymiar jest mierzony osobno i porównywany z bezpośrednią konkurencją z Top 10 SERP.
-          </p>
+          {/* Lewa kolumna: etykieta, nagłówek, akapit i link pod nim - wszystko obok diagramu. */}
+          <div>
+            <div style={{ marginBottom: 24 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 18 }}>
+                <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+                <span style={{ fontSize: 11, fontWeight: 600, color: '#818898', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Wymiary</span>
+                <div style={{ width: 20, height: 2, background: '#0b7983', borderRadius: 1 }} />
+              </div>
+              <h2 style={{
+                fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)',
+                fontWeight: 700,
+                color: '#0d0d12',
+                letterSpacing: '-0.03em',
+                lineHeight: 1.15,
+                margin: 0,
+              }}>
+                Jak AI ocenia Twój content?
+              </h2>
+            </div>
+            <p style={{ fontSize: 17, color: '#36394a', lineHeight: 1.75, margin: 0 }}>
+              CitationOne analizuje treść przez pryzmat 11 wymiarów jakości - tych samych parametrów, które modele językowe biorą pod uwagę wybierając źródła odpowiedzi. Każdy wymiar jest mierzony osobno i porównywany z bezpośrednią konkurencją z Top 10 SERP.
+            </p>
+            <p style={{ margin: '20px 0 0' }}>
+              <a href="/pl/wymiary" style={{
+                fontSize: 14,
+                color: '#0b7983',
+                fontWeight: 500,
+                textDecoration: 'underline',
+                textUnderlineOffset: 3,
+              }}>
+                Zobacz pełne omówienie wszystkich wymiarów jakości treści →
+              </a>
+            </p>
+          </div>
 
           <div style={{
             background: '#ffffff',
@@ -49,21 +59,6 @@ export default function DimensionsTeaser() {
           }}>
             <RadarIllustration maxWidth={320} />
           </div>
-        </div>
-
-        {/* Link */}
-        <div className="reveal"
-          style={{ ...revealStyle({ y: 0, duration: 0.4 }), marginBottom: 56 }}
-        >
-          <a href="/pl/wymiary" style={{
-            fontSize: 14,
-            color: '#0b7983',
-            fontWeight: 500,
-            textDecoration: 'underline',
-            textUnderlineOffset: 3,
-          }}>
-            Zobacz pełne omówienie wszystkich wymiarów jakości treści →
-          </a>
         </div>
 
       </div>

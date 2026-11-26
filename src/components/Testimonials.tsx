@@ -9,13 +9,18 @@ import { fetchTestimonials, testimonialsFor, testimonialsJsonLd, type Testimonia
  * przepływu danych w `src/lib/testimonials.ts`. Bez opinii w danym języku sekcja się nie renderuje.
  *
  * Karuzela to przewijany poziomo pas z `scroll-snap` (swipe na telefonie działa natywnie),
- * strzałki i kropki przewijają o jedną kartę. Autoodtwarzanie co 7 s tylko, gdy sekcja jest na
- * ekranie; zatrzymuje się na stałe po pierwszej interakcji i nie działa przy reduced motion.
+ * strzałki i kropki przewijają o jedną kartę. Autoodtwarzanie co 5 s tylko, gdy sekcja jest na
+ * ekranie; po ostatniej karcie wraca do pierwszej. Interakcja (klik, swipe, fokus) wstrzymuje je
+ * na 12 s, najechanie kursorem - do zjechania z sekcji. Przy reduced motion nie działa.
  * Gdy wszystkie karty mieszczą się naraz, strzałki znikają, a karty są wyśrodkowane.
+ * Kart naraz: 4 od 1200 px (sekcja szersza niż kolumna 1024 px), 3 od 1024 px, 2 poniżej,
+ * na telefonie jedna z widocznym brzegiem następnej.
  */
 
 const ACCENT = '#0b7983';
-const AUTOPLAY_MS = 7000;
+const AUTOPLAY_MS = 5000;
+/** Po interakcji autoodtwarzanie wraca po tym czasie, liczonym od ostatniego ruchu użytkownika. */
+const RESUME_AFTER_MS = 12000;
 const MAX_DOTS = 7;
 
 const COPY = {
@@ -139,7 +144,10 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
   const trackRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [nav, setNav] = useState({ scrollable: false, atStart: true, atEnd: false, index: 0, pages: 1 });
-  const stopped = useRef(false);
+  // `touched` = użytkownik już ruszał pasem (wtedy nie cofamy go na początek przy podmianie listy),
+  // `pausedUntil` = do kiedy autoodtwarzanie czeka po ostatniej interakcji.
+  const touched = useRef(false);
+  const pausedUntil = useRef(0);
   const hovering = useRef(false);
   const onScreen = useRef(false);
 
@@ -158,10 +166,10 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
   // a ta po przestawieniu stoi dalej - strona otwierała się na środku albo końcu listy.
   useLayoutEffect(() => {
     const track = trackRef.current;
-    if (!track || stopped.current) return;
+    if (!track || touched.current) return;
     track.scrollLeft = 0;
     const frame = requestAnimationFrame(() => {
-      if (!stopped.current) track.scrollLeft = 0;
+      if (!touched.current) track.scrollLeft = 0;
     });
     return () => cancelAnimationFrame(frame);
   }, [items]);
@@ -215,6 +223,11 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
     };
   }, [measure, items]);
 
+  const pause = () => {
+    touched.current = true;
+    pausedUntil.current = Date.now() + RESUME_AFTER_MS;
+  };
+
   const scrollToIndex = useCallback(
     (i: number) => {
       trackRef.current?.scrollTo({ left: i * step(), behavior: 'smooth' });
@@ -222,9 +235,16 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
     [step],
   );
 
+  // Strzałki działają w pętli, tak jak autoodtwarzanie: wstecz z pierwszej karty = koniec pasa,
+  // dalej z ostatniej = początek. Żadna strzałka nie jest więc nigdy wyszarzona.
   const go = (dir: -1 | 1) => {
-    stopped.current = true;
-    trackRef.current?.scrollBy({ left: dir * step(), behavior: 'smooth' });
+    pause();
+    const track = trackRef.current;
+    if (!track) return;
+    const max = track.scrollWidth - track.clientWidth;
+    if (dir === -1 && track.scrollLeft <= 2) track.scrollTo({ left: max, behavior: 'smooth' });
+    else if (dir === 1 && track.scrollLeft >= max - 2) track.scrollTo({ left: 0, behavior: 'smooth' });
+    else track.scrollBy({ left: dir * step(), behavior: 'smooth' });
   };
 
   // Autoodtwarzanie: na końcu wraca do pierwszej karty.
@@ -238,7 +258,7 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
     io.observe(section);
     const id = window.setInterval(() => {
       const track = trackRef.current;
-      if (!track || stopped.current || hovering.current || !onScreen.current || document.hidden) return;
+      if (!track || Date.now() < pausedUntil.current || hovering.current || !onScreen.current || document.hidden) return;
       const max = track.scrollWidth - track.clientWidth;
       if (max <= 2) return;
       if (track.scrollLeft >= max - 2) track.scrollTo({ left: 0, behavior: 'smooth' });
@@ -252,9 +272,7 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
 
   if (items.length === 0) return null;
 
-  const stop = () => {
-    stopped.current = true;
-  };
+  const stop = pause;
 
   return (
     <section
@@ -287,12 +305,12 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
           </div>
           {nav.scrollable && (
             <div className="tst-arrows">
-              <button type="button" className="tst-arrow" onClick={() => go(-1)} disabled={nav.atStart} aria-label={c.prev}>
+              <button type="button" className="tst-arrow" onClick={() => go(-1)} aria-label={c.prev}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M15 18l-6-6 6-6" />
                 </svg>
               </button>
-              <button type="button" className="tst-arrow" onClick={() => go(1)} disabled={nav.atEnd} aria-label={c.next}>
+              <button type="button" className="tst-arrow" onClick={() => go(1)} aria-label={c.next}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M9 18l6-6-6-6" />
                 </svg>
@@ -382,6 +400,12 @@ export default function Testimonials({ lang, initial }: { lang: 'pl' | 'en'; ini
         .tst-track.is-static { justify-content: center; }
         .tst-track:focus-visible { outline: 2px solid ${ACCENT}; outline-offset: 4px; border-radius: 12px; }
         .tst-card { position: relative; flex: 0 0 calc((100% - 40px) / 3); scroll-snap-align: start; margin: 0; display: flex; flex-direction: column; background: #fff; border: 1px solid #dfe1e7; border-radius: 14px; padding: 18px 18px 14px; box-shadow: 0 6px 20px -16px rgba(13,13,18,0.25); min-width: 0; }
+        /* Szeroki ekran: sekcja wychodzi poza kolumnę 1024 px, żeby zmieściły się 4 opinie naraz
+           (w 1024 px czwarta karta miałaby ~240 px i tekst łamałby się co dwa słowa). */
+        @media (min-width: 1200px) {
+          .tst-wrap { max-width: 1264px; }
+          .tst-card { flex-basis: calc((100% - 60px) / 4); }
+        }
         @media (max-width: 1023px) { .tst-card { flex-basis: calc((100% - 20px) / 2); } }
         @media (max-width: 640px) {
           .tst { padding: 40px 0 32px; }

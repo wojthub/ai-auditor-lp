@@ -28,9 +28,9 @@ const audiences = [
     color: '#c47a2a',
     colorBg: 'rgba(196,122,42,0.11)',
     highlights: [
-      'A new service in your portfolio that sets you apart from competitors.',
-      'A ready, professional client-facing report generated with one click.',
-      'Budget flexibility - buy audits one at a time. First 3 audits are free.',
+      'A new service that sets you apart from competitors.',
+      'A professional client report in one click.',
+      'Pay per audit - your first 3 are free.',
     ],
   },
 ];
